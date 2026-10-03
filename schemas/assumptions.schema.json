@@ -1,0 +1,96 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:ki-trading-v3:assumptions",
+  "title": "Annahmen",
+  "x-version": "3.0.0",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "3.0"
+    },
+    "document": {
+      "const": "Annahmen der Wirtschaftsrechnung"
+    },
+    "as_of": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+    },
+    "rule": {
+      "type": "string",
+      "minLength": 1
+    },
+    "assumptions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^A-\\d{2}$"
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "ref": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "ref"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 1
+    },
+    "scenarios": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^SZ-[A-Z0-9_]+$"
+          },
+          "definition": {
+            "type": "string",
+            "minLength": 1
+          },
+          "calculator": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "id",
+          "definition",
+          "calculator"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 1
+    },
+    "operating_model": {
+      "type": "string",
+      "minLength": 1
+    },
+    "taxes": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "required": [
+    "schema_version",
+    "document",
+    "as_of",
+    "rule",
+    "assumptions",
+    "scenarios",
+    "operating_model",
+    "taxes"
+  ],
+  "additionalProperties": false
+}

@@ -1,0 +1,16 @@
+{
+ "schema_version": "3.0",
+ "message_id": "00000000-0000-4000-8000-000000000017",
+ "correlation_id": "COR-0017",
+ "producer": "HERMES",
+ "created_utc": "2026-09-24T09:00:00Z",
+ "request_id": "MR-0001",
+ "identity": "svc-hermes",
+ "tool": "submit_experiment",
+ "idempotency_key": "IK-0001",
+ "payload": {
+  "experiment_id": "EXP-0001"
+ },
+ "payload_bytes": 2048,
+ "deadline_utc": "2026-09-24T09:05:00Z"
+}

@@ -1,0 +1,689 @@
+{
+  "schema_version": "3.0",
+  "document": "Risikoregister",
+  "as_of": "2026-09-24",
+  "scale": "Wahrscheinlichkeit und Wirkung je 1 (gering) bis 5 (sehr hoch); Score = Produkt",
+  "risks": [
+    {
+      "id": "RK-01",
+      "title": "Kurslücken bei hohem Hebel",
+      "category": "MARKT",
+      "cause": "Gleichgerichtete Lücke über Nacht, Wochenende oder bei Ereignissen",
+      "effect": "Tagesverlust über 9 %, Brokerliquidation",
+      "likelihood": 4,
+      "impact": 5,
+      "score": 20,
+      "controls": [
+        "DEC-DS-10 Größenregel gegen Lücken",
+        "P-GAP-*",
+        "P-RISK-WEEKEND-FACTOR",
+        "T-RISK-GAP-001"
+      ],
+      "residual": "Lücken jenseits der Historie",
+      "owner": "Betreiber (B); Prüfung durch die externe Risikofunktion (R) ab G9",
+      "masterprompt_ref": "§7.11",
+      "refs": [
+        "risk/leverage_results.json",
+        "risk/stress_results.json"
+      ],
+      "status": "OFFEN"
+    },
+    {
+      "id": "RK-02",
+      "title": "Margin-Erhöhungen",
+      "category": "LIQUIDITAET",
+      "cause": "Börse oder Broker erhöhen Margins in Stressphasen (+50 % / +100 %)",
+      "effect": "M/E steigt, Zwangsabbau",
+      "likelihood": 4,
+      "impact": 4,
+      "score": 16,
+      "controls": [
+        "P-LEV-*-ME",
+        "P-MRG-STRESS-1",
+        "P-MRG-STRESS-2",
+        "T-RISK-MRG-001"
+      ],
+      "residual": "Erhöhung über +100 %",
+      "owner": "Betreiber (B); Prüfung durch die externe Risikofunktion (R) ab G9",
+      "masterprompt_ref": "§7.11",
+      "refs": [
+        "risk/stress_results.json"
+      ],
+      "status": "OFFEN"
+    },
+    {
+      "id": "RK-03",
+      "title": "Zwangsliquidation durch den Broker",
+      "category": "LIQUIDITAET",
+      "cause": "Nachschusspflicht ausgeschlossen (BaFin) → Broker stellt früh glatt",
+      "effect": "Verkauf zum ungünstigsten Zeitpunkt",
+      "likelihood": 3,
+      "impact": 5,
+      "score": 15,
+      "controls": [
+        "P-MRG-DERISK-TRIGGER",
+        "X-BRK-LIQ",
+        "SM-SAFETY",
+        "KT-07"
+      ],
+      "residual": "Unbekannte Brokerregel bis zur Bestätigung",
+      "owner": "Betreiber (B); Prüfung durch die externe Risikofunktion (R) ab G9",
+      "masterprompt_ref": "§7.11",
+      "refs": [
+        "SRC-REG-BAFIN-FUT"
+      ],
+      "status": "OFFEN"
+    },
+    {
+      "id": "RK-04",
+      "title": "Zusammenbruch von Korrelationen",
+      "category": "MARKT",
+      "cause": "Korrelationen → 1 in Krisen",
+      "effect": "Diversifikation fällt weg, σ_p steigt",
+      "likelihood": 4,
+      "impact": 4,
+      "score": 16,
+      "controls": [
+        "Stressszenario SC-X-CORR1",
+        "P-LEV-CLUSTER-MODE",
+        "P-STR-IDM-CAP"
+      ],
+      "residual": "Schätzfehler der Normalphase",
+      "owner": "Betreiber (B); Prüfung durch die externe Risikofunktion (R) ab G9",
+      "masterprompt_ref": "§7.11",
+      "refs": [
+        "risk/stress_results.json"
+      ],
+      "status": "OFFEN"
+    },
+    {
+      "id": "RK-05",
+      "title": "Konzentration in Zinsfutures und Zinswende",
+      "category": "MARKT",
+      "cause": "Hoher Hebel verlangt Zinsfutures-Anteil",
+      "effect": "Verlust bei Zinsschock",
+      "likelihood": 3,
+      "impact": 4,
+      "score": 12,
+      "controls": [
+        "Klassendeckel (risk/leverage_results.json)",
+        "Stressszenario SC-X-RATESHOCK"
+      ],
+      "residual": "Zinsschock über Szenario",
+      "owner": "Betreiber (B); Prüfung durch die externe Risikofunktion (R) ab G9",
+      "masterprompt_ref": "§7.11",
+      "refs": [],
+      "status": "OFFEN"
+    },
+    {
+      "id": "RK-06",
+      "title": "Betreiberverhalten: Hebel nach Verlusten erhöhen",
+      "category": "VERHALTEN",
+      "cause": "Einzelbetreiber mit Alleinbefugnis",
+      "effect": "Verlustspirale",
+      "likelihood": 3,
+      "impact": 5,
+      "score": 15,
+      "controls": [
+        "SM-LEVERAGE: Aufstieg nur nach Evidenz und Veto der externen Risikofunktion",
+        "Automatischer Abstieg",
+        "Sperrzeit nach Drawdown-Stufe"
+      ],
+      "residual": "Betreiber kann Grants widerrufen, aber nicht Limits heben ohne Tor",
+      "owner": "Betreiber (B); Prüfung durch die externe Risikofunktion (R) ab G9",
+      "masterprompt_ref": "§7.11",
+      "refs": [
+        "DEC-CF-06"
+      ],
+      "status": "OFFEN"
+    },
+    {
+      "id": "RK-07",
+      "title": "Modellrisiko der Kovarianzschätzung",
+      "category": "MODELL",
+      "cause": "EWMA-Schätzung in Regimewechseln",
+      "effect": "Zu große Positionen",
+      "likelihood": 3,
+      "impact": 4,
+      "score": 12,
+      "controls": [
+        "Schockregime-Kovarianz (§7.1)",
+        "P-STR-IDM-CAP",
+        "Lückenregel unabhängig von Kovarianz"
+      ],
+      "residual": "Neue Regime",
+      "owner": "Betreiber (B); Prüfung durch die externe Risikofunktion (R) ab G9",
+      "masterprompt_ref": "§7.11",
+      "refs": [],
+      "status": "OFFEN"
+    },
+    {
+      "id": "RK-08",
+      "title": "Keine Netto-Edge im Zielhorizont 4 h–4 T",
+      "category": "STRATEGIE",
+      "cause": "Kosten dominieren kurze Horizonte (R3)",
+      "effect": "Dauerhafter Verlust nach Kosten",
+      "likelihood": 5,
+      "impact": 4,
+      "score": 20,
+      "controls": [
+        "research/prior_derivation.py",
+        "Futility-Regel (DEC-DS-21)",
+        "G3/G4/G7"
+      ],
+      "residual": "Prior-Unsicherheit",
+      "owner": "Betreiber (B)",
+      "masterprompt_ref": "§6",
+      "refs": [
+        "research/prior_results.json"
+      ],
+      "status": "OFFEN"
+    },
+    {
+      "id": "RK-09",
+      "title": "Kostendrift und Ausführungskosten über Modell",
+      "category": "KOSTEN",
+      "cause": "Spread/Schlupf höher als angenommen",
+      "effect": "Edge verschwindet",
+      "likelihood": 4,
+      "impact": 4,
+      "score": 16,
+      "controls": [
+        "Kostendrift-Monitor (§14.2)",
+        "X-EXEC-TCA",
+        "Kosten-Sensitivitäten ×1,5/×2/×3"
+      ],
+      "residual": "Messrauschen",
+      "owner": "Betreiber (B)",
+      "masterprompt_ref": "§14.2",
+      "refs": [
+        "operations/costdrift_results.json"
+      ],
+      "status": "OFFEN"
+    },
+    {
+      "id": "RK-10",
+      "title": "MT5: keine Client-Order-ID, Timeout-Doppelorder",
+      "category": "AUSFUEHRUNG",
+      "cause": "order_send ohne Idempotenzschlüssel",
+      "effect": "Doppelte Position",
+      "likelihood": 4,
+      "impact": 5,
+      "score": 20,
+      "controls": [
+        "SM-ORDER mit UNKNOWN und Abgleich vor Retry",
+        "magic/comment-Korrelation",
+        "KT-04",
+        "KT-05"
+      ],
+      "residual": "Broker ändert comment",
+      "owner": "Betreiber (B)",
+      "masterprompt_ref": "§8",
+      "refs": [
+        "SRC-MT5-API"
+      ],
+      "status": "OFFEN"
+    },
+    {
+      "id": "RK-11",
+      "title": "MT5-Zeitstempel unklar (UTC oder Serverzeit)",
+      "category": "DATEN",
+      "cause": "Widerspruch in der Dokumentation (R1)",
+      "effect": "Falsche Zeitstopps und Tagesgrenzen",
+      "likelihood": 3,
+      "impact": 4,
+      "score": 12,
+      "controls": [
+        "KT-03 Zeitoffset gegen NTP",
+        "Zeitstempel nur aus eigener UTC-Uhr für Regeln"
+      ],
+      "residual": "Sommerzeitwechsel",
+      "owner": "Betreiber (B)",
+      "masterprompt_ref": "§8",
+      "refs": [],
+      "status": "OFFEN"
+    },
+    {
+      "id": "RK-12",
+      "title": "Ausfall oder Insolvenz des Brokers",
+      "category": "GEGENPARTEI",
+      "cause": "Broker- oder FCM-Ausfall",
+      "effect": "Kapital eingefroren oder verloren",
+      "likelihood": 2,
+      "impact": 5,
+      "score": 10,
+      "controls": [
+        "Stressszenario SC-X-BROKER",
+        "Due Diligence Segregation",
+        "Kapital nur so weit beim Broker wie nötig (Sensitivität P-ECO-CASH-AT-BROKER)"
+      ],
+      "residual": "Einlagensicherung begrenzt",
+      "owner": "Betreiber (B); Prüfung durch die externe Risikofunktion (R) ab G9",
+      "masterprompt_ref": "§7.9",
+      "refs": [],
+      "status": "OFFEN"
+    },
+    {
+      "id": "RK-13",
+      "title": "Verstoß gegen Datenlizenzen",
+      "category": "RECHT_TECHNISCH",
+      "cause": "Non-Display-Einstufung, Weitergabe an LLM",
+      "effect": "Nachforderungen, Sperre",
+      "likelihood": 3,
+      "impact": 3,
+      "score": 9,
+      "controls": [
+        "X-DATA-ND",
+        "DEC-CF-07 keine Rohdaten an LLM",
+        "Egress-Allowlist"
+      ],
+      "residual": "Einstufung offen",
+      "owner": "Betreiber (B)",
+      "masterprompt_ref": "§9.1",
+      "refs": [],
+      "status": "OFFEN"
+    },
+    {
+      "id": "RK-14",
+      "title": "Hermes-Upstream ändert sich schnell",
+      "category": "KI",
+      "cause": "Release alle 5,6 Tage, große Patch-Releases (R5)",
+      "effect": "Regressionen, Sicherheitslücken",
+      "likelihood": 4,
+      "impact": 2,
+      "score": 8,
+      "controls": [
+        "Pin auf Version",
+        "Evaluationssuite vor Update (P-AI-EVAL-PASS)",
+        "P-AI-UPDATE-MIN-DAYS"
+      ],
+      "residual": "Pflegeaufwand",
+      "owner": "Betreiber (B)",
+      "masterprompt_ref": "§11.3",
+      "refs": [
+        "SRC-HERMES-UPSTREAM"
+      ],
+      "status": "OFFEN"
+    },
+    {
+      "id": "RK-15",
+      "title": "LLM-Kontingent erschöpft oder Anbieter fällt aus",
+      "category": "KI",
+      "cause": "Abo-Guthaben begrenzt",
+      "effect": "KI-Funktionen fallen aus",
+      "likelihood": 4,
+      "impact": 1,
+      "score": 4,
+      "controls": [
+        "Kern ohne KI voll funktionsfähig (Stufe H0)",
+        "Budgetgrenze"
+      ],
+      "residual": "keine Wirkung auf Geldpfad",
+      "owner": "Betreiber (B)",
+      "masterprompt_ref": "§11.3",
+      "refs": [],
+      "status": "OFFEN"
+    },
+    {
+      "id": "RK-16",
+      "title": "Einzelbetreiber und Schlüsselperson",
+      "category": "ORGANISATION",
+      "cause": "Nur eine befugte Person (BQ-09)",
+      "effect": "Ausfall ohne Vertretung",
+      "likelihood": 4,
+      "impact": 4,
+      "score": 16,
+      "controls": [
+        "X-ORG-DEPUTY Notfallvertretung mit Nur-Abbau-Recht",
+        "Break-glass",
+        "Automatischer Abbau bei fehlender Lease"
+      ],
+      "residual": "Keine zweite handelsbefugte Person",
+      "owner": "Betreiber (B)",
+      "masterprompt_ref": "§13",
+      "refs": [
+        "DEC-CF-06"
+      ],
+      "status": "OFFEN"
+    },
+    {
+      "id": "RK-17",
+      "title": "Kompromittierung von VPS oder Brokerkonto",
+      "category": "SICHERHEIT",
+      "cause": "Externer Angreifer, Schadsoftware, Phishing",
+      "effect": "Fehlorders, Datenabfluss",
+      "likelihood": 3,
+      "impact": 5,
+      "score": 15,
+      "controls": [
+        "Getrennte Vertrauensbereiche",
+        "Hardware-Schlüssel",
+        "Broker-Portal (Auszahlung) getrennt vom Handelszugang",
+        "Pentest vor Echtgeld"
+      ],
+      "residual": "Windows-Angriffsfläche",
+      "owner": "Betreiber (B); externer Prüfer (P) für Penetrationstest und Audit",
+      "masterprompt_ref": "§12",
+      "refs": [],
+      "status": "OFFEN"
+    },
+    {
+      "id": "RK-18",
+      "title": "Ausfall oder Neustart des Windows-VPS",
+      "category": "BETRIEB",
+      "cause": "Updates, Hosterausfall",
+      "effect": "Keine Überwachung",
+      "likelihood": 4,
+      "impact": 3,
+      "score": 12,
+      "controls": [
+        "Serverseitige Schutzstopps (DEC-DS-20)",
+        "Watchdog und zweiter Alarmweg",
+        "Wartungsfenster außerhalb der Handelszeiten"
+      ],
+      "residual": "Lücke während Ausfall",
+      "owner": "Betreiber (B)",
+      "masterprompt_ref": "§10.5",
+      "refs": [],
+      "status": "OFFEN"
+    },
+    {
+      "id": "RK-19",
+      "title": "Handelsaussetzungen und Limit-Moves",
+      "category": "MARKT",
+      "cause": "Tageslimits (Agrar, Vieh), DCB-Halts (Energie)",
+      "effect": "Kein Ausstieg möglich",
+      "likelihood": 3,
+      "impact": 4,
+      "score": 12,
+      "controls": [
+        "Stressszenario SC-H-2022NI (Mehrtagessperre)",
+        "Klassendeckel Agrar",
+        "KT-08",
+        "KT-10"
+      ],
+      "residual": "Mehrtägige Limitsperre",
+      "owner": "Betreiber (B); Prüfung durch die externe Risikofunktion (R) ab G9",
+      "masterprompt_ref": "§7.6",
+      "refs": [
+        "SRC-LIMIT-LM04"
+      ],
+      "status": "OFFEN"
+    },
+    {
+      "id": "RK-20",
+      "title": "Negative Preise",
+      "category": "MARKT",
+      "cause": "Verfall im Energiemarkt (WTI 2020)",
+      "effect": "Unbegrenzter Verlust im Frontmonat",
+      "likelihood": 2,
+      "impact": 5,
+      "score": 10,
+      "controls": [
+        "P-UNI-ENERGY-EXPIRY-DAYS",
+        "Preisplausibilität erlaubt negative Preise ohne Absturz"
+      ],
+      "residual": "Andere Kontrakte",
+      "owner": "Betreiber (B); Prüfung durch die externe Risikofunktion (R) ab G9",
+      "masterprompt_ref": "§7.6",
+      "refs": [
+        "SRC-STRESS-E2020-WTI-NEGATIVE"
+      ],
+      "status": "OFFEN"
+    },
+    {
+      "id": "RK-21",
+      "title": "Verwechslung Demo und Echtgeld",
+      "category": "BEDIENUNG",
+      "cause": "Gleiche Oberfläche",
+      "effect": "Echtgeldorder statt Test",
+      "likelihood": 2,
+      "impact": 5,
+      "score": 10,
+      "controls": [
+        "SM-MODE nur mit Betreiberschlüssel",
+        "Farbliche und textliche Trennung jeder Ansicht",
+        "getrennte Konfiguration"
+      ],
+      "residual": "Bedienfehler",
+      "owner": "Betreiber (B)",
+      "masterprompt_ref": "§10.7",
+      "refs": [],
+      "status": "OFFEN"
+    },
+    {
+      "id": "RK-22",
+      "title": "Überanpassung in der Forschung",
+      "category": "STRATEGIE",
+      "cause": "Viele Varianten, kurze Horizonte",
+      "effect": "Scheinbare Edge",
+      "likelihood": 4,
+      "impact": 4,
+      "score": 16,
+      "controls": [
+        "Vorregistrierung",
+        "DSR, PBO/CSCV, Romano-Wolf",
+        "Versiegelter Holdout"
+      ],
+      "residual": "Unbekannte Mehrfachtests",
+      "owner": "Betreiber (B)",
+      "masterprompt_ref": "§6.4",
+      "refs": [],
+      "status": "OFFEN"
+    },
+    {
+      "id": "RK-23",
+      "title": "Drift von ML-Modellen",
+      "category": "MODELL",
+      "cause": "Regimewechsel",
+      "effect": "Fehlprognosen im Größenpfad",
+      "likelihood": 3,
+      "impact": 3,
+      "score": 9,
+      "controls": [
+        "MRM-Richtlinie (ai/mrm_policy.md)",
+        "Drift-Monitor",
+        "Rückfall auf Regelbasis"
+      ],
+      "residual": "Verzögerte Erkennung",
+      "owner": "Betreiber (B)",
+      "masterprompt_ref": "§11.5",
+      "refs": [],
+      "status": "OFFEN"
+    },
+    {
+      "id": "RK-24",
+      "title": "Ungeklärte rechtliche Einstufung",
+      "category": "RECHT_TECHNISCH",
+      "cause": "Recht extern (BQ-03)",
+      "effect": "Unzulässiger Betrieb",
+      "likelihood": 2,
+      "impact": 5,
+      "score": 10,
+      "controls": [
+        "X-LEGAL-01 sperrt G8"
+      ],
+      "residual": "Abhängig von externer Person",
+      "owner": "Betreiber (B)",
+      "masterprompt_ref": "§15",
+      "refs": [
+        "DEC-CF-01"
+      ],
+      "status": "OFFEN"
+    },
+    {
+      "id": "RK-25",
+      "title": "Wochenend- und Feiertagsrisiko",
+      "category": "MARKT",
+      "cause": "Lange Schließzeiten",
+      "effect": "Größere Lücken",
+      "likelihood": 4,
+      "impact": 4,
+      "score": 16,
+      "controls": [
+        "P-RISK-WEEKEND-FACTOR",
+        "Freitagsregel im Risikomotor"
+      ],
+      "residual": "Ereignisse am Wochenende",
+      "owner": "Betreiber (B); Prüfung durch die externe Risikofunktion (R) ab G9",
+      "masterprompt_ref": "§7.6",
+      "refs": [],
+      "status": "OFFEN"
+    },
+    {
+      "id": "RK-26",
+      "title": "Krypto-Futures rund um die Uhr",
+      "category": "MARKT",
+      "cause": "CME-Krypto 24/7 seit 29.05.2026 (R2b)",
+      "effect": "Verluste außerhalb der Betreiberzeiten",
+      "likelihood": 3,
+      "impact": 4,
+      "score": 12,
+      "controls": [
+        "Automatische Leiter ohne Betreibereingriff",
+        "Klassendeckel Krypto"
+      ],
+      "residual": "Einzelbetreiber schläft",
+      "owner": "Betreiber (B); Prüfung durch die externe Risikofunktion (R) ab G9",
+      "masterprompt_ref": "§7.6",
+      "refs": [
+        "SRC-SPEC-CME-BTC"
+      ],
+      "status": "OFFEN"
+    },
+    {
+      "id": "RK-27",
+      "title": "CFD-Rückfallpfad",
+      "category": "GEGENPARTEI",
+      "cause": "Market Maker ist Gegenpartei; Finanzierungskosten",
+      "effect": "Höhere Kosten, Konflikt",
+      "likelihood": 2,
+      "impact": 3,
+      "score": 6,
+      "controls": [
+        "Standardmäßig abgeschaltet (DEC-CF-05)",
+        "ESMA-Grenzen hart"
+      ],
+      "residual": "Nur nach Freigabe",
+      "owner": "Betreiber (B); Prüfung durch die externe Risikofunktion (R) ab G9",
+      "masterprompt_ref": "§8",
+      "refs": [
+        "SRC-REG-ESMA-CFD"
+      ],
+      "status": "OFFEN"
+    },
+    {
+      "id": "RK-28",
+      "title": "Kontrakte beim Primärbroker nicht verfügbar",
+      "category": "ZUGANG",
+      "cause": "Kontraktliste unbestätigt (R1)",
+      "effect": "Kleineres Universum",
+      "likelihood": 4,
+      "impact": 3,
+      "score": 12,
+      "controls": [
+        "X-BRK-CONTRACTS",
+        "X-BRK-ALT"
+      ],
+      "residual": "Universum kleiner",
+      "owner": "Betreiber (B)",
+      "masterprompt_ref": "§6.2",
+      "refs": [],
+      "status": "OFFEN"
+    },
+    {
+      "id": "RK-29",
+      "title": "Überschreitung der 9-%-Tagesgrenze trotz Größenregel",
+      "category": "MARKT",
+      "cause": "Lücke jenseits der kalibrierten Klassenlücke",
+      "effect": "Verletzung einer Betreiber-Grenze",
+      "likelihood": 2,
+      "impact": 5,
+      "score": 10,
+      "controls": [
+        "DEC-DS-10",
+        "Restwahrscheinlichkeit ausgewiesen",
+        "X-OP-DLC-MODE"
+      ],
+      "residual": "nicht null",
+      "owner": "Betreiber (B); Prüfung durch die externe Risikofunktion (R) ab G9",
+      "masterprompt_ref": "§7.4",
+      "refs": [
+        "risk/kelly_ruin_results.json"
+      ],
+      "status": "OFFEN"
+    },
+    {
+      "id": "RK-30",
+      "title": "Kontraktgröße zu grob für kleines Kapital",
+      "category": "KAPITAL",
+      "cause": "Standardkontrakte bei kleinem Budget (BQ-01)",
+      "effect": "Keine Diversifikation, Rundungsrisiko",
+      "likelihood": 4,
+      "impact": 3,
+      "score": 12,
+      "controls": [
+        "Kapitaladaptive Zulassung (P-UNI-MAX-CONTRACT-RISK)",
+        "Micro-Kontrakte"
+      ],
+      "residual": "Micro-Kontrakte teuer je Risikoeinheit",
+      "owner": "Betreiber (B)",
+      "masterprompt_ref": "§4.3",
+      "refs": [
+        "financials/cost_model_results.json"
+      ],
+      "status": "OFFEN"
+    },
+    {
+      "id": "RK-31",
+      "title": "Ein-VPS-Betrieb ohne getrennte Vertrauensbereiche",
+      "category": "SICHERHEIT",
+      "cause": "Geldpfad, Forschung/KI und Prüfmodul laufen auf einem Windows-VPS (BQ-07), falls der Betreiber die Empfehlung aus DEC-CF-04 nicht umsetzt",
+      "effect": "Kompromittierung eines Dienstes erreicht den Geldpfad-Host; das Prüfmodul ist nicht mehr unabhängig",
+      "likelihood": 3,
+      "impact": 5,
+      "score": 15,
+      "controls": [
+        "DEC-CF-04 Empfehlung: drei getrennte Instanzen",
+        "Ersatzweise getrennte Windows-Konten, Firewall-Regeln, kein Hermes auf dem Geldpfad-Host",
+        "X-INF-ZONES sperrt G5 bis zur Entscheidung",
+        "T-SEC-014 Penetrationstest vor G5"
+      ],
+      "residual": "Seitliche Bewegung zwischen Diensten desselben Hosts bleibt möglich; ein Prüfmodul auf demselben Host ist kein unabhängiger Nachweis",
+      "owner": "Betreiber (B); externer Prüfer (P) für Penetrationstest und Audit",
+      "masterprompt_ref": "§12",
+      "refs": [
+        "DEC-CF-04",
+        "X-INF-ZONES",
+        "architecture/threat_model.md"
+      ],
+      "status": "OFFEN"
+    },
+    {
+      "id": "RK-32",
+      "title": "Projektschnittstelle als einziger Pfad aus der KI-Zone in den Geldpfad-Host",
+      "category": "SICHERHEIT",
+      "cause": "svc-projectops läuft im Geldpfad und ist aus der KI-Zone erreichbar (mTLS, Token, Werkzeug-Allowlist)",
+      "effect": "Eine Schwachstelle in svc-projectops erlaubt Zugriff auf den Geldpfad-Host",
+      "likelihood": 2,
+      "impact": 5,
+      "score": 10,
+      "controls": [
+        "Werkzeug-Allowlist ohne Order-, Grant- und Sperrwerkzeuge (T-CON-001)",
+        "eigene Identität ohne Brokerzugriff",
+        "Token-Rotation P-SEC-CRED-ROTATION-D",
+        "Verträge des Geldpfads nur mit Geldpfad-Erzeugern (schemas/order_intent.schema.json)",
+        "Option für BS-05: Pull-Modell – Vorschläge in eine Ablage, die der Geldpfad signaturgeprüft abholt; keine eingehende Verbindung in den Geldpfad-Host"
+      ],
+      "residual": "Restrisiko bis zur Entscheidung über das Pull-Modell in BS-05; Nachweis durch Penetrationstest",
+      "owner": "Betreiber (B); externer Prüfer (P) für Penetrationstest und Audit",
+      "masterprompt_ref": "§11, §12",
+      "refs": [
+        "security/security_architecture.md",
+        "T-SEC-014",
+        "T-CON-001"
+      ],
+      "status": "OFFEN"
+    }
+  ]
+}

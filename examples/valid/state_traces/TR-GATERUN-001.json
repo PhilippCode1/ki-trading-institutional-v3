@@ -1,0 +1,76 @@
+{
+ "schema_version": "3.0",
+ "id": "TR-GATERUN-001",
+ "machine": "SM-GATERUN",
+ "description": "Holdout nur einmal; Wiederholung nur mit identischen Eingaben; Ergebnis signiert und quittiert",
+ "scenarios": [
+  "OS-GV-06"
+ ],
+ "start": null,
+ "initial_reasons": null,
+ "steps": [
+  {
+   "event": "FREEZE",
+   "context": {
+    "manifest_registered": true,
+    "gate": "GATE-G4",
+    "holdout_access_count": 1
+   },
+   "expect_state": "REGISTERED",
+   "expect_invalid": true
+  },
+  {
+   "event": "FREEZE",
+   "context": {
+    "manifest_registered": true,
+    "gate": "GATE-G4",
+    "holdout_access_count": 0
+   },
+   "expect_state": "INPUTS_FROZEN"
+  },
+  {
+   "event": "RUN",
+   "context": {},
+   "expect_state": "RUNNING"
+  },
+  {
+   "event": "FAIL_TECH",
+   "context": {},
+   "expect_state": "ERRORED"
+  },
+  {
+   "event": "RERUN",
+   "context": {
+    "inputs_hash_unchanged": false
+   },
+   "expect_state": "ERRORED",
+   "expect_invalid": true
+  },
+  {
+   "event": "RERUN",
+   "context": {
+    "inputs_hash_unchanged": true
+   },
+   "expect_state": "RUNNING"
+  },
+  {
+   "event": "RESULT",
+   "context": {},
+   "expect_state": "DECIDED"
+  },
+  {
+   "event": "SIGN",
+   "context": {
+    "evaluator_key_valid": true
+   },
+   "expect_state": "SIGNED"
+  },
+  {
+   "event": "ACK_SIGNED",
+   "context": {
+    "signed": true
+   },
+   "expect_state": "ACKNOWLEDGED"
+  }
+ ]
+}

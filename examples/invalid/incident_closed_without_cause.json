@@ -1,0 +1,23 @@
+{
+ "schema_version": "3.0",
+ "message_id": "00000000-0000-4000-8000-000000000025",
+ "correlation_id": "COR-0025",
+ "producer": "OPERATOR",
+ "created_utc": "2026-09-24T09:00:00Z",
+ "incident_id": "INC-0001",
+ "severity": "HOCH",
+ "state": "CLOSED",
+ "opened_utc": "2026-09-24T09:00:00Z",
+ "runbook": "RB-03",
+ "timeline": [
+  {
+   "time_utc": "2026-09-24T09:00:31Z",
+   "entry": "Schutzstopp nicht binnen Frist bestätigt"
+  }
+ ],
+ "postmortem_ref": "PM-0001",
+ "closed_utc": "2026-09-25T09:00:00Z",
+ "safety_reasons": [
+  "STOP_MISSING"
+ ]
+}

@@ -1,0 +1,18 @@
+{
+ "schema_version": "3.0",
+ "id": "TR-POS-009",
+ "machine": "SM-POSITION",
+ "description": "Position vom Broker geschlossen (Stop-out oder Verfall): Brokerfakt, Incident",
+ "scenarios": [
+  "OS-RI-06"
+ ],
+ "start": "OPEN_PROTECTED",
+ "initial_reasons": null,
+ "steps": [
+  {
+   "event": "POSITION_CLOSED_BY_BROKER",
+   "context": {},
+   "expect_state": "FLAT"
+  }
+ ]
+}

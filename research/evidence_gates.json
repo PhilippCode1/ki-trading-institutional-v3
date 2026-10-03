@@ -1,0 +1,3900 @@
+{
+  "schema_version": "3.0",
+  "document": "Evidenztore und Monitore (führende Quelle der Torregeln)",
+  "as_of": "2026-09-24",
+  "leading_source_for": "Voraussetzungen, Berechnungen, Ergebnisprädikate, Flags und Folgeschritte aller Tore und Monitore",
+  "origin": "Technik übernommen aus v2.0 (research/evidence_gates.json des v2.0-Pakets); Tore G0–G10 nach §16 v3.0.",
+  "outcome_classes": {
+    "PASS": "Kriterien erfüllt; der Folgeschritt ist zulässig.",
+    "FAIL": "Kriterien mit gültigen Daten nicht erfüllt; Folgestufe gesperrt.",
+    "INCONCLUSIVE": "gültige Daten ohne Kriterienverletzung, Mindestinformation fehlt; begrenzte Fortsetzung.",
+    "INVALID": "Eingaben oder Verfahren ungültig (Leckage, Reihenfolge, Hash, fehlendes Vortor).",
+    "ERROR": "technischer Fehler; Wiederholung nur mit identischen eingefrorenen Eingaben.",
+    "BLOCKED_EXTERNAL": "externe Eingabe fehlt; abhängige Arbeit gesperrt."
+  },
+  "evaluation": "Voraussetzungen in Reihenfolge; die erste falsche liefert ihr on_fail. Danach Berechnungen, dann outcome_rules in Reihenfolge: die erste wahre Regel bestimmt das Ergebnis; die letzte ist immer wahr. Flags zusätzlich. Schwellen sind Parameterverweise; Zahlenvergleiche runden auf 9 Nachkommastellen (validation/expr.py). Interpreter: validation/gate_engine.py; Ergebnis als signiertes gate_result (schemas/gate_result.schema.json) nur vom Evaluator.",
+  "e_score_map": {
+    "E-1": [
+      "GATE-G0"
+    ],
+    "E-2": [
+      "GATE-G1"
+    ],
+    "E-3": [
+      "GATE-G2"
+    ],
+    "E-4": [
+      "GATE-G3",
+      "GATE-G4"
+    ],
+    "E-5": [
+      "GATE-G5"
+    ],
+    "E-6": [
+      "GATE-G6"
+    ],
+    "E-7": [
+      "GATE-G7"
+    ],
+    "E-8": [
+      "GATE-G8"
+    ],
+    "E-9": [
+      "GATE-G9",
+      "GATE-G10"
+    ]
+  },
+  "gates": [
+    {
+      "id": "GATE-G0",
+      "kind": "GATE",
+      "name": "G0 Betreibereingaben, Wirtschaftlichkeit mit echten Gebühren, Kauf-statt-Bau",
+      "stage": "BS-00",
+      "e_block": "E-1",
+      "cost_effect": "ohne Geldausgabe",
+      "evidence_class": "Entscheidungsrechnung",
+      "purpose": "Prüft vor jeder Ausgabe, ob die geplante Konfiguration mit bestätigten Gebühren und Betreiberwerten wirtschaftlich ist und nicht von einer Alternative (V0 Geldmarkt, V1 Fonds) dominiert wird (§5.7, §17.4).",
+      "prerequisites": [
+        {
+          "id": "PRE-G0-0",
+          "description": "Betreiberentscheidungen BQ-01 bis BQ-10 mit Wortlaut erfasst",
+          "expr": {
+            "eq": [
+              {
+                "var": "operator_decisions_recorded"
+              },
+              true
+            ]
+          },
+          "on_fail": "INVALID"
+        },
+        {
+          "id": "PRE-G0-1",
+          "description": "externe Eingabe X-BRK-FEES bestätigt (Gebührentabelle je Kontrakt und Seite)",
+          "expr": {
+            "eq": [
+              {
+                "var": "inputs.X-BRK-FEES"
+              },
+              "BESTAETIGT"
+            ]
+          },
+          "on_fail": "BLOCKED_EXTERNAL"
+        },
+        {
+          "id": "PRE-G0-2",
+          "description": "externe Eingabe X-OP-RATE bestätigt (Bewertung der eigenen Arbeitsstunde)",
+          "expr": {
+            "eq": [
+              {
+                "var": "inputs.X-OP-RATE"
+              },
+              "BESTAETIGT"
+            ]
+          },
+          "on_fail": "BLOCKED_EXTERNAL"
+        },
+        {
+          "id": "PRE-G0-3",
+          "description": "externe Eingabe X-OP-BUDGET bestätigt (Budget für Aufbau, Daten, KI und Prüfungen; Ausgabendeckel)",
+          "expr": {
+            "eq": [
+              {
+                "var": "inputs.X-OP-BUDGET"
+              },
+              "BESTAETIGT"
+            ]
+          },
+          "on_fail": "BLOCKED_EXTERNAL"
+        },
+        {
+          "id": "PRE-G0-4",
+          "description": "externe Eingabe X-BRK-INTEREST bestätigt (Verzinsung des Kontoguthabens)",
+          "expr": {
+            "eq": [
+              {
+                "var": "inputs.X-BRK-INTEREST"
+              },
+              "BESTAETIGT"
+            ]
+          },
+          "on_fail": "BLOCKED_EXTERNAL"
+        },
+        {
+          "id": "PRE-G0-5",
+          "description": "externe Eingabe X-V1-PRODUCTS bestätigt (Konkrete Trendfolge-/Managed-Futures-Produkte (V1) mit Kosten, Liquidität und Abbildungsqualität)",
+          "expr": {
+            "eq": [
+              {
+                "var": "inputs.X-V1-PRODUCTS"
+              },
+              "BESTAETIGT"
+            ]
+          },
+          "on_fail": "BLOCKED_EXTERNAL"
+        }
+      ],
+      "inputs": [
+        {
+          "name": "calculators_exit_code",
+          "type": "integer",
+          "unit": null,
+          "source": "validation/run_calculators.py"
+        },
+        {
+          "name": "calculators_check_passed",
+          "type": "boolean",
+          "unit": null,
+          "source": "run_calculators.py --check (bytegleich)"
+        },
+        {
+          "name": "variant_decision",
+          "type": "string",
+          "unit": null,
+          "source": "financials/decision_montecarlo_results.json#/variants_V0_V4/<Stufe>/decision"
+        },
+        {
+          "name": "finding_class",
+          "type": "string",
+          "unit": null,
+          "source": "financials/decision_montecarlo_results.json#/table/<Universum>/<Stufe>/<Profil>/class"
+        },
+        {
+          "name": "p_npv_positive",
+          "type": "number",
+          "unit": "Anteil",
+          "source": "dito base/p_npv_positive"
+        },
+        {
+          "name": "buy_vs_build_signed",
+          "type": "boolean",
+          "unit": null,
+          "source": "signierte Entscheidung zu financials/buy_vs_build.md"
+        },
+        {
+          "name": "variant_requires_operator_decision",
+          "type": "boolean",
+          "unit": null,
+          "source": "Variante verletzt eine Betreibervorgabe (z. B. TF-D1 ohne Sieben-Tage-Grenze)"
+        }
+      ],
+      "outcome_rules": [
+        {
+          "id": "G0-R1",
+          "outcome": "ERROR",
+          "when": {
+            "ne": [
+              {
+                "var": "calculators_exit_code"
+              },
+              0
+            ]
+          },
+          "reason": "Rechnerlauf fehlgeschlagen"
+        },
+        {
+          "id": "G0-R2",
+          "outcome": "INVALID",
+          "when": {
+            "eq": [
+              {
+                "var": "calculators_check_passed"
+              },
+              false
+            ]
+          },
+          "reason": "Ergebnisse nicht reproduzierbar"
+        },
+        {
+          "id": "G0-R3",
+          "outcome": "FAIL",
+          "when": {
+            "in": [
+              {
+                "var": "finding_class"
+              },
+              [
+                "PROFILE_NOT_ADMISSIBLE",
+                "NON_POSITIVE_BASE",
+                "NOT_VIABLE_AT_CAPITAL"
+              ]
+            ]
+          },
+          "reason": "Befundklasse nicht wirtschaftlich oder Profil unzulässig (§5.7; wird vor der Dominanz geprüft)"
+        },
+        {
+          "id": "G0-R4",
+          "outcome": "FAIL",
+          "when": {
+            "eq": [
+              {
+                "var": "variant_decision"
+              },
+              "DOMINATED_BY_ALTERNATIVE"
+            ]
+          },
+          "reason": "Alternative V0 oder V1 dominiert (EV-04)"
+        },
+        {
+          "id": "G0-R5",
+          "outcome": "FAIL",
+          "when": {
+            "lt": [
+              {
+                "var": "p_npv_positive"
+              },
+              {
+                "param": "P-ECO-MARGINAL-P"
+              }
+            ]
+          },
+          "reason": "P(NPV > 0) unter der Schwelle MARGINAL"
+        },
+        {
+          "id": "G0-R6",
+          "outcome": "INCONCLUSIVE",
+          "when": {
+            "eq": [
+              {
+                "var": "buy_vs_build_signed"
+              },
+              false
+            ]
+          },
+          "reason": "Kauf-statt-Bau-Befund noch nicht signiert"
+        },
+        {
+          "id": "G0-R7",
+          "outcome": "PASS",
+          "when": {
+            "const": true
+          },
+          "reason": "wirtschaftlich mindestens MARGINAL, Alternative nicht dominant, Entscheidung signiert"
+        }
+      ],
+      "flags": [
+        {
+          "name": "MARGINAL",
+          "when": {
+            "lt": [
+              {
+                "var": "p_npv_positive"
+              },
+              {
+                "param": "P-ECO-VIABLE-P"
+              }
+            ]
+          },
+          "description": "nur MARGINAL: Ausgabendeckel und Abbruchkriterien besonders eng führen"
+        },
+        {
+          "name": "V1_OBERER_WERT_UEBERLEGEN",
+          "when": {
+            "eq": [
+              {
+                "var": "variant_decision"
+              },
+              "V1_OBERER_WERT_UEBERLEGEN"
+            ]
+          },
+          "description": "Fondslösung V1 wäre beim oberen Indexwert überlegen; Produkte (X-V1-PRODUCTS) vor dem Bau prüfen"
+        },
+        {
+          "name": "OPERATOR_DECISION_REQUIRED",
+          "when": {
+            "eq": [
+              {
+                "var": "variant_requires_operator_decision"
+              },
+              true
+            ]
+          },
+          "description": "Variante braucht eine neue Betreiberentscheidung"
+        }
+      ],
+      "next_steps": {
+        "PASS": "BS-01 und BS-02 parallel starten.",
+        "FAIL": "Kein Aufbau; Alternative (V0/V1) umsetzen oder Betreibervorgaben ändern (neue BQ-Entscheidung).",
+        "INCONCLUSIVE": "Kauf-statt-Bau-Befund signieren und erneut auswerten.",
+        "INVALID": "Rechner reparieren, --check bestehen lassen, erneut auswerten.",
+        "ERROR": "Lauf mit identischen Eingaben wiederholen.",
+        "BLOCKED_EXTERNAL": "Fehlende Eingaben beschaffen (Liste im Ergebnis)."
+      },
+      "computations": []
+    },
+    {
+      "id": "GATE-G1",
+      "kind": "GATE",
+      "name": "G1 Kontozugang und frühe Killer-Tests",
+      "stage": "BS-01",
+      "e_block": "E-2",
+      "cost_effect": "Kontoeröffnung durch den Betreiber",
+      "evidence_class": "Brokersemantik (Orakel je Test)",
+      "purpose": "Prüft vor dem Systembau, ob MT5 beim Broker so arbeitet, wie das Konzept es braucht (KT-01 bis KT-16, execution/broker_killer_tests.md, EV-06).",
+      "prerequisites": [
+        {
+          "id": "PRE-G1-0",
+          "description": "GATE-G0 bestanden",
+          "expr": {
+            "eq": [
+              {
+                "var": "gate_g0"
+              },
+              "PASS"
+            ]
+          },
+          "on_fail": "INVALID"
+        },
+        {
+          "id": "PRE-G1-1",
+          "description": "externe Eingabe X-BRK-ACCOUNT bestätigt (Konto beim MT5-Futures-Broker (Demo und Echtgeld))",
+          "expr": {
+            "eq": [
+              {
+                "var": "inputs.X-BRK-ACCOUNT"
+              },
+              "BESTAETIGT"
+            ]
+          },
+          "on_fail": "BLOCKED_EXTERNAL"
+        },
+        {
+          "id": "PRE-G1-2",
+          "description": "externe Eingabe X-BRK-CONTRACTS bestätigt (Kontraktliste in MT5 mit Symbolen, Kontraktwerten und Rollterminen)",
+          "expr": {
+            "eq": [
+              {
+                "var": "inputs.X-BRK-CONTRACTS"
+              },
+              "BESTAETIGT"
+            ]
+          },
+          "on_fail": "BLOCKED_EXTERNAL"
+        },
+        {
+          "id": "PRE-G1-3",
+          "description": "externe Eingabe X-BRK-MARGIN bestätigt (Intraday- und Übernacht-Margins je Kontrakt)",
+          "expr": {
+            "eq": [
+              {
+                "var": "inputs.X-BRK-MARGIN"
+              },
+              "BESTAETIGT"
+            ]
+          },
+          "on_fail": "BLOCKED_EXTERNAL"
+        },
+        {
+          "id": "PRE-G1-4",
+          "description": "externe Eingabe X-BRK-LIQ bestätigt (Liquidationsregel des Brokers (Stop-out-Level, Zeitpunkt, Reihenfolge))",
+          "expr": {
+            "eq": [
+              {
+                "var": "inputs.X-BRK-LIQ"
+              },
+              "BESTAETIGT"
+            ]
+          },
+          "on_fail": "BLOCKED_EXTERNAL"
+        },
+        {
+          "id": "PRE-G1-5",
+          "description": "externe Eingabe X-BRK-NACHSCHUSS bestätigt (Vertraglicher Ausschluss der Nachschusspflicht für Futures)",
+          "expr": {
+            "eq": [
+              {
+                "var": "inputs.X-BRK-NACHSCHUSS"
+              },
+              "BESTAETIGT"
+            ]
+          },
+          "on_fail": "BLOCKED_EXTERNAL"
+        },
+        {
+          "id": "PRE-G1-6",
+          "description": "externe Eingabe X-BRK-API bestätigt (Erlaubnis für Python-Schnittstelle/EA bei Futures; Grenzen der Orderfrequenz)",
+          "expr": {
+            "eq": [
+              {
+                "var": "inputs.X-BRK-API"
+              },
+              "BESTAETIGT"
+            ]
+          },
+          "on_fail": "BLOCKED_EXTERNAL"
+        },
+        {
+          "id": "PRE-G1-7",
+          "description": "externe Eingabe X-BRK-DEMO bestätigt (Futures im Demokonto)",
+          "expr": {
+            "eq": [
+              {
+                "var": "inputs.X-BRK-DEMO"
+              },
+              "BESTAETIGT"
+            ]
+          },
+          "on_fail": "BLOCKED_EXTERNAL"
+        }
+      ],
+      "inputs": [
+        {
+          "name": "harness_exit_code",
+          "type": "integer",
+          "unit": null,
+          "source": "Testskripte der Killer-Tests"
+        },
+        {
+          "name": "protocol_complete",
+          "type": "boolean",
+          "unit": null,
+          "source": "Rohantworten, Zeitstempel, Auszugszeilen"
+        },
+        {
+          "name": "kt_01",
+          "type": "string",
+          "unit": null,
+          "source": "Ergebnis KT-01: BESTANDEN, RUECKFALL, GESCHEITERT oder OFFEN"
+        },
+        {
+          "name": "kt_02",
+          "type": "string",
+          "unit": null,
+          "source": "Ergebnis KT-02: BESTANDEN, RUECKFALL, GESCHEITERT oder OFFEN"
+        },
+        {
+          "name": "kt_03",
+          "type": "string",
+          "unit": null,
+          "source": "Ergebnis KT-03: BESTANDEN, RUECKFALL, GESCHEITERT oder OFFEN"
+        },
+        {
+          "name": "kt_04",
+          "type": "string",
+          "unit": null,
+          "source": "Ergebnis KT-04: BESTANDEN, RUECKFALL, GESCHEITERT oder OFFEN"
+        },
+        {
+          "name": "kt_05",
+          "type": "string",
+          "unit": null,
+          "source": "Ergebnis KT-05: BESTANDEN, RUECKFALL, GESCHEITERT oder OFFEN"
+        },
+        {
+          "name": "kt_06",
+          "type": "string",
+          "unit": null,
+          "source": "Ergebnis KT-06: BESTANDEN, RUECKFALL, GESCHEITERT oder OFFEN"
+        },
+        {
+          "name": "kt_07",
+          "type": "string",
+          "unit": null,
+          "source": "Ergebnis KT-07: BESTANDEN, RUECKFALL, GESCHEITERT oder OFFEN"
+        },
+        {
+          "name": "kt_08",
+          "type": "string",
+          "unit": null,
+          "source": "Ergebnis KT-08: BESTANDEN, RUECKFALL, GESCHEITERT oder OFFEN"
+        },
+        {
+          "name": "kt_09",
+          "type": "string",
+          "unit": null,
+          "source": "Ergebnis KT-09: BESTANDEN, RUECKFALL, GESCHEITERT oder OFFEN"
+        },
+        {
+          "name": "kt_10",
+          "type": "string",
+          "unit": null,
+          "source": "Ergebnis KT-10: BESTANDEN, RUECKFALL, GESCHEITERT oder OFFEN"
+        },
+        {
+          "name": "kt_11",
+          "type": "string",
+          "unit": null,
+          "source": "Ergebnis KT-11: BESTANDEN, RUECKFALL, GESCHEITERT oder OFFEN"
+        },
+        {
+          "name": "kt_12",
+          "type": "string",
+          "unit": null,
+          "source": "Ergebnis KT-12: BESTANDEN, RUECKFALL, GESCHEITERT oder OFFEN"
+        },
+        {
+          "name": "kt_13",
+          "type": "string",
+          "unit": null,
+          "source": "Ergebnis KT-13: BESTANDEN, RUECKFALL, GESCHEITERT oder OFFEN"
+        },
+        {
+          "name": "kt_14",
+          "type": "string",
+          "unit": null,
+          "source": "Ergebnis KT-14: BESTANDEN, RUECKFALL, GESCHEITERT oder OFFEN"
+        },
+        {
+          "name": "kt_15",
+          "type": "string",
+          "unit": null,
+          "source": "Ergebnis KT-15: BESTANDEN, RUECKFALL, GESCHEITERT oder OFFEN"
+        },
+        {
+          "name": "kt_16",
+          "type": "string",
+          "unit": null,
+          "source": "Ergebnis KT-16: BESTANDEN, RUECKFALL, GESCHEITERT oder OFFEN"
+        }
+      ],
+      "outcome_rules": [
+        {
+          "id": "G1-R1",
+          "outcome": "ERROR",
+          "when": {
+            "ne": [
+              {
+                "var": "harness_exit_code"
+              },
+              0
+            ]
+          },
+          "reason": "Testlauf fehlgeschlagen"
+        },
+        {
+          "id": "G1-R2",
+          "outcome": "INVALID",
+          "when": {
+            "eq": [
+              {
+                "var": "protocol_complete"
+              },
+              false
+            ]
+          },
+          "reason": "Protokoll unvollständig"
+        },
+        {
+          "id": "G1-R2A",
+          "outcome": "INVALID",
+          "when": {
+            "any": [
+              {
+                "not": {
+                  "in": [
+                    {
+                      "var": "kt_01"
+                    },
+                    [
+                      "BESTANDEN",
+                      "RUECKFALL",
+                      "GESCHEITERT",
+                      "OFFEN"
+                    ]
+                  ]
+                }
+              },
+              {
+                "not": {
+                  "in": [
+                    {
+                      "var": "kt_02"
+                    },
+                    [
+                      "BESTANDEN",
+                      "RUECKFALL",
+                      "GESCHEITERT",
+                      "OFFEN"
+                    ]
+                  ]
+                }
+              },
+              {
+                "not": {
+                  "in": [
+                    {
+                      "var": "kt_03"
+                    },
+                    [
+                      "BESTANDEN",
+                      "RUECKFALL",
+                      "GESCHEITERT",
+                      "OFFEN"
+                    ]
+                  ]
+                }
+              },
+              {
+                "not": {
+                  "in": [
+                    {
+                      "var": "kt_04"
+                    },
+                    [
+                      "BESTANDEN",
+                      "RUECKFALL",
+                      "GESCHEITERT",
+                      "OFFEN"
+                    ]
+                  ]
+                }
+              },
+              {
+                "not": {
+                  "in": [
+                    {
+                      "var": "kt_05"
+                    },
+                    [
+                      "BESTANDEN",
+                      "RUECKFALL",
+                      "GESCHEITERT",
+                      "OFFEN"
+                    ]
+                  ]
+                }
+              },
+              {
+                "not": {
+                  "in": [
+                    {
+                      "var": "kt_06"
+                    },
+                    [
+                      "BESTANDEN",
+                      "RUECKFALL",
+                      "GESCHEITERT",
+                      "OFFEN"
+                    ]
+                  ]
+                }
+              },
+              {
+                "not": {
+                  "in": [
+                    {
+                      "var": "kt_07"
+                    },
+                    [
+                      "BESTANDEN",
+                      "RUECKFALL",
+                      "GESCHEITERT",
+                      "OFFEN"
+                    ]
+                  ]
+                }
+              },
+              {
+                "not": {
+                  "in": [
+                    {
+                      "var": "kt_08"
+                    },
+                    [
+                      "BESTANDEN",
+                      "RUECKFALL",
+                      "GESCHEITERT",
+                      "OFFEN"
+                    ]
+                  ]
+                }
+              },
+              {
+                "not": {
+                  "in": [
+                    {
+                      "var": "kt_09"
+                    },
+                    [
+                      "BESTANDEN",
+                      "RUECKFALL",
+                      "GESCHEITERT",
+                      "OFFEN"
+                    ]
+                  ]
+                }
+              },
+              {
+                "not": {
+                  "in": [
+                    {
+                      "var": "kt_10"
+                    },
+                    [
+                      "BESTANDEN",
+                      "RUECKFALL",
+                      "GESCHEITERT",
+                      "OFFEN"
+                    ]
+                  ]
+                }
+              },
+              {
+                "not": {
+                  "in": [
+                    {
+                      "var": "kt_11"
+                    },
+                    [
+                      "BESTANDEN",
+                      "RUECKFALL",
+                      "GESCHEITERT",
+                      "OFFEN"
+                    ]
+                  ]
+                }
+              },
+              {
+                "not": {
+                  "in": [
+                    {
+                      "var": "kt_12"
+                    },
+                    [
+                      "BESTANDEN",
+                      "RUECKFALL",
+                      "GESCHEITERT",
+                      "OFFEN"
+                    ]
+                  ]
+                }
+              },
+              {
+                "not": {
+                  "in": [
+                    {
+                      "var": "kt_13"
+                    },
+                    [
+                      "BESTANDEN",
+                      "RUECKFALL",
+                      "GESCHEITERT",
+                      "OFFEN"
+                    ]
+                  ]
+                }
+              },
+              {
+                "not": {
+                  "in": [
+                    {
+                      "var": "kt_14"
+                    },
+                    [
+                      "BESTANDEN",
+                      "RUECKFALL",
+                      "GESCHEITERT",
+                      "OFFEN"
+                    ]
+                  ]
+                }
+              },
+              {
+                "not": {
+                  "in": [
+                    {
+                      "var": "kt_15"
+                    },
+                    [
+                      "BESTANDEN",
+                      "RUECKFALL",
+                      "GESCHEITERT",
+                      "OFFEN"
+                    ]
+                  ]
+                }
+              },
+              {
+                "not": {
+                  "in": [
+                    {
+                      "var": "kt_16"
+                    },
+                    [
+                      "BESTANDEN",
+                      "RUECKFALL",
+                      "GESCHEITERT",
+                      "OFFEN"
+                    ]
+                  ]
+                }
+              }
+            ]
+          },
+          "reason": "unzulässiger Ergebniswert (erlaubt: BESTANDEN, RUECKFALL, GESCHEITERT, OFFEN)"
+        },
+        {
+          "id": "G1-R2B",
+          "outcome": "INVALID",
+          "when": {
+            "any": [
+              {
+                "eq": [
+                  {
+                    "var": "kt_04"
+                  },
+                  "RUECKFALL"
+                ]
+              }
+            ]
+          },
+          "reason": "Rückfall gemeldet für einen Test ohne Rückfallvariante (KT-04)"
+        },
+        {
+          "id": "G1-R3",
+          "outcome": "FAIL",
+          "when": {
+            "any": [
+              {
+                "eq": [
+                  {
+                    "var": "kt_04"
+                  },
+                  "GESCHEITERT"
+                ]
+              },
+              {
+                "eq": [
+                  {
+                    "var": "kt_05"
+                  },
+                  "GESCHEITERT"
+                ]
+              },
+              {
+                "eq": [
+                  {
+                    "var": "kt_06"
+                  },
+                  "GESCHEITERT"
+                ]
+              }
+            ]
+          },
+          "reason": "Order-Lebenszyklus, Wiederholungssicherheit oder serverseitiger Schutz ohne tragfähige Rückfallvariante"
+        },
+        {
+          "id": "G1-R4",
+          "outcome": "INCONCLUSIVE",
+          "when": {
+            "any": [
+              {
+                "eq": [
+                  {
+                    "var": "kt_01"
+                  },
+                  "OFFEN"
+                ]
+              },
+              {
+                "eq": [
+                  {
+                    "var": "kt_02"
+                  },
+                  "OFFEN"
+                ]
+              },
+              {
+                "eq": [
+                  {
+                    "var": "kt_03"
+                  },
+                  "OFFEN"
+                ]
+              },
+              {
+                "eq": [
+                  {
+                    "var": "kt_04"
+                  },
+                  "OFFEN"
+                ]
+              },
+              {
+                "eq": [
+                  {
+                    "var": "kt_05"
+                  },
+                  "OFFEN"
+                ]
+              },
+              {
+                "eq": [
+                  {
+                    "var": "kt_06"
+                  },
+                  "OFFEN"
+                ]
+              },
+              {
+                "eq": [
+                  {
+                    "var": "kt_07"
+                  },
+                  "OFFEN"
+                ]
+              },
+              {
+                "eq": [
+                  {
+                    "var": "kt_08"
+                  },
+                  "OFFEN"
+                ]
+              },
+              {
+                "eq": [
+                  {
+                    "var": "kt_09"
+                  },
+                  "OFFEN"
+                ]
+              },
+              {
+                "eq": [
+                  {
+                    "var": "kt_11"
+                  },
+                  "OFFEN"
+                ]
+              },
+              {
+                "eq": [
+                  {
+                    "var": "kt_12"
+                  },
+                  "OFFEN"
+                ]
+              },
+              {
+                "eq": [
+                  {
+                    "var": "kt_13"
+                  },
+                  "OFFEN"
+                ]
+              },
+              {
+                "eq": [
+                  {
+                    "var": "kt_14"
+                  },
+                  "OFFEN"
+                ]
+              },
+              {
+                "eq": [
+                  {
+                    "var": "kt_15"
+                  },
+                  "OFFEN"
+                ]
+              },
+              {
+                "eq": [
+                  {
+                    "var": "kt_16"
+                  },
+                  "OFFEN"
+                ]
+              }
+            ]
+          },
+          "reason": "Killer-Tests ausstehend (KT-10 ist nur Beobachtung)"
+        },
+        {
+          "id": "G1-R5",
+          "outcome": "PASS",
+          "when": {
+            "const": true
+          },
+          "reason": "alle Killer-Tests bestanden oder mit Rückfallvariante"
+        }
+      ],
+      "flags": [
+        {
+          "name": "ECHTGELD_GESPERRT",
+          "when": {
+            "any": [
+              {
+                "eq": [
+                  {
+                    "var": "kt_02"
+                  },
+                  "GESCHEITERT"
+                ]
+              },
+              {
+                "eq": [
+                  {
+                    "var": "kt_13"
+                  },
+                  "GESCHEITERT"
+                ]
+              }
+            ]
+          },
+          "description": "Stop-out oder Margin-Übergang unklar: kein Echtgeld"
+        },
+        {
+          "name": "UNIVERSUM_VERKLEINERT",
+          "when": {
+            "any": [
+              {
+                "eq": [
+                  {
+                    "var": "kt_01"
+                  },
+                  "GESCHEITERT"
+                ]
+              },
+              {
+                "eq": [
+                  {
+                    "var": "kt_08"
+                  },
+                  "GESCHEITERT"
+                ]
+              },
+              {
+                "eq": [
+                  {
+                    "var": "kt_09"
+                  },
+                  "GESCHEITERT"
+                ]
+              },
+              {
+                "eq": [
+                  {
+                    "var": "kt_11"
+                  },
+                  "GESCHEITERT"
+                ]
+              }
+            ]
+          },
+          "description": "einzelne Instrumente oder Funktionen gesperrt; Wirtschaftlichkeit neu rechnen"
+        },
+        {
+          "name": "RUECKFALL_AKTIV",
+          "when": {
+            "any": [
+              {
+                "eq": [
+                  {
+                    "var": "kt_01"
+                  },
+                  "RUECKFALL"
+                ]
+              },
+              {
+                "eq": [
+                  {
+                    "var": "kt_02"
+                  },
+                  "RUECKFALL"
+                ]
+              },
+              {
+                "eq": [
+                  {
+                    "var": "kt_03"
+                  },
+                  "RUECKFALL"
+                ]
+              },
+              {
+                "eq": [
+                  {
+                    "var": "kt_04"
+                  },
+                  "RUECKFALL"
+                ]
+              },
+              {
+                "eq": [
+                  {
+                    "var": "kt_05"
+                  },
+                  "RUECKFALL"
+                ]
+              },
+              {
+                "eq": [
+                  {
+                    "var": "kt_06"
+                  },
+                  "RUECKFALL"
+                ]
+              },
+              {
+                "eq": [
+                  {
+                    "var": "kt_07"
+                  },
+                  "RUECKFALL"
+                ]
+              },
+              {
+                "eq": [
+                  {
+                    "var": "kt_08"
+                  },
+                  "RUECKFALL"
+                ]
+              },
+              {
+                "eq": [
+                  {
+                    "var": "kt_09"
+                  },
+                  "RUECKFALL"
+                ]
+              },
+              {
+                "eq": [
+                  {
+                    "var": "kt_10"
+                  },
+                  "RUECKFALL"
+                ]
+              },
+              {
+                "eq": [
+                  {
+                    "var": "kt_11"
+                  },
+                  "RUECKFALL"
+                ]
+              },
+              {
+                "eq": [
+                  {
+                    "var": "kt_12"
+                  },
+                  "RUECKFALL"
+                ]
+              },
+              {
+                "eq": [
+                  {
+                    "var": "kt_13"
+                  },
+                  "RUECKFALL"
+                ]
+              },
+              {
+                "eq": [
+                  {
+                    "var": "kt_14"
+                  },
+                  "RUECKFALL"
+                ]
+              },
+              {
+                "eq": [
+                  {
+                    "var": "kt_15"
+                  },
+                  "RUECKFALL"
+                ]
+              },
+              {
+                "eq": [
+                  {
+                    "var": "kt_16"
+                  },
+                  "RUECKFALL"
+                ]
+              }
+            ]
+          },
+          "description": "mindestens eine Rückfallvariante gewählt"
+        },
+        {
+          "name": "SCHUTZAENDERUNG_MANUELL",
+          "when": {
+            "any": [
+              {
+                "eq": [
+                  {
+                    "var": "kt_07"
+                  },
+                  "GESCHEITERT"
+                ]
+              }
+            ]
+          },
+          "description": "Schutzänderungen nur manuell; Einstiegssperre bis zur Klärung"
+        },
+        {
+          "name": "FENCING_ORGANISATORISCH",
+          "when": {
+            "any": [
+              {
+                "eq": [
+                  {
+                    "var": "kt_16"
+                  },
+                  "GESCHEITERT"
+                ]
+              }
+            ]
+          },
+          "description": "Fencing nur organisatorisch; Restore-Drill verschärfen"
+        },
+        {
+          "name": "KOSTEN_NUR_MONATLICH",
+          "when": {
+            "any": [
+              {
+                "eq": [
+                  {
+                    "var": "kt_14"
+                  },
+                  "GESCHEITERT"
+                ]
+              }
+            ]
+          },
+          "description": "Kostendrift nur monatlich messbar"
+        },
+        {
+          "name": "ZEITSTEMPEL_NUR_SYSTEMZEIT",
+          "when": {
+            "any": [
+              {
+                "eq": [
+                  {
+                    "var": "kt_03"
+                  },
+                  "GESCHEITERT"
+                ]
+              }
+            ]
+          },
+          "description": "Brokerzeitstempel nicht nutzbar"
+        },
+        {
+          "name": "FREQUENZ_EINGESCHRAENKT",
+          "when": {
+            "any": [
+              {
+                "eq": [
+                  {
+                    "var": "kt_15"
+                  },
+                  "GESCHEITERT"
+                ]
+              }
+            ]
+          },
+          "description": "Echtzeitkontrollen eingeschränkt"
+        },
+        {
+          "name": "VOLLABGLEICH_PFLICHT",
+          "when": {
+            "any": [
+              {
+                "eq": [
+                  {
+                    "var": "kt_12"
+                  },
+                  "GESCHEITERT"
+                ]
+              }
+            ]
+          },
+          "description": "nach jeder Wiederverbindung Vollabgleich vor Einstiegen"
+        }
+      ],
+      "next_steps": {
+        "PASS": "Register mit gemessenen Werten aktualisieren; BS-05 nach G4 freigeben.",
+        "FAIL": "Projektstopp oder Zweitbroker mit neuer Testrunde (RB-31).",
+        "INCONCLUSIVE": "Ausstehende Tests durchführen; kein Systembau.",
+        "INVALID": "Protokoll vervollständigen, Tests wiederholen.",
+        "ERROR": "Testlauf wiederholen.",
+        "BLOCKED_EXTERNAL": "Kontozugang und schriftliche Brokerangaben beschaffen."
+      },
+      "computations": []
+    },
+    {
+      "id": "GATE-G2",
+      "kind": "GATE",
+      "name": "G2 Datenlizenz, Abgleich zweier Quellen, Leckagetests",
+      "stage": "BS-02",
+      "e_block": "E-3",
+      "cost_effect": "Datenkauf",
+      "evidence_class": "Datenqualität",
+      "purpose": "Sichert lizenzierte, abgeglichene Daten mit ausreichender Historie und versiegeltem Holdout (§9, §6.5).",
+      "prerequisites": [
+        {
+          "id": "PRE-G2-0",
+          "description": "GATE-G0 bestanden",
+          "expr": {
+            "eq": [
+              {
+                "var": "gate_g0"
+              },
+              "PASS"
+            ]
+          },
+          "on_fail": "INVALID"
+        },
+        {
+          "id": "PRE-G2-1",
+          "description": "externe Eingabe X-DATA-LIC bestätigt (Lizenz der historischen Daten (interne Nutzung, keine Weitergabe an LLM))",
+          "expr": {
+            "eq": [
+              {
+                "var": "inputs.X-DATA-LIC"
+              },
+              "BESTAETIGT"
+            ]
+          },
+          "on_fail": "BLOCKED_EXTERNAL"
+        },
+        {
+          "id": "PRE-G2-2",
+          "description": "externe Eingabe X-DATA-ND bestätigt (Einstufung der Marktdatennutzung (Anzeige/Non-Display, Pro/Non-Pro) bei vollautomatischem Handel)",
+          "expr": {
+            "eq": [
+              {
+                "var": "inputs.X-DATA-ND"
+              },
+              "BESTAETIGT"
+            ]
+          },
+          "on_fail": "BLOCKED_EXTERNAL"
+        }
+      ],
+      "inputs": [
+        {
+          "name": "pipeline_exit_code",
+          "type": "integer",
+          "unit": null,
+          "source": "Datenpipeline"
+        },
+        {
+          "name": "leakage_tests_passed",
+          "type": "boolean",
+          "unit": null,
+          "source": "Leckagetests (Verschiebung der Daten)"
+        },
+        {
+          "name": "holdout_sealed",
+          "type": "boolean",
+          "unit": null,
+          "source": "Holdout mit Hash im Prüfmodul"
+        },
+        {
+          "name": "xcheck_share_min",
+          "type": "number",
+          "unit": "Anteil",
+          "source": "kleinster Anteil übereinstimmender Kerzen je Instrument (Toleranz P-DATA-XCHECK-TOL-TICKS)"
+        },
+        {
+          "name": "history_years_min",
+          "type": "number",
+          "unit": "Jahre",
+          "source": "kleinste Historie unter den zugelassenen Instrumenten (eigene oder Proxy)"
+        },
+        {
+          "name": "n_admitted_with_history",
+          "type": "integer",
+          "unit": null,
+          "source": "zugelassene Instrumente mit ausreichender Historie"
+        },
+        {
+          "name": "measurement_report_complete",
+          "type": "boolean",
+          "unit": null,
+          "source": "Messbericht Volatilität, Spreads, Tagesvolumen, Liquiditätsfenster (X-DATA-VOL, X-DATA-LIQ, X-DATA-HIST)"
+        }
+      ],
+      "computations": [
+        {
+          "name": "years_required",
+          "expr": {
+            "add": [
+              {
+                "param": "P-RES-DEV-YEARS"
+              },
+              {
+                "param": "P-RES-HOLDOUT-YEARS"
+              }
+            ]
+          },
+          "description": "Entwicklungsjahre plus Holdout-Jahre (DEC-DS-24)"
+        }
+      ],
+      "outcome_rules": [
+        {
+          "id": "G2-R1",
+          "outcome": "ERROR",
+          "when": {
+            "ne": [
+              {
+                "var": "pipeline_exit_code"
+              },
+              0
+            ]
+          },
+          "reason": "Pipeline fehlgeschlagen"
+        },
+        {
+          "id": "G2-R2",
+          "outcome": "INVALID",
+          "when": {
+            "any": [
+              {
+                "eq": [
+                  {
+                    "var": "leakage_tests_passed"
+                  },
+                  false
+                ]
+              },
+              {
+                "eq": [
+                  {
+                    "var": "holdout_sealed"
+                  },
+                  false
+                ]
+              }
+            ]
+          },
+          "reason": "Leckage oder Holdout nicht versiegelt"
+        },
+        {
+          "id": "G2-R3",
+          "outcome": "INVALID",
+          "when": {
+            "lt": [
+              {
+                "var": "history_years_min"
+              },
+              {
+                "var": "years_required"
+              }
+            ]
+          },
+          "reason": "zugelassenes Instrument ohne ausreichende Historie (Zulassungsregel verletzt)"
+        },
+        {
+          "id": "G2-R4",
+          "outcome": "FAIL",
+          "when": {
+            "lt": [
+              {
+                "var": "xcheck_share_min"
+              },
+              {
+                "param": "P-DATA-XCHECK-SHARE-MIN"
+              }
+            ]
+          },
+          "reason": "Datenquellen weichen zu stark ab"
+        },
+        {
+          "id": "G2-R5",
+          "outcome": "FAIL",
+          "when": {
+            "lt": [
+              {
+                "var": "n_admitted_with_history"
+              },
+              {
+                "param": "P-LEV-H5-MINDIV"
+              }
+            ]
+          },
+          "reason": "zu wenige Instrumente mit Historie für die Mindestdiversifikation"
+        },
+        {
+          "id": "G2-R6",
+          "outcome": "INCONCLUSIVE",
+          "when": {
+            "eq": [
+              {
+                "var": "measurement_report_complete"
+              },
+              false
+            ]
+          },
+          "reason": "Messbericht unvollständig"
+        },
+        {
+          "id": "G2-R7",
+          "outcome": "PASS",
+          "when": {
+            "const": true
+          },
+          "reason": "Daten lizenziert, abgeglichen, versiegelt, ausreichend"
+        }
+      ],
+      "next_steps": {
+        "PASS": "BS-03 (Forschung) registrieren.",
+        "FAIL": "Anbieter wechseln oder Universum neu bewerten; Wirtschaftlichkeit neu rechnen (G0).",
+        "INCONCLUSIVE": "Messung vervollständigen.",
+        "INVALID": "Leckage bzw. Zulassung korrigieren, Holdout neu versiegeln.",
+        "ERROR": "Lauf wiederholen.",
+        "BLOCKED_EXTERNAL": "Lizenz und Einstufung klären."
+      },
+      "flags": []
+    },
+    {
+      "id": "GATE-G3",
+      "kind": "GATE",
+      "name": "G3 Forschung auf Entwicklungsdaten mit Futility-Regel",
+      "stage": "BS-03",
+      "e_block": "E-4",
+      "cost_effect": "Rechenzeit",
+      "evidence_class": "statistisch (deflationiert)",
+      "oc_model": "research/operating_characteristics.py",
+      "purpose": "Prüft den vorregistrierten Kandidaten deflationiert gegen Mehrfachtests und bricht ab, wenn die Aussicht auf das Endtor unter der Futility-Schwelle liegt (§6.4, §6.6).",
+      "prerequisites": [
+        {
+          "id": "PRE-G3-0",
+          "description": "GATE-G2 bestanden",
+          "expr": {
+            "eq": [
+              {
+                "var": "gate_g2"
+              },
+              "PASS"
+            ]
+          },
+          "on_fail": "INVALID"
+        },
+        {
+          "id": "PRE-G3-1",
+          "description": "Experiment-Manifest vor jeder Ergebnisansicht registriert",
+          "expr": {
+            "eq": [
+              {
+                "var": "manifest_registered_before_results"
+              },
+              true
+            ]
+          },
+          "on_fail": "INVALID"
+        },
+        {
+          "id": "PRE-G3-2",
+          "description": "Versuche im registrierten Budget P-OC-TRIALS",
+          "expr": {
+            "le": [
+              {
+                "var": "trials_used"
+              },
+              {
+                "param": "P-OC-TRIALS"
+              }
+            ]
+          },
+          "on_fail": "INVALID"
+        },
+        {
+          "id": "PRE-G3-3",
+          "description": "externe Eingabe X-DATA-VOL bestätigt (Gemessene Volatilitäten, Spreads, Tagesvolumina)",
+          "expr": {
+            "eq": [
+              {
+                "var": "inputs.X-DATA-VOL"
+              },
+              "BESTAETIGT"
+            ]
+          },
+          "on_fail": "BLOCKED_EXTERNAL"
+        },
+        {
+          "id": "PRE-G3-4",
+          "description": "externe Eingabe X-DATA-LIQ bestätigt (Gemessene Liquiditätsfenster je Instrument)",
+          "expr": {
+            "eq": [
+              {
+                "var": "inputs.X-DATA-LIQ"
+              },
+              "BESTAETIGT"
+            ]
+          },
+          "on_fail": "BLOCKED_EXTERNAL"
+        },
+        {
+          "id": "PRE-G3-5",
+          "description": "externe Eingabe X-DATA-HIST bestätigt (Listungsdaten und tatsächlich verfügbare Intraday-Historie je Kontrakt)",
+          "expr": {
+            "eq": [
+              {
+                "var": "inputs.X-DATA-HIST"
+              },
+              "BESTAETIGT"
+            ]
+          },
+          "on_fail": "BLOCKED_EXTERNAL"
+        }
+      ],
+      "inputs": [
+        {
+          "name": "run_exit_code",
+          "type": "integer",
+          "unit": null,
+          "source": "Forschungslauf"
+        },
+        {
+          "name": "reference_equality",
+          "type": "boolean",
+          "unit": null,
+          "source": "Fachkern = Referenzimplementierung (T-STR-*)"
+        },
+        {
+          "name": "dsr",
+          "type": "number",
+          "unit": "Wahrscheinlichkeit",
+          "source": "research/statistical_calculator.py (PSR gegen erwartetes Maximum von P-OC-TRIALS Versuchen)"
+        },
+        {
+          "name": "pbo",
+          "type": "number",
+          "unit": "Anteil",
+          "source": "CSCV"
+        },
+        {
+          "name": "spa_p",
+          "type": "number",
+          "unit": "p-Wert",
+          "source": "Reality Check bzw. SPA mit stationärem Bootstrap"
+        },
+        {
+          "name": "p_predictive_final",
+          "type": "number",
+          "unit": "Wahrscheinlichkeit",
+          "source": "prädiktive Wahrscheinlichkeit, das Endtor zu bestehen (operating_characteristics.predictive_pass)"
+        },
+        {
+          "name": "turnover_ratio",
+          "type": "number",
+          "unit": "Verhältnis",
+          "source": "gemessener / simulierter Umschlag (research/turnover_results.json)"
+        },
+        {
+          "name": "neighbors_same_sign",
+          "type": "boolean",
+          "unit": null,
+          "source": "alle Nachbarkonfigurationen mit gleichem Vorzeichen"
+        },
+        {
+          "name": "subperiods_same_sign",
+          "type": "boolean",
+          "unit": null,
+          "source": "Teilperioden und Regime mit gleichem Vorzeichen"
+        }
+      ],
+      "computations": [
+        {
+          "name": "turnover_dev",
+          "expr": {
+            "abs": {
+              "sub": [
+                {
+                  "var": "turnover_ratio"
+                },
+                1
+              ]
+            }
+          },
+          "description": "relative Abweichung des Umschlags"
+        }
+      ],
+      "outcome_rules": [
+        {
+          "id": "G3-R1",
+          "outcome": "ERROR",
+          "when": {
+            "ne": [
+              {
+                "var": "run_exit_code"
+              },
+              0
+            ]
+          },
+          "reason": "Lauf fehlgeschlagen"
+        },
+        {
+          "id": "G3-R2",
+          "outcome": "INVALID",
+          "when": {
+            "eq": [
+              {
+                "var": "reference_equality"
+              },
+              false
+            ]
+          },
+          "reason": "Fachkern ≠ Referenz"
+        },
+        {
+          "id": "G3-R3",
+          "outcome": "FAIL",
+          "when": {
+            "lt": [
+              {
+                "var": "dsr"
+              },
+              {
+                "param": "P-RES-DSR-MIN"
+              }
+            ]
+          },
+          "reason": "Deflated Sharpe Ratio unter der Schwelle"
+        },
+        {
+          "id": "G3-R4",
+          "outcome": "FAIL",
+          "when": {
+            "gt": [
+              {
+                "var": "pbo"
+              },
+              {
+                "param": "P-RES-PBO-MAX"
+              }
+            ]
+          },
+          "reason": "Überanpassung (PBO) zu hoch"
+        },
+        {
+          "id": "G3-R5",
+          "outcome": "FAIL",
+          "when": {
+            "gt": [
+              {
+                "var": "spa_p"
+              },
+              {
+                "param": "P-RES-ALPHA"
+              }
+            ]
+          },
+          "reason": "Reality Check bzw. SPA nicht signifikant"
+        },
+        {
+          "id": "G3-R6",
+          "outcome": "FAIL",
+          "when": {
+            "gt": [
+              {
+                "var": "turnover_dev"
+              },
+              {
+                "param": "P-RES-TURNOVER-TOL"
+              }
+            ]
+          },
+          "reason": "Umschlag widerlegt Kosten- und Kapazitätsrechnung"
+        },
+        {
+          "id": "G3-R7",
+          "outcome": "FAIL",
+          "when": {
+            "lt": [
+              {
+                "var": "p_predictive_final"
+              },
+              {
+                "param": "P-RES-FUTILITY"
+              }
+            ]
+          },
+          "reason": "Futility: Aussicht auf das Endtor zu gering (DEC-DS-21)"
+        },
+        {
+          "id": "G3-R8",
+          "outcome": "FAIL",
+          "when": {
+            "any": [
+              {
+                "eq": [
+                  {
+                    "var": "neighbors_same_sign"
+                  },
+                  false
+                ]
+              },
+              {
+                "eq": [
+                  {
+                    "var": "subperiods_same_sign"
+                  },
+                  false
+                ]
+              }
+            ]
+          },
+          "reason": "nicht robust (Nachbarschaft oder Teilperioden)"
+        },
+        {
+          "id": "G3-R9",
+          "outcome": "PASS",
+          "when": {
+            "const": true
+          },
+          "reason": "deflationiert, robust und mit ausreichender Aussicht"
+        }
+      ],
+      "next_steps": {
+        "PASS": "Kandidat mit Hash einfrieren; G4 registrieren.",
+        "FAIL": "Kandidat verworfen; Stopp oder neue Kampagne innerhalb des Budgets (Befund im Wissensregister).",
+        "INVALID": "Verfahren korrigieren; ein ungültiger Lauf verbraucht das Budget.",
+        "ERROR": "Lauf mit identischen eingefrorenen Eingaben wiederholen.",
+        "BLOCKED_EXTERNAL": "Messungen aus G2 bestätigen.",
+        "INCONCLUSIVE": "nicht vorgesehen"
+      },
+      "flags": []
+    },
+    {
+      "id": "GATE-G4",
+      "kind": "GATE",
+      "name": "G4 Einmalige Holdout-Prüfung",
+      "stage": "BS-04",
+      "e_block": "E-4",
+      "cost_effect": "–",
+      "evidence_class": "Holdout (einmalig)",
+      "oc_model": "research/operating_characteristics.py",
+      "purpose": "Öffnet den versiegelten Holdout genau einmal und aktualisiert die Futility-Rechnung (§6.4, übernommen aus v2.0).",
+      "prerequisites": [
+        {
+          "id": "PRE-G4-0",
+          "description": "GATE-G3 bestanden",
+          "expr": {
+            "eq": [
+              {
+                "var": "gate_g3"
+              },
+              "PASS"
+            ]
+          },
+          "on_fail": "INVALID"
+        },
+        {
+          "id": "PRE-G4-1",
+          "description": "erster und einziger Zugriff auf den Holdout",
+          "expr": {
+            "eq": [
+              {
+                "var": "holdout_access_count"
+              },
+              0
+            ]
+          },
+          "on_fail": "INVALID"
+        },
+        {
+          "id": "PRE-G4-2",
+          "description": "eingefrorener Kandidat unverändert (Hash)",
+          "expr": {
+            "eq": [
+              {
+                "var": "candidate_hash_matches"
+              },
+              true
+            ]
+          },
+          "on_fail": "INVALID"
+        }
+      ],
+      "inputs": [
+        {
+          "name": "run_exit_code",
+          "type": "integer",
+          "unit": null,
+          "source": "Evaluator"
+        },
+        {
+          "name": "sr_holdout",
+          "type": "number",
+          "unit": "Sharpe p. a.",
+          "source": "Netto-Sharpe im Holdout"
+        },
+        {
+          "name": "p_predictive_final",
+          "type": "number",
+          "unit": "Wahrscheinlichkeit",
+          "source": "nach Holdout aktualisiert"
+        }
+      ],
+      "outcome_rules": [
+        {
+          "id": "G4-R1",
+          "outcome": "ERROR",
+          "when": {
+            "ne": [
+              {
+                "var": "run_exit_code"
+              },
+              0
+            ]
+          },
+          "reason": "Lauf fehlgeschlagen"
+        },
+        {
+          "id": "G4-R2",
+          "outcome": "FAIL",
+          "when": {
+            "le": [
+              {
+                "var": "sr_holdout"
+              },
+              0
+            ]
+          },
+          "reason": "Netto-Sharpe im Holdout nicht positiv"
+        },
+        {
+          "id": "G4-R3",
+          "outcome": "FAIL",
+          "when": {
+            "lt": [
+              {
+                "var": "p_predictive_final"
+              },
+              {
+                "param": "P-RES-FUTILITY"
+              }
+            ]
+          },
+          "reason": "Futility nach Holdout"
+        },
+        {
+          "id": "G4-R4",
+          "outcome": "PASS",
+          "when": {
+            "const": true
+          },
+          "reason": "Holdout positiv, Aussicht ausreichend"
+        }
+      ],
+      "next_steps": {
+        "PASS": "BS-05 (Systembau) beginnen, sofern G1 bestanden.",
+        "FAIL": "Projektstopp; der Holdout ist verbraucht und wird nicht erneut genutzt.",
+        "ERROR": "Wiederholung nur mit identischen Eingaben; der Zugriffszähler bleibt.",
+        "INVALID": "Verfahren prüfen; kein zweiter Zugriff.",
+        "BLOCKED_EXTERNAL": "nicht vorgesehen",
+        "INCONCLUSIVE": "nicht vorgesehen"
+      },
+      "flags": [],
+      "computations": []
+    },
+    {
+      "id": "GATE-G5",
+      "kind": "GATE",
+      "name": "G5 System gebaut, Abnahmetests bestanden, Prüfmodul ohne Abweichung",
+      "stage": "BS-05",
+      "e_block": "E-5",
+      "cost_effect": "Hauptaufwand",
+      "evidence_class": "Abnahme",
+      "purpose": "Prüft den gebauten Geldpfad gegen den Testkatalog, die Mutations- und Abdeckungsziele, den Penetrationstest und die Abbruchkriterien (§5.8, §10.4).",
+      "prerequisites": [
+        {
+          "id": "PRE-G5-0",
+          "description": "GATE-G4 bestanden",
+          "expr": {
+            "eq": [
+              {
+                "var": "gate_g4"
+              },
+              "PASS"
+            ]
+          },
+          "on_fail": "INVALID"
+        },
+        {
+          "id": "PRE-G5-1",
+          "description": "GATE-G1 bestanden",
+          "expr": {
+            "eq": [
+              {
+                "var": "gate_g1"
+              },
+              "PASS"
+            ]
+          },
+          "on_fail": "INVALID"
+        },
+        {
+          "id": "PRE-G5-2",
+          "description": "externe Eingabe X-INF-ZONES bestätigt (Aufteilung der Vertrauensbereiche auf Instanzen)",
+          "expr": {
+            "eq": [
+              {
+                "var": "inputs.X-INF-ZONES"
+              },
+              "BESTAETIGT"
+            ]
+          },
+          "on_fail": "BLOCKED_EXTERNAL"
+        },
+        {
+          "id": "PRE-G5-3",
+          "description": "externe Eingabe X-INF-VPS bestätigt (Leistungsdaten und Kosten des Windows-VPS)",
+          "expr": {
+            "eq": [
+              {
+                "var": "inputs.X-INF-VPS"
+              },
+              "BESTAETIGT"
+            ]
+          },
+          "on_fail": "BLOCKED_EXTERNAL"
+        },
+        {
+          "id": "PRE-G5-4",
+          "description": "externe Eingabe X-OP-BUDGET bestätigt (Budget für Aufbau, Daten, KI und Prüfungen; Ausgabendeckel)",
+          "expr": {
+            "eq": [
+              {
+                "var": "inputs.X-OP-BUDGET"
+              },
+              "BESTAETIGT"
+            ]
+          },
+          "on_fail": "BLOCKED_EXTERNAL"
+        },
+        {
+          "id": "PRE-G5-5",
+          "description": "Ausgaben bis G5 innerhalb P-ECO-SPEND-CAP",
+          "expr": {
+            "le": [
+              {
+                "var": "spend_to_date_eur"
+              },
+              {
+                "param": "P-ECO-SPEND-CAP"
+              }
+            ]
+          },
+          "on_fail": "FAIL"
+        },
+        {
+          "id": "PRE-G5-6",
+          "description": "Dauer bis G5 innerhalb P-ECO-MAX-MONTHS-G5",
+          "expr": {
+            "le": [
+              {
+                "var": "months_since_start"
+              },
+              {
+                "param": "P-ECO-MAX-MONTHS-G5"
+              }
+            ]
+          },
+          "on_fail": "FAIL"
+        }
+      ],
+      "inputs": [
+        {
+          "name": "ci_exit_code",
+          "type": "integer",
+          "unit": null,
+          "source": "CI-Lauf 3.11–3.13 mit -W error"
+        },
+        {
+          "name": "release_signed",
+          "type": "boolean",
+          "unit": null,
+          "source": "release_manifest"
+        },
+        {
+          "name": "sbom_present",
+          "type": "boolean",
+          "unit": null,
+          "source": "SBOM"
+        },
+        {
+          "name": "acceptance_failed",
+          "type": "integer",
+          "unit": null,
+          "source": "Abnahmetests des Testkatalogs ohne Bestehen"
+        },
+        {
+          "name": "evaluator_deviations",
+          "type": "integer",
+          "unit": null,
+          "source": "Abweichungen des Prüfmoduls"
+        },
+        {
+          "name": "mutation_score",
+          "type": "number",
+          "unit": "Anteil",
+          "source": "Mutationstests Geldpfad"
+        },
+        {
+          "name": "branch_coverage",
+          "type": "number",
+          "unit": "Anteil",
+          "source": "Zweigabdeckung Geldpfad"
+        },
+        {
+          "name": "pentest_critical_open",
+          "type": "integer",
+          "unit": null,
+          "source": "offene kritische Befunde (T-SEC-014)"
+        },
+        {
+          "name": "llm_isolation_passed",
+          "type": "boolean",
+          "unit": null,
+          "source": "T-AI-001 bis T-AI-004 (kein Sprachmodell im Geldpfad)"
+        }
+      ],
+      "outcome_rules": [
+        {
+          "id": "G5-R1",
+          "outcome": "ERROR",
+          "when": {
+            "ne": [
+              {
+                "var": "ci_exit_code"
+              },
+              0
+            ]
+          },
+          "reason": "CI fehlgeschlagen"
+        },
+        {
+          "id": "G5-R2",
+          "outcome": "INVALID",
+          "when": {
+            "any": [
+              {
+                "eq": [
+                  {
+                    "var": "release_signed"
+                  },
+                  false
+                ]
+              },
+              {
+                "eq": [
+                  {
+                    "var": "sbom_present"
+                  },
+                  false
+                ]
+              }
+            ]
+          },
+          "reason": "Release nicht signiert oder ohne SBOM"
+        },
+        {
+          "id": "G5-R3",
+          "outcome": "FAIL",
+          "when": {
+            "gt": [
+              {
+                "var": "acceptance_failed"
+              },
+              0
+            ]
+          },
+          "reason": "Abnahmetests nicht bestanden"
+        },
+        {
+          "id": "G5-R4",
+          "outcome": "FAIL",
+          "when": {
+            "gt": [
+              {
+                "var": "evaluator_deviations"
+              },
+              0
+            ]
+          },
+          "reason": "Prüfmodul weicht ab"
+        },
+        {
+          "id": "G5-R5",
+          "outcome": "FAIL",
+          "when": {
+            "lt": [
+              {
+                "var": "mutation_score"
+              },
+              {
+                "param": "P-QA-MUTATION-MIN"
+              }
+            ]
+          },
+          "reason": "Mutationsziel verfehlt"
+        },
+        {
+          "id": "G5-R6",
+          "outcome": "FAIL",
+          "when": {
+            "lt": [
+              {
+                "var": "branch_coverage"
+              },
+              {
+                "param": "P-QA-COVERAGE-MIN"
+              }
+            ]
+          },
+          "reason": "Abdeckungsziel verfehlt"
+        },
+        {
+          "id": "G5-R7",
+          "outcome": "FAIL",
+          "when": {
+            "gt": [
+              {
+                "var": "pentest_critical_open"
+              },
+              0
+            ]
+          },
+          "reason": "kritische Befunde des Penetrationstests offen"
+        },
+        {
+          "id": "G5-R8",
+          "outcome": "FAIL",
+          "when": {
+            "eq": [
+              {
+                "var": "llm_isolation_passed"
+              },
+              false
+            ]
+          },
+          "reason": "Sprachmodell nicht nachweislich außerhalb des Geldpfads"
+        },
+        {
+          "id": "G5-R9",
+          "outcome": "PASS",
+          "when": {
+            "const": true
+          },
+          "reason": "abgenommen"
+        }
+      ],
+      "next_steps": {
+        "PASS": "BS-06 (Drills) beginnen.",
+        "FAIL": "Nachbessern innerhalb von Ausgabendeckel und Höchstdauer; sonst Abbruch (§5.8).",
+        "INVALID": "Release und SBOM korrigieren.",
+        "ERROR": "CI wiederholen.",
+        "BLOCKED_EXTERNAL": "Infrastruktur und Budget bestätigen.",
+        "INCONCLUSIVE": "nicht vorgesehen"
+      },
+      "flags": [],
+      "computations": []
+    },
+    {
+      "id": "GATE-G6",
+      "kind": "GATE",
+      "name": "G6 Drills",
+      "stage": "BS-06",
+      "e_block": "E-6",
+      "cost_effect": "Betrieb",
+      "evidence_class": "Betriebsnachweis",
+      "purpose": "Belegt Restore, Ausfälle, Margin, Kill-Switch, Schlüsselverlust und Fencing im Demokonto (operations/drills.md) und den Dauerlauf.",
+      "prerequisites": [
+        {
+          "id": "PRE-G6-0",
+          "description": "GATE-G5 bestanden",
+          "expr": {
+            "eq": [
+              {
+                "var": "gate_g5"
+              },
+              "PASS"
+            ]
+          },
+          "on_fail": "INVALID"
+        }
+      ],
+      "inputs": [
+        {
+          "name": "protocols_complete",
+          "type": "boolean",
+          "unit": null,
+          "source": "Drill-Protokolle mit Datum, Ergebnis, Abweichungen"
+        },
+        {
+          "name": "soak_hours",
+          "type": "number",
+          "unit": "Stunden",
+          "source": "Dauerlauf im Demokonto"
+        },
+        {
+          "name": "dr_01",
+          "type": "string",
+          "unit": null,
+          "source": "Ergebnis DR-01: BESTANDEN, GESCHEITERT oder OFFEN"
+        },
+        {
+          "name": "dr_02",
+          "type": "string",
+          "unit": null,
+          "source": "Ergebnis DR-02: BESTANDEN, GESCHEITERT oder OFFEN"
+        },
+        {
+          "name": "dr_03",
+          "type": "string",
+          "unit": null,
+          "source": "Ergebnis DR-03: BESTANDEN, GESCHEITERT oder OFFEN"
+        },
+        {
+          "name": "dr_04",
+          "type": "string",
+          "unit": null,
+          "source": "Ergebnis DR-04: BESTANDEN, GESCHEITERT oder OFFEN"
+        },
+        {
+          "name": "dr_05",
+          "type": "string",
+          "unit": null,
+          "source": "Ergebnis DR-05: BESTANDEN, GESCHEITERT oder OFFEN"
+        },
+        {
+          "name": "dr_06",
+          "type": "string",
+          "unit": null,
+          "source": "Ergebnis DR-06: BESTANDEN, GESCHEITERT oder OFFEN"
+        },
+        {
+          "name": "dr_07",
+          "type": "string",
+          "unit": null,
+          "source": "Ergebnis DR-07: BESTANDEN, GESCHEITERT oder OFFEN"
+        },
+        {
+          "name": "dr_08",
+          "type": "string",
+          "unit": null,
+          "source": "Ergebnis DR-08: BESTANDEN, GESCHEITERT oder OFFEN"
+        },
+        {
+          "name": "dr_09",
+          "type": "string",
+          "unit": null,
+          "source": "Ergebnis DR-09: BESTANDEN, GESCHEITERT oder OFFEN"
+        },
+        {
+          "name": "dr_10",
+          "type": "string",
+          "unit": null,
+          "source": "Ergebnis DR-10: BESTANDEN, GESCHEITERT oder OFFEN"
+        }
+      ],
+      "outcome_rules": [
+        {
+          "id": "G6-R1",
+          "outcome": "INVALID",
+          "when": {
+            "eq": [
+              {
+                "var": "protocols_complete"
+              },
+              false
+            ]
+          },
+          "reason": "Protokolle unvollständig"
+        },
+        {
+          "id": "G6-R2",
+          "outcome": "FAIL",
+          "when": {
+            "any": [
+              {
+                "eq": [
+                  {
+                    "var": "dr_01"
+                  },
+                  "GESCHEITERT"
+                ]
+              },
+              {
+                "eq": [
+                  {
+                    "var": "dr_02"
+                  },
+                  "GESCHEITERT"
+                ]
+              },
+              {
+                "eq": [
+                  {
+                    "var": "dr_03"
+                  },
+                  "GESCHEITERT"
+                ]
+              },
+              {
+                "eq": [
+                  {
+                    "var": "dr_04"
+                  },
+                  "GESCHEITERT"
+                ]
+              },
+              {
+                "eq": [
+                  {
+                    "var": "dr_05"
+                  },
+                  "GESCHEITERT"
+                ]
+              },
+              {
+                "eq": [
+                  {
+                    "var": "dr_06"
+                  },
+                  "GESCHEITERT"
+                ]
+              },
+              {
+                "eq": [
+                  {
+                    "var": "dr_07"
+                  },
+                  "GESCHEITERT"
+                ]
+              },
+              {
+                "eq": [
+                  {
+                    "var": "dr_08"
+                  },
+                  "GESCHEITERT"
+                ]
+              },
+              {
+                "eq": [
+                  {
+                    "var": "dr_09"
+                  },
+                  "GESCHEITERT"
+                ]
+              },
+              {
+                "eq": [
+                  {
+                    "var": "dr_10"
+                  },
+                  "GESCHEITERT"
+                ]
+              }
+            ]
+          },
+          "reason": "mindestens ein Drill gescheitert"
+        },
+        {
+          "id": "G6-R3",
+          "outcome": "INCONCLUSIVE",
+          "when": {
+            "any": [
+              {
+                "eq": [
+                  {
+                    "var": "dr_01"
+                  },
+                  "OFFEN"
+                ]
+              },
+              {
+                "eq": [
+                  {
+                    "var": "dr_02"
+                  },
+                  "OFFEN"
+                ]
+              },
+              {
+                "eq": [
+                  {
+                    "var": "dr_03"
+                  },
+                  "OFFEN"
+                ]
+              },
+              {
+                "eq": [
+                  {
+                    "var": "dr_04"
+                  },
+                  "OFFEN"
+                ]
+              },
+              {
+                "eq": [
+                  {
+                    "var": "dr_05"
+                  },
+                  "OFFEN"
+                ]
+              },
+              {
+                "eq": [
+                  {
+                    "var": "dr_06"
+                  },
+                  "OFFEN"
+                ]
+              },
+              {
+                "eq": [
+                  {
+                    "var": "dr_07"
+                  },
+                  "OFFEN"
+                ]
+              },
+              {
+                "eq": [
+                  {
+                    "var": "dr_08"
+                  },
+                  "OFFEN"
+                ]
+              },
+              {
+                "eq": [
+                  {
+                    "var": "dr_09"
+                  },
+                  "OFFEN"
+                ]
+              },
+              {
+                "eq": [
+                  {
+                    "var": "dr_10"
+                  },
+                  "OFFEN"
+                ]
+              }
+            ]
+          },
+          "reason": "Drills ausstehend"
+        },
+        {
+          "id": "G6-R4",
+          "outcome": "INCONCLUSIVE",
+          "when": {
+            "lt": [
+              {
+                "var": "soak_hours"
+              },
+              {
+                "param": "P-QA-SOAK-H"
+              }
+            ]
+          },
+          "reason": "Dauerlauf zu kurz"
+        },
+        {
+          "id": "G6-R5",
+          "outcome": "PASS",
+          "when": {
+            "const": true
+          },
+          "reason": "alle Drills bestanden"
+        }
+      ],
+      "next_steps": {
+        "PASS": "Paper-Grant signieren; G7 beginnt.",
+        "FAIL": "Ursache beheben, Drill wiederholen.",
+        "INCONCLUSIVE": "Ausstehende Drills und Dauerlauf durchführen.",
+        "INVALID": "Protokolle vervollständigen.",
+        "ERROR": "nicht vorgesehen",
+        "BLOCKED_EXTERNAL": "nicht vorgesehen"
+      },
+      "flags": [],
+      "computations": []
+    },
+    {
+      "id": "GATE-G7",
+      "kind": "GATE",
+      "name": "G7 Paper-Forward",
+      "stage": "BS-07",
+      "e_block": "E-7",
+      "cost_effect": "Betrieb",
+      "evidence_class": "prospektiv (Demo)",
+      "oc_model": "research/operating_characteristics.py",
+      "purpose": "Prospektiver Betrieb im Demokonto über mindestens P-RES-PAPER-MONTHS mit Harm-Screen, Kostendrift und Limits.",
+      "prerequisites": [
+        {
+          "id": "PRE-G7-0",
+          "description": "GATE-G6 bestanden",
+          "expr": {
+            "eq": [
+              {
+                "var": "gate_g6"
+              },
+              "PASS"
+            ]
+          },
+          "on_fail": "INVALID"
+        },
+        {
+          "id": "PRE-G7-1",
+          "description": "Paper-Grant aktiv, Kontotyp DEMO",
+          "expr": {
+            "eq": [
+              {
+                "var": "paper_grant_active"
+              },
+              true
+            ]
+          },
+          "on_fail": "INVALID"
+        }
+      ],
+      "inputs": [
+        {
+          "name": "months_paper",
+          "type": "number",
+          "unit": "Monate",
+          "source": "Dauer"
+        },
+        {
+          "name": "sr_paper_est",
+          "type": "number",
+          "unit": "Sharpe p. a.",
+          "source": "geschätzte Netto-Sharpe"
+        },
+        {
+          "name": "hard_limit_breaches",
+          "type": "integer",
+          "unit": null,
+          "source": "MON-LIMITS"
+        },
+        {
+          "name": "costdrift_triggered",
+          "type": "boolean",
+          "unit": null,
+          "source": "MON-COSTDRIFT"
+        },
+        {
+          "name": "critical_incidents_open",
+          "type": "integer",
+          "unit": null,
+          "source": "offene Incidents der Schwere KRITISCH"
+        }
+      ],
+      "outcome_rules": [
+        {
+          "id": "G7-R1",
+          "outcome": "FAIL",
+          "when": {
+            "lt": [
+              {
+                "var": "sr_paper_est"
+              },
+              {
+                "param": "P-OC-HARM-SCREEN"
+              }
+            ]
+          },
+          "reason": "Harm-Screen: klar schädlich"
+        },
+        {
+          "id": "G7-R2",
+          "outcome": "FAIL",
+          "when": {
+            "gt": [
+              {
+                "var": "hard_limit_breaches"
+              },
+              0
+            ]
+          },
+          "reason": "harte Grenze verletzt"
+        },
+        {
+          "id": "G7-R3",
+          "outcome": "FAIL",
+          "when": {
+            "eq": [
+              {
+                "var": "costdrift_triggered"
+              },
+              true
+            ]
+          },
+          "reason": "Kostendrift ausgelöst"
+        },
+        {
+          "id": "G7-R4",
+          "outcome": "FAIL",
+          "when": {
+            "gt": [
+              {
+                "var": "critical_incidents_open"
+              },
+              0
+            ]
+          },
+          "reason": "kritischer Incident offen"
+        },
+        {
+          "id": "G7-R5",
+          "outcome": "INCONCLUSIVE",
+          "when": {
+            "lt": [
+              {
+                "var": "months_paper"
+              },
+              {
+                "param": "P-RES-PAPER-MONTHS"
+              }
+            ]
+          },
+          "reason": "Mindestdauer nicht erreicht"
+        },
+        {
+          "id": "G7-R6",
+          "outcome": "PASS",
+          "when": {
+            "const": true
+          },
+          "reason": "Paper-Forward bestanden"
+        }
+      ],
+      "next_steps": {
+        "PASS": "Pilot-Grant nur nach Lösung aller externen Sperren (G8-Voraussetzungen); Moduswechsel nur durch den Betreiber.",
+        "FAIL": "Abbau im Demokonto; Ursachenbericht; Stopp oder neue Forschung.",
+        "INCONCLUSIVE": "Paper-Forward fortsetzen.",
+        "INVALID": "Grant und Kontotyp korrigieren.",
+        "ERROR": "nicht vorgesehen",
+        "BLOCKED_EXTERNAL": "nicht vorgesehen"
+      },
+      "flags": [],
+      "computations": []
+    },
+    {
+      "id": "GATE-G8",
+      "kind": "GATE",
+      "name": "G8 Pilot mit Echtgeld im Profil H5 (Endtor)",
+      "stage": "BS-08",
+      "e_block": "E-8",
+      "cost_effect": "Pilotverlustbudget",
+      "evidence_class": "prospektiv (Echtgeld)",
+      "oc_model": "research/operating_characteristics.py",
+      "purpose": "Pilot in H5 mit Pilotgröße über mindestens P-RES-PILOT-MONTHS; Endtor: Posterior P(Sharpe > 0) ≥ P-RES-FINAL-P (§16, §6.6).",
+      "prerequisites": [
+        {
+          "id": "PRE-G8-0",
+          "description": "GATE-G7 bestanden",
+          "expr": {
+            "eq": [
+              {
+                "var": "gate_g7"
+              },
+              "PASS"
+            ]
+          },
+          "on_fail": "INVALID"
+        },
+        {
+          "id": "PRE-G8-KT",
+          "description": "Killer-Tests ohne Echtgeld-Sperre: im signierten G1-Ergebnis ist das Flag ECHTGELD_GESPERRT nicht gesetzt (KT-02, KT-13)",
+          "expr": {
+            "eq": [
+              {
+                "var": "g1_realmoney_blocked"
+              },
+              false
+            ]
+          },
+          "on_fail": "FAIL"
+        },
+        {
+          "id": "PRE-G8-1",
+          "description": "gültiger Pilot-Grant (Profil H5 zulässig, Kontotyp REAL)",
+          "expr": {
+            "eq": [
+              {
+                "var": "pilot_grant_valid"
+              },
+              true
+            ]
+          },
+          "on_fail": "INVALID"
+        },
+        {
+          "id": "PRE-G8-2",
+          "description": "zwei Hardware-Schlüssel registriert",
+          "expr": {
+            "eq": [
+              {
+                "var": "hardware_keys_registered"
+              },
+              true
+            ]
+          },
+          "on_fail": "BLOCKED_EXTERNAL"
+        },
+        {
+          "id": "PRE-G8-3",
+          "description": "externe Eingabe X-OP-CAPITAL bestätigt (Kapital je Echtgeldstufe (Pilot, Standard))",
+          "expr": {
+            "eq": [
+              {
+                "var": "inputs.X-OP-CAPITAL"
+              },
+              "BESTAETIGT"
+            ]
+          },
+          "on_fail": "BLOCKED_EXTERNAL"
+        },
+        {
+          "id": "PRE-G8-4",
+          "description": "externe Eingabe X-OP-RISK-ACCEPT bestätigt (Signierte Risikoakzeptanz je Profil (Klartextzahlen))",
+          "expr": {
+            "eq": [
+              {
+                "var": "inputs.X-OP-RISK-ACCEPT"
+              },
+              "BESTAETIGT"
+            ]
+          },
+          "on_fail": "BLOCKED_EXTERNAL"
+        },
+        {
+          "id": "PRE-G8-5",
+          "description": "externe Eingabe X-OP-DLC-MODE bestätigt (Auslegung der 9-%-Tagesgrenze (streng oder mit ausgewiesener Restwahrscheinlichkeit))",
+          "expr": {
+            "eq": [
+              {
+                "var": "inputs.X-OP-DLC-MODE"
+              },
+              "BESTAETIGT"
+            ]
+          },
+          "on_fail": "BLOCKED_EXTERNAL"
+        },
+        {
+          "id": "PRE-G8-6",
+          "description": "externe Eingabe X-LEGAL-01 bestätigt (Bestätigung der externen Person: Eigenhandel ohne Erlaubnispflicht, Pflichten aus algorithmischem Handel, Marktverhalten)",
+          "expr": {
+            "eq": [
+              {
+                "var": "inputs.X-LEGAL-01"
+              },
+              "BESTAETIGT"
+            ]
+          },
+          "on_fail": "BLOCKED_EXTERNAL"
+        },
+        {
+          "id": "PRE-G8-7",
+          "description": "externe Eingabe X-TAX-01 bestätigt (Steuerliche Behandlung und Übergabeformat)",
+          "expr": {
+            "eq": [
+              {
+                "var": "inputs.X-TAX-01"
+              },
+              "BESTAETIGT"
+            ]
+          },
+          "on_fail": "BLOCKED_EXTERNAL"
+        },
+        {
+          "id": "PRE-G8-8",
+          "description": "externe Eingabe X-ORG-DEPUTY bestätigt (Notfallvertretung mit Nur-Abbau-Recht)",
+          "expr": {
+            "eq": [
+              {
+                "var": "inputs.X-ORG-DEPUTY"
+              },
+              "BESTAETIGT"
+            ]
+          },
+          "on_fail": "BLOCKED_EXTERNAL"
+        },
+        {
+          "id": "PRE-G8-9",
+          "description": "externe Eingabe X-DATA-ND bestätigt (Einstufung der Marktdatennutzung (Anzeige/Non-Display, Pro/Non-Pro) bei vollautomatischem Handel)",
+          "expr": {
+            "eq": [
+              {
+                "var": "inputs.X-DATA-ND"
+              },
+              "BESTAETIGT"
+            ]
+          },
+          "on_fail": "BLOCKED_EXTERNAL"
+        },
+        {
+          "id": "PRE-G8-10",
+          "description": "externe Eingabe X-EXEC-TCA bestätigt (Gemessener Schlupf je Instrumentgruppe)",
+          "expr": {
+            "eq": [
+              {
+                "var": "inputs.X-EXEC-TCA"
+              },
+              "BESTAETIGT"
+            ]
+          },
+          "on_fail": "BLOCKED_EXTERNAL"
+        }
+      ],
+      "inputs": [
+        {
+          "name": "months_pilot",
+          "type": "number",
+          "unit": "Monate",
+          "source": "Dauer"
+        },
+        {
+          "name": "pilot_loss_share",
+          "type": "number",
+          "unit": "Anteil",
+          "source": "Verlust / Pilotkapital"
+        },
+        {
+          "name": "sr_pilot_est",
+          "type": "number",
+          "unit": "Sharpe p. a.",
+          "source": "geschätzte Netto-Sharpe"
+        },
+        {
+          "name": "hard_limit_breaches",
+          "type": "integer",
+          "unit": null,
+          "source": "MON-LIMITS"
+        },
+        {
+          "name": "costdrift_triggered",
+          "type": "boolean",
+          "unit": null,
+          "source": "MON-COSTDRIFT"
+        },
+        {
+          "name": "posterior_p_positive",
+          "type": "number",
+          "unit": "Wahrscheinlichkeit",
+          "source": "Posterior aus Prior, deflationierter Entwicklung, Holdout, Paper und Pilot"
+        }
+      ],
+      "outcome_rules": [
+        {
+          "id": "G8-R1",
+          "outcome": "FAIL",
+          "when": {
+            "ge": [
+              {
+                "var": "pilot_loss_share"
+              },
+              {
+                "param": "P-RES-PILOT-LOSS-BUDGET"
+              }
+            ]
+          },
+          "reason": "Pilotverlustbudget erreicht"
+        },
+        {
+          "id": "G8-R2",
+          "outcome": "FAIL",
+          "when": {
+            "gt": [
+              {
+                "var": "hard_limit_breaches"
+              },
+              0
+            ]
+          },
+          "reason": "harte Grenze verletzt"
+        },
+        {
+          "id": "G8-R3",
+          "outcome": "FAIL",
+          "when": {
+            "lt": [
+              {
+                "var": "sr_pilot_est"
+              },
+              {
+                "param": "P-OC-HARM-SCREEN"
+              }
+            ]
+          },
+          "reason": "Harm-Screen"
+        },
+        {
+          "id": "G8-R4",
+          "outcome": "FAIL",
+          "when": {
+            "eq": [
+              {
+                "var": "costdrift_triggered"
+              },
+              true
+            ]
+          },
+          "reason": "Kosten außerhalb des Modellbands"
+        },
+        {
+          "id": "G8-R5",
+          "outcome": "INCONCLUSIVE",
+          "when": {
+            "lt": [
+              {
+                "var": "months_pilot"
+              },
+              {
+                "param": "P-RES-PILOT-MONTHS"
+              }
+            ]
+          },
+          "reason": "Mindestdauer nicht erreicht"
+        },
+        {
+          "id": "G8-R6",
+          "outcome": "FAIL",
+          "when": {
+            "lt": [
+              {
+                "var": "posterior_p_positive"
+              },
+              {
+                "param": "P-RES-FINAL-P"
+              }
+            ]
+          },
+          "reason": "Endtor verfehlt: Posterior unter der Schwelle"
+        },
+        {
+          "id": "G8-R7",
+          "outcome": "PASS",
+          "when": {
+            "const": true
+          },
+          "reason": "Pilot bestanden; Endtor erreicht"
+        }
+      ],
+      "next_steps": {
+        "PASS": "Standard-Grant (H5) mit Risikofunktion möglich; Moduswechsel nur durch den Betreiber.",
+        "FAIL": "WIND_DOWN; Ursachenbericht; kein Standardbetrieb.",
+        "INCONCLUSIVE": "Pilot fortsetzen (Grant erneuern, höchstens P-SEC-GRANT-DAYS je Grant).",
+        "INVALID": "Grant korrigieren.",
+        "ERROR": "nicht vorgesehen",
+        "BLOCKED_EXTERNAL": "externe Sperren lösen (Recht, Steuern, Vertretung, Kapital, Risikoakzeptanz)."
+      },
+      "flags": [],
+      "computations": []
+    },
+    {
+      "id": "GATE-G9",
+      "kind": "GATE",
+      "name": "G9 Standardbetrieb mit Hebel-Stufenleiter",
+      "stage": "BS-09",
+      "e_block": "E-9",
+      "cost_effect": "Kapital",
+      "evidence_class": "Betrieb über zwölf Monate",
+      "purpose": "Mindestens P-RES-STANDARD-MONTHS Standardbetrieb ohne schwere Incidents mit regelkonformer Stufenleiter (§7.8, E-9).",
+      "prerequisites": [
+        {
+          "id": "PRE-G9-0",
+          "description": "GATE-G8 bestanden",
+          "expr": {
+            "eq": [
+              {
+                "var": "gate_g8"
+              },
+              "PASS"
+            ]
+          },
+          "on_fail": "INVALID"
+        },
+        {
+          "id": "PRE-G9-1",
+          "description": "externe Eingabe X-ORG-RISK bestätigt (Externe unabhängige Risikofunktion mit Lese- und Vetorecht)",
+          "expr": {
+            "eq": [
+              {
+                "var": "inputs.X-ORG-RISK"
+              },
+              "BESTAETIGT"
+            ]
+          },
+          "on_fail": "BLOCKED_EXTERNAL"
+        },
+        {
+          "id": "PRE-G9-2",
+          "description": "externe Eingabe X-OP-CAPITAL bestätigt (Kapital je Echtgeldstufe (Pilot, Standard))",
+          "expr": {
+            "eq": [
+              {
+                "var": "inputs.X-OP-CAPITAL"
+              },
+              "BESTAETIGT"
+            ]
+          },
+          "on_fail": "BLOCKED_EXTERNAL"
+        },
+        {
+          "id": "PRE-G9-3",
+          "description": "externe Eingabe X-OP-RISK-ACCEPT bestätigt (Signierte Risikoakzeptanz je Profil (Klartextzahlen))",
+          "expr": {
+            "eq": [
+              {
+                "var": "inputs.X-OP-RISK-ACCEPT"
+              },
+              "BESTAETIGT"
+            ]
+          },
+          "on_fail": "BLOCKED_EXTERNAL"
+        }
+      ],
+      "inputs": [
+        {
+          "name": "months_standard",
+          "type": "number",
+          "unit": "Monate",
+          "source": "Dauer"
+        },
+        {
+          "name": "hard_limit_breaches",
+          "type": "integer",
+          "unit": null,
+          "source": "MON-LIMITS"
+        },
+        {
+          "name": "ladder_violations",
+          "type": "integer",
+          "unit": null,
+          "source": "Aufstiege ohne Evidenz oder zweite Freigabe"
+        },
+        {
+          "name": "severe_incidents",
+          "type": "integer",
+          "unit": null,
+          "source": "Incidents HOCH oder KRITISCH"
+        },
+        {
+          "name": "posterior_p_negative",
+          "type": "number",
+          "unit": "Wahrscheinlichkeit",
+          "source": "MON-HARM"
+        }
+      ],
+      "outcome_rules": [
+        {
+          "id": "G9-R1",
+          "outcome": "FAIL",
+          "when": {
+            "gt": [
+              {
+                "var": "hard_limit_breaches"
+              },
+              0
+            ]
+          },
+          "reason": "harte Grenze verletzt"
+        },
+        {
+          "id": "G9-R2",
+          "outcome": "FAIL",
+          "when": {
+            "gt": [
+              {
+                "var": "ladder_violations"
+              },
+              0
+            ]
+          },
+          "reason": "Stufenleiter verletzt"
+        },
+        {
+          "id": "G9-R3",
+          "outcome": "FAIL",
+          "when": {
+            "gt": [
+              {
+                "var": "severe_incidents"
+              },
+              0
+            ]
+          },
+          "reason": "schwerer Incident"
+        },
+        {
+          "id": "G9-R4",
+          "outcome": "FAIL",
+          "when": {
+            "ge": [
+              {
+                "var": "posterior_p_negative"
+              },
+              {
+                "param": "P-MON-HARM-SR"
+              }
+            ]
+          },
+          "reason": "Harm-Monitor"
+        },
+        {
+          "id": "G9-R5",
+          "outcome": "INCONCLUSIVE",
+          "when": {
+            "lt": [
+              {
+                "var": "months_standard"
+              },
+              {
+                "param": "P-RES-STANDARD-MONTHS"
+              }
+            ]
+          },
+          "reason": "Mindestdauer nicht erreicht"
+        },
+        {
+          "id": "G9-R6",
+          "outcome": "PASS",
+          "when": {
+            "const": true
+          },
+          "reason": "Standardbetrieb nachgewiesen"
+        }
+      ],
+      "next_steps": {
+        "PASS": "Externes Audit (G10) beauftragen.",
+        "FAIL": "Profilabstieg oder Abbau nach Ursache; Ursachenbericht.",
+        "INCONCLUSIVE": "Betrieb fortsetzen.",
+        "INVALID": "nicht vorgesehen",
+        "ERROR": "nicht vorgesehen",
+        "BLOCKED_EXTERNAL": "Risikofunktion, Kapital und Risikoakzeptanz bestätigen."
+      },
+      "flags": [],
+      "computations": []
+    },
+    {
+      "id": "GATE-G10",
+      "kind": "GATE",
+      "name": "G10 Externes Audit (Technik, Risiko, Prozesse)",
+      "stage": "BS-10",
+      "e_block": "E-9",
+      "cost_effect": "Prüfkosten",
+      "evidence_class": "unabhängig",
+      "purpose": "Unabhängige Prüfung von Technik, Risiko und Prozessen ohne wesentliche Feststellung.",
+      "prerequisites": [
+        {
+          "id": "PRE-G10-0",
+          "description": "GATE-G9 bestanden",
+          "expr": {
+            "eq": [
+              {
+                "var": "gate_g9"
+              },
+              "PASS"
+            ]
+          },
+          "on_fail": "INVALID"
+        }
+      ],
+      "inputs": [
+        {
+          "name": "auditor_independent",
+          "type": "boolean",
+          "unit": null,
+          "source": "keine Autoren- oder Betreiberrolle"
+        },
+        {
+          "name": "audit_completed",
+          "type": "boolean",
+          "unit": null,
+          "source": "Bericht liegt vor"
+        },
+        {
+          "name": "material_findings",
+          "type": "integer",
+          "unit": null,
+          "source": "wesentliche Feststellungen"
+        }
+      ],
+      "outcome_rules": [
+        {
+          "id": "G10-R1",
+          "outcome": "INVALID",
+          "when": {
+            "eq": [
+              {
+                "var": "auditor_independent"
+              },
+              false
+            ]
+          },
+          "reason": "Prüfer nicht unabhängig"
+        },
+        {
+          "id": "G10-R2",
+          "outcome": "INCONCLUSIVE",
+          "when": {
+            "eq": [
+              {
+                "var": "audit_completed"
+              },
+              false
+            ]
+          },
+          "reason": "Audit nicht abgeschlossen"
+        },
+        {
+          "id": "G10-R3",
+          "outcome": "FAIL",
+          "when": {
+            "gt": [
+              {
+                "var": "material_findings"
+              },
+              0
+            ]
+          },
+          "reason": "wesentliche Feststellungen"
+        },
+        {
+          "id": "G10-R4",
+          "outcome": "PASS",
+          "when": {
+            "const": true
+          },
+          "reason": "Audit ohne wesentliche Feststellung"
+        }
+      ],
+      "next_steps": {
+        "PASS": "Jährliche Wiederholung; E-9 vollständig.",
+        "FAIL": "Maßnahmenplan; Profilaufstiege ausgesetzt bis zur Nachprüfung.",
+        "INCONCLUSIVE": "Audit abschließen.",
+        "INVALID": "unabhängigen Prüfer beauftragen.",
+        "ERROR": "nicht vorgesehen",
+        "BLOCKED_EXTERNAL": "nicht vorgesehen"
+      },
+      "flags": [],
+      "computations": []
+    },
+    {
+      "id": "MON-HARM",
+      "kind": "MONITOR",
+      "name": "Harm- und Futility-Monitor",
+      "stage": "BS-07",
+      "e_block": null,
+      "cost_effect": "–",
+      "evidence_class": "laufend",
+      "purpose": "Stoppt bei hoher Posterior-Wahrscheinlichkeit einer negativen Netto-Sharpe oder zu geringer Aussicht auf das Endtor (übernommen aus v2.0).",
+      "prerequisites": [],
+      "inputs": [
+        {
+          "name": "posterior_p_negative",
+          "type": "number",
+          "unit": "Wahrscheinlichkeit",
+          "source": "Normal-Normal-Posterior"
+        },
+        {
+          "name": "p_predictive_final",
+          "type": "number",
+          "unit": "Wahrscheinlichkeit",
+          "source": "prädiktive Aussicht auf das Endtor"
+        }
+      ],
+      "outcome_rules": [
+        {
+          "id": "MH-R1",
+          "outcome": "FAIL",
+          "when": {
+            "ge": [
+              {
+                "var": "posterior_p_negative"
+              },
+              {
+                "param": "P-MON-HARM-SR"
+              }
+            ]
+          },
+          "reason": "schädlich"
+        },
+        {
+          "id": "MH-R2",
+          "outcome": "FAIL",
+          "when": {
+            "lt": [
+              {
+                "var": "p_predictive_final"
+              },
+              {
+                "param": "P-RES-FUTILITY"
+              }
+            ]
+          },
+          "reason": "Futility im Betrieb"
+        },
+        {
+          "id": "MH-R3",
+          "outcome": "PASS",
+          "when": {
+            "const": true
+          },
+          "reason": "unauffällig"
+        }
+      ],
+      "next_steps": {
+        "PASS": "weiter",
+        "FAIL": "MONITOR_STOP → WIND_DOWN (SM-MODE); Ursachenbericht.",
+        "INCONCLUSIVE": "nicht vorgesehen",
+        "INVALID": "nicht vorgesehen",
+        "ERROR": "Monitor reparieren; bis dahin Einstiegssperre",
+        "BLOCKED_EXTERNAL": "nicht vorgesehen"
+      },
+      "flags": [],
+      "computations": []
+    },
+    {
+      "id": "MON-COSTDRIFT",
+      "kind": "MONITOR",
+      "name": "Kostendrift-Monitor (gepoolt, EV-07)",
+      "stage": "BS-07",
+      "e_block": null,
+      "cost_effect": "–",
+      "evidence_class": "laufend",
+      "purpose": "Erkennt überhöhte Ausführungskosten mit gepoolter, geschrumpfter Schätzung (operations/costdrift_monitor.py, §14.2).",
+      "prerequisites": [],
+      "inputs": [
+        {
+          "name": "p_ratio_above",
+          "type": "number",
+          "unit": "Wahrscheinlichkeit",
+          "source": "Posterior P(Kostenverhältnis > P-MON-COSTDRIFT-RATIO)"
+        },
+        {
+          "name": "fills",
+          "type": "integer",
+          "unit": null,
+          "source": "Fills im Pool"
+        }
+      ],
+      "outcome_rules": [
+        {
+          "id": "MC-R1",
+          "outcome": "FAIL",
+          "when": {
+            "ge": [
+              {
+                "var": "p_ratio_above"
+              },
+              {
+                "param": "P-MON-COSTDRIFT-PROB"
+              }
+            ]
+          },
+          "reason": "Kostendrift"
+        },
+        {
+          "id": "MC-R2",
+          "outcome": "PASS",
+          "when": {
+            "const": true
+          },
+          "reason": "Kosten im Band"
+        }
+      ],
+      "next_steps": {
+        "PASS": "weiter",
+        "FAIL": "RB-32: Einstiegssperre der Gruppe, Kostenmodell und Wirtschaftlichkeit neu rechnen.",
+        "INCONCLUSIVE": "nicht vorgesehen",
+        "INVALID": "nicht vorgesehen",
+        "ERROR": "Monitor reparieren",
+        "BLOCKED_EXTERNAL": "nicht vorgesehen"
+      },
+      "flags": [],
+      "computations": []
+    },
+    {
+      "id": "MON-DRIFT",
+      "kind": "MONITOR",
+      "name": "Aktivitäts- und Modell-Drift",
+      "stage": "BS-07",
+      "e_block": null,
+      "cost_effect": "–",
+      "evidence_class": "laufend",
+      "purpose": "Vergleicht Umschlag, Haltedauer und realisierte Volatilität mit Modell und Betreibervorgaben (BQ-04).",
+      "prerequisites": [],
+      "inputs": [
+        {
+          "name": "turnover_ratio",
+          "type": "number",
+          "unit": "Verhältnis",
+          "source": "gemessen / simuliert"
+        },
+        {
+          "name": "vol_ratio",
+          "type": "number",
+          "unit": "Verhältnis",
+          "source": "realisierte Volatilität über P-MON-VOL-WINDOW-D Handelstage / Zielvolatilität"
+        },
+        {
+          "name": "holding_max_violations",
+          "type": "integer",
+          "unit": null,
+          "source": "Positionen länger als P-OP-HOLD-MAX-H"
+        }
+      ],
+      "computations": [
+        {
+          "name": "turnover_dev",
+          "expr": {
+            "abs": {
+              "sub": [
+                {
+                  "var": "turnover_ratio"
+                },
+                1
+              ]
+            }
+          },
+          "description": "Abweichung Umschlag"
+        },
+        {
+          "name": "vol_dev",
+          "expr": {
+            "abs": {
+              "sub": [
+                {
+                  "var": "vol_ratio"
+                },
+                1
+              ]
+            }
+          },
+          "description": "Abweichung Volatilität"
+        }
+      ],
+      "outcome_rules": [
+        {
+          "id": "MD-R1",
+          "outcome": "FAIL",
+          "when": {
+            "gt": [
+              {
+                "var": "holding_max_violations"
+              },
+              0
+            ]
+          },
+          "reason": "Höchsthaltedauer verletzt (BQ-04)"
+        },
+        {
+          "id": "MD-R2",
+          "outcome": "FAIL",
+          "when": {
+            "gt": [
+              {
+                "var": "turnover_dev"
+              },
+              {
+                "param": "P-RES-TURNOVER-TOL"
+              }
+            ]
+          },
+          "reason": "Umschlag außerhalb der Toleranz"
+        },
+        {
+          "id": "MD-R3",
+          "outcome": "FAIL",
+          "when": {
+            "gt": [
+              {
+                "var": "vol_dev"
+              },
+              {
+                "param": "P-MON-VOL-BAND"
+              }
+            ]
+          },
+          "reason": "Volatilität außerhalb des Bands"
+        },
+        {
+          "id": "MD-R4",
+          "outcome": "PASS",
+          "when": {
+            "const": true
+          },
+          "reason": "im Modell"
+        }
+      ],
+      "next_steps": {
+        "PASS": "weiter",
+        "FAIL": "Einstiegssperre; Neukalibrierung und Neuvalidierung (MRM); kein Profilaufstieg.",
+        "INCONCLUSIVE": "nicht vorgesehen",
+        "INVALID": "nicht vorgesehen",
+        "ERROR": "Monitor reparieren",
+        "BLOCKED_EXTERNAL": "nicht vorgesehen"
+      },
+      "flags": []
+    },
+    {
+      "id": "MON-LIMITS",
+      "kind": "MONITOR",
+      "name": "Limitverletzungen und Datenqualität",
+      "stage": "BS-07",
+      "e_block": null,
+      "cost_effect": "–",
+      "evidence_class": "laufend",
+      "purpose": "Fasst harte Grenzverletzungen, Leiterereignisse und Datenqualität zusammen (risk/limits.md, §9).",
+      "prerequisites": [],
+      "inputs": [
+        {
+          "name": "hard_limit_breaches",
+          "type": "integer",
+          "unit": null,
+          "source": "Überschreitungen harter Grenzen"
+        },
+        {
+          "name": "ladder_l3_events",
+          "type": "integer",
+          "unit": null,
+          "source": "L3-Ereignisse"
+        },
+        {
+          "name": "xcheck_share_min",
+          "type": "number",
+          "unit": "Anteil",
+          "source": "kleinster Abgleichanteil der Datenquellen"
+        }
+      ],
+      "outcome_rules": [
+        {
+          "id": "ML-R1",
+          "outcome": "FAIL",
+          "when": {
+            "gt": [
+              {
+                "var": "hard_limit_breaches"
+              },
+              0
+            ]
+          },
+          "reason": "harte Grenze verletzt"
+        },
+        {
+          "id": "ML-R2",
+          "outcome": "FAIL",
+          "when": {
+            "lt": [
+              {
+                "var": "xcheck_share_min"
+              },
+              {
+                "param": "P-DATA-XCHECK-SHARE-MIN"
+              }
+            ]
+          },
+          "reason": "Datenqualität unzureichend"
+        },
+        {
+          "id": "ML-R3",
+          "outcome": "PASS",
+          "when": {
+            "const": true
+          },
+          "reason": "keine Verletzung"
+        }
+      ],
+      "flags": [
+        {
+          "name": "LEITER_L3",
+          "when": {
+            "gt": [
+              {
+                "var": "ladder_l3_events"
+              },
+              0
+            ]
+          },
+          "description": "Tagesverlust-Leiter L3 ausgelöst"
+        }
+      ],
+      "next_steps": {
+        "PASS": "weiter",
+        "FAIL": "schwerer Incident (RK-29) bzw. Instrument sperren; Ursachenbericht.",
+        "INCONCLUSIVE": "nicht vorgesehen",
+        "INVALID": "nicht vorgesehen",
+        "ERROR": "Monitor reparieren",
+        "BLOCKED_EXTERNAL": "nicht vorgesehen"
+      },
+      "computations": []
+    },
+    {
+      "id": "MON-AI",
+      "kind": "MONITOR",
+      "name": "Nutzen der KI-Schicht (EV-10)",
+      "stage": "BS-05",
+      "e_block": null,
+      "cost_effect": "–",
+      "evidence_class": "quartalsweise",
+      "purpose": "Nutzenbilanz des Agenten je Quartal mit Rückbaukriterium (§11.4).",
+      "prerequisites": [],
+      "inputs": [
+        {
+          "name": "negative_quarters",
+          "type": "integer",
+          "unit": null,
+          "source": "Quartale mit negativer Nutzenbilanz in Folge"
+        },
+        {
+          "name": "eval_pass_rate",
+          "type": "number",
+          "unit": "Anteil",
+          "source": "Evaluationssuite"
+        },
+        {
+          "name": "acceptance_rate",
+          "type": "number",
+          "unit": "Anteil",
+          "source": "angenommene Vorschläge"
+        },
+        {
+          "name": "saved_hours",
+          "type": "number",
+          "unit": "Stunden",
+          "source": "gemessene Zeit ohne Agent (Basislinie) minus Zeit mit Agent im Quartal"
+        },
+        {
+          "name": "maintenance_hours",
+          "type": "number",
+          "unit": "Stunden",
+          "source": "Pflege, Updates, Evaluationssuite, Prüfung der Vorschläge"
+        },
+        {
+          "name": "correction_hours",
+          "type": "number",
+          "unit": "Stunden",
+          "source": "Nacharbeit an angenommenen, später korrigierten Vorschlägen (Fehlerquote)"
+        },
+        {
+          "name": "subscription_eur",
+          "type": "number",
+          "unit": "EUR",
+          "source": "Abo- und Anbieterkosten des Quartals"
+        }
+      ],
+      "computations": [
+        {
+          "name": "net_benefit_hours",
+          "expr": {
+            "sub": [
+              {
+                "sub": [
+                  {
+                    "sub": [
+                      {
+                        "var": "saved_hours"
+                      },
+                      {
+                        "var": "maintenance_hours"
+                      }
+                    ]
+                  },
+                  {
+                    "var": "correction_hours"
+                  }
+                ]
+              },
+              {
+                "div": [
+                  {
+                    "var": "subscription_eur"
+                  },
+                  {
+                    "param": "P-ECO-HOURLY-RATE"
+                  }
+                ]
+              }
+            ]
+          },
+          "description": "Nettonutzen in Stunden: eingesparte minus Pflege- und Korrekturstunden minus Abo-Kosten in Stunden (Stundensatz)"
+        }
+      ],
+      "outcome_rules": [
+        {
+          "id": "MA-R1",
+          "outcome": "FAIL",
+          "when": {
+            "ge": [
+              {
+                "var": "negative_quarters"
+              },
+              {
+                "param": "P-AI-ROLLBACK-QUARTERS"
+              }
+            ]
+          },
+          "reason": "Rückbaukriterium erfüllt"
+        },
+        {
+          "id": "MA-R2",
+          "outcome": "FAIL",
+          "when": {
+            "lt": [
+              {
+                "var": "eval_pass_rate"
+              },
+              {
+                "param": "P-AI-EVAL-PASS"
+              }
+            ]
+          },
+          "reason": "Evaluationssuite nicht bestanden"
+        },
+        {
+          "id": "MA-R3",
+          "outcome": "INCONCLUSIVE",
+          "when": {
+            "any": [
+              {
+                "lt": [
+                  {
+                    "var": "acceptance_rate"
+                  },
+                  {
+                    "param": "P-AI-ACCEPT-MIN"
+                  }
+                ]
+              },
+              {
+                "lt": [
+                  {
+                    "var": "net_benefit_hours"
+                  },
+                  0
+                ]
+              }
+            ]
+          },
+          "reason": "Quartal negativ (Annahmequote oder Nettonutzen nach Abo-Kosten und Korrekturen)"
+        },
+        {
+          "id": "MA-R4",
+          "outcome": "PASS",
+          "when": {
+            "const": true
+          },
+          "reason": "Nutzen belegt"
+        }
+      ],
+      "next_steps": {
+        "PASS": "weiter",
+        "FAIL": "Rückbau (SM-HERMES RETIRED) bzw. kein Update, voriges Image behalten.",
+        "INCONCLUSIVE": "Quartal als negativ zählen; Umfang verkleinern.",
+        "INVALID": "nicht vorgesehen",
+        "ERROR": "nicht vorgesehen",
+        "BLOCKED_EXTERNAL": "nicht vorgesehen"
+      },
+      "flags": []
+    }
+  ]
+}

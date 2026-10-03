@@ -1,0 +1,28 @@
+{
+ "schema_version": "3.0",
+ "message_id": "00000000-0000-4000-8000-000000000009",
+ "correlation_id": "COR-0009",
+ "producer": "TRADE_CORE",
+ "created_utc": "2026-09-24T09:00:00Z",
+ "position_ticket": 5550001,
+ "instrument_id": "INS-COMEX-MGC",
+ "broker_symbol": "MGCZ26",
+ "side": "BUY",
+ "qty": 3,
+ "open_price": "4228.1",
+ "opened_at_utc": "2026-09-24T09:00:02Z",
+ "time_stop_utc": "2026-10-01T09:00:02Z",
+ "state": "OPEN_PROTECTED",
+ "sl_price": "4190.3",
+ "sl_confirmed": true,
+ "strategy_allocations": [
+  {
+   "strategy_id": "S-TF",
+   "qty": 2
+  },
+  {
+   "strategy_id": "S-IM",
+   "qty": 1
+  }
+ ]
+}

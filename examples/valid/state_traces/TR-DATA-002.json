@@ -1,0 +1,48 @@
+{
+ "schema_version": "3.0",
+ "id": "TR-DATA-002",
+ "machine": "SM-DATAFEED",
+ "description": "Kalenderkonflikt sperrt; Lücken über der Schwelle führen nach STALE",
+ "scenarios": [
+  "OS-DA-02",
+  "OS-EX-11"
+ ],
+ "start": "HEALTHY",
+ "initial_reasons": null,
+ "steps": [
+  {
+   "event": "CALENDAR_CONFLICT",
+   "context": {},
+   "expect_state": "BLOCKED_CALENDAR"
+  },
+  {
+   "event": "CALENDAR_RESOLVED",
+   "context": {
+    "signed": true
+   },
+   "expect_state": "DEGRADED"
+  },
+  {
+   "event": "QUOTE_UPDATE",
+   "context": {
+    "quote_age_s": 2,
+    "xcheck_share": 0.99
+   },
+   "expect_state": "HEALTHY"
+  },
+  {
+   "event": "GAP_DETECTED",
+   "context": {
+    "gap_minutes": 5
+   },
+   "expect_state": "HEALTHY"
+  },
+  {
+   "event": "GAP_DETECTED",
+   "context": {
+    "gap_minutes": 20
+   },
+   "expect_state": "STALE"
+  }
+ ]
+}

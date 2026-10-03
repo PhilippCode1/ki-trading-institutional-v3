@@ -1,0 +1,189 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:ki-trading-v3:scorecard_K",
+  "title": "Konzept-Score K",
+  "x-version": "3.0.0",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "3.0"
+    },
+    "document": {
+      "const": "Konzept-Score K – Selbstbewertung nach §20.1"
+    },
+    "as_of": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+    },
+    "self_assessment": {
+      "const": true
+    },
+    "grid": {
+      "type": "string",
+      "minLength": 1
+    },
+    "rules": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 1
+    },
+    "basis": {
+      "type": "string",
+      "minLength": 1
+    },
+    "operator_scope_effect": {
+      "type": "string",
+      "minLength": 1
+    },
+    "subcriteria": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[A-J][1-5]$"
+          },
+          "area": {
+            "type": "string",
+            "pattern": "^[A-J]$"
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "max": {
+            "type": "number"
+          },
+          "condition": {
+            "type": "string",
+            "minLength": 1
+          },
+          "factor": {
+            "enum": [
+              0,
+              0.25,
+              0.5,
+              0.75,
+              1
+            ]
+          },
+          "points": {
+            "type": "number"
+          },
+          "evidence": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "minItems": 0
+          },
+          "met": {
+            "type": "string",
+            "minLength": 1
+          },
+          "deduction": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "area",
+          "name",
+          "max",
+          "condition",
+          "factor",
+          "points",
+          "evidence",
+          "met",
+          "deduction"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 36
+    },
+    "areas": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[A-J]$"
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "max": {
+            "type": "number"
+          },
+          "points": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "max",
+          "points"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 10
+    },
+    "total": {
+      "type": "number"
+    },
+    "independent_review": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "enum": [
+            "AUSSTEHEND",
+            "BESTANDEN",
+            "NICHT_BESTANDEN"
+          ]
+        },
+        "request": {
+          "type": "string",
+          "minLength": 1
+        },
+        "external_input": {
+          "type": "string",
+          "minLength": 1
+        },
+        "rule": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "status",
+        "request",
+        "external_input",
+        "rule"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "schema_version",
+    "document",
+    "as_of",
+    "self_assessment",
+    "grid",
+    "rules",
+    "basis",
+    "operator_scope_effect",
+    "subcriteria",
+    "areas",
+    "total",
+    "independent_review"
+  ],
+  "additionalProperties": false
+}

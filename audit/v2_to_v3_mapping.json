@@ -1,0 +1,3022 @@
+{
+  "schema_version": "3.0",
+  "document": "Abbildung v2.0 → v3.0",
+  "as_of": "2026-09-24",
+  "rule": "Jede Übernahme ist im Text mit „übernommen aus v2.0“ markiert und hier einem Konzept zugeordnet (§3.2); jede v2-Datei hat einen Verbleib.",
+  "source": "SRC-V2-PAKET",
+  "adoptions": [
+    {
+      "id": "C01",
+      "concept": "Persistenz vor jedem Netzwerkaufruf",
+      "adaptation": "SQLite WAL mit synchronous=FULL; unverändert",
+      "locations": [
+        "architecture/state_machines.json",
+        "execution/oms_ems.md"
+      ]
+    },
+    {
+      "id": "C02",
+      "concept": "UNKNOWN statt Raten mit Negativnachweis",
+      "adaptation": "Negativnachweis über ORDER_TIME_SPECIFIED und P-EXE-NEGPROOF-CYCLES (MT5)",
+      "locations": [
+        "execution/oms_ems.md"
+      ]
+    },
+    {
+      "id": "C03",
+      "concept": "Einstiege genau einmal",
+      "adaptation": "unverändert",
+      "locations": [
+        "architecture/interfaces.md"
+      ]
+    },
+    {
+      "id": "C04",
+      "concept": "Deduplizierung von Ausführungen",
+      "adaptation": "Deal-Ticket statt Ausführungs-ID (MT5)",
+      "locations": [
+        "execution/oms_ems.md"
+      ]
+    },
+    {
+      "id": "C05",
+      "concept": "Genau ein Writer mit Fencing",
+      "adaptation": "Fencing über Wechsel des Hauptpassworts (KT-16)",
+      "locations": [
+        "Masterkonzept_v3.0.md",
+        "architecture/state_machines.json",
+        "execution/oms_ems.md"
+      ]
+    },
+    {
+      "id": "C06",
+      "concept": "Sperrgrund-Verband mit Schutzbasis",
+      "adaptation": "neue Gründe für Leitern, Kill-Switch, Modus, Margin",
+      "locations": [
+        "architecture/state_machines.json"
+      ]
+    },
+    {
+      "id": "C07",
+      "concept": "Signierte, befristete Grants und Betreiberaktionen",
+      "adaptation": "Kontotyp und Profil im Grant; BQ-09",
+      "locations": [
+        "architecture/interfaces.md",
+        "architecture/state_machines.json",
+        "governance/grants_and_risk_acceptance.md"
+      ]
+    },
+    {
+      "id": "C08",
+      "concept": "Getrennter Evaluator mit signierten Torergebnissen",
+      "adaptation": "Tore G0–G10",
+      "locations": [
+        "architecture/state_machines.json",
+        "architecture/system_design.md",
+        "execution/pretrade_controls.md"
+      ]
+    },
+    {
+      "id": "C09",
+      "concept": "LLM-Gateway und Projektschnittstelle",
+      "adaptation": "Allowlist mit vierzehn Werkzeugen",
+      "locations": [
+        "architecture/interfaces.md"
+      ]
+    },
+    {
+      "id": "C10",
+      "concept": "Unitisierter NAV mit verriegelten Verlusthalts",
+      "adaptation": "Leitern nach risk/limits.md",
+      "locations": [
+        "implementation/test_catalog.json",
+        "requirements.json"
+      ]
+    },
+    {
+      "id": "C11",
+      "concept": "Register-, Render- und Validator-Technik mit Mutationstests",
+      "adaptation": "neu geschrieben, Technik gleich",
+      "locations": [
+        "validation/gate_engine.py",
+        "validation/render_blocks.py",
+        "validation/state_engine.py"
+      ]
+    },
+    {
+      "id": "C12",
+      "concept": "Register externer Eingaben mit Sperrwirkung",
+      "adaptation": "34 Eingaben",
+      "locations": [
+        "Masterkonzept_v3.0.md"
+      ]
+    },
+    {
+      "id": "C13",
+      "concept": "Holdout-Versiegelung",
+      "adaptation": "im Prüfmodul, einmalige Öffnung in G4",
+      "locations": [
+        "Masterkonzept_v3.0.md",
+        "architecture/state_machines.json",
+        "data/data_plan.md",
+        "research/evidence_gates.json",
+        "research/research_plan.md"
+      ]
+    },
+    {
+      "id": "C14",
+      "concept": "Betriebscharakteristik der Tore",
+      "adaptation": "mit Futility-Regel (EV-05)",
+      "locations": [
+        "research/research_plan.md"
+      ]
+    },
+    {
+      "id": "C15",
+      "concept": "Autonomieleiter und Governance des Agenten über Dateisystem und Netz",
+      "adaptation": "gegen die gepinnte Hermes-Version zu prüfen",
+      "locations": [
+        "ai/ai_layer.md",
+        "ai/hermes_integration.md"
+      ]
+    },
+    {
+      "id": "C16",
+      "concept": "Evaluationssuite des Agenten",
+      "adaptation": "P-AI-EVAL-*",
+      "locations": [
+        "ai/eval_suite_spec.md"
+      ]
+    },
+    {
+      "id": "C17",
+      "concept": "Autoritative Quellen je Zustand",
+      "adaptation": "Broker autoritativ für Bestände",
+      "locations": [
+        "architecture/system_design.md"
+      ]
+    },
+    {
+      "id": "C18",
+      "concept": "Zwei Alarmwege mit täglichem Testalarm",
+      "adaptation": "P-OPS-ALERT-ACK-H",
+      "locations": [
+        "architecture/system_design.md"
+      ]
+    },
+    {
+      "id": "C19",
+      "concept": "Änderungsklassen mit Karenzzeit",
+      "adaptation": "verschärft um die menschliche zweite Freigabe",
+      "locations": [
+        "governance/policies/change_policy.md",
+        "security/key_management.md"
+      ]
+    },
+    {
+      "id": "C20",
+      "concept": "Schlüsselhinterlegung und Break-glass",
+      "adaptation": "Hardware-Schlüssel",
+      "locations": [
+        "security/key_management.md"
+      ]
+    },
+    {
+      "id": "C21",
+      "concept": "Nachführung nur enger",
+      "adaptation": "SL der Position (TRADE_ACTION_SLTP)",
+      "locations": [
+        "architecture/state_machines.json",
+        "execution/oms_ems.md"
+      ]
+    },
+    {
+      "id": "C22",
+      "concept": "Zustandsautomaten mit Traces",
+      "adaptation": "auf MT5 und Mehrstrategiebetrieb angepasst; neu SM-LEVERAGE, SM-MLMODEL",
+      "locations": [
+        "Masterkonzept_v3.0.md",
+        "architecture/state_machines.json"
+      ]
+    },
+    {
+      "id": "C23",
+      "concept": "Notfalljournal und Fail-Stop",
+      "adaptation": "unverändert",
+      "locations": [
+        "execution/oms_ems.md"
+      ]
+    },
+    {
+      "id": "C24",
+      "concept": "Leckageprüfung durch Verschieben der Daten",
+      "adaptation": "Voraussetzung von G2",
+      "locations": [
+        "data/data_plan.md"
+      ]
+    },
+    {
+      "id": "C25",
+      "concept": "Notfallprioritäten",
+      "adaptation": "Schutz > keine Exposure > Alarm > Abgleich > Agent",
+      "locations": [
+        "operations/operations_plan.md"
+      ]
+    },
+    {
+      "id": "C26",
+      "concept": "Technische Grenzen des Systems",
+      "adaptation": "keine Gelder Dritter, Marktverhaltenskontrollen",
+      "locations": [
+        "Masterkonzept_v3.0.md"
+      ]
+    },
+    {
+      "id": "C27",
+      "concept": "Szenarien S01–S21 und N01–N18",
+      "adaptation": "architecture/scenario_catalog.json",
+      "locations": [
+        "architecture/scenario_catalog.json",
+        "architecture/system_design.md"
+      ]
+    },
+    {
+      "id": "C28",
+      "concept": "Parameterwerte mit v2-Herkunft",
+      "adaptation": "je Parameter im Feld basis vermerkt",
+      "locations": [
+        "parameters.json"
+      ],
+      "parameters": [
+        "P-STR-BASE-ENTRY-N",
+        "P-STR-BASE-EXIT-N",
+        "P-STR-BASE-ATR-N",
+        "P-STR-BASE-STOP-ATR",
+        "P-RES-HOLDOUT-YEARS",
+        "P-EXE-SNAPSHOT-MAX-S",
+        "P-EXE-RECON-ACTIVE-S",
+        "P-EXE-RECON-IDLE-S",
+        "P-EXE-UNKNOWN-POLL-S",
+        "P-EXE-UNKNOWN-POLL-LATER-S",
+        "P-EXE-UNKNOWN-MAX-H",
+        "P-EXE-STOP-CONFIRM-S",
+        "P-EXE-LEASE-S",
+        "P-EXE-NEGPROOF-CYCLES",
+        "P-QA-FAULT-REPEATS",
+        "P-OPS-HEARTBEAT-S",
+        "P-OPS-HEARTBEAT-CRIT-S",
+        "P-OPS-RESTART-MAX-N",
+        "P-OPS-RESTART-WINDOW-MIN",
+        "P-OPS-RESTART-S",
+        "P-OPS-RPO-JOURNAL-MIN",
+        "P-OPS-RTO-CORE-H",
+        "P-OPS-BACKUP-DAILY",
+        "P-OPS-BACKUP-WEEKLY",
+        "P-OPS-RESTORE-DRILL-D",
+        "P-OPS-CLOCK-WARN-S",
+        "P-OPS-CLOCK-BLOCK-S",
+        "P-OPS-DISK-LEVELS",
+        "P-OPS-ALERT-ACK-H",
+        "P-OPS-ALERT-DOWN-H",
+        "P-OPS-PRESENCE-MAX-D",
+        "P-OPS-ISOLATE-MIN",
+        "P-OPS-CHANGE-COOLDOWN-H",
+        "P-SEC-SIG-EXPIRY-MIN",
+        "P-SEC-GRANT-DAYS",
+        "P-SEC-INJECTION-CASES",
+        "P-SEC-PATCH-CRIT-D",
+        "P-AI-EVAL-CASES",
+        "P-AI-EVAL-HIDDEN",
+        "P-AI-EVAL-ROTATE",
+        "P-AI-EVAL-REPEATS",
+        "P-AI-ACCEPT-MIN",
+        "P-AI-JOB-MAX-H",
+        "P-AI-PROPOSALS-OPEN-MAX",
+        "P-AI-PROPOSALS-WEEK-MAX",
+        "P-AI-PAYLOAD-MAX-MIB",
+        "P-AI-WORK-BUDGET-H",
+        "P-AI-REVIEW-ROUNDS"
+      ]
+    },
+    {
+      "id": "C29",
+      "concept": "Quellen aus v2.0 (erneut geprüft)",
+      "adaptation": "je Quelle im Feld origin vermerkt; Status neu bewertet",
+      "locations": [
+        "registers/source_register.json"
+      ],
+      "sources": [
+        "SRC-BAFIN-AV-CFD",
+        "SRC-BAFIN-EIGENGESCHAEFT",
+        "SRC-BBK-MFI",
+        "SRC-CBOT-MTN",
+        "SRC-ECB-ESTR",
+        "SRC-ECB-FXREF",
+        "SRC-ECB-RATES",
+        "SRC-ESMA-CFD-2026",
+        "SRC-HERMES-CONFIG",
+        "SRC-HERMES-EGRESS",
+        "SRC-HERMES-ISSUE-34514",
+        "SRC-HERMES-MCP",
+        "SRC-HERMES-MEMORY",
+        "SRC-HERMES-SECURITY",
+        "SRC-HERMES-UPDATE",
+        "SRC-LIT-KAMINSKI-WEN-2025",
+        "SRC-LIT-LO-2002",
+        "SRC-MT5-PYPI",
+        "SRC-RHEINMETALL-DAX",
+        "SRC-SG-TREND-TTU-2025",
+        "SRC-SP500-HOLDINGS",
+        "SRC-SQLITE-WAL",
+        "SRC-WB-PINKSHEET"
+      ]
+    },
+    {
+      "id": "C30",
+      "concept": "Harm- und Futility-Monitor im Betrieb",
+      "adaptation": "MON-HARM mit P-MON-HARM-SR und P-RES-FUTILITY",
+      "locations": [
+        "research/evidence_gates.json"
+      ]
+    },
+    {
+      "id": "C31",
+      "concept": "Kein Sprachmodell im Geldpfad (D3-05)",
+      "adaptation": "technisch erzwungen; Tests T-AI-001 bis T-AI-004",
+      "locations": [
+        "registers/decision_register.json"
+      ]
+    },
+    {
+      "id": "C32",
+      "concept": "Evidenztore als geordnete Regeltabellen",
+      "adaptation": "Tore G0–G10 und Monitore; ein Folgeschritt je Ergebnis",
+      "locations": [
+        "Masterkonzept_v3.0.md",
+        "research/evidence_gates.json"
+      ]
+    },
+    {
+      "id": "C33",
+      "concept": "TF-D1 als Referenz-Baseline (D3-04)",
+      "adaptation": "S-BASE mit Parametern P-STR-BASE-*",
+      "locations": [
+        "research/reference_strategies/s_base.py"
+      ]
+    },
+    {
+      "id": "C34",
+      "concept": "Getrennte Dienstidentitäten mit minimalen Rechten",
+      "adaptation": "auf MT5 und Windows angepasst",
+      "locations": [
+        "security/security_architecture.md"
+      ]
+    }
+  ],
+  "artifacts": [
+    {
+      "v2": "CHECKSUMS.sha256",
+      "v3": "CHECKSUMS.sha256; PACKAGE_MANIFEST.json",
+      "disposition": "ERSETZT",
+      "note": "neu erzeugt"
+    },
+    {
+      "v2": "Masterkonzept_v2.0.md",
+      "v3": "Masterkonzept_v3.0.md",
+      "disposition": "ERSETZT",
+      "note": "neu geschrieben; Übernahmen markiert"
+    },
+    {
+      "v2": "PACKAGE_MANIFEST.json",
+      "v3": "CHECKSUMS.sha256; PACKAGE_MANIFEST.json",
+      "disposition": "ERSETZT",
+      "note": "neu erzeugt"
+    },
+    {
+      "v2": "README.md",
+      "v3": "README.md",
+      "disposition": "ERSETZT",
+      "note": "neu"
+    },
+    {
+      "v2": "architecture/interfaces.md",
+      "v3": "architecture/interfaces.md",
+      "disposition": "ANGEPASST",
+      "note": "Adapter-Vertrag auf MT5; IF-07 übernommen"
+    },
+    {
+      "v2": "architecture/scenario_catalog.json",
+      "v3": "architecture/scenario_catalog.json",
+      "disposition": "ANGEPASST",
+      "note": "S01–S21, N01–N18 soweit auf MT5 übertragbar; neue Kategorien"
+    },
+    {
+      "v2": "architecture/state_machines.json",
+      "v3": "architecture/state_machines.json",
+      "disposition": "ANGEPASST",
+      "note": "Technik übernommen; Inhalt auf MT5, Hebelprofile und BQ-09"
+    },
+    {
+      "v2": "architecture/system_design.md",
+      "v3": "architecture/system_design.md",
+      "disposition": "ANGEPASST",
+      "note": "drei Vertrauensbereiche; Windows-VPS für den Geldpfad"
+    },
+    {
+      "v2": "audit/concept_review.md",
+      "v3": "audit/concept_review.md",
+      "disposition": "ERSETZT",
+      "note": "neu"
+    },
+    {
+      "v2": "audit/decision_register.json",
+      "v3": "registers/decision_register.json",
+      "disposition": "ERSETZT",
+      "note": "neue Rangfolge mit Betreiberentscheidungen BQ-01 bis BQ-10"
+    },
+    {
+      "v2": "audit/resolution_matrix.json",
+      "v3": "registers/resolution_matrix.json",
+      "disposition": "ERSETZT",
+      "note": "Befunde EV-01 bis EV-13 und CR-5"
+    },
+    {
+      "v2": "audit/risk_register.json",
+      "v3": "registers/risk_register.json",
+      "disposition": "ERSETZT",
+      "note": "Pflichtrisiken §7.11"
+    },
+    {
+      "v2": "audit/scorecard.json",
+      "v3": "audit/scorecard_K.json; audit/scorecard_E.json",
+      "disposition": "ERSETZT",
+      "note": "neues Raster §20; Abbildung in criteria_mapping"
+    },
+    {
+      "v2": "audit/source_inventory.json",
+      "v3": "research/sources/",
+      "disposition": "ERSETZT",
+      "note": "Rohbelege der Recherche v3.0"
+    },
+    {
+      "v2": "audit/source_register.json",
+      "v3": "registers/source_register.json",
+      "disposition": "TEILWEISE_UEBERNOMMEN",
+      "note": "Quellen mit Herkunft 'übernommen aus v2.0' erneut geprüft"
+    },
+    {
+      "v2": "audit/traceability.json",
+      "v3": "registers/traceability.json",
+      "disposition": "ANGEPASST",
+      "note": "abgeleitet durch validation/render_blocks.py"
+    },
+    {
+      "v2": "examples/EXAMPLES.json",
+      "v3": "examples/EXAMPLES.json",
+      "disposition": "ANGEPASST",
+      "note": "neue Verträge"
+    },
+    {
+      "v2": "examples/invalid/account_snapshot_local_time.json",
+      "v3": "examples/invalid/",
+      "disposition": "ERSETZT",
+      "note": "für die v3-Verträge neu erzeugt; Technik übernommen"
+    },
+    {
+      "v2": "examples/invalid/account_snapshot_stale_for_risk.json",
+      "v3": "examples/invalid/",
+      "disposition": "ERSETZT",
+      "note": "für die v3-Verträge neu erzeugt; Technik übernommen"
+    },
+    {
+      "v2": "examples/invalid/data_manifest_holdout_unsealed.json",
+      "v3": "examples/invalid/",
+      "disposition": "ERSETZT",
+      "note": "für die v3-Verträge neu erzeugt; Technik übernommen"
+    },
+    {
+      "v2": "examples/invalid/data_manifest_overlap.json",
+      "v3": "examples/invalid/",
+      "disposition": "ERSETZT",
+      "note": "für die v3-Verträge neu erzeugt; Technik übernommen"
+    },
+    {
+      "v2": "examples/invalid/experiment_manifest_overlap.json",
+      "v3": "examples/invalid/",
+      "disposition": "ERSETZT",
+      "note": "für die v3-Verträge neu erzeugt; Technik übernommen"
+    },
+    {
+      "v2": "examples/invalid/gate_result_e1_repo_ci.json",
+      "v3": "examples/invalid/",
+      "disposition": "ERSETZT",
+      "note": "für die v3-Verträge neu erzeugt; Technik übernommen"
+    },
+    {
+      "v2": "examples/invalid/gate_result_pass_with_error_exit.json",
+      "v3": "examples/invalid/",
+      "disposition": "ERSETZT",
+      "note": "für die v3-Verträge neu erzeugt; Technik übernommen"
+    },
+    {
+      "v2": "examples/invalid/incident_closed_without_cause.json",
+      "v3": "examples/invalid/",
+      "disposition": "ERSETZT",
+      "note": "für die v3-Verträge neu erzeugt; Technik übernommen"
+    },
+    {
+      "v2": "examples/invalid/instrument_spec_without_date.json",
+      "v3": "examples/invalid/",
+      "disposition": "ERSETZT",
+      "note": "für die v3-Verträge neu erzeugt; Technik übernommen"
+    },
+    {
+      "v2": "examples/invalid/knowledge_entry_hypothesis_as_fact.json",
+      "v3": "examples/invalid/",
+      "disposition": "ERSETZT",
+      "note": "für die v3-Verträge neu erzeugt; Technik übernommen"
+    },
+    {
+      "v2": "examples/invalid/knowledge_entry_without_validity.json",
+      "v3": "examples/invalid/",
+      "disposition": "ERSETZT",
+      "note": "für die v3-Verträge neu erzeugt; Technik übernommen"
+    },
+    {
+      "v2": "examples/invalid/live_grant_paper_in_live_environment.json",
+      "v3": "examples/invalid/",
+      "disposition": "ERSETZT",
+      "note": "für die v3-Verträge neu erzeugt; Technik übernommen"
+    },
+    {
+      "v2": "examples/invalid/live_grant_pilot_45_days.json",
+      "v3": "examples/invalid/",
+      "disposition": "ERSETZT",
+      "note": "für die v3-Verträge neu erzeugt; Technik übernommen"
+    },
+    {
+      "v2": "examples/invalid/live_grant_standard_in_pilot_only_path.json",
+      "v3": "examples/invalid/",
+      "disposition": "ERSETZT",
+      "note": "für die v3-Verträge neu erzeugt; Technik übernommen"
+    },
+    {
+      "v2": "examples/invalid/live_grant_standard_without_e5.json",
+      "v3": "examples/invalid/",
+      "disposition": "ERSETZT",
+      "note": "für die v3-Verträge neu erzeugt; Technik übernommen"
+    },
+    {
+      "v2": "examples/invalid/mcp_request_foreign_identity.json",
+      "v3": "examples/invalid/",
+      "disposition": "ERSETZT",
+      "note": "für die v3-Verträge neu erzeugt; Technik übernommen"
+    },
+    {
+      "v2": "examples/invalid/mcp_request_oversized.json",
+      "v3": "examples/invalid/",
+      "disposition": "ERSETZT",
+      "note": "für die v3-Verträge neu erzeugt; Technik übernommen"
+    },
+    {
+      "v2": "examples/invalid/mcp_request_place_order.json",
+      "v3": "examples/invalid/",
+      "disposition": "ERSETZT",
+      "note": "für die v3-Verträge neu erzeugt; Technik übernommen"
+    },
+    {
+      "v2": "examples/invalid/mcp_response_completed_without_evidence.json",
+      "v3": "examples/invalid/",
+      "disposition": "ERSETZT",
+      "note": "für die v3-Verträge neu erzeugt; Technik übernommen"
+    },
+    {
+      "v2": "examples/invalid/operator_action_clear_without_reason.json",
+      "v3": "examples/invalid/",
+      "disposition": "ERSETZT",
+      "note": "für die v3-Verträge neu erzeugt; Technik übernommen"
+    },
+    {
+      "v2": "examples/invalid/operator_action_expiry_too_long.json",
+      "v3": "examples/invalid/",
+      "disposition": "ERSETZT",
+      "note": "für die v3-Verträge neu erzeugt; Technik übernommen"
+    },
+    {
+      "v2": "examples/invalid/operator_action_wind_down_without_snapshot.json",
+      "v3": "examples/invalid/",
+      "disposition": "ERSETZT",
+      "note": "für die v3-Verträge neu erzeugt; Technik übernommen"
+    },
+    {
+      "v2": "examples/invalid/operator_profile_research_as_live.json",
+      "v3": "examples/invalid/",
+      "disposition": "ERSETZT",
+      "note": "für die v3-Verträge neu erzeugt; Technik übernommen"
+    },
+    {
+      "v2": "examples/invalid/operator_profile_research_with_risk.json",
+      "v3": "examples/invalid/",
+      "disposition": "ERSETZT",
+      "note": "für die v3-Verträge neu erzeugt; Technik übernommen"
+    },
+    {
+      "v2": "examples/invalid/operator_profile_standard_without_loss_budget.json",
+      "v3": "examples/invalid/",
+      "disposition": "ERSETZT",
+      "note": "für die v3-Verträge neu erzeugt; Technik übernommen"
+    },
+    {
+      "v2": "examples/invalid/order_attempt_filled_without_price.json",
+      "v3": "examples/invalid/",
+      "disposition": "ERSETZT",
+      "note": "für die v3-Verträge neu erzeugt; Technik übernommen"
+    },
+    {
+      "v2": "examples/invalid/order_attempt_not_executed_without_proof.json",
+      "v3": "examples/invalid/",
+      "disposition": "ERSETZT",
+      "note": "für die v3-Verträge neu erzeugt; Technik übernommen"
+    },
+    {
+      "v2": "examples/invalid/order_intent_close_with_entry_permission.json",
+      "v3": "examples/invalid/",
+      "disposition": "ERSETZT",
+      "note": "für die v3-Verträge neu erzeugt; Technik übernommen"
+    },
+    {
+      "v2": "examples/invalid/order_intent_close_without_position.json",
+      "v3": "examples/invalid/",
+      "disposition": "ERSETZT",
+      "note": "für die v3-Verträge neu erzeugt; Technik übernommen"
+    },
+    {
+      "v2": "examples/invalid/order_intent_entry_without_stop.json",
+      "v3": "examples/invalid/",
+      "disposition": "ERSETZT",
+      "note": "für die v3-Verträge neu erzeugt; Technik übernommen"
+    },
+    {
+      "v2": "examples/invalid/order_intent_float_qty.json",
+      "v3": "examples/invalid/",
+      "disposition": "ERSETZT",
+      "note": "für die v3-Verträge neu erzeugt; Technik übernommen"
+    },
+    {
+      "v2": "examples/invalid/order_intent_stop_wrong_side.json",
+      "v3": "examples/invalid/",
+      "disposition": "ERSETZT",
+      "note": "für die v3-Verträge neu erzeugt; Technik übernommen"
+    },
+    {
+      "v2": "examples/invalid/position_without_exit_pair.json",
+      "v3": "examples/invalid/",
+      "disposition": "ERSETZT",
+      "note": "für die v3-Verträge neu erzeugt; Technik übernommen"
+    },
+    {
+      "v2": "examples/invalid/register_parameter_invented_operator_value.json",
+      "v3": "examples/invalid/",
+      "disposition": "ERSETZT",
+      "note": "für die v3-Verträge neu erzeugt; Technik übernommen"
+    },
+    {
+      "v2": "examples/invalid/register_requirement_without_test.json",
+      "v3": "examples/invalid/",
+      "disposition": "ERSETZT",
+      "note": "für die v3-Verträge neu erzeugt; Technik übernommen"
+    },
+    {
+      "v2": "examples/invalid/register_scorecard_bad_factor.json",
+      "v3": "examples/invalid/",
+      "disposition": "ERSETZT",
+      "note": "für die v3-Verträge neu erzeugt; Technik übernommen"
+    },
+    {
+      "v2": "examples/invalid/release_manifest_b_equivalence_failed.json",
+      "v3": "examples/invalid/",
+      "disposition": "ERSETZT",
+      "note": "für die v3-Verträge neu erzeugt; Technik übernommen"
+    },
+    {
+      "v2": "examples/invalid/release_manifest_self_review.json",
+      "v3": "examples/invalid/",
+      "disposition": "ERSETZT",
+      "note": "für die v3-Verträge neu erzeugt; Technik übernommen"
+    },
+    {
+      "v2": "examples/invalid/risk_decision_reject_without_reason.json",
+      "v3": "examples/invalid/",
+      "disposition": "ERSETZT",
+      "note": "für die v3-Verträge neu erzeugt; Technik übernommen"
+    },
+    {
+      "v2": "examples/invalid/risk_decision_rounded_up.json",
+      "v3": "examples/invalid/",
+      "disposition": "ERSETZT",
+      "note": "für die v3-Verträge neu erzeugt; Technik übernommen"
+    },
+    {
+      "v2": "examples/invalid/safety_observation_without_measurement.json",
+      "v3": "examples/invalid/",
+      "disposition": "ERSETZT",
+      "note": "für die v3-Verträge neu erzeugt; Technik übernommen"
+    },
+    {
+      "v2": "examples/invalid/stage_report_missing_test.json",
+      "v3": "examples/invalid/",
+      "disposition": "ERSETZT",
+      "note": "für die v3-Verträge neu erzeugt; Technik übernommen"
+    },
+    {
+      "v2": "examples/invalid/stage_report_passed_without_evidence.json",
+      "v3": "examples/invalid/",
+      "disposition": "ERSETZT",
+      "note": "für die v3-Verträge neu erzeugt; Technik übernommen"
+    },
+    {
+      "v2": "examples/invalid/work_item_four_rounds.json",
+      "v3": "examples/invalid/",
+      "disposition": "ERSETZT",
+      "note": "für die v3-Verträge neu erzeugt; Technik übernommen"
+    },
+    {
+      "v2": "examples/valid/contracts/account_snapshot_complete.json",
+      "v3": "examples/valid/contracts/",
+      "disposition": "ERSETZT",
+      "note": "für die v3-Verträge neu erzeugt"
+    },
+    {
+      "v2": "examples/valid/contracts/broker_event_fill.json",
+      "v3": "examples/valid/contracts/",
+      "disposition": "ERSETZT",
+      "note": "für die v3-Verträge neu erzeugt"
+    },
+    {
+      "v2": "examples/valid/contracts/change_proposal_parser.json",
+      "v3": "examples/valid/contracts/",
+      "disposition": "ERSETZT",
+      "note": "für die v3-Verträge neu erzeugt"
+    },
+    {
+      "v2": "examples/valid/contracts/data_manifest_futures.json",
+      "v3": "examples/valid/contracts/",
+      "disposition": "ERSETZT",
+      "note": "für die v3-Verträge neu erzeugt"
+    },
+    {
+      "v2": "examples/valid/contracts/decision_record_entry.json",
+      "v3": "examples/valid/contracts/",
+      "disposition": "ERSETZT",
+      "note": "für die v3-Verträge neu erzeugt"
+    },
+    {
+      "v2": "examples/valid/contracts/error_unknown_order.json",
+      "v3": "examples/valid/contracts/",
+      "disposition": "ERSETZT",
+      "note": "für die v3-Verträge neu erzeugt"
+    },
+    {
+      "v2": "examples/valid/contracts/experiment_manifest_e1.json",
+      "v3": "examples/valid/contracts/",
+      "disposition": "ERSETZT",
+      "note": "für die v3-Verträge neu erzeugt"
+    },
+    {
+      "v2": "examples/valid/contracts/gate_result_e0a_repo_ci.json",
+      "v3": "examples/valid/contracts/",
+      "disposition": "ERSETZT",
+      "note": "für die v3-Verträge neu erzeugt"
+    },
+    {
+      "v2": "examples/valid/contracts/gate_result_e1_pass.json",
+      "v3": "examples/valid/contracts/",
+      "disposition": "ERSETZT",
+      "note": "für die v3-Verträge neu erzeugt"
+    },
+    {
+      "v2": "examples/valid/contracts/incident_closed.json",
+      "v3": "examples/valid/contracts/",
+      "disposition": "ERSETZT",
+      "note": "für die v3-Verträge neu erzeugt"
+    },
+    {
+      "v2": "examples/valid/contracts/instrument_spec_public.json",
+      "v3": "examples/valid/contracts/",
+      "disposition": "ERSETZT",
+      "note": "für die v3-Verträge neu erzeugt"
+    },
+    {
+      "v2": "examples/valid/contracts/knowledge_entry_hypothesis.json",
+      "v3": "examples/valid/contracts/",
+      "disposition": "ERSETZT",
+      "note": "für die v3-Verträge neu erzeugt"
+    },
+    {
+      "v2": "examples/valid/contracts/knowledge_entry_measured.json",
+      "v3": "examples/valid/contracts/",
+      "disposition": "ERSETZT",
+      "note": "für die v3-Verträge neu erzeugt"
+    },
+    {
+      "v2": "examples/valid/contracts/live_grant_paper.json",
+      "v3": "examples/valid/contracts/",
+      "disposition": "ERSETZT",
+      "note": "für die v3-Verträge neu erzeugt"
+    },
+    {
+      "v2": "examples/valid/contracts/live_grant_pilot.json",
+      "v3": "examples/valid/contracts/",
+      "disposition": "ERSETZT",
+      "note": "für die v3-Verträge neu erzeugt"
+    },
+    {
+      "v2": "examples/valid/contracts/mcp_request_submit_experiment.json",
+      "v3": "examples/valid/contracts/",
+      "disposition": "ERSETZT",
+      "note": "für die v3-Verträge neu erzeugt"
+    },
+    {
+      "v2": "examples/valid/contracts/mcp_response_accepted.json",
+      "v3": "examples/valid/contracts/",
+      "disposition": "ERSETZT",
+      "note": "für die v3-Verträge neu erzeugt"
+    },
+    {
+      "v2": "examples/valid/contracts/mcp_response_rejected.json",
+      "v3": "examples/valid/contracts/",
+      "disposition": "ERSETZT",
+      "note": "für die v3-Verträge neu erzeugt"
+    },
+    {
+      "v2": "examples/valid/contracts/operator_action_clear_reason.json",
+      "v3": "examples/valid/contracts/",
+      "disposition": "ERSETZT",
+      "note": "für die v3-Verträge neu erzeugt"
+    },
+    {
+      "v2": "examples/valid/contracts/operator_action_pause.json",
+      "v3": "examples/valid/contracts/",
+      "disposition": "ERSETZT",
+      "note": "für die v3-Verträge neu erzeugt"
+    },
+    {
+      "v2": "examples/valid/contracts/operator_profile_pilot_complete.json",
+      "v3": "examples/valid/contracts/",
+      "disposition": "ERSETZT",
+      "note": "für die v3-Verträge neu erzeugt"
+    },
+    {
+      "v2": "examples/valid/contracts/operator_profile_research.json",
+      "v3": "examples/valid/contracts/",
+      "disposition": "ERSETZT",
+      "note": "für die v3-Verträge neu erzeugt"
+    },
+    {
+      "v2": "examples/valid/contracts/order_attempt_not_executed_proven.json",
+      "v3": "examples/valid/contracts/",
+      "disposition": "ERSETZT",
+      "note": "für die v3-Verträge neu erzeugt"
+    },
+    {
+      "v2": "examples/valid/contracts/order_attempt_unknown.json",
+      "v3": "examples/valid/contracts/",
+      "disposition": "ERSETZT",
+      "note": "für die v3-Verträge neu erzeugt"
+    },
+    {
+      "v2": "examples/valid/contracts/order_intent_close_via_exit_pair.json",
+      "v3": "examples/valid/contracts/",
+      "disposition": "ERSETZT",
+      "note": "für die v3-Verträge neu erzeugt"
+    },
+    {
+      "v2": "examples/valid/contracts/order_intent_entry.json",
+      "v3": "examples/valid/contracts/",
+      "disposition": "ERSETZT",
+      "note": "für die v3-Verträge neu erzeugt"
+    },
+    {
+      "v2": "examples/valid/contracts/order_intent_stop_amend.json",
+      "v3": "examples/valid/contracts/",
+      "disposition": "ERSETZT",
+      "note": "für die v3-Verträge neu erzeugt"
+    },
+    {
+      "v2": "examples/valid/contracts/position_open_protected.json",
+      "v3": "examples/valid/contracts/",
+      "disposition": "ERSETZT",
+      "note": "für die v3-Verträge neu erzeugt"
+    },
+    {
+      "v2": "examples/valid/contracts/release_manifest_b_equivalent.json",
+      "v3": "examples/valid/contracts/",
+      "disposition": "ERSETZT",
+      "note": "für die v3-Verträge neu erzeugt"
+    },
+    {
+      "v2": "examples/valid/contracts/risk_decision_pass.json",
+      "v3": "examples/valid/contracts/",
+      "disposition": "ERSETZT",
+      "note": "für die v3-Verträge neu erzeugt"
+    },
+    {
+      "v2": "examples/valid/contracts/risk_decision_reject_lot.json",
+      "v3": "examples/valid/contracts/",
+      "disposition": "ERSETZT",
+      "note": "für die v3-Verträge neu erzeugt"
+    },
+    {
+      "v2": "examples/valid/contracts/safety_observation.json",
+      "v3": "examples/valid/contracts/",
+      "disposition": "ERSETZT",
+      "note": "für die v3-Verträge neu erzeugt"
+    },
+    {
+      "v2": "examples/valid/contracts/stage_report_m0_blocked.json",
+      "v3": "examples/valid/contracts/",
+      "disposition": "ERSETZT",
+      "note": "für die v3-Verträge neu erzeugt"
+    },
+    {
+      "v2": "examples/valid/contracts/work_item_running.json",
+      "v3": "examples/valid/contracts/",
+      "disposition": "ERSETZT",
+      "note": "für die v3-Verträge neu erzeugt"
+    },
+    {
+      "v2": "examples/valid/gate_cases/GC-ACTIVITY-001.json",
+      "v3": "examples/valid/gate_cases/",
+      "disposition": "ERSETZT",
+      "note": "Tore G0–G10 und Monitore"
+    },
+    {
+      "v2": "examples/valid/gate_cases/GC-ACTIVITY-002.json",
+      "v3": "examples/valid/gate_cases/",
+      "disposition": "ERSETZT",
+      "note": "Tore G0–G10 und Monitore"
+    },
+    {
+      "v2": "examples/valid/gate_cases/GC-ACTIVITY-003.json",
+      "v3": "examples/valid/gate_cases/",
+      "disposition": "ERSETZT",
+      "note": "Tore G0–G10 und Monitore"
+    },
+    {
+      "v2": "examples/valid/gate_cases/GC-ACTIVITY-004.json",
+      "v3": "examples/valid/gate_cases/",
+      "disposition": "ERSETZT",
+      "note": "Tore G0–G10 und Monitore"
+    },
+    {
+      "v2": "examples/valid/gate_cases/GC-AUDIT-001.json",
+      "v3": "examples/valid/gate_cases/",
+      "disposition": "ERSETZT",
+      "note": "Tore G0–G10 und Monitore"
+    },
+    {
+      "v2": "examples/valid/gate_cases/GC-AUDIT-002.json",
+      "v3": "examples/valid/gate_cases/",
+      "disposition": "ERSETZT",
+      "note": "Tore G0–G10 und Monitore"
+    },
+    {
+      "v2": "examples/valid/gate_cases/GC-AUDIT-003.json",
+      "v3": "examples/valid/gate_cases/",
+      "disposition": "ERSETZT",
+      "note": "Tore G0–G10 und Monitore"
+    },
+    {
+      "v2": "examples/valid/gate_cases/GC-COSTDRIFT-001.json",
+      "v3": "examples/valid/gate_cases/",
+      "disposition": "ERSETZT",
+      "note": "Tore G0–G10 und Monitore"
+    },
+    {
+      "v2": "examples/valid/gate_cases/GC-COSTDRIFT-002.json",
+      "v3": "examples/valid/gate_cases/",
+      "disposition": "ERSETZT",
+      "note": "Tore G0–G10 und Monitore"
+    },
+    {
+      "v2": "examples/valid/gate_cases/GC-COSTDRIFT-003.json",
+      "v3": "examples/valid/gate_cases/",
+      "disposition": "ERSETZT",
+      "note": "Tore G0–G10 und Monitore"
+    },
+    {
+      "v2": "examples/valid/gate_cases/GC-COSTDRIFT-004.json",
+      "v3": "examples/valid/gate_cases/",
+      "disposition": "ERSETZT",
+      "note": "Tore G0–G10 und Monitore"
+    },
+    {
+      "v2": "examples/valid/gate_cases/GC-E0A-001.json",
+      "v3": "examples/valid/gate_cases/",
+      "disposition": "ERSETZT",
+      "note": "Tore G0–G10 und Monitore"
+    },
+    {
+      "v2": "examples/valid/gate_cases/GC-E0A-002.json",
+      "v3": "examples/valid/gate_cases/",
+      "disposition": "ERSETZT",
+      "note": "Tore G0–G10 und Monitore"
+    },
+    {
+      "v2": "examples/valid/gate_cases/GC-E0A-003.json",
+      "v3": "examples/valid/gate_cases/",
+      "disposition": "ERSETZT",
+      "note": "Tore G0–G10 und Monitore"
+    },
+    {
+      "v2": "examples/valid/gate_cases/GC-E0A-004.json",
+      "v3": "examples/valid/gate_cases/",
+      "disposition": "ERSETZT",
+      "note": "Tore G0–G10 und Monitore"
+    },
+    {
+      "v2": "examples/valid/gate_cases/GC-E0A-005.json",
+      "v3": "examples/valid/gate_cases/",
+      "disposition": "ERSETZT",
+      "note": "Tore G0–G10 und Monitore"
+    },
+    {
+      "v2": "examples/valid/gate_cases/GC-E0A-006.json",
+      "v3": "examples/valid/gate_cases/",
+      "disposition": "ERSETZT",
+      "note": "Tore G0–G10 und Monitore"
+    },
+    {
+      "v2": "examples/valid/gate_cases/GC-E0A-007.json",
+      "v3": "examples/valid/gate_cases/",
+      "disposition": "ERSETZT",
+      "note": "Tore G0–G10 und Monitore"
+    },
+    {
+      "v2": "examples/valid/gate_cases/GC-E0A-008.json",
+      "v3": "examples/valid/gate_cases/",
+      "disposition": "ERSETZT",
+      "note": "Tore G0–G10 und Monitore"
+    },
+    {
+      "v2": "examples/valid/gate_cases/GC-E0A-009.json",
+      "v3": "examples/valid/gate_cases/",
+      "disposition": "ERSETZT",
+      "note": "Tore G0–G10 und Monitore"
+    },
+    {
+      "v2": "examples/valid/gate_cases/GC-E0A-010.json",
+      "v3": "examples/valid/gate_cases/",
+      "disposition": "ERSETZT",
+      "note": "Tore G0–G10 und Monitore"
+    },
+    {
+      "v2": "examples/valid/gate_cases/GC-E0B-001.json",
+      "v3": "examples/valid/gate_cases/",
+      "disposition": "ERSETZT",
+      "note": "Tore G0–G10 und Monitore"
+    },
+    {
+      "v2": "examples/valid/gate_cases/GC-E0B-002.json",
+      "v3": "examples/valid/gate_cases/",
+      "disposition": "ERSETZT",
+      "note": "Tore G0–G10 und Monitore"
+    },
+    {
+      "v2": "examples/valid/gate_cases/GC-E0B-003.json",
+      "v3": "examples/valid/gate_cases/",
+      "disposition": "ERSETZT",
+      "note": "Tore G0–G10 und Monitore"
+    },
+    {
+      "v2": "examples/valid/gate_cases/GC-E0B-004.json",
+      "v3": "examples/valid/gate_cases/",
+      "disposition": "ERSETZT",
+      "note": "Tore G0–G10 und Monitore"
+    },
+    {
+      "v2": "examples/valid/gate_cases/GC-E0B-005.json",
+      "v3": "examples/valid/gate_cases/",
+      "disposition": "ERSETZT",
+      "note": "Tore G0–G10 und Monitore"
+    },
+    {
+      "v2": "examples/valid/gate_cases/GC-E0B-006.json",
+      "v3": "examples/valid/gate_cases/",
+      "disposition": "ERSETZT",
+      "note": "Tore G0–G10 und Monitore"
+    },
+    {
+      "v2": "examples/valid/gate_cases/GC-E0B-007.json",
+      "v3": "examples/valid/gate_cases/",
+      "disposition": "ERSETZT",
+      "note": "Tore G0–G10 und Monitore"
+    },
+    {
+      "v2": "examples/valid/gate_cases/GC-E0B-008.json",
+      "v3": "examples/valid/gate_cases/",
+      "disposition": "ERSETZT",
+      "note": "Tore G0–G10 und Monitore"
+    },
+    {
+      "v2": "examples/valid/gate_cases/GC-E0B-009.json",
+      "v3": "examples/valid/gate_cases/",
+      "disposition": "ERSETZT",
+      "note": "Tore G0–G10 und Monitore"
+    },
+    {
+      "v2": "examples/valid/gate_cases/GC-E0B-010.json",
+      "v3": "examples/valid/gate_cases/",
+      "disposition": "ERSETZT",
+      "note": "Tore G0–G10 und Monitore"
+    },
+    {
+      "v2": "examples/valid/gate_cases/GC-E0B-011.json",
+      "v3": "examples/valid/gate_cases/",
+      "disposition": "ERSETZT",
+      "note": "Tore G0–G10 und Monitore"
+    },
+    {
+      "v2": "examples/valid/gate_cases/GC-E0B-012.json",
+      "v3": "examples/valid/gate_cases/",
+      "disposition": "ERSETZT",
+      "note": "Tore G0–G10 und Monitore"
+    },
+    {
+      "v2": "examples/valid/gate_cases/GC-E0B-013.json",
+      "v3": "examples/valid/gate_cases/",
+      "disposition": "ERSETZT",
+      "note": "Tore G0–G10 und Monitore"
+    },
+    {
+      "v2": "examples/valid/gate_cases/GC-E1-001.json",
+      "v3": "examples/valid/gate_cases/",
+      "disposition": "ERSETZT",
+      "note": "Tore G0–G10 und Monitore"
+    },
+    {
+      "v2": "examples/valid/gate_cases/GC-E1-002.json",
+      "v3": "examples/valid/gate_cases/",
+      "disposition": "ERSETZT",
+      "note": "Tore G0–G10 und Monitore"
+    },
+    {
+      "v2": "examples/valid/gate_cases/GC-E1-003.json",
+      "v3": "examples/valid/gate_cases/",
+      "disposition": "ERSETZT",
+      "note": "Tore G0–G10 und Monitore"
+    },
+    {
+      "v2": "examples/valid/gate_cases/GC-E1-004.json",
+      "v3": "examples/valid/gate_cases/",
+      "disposition": "ERSETZT",
+      "note": "Tore G0–G10 und Monitore"
+    },
+    {
+      "v2": "examples/valid/gate_cases/GC-E1-005.json",
+      "v3": "examples/valid/gate_cases/",
+      "disposition": "ERSETZT",
+      "note": "Tore G0–G10 und Monitore"
+    },
+    {
+      "v2": "examples/valid/gate_cases/GC-E1-006.json",
+      "v3": "examples/valid/gate_cases/",
+      "disposition": "ERSETZT",
+      "note": "Tore G0–G10 und Monitore"
+    },
+    {
+      "v2": "examples/valid/gate_cases/GC-E1-007.json",
+      "v3": "examples/valid/gate_cases/",
+      "disposition": "ERSETZT",
+      "note": "Tore G0–G10 und Monitore"
+    },
+    {
+      "v2": "examples/valid/gate_cases/GC-E1-008.json",
+      "v3": "examples/valid/gate_cases/",
+      "disposition": "ERSETZT",
+      "note": "Tore G0–G10 und Monitore"
+    },
+    {
+      "v2": "examples/valid/gate_cases/GC-E1-009.json",
+      "v3": "examples/valid/gate_cases/",
+      "disposition": "ERSETZT",
+      "note": "Tore G0–G10 und Monitore"
+    },
+    {
+      "v2": "examples/valid/gate_cases/GC-E1-010.json",
+      "v3": "examples/valid/gate_cases/",
+      "disposition": "ERSETZT",
+      "note": "Tore G0–G10 und Monitore"
+    },
+    {
+      "v2": "examples/valid/gate_cases/GC-E1-011.json",
+      "v3": "examples/valid/gate_cases/",
+      "disposition": "ERSETZT",
+      "note": "Tore G0–G10 und Monitore"
+    },
+    {
+      "v2": "examples/valid/gate_cases/GC-E1-012.json",
+      "v3": "examples/valid/gate_cases/",
+      "disposition": "ERSETZT",
+      "note": "Tore G0–G10 und Monitore"
+    },
+    {
+      "v2": "examples/valid/gate_cases/GC-E1-013.json",
+      "v3": "examples/valid/gate_cases/",
+      "disposition": "ERSETZT",
+      "note": "Tore G0–G10 und Monitore"
+    },
+    {
+      "v2": "examples/valid/gate_cases/GC-E1-014.json",
+      "v3": "examples/valid/gate_cases/",
+      "disposition": "ERSETZT",
+      "note": "Tore G0–G10 und Monitore"
+    },
+    {
+      "v2": "examples/valid/gate_cases/GC-E1-015.json",
+      "v3": "examples/valid/gate_cases/",
+      "disposition": "ERSETZT",
+      "note": "Tore G0–G10 und Monitore"
+    },
+    {
+      "v2": "examples/valid/gate_cases/GC-E1-016.json",
+      "v3": "examples/valid/gate_cases/",
+      "disposition": "ERSETZT",
+      "note": "Tore G0–G10 und Monitore"
+    },
+    {
+      "v2": "examples/valid/gate_cases/GC-E1-017.json",
+      "v3": "examples/valid/gate_cases/",
+      "disposition": "ERSETZT",
+      "note": "Tore G0–G10 und Monitore"
+    },
+    {
+      "v2": "examples/valid/gate_cases/GC-E1-018.json",
+      "v3": "examples/valid/gate_cases/",
+      "disposition": "ERSETZT",
+      "note": "Tore G0–G10 und Monitore"
+    },
+    {
+      "v2": "examples/valid/gate_cases/GC-E1-019.json",
+      "v3": "examples/valid/gate_cases/",
+      "disposition": "ERSETZT",
+      "note": "Tore G0–G10 und Monitore"
+    },
+    {
+      "v2": "examples/valid/gate_cases/GC-E1-020.json",
+      "v3": "examples/valid/gate_cases/",
+      "disposition": "ERSETZT",
+      "note": "Tore G0–G10 und Monitore"
+    },
+    {
+      "v2": "examples/valid/gate_cases/GC-E1-021.json",
+      "v3": "examples/valid/gate_cases/",
+      "disposition": "ERSETZT",
+      "note": "Tore G0–G10 und Monitore"
+    },
+    {
+      "v2": "examples/valid/gate_cases/GC-E1-022.json",
+      "v3": "examples/valid/gate_cases/",
+      "disposition": "ERSETZT",
+      "note": "Tore G0–G10 und Monitore"
+    },
+    {
+      "v2": "examples/valid/gate_cases/GC-E1-023.json",
+      "v3": "examples/valid/gate_cases/",
+      "disposition": "ERSETZT",
+      "note": "Tore G0–G10 und Monitore"
+    },
+    {
+      "v2": "examples/valid/gate_cases/GC-E1-024.json",
+      "v3": "examples/valid/gate_cases/",
+      "disposition": "ERSETZT",
+      "note": "Tore G0–G10 und Monitore"
+    },
+    {
+      "v2": "examples/valid/gate_cases/GC-E1-025.json",
+      "v3": "examples/valid/gate_cases/",
+      "disposition": "ERSETZT",
+      "note": "Tore G0–G10 und Monitore"
+    },
+    {
+      "v2": "examples/valid/gate_cases/GC-E1-026.json",
+      "v3": "examples/valid/gate_cases/",
+      "disposition": "ERSETZT",
+      "note": "Tore G0–G10 und Monitore"
+    },
+    {
+      "v2": "examples/valid/gate_cases/GC-E1-027.json",
+      "v3": "examples/valid/gate_cases/",
+      "disposition": "ERSETZT",
+      "note": "Tore G0–G10 und Monitore"
+    },
+    {
+      "v2": "examples/valid/gate_cases/GC-E1-028.json",
+      "v3": "examples/valid/gate_cases/",
+      "disposition": "ERSETZT",
+      "note": "Tore G0–G10 und Monitore"
+    },
+    {
+      "v2": "examples/valid/gate_cases/GC-E1-029.json",
+      "v3": "examples/valid/gate_cases/",
+      "disposition": "ERSETZT",
+      "note": "Tore G0–G10 und Monitore"
+    },
+    {
+      "v2": "examples/valid/gate_cases/GC-E2-001.json",
+      "v3": "examples/valid/gate_cases/",
+      "disposition": "ERSETZT",
+      "note": "Tore G0–G10 und Monitore"
+    },
+    {
+      "v2": "examples/valid/gate_cases/GC-E2-002.json",
+      "v3": "examples/valid/gate_cases/",
+      "disposition": "ERSETZT",
+      "note": "Tore G0–G10 und Monitore"
+    },
+    {
+      "v2": "examples/valid/gate_cases/GC-E2-003.json",
+      "v3": "examples/valid/gate_cases/",
+      "disposition": "ERSETZT",
+      "note": "Tore G0–G10 und Monitore"
+    },
+    {
+      "v2": "examples/valid/gate_cases/GC-E2-004.json",
+      "v3": "examples/valid/gate_cases/",
+      "disposition": "ERSETZT",
+      "note": "Tore G0–G10 und Monitore"
+    },
+    {
+      "v2": "examples/valid/gate_cases/GC-E2-005.json",
+      "v3": "examples/valid/gate_cases/",
+      "disposition": "ERSETZT",
+      "note": "Tore G0–G10 und Monitore"
+    },
+    {
+      "v2": "examples/valid/gate_cases/GC-E2-006.json",
+      "v3": "examples/valid/gate_cases/",
+      "disposition": "ERSETZT",
+      "note": "Tore G0–G10 und Monitore"
+    },
+    {
+      "v2": "examples/valid/gate_cases/GC-E2-007.json",
+      "v3": "examples/valid/gate_cases/",
+      "disposition": "ERSETZT",
+      "note": "Tore G0–G10 und Monitore"
+    },
+    {
+      "v2": "examples/valid/gate_cases/GC-E2-008.json",
+      "v3": "examples/valid/gate_cases/",
+      "disposition": "ERSETZT",
+      "note": "Tore G0–G10 und Monitore"
+    },
+    {
+      "v2": "examples/valid/gate_cases/GC-E2-009.json",
+      "v3": "examples/valid/gate_cases/",
+      "disposition": "ERSETZT",
+      "note": "Tore G0–G10 und Monitore"
+    },
+    {
+      "v2": "examples/valid/gate_cases/GC-E2-010.json",
+      "v3": "examples/valid/gate_cases/",
+      "disposition": "ERSETZT",
+      "note": "Tore G0–G10 und Monitore"
+    },
+    {
+      "v2": "examples/valid/gate_cases/GC-E2-011.json",
+      "v3": "examples/valid/gate_cases/",
+      "disposition": "ERSETZT",
+      "note": "Tore G0–G10 und Monitore"
+    },
+    {
+      "v2": "examples/valid/gate_cases/GC-E2-012.json",
+      "v3": "examples/valid/gate_cases/",
+      "disposition": "ERSETZT",
+      "note": "Tore G0–G10 und Monitore"
+    },
+    {
+      "v2": "examples/valid/gate_cases/GC-E2-013.json",
+      "v3": "examples/valid/gate_cases/",
+      "disposition": "ERSETZT",
+      "note": "Tore G0–G10 und Monitore"
+    },
+    {
+      "v2": "examples/valid/gate_cases/GC-E2-014.json",
+      "v3": "examples/valid/gate_cases/",
+      "disposition": "ERSETZT",
+      "note": "Tore G0–G10 und Monitore"
+    },
+    {
+      "v2": "examples/valid/gate_cases/GC-E3-001.json",
+      "v3": "examples/valid/gate_cases/",
+      "disposition": "ERSETZT",
+      "note": "Tore G0–G10 und Monitore"
+    },
+    {
+      "v2": "examples/valid/gate_cases/GC-E3-002.json",
+      "v3": "examples/valid/gate_cases/",
+      "disposition": "ERSETZT",
+      "note": "Tore G0–G10 und Monitore"
+    },
+    {
+      "v2": "examples/valid/gate_cases/GC-E3-003.json",
+      "v3": "examples/valid/gate_cases/",
+      "disposition": "ERSETZT",
+      "note": "Tore G0–G10 und Monitore"
+    },
+    {
+      "v2": "examples/valid/gate_cases/GC-E3-004.json",
+      "v3": "examples/valid/gate_cases/",
+      "disposition": "ERSETZT",
+      "note": "Tore G0–G10 und Monitore"
+    },
+    {
+      "v2": "examples/valid/gate_cases/GC-E3-005.json",
+      "v3": "examples/valid/gate_cases/",
+      "disposition": "ERSETZT",
+      "note": "Tore G0–G10 und Monitore"
+    },
+    {
+      "v2": "examples/valid/gate_cases/GC-E3-006.json",
+      "v3": "examples/valid/gate_cases/",
+      "disposition": "ERSETZT",
+      "note": "Tore G0–G10 und Monitore"
+    },
+    {
+      "v2": "examples/valid/gate_cases/GC-E3-007.json",
+      "v3": "examples/valid/gate_cases/",
+      "disposition": "ERSETZT",
+      "note": "Tore G0–G10 und Monitore"
+    },
+    {
+      "v2": "examples/valid/gate_cases/GC-E3-008.json",
+      "v3": "examples/valid/gate_cases/",
+      "disposition": "ERSETZT",
+      "note": "Tore G0–G10 und Monitore"
+    },
+    {
+      "v2": "examples/valid/gate_cases/GC-E3-009.json",
+      "v3": "examples/valid/gate_cases/",
+      "disposition": "ERSETZT",
+      "note": "Tore G0–G10 und Monitore"
+    },
+    {
+      "v2": "examples/valid/gate_cases/GC-E3-010.json",
+      "v3": "examples/valid/gate_cases/",
+      "disposition": "ERSETZT",
+      "note": "Tore G0–G10 und Monitore"
+    },
+    {
+      "v2": "examples/valid/gate_cases/GC-E3-011.json",
+      "v3": "examples/valid/gate_cases/",
+      "disposition": "ERSETZT",
+      "note": "Tore G0–G10 und Monitore"
+    },
+    {
+      "v2": "examples/valid/gate_cases/GC-E3-012.json",
+      "v3": "examples/valid/gate_cases/",
+      "disposition": "ERSETZT",
+      "note": "Tore G0–G10 und Monitore"
+    },
+    {
+      "v2": "examples/valid/gate_cases/GC-E3-013.json",
+      "v3": "examples/valid/gate_cases/",
+      "disposition": "ERSETZT",
+      "note": "Tore G0–G10 und Monitore"
+    },
+    {
+      "v2": "examples/valid/gate_cases/GC-E4-001.json",
+      "v3": "examples/valid/gate_cases/",
+      "disposition": "ERSETZT",
+      "note": "Tore G0–G10 und Monitore"
+    },
+    {
+      "v2": "examples/valid/gate_cases/GC-E4-002.json",
+      "v3": "examples/valid/gate_cases/",
+      "disposition": "ERSETZT",
+      "note": "Tore G0–G10 und Monitore"
+    },
+    {
+      "v2": "examples/valid/gate_cases/GC-E4-003.json",
+      "v3": "examples/valid/gate_cases/",
+      "disposition": "ERSETZT",
+      "note": "Tore G0–G10 und Monitore"
+    },
+    {
+      "v2": "examples/valid/gate_cases/GC-E4-004.json",
+      "v3": "examples/valid/gate_cases/",
+      "disposition": "ERSETZT",
+      "note": "Tore G0–G10 und Monitore"
+    },
+    {
+      "v2": "examples/valid/gate_cases/GC-E4-005.json",
+      "v3": "examples/valid/gate_cases/",
+      "disposition": "ERSETZT",
+      "note": "Tore G0–G10 und Monitore"
+    },
+    {
+      "v2": "examples/valid/gate_cases/GC-E4-006.json",
+      "v3": "examples/valid/gate_cases/",
+      "disposition": "ERSETZT",
+      "note": "Tore G0–G10 und Monitore"
+    },
+    {
+      "v2": "examples/valid/gate_cases/GC-E4-007.json",
+      "v3": "examples/valid/gate_cases/",
+      "disposition": "ERSETZT",
+      "note": "Tore G0–G10 und Monitore"
+    },
+    {
+      "v2": "examples/valid/gate_cases/GC-E4-008.json",
+      "v3": "examples/valid/gate_cases/",
+      "disposition": "ERSETZT",
+      "note": "Tore G0–G10 und Monitore"
+    },
+    {
+      "v2": "examples/valid/gate_cases/GC-E4-009.json",
+      "v3": "examples/valid/gate_cases/",
+      "disposition": "ERSETZT",
+      "note": "Tore G0–G10 und Monitore"
+    },
+    {
+      "v2": "examples/valid/gate_cases/GC-E4-010.json",
+      "v3": "examples/valid/gate_cases/",
+      "disposition": "ERSETZT",
+      "note": "Tore G0–G10 und Monitore"
+    },
+    {
+      "v2": "examples/valid/gate_cases/GC-E4-011.json",
+      "v3": "examples/valid/gate_cases/",
+      "disposition": "ERSETZT",
+      "note": "Tore G0–G10 und Monitore"
+    },
+    {
+      "v2": "examples/valid/gate_cases/GC-E4-012.json",
+      "v3": "examples/valid/gate_cases/",
+      "disposition": "ERSETZT",
+      "note": "Tore G0–G10 und Monitore"
+    },
+    {
+      "v2": "examples/valid/gate_cases/GC-E4-013.json",
+      "v3": "examples/valid/gate_cases/",
+      "disposition": "ERSETZT",
+      "note": "Tore G0–G10 und Monitore"
+    },
+    {
+      "v2": "examples/valid/gate_cases/GC-E4-014.json",
+      "v3": "examples/valid/gate_cases/",
+      "disposition": "ERSETZT",
+      "note": "Tore G0–G10 und Monitore"
+    },
+    {
+      "v2": "examples/valid/gate_cases/GC-E4-015.json",
+      "v3": "examples/valid/gate_cases/",
+      "disposition": "ERSETZT",
+      "note": "Tore G0–G10 und Monitore"
+    },
+    {
+      "v2": "examples/valid/gate_cases/GC-E5-001.json",
+      "v3": "examples/valid/gate_cases/",
+      "disposition": "ERSETZT",
+      "note": "Tore G0–G10 und Monitore"
+    },
+    {
+      "v2": "examples/valid/gate_cases/GC-E5-002.json",
+      "v3": "examples/valid/gate_cases/",
+      "disposition": "ERSETZT",
+      "note": "Tore G0–G10 und Monitore"
+    },
+    {
+      "v2": "examples/valid/gate_cases/GC-E5-003.json",
+      "v3": "examples/valid/gate_cases/",
+      "disposition": "ERSETZT",
+      "note": "Tore G0–G10 und Monitore"
+    },
+    {
+      "v2": "examples/valid/gate_cases/GC-E5-004.json",
+      "v3": "examples/valid/gate_cases/",
+      "disposition": "ERSETZT",
+      "note": "Tore G0–G10 und Monitore"
+    },
+    {
+      "v2": "examples/valid/gate_cases/GC-E5-005.json",
+      "v3": "examples/valid/gate_cases/",
+      "disposition": "ERSETZT",
+      "note": "Tore G0–G10 und Monitore"
+    },
+    {
+      "v2": "examples/valid/gate_cases/GC-E5-006.json",
+      "v3": "examples/valid/gate_cases/",
+      "disposition": "ERSETZT",
+      "note": "Tore G0–G10 und Monitore"
+    },
+    {
+      "v2": "examples/valid/gate_cases/GC-E5-007.json",
+      "v3": "examples/valid/gate_cases/",
+      "disposition": "ERSETZT",
+      "note": "Tore G0–G10 und Monitore"
+    },
+    {
+      "v2": "examples/valid/gate_cases/GC-E5-008.json",
+      "v3": "examples/valid/gate_cases/",
+      "disposition": "ERSETZT",
+      "note": "Tore G0–G10 und Monitore"
+    },
+    {
+      "v2": "examples/valid/gate_cases/GC-E5-009.json",
+      "v3": "examples/valid/gate_cases/",
+      "disposition": "ERSETZT",
+      "note": "Tore G0–G10 und Monitore"
+    },
+    {
+      "v2": "examples/valid/gate_cases/GC-E5-010.json",
+      "v3": "examples/valid/gate_cases/",
+      "disposition": "ERSETZT",
+      "note": "Tore G0–G10 und Monitore"
+    },
+    {
+      "v2": "examples/valid/gate_cases/GC-E5-011.json",
+      "v3": "examples/valid/gate_cases/",
+      "disposition": "ERSETZT",
+      "note": "Tore G0–G10 und Monitore"
+    },
+    {
+      "v2": "examples/valid/gate_cases/GC-E5-012.json",
+      "v3": "examples/valid/gate_cases/",
+      "disposition": "ERSETZT",
+      "note": "Tore G0–G10 und Monitore"
+    },
+    {
+      "v2": "examples/valid/gate_cases/GC-E5-013.json",
+      "v3": "examples/valid/gate_cases/",
+      "disposition": "ERSETZT",
+      "note": "Tore G0–G10 und Monitore"
+    },
+    {
+      "v2": "examples/valid/gate_cases/GC-E5-014.json",
+      "v3": "examples/valid/gate_cases/",
+      "disposition": "ERSETZT",
+      "note": "Tore G0–G10 und Monitore"
+    },
+    {
+      "v2": "examples/valid/gate_cases/GC-E5-015.json",
+      "v3": "examples/valid/gate_cases/",
+      "disposition": "ERSETZT",
+      "note": "Tore G0–G10 und Monitore"
+    },
+    {
+      "v2": "examples/valid/gate_cases/GC-FUTILITY-001.json",
+      "v3": "examples/valid/gate_cases/",
+      "disposition": "ERSETZT",
+      "note": "Tore G0–G10 und Monitore"
+    },
+    {
+      "v2": "examples/valid/gate_cases/GC-FUTILITY-002.json",
+      "v3": "examples/valid/gate_cases/",
+      "disposition": "ERSETZT",
+      "note": "Tore G0–G10 und Monitore"
+    },
+    {
+      "v2": "examples/valid/gate_cases/GC-FUTILITY-003.json",
+      "v3": "examples/valid/gate_cases/",
+      "disposition": "ERSETZT",
+      "note": "Tore G0–G10 und Monitore"
+    },
+    {
+      "v2": "examples/valid/gate_cases/GC-HARM-001.json",
+      "v3": "examples/valid/gate_cases/",
+      "disposition": "ERSETZT",
+      "note": "Tore G0–G10 und Monitore"
+    },
+    {
+      "v2": "examples/valid/gate_cases/GC-HARM-002.json",
+      "v3": "examples/valid/gate_cases/",
+      "disposition": "ERSETZT",
+      "note": "Tore G0–G10 und Monitore"
+    },
+    {
+      "v2": "examples/valid/gate_cases/GC-HARM-003.json",
+      "v3": "examples/valid/gate_cases/",
+      "disposition": "ERSETZT",
+      "note": "Tore G0–G10 und Monitore"
+    },
+    {
+      "v2": "examples/valid/gate_cases/GC-HARM-004.json",
+      "v3": "examples/valid/gate_cases/",
+      "disposition": "ERSETZT",
+      "note": "Tore G0–G10 und Monitore"
+    },
+    {
+      "v2": "examples/valid/gate_cases/GC-HARM-005.json",
+      "v3": "examples/valid/gate_cases/",
+      "disposition": "ERSETZT",
+      "note": "Tore G0–G10 und Monitore"
+    },
+    {
+      "v2": "examples/valid/state_traces/TR-DATA-001.json",
+      "v3": "examples/valid/state_traces/",
+      "disposition": "ANGEPASST",
+      "note": "Traces auf MT5 und neue Automaten"
+    },
+    {
+      "v2": "examples/valid/state_traces/TR-GATERUN-001.json",
+      "v3": "examples/valid/state_traces/",
+      "disposition": "ANGEPASST",
+      "note": "Traces auf MT5 und neue Automaten"
+    },
+    {
+      "v2": "examples/valid/state_traces/TR-GRANT-001.json",
+      "v3": "examples/valid/state_traces/",
+      "disposition": "ANGEPASST",
+      "note": "Traces auf MT5 und neue Automaten"
+    },
+    {
+      "v2": "examples/valid/state_traces/TR-GRANT-002.json",
+      "v3": "examples/valid/state_traces/",
+      "disposition": "ANGEPASST",
+      "note": "Traces auf MT5 und neue Automaten"
+    },
+    {
+      "v2": "examples/valid/state_traces/TR-GRANT-003.json",
+      "v3": "examples/valid/state_traces/",
+      "disposition": "ANGEPASST",
+      "note": "Traces auf MT5 und neue Automaten"
+    },
+    {
+      "v2": "examples/valid/state_traces/TR-HERMES-001.json",
+      "v3": "examples/valid/state_traces/",
+      "disposition": "ANGEPASST",
+      "note": "Traces auf MT5 und neue Automaten"
+    },
+    {
+      "v2": "examples/valid/state_traces/TR-INCIDENT-001.json",
+      "v3": "examples/valid/state_traces/",
+      "disposition": "ANGEPASST",
+      "note": "Traces auf MT5 und neue Automaten"
+    },
+    {
+      "v2": "examples/valid/state_traces/TR-MODE-001.json",
+      "v3": "examples/valid/state_traces/",
+      "disposition": "ANGEPASST",
+      "note": "Traces auf MT5 und neue Automaten"
+    },
+    {
+      "v2": "examples/valid/state_traces/TR-MODE-002.json",
+      "v3": "examples/valid/state_traces/",
+      "disposition": "ANGEPASST",
+      "note": "Traces auf MT5 und neue Automaten"
+    },
+    {
+      "v2": "examples/valid/state_traces/TR-ORDER-001.json",
+      "v3": "examples/valid/state_traces/",
+      "disposition": "ANGEPASST",
+      "note": "Traces auf MT5 und neue Automaten"
+    },
+    {
+      "v2": "examples/valid/state_traces/TR-ORDER-002.json",
+      "v3": "examples/valid/state_traces/",
+      "disposition": "ANGEPASST",
+      "note": "Traces auf MT5 und neue Automaten"
+    },
+    {
+      "v2": "examples/valid/state_traces/TR-ORDER-003.json",
+      "v3": "examples/valid/state_traces/",
+      "disposition": "ANGEPASST",
+      "note": "Traces auf MT5 und neue Automaten"
+    },
+    {
+      "v2": "examples/valid/state_traces/TR-ORDER-004.json",
+      "v3": "examples/valid/state_traces/",
+      "disposition": "ANGEPASST",
+      "note": "Traces auf MT5 und neue Automaten"
+    },
+    {
+      "v2": "examples/valid/state_traces/TR-ORDER-005.json",
+      "v3": "examples/valid/state_traces/",
+      "disposition": "ANGEPASST",
+      "note": "Traces auf MT5 und neue Automaten"
+    },
+    {
+      "v2": "examples/valid/state_traces/TR-ORDER-006.json",
+      "v3": "examples/valid/state_traces/",
+      "disposition": "ANGEPASST",
+      "note": "Traces auf MT5 und neue Automaten"
+    },
+    {
+      "v2": "examples/valid/state_traces/TR-ORDER-007.json",
+      "v3": "examples/valid/state_traces/",
+      "disposition": "ANGEPASST",
+      "note": "Traces auf MT5 und neue Automaten"
+    },
+    {
+      "v2": "examples/valid/state_traces/TR-ORDER-008.json",
+      "v3": "examples/valid/state_traces/",
+      "disposition": "ANGEPASST",
+      "note": "Traces auf MT5 und neue Automaten"
+    },
+    {
+      "v2": "examples/valid/state_traces/TR-ORDER-009.json",
+      "v3": "examples/valid/state_traces/",
+      "disposition": "ANGEPASST",
+      "note": "Traces auf MT5 und neue Automaten"
+    },
+    {
+      "v2": "examples/valid/state_traces/TR-ORDER-010.json",
+      "v3": "examples/valid/state_traces/",
+      "disposition": "ANGEPASST",
+      "note": "Traces auf MT5 und neue Automaten"
+    },
+    {
+      "v2": "examples/valid/state_traces/TR-POS-001.json",
+      "v3": "examples/valid/state_traces/",
+      "disposition": "ANGEPASST",
+      "note": "Traces auf MT5 und neue Automaten"
+    },
+    {
+      "v2": "examples/valid/state_traces/TR-POS-002.json",
+      "v3": "examples/valid/state_traces/",
+      "disposition": "ANGEPASST",
+      "note": "Traces auf MT5 und neue Automaten"
+    },
+    {
+      "v2": "examples/valid/state_traces/TR-POS-003.json",
+      "v3": "examples/valid/state_traces/",
+      "disposition": "ANGEPASST",
+      "note": "Traces auf MT5 und neue Automaten"
+    },
+    {
+      "v2": "examples/valid/state_traces/TR-POS-004.json",
+      "v3": "examples/valid/state_traces/",
+      "disposition": "ANGEPASST",
+      "note": "Traces auf MT5 und neue Automaten"
+    },
+    {
+      "v2": "examples/valid/state_traces/TR-POS-005.json",
+      "v3": "examples/valid/state_traces/",
+      "disposition": "ANGEPASST",
+      "note": "Traces auf MT5 und neue Automaten"
+    },
+    {
+      "v2": "examples/valid/state_traces/TR-POS-006.json",
+      "v3": "examples/valid/state_traces/",
+      "disposition": "ANGEPASST",
+      "note": "Traces auf MT5 und neue Automaten"
+    },
+    {
+      "v2": "examples/valid/state_traces/TR-RELEASE-001.json",
+      "v3": "examples/valid/state_traces/",
+      "disposition": "ANGEPASST",
+      "note": "Traces auf MT5 und neue Automaten"
+    },
+    {
+      "v2": "examples/valid/state_traces/TR-RELEASE-002.json",
+      "v3": "examples/valid/state_traces/",
+      "disposition": "ANGEPASST",
+      "note": "Traces auf MT5 und neue Automaten"
+    },
+    {
+      "v2": "examples/valid/state_traces/TR-RELEASE-003.json",
+      "v3": "examples/valid/state_traces/",
+      "disposition": "ANGEPASST",
+      "note": "Traces auf MT5 und neue Automaten"
+    },
+    {
+      "v2": "examples/valid/state_traces/TR-RELEASE-004.json",
+      "v3": "examples/valid/state_traces/",
+      "disposition": "ANGEPASST",
+      "note": "Traces auf MT5 und neue Automaten"
+    },
+    {
+      "v2": "examples/valid/state_traces/TR-SAFETY-001.json",
+      "v3": "examples/valid/state_traces/",
+      "disposition": "ANGEPASST",
+      "note": "Traces auf MT5 und neue Automaten"
+    },
+    {
+      "v2": "examples/valid/state_traces/TR-SAFETY-002.json",
+      "v3": "examples/valid/state_traces/",
+      "disposition": "ANGEPASST",
+      "note": "Traces auf MT5 und neue Automaten"
+    },
+    {
+      "v2": "examples/valid/state_traces/TR-SAFETY-003.json",
+      "v3": "examples/valid/state_traces/",
+      "disposition": "ANGEPASST",
+      "note": "Traces auf MT5 und neue Automaten"
+    },
+    {
+      "v2": "examples/valid/state_traces/TR-SAFETY-004.json",
+      "v3": "examples/valid/state_traces/",
+      "disposition": "ANGEPASST",
+      "note": "Traces auf MT5 und neue Automaten"
+    },
+    {
+      "v2": "examples/valid/state_traces/TR-SAFETY-005.json",
+      "v3": "examples/valid/state_traces/",
+      "disposition": "ANGEPASST",
+      "note": "Traces auf MT5 und neue Automaten"
+    },
+    {
+      "v2": "examples/valid/state_traces/TR-SAFETY-006.json",
+      "v3": "examples/valid/state_traces/",
+      "disposition": "ANGEPASST",
+      "note": "Traces auf MT5 und neue Automaten"
+    },
+    {
+      "v2": "examples/valid/state_traces/TR-SAFETY-007.json",
+      "v3": "examples/valid/state_traces/",
+      "disposition": "ANGEPASST",
+      "note": "Traces auf MT5 und neue Automaten"
+    },
+    {
+      "v2": "examples/valid/state_traces/TR-SAFETY-008.json",
+      "v3": "examples/valid/state_traces/",
+      "disposition": "ANGEPASST",
+      "note": "Traces auf MT5 und neue Automaten"
+    },
+    {
+      "v2": "examples/valid/state_traces/TR-WORK-001.json",
+      "v3": "examples/valid/state_traces/",
+      "disposition": "ANGEPASST",
+      "note": "Traces auf MT5 und neue Automaten"
+    },
+    {
+      "v2": "examples/valid/state_traces/TR-WORK-002.json",
+      "v3": "examples/valid/state_traces/",
+      "disposition": "ANGEPASST",
+      "note": "Traces auf MT5 und neue Automaten"
+    },
+    {
+      "v2": "examples/valid/state_traces/TR-WRITER-001.json",
+      "v3": "examples/valid/state_traces/",
+      "disposition": "ANGEPASST",
+      "note": "Traces auf MT5 und neue Automaten"
+    },
+    {
+      "v2": "examples/valid/state_traces/TR-WRITER-002.json",
+      "v3": "examples/valid/state_traces/",
+      "disposition": "ANGEPASST",
+      "note": "Traces auf MT5 und neue Automaten"
+    },
+    {
+      "v2": "external_inputs.json",
+      "v3": "external_inputs.json",
+      "disposition": "ERSETZT",
+      "note": "Technik übernommen (C12)"
+    },
+    {
+      "v2": "financials/assumptions.json",
+      "v3": "financials/assumptions.json",
+      "disposition": "ERSETZT",
+      "note": "nur Verweise auf Register"
+    },
+    {
+      "v2": "financials/break_even_model.csv",
+      "v3": "financials/decision_montecarlo_results.json",
+      "disposition": "ERSETZT",
+      "note": "Monte-Carlo je Stufe, Profil und Modell"
+    },
+    {
+      "v2": "financials/economic_model.md",
+      "v3": "financials/economic_model.md",
+      "disposition": "ERSETZT",
+      "note": "neu"
+    },
+    {
+      "v2": "financials/financial_calculator.py",
+      "v3": "financials/cost_model.py; financials/decision_montecarlo.py",
+      "disposition": "ERSETZT",
+      "note": "Kostenwiderspruch EV-01 behoben"
+    },
+    {
+      "v2": "financials/research_phase_budget.csv",
+      "v3": "implementation/build_stages.json; financials/stage_costs.py",
+      "disposition": "ERSETZT",
+      "note": "Stufenkosten"
+    },
+    {
+      "v2": "implementation/CODING_AGENT_START.md",
+      "v3": "implementation/CODING_AGENT_START.md",
+      "disposition": "ERSETZT",
+      "note": "neu"
+    },
+    {
+      "v2": "implementation/build_plan.md",
+      "v3": "implementation/build_program.md",
+      "disposition": "ERSETZT",
+      "note": "Aufwand Mensch und Agent mit Schätzbasis"
+    },
+    {
+      "v2": "implementation/build_stages.json",
+      "v3": "implementation/build_stages.json",
+      "disposition": "ERSETZT",
+      "note": "BS-00 bis BS-10"
+    },
+    {
+      "v2": "implementation/test_catalog.json",
+      "v3": "implementation/test_catalog.json",
+      "disposition": "ERSETZT",
+      "note": "Killer-Tests zuerst"
+    },
+    {
+      "v2": "operations/operations_plan.md",
+      "v3": "operations/operations_plan.md",
+      "disposition": "ANGEPASST",
+      "note": "Notfallprioritäten übernommen"
+    },
+    {
+      "v2": "operations/runbooks.md",
+      "v3": "operations/runbooks.md; operations/runbook_register.json",
+      "disposition": "ANGEPASST",
+      "note": "Register mit Abdeckungsprüfung"
+    },
+    {
+      "v2": "parameters.json",
+      "v3": "parameters.json",
+      "disposition": "ERSETZT",
+      "note": "Parameter mit v2-Herkunft je Eintrag vermerkt"
+    },
+    {
+      "v2": "requirements.json",
+      "v3": "requirements.json",
+      "disposition": "ERSETZT",
+      "note": "neu"
+    },
+    {
+      "v2": "research/activity_model.py",
+      "v3": "research/reference_strategies/turnover_simulation.py",
+      "disposition": "ERSETZT",
+      "note": "Umschlag und Haltedauer je Strategie"
+    },
+    {
+      "v2": "research/activity_model_results.json",
+      "v3": "research/reference_strategies/turnover_simulation.py",
+      "disposition": "ERSETZT",
+      "note": "Umschlag und Haltedauer je Strategie"
+    },
+    {
+      "v2": "research/evidence_gates.json",
+      "v3": "research/evidence_gates.json",
+      "disposition": "ERSETZT",
+      "note": "Technik übernommen; Tore G0–G10"
+    },
+    {
+      "v2": "research/null_calibration_results.json",
+      "v3": "research/operating_characteristics_results.json",
+      "disposition": "ERSETZT",
+      "note": "Betriebscharakteristik mit Futility"
+    },
+    {
+      "v2": "research/power_scenarios.csv",
+      "v3": "research/statistical_results.json",
+      "disposition": "ERSETZT",
+      "note": "Teststärke nach Lo"
+    },
+    {
+      "v2": "research/reference_strategy.py",
+      "v3": "research/reference_strategies/tf_d1_baseline.py",
+      "disposition": "UEBERNOMMEN",
+      "note": "TF-D1 als Referenz-Baseline (D3-04)"
+    },
+    {
+      "v2": "research/research_plan.md",
+      "v3": "research/research_plan.md",
+      "disposition": "ERSETZT",
+      "note": "neu"
+    },
+    {
+      "v2": "research/statistical_calculator.py",
+      "v3": "research/statistical_calculator.py",
+      "disposition": "ERSETZT",
+      "note": "neu geschrieben (Standardbibliothek)"
+    },
+    {
+      "v2": "schemas/account_snapshot.schema.json",
+      "v3": "schemas/",
+      "disposition": "ERSETZT",
+      "note": "Verträge und Register v3.0"
+    },
+    {
+      "v2": "schemas/assumptions.schema.json",
+      "v3": "schemas/",
+      "disposition": "ERSETZT",
+      "note": "Verträge und Register v3.0"
+    },
+    {
+      "v2": "schemas/broker_event.schema.json",
+      "v3": "schemas/",
+      "disposition": "ERSETZT",
+      "note": "Verträge und Register v3.0"
+    },
+    {
+      "v2": "schemas/build_stages.schema.json",
+      "v3": "schemas/",
+      "disposition": "ERSETZT",
+      "note": "Verträge und Register v3.0"
+    },
+    {
+      "v2": "schemas/change_proposal.schema.json",
+      "v3": "schemas/",
+      "disposition": "ERSETZT",
+      "note": "Verträge und Register v3.0"
+    },
+    {
+      "v2": "schemas/common.schema.json",
+      "v3": "schemas/",
+      "disposition": "ERSETZT",
+      "note": "Verträge und Register v3.0"
+    },
+    {
+      "v2": "schemas/data_manifest.schema.json",
+      "v3": "schemas/",
+      "disposition": "ERSETZT",
+      "note": "Verträge und Register v3.0"
+    },
+    {
+      "v2": "schemas/decision_record.schema.json",
+      "v3": "schemas/",
+      "disposition": "ERSETZT",
+      "note": "Verträge und Register v3.0"
+    },
+    {
+      "v2": "schemas/decision_register.schema.json",
+      "v3": "schemas/",
+      "disposition": "ERSETZT",
+      "note": "Verträge und Register v3.0"
+    },
+    {
+      "v2": "schemas/error.schema.json",
+      "v3": "schemas/",
+      "disposition": "ERSETZT",
+      "note": "Verträge und Register v3.0"
+    },
+    {
+      "v2": "schemas/evidence_gates.schema.json",
+      "v3": "schemas/",
+      "disposition": "ERSETZT",
+      "note": "Verträge und Register v3.0"
+    },
+    {
+      "v2": "schemas/examples_index.schema.json",
+      "v3": "schemas/",
+      "disposition": "ERSETZT",
+      "note": "Verträge und Register v3.0"
+    },
+    {
+      "v2": "schemas/experiment_manifest.schema.json",
+      "v3": "schemas/",
+      "disposition": "ERSETZT",
+      "note": "Verträge und Register v3.0"
+    },
+    {
+      "v2": "schemas/external_inputs.schema.json",
+      "v3": "schemas/",
+      "disposition": "ERSETZT",
+      "note": "Verträge und Register v3.0"
+    },
+    {
+      "v2": "schemas/gate_case.schema.json",
+      "v3": "schemas/",
+      "disposition": "ERSETZT",
+      "note": "Verträge und Register v3.0"
+    },
+    {
+      "v2": "schemas/gate_result.schema.json",
+      "v3": "schemas/",
+      "disposition": "ERSETZT",
+      "note": "Verträge und Register v3.0"
+    },
+    {
+      "v2": "schemas/incident.schema.json",
+      "v3": "schemas/",
+      "disposition": "ERSETZT",
+      "note": "Verträge und Register v3.0"
+    },
+    {
+      "v2": "schemas/instrument_spec.schema.json",
+      "v3": "schemas/",
+      "disposition": "ERSETZT",
+      "note": "Verträge und Register v3.0"
+    },
+    {
+      "v2": "schemas/knowledge_entry.schema.json",
+      "v3": "schemas/",
+      "disposition": "ERSETZT",
+      "note": "Verträge und Register v3.0"
+    },
+    {
+      "v2": "schemas/live_grant.schema.json",
+      "v3": "schemas/",
+      "disposition": "ERSETZT",
+      "note": "Verträge und Register v3.0"
+    },
+    {
+      "v2": "schemas/mcp_request.schema.json",
+      "v3": "schemas/",
+      "disposition": "ERSETZT",
+      "note": "Verträge und Register v3.0"
+    },
+    {
+      "v2": "schemas/mcp_response.schema.json",
+      "v3": "schemas/",
+      "disposition": "ERSETZT",
+      "note": "Verträge und Register v3.0"
+    },
+    {
+      "v2": "schemas/operator_action.schema.json",
+      "v3": "schemas/",
+      "disposition": "ERSETZT",
+      "note": "Verträge und Register v3.0"
+    },
+    {
+      "v2": "schemas/operator_profile.schema.json",
+      "v3": "schemas/",
+      "disposition": "ERSETZT",
+      "note": "Verträge und Register v3.0"
+    },
+    {
+      "v2": "schemas/operator_profile_live.schema.json",
+      "v3": "schemas/",
+      "disposition": "ERSETZT",
+      "note": "Verträge und Register v3.0"
+    },
+    {
+      "v2": "schemas/order_attempt.schema.json",
+      "v3": "schemas/",
+      "disposition": "ERSETZT",
+      "note": "Verträge und Register v3.0"
+    },
+    {
+      "v2": "schemas/order_intent.schema.json",
+      "v3": "schemas/",
+      "disposition": "ERSETZT",
+      "note": "Verträge und Register v3.0"
+    },
+    {
+      "v2": "schemas/package_manifest.schema.json",
+      "v3": "schemas/",
+      "disposition": "ERSETZT",
+      "note": "Verträge und Register v3.0"
+    },
+    {
+      "v2": "schemas/parameters.schema.json",
+      "v3": "schemas/",
+      "disposition": "ERSETZT",
+      "note": "Verträge und Register v3.0"
+    },
+    {
+      "v2": "schemas/position.schema.json",
+      "v3": "schemas/",
+      "disposition": "ERSETZT",
+      "note": "Verträge und Register v3.0"
+    },
+    {
+      "v2": "schemas/release_manifest.schema.json",
+      "v3": "schemas/",
+      "disposition": "ERSETZT",
+      "note": "Verträge und Register v3.0"
+    },
+    {
+      "v2": "schemas/requirements.schema.json",
+      "v3": "schemas/",
+      "disposition": "ERSETZT",
+      "note": "Verträge und Register v3.0"
+    },
+    {
+      "v2": "schemas/resolution_matrix.schema.json",
+      "v3": "schemas/",
+      "disposition": "ERSETZT",
+      "note": "Verträge und Register v3.0"
+    },
+    {
+      "v2": "schemas/risk_decision.schema.json",
+      "v3": "schemas/",
+      "disposition": "ERSETZT",
+      "note": "Verträge und Register v3.0"
+    },
+    {
+      "v2": "schemas/risk_register.schema.json",
+      "v3": "schemas/",
+      "disposition": "ERSETZT",
+      "note": "Verträge und Register v3.0"
+    },
+    {
+      "v2": "schemas/safety_observation.schema.json",
+      "v3": "schemas/",
+      "disposition": "ERSETZT",
+      "note": "Verträge und Register v3.0"
+    },
+    {
+      "v2": "schemas/scenario_catalog.schema.json",
+      "v3": "schemas/",
+      "disposition": "ERSETZT",
+      "note": "Verträge und Register v3.0"
+    },
+    {
+      "v2": "schemas/scorecard.schema.json",
+      "v3": "schemas/",
+      "disposition": "ERSETZT",
+      "note": "Verträge und Register v3.0"
+    },
+    {
+      "v2": "schemas/source_inventory.schema.json",
+      "v3": "schemas/",
+      "disposition": "ERSETZT",
+      "note": "Verträge und Register v3.0"
+    },
+    {
+      "v2": "schemas/source_register.schema.json",
+      "v3": "schemas/",
+      "disposition": "ERSETZT",
+      "note": "Verträge und Register v3.0"
+    },
+    {
+      "v2": "schemas/stage_report.schema.json",
+      "v3": "schemas/",
+      "disposition": "ERSETZT",
+      "note": "Verträge und Register v3.0"
+    },
+    {
+      "v2": "schemas/state_machines.schema.json",
+      "v3": "schemas/",
+      "disposition": "ERSETZT",
+      "note": "Verträge und Register v3.0"
+    },
+    {
+      "v2": "schemas/state_trace.schema.json",
+      "v3": "schemas/",
+      "disposition": "ERSETZT",
+      "note": "Verträge und Register v3.0"
+    },
+    {
+      "v2": "schemas/test_catalog.schema.json",
+      "v3": "schemas/",
+      "disposition": "ERSETZT",
+      "note": "Verträge und Register v3.0"
+    },
+    {
+      "v2": "schemas/traceability.schema.json",
+      "v3": "schemas/",
+      "disposition": "ERSETZT",
+      "note": "Verträge und Register v3.0"
+    },
+    {
+      "v2": "schemas/validation_report.schema.json",
+      "v3": "schemas/",
+      "disposition": "ERSETZT",
+      "note": "Verträge und Register v3.0"
+    },
+    {
+      "v2": "schemas/work_item.schema.json",
+      "v3": "schemas/",
+      "disposition": "ERSETZT",
+      "note": "Verträge und Register v3.0"
+    },
+    {
+      "v2": "security/security_and_permissions.md",
+      "v3": "security/security_architecture.md; security/key_management.md; architecture/threat_model.md",
+      "disposition": "ERSETZT",
+      "note": "aufgeteilt"
+    },
+    {
+      "v2": "validation/execution_log.txt",
+      "v3": "validation/",
+      "disposition": "ERSETZT",
+      "note": "Laufbelege v3.0"
+    },
+    {
+      "v2": "validation/expr.py",
+      "v3": "validation/expr.py",
+      "disposition": "UEBERNOMMEN",
+      "note": "unverändert"
+    },
+    {
+      "v2": "validation/gate_engine.py",
+      "v3": "validation/gate_engine.py",
+      "disposition": "UEBERNOMMEN",
+      "note": "nur Kopfkommentar angepasst"
+    },
+    {
+      "v2": "validation/mutation_tests.py",
+      "v3": "validation/",
+      "disposition": "ERSETZT",
+      "note": "neu für v3.0"
+    },
+    {
+      "v2": "validation/render_blocks.py",
+      "v3": "validation/render_blocks.py",
+      "disposition": "ERSETZT",
+      "note": "neu geschrieben, Technik übernommen (C11)"
+    },
+    {
+      "v2": "validation/state_engine.py",
+      "v3": "validation/state_engine.py",
+      "disposition": "UEBERNOMMEN",
+      "note": "nur Kopfkommentar angepasst"
+    },
+    {
+      "v2": "validation/test_reference_models.py",
+      "v3": "validation/",
+      "disposition": "ERSETZT",
+      "note": "neu für v3.0"
+    },
+    {
+      "v2": "validation/validate_package.py",
+      "v3": "validation/validate_package.py",
+      "disposition": "ERSETZT",
+      "note": "neu geschrieben, Phasen übernommen und erweitert"
+    },
+    {
+      "v2": "validation/validation_report.json",
+      "v3": "validation/",
+      "disposition": "ERSETZT",
+      "note": "Laufbelege v3.0"
+    }
+  ],
+  "criteria_mapping": [
+    {
+      "v2": "A1",
+      "v2_name": "Ziel, Erfolg, Vergleich",
+      "v2_weight": 2,
+      "v2_self_factor": 1.0,
+      "k_subcriteria": [
+        "A3",
+        "A5"
+      ]
+    },
+    {
+      "v2": "A2",
+      "v2_name": "Kostenvollständigkeit, Kapitaluntergrenze",
+      "v2_weight": 4,
+      "v2_self_factor": 0.75,
+      "k_subcriteria": [
+        "A1",
+        "A2"
+      ]
+    },
+    {
+      "v2": "A3",
+      "v2_name": "Hürde, Szenariorobustheit",
+      "v2_weight": 4,
+      "v2_self_factor": 0.75,
+      "k_subcriteria": [
+        "A3"
+      ]
+    },
+    {
+      "v2": "A4",
+      "v2_name": "Falsifikation, Abbruch",
+      "v2_weight": 2,
+      "v2_self_factor": 0.75,
+      "k_subcriteria": [
+        "A5",
+        "C2"
+      ]
+    },
+    {
+      "v2": "B1",
+      "v2_name": "Mechanismus, Widerlegbarkeit",
+      "v2_weight": 2,
+      "v2_self_factor": 0.75,
+      "k_subcriteria": [
+        "B1"
+      ]
+    },
+    {
+      "v2": "B2",
+      "v2_name": "Signalregeln eindeutig",
+      "v2_weight": 2,
+      "v2_self_factor": 0.75,
+      "k_subcriteria": [
+        "B1"
+      ]
+    },
+    {
+      "v2": "B3",
+      "v2_name": "Zeit- und Handelssemantik",
+      "v2_weight": 2,
+      "v2_self_factor": 0.75,
+      "k_subcriteria": [
+        "B1",
+        "E4"
+      ]
+    },
+    {
+      "v2": "B4",
+      "v2_name": "Forschungsumfang",
+      "v2_weight": 2,
+      "v2_self_factor": 1.0,
+      "k_subcriteria": [
+        "C1"
+      ]
+    },
+    {
+      "v2": "C1",
+      "v2_name": "Datenherkunft",
+      "v2_weight": 2,
+      "v2_self_factor": 0.75,
+      "k_subcriteria": [
+        "B3"
+      ]
+    },
+    {
+      "v2": "C2",
+      "v2_name": "Kalender, Qualität",
+      "v2_weight": 2,
+      "v2_self_factor": 0.75,
+      "k_subcriteria": [
+        "B3",
+        "E4"
+      ]
+    },
+    {
+      "v2": "C3",
+      "v2_name": "Ausführbare Preise, Kosten-Replay",
+      "v2_weight": 2,
+      "v2_self_factor": 0.75,
+      "k_subcriteria": [
+        "A1",
+        "E4"
+      ]
+    },
+    {
+      "v2": "C4",
+      "v2_name": "Ereignisreihenfolge, Produktionsgleichheit",
+      "v2_weight": 2,
+      "v2_self_factor": 1.0,
+      "k_subcriteria": [
+        "F1"
+      ]
+    },
+    {
+      "v2": "C5",
+      "v2_name": "Reproduzierbarkeit, Leckage",
+      "v2_weight": 2,
+      "v2_self_factor": 1.0,
+      "k_subcriteria": [
+        "C1",
+        "I3"
+      ]
+    },
+    {
+      "v2": "D1",
+      "v2_name": "Vorregistrierung, Datentrennung",
+      "v2_weight": 2,
+      "v2_self_factor": 1.0,
+      "k_subcriteria": [
+        "C1"
+      ]
+    },
+    {
+      "v2": "D2",
+      "v2_name": "Mehrfachsuche, Fehlerbudgets",
+      "v2_weight": 3,
+      "v2_self_factor": 0.75,
+      "k_subcriteria": [
+        "C1"
+      ]
+    },
+    {
+      "v2": "D3",
+      "v2_name": "Bootstrap, Teststärke",
+      "v2_weight": 3,
+      "v2_self_factor": 0.75,
+      "k_subcriteria": [
+        "C1",
+        "C2"
+      ]
+    },
+    {
+      "v2": "D4",
+      "v2_name": "Tore E0–E5",
+      "v2_weight": 2,
+      "v2_self_factor": 0.75,
+      "k_subcriteria": [
+        "C2"
+      ]
+    },
+    {
+      "v2": "D5",
+      "v2_name": "Prospektiver Nachweis, Drift",
+      "v2_weight": 2,
+      "v2_self_factor": 0.75,
+      "k_subcriteria": [
+        "C3"
+      ]
+    },
+    {
+      "v2": "E1",
+      "v2_name": "Positionsgröße",
+      "v2_weight": 3,
+      "v2_self_factor": 1.0,
+      "k_subcriteria": [
+        "D1",
+        "D3"
+      ]
+    },
+    {
+      "v2": "E2",
+      "v2_name": "Gesamtkonto, Reservierungen",
+      "v2_weight": 3,
+      "v2_self_factor": 1.0,
+      "k_subcriteria": [
+        "D3",
+        "E1"
+      ]
+    },
+    {
+      "v2": "E3",
+      "v2_name": "Verlustbudgets, Cashflows",
+      "v2_weight": 3,
+      "v2_self_factor": 1.0,
+      "k_subcriteria": [
+        "D3"
+      ]
+    },
+    {
+      "v2": "E4",
+      "v2_name": "Schutzstops, Gaps",
+      "v2_weight": 3,
+      "v2_self_factor": 0.75,
+      "k_subcriteria": [
+        "D2",
+        "E2"
+      ]
+    },
+    {
+      "v2": "E5",
+      "v2_name": "Profile, Zustände",
+      "v2_weight": 2,
+      "v2_self_factor": 1.0,
+      "k_subcriteria": [
+        "D4",
+        "E1"
+      ]
+    },
+    {
+      "v2": "F1",
+      "v2_name": "Zugang, Adapterfähigkeiten",
+      "v2_weight": 3,
+      "v2_self_factor": 0.75,
+      "k_subcriteria": [
+        "E2"
+      ]
+    },
+    {
+      "v2": "F2",
+      "v2_name": "Persistenz, Idempotenz",
+      "v2_weight": 3,
+      "v2_self_factor": 1.0,
+      "k_subcriteria": [
+        "E1"
+      ]
+    },
+    {
+      "v2": "F3",
+      "v2_name": "UNKNOWN, Rennen",
+      "v2_weight": 2,
+      "v2_self_factor": 1.0,
+      "k_subcriteria": [
+        "E1"
+      ]
+    },
+    {
+      "v2": "F4",
+      "v2_name": "Autoritativer Abgleich",
+      "v2_weight": 2,
+      "v2_self_factor": 1.0,
+      "k_subcriteria": [
+        "E1"
+      ]
+    },
+    {
+      "v2": "F5",
+      "v2_name": "Einziger Writer, Notfall",
+      "v2_weight": 2,
+      "v2_self_factor": 0.75,
+      "k_subcriteria": [
+        "E1",
+        "F1"
+      ]
+    },
+    {
+      "v2": "G1",
+      "v2_name": "Echte Integration",
+      "v2_weight": 2,
+      "v2_self_factor": 0.75,
+      "k_subcriteria": [
+        "F3"
+      ]
+    },
+    {
+      "v2": "G2",
+      "v2_name": "Gedächtnis, Skills, Qualität",
+      "v2_weight": 2,
+      "v2_self_factor": 0.75,
+      "k_subcriteria": [
+        "F3"
+      ]
+    },
+    {
+      "v2": "G3",
+      "v2_name": "Rollen, Schleife",
+      "v2_weight": 1,
+      "v2_self_factor": 1.0,
+      "k_subcriteria": [
+        "F3"
+      ]
+    },
+    {
+      "v2": "G4",
+      "v2_name": "Zusatznutzen, Aufwand",
+      "v2_weight": 1,
+      "v2_self_factor": 0.5,
+      "k_subcriteria": [
+        "F3"
+      ]
+    },
+    {
+      "v2": "H1",
+      "v2_name": "OS-, Datei-, Netzgrenzen",
+      "v2_weight": 2,
+      "v2_self_factor": 1.0,
+      "k_subcriteria": [
+        "F2"
+      ]
+    },
+    {
+      "v2": "H2",
+      "v2_name": "Autorisierung, Secrets",
+      "v2_weight": 2,
+      "v2_self_factor": 1.0,
+      "k_subcriteria": [
+        "F2"
+      ]
+    },
+    {
+      "v2": "H3",
+      "v2_name": "Inhalte, Lieferkette",
+      "v2_weight": 2,
+      "v2_self_factor": 0.75,
+      "k_subcriteria": [
+        "F2"
+      ]
+    },
+    {
+      "v2": "I1",
+      "v2_name": "Änderungsklassen",
+      "v2_weight": 2,
+      "v2_self_factor": 1.0,
+      "k_subcriteria": [
+        "G1"
+      ]
+    },
+    {
+      "v2": "I2",
+      "v2_name": "Artefaktidentität, Import",
+      "v2_weight": 1,
+      "v2_self_factor": 1.0,
+      "k_subcriteria": [
+        "F2"
+      ]
+    },
+    {
+      "v2": "I3",
+      "v2_name": "Aktivierung, Rollback",
+      "v2_weight": 1,
+      "v2_self_factor": 1.0,
+      "k_subcriteria": [
+        "F1"
+      ]
+    },
+    {
+      "v2": "I4",
+      "v2_name": "LiveGrant, Widerruf",
+      "v2_weight": 1,
+      "v2_self_factor": 1.0,
+      "k_subcriteria": [
+        "G1",
+        "D3"
+      ]
+    },
+    {
+      "v2": "J1",
+      "v2_name": "Kapazität, Priorität",
+      "v2_weight": 1,
+      "v2_self_factor": 1.0,
+      "k_subcriteria": [
+        "F1"
+      ]
+    },
+    {
+      "v2": "J2",
+      "v2_name": "Unabhängige Überwachung",
+      "v2_weight": 1,
+      "v2_self_factor": 0.75,
+      "k_subcriteria": [
+        "G2"
+      ]
+    },
+    {
+      "v2": "J3",
+      "v2_name": "Sicherung, Wiederherstellung",
+      "v2_weight": 1,
+      "v2_self_factor": 1.0,
+      "k_subcriteria": [
+        "F1",
+        "G3"
+      ]
+    },
+    {
+      "v2": "J4",
+      "v2_name": "Notfälle",
+      "v2_weight": 1,
+      "v2_self_factor": 1.0,
+      "k_subcriteria": [
+        "G2"
+      ]
+    },
+    {
+      "v2": "J5",
+      "v2_name": "Betriebsaufwand",
+      "v2_weight": 1,
+      "v2_self_factor": 0.75,
+      "k_subcriteria": [
+        "A2",
+        "G2"
+      ]
+    },
+    {
+      "v2": "K1",
+      "v2_name": "Bauplan, kritischer Pfad",
+      "v2_weight": 2,
+      "v2_self_factor": 0.75,
+      "k_subcriteria": [
+        "I1"
+      ]
+    },
+    {
+      "v2": "K2",
+      "v2_name": "Prüfqualität, Unabhängigkeit",
+      "v2_weight": 2,
+      "v2_self_factor": 0.5,
+      "k_subcriteria": [
+        "I2",
+        "J3"
+      ]
+    },
+    {
+      "v2": "K3",
+      "v2_name": "Verträge, Komplexität",
+      "v2_weight": 1,
+      "v2_self_factor": 0.75,
+      "k_subcriteria": [
+        "I3",
+        "F1"
+      ]
+    },
+    {
+      "v2": "L1",
+      "v2_name": "Produkt- und Kontozugang",
+      "v2_weight": 1,
+      "v2_self_factor": 0.75,
+      "k_subcriteria": [
+        "H1",
+        "H3"
+      ]
+    },
+    {
+      "v2": "L2",
+      "v2_name": "Daten, Software, Verarbeitung",
+      "v2_weight": 1,
+      "v2_self_factor": 0.75,
+      "k_subcriteria": [
+        "H3"
+      ]
+    },
+    {
+      "v2": "L3",
+      "v2_name": "Projektgrenzen, Nachweise",
+      "v2_weight": 1,
+      "v2_self_factor": 0.75,
+      "k_subcriteria": [
+        "H1"
+      ]
+    },
+    {
+      "v2": "M1",
+      "v2_name": "Bedienung",
+      "v2_weight": 1,
+      "v2_self_factor": 0.75,
+      "k_subcriteria": [
+        "F1"
+      ]
+    },
+    {
+      "v2": "M2",
+      "v2_name": "Ehrliche Information",
+      "v2_weight": 1,
+      "v2_self_factor": 1.0,
+      "k_subcriteria": [
+        "J1",
+        "J2"
+      ]
+    }
+  ],
+  "baseline": {
+    "v2_self_score": 84.75,
+    "independent_2026_09_24": 55.5,
+    "source": "SRC-MASTERPROMPT-V3 (§3.4)",
+    "areas": [
+      {
+        "area": "A",
+        "name": "Wirtschaftlichkeit und Business Case",
+        "max": 20,
+        "v2_independent": 7.0,
+        "main_deficit": "Kostenwiderspruch; Steuern und Aufbauaufwand fehlen; kein Kauf-statt-Bau-Vergleich"
+      },
+      {
+        "area": "B",
+        "name": "Strategie und Edge",
+        "max": 15,
+        "v2_independent": 6.0,
+        "main_deficit": "Einzelregel auf 16 Micro-Kontrakten; kein eigener Beleg"
+      },
+      {
+        "area": "C",
+        "name": "Statistik, Tore, Forschungsdesign",
+        "max": 10,
+        "v2_independent": 8.0,
+        "main_deficit": "Keine frühe Futility-Regel"
+      },
+      {
+        "area": "D",
+        "name": "Risiko und Kapital",
+        "max": 10,
+        "v2_independent": 8.0,
+        "main_deficit": "Margin- und Liquidationsmechanik des Brokers"
+      },
+      {
+        "area": "E",
+        "name": "Geldpfad und Ausführung",
+        "max": 10,
+        "v2_independent": 7.0,
+        "main_deficit": "Kernmechanik beim Broker unbelegt und spät getestet"
+      },
+      {
+        "area": "F",
+        "name": "Architektur, Sicherheit, KI",
+        "max": 10,
+        "v2_independent": 6.0,
+        "main_deficit": "Nutzen der KI unbelegt; für den Maßstab überdimensioniert"
+      },
+      {
+        "area": "G",
+        "name": "Betrieb und Organisation",
+        "max": 8,
+        "v2_independent": 4.0,
+        "main_deficit": "Einzelbetreiber; kein menschliches Vier-Augen-Prinzip"
+      },
+      {
+        "area": "H",
+        "name": "Recht, Steuern, Compliance",
+        "max": 5,
+        "v2_independent": 3.0,
+        "main_deficit": "Steuern nicht modelliert"
+      },
+      {
+        "area": "I",
+        "name": "Umsetzungs- und Verifikationsstand",
+        "max": 7,
+        "v2_independent": 2.0,
+        "main_deficit": "Kein Produktionscode; 132 von 149 Tests nur geplant"
+      },
+      {
+        "area": "J",
+        "name": "Dokumentation und Integrität",
+        "max": 5,
+        "v2_independent": 4.5,
+        "main_deficit": "Sehr dicht; Konzeptprüfung durch dasselbe Modell"
+      }
+    ]
+  },
+  "comparisons": {
+    "v2_agent_days": {
+      "low": 45,
+      "high": 71,
+      "stages": [
+        "M0",
+        "ADP-R",
+        "M1-DATA",
+        "M2",
+        "M3",
+        "M4",
+        "ADP-W",
+        "M5",
+        "M6"
+      ],
+      "source": "SRC-V2-PAKET (implementation/build_stages.json, Feld estimate)",
+      "method": "Summe der Spannen „Agententage“ je Stufe ohne die Abbruchstufe STOP; Stufen ohne Agententage-Angabe (Betrieb) nicht enthalten."
+    }
+  }
+}

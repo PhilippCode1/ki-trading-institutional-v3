@@ -1,0 +1,26 @@
+{
+ "schema_version": "3.0",
+ "id": "TR-POS-005",
+ "machine": "SM-POSITION",
+ "description": "Fremde Position wird nie still geschlossen; der Betreiber schließt, Abgleich flach",
+ "scenarios": [
+  "OS-GV-07"
+ ],
+ "start": null,
+ "initial_reasons": null,
+ "steps": [
+  {
+   "event": "UNKNOWN_POSITION_SEEN",
+   "context": {},
+   "expect_state": "FOREIGN"
+  },
+  {
+   "event": "RECON_MATCH",
+   "context": {
+    "operator_adopted": false,
+    "broker_qty": 0
+   },
+   "expect_state": "FLAT"
+  }
+ ]
+}

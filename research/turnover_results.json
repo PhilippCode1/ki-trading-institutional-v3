@@ -1,0 +1,142 @@
+{
+ "calculator": "research/reference_strategies/turnover_simulation.py",
+ "model": "MOD-TURN",
+ "inputs": {
+  "parameters.json": "38f7ce22d3184218e02001b719b137e4f0ad0faaf239b53bff44e8c6ebc576b6"
+ },
+ "seed": 20260924,
+ "synthetic": true,
+ "setup": {
+  "instruments": 6,
+  "years": 8,
+  "bars_per_day": 23,
+  "window_bars": 7,
+  "window_start_bar": 14,
+  "sigma_annual": [
+   0.15,
+   0.19,
+   0.23,
+   0.27,
+   0.31,
+   0.35
+  ],
+  "innovations": "t(5), Varianz 1",
+  "regime": {
+   "enter_per_day": 0.01,
+   "exit_per_day": 0.05,
+   "vol_multiple": 2.0
+  },
+  "intraday_vol_factor": {
+   "kernzeit": 1.35,
+   "sonst": 0.85
+  },
+  "weekend_gap_vol_factor": 2.0,
+  "note": "Testumgebung (keine Parameter des Systems): synthetische Preise ohne Edge; nur Umschlag und Haltedauer sind aussagekräftig (R-02)."
+ },
+ "tf_forecast": {
+  "fdm_mean": 1.150403623,
+  "scalars_mean": [
+   46.33826742,
+   32.65611505,
+   23.07481419,
+   16.50087635
+  ]
+ },
+ "strategies": {
+  "S-TF": {
+   "round_turns_per_year": 81.20833333,
+   "time_in_market": 0.6166873376,
+   "holding_hours_mean": 64.29984305,
+   "holding_hours_median": 47.66666667,
+   "share_within_4h_4d": 0.725578527,
+   "share_over_4d": 0.2412794596,
+   "share_timestop": 0.08208146122,
+   "round_turns_per_year_min": 78.875,
+   "round_turns_per_year_max": 82.5,
+   "max_holding_hours": 168.0,
+   "exit_reasons": {
+    "ENDE": 0.001031017776,
+    "SIGNAL": 0.910232729,
+    "STOPP": 0.006654792009,
+    "ZEITSTOPP": 0.08208146122
+   },
+   "trades_total": 3898,
+   "admissible_holding": true
+  },
+  "S-IM": {
+   "round_turns_per_year": 113.5208333,
+   "time_in_market": 0.05344909048,
+   "holding_hours_mean": 3.986016505,
+   "holding_hours_median": 4.0,
+   "share_within_4h_4d": 0.9904567885,
+   "share_over_4d": 0.0,
+   "share_timestop": 0.0,
+   "round_turns_per_year_min": 107.375,
+   "round_turns_per_year_max": 120.75,
+   "max_holding_hours": 4.0,
+   "exit_reasons": {
+    "KERNZEITENDE": 0.9830282423,
+    "STOPP": 0.01697175775
+   },
+   "trades_total": 5449,
+   "admissible_holding": true
+  },
+  "S-REV": {
+   "round_turns_per_year": 8.104166667,
+   "time_in_market": 0.06597222222,
+   "holding_hours_mean": 68.9553341,
+   "holding_hours_median": 72.0,
+   "share_within_4h_4d": 0.898002679,
+   "share_over_4d": 0.101997321,
+   "share_timestop": 0.0,
+   "round_turns_per_year_min": 7.0,
+   "round_turns_per_year_max": 9.25,
+   "max_holding_hours": 106.0,
+   "exit_reasons": {
+    "HALTEDAUER": 0.727499352,
+    "SIGNAL": 0.2477115699,
+    "STOPP": 0.02478907817
+   },
+   "trades_total": 389,
+   "admissible_holding": true
+  },
+  "S-BASE-TFD1": {
+   "round_turns_per_year": 6.8125,
+   "time_in_market": 0.4647413182,
+   "holding_hours_mean": 596.4705139,
+   "holding_hours_median": 362.0,
+   "share_within_4h_4d": 0.1985920673,
+   "share_over_4d": 0.8014079327,
+   "share_timestop": 0.0,
+   "round_turns_per_year_min": 5.625,
+   "round_turns_per_year_max": 8.375,
+   "max_holding_hours": 6120.0,
+   "exit_reasons": {
+    "ENDE": 0.006191265893,
+    "KANAL": 0.3217472839,
+    "STOPP": 0.6720614502
+   },
+   "trades_total": 327,
+   "admissible_holding": false
+  },
+  "S-BASE-TFD1-7T": {
+   "round_turns_per_year": 13.16666667,
+   "time_in_market": 0.2168084101,
+   "holding_hours_mean": 139.2088952,
+   "holding_hours_median": 168.0,
+   "share_within_4h_4d": 0.2341194463,
+   "share_over_4d": 0.7658805537,
+   "share_timestop": 0.6186185655,
+   "round_turns_per_year_min": 11.5,
+   "round_turns_per_year_max": 14.25,
+   "max_holding_hours": 168.0,
+   "exit_reasons": {
+    "ENDE": 0.003145489988,
+    "STOPP": 0.3782359445,
+    "ZEITSTOPP": 0.6186185655
+   },
+   "trades_total": 632,
+   "admissible_holding": true
+  }
+ }
+}

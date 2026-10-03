@@ -1,0 +1,20 @@
+{
+ "schema_version": "3.0",
+ "message_id": "00000000-0000-4000-8000-000000000014",
+ "correlation_id": "COR-0014",
+ "producer": "OPERATOR",
+ "created_utc": "2026-09-24T09:00:00Z",
+ "action_id": "OA-0003",
+ "action": "APPROVE_STEP_UP",
+ "actor_role": "BETREIBER",
+ "key_fingerprint": "FP-00000000000000B1",
+ "signed_payload_sha256": "0000000000000000000000000000000000000000000000000000000000000009",
+ "signature": "SIG-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+ "expires_utc": "2026-09-24T09:10:00Z",
+ "subject_ref": "H5->H10",
+ "co_signature": {
+  "role": "RISIKOFUNKTION",
+  "key_fingerprint": "FP-00000000000000F1",
+  "signature": "SIG-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+ }
+}

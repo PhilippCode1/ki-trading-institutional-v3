@@ -1,0 +1,89 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:ki-trading-v3:decision_record",
+  "title": "DecisionRecord (IF-03)",
+  "description": "Das Prüfmodul rechnet jede Entscheidung aus Eingaben, Parametern und Release unabhängig nach.",
+  "x-version": "3.0.0",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "$ref": "urn:ki-trading-v3:common#/$defs/schema_version"
+    },
+    "message_id": {
+      "$ref": "urn:ki-trading-v3:common#/$defs/uuid"
+    },
+    "correlation_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "producer": {
+      "enum": [
+        "TRADE_CORE"
+      ],
+      "description": "Geldpfad: nur Geldpfad-Komponenten als Erzeuger (R-05)"
+    },
+    "created_utc": {
+      "$ref": "urn:ki-trading-v3:common#/$defs/utc"
+    },
+    "record_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "kind": {
+      "enum": [
+        "SIGNAL",
+        "SIZING",
+        "RISK",
+        "ORDER",
+        "LADDER",
+        "MODE",
+        "PROFILE"
+      ]
+    },
+    "time_utc": {
+      "$ref": "urn:ki-trading-v3:common#/$defs/utc"
+    },
+    "inputs_sha256": {
+      "$ref": "urn:ki-trading-v3:common#/$defs/sha256"
+    },
+    "rule_ids": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 1
+    },
+    "parameters_sha256": {
+      "$ref": "urn:ki-trading-v3:common#/$defs/sha256"
+    },
+    "release_sha256": {
+      "$ref": "urn:ki-trading-v3:common#/$defs/sha256"
+    },
+    "result": {
+      "type": "string",
+      "minLength": 1
+    },
+    "explanation": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "required": [
+    "schema_version",
+    "message_id",
+    "correlation_id",
+    "producer",
+    "created_utc",
+    "record_id",
+    "kind",
+    "time_utc",
+    "inputs_sha256",
+    "rule_ids",
+    "parameters_sha256",
+    "release_sha256",
+    "result",
+    "explanation"
+  ],
+  "additionalProperties": false
+}

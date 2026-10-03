@@ -1,0 +1,2311 @@
+{
+  "schema_version": "3.0",
+  "document": "Szenariokatalog",
+  "as_of": "2026-09-24",
+  "leading_source_for": "kritische Abläufe mit erwarteter und verbotener Wirkung, Erkennung, Wiederaufnahme und Abnahme",
+  "rules": [
+    "Jedes Szenario nennt Tests; Szenarien mit Traces sind im Paket geprüft (validation/state_engine.py).",
+    "Stressszenarien sind im Stressmotor je Profil gerechnet (risk/stress_results.json).",
+    "Szenarien S01–S21 und N01–N18 übernommen aus v2.0, soweit auf MT5 übertragbar; Herkunft je Eintrag im Feld origin."
+  ],
+  "scenarios": [
+    {
+      "id": "OS-EX-01",
+      "category": "AUSFUEHRUNG",
+      "title": "Einstieg ausgeführt, Antwort geht verloren",
+      "origin": "v2.0 S01, auf MT5 angepasst",
+      "initial_state": "READY, Instrument flach, Einstieg als Limit-Order mit Gültigkeit und Reservierung gesendet.",
+      "events": [
+        "Broker führt aus",
+        "order_send liefert Retcode 10012 oder IPC-Fehler",
+        "Abfragen nach P-EXE-UNKNOWN-POLL-S"
+      ],
+      "expected_effect": "Versuch UNKNOWN; Reservierung und UNKNOWN_ORDER bleiben; Abgleich findet den Deal über magic/comment und Historie; danach Schutzprüfung.",
+      "prohibited_effect": "Zweiter Sendeversuch desselben Einstiegs; Freigabe der Reservierung vor der Klärung; Zeitüberschreitung als Ablehnung behandeln.",
+      "detection": "Zeitüberschreitung setzt UNKNOWN; Abgleich über Deals seit dem Cursor.",
+      "recovery": "RECON_FOUND_FILL → FILLED; Schutzprüfung; UNKNOWN_ORDER heilt mit Beweisobjekt.",
+      "acceptance": "T-EXE-003 mit P-QA-FAULT-REPEATS Wiederholungen: keine zweite Order, Position in zwei Abgleichzyklen erkannt.",
+      "traces": [
+        "TR-ORDER-001",
+        "TR-ORDER-011"
+      ],
+      "runbooks": [
+        "RB-05"
+      ],
+      "tests": [
+        "T-EXE-003",
+        "KT-05",
+        "T-SM-001"
+      ],
+      "requirements": [
+        "REQ-EXE-002"
+      ],
+      "status": "IM_PAKET_GEPRUEFT"
+    },
+    {
+      "id": "OS-EX-02",
+      "category": "AUSFUEHRUNG",
+      "title": "Teilausführung, Stornierung und restliche Ausführung konkurrieren",
+      "origin": "v2.0 S02 und N01",
+      "initial_state": "Einstieg teilweise ausgeführt; Stornierung des Rests angefragt.",
+      "events": [
+        "weitere Teilausführung",
+        "Stornierung bestätigt oder vollständige Ausführung"
+      ],
+      "expected_effect": "Menge = Summe der Deals je Ticket; Ausführung gewinnt das Rennen; Schutz für die gefüllte Menge.",
+      "prohibited_effect": "Doppelt gezählte Menge; Schutz nur für die ursprüngliche Menge.",
+      "detection": "Deal-Abfrage",
+      "recovery": "Schutzmenge anpassen; Rest storniert oder verfallen.",
+      "acceptance": "KT-09 und T-EXE-005.",
+      "traces": [
+        "TR-ORDER-003",
+        "TR-ORDER-004",
+        "TR-POS-003"
+      ],
+      "runbooks": [
+        "RB-05"
+      ],
+      "tests": [
+        "KT-09",
+        "T-EXE-005",
+        "T-SM-001"
+      ],
+      "requirements": [
+        "REQ-EXE-004"
+      ],
+      "status": "IM_PAKET_GEPRUEFT"
+    },
+    {
+      "id": "OS-EX-03",
+      "category": "AUSFUEHRUNG",
+      "title": "Absturz zwischen Commit, Senden und Antwort",
+      "origin": "v2.0 S03",
+      "initial_state": "Kern persistiert Absicht und Versuch; Absturz an einem von vier Punkten.",
+      "events": [
+        "Prozessabbruch",
+        "Neustart in BOOTING und SYNCING"
+      ],
+      "expected_effect": "Ohne sent_at nie gesendet (FAILED_BEFORE_SEND); mit sent_at UNKNOWN und Klärung.",
+      "prohibited_effect": "Doppelsenden nach Neustart.",
+      "detection": "Journal und Abgleich beim Start",
+      "recovery": "Deals seit dem Cursor nachziehen; UNKNOWN nach RB-05.",
+      "acceptance": "T-EXE-001 an vier Punkten.",
+      "traces": [
+        "TR-ORDER-005",
+        "TR-ORDER-006"
+      ],
+      "runbooks": [
+        "RB-01",
+        "RB-05"
+      ],
+      "tests": [
+        "T-EXE-001",
+        "T-DRL-002",
+        "T-SM-001"
+      ],
+      "requirements": [
+        "REQ-EXE-001"
+      ],
+      "status": "IM_PAKET_GEPRUEFT"
+    },
+    {
+      "id": "OS-EX-04",
+      "category": "AUSFUEHRUNG",
+      "title": "Negativnachweis und später Deal",
+      "origin": "v2.0 N14",
+      "initial_state": "Versuch UNKNOWN, Gültigkeit abgelaufen.",
+      "events": [
+        "zwei saubere Abfragezyklen",
+        "später doch ein Deal"
+      ],
+      "expected_effect": "NOT_EXECUTED_PROVEN nur nach P-EXE-NEGPROOF-CYCLES Zyklen; später Deal wird übernommen und geschützt, Incident und INTEGRITY_ERROR.",
+      "prohibited_effect": "Negativnachweis vor Ablauf; Ignorieren des späten Deals.",
+      "detection": "Abgleich",
+      "recovery": "Position schützen; Ursache klären.",
+      "acceptance": "T-EXE-004.",
+      "traces": [
+        "TR-ORDER-002"
+      ],
+      "runbooks": [
+        "RB-05"
+      ],
+      "tests": [
+        "T-EXE-004",
+        "T-SM-001"
+      ],
+      "requirements": [
+        "REQ-EXE-003"
+      ],
+      "status": "IM_PAKET_GEPRUEFT"
+    },
+    {
+      "id": "OS-EX-05",
+      "category": "AUSFUEHRUNG",
+      "title": "Doppelt gemeldeter Deal nach Wiederverbindung; nicht vorgesehenes Brokerereignis",
+      "origin": "v2.0 N15",
+      "initial_state": "Terminal verbindet sich neu.",
+      "events": [
+        "Deals seit dem Cursor werden erneut geliefert",
+        "Brokerereignis passt nicht zum Positionszustand"
+      ],
+      "expected_effect": "Duplikate über das Ticket verworfen; unpassende Ereignisse führen zu UNRECONCILED und Vollabgleich.",
+      "prohibited_effect": "Doppelte Menge; stilles Ignorieren.",
+      "detection": "Ticketvergleich",
+      "recovery": "Vollabgleich",
+      "acceptance": "KT-12, T-EXE-005.",
+      "traces": [
+        "TR-ORDER-008",
+        "TR-POS-007"
+      ],
+      "runbooks": [
+        "RB-02"
+      ],
+      "tests": [
+        "KT-12",
+        "T-EXE-005",
+        "T-SM-001"
+      ],
+      "requirements": [
+        "REQ-EXE-004"
+      ],
+      "status": "IM_PAKET_GEPRUEFT"
+    },
+    {
+      "id": "OS-EX-06",
+      "category": "AUSFUEHRUNG",
+      "title": "Schutzstopp fehlt oder ist unbestätigt",
+      "origin": "v2.0 S08",
+      "initial_state": "Position ausgeführt; SL-Anfrage verzögert, abgelehnt oder später verloren.",
+      "events": [
+        "Frist P-EXE-STOP-CONFIRM-S abgelaufen",
+        "Abgleich findet Position ohne SL"
+      ],
+      "expected_effect": "Notfallschutz (auch in der Einstiegssperre erlaubt), sonst Schließen; STOP_MISSING bis Quittung.",
+      "prohibited_effect": "Position ohne Schutz über Nacht; Entzug der Schutzbasis durch weitere Sperrgründe.",
+      "detection": "Guardian-Frist und Abgleich",
+      "recovery": "RB-03",
+      "acceptance": "KT-06, T-EXE-007, DR-10.",
+      "traces": [
+        "TR-POS-002",
+        "TR-POS-006",
+        "TR-ORDER-014",
+        "TR-SAFETY-004"
+      ],
+      "runbooks": [
+        "RB-03"
+      ],
+      "tests": [
+        "KT-06",
+        "T-EXE-007",
+        "T-DRL-010",
+        "T-SM-001"
+      ],
+      "requirements": [
+        "REQ-EXE-006"
+      ],
+      "status": "IM_PAKET_GEPRUEFT"
+    },
+    {
+      "id": "OS-EX-07",
+      "category": "AUSFUEHRUNG",
+      "title": "Zeitstopp nach Höchsthaltedauer",
+      "origin": "neu v3.0 (BQ-04)",
+      "initial_state": "Position offen, Haltedauer erreicht P-OP-HOLD-MAX-H.",
+      "events": [
+        "Zeitgeber meldet TIMESTOP_DUE"
+      ],
+      "expected_effect": "Schließen mit position=Ticket unabhängig vom Signal.",
+      "prohibited_effect": "Position über die Höchsthaltedauer; Zeitstopp vor Ablauf.",
+      "detection": "Zeitgeber",
+      "recovery": "in HALTED nur manuell nach Runbook",
+      "acceptance": "T-EXE-009; MON-DRIFT ohne Verletzung.",
+      "traces": [
+        "TR-POS-001",
+        "TR-POS-008"
+      ],
+      "runbooks": [
+        "RB-22"
+      ],
+      "tests": [
+        "T-EXE-009",
+        "T-SM-001",
+        "T-GATE-001"
+      ],
+      "requirements": [
+        "REQ-EXE-012"
+      ],
+      "status": "IM_PAKET_GEPRUEFT"
+    },
+    {
+      "id": "OS-EX-08",
+      "category": "AUSFUEHRUNG",
+      "title": "Schließen im Abbau mit bestätigter Menge",
+      "origin": "neu v3.0 (MT5 Hedging)",
+      "initial_state": "EXIT_ONLY nach L3; Positionen offen.",
+      "events": [
+        "Abbau über Child-Orders"
+      ],
+      "expected_effect": "Schließen nur mit position=Ticket und Menge aus frischem Snapshot.",
+      "prohibited_effect": "Freie Gegenorder (würde eine Gegenposition eröffnen).",
+      "detection": "Vorprüfung O-05",
+      "recovery": "–",
+      "acceptance": "T-EXE-006.",
+      "traces": [
+        "TR-ORDER-009"
+      ],
+      "runbooks": [
+        "RB-07",
+        "RB-22"
+      ],
+      "tests": [
+        "T-EXE-006",
+        "T-SM-001"
+      ],
+      "requirements": [
+        "REQ-EXE-005"
+      ],
+      "status": "IM_PAKET_GEPRUEFT"
+    },
+    {
+      "id": "OS-EX-09",
+      "category": "AUSFUEHRUNG",
+      "title": "Schließen ohne Ticket oder mit veraltetem Snapshot",
+      "origin": "v2.0 N12, auf MT5 angepasst",
+      "initial_state": "Schließauftrag ohne Ticket oder mit Snapshot älter als P-EXE-SNAPSHOT-MAX-S.",
+      "events": [
+        "SEND_STARTED"
+      ],
+      "expected_effect": "Kein order_send; Vorprüfung scheitert.",
+      "prohibited_effect": "Freie Gegenorder im Hedging-Konto.",
+      "detection": "Wächter O-05",
+      "recovery": "frischen Snapshot holen",
+      "acceptance": "T-EXE-006, ungültige Beispiele order_intent.",
+      "traces": [
+        "TR-ORDER-010"
+      ],
+      "runbooks": [
+        "RB-23"
+      ],
+      "tests": [
+        "T-EXE-006",
+        "T-CON-001",
+        "T-SM-001"
+      ],
+      "requirements": [
+        "REQ-EXE-005"
+      ],
+      "status": "IM_PAKET_GEPRUEFT"
+    },
+    {
+      "id": "OS-EX-10",
+      "category": "AUSFUEHRUNG",
+      "title": "Unaufgeforderte Stornierung durch Börse oder Broker",
+      "origin": "neu v3.0",
+      "initial_state": "Order platziert.",
+      "events": [
+        "Order erscheint in der Historie als storniert"
+      ],
+      "expected_effect": "CANCELLED; Incident; bei Deals Korrekturbuchung nach RB-06.",
+      "prohibited_effect": "Erneutes Senden des Einstiegs.",
+      "detection": "Abfrage",
+      "recovery": "RB-06",
+      "acceptance": "KT-12.",
+      "traces": [
+        "TR-ORDER-012"
+      ],
+      "runbooks": [
+        "RB-06"
+      ],
+      "tests": [
+        "KT-12",
+        "T-SM-001"
+      ],
+      "requirements": [
+        "REQ-EXE-004"
+      ],
+      "status": "IM_PAKET_GEPRUEFT"
+    },
+    {
+      "id": "OS-EX-11",
+      "category": "AUSFUEHRUNG",
+      "title": "Rollfenster, Verfall und Kalenderkonflikt",
+      "origin": "v2.0 N04, auf MT5 angepasst",
+      "initial_state": "Position im Kontrakt nahe FND/LTD.",
+      "events": [
+        "Rollfenster erreicht",
+        "Kalender widersprüchlich"
+      ],
+      "expected_effect": "Schließen im Rollfenster; kein Einstieg bei Kalenderkonflikt bis zur Klärung.",
+      "prohibited_effect": "Position im Liefer- oder Verfallsfenster.",
+      "detection": "Kalender, KT-11",
+      "recovery": "RB-18",
+      "acceptance": "T-EXE-010.",
+      "traces": [
+        "TR-POS-004",
+        "TR-DATA-002"
+      ],
+      "runbooks": [
+        "RB-18"
+      ],
+      "tests": [
+        "KT-11",
+        "T-EXE-010",
+        "T-SM-001"
+      ],
+      "requirements": [
+        "REQ-EXE-013"
+      ],
+      "status": "IM_PAKET_GEPRUEFT"
+    },
+    {
+      "id": "OS-EX-12",
+      "category": "AUSFUEHRUNG",
+      "title": "Kurslücke überspringt den Stopp oder Limit-Move",
+      "origin": "v2.0 S07",
+      "initial_state": "Positionen über Nacht offen.",
+      "events": [
+        "Eröffnung mit Lücke über k·σ_Tag",
+        "Tageslimit erreicht"
+      ],
+      "expected_effect": "Stopp füllt schlechter oder gar nicht; Lückenregel hat den Tagesverlust vorab begrenzt; Leiter wirkt bei Wiedereröffnung.",
+      "prohibited_effect": "Panikorders; Verletzung der Tagesgrenze innerhalb der Konstruktion.",
+      "detection": "Stressmotor, KT-10, SM-DATAFEED (LIMIT_LOCKED, HALTED)",
+      "recovery": "RB-25",
+      "acceptance": "T-RISK-GAP-001, SC-X-GAP5 und SC-X-GAP10 im Stressmotor; Trace TR-DATA-004.",
+      "traces": [
+        "TR-DATA-004"
+      ],
+      "runbooks": [
+        "RB-25"
+      ],
+      "tests": [
+        "KT-10",
+        "T-RISK-GAP-001",
+        "T-CALC-STRESS-001",
+        "T-SM-001"
+      ],
+      "requirements": [
+        "REQ-RSK-001"
+      ],
+      "status": "IM_PAKET_GEPRUEFT"
+    },
+    {
+      "id": "OS-EX-13",
+      "category": "AUSFUEHRUNG",
+      "title": "Negativer Preis im auslaufenden Energiekontrakt",
+      "origin": "neu v3.0 (RK-20)",
+      "initial_state": "Energie-Frontmonat nahe LTD.",
+      "events": [
+        "Preis unter null"
+      ],
+      "expected_effect": "Keine Position (Regel P-UNI-ENERGY-EXPIRY-DAYS); Preisprüfung akzeptiert negative Preise ohne Absturz.",
+      "prohibited_effect": "Absturz der Preisprüfung; Position bis LTD.",
+      "detection": "Kalender",
+      "recovery": "RB-26",
+      "acceptance": "T-EXE-NEGPRICE-001.",
+      "traces": [],
+      "runbooks": [
+        "RB-26"
+      ],
+      "tests": [
+        "T-EXE-NEGPRICE-001"
+      ],
+      "requirements": [
+        "REQ-EXE-018"
+      ],
+      "status": "SPEZIFIZIERT"
+    },
+    {
+      "id": "OS-RI-01",
+      "category": "RISIKO",
+      "title": "Kleinste Menge überschreitet das Risikobudget",
+      "origin": "v2.0 S05",
+      "initial_state": "Signal für ein Instrument mit großem Kontraktrisiko.",
+      "events": [
+        "Größenrechnung ergibt < 1 Kontrakt"
+      ],
+      "expected_effect": "REJECTED_BY_RISK; nie aufrunden.",
+      "prohibited_effect": "Aufrunden auf einen Kontrakt.",
+      "detection": "Risikomotor",
+      "recovery": "–",
+      "acceptance": "T-RISK-SIZE-001; ungültiges Beispiel risk_decision_rounded_up.",
+      "traces": [],
+      "runbooks": [],
+      "tests": [
+        "T-RISK-SIZE-001",
+        "T-CON-001"
+      ],
+      "requirements": [
+        "REQ-RSK-014"
+      ],
+      "status": "SPEZIFIZIERT"
+    },
+    {
+      "id": "OS-RI-02",
+      "category": "RISIKO",
+      "title": "Tagesverlust-Leiter L2",
+      "origin": "neu v3.0 (DEC-DS-01)",
+      "initial_state": "READY; Tagesverlust erreicht P-RISK-DL-L2.",
+      "events": [
+        "DAILY_LOSS_L2",
+        "Quittung am selben Tag",
+        "Quittung am nächsten Handelstag"
+      ],
+      "expected_effect": "ENTRY_PAUSED bis zum nächsten Handelstag mit Quittung; Schutz und Schließen erlaubt.",
+      "prohibited_effect": "Einstieg am selben Tag; Heilung ohne Quittung.",
+      "detection": "Risikomotor",
+      "recovery": "RB-07",
+      "acceptance": "T-RISK-LADDER-001, DR-05.",
+      "traces": [
+        "TR-SAFETY-001",
+        "TR-ORDER-007"
+      ],
+      "runbooks": [
+        "RB-07"
+      ],
+      "tests": [
+        "T-RISK-LADDER-001",
+        "T-DRL-005",
+        "T-SM-001"
+      ],
+      "requirements": [
+        "REQ-RSK-002"
+      ],
+      "status": "IM_PAKET_GEPRUEFT"
+    },
+    {
+      "id": "OS-RI-03",
+      "category": "RISIKO",
+      "title": "Tagesverlust-Leiter L3",
+      "origin": "neu v3.0",
+      "initial_state": "Tagesverlust erreicht P-RISK-DL-L3.",
+      "events": [
+        "DAILY_LOSS_L3",
+        "Abbau",
+        "Wiederaufnahme"
+      ],
+      "expected_effect": "EXIT_ONLY mit geordnetem Abbau; Wiederaufnahme nur mit Ursachenbericht am nächsten Handelstag.",
+      "prohibited_effect": "Neue Einstiege; Wiederaufnahme ohne Ursachenbericht.",
+      "detection": "Risikomotor",
+      "recovery": "RB-07",
+      "acceptance": "T-RISK-LADDER-001.",
+      "traces": [
+        "TR-SAFETY-002",
+        "TR-ORDER-009"
+      ],
+      "runbooks": [
+        "RB-07"
+      ],
+      "tests": [
+        "T-RISK-LADDER-001",
+        "T-SM-001"
+      ],
+      "requirements": [
+        "REQ-RSK-002"
+      ],
+      "status": "IM_PAKET_GEPRUEFT"
+    },
+    {
+      "id": "OS-RI-04",
+      "category": "RISIKO",
+      "title": "Wochenverlust",
+      "origin": "neu v3.0",
+      "initial_state": "Wochenverlust erreicht P-RISK-WEEK-LOSS.",
+      "events": [
+        "WEEKLY_LOSS_LIMIT",
+        "neue Handelswoche"
+      ],
+      "expected_effect": "Einstiegssperre bis zur neuen Woche.",
+      "prohibited_effect": "Heilung durch Quittung.",
+      "detection": "Risikomotor",
+      "recovery": "RB-08",
+      "acceptance": "T-RISK-LADDER-002.",
+      "traces": [
+        "TR-SAFETY-007"
+      ],
+      "runbooks": [
+        "RB-08"
+      ],
+      "tests": [
+        "T-RISK-LADDER-002",
+        "T-SM-001"
+      ],
+      "requirements": [
+        "REQ-RSK-003"
+      ],
+      "status": "IM_PAKET_GEPRUEFT"
+    },
+    {
+      "id": "OS-RI-05",
+      "category": "RISIKO",
+      "title": "Margin-Erhöhung und Margin-Defizit",
+      "origin": "v2.0 N11, auf Margin-Level angepasst (EV-09)",
+      "initial_state": "Positionen offen; Börse erhöht Margins.",
+      "events": [
+        "Margin-Level unter P-MRG-DERISK-TRIGGER",
+        "Abbau",
+        "Margin-Level wieder darüber"
+      ],
+      "expected_effect": "EXIT_ONLY bis das Margin-Level über der Schwelle liegt; nie Brokerliquidation abwarten.",
+      "prohibited_effect": "Einstiege trotz Defizit; Heilung ohne Nachweis.",
+      "detection": "Abgleich der Salden",
+      "recovery": "RB-24",
+      "acceptance": "T-RISK-MRG-001, DR-05.",
+      "traces": [
+        "TR-SAFETY-003"
+      ],
+      "runbooks": [
+        "RB-24"
+      ],
+      "tests": [
+        "T-RISK-MRG-001",
+        "T-DRL-005",
+        "T-SM-001"
+      ],
+      "requirements": [
+        "REQ-RSK-007"
+      ],
+      "status": "IM_PAKET_GEPRUEFT"
+    },
+    {
+      "id": "OS-RI-06",
+      "category": "RISIKO",
+      "title": "Stop-out durch den Broker trotz Leiter (Restfall)",
+      "origin": "neu v3.0",
+      "initial_state": "Extreme Bewegung jenseits der Konstruktion.",
+      "events": [
+        "Broker schließt Positionen"
+      ],
+      "expected_effect": "Brokerfakt übernommen, Positionen FLAT, schwerer Incident.",
+      "prohibited_effect": "Neueröffnung der geschlossenen Positionen.",
+      "detection": "Abgleich",
+      "recovery": "RB-24",
+      "acceptance": "Restwahrscheinlichkeit in risk/kelly_ruin_results.json.",
+      "traces": [
+        "TR-POS-009"
+      ],
+      "runbooks": [
+        "RB-24"
+      ],
+      "tests": [
+        "T-SM-001",
+        "T-CALC-KELLY-001"
+      ],
+      "requirements": [
+        "REQ-RSK-007"
+      ],
+      "status": "IM_PAKET_GEPRUEFT"
+    },
+    {
+      "id": "OS-RI-07",
+      "category": "RISIKO",
+      "title": "Kill-Switch Stufe 1 und 2",
+      "origin": "neu v3.0",
+      "initial_state": "Betreiber, Vertretung, Prüfmodul oder Risikomotor lösen aus.",
+      "events": [
+        "KILL_STAGE1",
+        "KILL_STAGE2",
+        "Fortsetzen"
+      ],
+      "expected_effect": "Stufe 1 storniert nicht schützende Orders; Stufe 2 stellt glatt; fortsetzen nur der Betreiber.",
+      "prohibited_effect": "Stornierung des Schutzstopps offener Positionen; Fortsetzen durch die Vertretung.",
+      "detection": "Journal",
+      "recovery": "RB-34",
+      "acceptance": "T-KILL-001, DR-10.",
+      "traces": [
+        "TR-SAFETY-006"
+      ],
+      "runbooks": [
+        "RB-34"
+      ],
+      "tests": [
+        "T-KILL-001",
+        "T-DRL-010",
+        "T-SM-001"
+      ],
+      "requirements": [
+        "REQ-RSK-009"
+      ],
+      "status": "IM_PAKET_GEPRUEFT"
+    },
+    {
+      "id": "OS-RI-08",
+      "category": "RISIKO",
+      "title": "Drawdown-Kill",
+      "origin": "neu v3.0",
+      "initial_state": "Drawdown erreicht P-RISK-DD-KILL.",
+      "events": [
+        "DRAWDOWN_KILL_LEVEL"
+      ],
+      "expected_effect": "EXIT_ONLY, SM-MODE WIND_DOWN, SM-LEVERAGE SUSPENDED; Neustart nur mit neuem Grant.",
+      "prohibited_effect": "Heilung durch Quittung oder Erholung.",
+      "detection": "Risikomotor",
+      "recovery": "RB-08",
+      "acceptance": "T-RISK-LADDER-002.",
+      "traces": [
+        "TR-SAFETY-009"
+      ],
+      "runbooks": [
+        "RB-08"
+      ],
+      "tests": [
+        "T-RISK-LADDER-002",
+        "T-SM-001"
+      ],
+      "requirements": [
+        "REQ-RSK-003"
+      ],
+      "status": "IM_PAKET_GEPRUEFT"
+    },
+    {
+      "id": "OS-RI-09",
+      "category": "RISIKO",
+      "title": "Kein Hebelprofil zulässig (Stand 24.09.2026)",
+      "origin": "neu v3.0",
+      "initial_state": "Rechner weisen kein Profil als zulässig aus.",
+      "events": [
+        "Pilot-Grant wird beantragt"
+      ],
+      "expected_effect": "Grant und Profil werden abgewiesen; nur Paper-Betrieb möglich.",
+      "prohibited_effect": "Echtgeld mit unzulässigem Profil.",
+      "detection": "Grant-Register, Hebelrechner",
+      "recovery": "–",
+      "acceptance": "TR-LEV-001 und TR-GRANT-004.",
+      "traces": [
+        "TR-LEV-001",
+        "TR-GRANT-004",
+        "TR-LEV-002"
+      ],
+      "runbooks": [],
+      "tests": [
+        "T-SM-001",
+        "T-CALC-LEV-001"
+      ],
+      "requirements": [
+        "REQ-RSK-004"
+      ],
+      "status": "IM_PAKET_GEPRUEFT"
+    },
+    {
+      "id": "OS-RI-10",
+      "category": "RISIKO",
+      "title": "Profilaufstieg und automatischer Abstieg",
+      "origin": "neu v3.0 (§7.8, RK-06)",
+      "initial_state": "Standardbetrieb in H5.",
+      "events": [
+        "Aufstiegsantrag",
+        "Drawdown-Stufe 2"
+      ],
+      "expected_effect": "Aufstieg nur mit Evidenz und zweiter Freigabe; Abstieg automatisch.",
+      "prohibited_effect": "Aufstieg nach Verlusten ohne Evidenz; automatischer Aufstieg.",
+      "detection": "SM-LEVERAGE",
+      "recovery": "–",
+      "acceptance": "T-RISK-STEP-001.",
+      "traces": [
+        "TR-LEV-002",
+        "TR-LEV-003"
+      ],
+      "runbooks": [
+        "RB-08"
+      ],
+      "tests": [
+        "T-RISK-STEP-001",
+        "T-SM-001"
+      ],
+      "requirements": [
+        "REQ-RSK-008"
+      ],
+      "status": "IM_PAKET_GEPRUEFT"
+    },
+    {
+      "id": "OS-RI-11",
+      "category": "RISIKO",
+      "title": "Verlustbudget des Grants erreicht",
+      "origin": "v2.0 (Grant-Verlustgrenze)",
+      "initial_state": "Pilot aktiv.",
+      "events": [
+        "Verlust erreicht P-RES-PILOT-LOSS-BUDGET"
+      ],
+      "expected_effect": "Grant ungültig; EXIT_ONLY; neuer Grant nur nach Ursachenbericht.",
+      "prohibited_effect": "Weiterhandel.",
+      "detection": "Risikomotor",
+      "recovery": "RB-19",
+      "acceptance": "Torfall G8-R1.",
+      "traces": [
+        "TR-GRANT-005"
+      ],
+      "runbooks": [
+        "RB-19"
+      ],
+      "tests": [
+        "T-SM-001",
+        "T-GATE-001"
+      ],
+      "requirements": [
+        "REQ-GOV-003"
+      ],
+      "status": "IM_PAKET_GEPRUEFT"
+    },
+    {
+      "id": "OS-RI-12",
+      "category": "RISIKO",
+      "title": "Ein- oder Auszahlung während eines Drawdowns",
+      "origin": "v2.0 S12",
+      "initial_state": "Drawdown aktiv.",
+      "events": [
+        "Betreiber zahlt ein oder aus"
+      ],
+      "expected_effect": "Unitisierter NAV: Drawdown unverändert.",
+      "prohibited_effect": "Scheinbare Erholung durch Einzahlung.",
+      "detection": "NAV-Rechnung",
+      "recovery": "–",
+      "acceptance": "T-RISK-NAV-001.",
+      "traces": [],
+      "runbooks": [],
+      "tests": [
+        "T-RISK-NAV-001"
+      ],
+      "requirements": [
+        "REQ-RSK-011"
+      ],
+      "status": "SPEZIFIZIERT"
+    },
+    {
+      "id": "OS-RI-13",
+      "category": "RISIKO",
+      "title": "Gegenläufige Absichten mehrerer Strategien",
+      "origin": "neu v3.0 (DEC-DS-11)",
+      "initial_state": "S-TF kauft, S-REV verkauft dasselbe Instrument.",
+      "events": [
+        "Netting"
+      ],
+      "expected_effect": "Interne Kreuzung zum Mittelkurs; an den Markt nur die Differenz; Summe der Teilpositionen = Brokerposition.",
+      "prohibited_effect": "Zwei Brokerpositionen im Hedging-Konto.",
+      "detection": "Abgleich",
+      "recovery": "–",
+      "acceptance": "T-OMS-NET-001; Beispielregel R-EX-10.",
+      "traces": [],
+      "runbooks": [],
+      "tests": [
+        "T-OMS-NET-001",
+        "T-CON-001"
+      ],
+      "requirements": [
+        "REQ-EXE-014"
+      ],
+      "status": "SPEZIFIZIERT"
+    },
+    {
+      "id": "OS-RI-14",
+      "category": "RISIKO",
+      "title": "Lückenregel vor dem Wochenende",
+      "origin": "neu v3.0",
+      "initial_state": "Freitag, Positionen offen.",
+      "events": [
+        "neue Order"
+      ],
+      "expected_effect": "Lückenstress mit P-RISK-WEEKEND-FACTOR; Order verkleinert oder abgelehnt.",
+      "prohibited_effect": "Order über der Grenze.",
+      "detection": "PTC-13",
+      "recovery": "–",
+      "acceptance": "T-PTC-013.",
+      "traces": [],
+      "runbooks": [],
+      "tests": [
+        "T-PTC-013",
+        "T-RISK-GAP-001"
+      ],
+      "requirements": [
+        "REQ-RSK-001"
+      ],
+      "status": "SPEZIFIZIERT"
+    },
+    {
+      "id": "OS-GV-01",
+      "category": "GOVERNANCE",
+      "title": "Verwechslung Demo und Echtgeld",
+      "origin": "neu v3.0 (BQ-09, RK-21)",
+      "initial_state": "Konfiguration oder Konto verwechselt.",
+      "events": [
+        "Kontotyp laut Broker ≠ signierter Modus",
+        "Wechselversuch durch Nicht-Betreiber"
+      ],
+      "expected_effect": "Ablehnung, MODE_MISMATCH (HALTED), Kill-Switch Stufe 1; nur der Betreiber hebt auf.",
+      "prohibited_effect": "Handel im falschen Konto; Moduswechsel durch Vertretung oder Agent.",
+      "detection": "PTC-10",
+      "recovery": "RB-33",
+      "acceptance": "DR-08, T-PTC-010.",
+      "traces": [
+        "TR-SAFETY-005",
+        "TR-MODE-001",
+        "TR-MODE-003",
+        "TR-GRANT-003"
+      ],
+      "runbooks": [
+        "RB-33"
+      ],
+      "tests": [
+        "T-PTC-010",
+        "T-DRL-008",
+        "T-SM-001",
+        "T-CON-001"
+      ],
+      "requirements": [
+        "REQ-GOV-001",
+        "REQ-PTC-002"
+      ],
+      "status": "IM_PAKET_GEPRUEFT"
+    },
+    {
+      "id": "OS-GV-02",
+      "category": "GOVERNANCE",
+      "title": "Grant läuft bei offenen Positionen ab",
+      "origin": "v2.0 S20",
+      "initial_state": "Positionen offen, Betreiber abwesend.",
+      "events": [
+        "GRANT_EXPIRED"
+      ],
+      "expected_effect": "EXIT_ONLY: Schutz und Abbau laufen; neuer Grant nur mit passender Umgebung.",
+      "prohibited_effect": "Einstiege ohne Grant; Grant-Verlängerung.",
+      "detection": "Grant-Register",
+      "recovery": "RB-19",
+      "acceptance": "TR-SAFETY-008.",
+      "traces": [
+        "TR-SAFETY-008",
+        "TR-GRANT-001",
+        "TR-GRANT-002"
+      ],
+      "runbooks": [
+        "RB-19",
+        "RB-35"
+      ],
+      "tests": [
+        "T-SM-001",
+        "T-CON-001"
+      ],
+      "requirements": [
+        "REQ-GOV-003"
+      ],
+      "status": "IM_PAKET_GEPRUEFT"
+    },
+    {
+      "id": "OS-GV-03",
+      "category": "GOVERNANCE",
+      "title": "Pause durch die Vertretung",
+      "origin": "neu v3.0 (§13)",
+      "initial_state": "Betreiber nicht erreichbar.",
+      "events": [
+        "Vertretung pausiert",
+        "Vertretung will fortsetzen"
+      ],
+      "expected_effect": "Pause wirkt; Fortsetzen nur durch den Betreiber.",
+      "prohibited_effect": "Fortsetzen oder Risikoerhöhung durch die Vertretung.",
+      "detection": "Signaturprüfung",
+      "recovery": "RB-34",
+      "acceptance": "TR-SAFETY-012.",
+      "traces": [
+        "TR-SAFETY-012"
+      ],
+      "runbooks": [
+        "RB-34",
+        "RB-35"
+      ],
+      "tests": [
+        "T-SM-001",
+        "T-CON-001"
+      ],
+      "requirements": [
+        "REQ-GOV-005"
+      ],
+      "status": "IM_PAKET_GEPRUEFT"
+    },
+    {
+      "id": "OS-GV-04",
+      "category": "GOVERNANCE",
+      "title": "Pilot scheitert; Abbau bis Stopp",
+      "origin": "neu v3.0",
+      "initial_state": "PILOT aktiv.",
+      "events": [
+        "G8 FAIL",
+        "Abbau",
+        "flach"
+      ],
+      "expected_effect": "WIND_DOWN → STOPPED → RESEARCH.",
+      "prohibited_effect": "Direkter Wechsel zurück ins Demokonto mit offenen Positionen.",
+      "detection": "SM-MODE",
+      "recovery": "RB-22",
+      "acceptance": "TR-MODE-001.",
+      "traces": [
+        "TR-MODE-001",
+        "TR-MODE-002"
+      ],
+      "runbooks": [
+        "RB-22"
+      ],
+      "tests": [
+        "T-SM-001"
+      ],
+      "requirements": [
+        "REQ-GOV-001"
+      ],
+      "status": "IM_PAKET_GEPRUEFT"
+    },
+    {
+      "id": "OS-GV-05",
+      "category": "GOVERNANCE",
+      "title": "Release mit Handelswirkung",
+      "origin": "v2.0 S16 und N13",
+      "initial_state": "Änderung an gemeinsamer Bibliothek.",
+      "events": [
+        "Klassifizierung",
+        "Wiedergabe",
+        "Freigabe"
+      ],
+      "expected_effect": "Klasse C mit zweiter Freigabe und Karenzzeit; Aktivierung nur flach; Grants ungültig.",
+      "prohibited_effect": "Freigabe als Klasse B; Aktivierung mit offenen Positionen.",
+      "detection": "SM-RELEASE",
+      "recovery": "RB-20",
+      "acceptance": "T-REL-001, T-REL-002.",
+      "traces": [
+        "TR-RELEASE-001",
+        "TR-RELEASE-003",
+        "TR-GRANT-002"
+      ],
+      "runbooks": [
+        "RB-20"
+      ],
+      "tests": [
+        "T-REL-001",
+        "T-REL-002",
+        "T-SM-001"
+      ],
+      "requirements": [
+        "REQ-GOV-002"
+      ],
+      "status": "IM_PAKET_GEPRUEFT"
+    },
+    {
+      "id": "OS-GV-06",
+      "category": "GOVERNANCE",
+      "title": "Holdout soll erneut genutzt werden",
+      "origin": "v2.0 S17",
+      "initial_state": "G4 ausgewertet.",
+      "events": [
+        "neue Kampagne verlangt Holdout"
+      ],
+      "expected_effect": "Abgewiesen; Zugriffszähler bleibt.",
+      "prohibited_effect": "Zweite Öffnung.",
+      "detection": "SM-GATERUN",
+      "recovery": "–",
+      "acceptance": "T-RES-HOLDOUT-001.",
+      "traces": [
+        "TR-GATERUN-001"
+      ],
+      "runbooks": [],
+      "tests": [
+        "T-RES-HOLDOUT-001",
+        "T-SM-001"
+      ],
+      "requirements": [
+        "REQ-RES-004"
+      ],
+      "status": "IM_PAKET_GEPRUEFT"
+    },
+    {
+      "id": "OS-GV-07",
+      "category": "GOVERNANCE",
+      "title": "Fremde Position oder Order",
+      "origin": "v2.0 N12",
+      "initial_state": "Abgleich findet Bestände ohne eigene Absicht.",
+      "events": [
+        "UNKNOWN_POSITION_SEEN"
+      ],
+      "expected_effect": "FOREIGN_POSITION; nie still schließen; Betreiber klärt.",
+      "prohibited_effect": "Automatisches Schließen.",
+      "detection": "Abgleich",
+      "recovery": "RB-06",
+      "acceptance": "TR-POS-005.",
+      "traces": [
+        "TR-POS-005",
+        "TR-ORDER-013"
+      ],
+      "runbooks": [
+        "RB-06",
+        "RB-13"
+      ],
+      "tests": [
+        "T-SM-001"
+      ],
+      "requirements": [
+        "REQ-EXE-004"
+      ],
+      "status": "IM_PAKET_GEPRUEFT"
+    },
+    {
+      "id": "OS-GV-08",
+      "category": "GOVERNANCE",
+      "title": "Incident mit Quittungsfrist",
+      "origin": "neu v3.0",
+      "initial_state": "Incident offen.",
+      "events": [
+        "keine Quittung binnen P-SLO-INCIDENT-ACK-MIN"
+      ],
+      "expected_effect": "Eskalation an die Vertretung; Post-Mortem ab HOCH.",
+      "prohibited_effect": "Abschluss ohne Ursache.",
+      "detection": "SM-INCIDENT",
+      "recovery": "operations/runbooks.md",
+      "acceptance": "TR-INCIDENT-001.",
+      "traces": [
+        "TR-INCIDENT-001"
+      ],
+      "runbooks": [],
+      "tests": [
+        "T-SM-001",
+        "T-CON-001"
+      ],
+      "requirements": [
+        "REQ-OPS-005"
+      ],
+      "status": "IM_PAKET_GEPRUEFT"
+    },
+    {
+      "id": "OS-GV-09",
+      "category": "GOVERNANCE",
+      "title": "Agent: Budget, Update, Prüfung, Rückbau",
+      "origin": "v2.0 N06 und S13",
+      "initial_state": "Agent arbeitet an Aufträgen.",
+      "events": [
+        "Budget erschöpft",
+        "Update ohne Evaluationssuite",
+        "drei Prüfrunden",
+        "negative Nutzenbilanz"
+      ],
+      "expected_effect": "Pause, Ablehnung, Rückbau; Kern unberührt.",
+      "prohibited_effect": "Agent als Prüfer; Update ohne Suite.",
+      "detection": "SM-HERMES, SM-WORKITEM, SM-RELEASE",
+      "recovery": "RB-11",
+      "acceptance": "T-AI-005, T-AI-006.",
+      "traces": [
+        "TR-HERMES-001",
+        "TR-RELEASE-002",
+        "TR-WORK-001",
+        "TR-WORK-002",
+        "TR-WORK-003"
+      ],
+      "runbooks": [
+        "RB-11"
+      ],
+      "tests": [
+        "T-AI-005",
+        "T-AI-006",
+        "T-SM-001",
+        "T-GATE-001"
+      ],
+      "requirements": [
+        "REQ-AI-004",
+        "REQ-AI-005"
+      ],
+      "status": "IM_PAKET_GEPRUEFT"
+    },
+    {
+      "id": "OS-GV-10",
+      "category": "GOVERNANCE",
+      "title": "Artefakt nach Review ausgetauscht",
+      "origin": "v2.0 S15",
+      "initial_state": "Kandidat eingereicht.",
+      "events": [
+        "Digest weicht ab oder Symlink"
+      ],
+      "expected_effect": "Import abgewiesen; Sicherheitsereignis.",
+      "prohibited_effect": "Installation des veränderten Artefakts.",
+      "detection": "Importer",
+      "recovery": "RB-20",
+      "acceptance": "T-SEC-006.",
+      "traces": [
+        "TR-RELEASE-004"
+      ],
+      "runbooks": [
+        "RB-20"
+      ],
+      "tests": [
+        "T-SEC-006",
+        "T-SM-001"
+      ],
+      "requirements": [
+        "REQ-SEC-005"
+      ],
+      "status": "IM_PAKET_GEPRUEFT"
+    },
+    {
+      "id": "OS-GV-11",
+      "category": "GOVERNANCE",
+      "title": "ML-Komponente besteht die Hürden nicht",
+      "origin": "neu v3.0 (§11.5)",
+      "initial_state": "Meta-Labeling entwickelt.",
+      "events": [
+        "Validierung"
+      ],
+      "expected_effect": "Verzicht begründet (erwarteter Fall).",
+      "prohibited_effect": "Einsatz ohne Hürden; Sprachmodell im Größenpfad; Rückkehr aus dem Rückfall ohne volle Neuvalidierung.",
+      "detection": "SM-MLMODEL",
+      "recovery": "–",
+      "acceptance": "T-ML-001.",
+      "traces": [
+        "TR-ML-001",
+        "TR-ML-002",
+        "TR-ML-003",
+        "TR-ML-004"
+      ],
+      "runbooks": [],
+      "tests": [
+        "T-ML-001",
+        "T-SM-001"
+      ],
+      "requirements": [
+        "REQ-ML-001"
+      ],
+      "status": "IM_PAKET_GEPRUEFT"
+    },
+    {
+      "id": "OS-GV-12",
+      "category": "GOVERNANCE",
+      "title": "Prompt-Injection über Web, Logs oder Brokertexte",
+      "origin": "v2.0 S13",
+      "initial_state": "Agent liest externe Inhalte.",
+      "events": [
+        "Inhalt fordert Secrets oder Regeländerungen"
+      ],
+      "expected_effect": "Keine Rechteerweiterung; Versuch protokolliert.",
+      "prohibited_effect": "Order, Freigabe oder Konfigurationsänderung.",
+      "detection": "Gateway, Allowlist",
+      "recovery": "RB-12",
+      "acceptance": "T-SEC-002.",
+      "traces": [],
+      "runbooks": [
+        "RB-12"
+      ],
+      "tests": [
+        "T-SEC-002"
+      ],
+      "requirements": [
+        "REQ-AI-006"
+      ],
+      "status": "SPEZIFIZIERT"
+    },
+    {
+      "id": "OS-GV-13",
+      "category": "GOVERNANCE",
+      "title": "Gefälschtes oder unsigniertes Torergebnis",
+      "origin": "v2.0 N05",
+      "initial_state": "Grant-Register erwartet Torergebnis.",
+      "events": [
+        "unsigniertes gate_result"
+      ],
+      "expected_effect": "Abgewiesen.",
+      "prohibited_effect": "Grant auf Basis gefälschter Evidenz.",
+      "detection": "Signaturprüfung",
+      "recovery": "RB-13",
+      "acceptance": "T-SEC-011; ungültiges Beispiel gate_result_unsigned.",
+      "traces": [],
+      "runbooks": [
+        "RB-13"
+      ],
+      "tests": [
+        "T-SEC-011",
+        "T-CON-001"
+      ],
+      "requirements": [
+        "REQ-ARC-009"
+      ],
+      "status": "SPEZIFIZIERT"
+    },
+    {
+      "id": "OS-GV-14",
+      "category": "GOVERNANCE",
+      "title": "Vertrauliche Werte erreichen den Modellanbieter",
+      "origin": "v2.0 N07",
+      "initial_state": "Agent formuliert Anfrage.",
+      "events": [
+        "Kanarienwert in der Anfrage"
+      ],
+      "expected_effect": "Gateway blockiert; Isolation.",
+      "prohibited_effect": "Abfluss von Rohdaten oder Secrets.",
+      "detection": "Gateway",
+      "recovery": "RB-12",
+      "acceptance": "T-SEC-012, DR-07.",
+      "traces": [],
+      "runbooks": [
+        "RB-12"
+      ],
+      "tests": [
+        "T-SEC-012",
+        "T-DRL-007"
+      ],
+      "requirements": [
+        "REQ-DAT-005"
+      ],
+      "status": "SPEZIFIZIERT"
+    },
+    {
+      "id": "OS-DA-01",
+      "category": "DATEN",
+      "title": "Veraltete Kurse oder abweichende Quellen",
+      "origin": "v2.0 S06",
+      "initial_state": "Instrument HEALTHY.",
+      "events": [
+        "Kurs älter als P-EXE-QUOTE-MAX-AGE-S bzw. P-DATA-STALE-S",
+        "Abgleich unter der Schwelle"
+      ],
+      "expected_effect": "DEGRADED oder STALE: keine Einstiege; Schutz unberührt.",
+      "prohibited_effect": "Einstieg mit veraltetem Kurs.",
+      "detection": "SM-DATAFEED",
+      "recovery": "RB-14",
+      "acceptance": "DR-04, T-DAT-001.",
+      "traces": [
+        "TR-DATA-001",
+        "TR-DATA-003"
+      ],
+      "runbooks": [
+        "RB-14"
+      ],
+      "tests": [
+        "T-DRL-004",
+        "T-DAT-001",
+        "T-SM-001"
+      ],
+      "requirements": [
+        "REQ-DAT-001",
+        "REQ-DAT-002"
+      ],
+      "status": "IM_PAKET_GEPRUEFT"
+    },
+    {
+      "id": "OS-DA-02",
+      "category": "DATEN",
+      "title": "Lücken im Kursstrom",
+      "origin": "neu v3.0",
+      "initial_state": "Sitzung offen.",
+      "events": [
+        "Lücke über P-DATA-GAP-MAX-MIN"
+      ],
+      "expected_effect": "STALE bis frische Kurse.",
+      "prohibited_effect": "Einstieg über die Lücke hinweg.",
+      "detection": "SM-DATAFEED",
+      "recovery": "RB-14",
+      "acceptance": "TR-DATA-002.",
+      "traces": [
+        "TR-DATA-002"
+      ],
+      "runbooks": [
+        "RB-14"
+      ],
+      "tests": [
+        "T-SM-001"
+      ],
+      "requirements": [
+        "REQ-DAT-002"
+      ],
+      "status": "IM_PAKET_GEPRUEFT"
+    },
+    {
+      "id": "OS-DA-03",
+      "category": "DATEN",
+      "title": "Revision der Anbieterdaten nach einer Entscheidung",
+      "origin": "neu v3.0",
+      "initial_state": "Entscheidung auf Basis vorläufiger Daten.",
+      "events": [
+        "Korrektur innerhalb P-DATA-REVISION-DAYS"
+      ],
+      "expected_effect": "Neubewertung, Incident bei Wirkung.",
+      "prohibited_effect": "Stilles Überschreiben.",
+      "detection": "Datenpipeline",
+      "recovery": "RB-14",
+      "acceptance": "T-DAT-003.",
+      "traces": [],
+      "runbooks": [
+        "RB-14"
+      ],
+      "tests": [
+        "T-DAT-003"
+      ],
+      "requirements": [
+        "REQ-DAT-004"
+      ],
+      "status": "SPEZIFIZIERT"
+    },
+    {
+      "id": "HA-VPS-DOWN",
+      "category": "BETRIEB",
+      "title": "Geldpfad-Instanz ausgefallen",
+      "origin": "neu v3.0 (§10.5)",
+      "initial_state": "Normalbetrieb",
+      "events": [
+        "Heartbeat fehlt länger als P-OPS-HEARTBEAT-CRIT-S"
+      ],
+      "expected_effect": "Schutz liegt beim Broker; Sperrgründe nach SM-SAFETY; Runbook nach Register.",
+      "prohibited_effect": "Einstiege ohne READY; Entzug der Schutzbasis.",
+      "detection": "Heartbeat fehlt länger als P-OPS-HEARTBEAT-CRIT-S",
+      "recovery": "RB-01",
+      "acceptance": "T-DRL-001",
+      "traces": [],
+      "runbooks": [
+        "RB-01"
+      ],
+      "tests": [
+        "T-DRL-001"
+      ],
+      "requirements": [
+        "REQ-ARC-005"
+      ],
+      "status": "SPEZIFIZIERT"
+    },
+    {
+      "id": "HA-RESTART-LIMIT",
+      "category": "BETRIEB",
+      "title": "Neustartgrenze erreicht",
+      "origin": "neu v3.0 (§10.5)",
+      "initial_state": "Normalbetrieb",
+      "events": [
+        "mehr als P-OPS-RESTART-MAX-N Neustarts in P-OPS-RESTART-WINDOW-MIN"
+      ],
+      "expected_effect": "Schutz liegt beim Broker; Sperrgründe nach SM-SAFETY; Runbook nach Register.",
+      "prohibited_effect": "Einstiege ohne READY; Entzug der Schutzbasis.",
+      "detection": "mehr als P-OPS-RESTART-MAX-N Neustarts in P-OPS-RESTART-WINDOW-MIN",
+      "recovery": "RB-01",
+      "acceptance": "T-DRL-002",
+      "traces": [],
+      "runbooks": [
+        "RB-01"
+      ],
+      "tests": [
+        "T-DRL-002"
+      ],
+      "requirements": [
+        "REQ-EXE-001"
+      ],
+      "status": "SPEZIFIZIERT"
+    },
+    {
+      "id": "HA-SESSION-LOST",
+      "category": "BETRIEB",
+      "title": "MT5-Terminal oder Brokersitzung getrennt",
+      "origin": "neu v3.0 (§10.5)",
+      "initial_state": "Normalbetrieb",
+      "events": [
+        "Adapter meldet Sitzungsverlust"
+      ],
+      "expected_effect": "Schutz liegt beim Broker; Sperrgründe nach SM-SAFETY; Runbook nach Register.",
+      "prohibited_effect": "Einstiege ohne READY; Entzug der Schutzbasis.",
+      "detection": "Adapter meldet Sitzungsverlust",
+      "recovery": "RB-02",
+      "acceptance": "KT-12, T-DRL-010",
+      "traces": [
+        "TR-WRITER-002"
+      ],
+      "runbooks": [
+        "RB-02"
+      ],
+      "tests": [
+        "KT-12",
+        "T-DRL-010"
+      ],
+      "requirements": [
+        "REQ-EXE-008"
+      ],
+      "status": "IM_PAKET_GEPRUEFT"
+    },
+    {
+      "id": "HA-JOURNAL",
+      "category": "BETRIEB",
+      "title": "Journal nicht beschreibbar",
+      "origin": "neu v3.0 (§10.5)",
+      "initial_state": "Normalbetrieb",
+      "events": [
+        "Schreib- oder fsync-Fehler"
+      ],
+      "expected_effect": "Schutz liegt beim Broker; Sperrgründe nach SM-SAFETY; Runbook nach Register.",
+      "prohibited_effect": "Einstiege ohne READY; Entzug der Schutzbasis.",
+      "detection": "Schreib- oder fsync-Fehler",
+      "recovery": "RB-04",
+      "acceptance": "T-EXE-011, T-DRL-002",
+      "traces": [
+        "TR-SAFETY-004"
+      ],
+      "runbooks": [
+        "RB-04"
+      ],
+      "tests": [
+        "T-EXE-011",
+        "T-DRL-002"
+      ],
+      "requirements": [
+        "REQ-EXE-016"
+      ],
+      "status": "IM_PAKET_GEPRUEFT"
+    },
+    {
+      "id": "HA-ALERT",
+      "category": "BETRIEB",
+      "title": "Alarmkanal ausgefallen",
+      "origin": "neu v3.0 (§10.5)",
+      "initial_state": "Normalbetrieb",
+      "events": [
+        "Testalarm nicht quittiert"
+      ],
+      "expected_effect": "Schutz liegt beim Broker; Sperrgründe nach SM-SAFETY; Runbook nach Register.",
+      "prohibited_effect": "Einstiege ohne READY; Entzug der Schutzbasis.",
+      "detection": "Testalarm nicht quittiert",
+      "recovery": "RB-09",
+      "acceptance": "T-OPS-ALERT-001, T-DRL-008",
+      "traces": [],
+      "runbooks": [
+        "RB-09"
+      ],
+      "tests": [
+        "T-OPS-ALERT-001",
+        "T-DRL-008"
+      ],
+      "requirements": [
+        "REQ-ARC-006"
+      ],
+      "status": "SPEZIFIZIERT"
+    },
+    {
+      "id": "HA-CLOCK",
+      "category": "BETRIEB",
+      "title": "Uhrabweichung",
+      "origin": "neu v3.0 (§10.5)",
+      "initial_state": "Normalbetrieb",
+      "events": [
+        "Abweichung ab P-OPS-CLOCK-BLOCK-S"
+      ],
+      "expected_effect": "Schutz liegt beim Broker; Sperrgründe nach SM-SAFETY; Runbook nach Register.",
+      "prohibited_effect": "Einstiege ohne READY; Entzug der Schutzbasis.",
+      "detection": "Abweichung ab P-OPS-CLOCK-BLOCK-S",
+      "recovery": "RB-10",
+      "acceptance": "T-QA-CHAOS-001",
+      "traces": [
+        "TR-SAFETY-011"
+      ],
+      "runbooks": [
+        "RB-10"
+      ],
+      "tests": [
+        "T-QA-CHAOS-001"
+      ],
+      "requirements": [
+        "REQ-OPS-007"
+      ],
+      "status": "IM_PAKET_GEPRUEFT"
+    },
+    {
+      "id": "HA-DISK",
+      "category": "BETRIEB",
+      "title": "Platte voll",
+      "origin": "neu v3.0 (§10.5)",
+      "initial_state": "Normalbetrieb",
+      "events": [
+        "Belegung über der Sperrstufe P-OPS-DISK-LEVELS"
+      ],
+      "expected_effect": "Schutz liegt beim Broker; Sperrgründe nach SM-SAFETY; Runbook nach Register.",
+      "prohibited_effect": "Einstiege ohne READY; Entzug der Schutzbasis.",
+      "detection": "Belegung über der Sperrstufe P-OPS-DISK-LEVELS",
+      "recovery": "RB-10",
+      "acceptance": "T-QA-CHAOS-001",
+      "traces": [],
+      "runbooks": [
+        "RB-10"
+      ],
+      "tests": [
+        "T-QA-CHAOS-001"
+      ],
+      "requirements": [
+        "REQ-OPS-007"
+      ],
+      "status": "SPEZIFIZIERT"
+    },
+    {
+      "id": "HA-AI-DOWN",
+      "category": "BETRIEB",
+      "title": "KI-Zone ausgefallen oder Kontingent erschöpft",
+      "origin": "neu v3.0 (§10.5)",
+      "initial_state": "Normalbetrieb",
+      "events": [
+        "Heartbeat der KI-Zone fehlt"
+      ],
+      "expected_effect": "Schutz liegt beim Broker; Sperrgründe nach SM-SAFETY; Runbook nach Register.",
+      "prohibited_effect": "Einstiege ohne READY; Entzug der Schutzbasis.",
+      "detection": "Heartbeat der KI-Zone fehlt",
+      "recovery": "RB-11",
+      "acceptance": "T-AI-004, T-AI-006",
+      "traces": [],
+      "runbooks": [
+        "RB-11"
+      ],
+      "tests": [
+        "T-AI-004",
+        "T-AI-006"
+      ],
+      "requirements": [
+        "REQ-AI-001"
+      ],
+      "status": "SPEZIFIZIERT"
+    },
+    {
+      "id": "HA-EVALUATOR-DOWN",
+      "category": "BETRIEB",
+      "title": "Prüfmodul ausgefallen",
+      "origin": "neu v3.0 (§10.5)",
+      "initial_state": "Normalbetrieb",
+      "events": [
+        "Nachrechnung fehlt"
+      ],
+      "expected_effect": "Schutz liegt beim Broker; Sperrgründe nach SM-SAFETY; Runbook nach Register.",
+      "prohibited_effect": "Einstiege ohne READY; Entzug der Schutzbasis.",
+      "detection": "Nachrechnung fehlt",
+      "recovery": "RB-11",
+      "acceptance": "T-EVAL-001",
+      "traces": [],
+      "runbooks": [
+        "RB-11"
+      ],
+      "tests": [
+        "T-EVAL-001"
+      ],
+      "requirements": [
+        "REQ-PTC-004"
+      ],
+      "status": "SPEZIFIZIERT"
+    },
+    {
+      "id": "HA-AI-COMPROMISE",
+      "category": "BETRIEB",
+      "title": "Kompromittierungsverdacht in der KI-Zone",
+      "origin": "neu v3.0 (§10.5)",
+      "initial_state": "Normalbetrieb",
+      "events": [
+        "Kanarienwert, unerwarteter Egress"
+      ],
+      "expected_effect": "Schutz liegt beim Broker; Sperrgründe nach SM-SAFETY; Runbook nach Register.",
+      "prohibited_effect": "Einstiege ohne READY; Entzug der Schutzbasis.",
+      "detection": "Kanarienwert, unerwarteter Egress",
+      "recovery": "RB-12",
+      "acceptance": "T-DRL-007, T-SEC-012",
+      "traces": [
+        "TR-HERMES-001"
+      ],
+      "runbooks": [
+        "RB-12"
+      ],
+      "tests": [
+        "T-DRL-007",
+        "T-SEC-012"
+      ],
+      "requirements": [
+        "REQ-AI-009"
+      ],
+      "status": "IM_PAKET_GEPRUEFT"
+    },
+    {
+      "id": "HA-COMPROMISE",
+      "category": "BETRIEB",
+      "title": "Kompromittierung von Geldpfad oder Brokerkonto",
+      "origin": "neu v3.0 (§10.5)",
+      "initial_state": "Normalbetrieb",
+      "events": [
+        "Secret-Verdacht, fremde Anmeldung, Integritätsfehler"
+      ],
+      "expected_effect": "Schutz liegt beim Broker; Sperrgründe nach SM-SAFETY; Runbook nach Register.",
+      "prohibited_effect": "Einstiege ohne READY; Entzug der Schutzbasis.",
+      "detection": "Secret-Verdacht, fremde Anmeldung, Integritätsfehler",
+      "recovery": "RB-13",
+      "acceptance": "T-DRL-006, T-SEC-010",
+      "traces": [],
+      "runbooks": [
+        "RB-13"
+      ],
+      "tests": [
+        "T-DRL-006",
+        "T-SEC-010"
+      ],
+      "requirements": [
+        "REQ-SEC-002"
+      ],
+      "status": "SPEZIFIZIERT"
+    },
+    {
+      "id": "HA-COMBINED",
+      "category": "BETRIEB",
+      "title": "Kombinationsausfall (Broker weg, Journal gestört, Snapshot alt)",
+      "origin": "neu v3.0 (§10.5)",
+      "initial_state": "Normalbetrieb",
+      "events": [
+        "mehrere Sperrgründe gleichzeitig"
+      ],
+      "expected_effect": "Schutz liegt beim Broker; Sperrgründe nach SM-SAFETY; Runbook nach Register.",
+      "prohibited_effect": "Einstiege ohne READY; Entzug der Schutzbasis.",
+      "detection": "mehrere Sperrgründe gleichzeitig",
+      "recovery": "RB-15",
+      "acceptance": "T-DRL-003, T-QA-CHAOS-001",
+      "traces": [],
+      "runbooks": [
+        "RB-15"
+      ],
+      "tests": [
+        "T-DRL-003",
+        "T-QA-CHAOS-001"
+      ],
+      "requirements": [
+        "REQ-OPS-002"
+      ],
+      "status": "SPEZIFIZIERT"
+    },
+    {
+      "id": "HA-RESTORE",
+      "category": "BETRIEB",
+      "title": "Restore aus Sicherung",
+      "origin": "neu v3.0 (§10.5)",
+      "initial_state": "Normalbetrieb",
+      "events": [
+        "Start aus Offsite-Kopie"
+      ],
+      "expected_effect": "Schutz liegt beim Broker; Sperrgründe nach SM-SAFETY; Runbook nach Register.",
+      "prohibited_effect": "Einstiege ohne READY; Entzug der Schutzbasis.",
+      "detection": "Start aus Offsite-Kopie",
+      "recovery": "RB-16",
+      "acceptance": "T-DRL-001",
+      "traces": [
+        "TR-SAFETY-010"
+      ],
+      "runbooks": [
+        "RB-16"
+      ],
+      "tests": [
+        "T-DRL-001"
+      ],
+      "requirements": [
+        "REQ-ARC-005"
+      ],
+      "status": "IM_PAKET_GEPRUEFT"
+    },
+    {
+      "id": "HA-FENCING",
+      "category": "BETRIEB",
+      "title": "Hostwechsel und Fencing",
+      "origin": "neu v3.0 (§10.5)",
+      "initial_state": "Normalbetrieb",
+      "events": [
+        "neue Instanz bei laufender Altinstanz"
+      ],
+      "expected_effect": "Schutz liegt beim Broker; Sperrgründe nach SM-SAFETY; Runbook nach Register.",
+      "prohibited_effect": "Einstiege ohne READY; Entzug der Schutzbasis.",
+      "detection": "neue Instanz bei laufender Altinstanz",
+      "recovery": "RB-17",
+      "acceptance": "T-DRL-009, KT-16",
+      "traces": [
+        "TR-WRITER-001",
+        "TR-ORDER-015"
+      ],
+      "runbooks": [
+        "RB-17"
+      ],
+      "tests": [
+        "T-DRL-009",
+        "KT-16"
+      ],
+      "requirements": [
+        "REQ-EXE-008"
+      ],
+      "status": "IM_PAKET_GEPRUEFT"
+    },
+    {
+      "id": "HA-KILL",
+      "category": "BETRIEB",
+      "title": "Kill-Switch ausgelöst",
+      "origin": "neu v3.0 (§10.5)",
+      "initial_state": "Normalbetrieb",
+      "events": [
+        "Stufe 1 oder 2"
+      ],
+      "expected_effect": "Schutz liegt beim Broker; Sperrgründe nach SM-SAFETY; Runbook nach Register.",
+      "prohibited_effect": "Einstiege ohne READY; Entzug der Schutzbasis.",
+      "detection": "Stufe 1 oder 2",
+      "recovery": "RB-34",
+      "acceptance": "T-KILL-001, T-DRL-010",
+      "traces": [
+        "TR-SAFETY-006"
+      ],
+      "runbooks": [
+        "RB-34"
+      ],
+      "tests": [
+        "T-KILL-001",
+        "T-DRL-010"
+      ],
+      "requirements": [
+        "REQ-RSK-009"
+      ],
+      "status": "IM_PAKET_GEPRUEFT"
+    },
+    {
+      "id": "HA-OPERATOR-ABSENT",
+      "category": "BETRIEB",
+      "title": "Betreiber nicht erreichbar",
+      "origin": "neu v3.0 (§10.5)",
+      "initial_state": "Normalbetrieb",
+      "events": [
+        "keine bestätigte Erreichbarkeit seit P-OPS-PRESENCE-MAX-D"
+      ],
+      "expected_effect": "Schutz liegt beim Broker; Sperrgründe nach SM-SAFETY; Runbook nach Register.",
+      "prohibited_effect": "Einstiege ohne READY; Entzug der Schutzbasis.",
+      "detection": "keine bestätigte Erreichbarkeit seit P-OPS-PRESENCE-MAX-D",
+      "recovery": "RB-35",
+      "acceptance": "T-SM-001",
+      "traces": [],
+      "runbooks": [
+        "RB-35"
+      ],
+      "tests": [
+        "T-SM-001"
+      ],
+      "requirements": [
+        "REQ-GOV-005"
+      ],
+      "status": "SPEZIFIZIERT"
+    },
+    {
+      "id": "SC-H-1987",
+      "category": "STRESS",
+      "title": "Aktiencrash 19.10.1987",
+      "origin": "neu v3.0 (§7.9)",
+      "source": "risk/stress_scenarios.json",
+      "results": [
+        "risk/stress_results.json#/results/SYSTEM/H5/scenarios/SC-H-1987",
+        "risk/stress_results.json#/results/SYSTEM/H10/scenarios/SC-H-1987",
+        "risk/stress_results.json#/results/SYSTEM/H15/scenarios/SC-H-1987",
+        "risk/stress_results.json#/results/SYSTEM/H20/scenarios/SC-H-1987"
+      ],
+      "runbooks": [
+        "RB-25",
+        "RB-29"
+      ],
+      "tests": [
+        "T-CALC-STRESS-001",
+        "T-SEM-STRESS-001"
+      ],
+      "requirements": [
+        "REQ-RSK-006"
+      ],
+      "traces": [],
+      "status": "IM_PAKET_GERECHNET"
+    },
+    {
+      "id": "SC-H-1994",
+      "category": "STRESS",
+      "title": "Anleihecrash 1994",
+      "origin": "neu v3.0 (§7.9)",
+      "source": "risk/stress_scenarios.json",
+      "results": [
+        "risk/stress_results.json#/results/SYSTEM/H5/scenarios/SC-H-1994",
+        "risk/stress_results.json#/results/SYSTEM/H10/scenarios/SC-H-1994",
+        "risk/stress_results.json#/results/SYSTEM/H15/scenarios/SC-H-1994",
+        "risk/stress_results.json#/results/SYSTEM/H20/scenarios/SC-H-1994"
+      ],
+      "runbooks": [
+        "RB-30"
+      ],
+      "tests": [
+        "T-CALC-STRESS-001",
+        "T-SEM-STRESS-001"
+      ],
+      "requirements": [
+        "REQ-RSK-006"
+      ],
+      "traces": [],
+      "status": "IM_PAKET_GERECHNET"
+    },
+    {
+      "id": "SC-H-1998",
+      "category": "STRESS",
+      "title": "LTCM/Russland 1998",
+      "origin": "neu v3.0 (§7.9)",
+      "source": "risk/stress_scenarios.json",
+      "results": [
+        "risk/stress_results.json#/results/SYSTEM/H5/scenarios/SC-H-1998",
+        "risk/stress_results.json#/results/SYSTEM/H10/scenarios/SC-H-1998",
+        "risk/stress_results.json#/results/SYSTEM/H15/scenarios/SC-H-1998",
+        "risk/stress_results.json#/results/SYSTEM/H20/scenarios/SC-H-1998"
+      ],
+      "runbooks": [
+        "RB-29"
+      ],
+      "tests": [
+        "T-CALC-STRESS-001",
+        "T-SEM-STRESS-001"
+      ],
+      "requirements": [
+        "REQ-RSK-006"
+      ],
+      "traces": [],
+      "status": "IM_PAKET_GERECHNET"
+    },
+    {
+      "id": "SC-H-2008",
+      "category": "STRESS",
+      "title": "Finanzkrise Herbst 2008",
+      "origin": "neu v3.0 (§7.9)",
+      "source": "risk/stress_scenarios.json",
+      "results": [
+        "risk/stress_results.json#/results/SYSTEM/H5/scenarios/SC-H-2008",
+        "risk/stress_results.json#/results/SYSTEM/H10/scenarios/SC-H-2008",
+        "risk/stress_results.json#/results/SYSTEM/H15/scenarios/SC-H-2008",
+        "risk/stress_results.json#/results/SYSTEM/H20/scenarios/SC-H-2008"
+      ],
+      "runbooks": [
+        "RB-24",
+        "RB-29"
+      ],
+      "tests": [
+        "T-CALC-STRESS-001",
+        "T-SEM-STRESS-001"
+      ],
+      "requirements": [
+        "REQ-RSK-006"
+      ],
+      "traces": [],
+      "status": "IM_PAKET_GERECHNET"
+    },
+    {
+      "id": "SC-H-2010",
+      "category": "STRESS",
+      "title": "Flash Crash 06.05.2010",
+      "origin": "neu v3.0 (§7.9)",
+      "source": "risk/stress_scenarios.json",
+      "results": [
+        "risk/stress_results.json#/results/SYSTEM/H5/scenarios/SC-H-2010",
+        "risk/stress_results.json#/results/SYSTEM/H10/scenarios/SC-H-2010",
+        "risk/stress_results.json#/results/SYSTEM/H15/scenarios/SC-H-2010",
+        "risk/stress_results.json#/results/SYSTEM/H20/scenarios/SC-H-2010"
+      ],
+      "runbooks": [
+        "RB-25"
+      ],
+      "tests": [
+        "T-CALC-STRESS-001",
+        "T-SEM-STRESS-001"
+      ],
+      "requirements": [
+        "REQ-RSK-006"
+      ],
+      "traces": [],
+      "status": "IM_PAKET_GERECHNET"
+    },
+    {
+      "id": "SC-H-2015",
+      "category": "STRESS",
+      "title": "SNB-Mindestkursaufgabe 15.01.2015",
+      "origin": "neu v3.0 (§7.9)",
+      "source": "risk/stress_scenarios.json",
+      "results": [
+        "risk/stress_results.json#/results/SYSTEM/H5/scenarios/SC-H-2015",
+        "risk/stress_results.json#/results/SYSTEM/H10/scenarios/SC-H-2015",
+        "risk/stress_results.json#/results/SYSTEM/H15/scenarios/SC-H-2015",
+        "risk/stress_results.json#/results/SYSTEM/H20/scenarios/SC-H-2015"
+      ],
+      "runbooks": [
+        "RB-25"
+      ],
+      "tests": [
+        "T-CALC-STRESS-001",
+        "T-SEM-STRESS-001"
+      ],
+      "requirements": [
+        "REQ-RSK-006"
+      ],
+      "traces": [],
+      "status": "IM_PAKET_GERECHNET"
+    },
+    {
+      "id": "SC-H-2018",
+      "category": "STRESS",
+      "title": "Volatilitätsschock Februar 2018",
+      "origin": "neu v3.0 (§7.9)",
+      "source": "risk/stress_scenarios.json",
+      "results": [
+        "risk/stress_results.json#/results/SYSTEM/H5/scenarios/SC-H-2018",
+        "risk/stress_results.json#/results/SYSTEM/H10/scenarios/SC-H-2018",
+        "risk/stress_results.json#/results/SYSTEM/H15/scenarios/SC-H-2018",
+        "risk/stress_results.json#/results/SYSTEM/H20/scenarios/SC-H-2018"
+      ],
+      "runbooks": [
+        "RB-25"
+      ],
+      "tests": [
+        "T-CALC-STRESS-001",
+        "T-SEM-STRESS-001"
+      ],
+      "requirements": [
+        "REQ-RSK-006"
+      ],
+      "traces": [],
+      "status": "IM_PAKET_GERECHNET"
+    },
+    {
+      "id": "SC-H-2020",
+      "category": "STRESS",
+      "title": "März 2020",
+      "origin": "neu v3.0 (§7.9)",
+      "source": "risk/stress_scenarios.json",
+      "results": [
+        "risk/stress_results.json#/results/SYSTEM/H5/scenarios/SC-H-2020",
+        "risk/stress_results.json#/results/SYSTEM/H10/scenarios/SC-H-2020",
+        "risk/stress_results.json#/results/SYSTEM/H15/scenarios/SC-H-2020",
+        "risk/stress_results.json#/results/SYSTEM/H20/scenarios/SC-H-2020"
+      ],
+      "runbooks": [
+        "RB-24",
+        "RB-29"
+      ],
+      "tests": [
+        "T-CALC-STRESS-001",
+        "T-SEM-STRESS-001"
+      ],
+      "requirements": [
+        "REQ-RSK-006"
+      ],
+      "traces": [],
+      "status": "IM_PAKET_GERECHNET"
+    },
+    {
+      "id": "SC-H-2020WTI",
+      "category": "STRESS",
+      "title": "Negativer WTI-Preis 20.04.2020",
+      "origin": "neu v3.0 (§7.9)",
+      "source": "risk/stress_scenarios.json",
+      "results": [
+        "risk/stress_results.json#/results/SYSTEM/H5/scenarios/SC-H-2020WTI",
+        "risk/stress_results.json#/results/SYSTEM/H10/scenarios/SC-H-2020WTI",
+        "risk/stress_results.json#/results/SYSTEM/H15/scenarios/SC-H-2020WTI",
+        "risk/stress_results.json#/results/SYSTEM/H20/scenarios/SC-H-2020WTI"
+      ],
+      "runbooks": [
+        "RB-26"
+      ],
+      "tests": [
+        "T-CALC-STRESS-001",
+        "T-SEM-STRESS-001"
+      ],
+      "requirements": [
+        "REQ-RSK-006"
+      ],
+      "traces": [],
+      "status": "IM_PAKET_GERECHNET"
+    },
+    {
+      "id": "SC-H-2022NI",
+      "category": "STRESS",
+      "title": "LME-Nickel März 2022",
+      "origin": "neu v3.0 (§7.9)",
+      "source": "risk/stress_scenarios.json",
+      "results": [
+        "risk/stress_results.json#/results/SYSTEM/H5/scenarios/SC-H-2022NI",
+        "risk/stress_results.json#/results/SYSTEM/H10/scenarios/SC-H-2022NI",
+        "risk/stress_results.json#/results/SYSTEM/H15/scenarios/SC-H-2022NI",
+        "risk/stress_results.json#/results/SYSTEM/H20/scenarios/SC-H-2022NI"
+      ],
+      "runbooks": [
+        "RB-06",
+        "RB-25"
+      ],
+      "tests": [
+        "T-CALC-STRESS-001",
+        "T-SEM-STRESS-001"
+      ],
+      "requirements": [
+        "REQ-RSK-006"
+      ],
+      "traces": [],
+      "status": "IM_PAKET_GERECHNET"
+    },
+    {
+      "id": "SC-H-2022GILT",
+      "category": "STRESS",
+      "title": "UK-Gilts Herbst 2022",
+      "origin": "neu v3.0 (§7.9)",
+      "source": "risk/stress_scenarios.json",
+      "results": [
+        "risk/stress_results.json#/results/SYSTEM/H5/scenarios/SC-H-2022GILT",
+        "risk/stress_results.json#/results/SYSTEM/H10/scenarios/SC-H-2022GILT",
+        "risk/stress_results.json#/results/SYSTEM/H15/scenarios/SC-H-2022GILT",
+        "risk/stress_results.json#/results/SYSTEM/H20/scenarios/SC-H-2022GILT"
+      ],
+      "runbooks": [
+        "RB-24",
+        "RB-30"
+      ],
+      "tests": [
+        "T-CALC-STRESS-001",
+        "T-SEM-STRESS-001"
+      ],
+      "requirements": [
+        "REQ-RSK-006"
+      ],
+      "traces": [],
+      "status": "IM_PAKET_GERECHNET"
+    },
+    {
+      "id": "SC-H-2023",
+      "category": "STRESS",
+      "title": "Bankenstress März 2023",
+      "origin": "neu v3.0 (§7.9)",
+      "source": "risk/stress_scenarios.json",
+      "results": [
+        "risk/stress_results.json#/results/SYSTEM/H5/scenarios/SC-H-2023",
+        "risk/stress_results.json#/results/SYSTEM/H10/scenarios/SC-H-2023",
+        "risk/stress_results.json#/results/SYSTEM/H15/scenarios/SC-H-2023",
+        "risk/stress_results.json#/results/SYSTEM/H20/scenarios/SC-H-2023"
+      ],
+      "runbooks": [
+        "RB-27",
+        "RB-30"
+      ],
+      "tests": [
+        "T-CALC-STRESS-001",
+        "T-SEM-STRESS-001"
+      ],
+      "requirements": [
+        "REQ-RSK-006"
+      ],
+      "traces": [],
+      "status": "IM_PAKET_GERECHNET"
+    },
+    {
+      "id": "SC-H-2025",
+      "category": "STRESS",
+      "title": "Zollschock April 2025",
+      "origin": "neu v3.0 (§7.9)",
+      "source": "risk/stress_scenarios.json",
+      "results": [
+        "risk/stress_results.json#/results/SYSTEM/H5/scenarios/SC-H-2025",
+        "risk/stress_results.json#/results/SYSTEM/H10/scenarios/SC-H-2025",
+        "risk/stress_results.json#/results/SYSTEM/H15/scenarios/SC-H-2025",
+        "risk/stress_results.json#/results/SYSTEM/H20/scenarios/SC-H-2025"
+      ],
+      "runbooks": [
+        "RB-25",
+        "RB-29"
+      ],
+      "tests": [
+        "T-CALC-STRESS-001",
+        "T-SEM-STRESS-001"
+      ],
+      "requirements": [
+        "REQ-RSK-006"
+      ],
+      "traces": [],
+      "status": "IM_PAKET_GERECHNET"
+    },
+    {
+      "id": "SC-X-CORR1",
+      "category": "STRESS",
+      "title": "Korrelationen → 1",
+      "origin": "neu v3.0 (§7.9)",
+      "source": "risk/stress_scenarios.json",
+      "results": [
+        "risk/stress_results.json#/results/SYSTEM/H5/scenarios/SC-X-CORR1",
+        "risk/stress_results.json#/results/SYSTEM/H10/scenarios/SC-X-CORR1",
+        "risk/stress_results.json#/results/SYSTEM/H15/scenarios/SC-X-CORR1",
+        "risk/stress_results.json#/results/SYSTEM/H20/scenarios/SC-X-CORR1"
+      ],
+      "runbooks": [
+        "RB-29"
+      ],
+      "tests": [
+        "T-CALC-STRESS-001",
+        "T-SEM-STRESS-001"
+      ],
+      "requirements": [
+        "REQ-RSK-006"
+      ],
+      "traces": [],
+      "status": "IM_PAKET_GERECHNET"
+    },
+    {
+      "id": "SC-X-LIQ",
+      "category": "STRESS",
+      "title": "Liquiditätsausfall",
+      "origin": "neu v3.0 (§7.9)",
+      "source": "risk/stress_scenarios.json",
+      "results": [
+        "risk/stress_results.json#/results/SYSTEM/H5/scenarios/SC-X-LIQ",
+        "risk/stress_results.json#/results/SYSTEM/H10/scenarios/SC-X-LIQ",
+        "risk/stress_results.json#/results/SYSTEM/H15/scenarios/SC-X-LIQ",
+        "risk/stress_results.json#/results/SYSTEM/H20/scenarios/SC-X-LIQ"
+      ],
+      "runbooks": [
+        "RB-29"
+      ],
+      "tests": [
+        "T-CALC-STRESS-001",
+        "T-SEM-STRESS-001"
+      ],
+      "requirements": [
+        "REQ-RSK-006"
+      ],
+      "traces": [],
+      "status": "IM_PAKET_GERECHNET"
+    },
+    {
+      "id": "SC-X-BROKER",
+      "category": "STRESS",
+      "title": "Ausfall von Broker oder FCM",
+      "origin": "neu v3.0 (§7.9)",
+      "source": "risk/stress_scenarios.json",
+      "results": [
+        "risk/stress_results.json#/results/SYSTEM/H5/scenarios/SC-X-BROKER",
+        "risk/stress_results.json#/results/SYSTEM/H10/scenarios/SC-X-BROKER",
+        "risk/stress_results.json#/results/SYSTEM/H15/scenarios/SC-X-BROKER",
+        "risk/stress_results.json#/results/SYSTEM/H20/scenarios/SC-X-BROKER"
+      ],
+      "runbooks": [
+        "RB-27"
+      ],
+      "tests": [
+        "T-CALC-STRESS-001",
+        "T-SEM-STRESS-001"
+      ],
+      "requirements": [
+        "REQ-RSK-006"
+      ],
+      "traces": [],
+      "status": "IM_PAKET_GERECHNET"
+    },
+    {
+      "id": "SC-X-EXCH",
+      "category": "STRESS",
+      "title": "Ausfall einer Börse",
+      "origin": "neu v3.0 (§7.9)",
+      "source": "risk/stress_scenarios.json",
+      "results": [
+        "risk/stress_results.json#/results/SYSTEM/H5/scenarios/SC-X-EXCH",
+        "risk/stress_results.json#/results/SYSTEM/H10/scenarios/SC-X-EXCH",
+        "risk/stress_results.json#/results/SYSTEM/H15/scenarios/SC-X-EXCH",
+        "risk/stress_results.json#/results/SYSTEM/H20/scenarios/SC-X-EXCH"
+      ],
+      "runbooks": [
+        "RB-28"
+      ],
+      "tests": [
+        "T-CALC-STRESS-001",
+        "T-SEM-STRESS-001"
+      ],
+      "requirements": [
+        "REQ-RSK-006"
+      ],
+      "traces": [],
+      "status": "IM_PAKET_GERECHNET"
+    },
+    {
+      "id": "SC-X-DATA",
+      "category": "STRESS",
+      "title": "Datenausfall",
+      "origin": "neu v3.0 (§7.9)",
+      "source": "risk/stress_scenarios.json",
+      "results": [
+        "risk/stress_results.json#/results/SYSTEM/H5/scenarios/SC-X-DATA",
+        "risk/stress_results.json#/results/SYSTEM/H10/scenarios/SC-X-DATA",
+        "risk/stress_results.json#/results/SYSTEM/H15/scenarios/SC-X-DATA",
+        "risk/stress_results.json#/results/SYSTEM/H20/scenarios/SC-X-DATA"
+      ],
+      "runbooks": [
+        "RB-14"
+      ],
+      "tests": [
+        "T-CALC-STRESS-001",
+        "T-SEM-STRESS-001"
+      ],
+      "requirements": [
+        "REQ-RSK-006"
+      ],
+      "traces": [],
+      "status": "IM_PAKET_GERECHNET"
+    },
+    {
+      "id": "SC-X-GAP5",
+      "category": "STRESS",
+      "title": "Kurslücke 5 σ",
+      "origin": "neu v3.0 (§7.9)",
+      "source": "risk/stress_scenarios.json",
+      "results": [
+        "risk/stress_results.json#/results/SYSTEM/H5/scenarios/SC-X-GAP5",
+        "risk/stress_results.json#/results/SYSTEM/H10/scenarios/SC-X-GAP5",
+        "risk/stress_results.json#/results/SYSTEM/H15/scenarios/SC-X-GAP5",
+        "risk/stress_results.json#/results/SYSTEM/H20/scenarios/SC-X-GAP5"
+      ],
+      "runbooks": [
+        "RB-07",
+        "RB-25"
+      ],
+      "tests": [
+        "T-CALC-STRESS-001",
+        "T-SEM-STRESS-001"
+      ],
+      "requirements": [
+        "REQ-RSK-006"
+      ],
+      "traces": [],
+      "status": "IM_PAKET_GERECHNET"
+    },
+    {
+      "id": "SC-X-GAP10",
+      "category": "STRESS",
+      "title": "Kurslücke 10 σ",
+      "origin": "neu v3.0 (§7.9)",
+      "source": "risk/stress_scenarios.json",
+      "results": [
+        "risk/stress_results.json#/results/SYSTEM/H5/scenarios/SC-X-GAP10",
+        "risk/stress_results.json#/results/SYSTEM/H10/scenarios/SC-X-GAP10",
+        "risk/stress_results.json#/results/SYSTEM/H15/scenarios/SC-X-GAP10",
+        "risk/stress_results.json#/results/SYSTEM/H20/scenarios/SC-X-GAP10"
+      ],
+      "runbooks": [
+        "RB-07",
+        "RB-25"
+      ],
+      "tests": [
+        "T-CALC-STRESS-001",
+        "T-SEM-STRESS-001"
+      ],
+      "requirements": [
+        "REQ-RSK-006"
+      ],
+      "traces": [],
+      "status": "IM_PAKET_GERECHNET"
+    },
+    {
+      "id": "SC-X-RATESHOCK",
+      "category": "STRESS",
+      "title": "Zinsschock (Zinswende) auf die Zinsfutures-Allokation",
+      "origin": "neu v3.0 (§7.9)",
+      "source": "risk/stress_scenarios.json",
+      "results": [
+        "risk/stress_results.json#/results/SYSTEM/H5/scenarios/SC-X-RATESHOCK",
+        "risk/stress_results.json#/results/SYSTEM/H10/scenarios/SC-X-RATESHOCK",
+        "risk/stress_results.json#/results/SYSTEM/H15/scenarios/SC-X-RATESHOCK",
+        "risk/stress_results.json#/results/SYSTEM/H20/scenarios/SC-X-RATESHOCK"
+      ],
+      "runbooks": [
+        "RB-30"
+      ],
+      "tests": [
+        "T-CALC-STRESS-001",
+        "T-SEM-STRESS-001"
+      ],
+      "requirements": [
+        "REQ-RSK-006"
+      ],
+      "traces": [],
+      "status": "IM_PAKET_GERECHNET"
+    }
+  ]
+}

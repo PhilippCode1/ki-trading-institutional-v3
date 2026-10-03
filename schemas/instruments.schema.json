@@ -1,0 +1,472 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:ki-trading-v3:instruments",
+  "title": "Instrumenttabelle",
+  "x-version": "3.0.0",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "3.0"
+    },
+    "document": {
+      "const": "Instrumenttabelle (Kandidatenuniversum)"
+    },
+    "as_of": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+    },
+    "conventions": {
+      "type": "object"
+    },
+    "instruments": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^INS-[A-Z]+-[A-Z0-9]+$"
+          },
+          "symbol": {
+            "type": "string",
+            "minLength": 1
+          },
+          "exchange": {
+            "type": "string",
+            "minLength": 1
+          },
+          "exchange_text": {
+            "type": "string",
+            "minLength": 1
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "asset_class": {
+            "enum": [
+              "STIR",
+              "ANLEIHE",
+              "RENDITE",
+              "FX",
+              "ENERGIE",
+              "METALL",
+              "AGRAR",
+              "KRYPTO"
+            ]
+          },
+          "risk_class": {
+            "type": "string",
+            "minLength": 1
+          },
+          "currency": {
+            "enum": [
+              "USD",
+              "EUR",
+              "GBP"
+            ]
+          },
+          "size_class": {
+            "enum": [
+              "STANDARD",
+              "MINI",
+              "MICRO"
+            ]
+          },
+          "standard_ref": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "multiplier": {
+            "type": "string",
+            "pattern": "^-?\\d+(\\.\\d+)?$"
+          },
+          "tick_size": {
+            "type": "string",
+            "pattern": "^-?\\d+(\\.\\d+)?$"
+          },
+          "tick_value": {
+            "type": "string",
+            "pattern": "^-?\\d+(\\.\\d+)?$"
+          },
+          "settlement": {
+            "enum": [
+              "BAR",
+              "PHYSISCH"
+            ]
+          },
+          "spec_status": {
+            "enum": [
+              "BELEGT",
+              "TEILWEISE",
+              "WIDERSPRUCH"
+            ]
+          },
+          "source": {
+            "type": "string",
+            "pattern": "^SRC-SPEC-"
+          },
+          "evidence": {
+            "type": "string",
+            "minLength": 1
+          },
+          "text": {
+            "type": "object"
+          },
+          "planning": {
+            "type": "object",
+            "properties": {
+              "price": {
+                "type": "object",
+                "properties": {
+                  "value": {
+                    "type": "string",
+                    "pattern": "^-?\\d+(\\.\\d+)?$"
+                  },
+                  "unit": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "status": {
+                    "enum": [
+                      "BELEGT",
+                      "TEILWEISE",
+                      "ANNAHME"
+                    ]
+                  },
+                  "source": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "note": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                },
+                "required": [
+                  "value",
+                  "unit",
+                  "status",
+                  "source",
+                  "note"
+                ],
+                "additionalProperties": false
+              },
+              "vol_annual_pct": {
+                "type": "object",
+                "properties": {
+                  "base": {
+                    "type": "number"
+                  },
+                  "low": {
+                    "type": "number"
+                  },
+                  "high": {
+                    "type": "number"
+                  },
+                  "status": {
+                    "const": "ANNAHME"
+                  },
+                  "note": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                },
+                "required": [
+                  "base",
+                  "low",
+                  "high",
+                  "status",
+                  "note"
+                ],
+                "additionalProperties": false
+              },
+              "spread_ticks": {
+                "type": "object",
+                "properties": {
+                  "value": {},
+                  "status": {
+                    "enum": [
+                      "BELEGT",
+                      "TEILWEISE",
+                      "ANNAHME"
+                    ]
+                  },
+                  "note": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                },
+                "required": [
+                  "value",
+                  "status",
+                  "note"
+                ],
+                "additionalProperties": false
+              },
+              "adv_contracts": {
+                "type": "object",
+                "properties": {
+                  "value": {},
+                  "status": {
+                    "enum": [
+                      "BELEGT",
+                      "TEILWEISE",
+                      "ANNAHME"
+                    ]
+                  },
+                  "note": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                },
+                "required": [
+                  "value",
+                  "status",
+                  "note"
+                ],
+                "additionalProperties": false
+              },
+              "duration_years": {
+                "type": [
+                  "object",
+                  "null"
+                ]
+              },
+              "initial_margin_pct": {
+                "type": "object",
+                "properties": {
+                  "value": {},
+                  "status": {
+                    "enum": [
+                      "BELEGT",
+                      "TEILWEISE",
+                      "ANNAHME"
+                    ]
+                  },
+                  "note": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                },
+                "required": [
+                  "value",
+                  "status",
+                  "note"
+                ],
+                "additionalProperties": false
+              },
+              "liquidity_window_cet": {
+                "type": "object",
+                "properties": {
+                  "value": {},
+                  "status": {
+                    "enum": [
+                      "BELEGT",
+                      "TEILWEISE",
+                      "ANNAHME"
+                    ]
+                  },
+                  "note": {
+                    "type": "string",
+                    "minLength": 1
+                  }
+                },
+                "required": [
+                  "value",
+                  "status",
+                  "note"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "required": [
+              "price",
+              "vol_annual_pct",
+              "spread_ticks",
+              "adv_contracts",
+              "duration_years",
+              "initial_margin_pct",
+              "liquidity_window_cet"
+            ],
+            "additionalProperties": false
+          },
+          "access": {
+            "type": "object",
+            "properties": {
+              "primary_broker": {
+                "type": "string",
+                "minLength": 1
+              },
+              "status": {
+                "enum": [
+                  "PRIMAERBROKER_BOERSE_ANGEBOTEN",
+                  "KEIN_ZUGANG_PRIMAERBROKER"
+                ]
+              },
+              "note": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "primary_broker",
+              "status",
+              "note"
+            ],
+            "additionalProperties": false
+          },
+          "blocked": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "data_history": {
+            "type": "object",
+            "properties": {
+              "plan_source": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "vendor_since": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "vendor_status": {
+                "enum": [
+                  "BELEGT",
+                  "TEILWEISE",
+                  "NICHT_GEPRUEFT"
+                ]
+              },
+              "listing_year": {
+                "type": [
+                  "object",
+                  "null"
+                ]
+              },
+              "years_available": {
+                "type": "number",
+                "minimum": 0
+              }
+            },
+            "required": [
+              "plan_source",
+              "vendor_since",
+              "vendor_status",
+              "listing_year",
+              "years_available"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "id",
+          "symbol",
+          "exchange",
+          "exchange_text",
+          "name",
+          "asset_class",
+          "risk_class",
+          "currency",
+          "size_class",
+          "standard_ref",
+          "multiplier",
+          "tick_size",
+          "tick_value",
+          "settlement",
+          "spec_status",
+          "source",
+          "evidence",
+          "text",
+          "planning",
+          "access",
+          "blocked",
+          "data_history"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 60
+    },
+    "equity_index_candidates": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "venue": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "product": {
+            "type": "string",
+            "minLength": 1
+          },
+          "product_code": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "meets_no_defense_condition": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "status": {
+            "const": "GESPERRT_BQ06A"
+          },
+          "source": {
+            "type": "string",
+            "minLength": 1
+          },
+          "evidence": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "id",
+          "venue",
+          "product",
+          "product_code",
+          "meets_no_defense_condition",
+          "status",
+          "source",
+          "evidence"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 0
+    },
+    "equity_index_rule": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "required": [
+    "schema_version",
+    "document",
+    "as_of",
+    "conventions",
+    "instruments",
+    "equity_index_candidates",
+    "equity_index_rule"
+  ],
+  "additionalProperties": false
+}

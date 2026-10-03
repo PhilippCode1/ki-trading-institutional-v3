@@ -1,0 +1,63 @@
+{
+ "schema_version": "3.0",
+ "id": "TR-INCIDENT-001",
+ "machine": "SM-INCIDENT",
+ "description": "Quittungsfrist überschritten, Eindämmung, Post-Mortem ab Schwere HOCH, Abschluss, Wiedereröffnung",
+ "scenarios": [
+  "OS-GV-08"
+ ],
+ "start": null,
+ "initial_reasons": null,
+ "steps": [
+  {
+   "event": "ACK_OVERDUE",
+   "context": {
+    "minutes_open": 45
+   },
+   "expect_state": "OPEN"
+  },
+  {
+   "event": "TRIAGE",
+   "context": {
+    "runbook_assigned": true
+   },
+   "expect_state": "TRIAGED"
+  },
+  {
+   "event": "MITIGATE",
+   "context": {},
+   "expect_state": "MITIGATED"
+  },
+  {
+   "event": "RESOLVE",
+   "context": {
+    "cause_recorded": true,
+    "severity": "HOCH",
+    "postmortem_done": false
+   },
+   "expect_state": "MITIGATED",
+   "expect_invalid": true
+  },
+  {
+   "event": "RESOLVE",
+   "context": {
+    "cause_recorded": true,
+    "severity": "HOCH",
+    "postmortem_done": true
+   },
+   "expect_state": "RESOLVED"
+  },
+  {
+   "event": "CLOSE_SIGNED",
+   "context": {
+    "signed": true
+   },
+   "expect_state": "CLOSED"
+  },
+  {
+   "event": "REOPEN",
+   "context": {},
+   "expect_state": "OPEN"
+  }
+ ]
+}

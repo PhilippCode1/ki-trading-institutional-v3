@@ -1,0 +1,49 @@
+{
+ "schema_version": "3.0",
+ "id": "TR-SAFETY-003",
+ "machine": "SM-SAFETY",
+ "description": "Margin-Defizit: Abbau bis über die De-Risking-Schwelle, dann Heilung mit Beweisobjekt",
+ "scenarios": [
+  "OS-RI-05"
+ ],
+ "start": null,
+ "initial_reasons": [],
+ "steps": [
+  {
+   "event": "MARGIN_DEFICIT_DETECTED",
+   "context": {},
+   "expect_state": "EXIT_ONLY",
+   "expect_reasons": [
+    "MARGIN_DEFICIT"
+   ],
+   "expect_allowed": [
+    "CANCEL_ORDER",
+    "CLOSE_REDUCE",
+    "EMERGENCY_PROTECT",
+    "RECONCILE",
+    "ROLL_AS_CLOSE",
+    "STOP_AMEND_RECONCILED_ONLY"
+   ]
+  },
+  {
+   "event": "MARGIN_RESTORED",
+   "context": {
+    "proof_recorded": true,
+    "margin_level": 1.4
+   },
+   "expect_state": "EXIT_ONLY",
+   "expect_reasons": [
+    "MARGIN_DEFICIT"
+   ]
+  },
+  {
+   "event": "MARGIN_RESTORED",
+   "context": {
+    "proof_recorded": true,
+    "margin_level": 1.6
+   },
+   "expect_state": "READY",
+   "expect_reasons": []
+  }
+ ]
+}

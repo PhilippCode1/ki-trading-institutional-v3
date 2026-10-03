@@ -1,0 +1,156 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:ki-trading-v3:experiment_manifest",
+  "title": "Experiment-Manifest (Vorregistrierung, IF-09)",
+  "description": "Registrierung vor Ergebnisansicht; Versuch innerhalb des Budgets P-OC-TRIALS (Beispielregel R-EX-05).",
+  "x-version": "3.0.0",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "$ref": "urn:ki-trading-v3:common#/$defs/schema_version"
+    },
+    "message_id": {
+      "$ref": "urn:ki-trading-v3:common#/$defs/uuid"
+    },
+    "correlation_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "producer": {
+      "$ref": "urn:ki-trading-v3:common#/$defs/producer"
+    },
+    "created_utc": {
+      "$ref": "urn:ki-trading-v3:common#/$defs/utc"
+    },
+    "experiment_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "hypothesis": {
+      "type": "string",
+      "minLength": 1
+    },
+    "strategy_id": {
+      "$ref": "urn:ki-trading-v3:common#/$defs/strategy_id"
+    },
+    "parameter_set": {
+      "type": "object"
+    },
+    "universe": {
+      "type": "array",
+      "items": {
+        "$ref": "urn:ki-trading-v3:common#/$defs/instrument_id"
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "data_manifest_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "dev_window": {
+      "type": "object",
+      "properties": {
+        "start": {
+          "$ref": "urn:ki-trading-v3:common#/$defs/date"
+        },
+        "end": {
+          "$ref": "urn:ki-trading-v3:common#/$defs/date"
+        }
+      },
+      "required": [
+        "start",
+        "end"
+      ],
+      "additionalProperties": false
+    },
+    "cost_scenario": {
+      "type": "string",
+      "pattern": "^(BASIS|SZ-[A-Z0-9_]+)$"
+    },
+    "metrics": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 1
+    },
+    "decision_rule": {
+      "type": "object",
+      "properties": {
+        "gate": {
+          "$ref": "urn:ki-trading-v3:common#/$defs/gate_id"
+        },
+        "rule_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1
+        }
+      },
+      "required": [
+        "gate",
+        "rule_ids"
+      ],
+      "additionalProperties": false
+    },
+    "trials_budget": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "trial_number": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "seeds": {
+      "type": "array",
+      "items": {
+        "type": "integer"
+      },
+      "minItems": 1
+    },
+    "code_sha256": {
+      "$ref": "urn:ki-trading-v3:common#/$defs/sha256"
+    },
+    "registered_utc": {
+      "$ref": "urn:ki-trading-v3:common#/$defs/utc"
+    },
+    "results_viewed_utc": {
+      "anyOf": [
+        {
+          "$ref": "urn:ki-trading-v3:common#/$defs/utc"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    }
+  },
+  "required": [
+    "schema_version",
+    "message_id",
+    "correlation_id",
+    "producer",
+    "created_utc",
+    "experiment_id",
+    "hypothesis",
+    "strategy_id",
+    "parameter_set",
+    "universe",
+    "data_manifest_id",
+    "dev_window",
+    "cost_scenario",
+    "metrics",
+    "decision_rule",
+    "trials_budget",
+    "trial_number",
+    "seeds",
+    "code_sha256",
+    "registered_utc",
+    "results_viewed_utc"
+  ],
+  "additionalProperties": false
+}

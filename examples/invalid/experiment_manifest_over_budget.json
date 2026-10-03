@@ -1,0 +1,45 @@
+{
+ "schema_version": "3.0",
+ "message_id": "00000000-0000-4000-8000-000000000022",
+ "correlation_id": "COR-0022",
+ "producer": "HERMES",
+ "created_utc": "2026-09-24T09:00:00Z",
+ "experiment_id": "EXP-0001",
+ "hypothesis": "S-TF hat nach Kosten eine positive Netto-Sharpe",
+ "strategy_id": "S-TF",
+ "parameter_set": {
+  "speeds": "registriert"
+ },
+ "universe": [
+  "INS-COMEX-MGC",
+  "INS-CBOT-ZN"
+ ],
+ "data_manifest_id": "DM-0001",
+ "dev_window": {
+  "start": "2016-01-01",
+  "end": "2023-12-31"
+ },
+ "cost_scenario": "BASIS",
+ "metrics": [
+  "DSR",
+  "PBO",
+  "SPA"
+ ],
+ "decision_rule": {
+  "gate": "GATE-G3",
+  "rule_ids": [
+   "G3-R3",
+   "G3-R4",
+   "G3-R5",
+   "G3-R7"
+  ]
+ },
+ "trials_budget": 25,
+ "trial_number": 21,
+ "seeds": [
+  662026
+ ],
+ "code_sha256": "000000000000000000000000000000000000000000000000000000000000000f",
+ "registered_utc": "2026-09-24T08:00:00Z",
+ "results_viewed_utc": null
+}

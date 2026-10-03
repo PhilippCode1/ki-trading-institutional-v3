@@ -1,0 +1,2278 @@
+{
+  "retrieved": "2026-09-24",
+  "studies": [
+    {
+      "id": "TF-MOP-2012",
+      "citation": "Moskowitz, T. J., Ooi, Y. H., Pedersen, L. H. (2012): Time series momentum. Journal of Financial Economics 104(2), 228–250.",
+      "journal_year": "Journal of Financial Economics, 2012",
+      "period": "1985–2009 (Hauptauswertung, ab 1985 berichtet); Faktor zusätzlich 1966–1985 als Vorperiode",
+      "universe": "58 liquide Futures und Forwards: Aktienindizes, Währungen, Rohstoffe, Anleihen",
+      "horizon_or_frequency": "Lookback 1–48 Monate × Haltedauer 1–48 Monate; Fokus 12 Monate Lookback / 1 Monat Haltedauer [Bezug Zielhorizont 4 h–4 T: niedrig bis mittel – kürzester Lookback 1 Monat]",
+      "gross_or_net": "brutto (keine Transaktionskosten abgezogen)",
+      "sharpe": null,
+      "sharpe_note": "UNTERGRENZE: diversifiziertes TSMOM 1985–2009 'Sharpe ratio greater than one' – kein Punktwert, daher null; Untergrenze 1,0 und Vorperiode 1966–1985 = 1,1 in other_key_numbers. Kurze Lookbacks nur als Alpha-t-Statistiken (Tabelle 2), keine Sharpe je Lookback.",
+      "cost_assumption": "Keine Kostenabzüge; Beschränkung auf die liquidesten Instrumente, um Illiquiditäts- und Stale-Price-Effekte zu vermeiden.",
+      "other_key_numbers": [
+        {
+          "name": "Anzahl Instrumente",
+          "value": 58,
+          "unit": "Futures/Forwards",
+          "source": 0
+        },
+        {
+          "name": "Sharpe diversifiziertes TSMOM, Untergrenze",
+          "value": 1.0,
+          "unit": "Sharpe p.a., brutto ('greater than one')",
+          "source": 2
+        },
+        {
+          "name": "Sharpe relativ zum Aktienmarktportfolio",
+          "value": 2.5,
+          "unit": "Vielfaches ('roughly')",
+          "source": 2
+        },
+        {
+          "name": "Sharpe TSMOM-Faktor 1966–1985 (Vorperiode)",
+          "value": 1.1,
+          "unit": "Sharpe p.a., brutto",
+          "source": 4
+        },
+        {
+          "name": "Obergrenze Persistenzhorizont",
+          "value": 12,
+          "unit": "Monate (Persistenz 1–12 Monate, danach teilweise Umkehr)",
+          "source": 1
+        },
+        {
+          "name": "t-Stat Alpha, Lookback 1 M / Haltedauer 1 M",
+          "value": 4.34,
+          "unit": "t-Statistik",
+          "source": 6,
+          "note": "Spaltenfolge Haltedauer 1,3,6,9,12,24,36,48 Monate laut Transkription"
+        },
+        {
+          "name": "t-Stat Alpha, Lookback 1 M / Haltedauer 12 M",
+          "value": 5.12,
+          "unit": "t-Statistik",
+          "source": 6
+        },
+        {
+          "name": "t-Stat Alpha, Lookback 1 M / Haltedauer 48 M",
+          "value": 1.9,
+          "unit": "t-Statistik",
+          "source": 6
+        },
+        {
+          "name": "t-Stat Alpha, Lookback 12 M / Haltedauer 1 M",
+          "value": 6.61,
+          "unit": "t-Statistik",
+          "source": 7
+        },
+        {
+          "name": "t-Stat Alpha, Lookback 12 M / Haltedauer 48 M",
+          "value": 0.46,
+          "unit": "t-Statistik",
+          "source": 7
+        }
+      ],
+      "status": "VERIFIZIERT",
+      "sources": [
+        {
+          "url": "https://w4.stern.nyu.edu/facdir/lpederse/papers/TimeSeriesMomentum.pdf",
+          "quote": "in equity index, currency, commodity, and bond futures for each of the 58 liquid instruments we consider."
+        },
+        {
+          "url": "https://w4.stern.nyu.edu/facdir/lpederse/papers/TimeSeriesMomentum.pdf",
+          "quote": "We find persistence in returns for one to 12 months that partially reverses over longer horizons"
+        },
+        {
+          "url": "https://w4.stern.nyu.edu/facdir/lpederse/papers/TimeSeriesMomentum.pdf",
+          "quote": "yielding a Sharpe ratio greater than one on an annual basis, or roughly 2.5 times the Sharpe ratio for the equity market portfolio"
+        },
+        {
+          "url": "https://w4.stern.nyu.edu/facdir/lpederse/papers/TimeSeriesMomentum.pdf",
+          "quote": "given the more limited breadth and liquidity of the instruments during this time, we report results post-1985."
+        },
+        {
+          "url": "https://w4.stern.nyu.edu/facdir/lpederse/papers/TimeSeriesMomentum.pdf",
+          "quote": "Over this earlier sample, time series momentum has a statistically significant return and an annualized Sharpe ratio of 1.1, providing strong out-of-sample evidence of time series momentum."
+        },
+        {
+          "url": "https://w4.stern.nyu.edu/facdir/lpederse/papers/TimeSeriesMomentum.pdf",
+          "quote": "We can also compute the return of the time series momentum factor from 1966 to 1985, despite the limited number of instruments with available data."
+        },
+        {
+          "url": "https://w4.stern.nyu.edu/facdir/lpederse/papers/TimeSeriesMomentum.pdf",
+          "quote": "[Table 2, Panel A, look-back 1 month] 4.34 4.68 3.83 4.29 5.12 3.02 2.74 1.90"
+        },
+        {
+          "url": "https://w4.stern.nyu.edu/facdir/lpederse/papers/TimeSeriesMomentum.pdf",
+          "quote": "[Table 2, Panel A, look-back 12 months] 6.61 5.60 4.44 3.69 2.85 1.68 0.66 0.46"
+        },
+        {
+          "url": "https://w4.stern.nyu.edu/facdir/lpederse/papers/TimeSeriesMomentum.pdf",
+          "quote": "The existence and significance of time series momentum is robust across horizons and asset classes, particularly when the look-back and holding periods are 12 months or less."
+        },
+        {
+          "url": "https://w4.stern.nyu.edu/facdir/lpederse/papers/TimeSeriesMomentum.pdf",
+          "quote": "We focus on the most liquid instruments to avoid returns being contaminated by illiquidity or stale price issues"
+        },
+        {
+          "url": "https://w4.stern.nyu.edu/facdir/lpederse/papers/TimeSeriesMomentum.pdf",
+          "quote": "[Table 2 title] t-statistics of the alphas of time series momentum strategies with different look-back and holding periods"
+        },
+        {
+          "url": "https://www.sciencedirect.com/science/article/pii/S0304405X11002613",
+          "quote": "We find persistence in returns for one to 12 months that partially reverses over longer horizons, consistent with sentiment theories of initial under-reaction and delayed over-reaction."
+        }
+      ]
+    },
+    {
+      "id": "TF-HOP-2013",
+      "citation": "Hurst, B., Ooi, Y. H., Pedersen, L. H. (2013): Demystifying Managed Futures. Journal of Investment Management (Autorenfassung mit Vermerk 'Forthcoming Journal of Investment Management').",
+      "journal_year": "Journal of Investment Management, 2013",
+      "period": "Januar 1985 – Juni 2012",
+      "universe": "58 Futures/Forwards: 24 Rohstoffe, 9 Aktienindizes, 13 Anleihen, 12 Währungs-Forwards",
+      "horizon_or_frequency": "TSMOM mit 1-, 3- und 12-Monats-Lookback; diversifiziert = Kombination der drei Geschwindigkeiten [Bezug Zielhorizont 4 h–4 T: mittel – schnellste Komponente 1 Monat]",
+      "gross_or_net": "brutto (vor Transaktionskosten und Gebühren); Netto-Schätzung im Text",
+      "sharpe": 1.79,
+      "sharpe_note": "Diversifiziertes TSMOM brutto 1,79; einzeln brutto: 1 Monat 1,26 / 3 Monate 1,43 / 12 Monate 1,52. Nach geschätzten Gebühren (2/20) und Kosten laut Text 'near 1'. Spalten Tabelle 1 laut Transkription: Überschussrendite, Volatilität, Sharpe, Alpha, (t-Stat).",
+      "cost_assumption": "Renditen brutto; Autoren schätzen jährliche Transaktionskosten eines Managed-Futures-Programms auf etwa 1–4 % für professionelle Händler (für weniger professionelle deutlich höher); nach Gebühren und Kosten Sharpe 'near 1'.",
+      "other_key_numbers": [
+        {
+          "name": "Anzahl Instrumente",
+          "value": 58,
+          "unit": "Futures/Forwards",
+          "source": 0
+        },
+        {
+          "name": "Sharpe 1-Monats-TSMOM",
+          "value": 1.26,
+          "unit": "Sharpe p.a., brutto",
+          "source": 1
+        },
+        {
+          "name": "Überschussrendite 1-Monats-TSMOM",
+          "value": 12.0,
+          "unit": "% p.a., brutto",
+          "source": 1
+        },
+        {
+          "name": "Volatilität 1-Monats-TSMOM",
+          "value": 9.5,
+          "unit": "% p.a.",
+          "source": 1
+        },
+        {
+          "name": "Sharpe 3-Monats-TSMOM",
+          "value": 1.43,
+          "unit": "Sharpe p.a., brutto",
+          "source": 2
+        },
+        {
+          "name": "Sharpe 12-Monats-TSMOM",
+          "value": 1.52,
+          "unit": "Sharpe p.a., brutto",
+          "source": 3
+        },
+        {
+          "name": "Sharpe diversifiziertes TSMOM",
+          "value": 1.79,
+          "unit": "Sharpe p.a., brutto",
+          "source": 4
+        },
+        {
+          "name": "Sharpe diversifiziertes TSMOM nach Gebühren und Kosten",
+          "value": 1.0,
+          "unit": "Sharpe p.a., netto, ungefähr ('near 1')",
+          "source": 6
+        },
+        {
+          "name": "Transaktionskosten Managed Futures, untere Schätzung",
+          "value": 1,
+          "unit": "% p.a.",
+          "source": 7
+        },
+        {
+          "name": "Transaktionskosten Managed Futures, obere Schätzung",
+          "value": 4,
+          "unit": "% p.a.",
+          "source": 7
+        },
+        {
+          "name": "Sharpe BTOP50-Index (realisiert, bis 6/2012)",
+          "value": 0.5,
+          "unit": "Sharpe p.a.",
+          "source": 8,
+          "note": "Gebührenbasis im Tabellentext nicht ausdrücklich genannt"
+        },
+        {
+          "name": "Sharpe DJCS-Managed-Futures-Index (realisiert, bis 6/2012)",
+          "value": 0.27,
+          "unit": "Sharpe p.a.",
+          "source": 9,
+          "note": "Gebührenbasis im Tabellentext nicht ausdrücklich genannt"
+        }
+      ],
+      "status": "VERIFIZIERT",
+      "sources": [
+        {
+          "url": "http://docs.lhpedersen.com/DemystifyingManagedFutures.pdf",
+          "quote": "58 highly liquid futures and currency forwards from January 1985 to June 2012 – specifically 24 commodity futures, 9 equity index futures, 13 bond futures, and 12 currency forwards."
+        },
+        {
+          "url": "http://docs.lhpedersen.com/DemystifyingManagedFutures.pdf",
+          "quote": "[Table 1, Panel B] 1‐Month TSM | 12.0% | 9.5% | 1.26 | 11.1% | (6.04)"
+        },
+        {
+          "url": "http://docs.lhpedersen.com/DemystifyingManagedFutures.pdf",
+          "quote": "[Table 1, Panel B] 3‐Month TSM | 14.5% | 10.2% | 1.43 | 13.3% | (6.70)"
+        },
+        {
+          "url": "http://docs.lhpedersen.com/DemystifyingManagedFutures.pdf",
+          "quote": "[Table 1, Panel B] 12‐Month TSM | 17.2% | 11.3% | 1.52 | 14.4% | (6.74)"
+        },
+        {
+          "url": "http://docs.lhpedersen.com/DemystifyingManagedFutures.pdf",
+          "quote": "[Table 1, Panel B] Diversifed TSM | 19.4% | 10.8% | 1.79 | 17.4% | (8.42)"
+        },
+        {
+          "url": "http://docs.lhpedersen.com/DemystifyingManagedFutures.pdf",
+          "quote": "The strategy returns are gross of transaction costs, but we note that the instruments we consider are among the most liquid in the world."
+        },
+        {
+          "url": "http://docs.lhpedersen.com/DemystifyingManagedFutures.pdf",
+          "quote": "after these estimated fees and transaction costs, the Sharpe ratio of the diversified time series momentum strategy would historically have been near 1"
+        },
+        {
+          "url": "http://docs.lhpedersen.com/DemystifyingManagedFutures.pdf",
+          "quote": "the annual transaction costs of a Managed Futures strategy are typically about 1-4% for a sophisticated trader, possibly much higher for less sophisticated traders"
+        },
+        {
+          "url": "http://docs.lhpedersen.com/DemystifyingManagedFutures.pdf",
+          "quote": "[Table 3] BTOP50 | 5.2% | 10.3% | 0.50 | 3.5% | (1.69)"
+        },
+        {
+          "url": "http://docs.lhpedersen.com/DemystifyingManagedFutures.pdf",
+          "quote": "[Table 3] DJCS MF | 3.2% | 11.7% | 0.27 | 1.1% | (0.41)"
+        },
+        {
+          "url": "http://docs.lhpedersen.com/DemystifyingManagedFutures.pdf",
+          "quote": "Shows performance of Managed Futures indices and 5 largest managers in Lipper/Tass database as of 6/2012."
+        }
+      ]
+    },
+    {
+      "id": "TF-HOP-2017",
+      "citation": "Hurst, B., Ooi, Y. H., Pedersen, L. H. (2017): A Century of Evidence on Trend-Following Investing. Journal of Portfolio Management 44(1), ab S. 15, DOI 10.3905/jpm.2017.44.1.015.",
+      "journal_year": "Journal of Portfolio Management, 2017",
+      "period": "1880–2016",
+      "universe": "67 Märkte in vier Anlageklassen (Aktienindizes, Anleihen, Währungen, Rohstoffe)",
+      "horizon_or_frequency": "Gleichgewichtete Kombination aus 1-, 3- und 12-Monats-TSMOM, monatlich aggregiert, Zielvolatilität 10 % p.a. [Bezug Zielhorizont 4 h–4 T: niedrig bis mittel]",
+      "gross_or_net": "brutto und netto (simulierte Transaktionskosten; 2/20-Gebühren) – Werte nur in Exhibits",
+      "sharpe": null,
+      "sharpe_note": "NICHT_GEPRUEFT: Exhibits 1/2 (Sharpe brutto/netto, Dekaden, 1-/3-/12-Monats-Signale) liegen im AQR-PDF nur als Bild vor; SSRN-Volltext HTTP 429; JPM-Seite (pm-research) robots-gesperrt. Im Fließtext belegt nur: Einzelmärkte im Mittel Sharpe ≈ 0,4. Der v2.0-Wert 0,76 netto stammte von einer nicht zulässigen Drittseite und bleibt ungeprüft.",
+      "cost_assumption": "2 % Management- und 20 % Performancegebühr mit High-Water-Mark; Transaktionskosten = proprietäre AQR-Schätzungen (2012) je Anlageklasse inkl. Market Impact und Kommission; 1993–2002 doppelt, 1880–1992 sechsfach (nach Jones 2002). Zahlenwerte der Kostentabelle (Exhibit B1) NICHT_GEPRUEFT – nur als Bild vorhanden.",
+      "other_key_numbers": [
+        {
+          "name": "Anzahl Märkte",
+          "value": 67,
+          "unit": "Märkte",
+          "source": 0
+        },
+        {
+          "name": "Managementgebühr",
+          "value": 2,
+          "unit": "% p.a.",
+          "source": 1
+        },
+        {
+          "name": "Performancegebühr",
+          "value": 20,
+          "unit": "% (High-Water-Mark)",
+          "source": 1
+        },
+        {
+          "name": "Kostenfaktor 1993–2002 gegenüber heute",
+          "value": 2,
+          "unit": "Vielfaches",
+          "source": 3
+        },
+        {
+          "name": "Kostenfaktor 1880–1992 gegenüber heute",
+          "value": 6,
+          "unit": "Vielfaches",
+          "source": 3
+        },
+        {
+          "name": "Mittlere Sharpe je Einzelmarkt",
+          "value": 0.4,
+          "unit": "Sharpe p.a. ('approximately')",
+          "source": 4
+        },
+        {
+          "name": "Zielvolatilität Portfolio",
+          "value": 10,
+          "unit": "% p.a. ex ante",
+          "source": 5
+        },
+        {
+          "name": "Kostentabelle Exhibit B1 je Anlageklasse",
+          "value": null,
+          "unit": "% je Transaktion",
+          "source": 2,
+          "note": "NICHT_GEPRUEFT – Bild, nicht maschinenlesbar"
+        }
+      ],
+      "status": "TEILWEISE",
+      "sources": [
+        {
+          "url": "https://www.aqr.com/-/media/AQR/Documents/Insights/Journal-Article/AQR-JPM-Fall-2017.pdf",
+          "quote": "We construct an equal-weighted combination of 1-month, 3-month, and 12-month time-series momentum strategies for the 67 markets."
+        },
+        {
+          "url": "https://www.aqr.com/-/media/AQR/Documents/Insights/Journal-Article/AQR-JPM-Fall-2017.pdf",
+          "quote": "To simulate fees, we apply a 2% management fee and a 20% performance fee subject to a high-water mark, as has been typical for hedge funds."
+        },
+        {
+          "url": "https://www.aqr.com/-/media/AQR/Documents/Insights/Journal-Article/AQR-JPM-Fall-2017.pdf",
+          "quote": "These costs are based on proprietary estimates, made in 2012, of the average transaction costs for each of the four asset classes"
+        },
+        {
+          "url": "https://www.aqr.com/-/media/AQR/Documents/Insights/Journal-Article/AQR-JPM-Fall-2017.pdf",
+          "quote": "the transaction costs are assumed to be twice as high from 1993 to 2002 and six times as high from 1880 to 1992, based on Jones [2002]."
+        },
+        {
+          "url": "https://www.aqr.com/-/media/AQR/Documents/Insights/Journal-Article/AQR-JPM-Fall-2017.pdf",
+          "quote": "We see that the strategy has delivered positive average returns in each market, with an average Sharpe ratio of approximately 0.4."
+        },
+        {
+          "url": "https://www.aqr.com/-/media/AQR/Documents/Insights/Journal-Article/AQR-JPM-Fall-2017.pdf",
+          "quote": "The positions across the three strategies are aggregated each month and scaled such that the combined portfolio has an annualized ex ante volatility target of 10% annualized."
+        },
+        {
+          "url": "https://www.aqr.com/-/media/AQR/Documents/Insights/Journal-Article/AQR-JPM-Fall-2017.pdf",
+          "quote": "We report the results gross and net of simulated transaction costs and consider returns both before and after fees."
+        },
+        {
+          "url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2993026",
+          "quote": "They find that in each decade since 1880, time series momentum has delivered positive average returns with low correlations to traditional asset classes."
+        }
+      ]
+    },
+    {
+      "id": "TF-BABU-2020-JOIM",
+      "citation": "Babu, A., Levine, A., Ooi, Y. H., Pedersen, L. H., Stamelos, E. (2020): Trends Everywhere. Journal of Investment Management 18(1).",
+      "journal_year": "Journal of Investment Management, 2020",
+      "period": "Januar 1985 – Dezember 2017",
+      "universe": "156 Anlagen, davon 58 'traditionelle' (klassische Futures/Forwards); übrige: alternative Märkte und Faktoren",
+      "horizon_or_frequency": "12-Monats-TSMOM (Hauptanalyse); Tabelle 3: Lookbacks 1–12 Monate [Bezug Zielhorizont 4 h–4 T: niedrig bis mittel]",
+      "gross_or_net": "brutto (vor Transaktionskosten)",
+      "sharpe": 1.17,
+      "sharpe_note": "Diversifiziert, nur traditionelle Anlagen, 12-Monats-TSMOM, brutto = 1,17 (als Hauptwert gewählt, da nächster am Futures-Universum). Alternative Anlagen 1,34; Faktoren 0,95; alle zusammen 1,60. Median je Einzelanlage 0,34 (traditionell). Spaltenfolge laut Transkription: Traditional | Alternative | Factors | All.",
+      "cost_assumption": "Keine Kosten; Autoren: Handelskosten für alternative Anlagen und Faktoren wahrscheinlich höher als für traditionelle.",
+      "other_key_numbers": [
+        {
+          "name": "Anzahl Anlagen gesamt",
+          "value": 156,
+          "unit": "Anlagen",
+          "source": 0
+        },
+        {
+          "name": "Anzahl traditionelle Anlagen",
+          "value": 58,
+          "unit": "Anlagen",
+          "source": 0
+        },
+        {
+          "name": "Median-Sharpe je Einzelanlage, traditionell",
+          "value": 0.34,
+          "unit": "Sharpe p.a., brutto",
+          "source": 4
+        },
+        {
+          "name": "Median-Sharpe je Einzelanlage, alternativ",
+          "value": 0.34,
+          "unit": "Sharpe p.a., brutto",
+          "source": 4
+        },
+        {
+          "name": "Median-Sharpe je Einzelanlage, Faktoren",
+          "value": 0.39,
+          "unit": "Sharpe p.a., brutto",
+          "source": 4
+        },
+        {
+          "name": "Sharpe diversifiziert, alternative Anlagen",
+          "value": 1.34,
+          "unit": "Sharpe p.a., brutto",
+          "source": 5
+        },
+        {
+          "name": "Sharpe diversifiziert, Faktoren",
+          "value": 0.95,
+          "unit": "Sharpe p.a., brutto",
+          "source": 5
+        },
+        {
+          "name": "Sharpe diversifiziert, alle Anlagen und Faktoren",
+          "value": 1.6,
+          "unit": "Sharpe p.a., brutto",
+          "source": 5
+        },
+        {
+          "name": "Alpha-t-Stat Lookback 1 M, traditionell",
+          "value": 4.12,
+          "unit": "t-Statistik",
+          "source": 6
+        },
+        {
+          "name": "Alpha-t-Stat Lookback 1 M, alternativ",
+          "value": 8.17,
+          "unit": "t-Statistik",
+          "source": 6
+        },
+        {
+          "name": "Alpha-t-Stat Lookback 12 M, traditionell",
+          "value": 5.72,
+          "unit": "t-Statistik",
+          "source": 7
+        },
+        {
+          "name": "Alpha-t-Stat Lookback 12 M, alternativ",
+          "value": 6.78,
+          "unit": "t-Statistik",
+          "source": 7
+        }
+      ],
+      "status": "VERIFIZIERT",
+      "sources": [
+        {
+          "url": "https://www.aqr.com/-/media/AQR/Documents/Insights/Journal-Article/AQR-Trends-Everywhere_JOIM.pdf?sc_lang=en",
+          "quote": "Our full data contains 156 assets, of which 58 are the \"traditional assets\" studied in the literature cited above."
+        },
+        {
+          "url": "https://www.aqr.com/-/media/AQR/Documents/Insights/Journal-Article/AQR-Trends-Everywhere_JOIM.pdf?sc_lang=en",
+          "quote": "We compute this excess return of 12-month time series momentum for each instrument and each available month from January 1985 to December 2017."
+        },
+        {
+          "url": "https://www.aqr.com/-/media/AQR/Documents/Insights/Journal-Article/AQR-Trends-Everywhere_JOIM.pdf?sc_lang=en",
+          "quote": "We report strategy returns gross of transaction costs."
+        },
+        {
+          "url": "https://www.aqr.com/-/media/AQR/Documents/Insights/Journal-Article/AQR-Trends-Everywhere_JOIM.pdf?sc_lang=en",
+          "quote": "We note that the trading costs are likely higher for alternative assets and factors than for traditional assets."
+        },
+        {
+          "url": "https://www.aqr.com/-/media/AQR/Documents/Insights/Journal-Article/AQR-Trends-Everywhere_JOIM.pdf?sc_lang=en",
+          "quote": "[Table 2, Sharpe Ratio] Median Across Individual Assets 0.34 0.34 0.39 0.35"
+        },
+        {
+          "url": "https://www.aqr.com/-/media/AQR/Documents/Insights/Journal-Article/AQR-Trends-Everywhere_JOIM.pdf?sc_lang=en",
+          "quote": "[Table 2, Sharpe Ratio] Diversified Portfolio 1.17 1.34 0.95 1.60"
+        },
+        {
+          "url": "https://www.aqr.com/-/media/AQR/Documents/Insights/Journal-Article/AQR-Trends-Everywhere_JOIM.pdf?sc_lang=en",
+          "quote": "[Table 3, Panel A, TSMOM lookback 1 month] 1 4.12 8.17 3.75 7.61"
+        },
+        {
+          "url": "https://www.aqr.com/-/media/AQR/Documents/Insights/Journal-Article/AQR-Trends-Everywhere_JOIM.pdf?sc_lang=en",
+          "quote": "[Table 3, Panel A, TSMOM lookback 12 months] 12 5.72 6.78 2.05 6.27"
+        }
+      ]
+    },
+    {
+      "id": "IDX-SGTREND-BABU-2020",
+      "citation": "Babu, A., Levine, A., Ooi, Y. H., Schroeder, S., Stamelos, E. (2020): You Can't Always Trend When You Want. Journal of Portfolio Management 46(4) – darin Kennzahlen des SG Trend Index.",
+      "journal_year": "Journal of Portfolio Management, 2020",
+      "period": "01.01.2000 – 31.12.2018 (Teilperiode 01.01.2010 – 31.12.2018)",
+      "universe": "SG Trend Index (realisierte Renditen großer Trendfolge-CTAs)",
+      "horizon_or_frequency": "Index realisierter Fondsrenditen, überwiegend mittel- bis langfristige Trendfolge [Bezug Zielhorizont 4 h–4 T: niedrig; Umsetzungsrealität]",
+      "gross_or_net": "realisierte Indexrenditen (Gebühren-/Kostenbasis im Zitat nicht genannt)",
+      "sharpe": 0.28,
+      "sharpe_note": "SG Trend Index 2000–2018: 0,28; 2010–2018: 0,05. Nur Kennzahlen aus dem Artikel; keine Primärdaten von Société Générale abgerufen.",
+      "cost_assumption": "Index = realisierte Fondsrenditen. Die im Artikel simulierte Trendstrategie ist 'net of estimated transaction costs, and gross of fees' (Kostenmodell wie Hurst/Ooi/Pedersen 2017).",
+      "other_key_numbers": [
+        {
+          "name": "Sharpe SG Trend Index 2000–2018",
+          "value": 0.28,
+          "unit": "Sharpe p.a., realisiert",
+          "source": 1
+        },
+        {
+          "name": "Sharpe SG Trend Index 2010–2018",
+          "value": 0.05,
+          "unit": "Sharpe p.a., realisiert",
+          "source": 0
+        }
+      ],
+      "status": "VERIFIZIERT",
+      "sources": [
+        {
+          "url": "https://images.aqr.com/-/media/AQR/Documents/Journal-Articles/JPM-You-Cant-Always-Trend-When-You-Want.pdf",
+          "quote": "From January 1, 2010, through December 31, 2018, the SG Trend Index realized an annualized Sharpe ratio of 0.05"
+        },
+        {
+          "url": "https://images.aqr.com/-/media/AQR/Documents/Journal-Articles/JPM-You-Cant-Always-Trend-When-You-Want.pdf",
+          "quote": "versus a Sharpe ratio of 0.28 from the inception of the index on January 1, 2000, through December 31, 2018."
+        },
+        {
+          "url": "https://images.aqr.com/-/media/AQR/Documents/Journal-Articles/JPM-You-Cant-Always-Trend-When-You-Want.pdf",
+          "quote": "The Sharpe ratios are based on the hypothetical trend-following strategy backtest, net of estimated transaction costs, and gross of fees."
+        }
+      ]
+    },
+    {
+      "id": "CARRY-KMPV-2018",
+      "citation": "Koijen, R. S. J., Moskowitz, T. J., Pedersen, L. H., Vrugt, E. B. (2018): Carry. Journal of Financial Economics 127(2), 197–225. Zahlen aus NBER Working Paper 19325 (Aug. 2013, rev. Dez. 2013).",
+      "journal_year": "Journal of Financial Economics, 2018 (Zahlen: NBER WP 19325, 2013)",
+      "period": "bis September 2012; Beginn je Anlageklasse verschieden (z. B. Devisen-Forwards ab November 1983)",
+      "universe": "Globale Aktien(indizes), globale Anleihen, Währungen, Rohstoffe, US-Treasuries, Credit, Index-Optionen",
+      "horizon_or_frequency": "Carry-Signal (ex ante messbar), Querschnitts- und Zeitreihenstrategien [Bezug Zielhorizont 4 h–4 T: indirekt – Carry nur als Filter/Neigung]",
+      "gross_or_net": "brutto (Kosten nur qualitativ erwähnt)",
+      "sharpe": 1.1,
+      "sharpe_note": "Über alle Anlageklassen diversifizierte Carry-Strategie 1,1 (NBER-Fassung). Einzelklassen: Spanne 0,37 (Call-Optionen) bis 1,80 (Put-Optionen), Durchschnitt 0,74. Werte je Futures-Klasse (Aktien, Anleihen, Währungen, Rohstoffe) NICHT_GEPRUEFT: Tabellen-Transkription in drei Abrufen widersprüchlich, daher verworfen. Qualitativ belegt: in Aktien deutlich besser als in Währungen, Rohstoffe etwa wie Währungen.",
+      "cost_assumption": "Keine Kostenabzüge; Autoren: Carry-Strategie hat höhere Transaktionskosten, Finanzierungsfragen und Arbitragegrenzen als eine passive Strategie.",
+      "other_key_numbers": [
+        {
+          "name": "Sharpe Carry diversifiziert (alle Klassen)",
+          "value": 1.1,
+          "unit": "Sharpe p.a., brutto",
+          "source": 1
+        },
+        {
+          "name": "Sharpe Carry Minimum je Klasse (Call-Optionen)",
+          "value": 0.37,
+          "unit": "Sharpe p.a., brutto",
+          "source": 2
+        },
+        {
+          "name": "Sharpe Carry Maximum je Klasse (Put-Optionen)",
+          "value": 1.8,
+          "unit": "Sharpe p.a., brutto",
+          "source": 2
+        },
+        {
+          "name": "Sharpe Carry Durchschnitt über Klassen",
+          "value": 0.74,
+          "unit": "Sharpe p.a., brutto",
+          "source": 2
+        },
+        {
+          "name": "Anzahl Devisen-Forwards",
+          "value": 20,
+          "unit": "Kontrakte",
+          "source": 4
+        },
+        {
+          "name": "Sharpe Carry je Futures-Klasse",
+          "value": null,
+          "unit": "Sharpe p.a.",
+          "source": 1,
+          "note": "NICHT_GEPRUEFT – Transkription widersprüchlich"
+        }
+      ],
+      "status": "TEILWEISE",
+      "sources": [
+        {
+          "url": "https://www.nber.org/papers/w19325",
+          "quote": "carry predicts returns both in the cross section and time series for a variety of different asset classes"
+        },
+        {
+          "url": "https://www.nber.org/system/files/working_papers/w19325/w19325.pdf",
+          "quote": "Forming a portfolio of carry strategies diversified across all asset classes earns a Sharpe ratio of 1.1, suggesting significant diversification benefits."
+        },
+        {
+          "url": "https://www.nber.org/system/files/working_papers/w19325/w19325.pdf",
+          "quote": "The Sharpe ratios for the carry strategies range from 0.37 for call options to 1.80 for put options, with the average being 0.74 across all asset classes."
+        },
+        {
+          "url": "https://www.nber.org/system/files/working_papers/w19325/w19325.pdf",
+          "quote": "On the other hand, the carry strategy faces larger transaction costs, greater funding issues, and limits to arbitrage than a passive strategy."
+        },
+        {
+          "url": "https://www.nber.org/system/files/working_papers/w19325/w19325.pdf",
+          "quote": "We consider 20 foreign exchange forward contracts covering the period November 1983 to September 2012"
+        },
+        {
+          "url": "https://www.nber.org/system/files/working_papers/w19325/w19325.pdf",
+          "quote": "performing markedly better in equities and put options than in currencies, and about as well as currencies in commodities"
+        },
+        {
+          "url": "https://www.sciencedirect.com/science/article/abs/pii/S0304405X17302908",
+          "quote": "Carry predicts returns cross-sectionally and in time series for a host of different asset classes, including global equities, global bonds, commodities, US Treasuries, credit, and options."
+        },
+        {
+          "url": "https://www.sciencedirect.com/science/article/abs/pii/S0304405X17302908",
+          "quote": "carry strategies are commonly exposed to global recession, liquidity, and volatility risks, though none fully explains carry's premium."
+        }
+      ]
+    },
+    {
+      "id": "MOM-AMP-2013",
+      "citation": "Asness, C. S., Moskowitz, T. J., Pedersen, L. H. (2013): Value and Momentum Everywhere. Journal of Finance 68(3), 929–985.",
+      "journal_year": "Journal of Finance, 2013",
+      "period": "bis Juli 2011; Beginn je Anlageklasse verschieden (z. B. Währungen ab Januar 1979)",
+      "universe": "8 Märkte/Anlageklassen: Einzelaktien (USA, UK, Kontinentaleuropa, Japan), Aktienindex-Futures, Staatsanleihen, Währungen, Rohstoff-Futures",
+      "horizon_or_frequency": "Querschnittsmomentum MOM2–12 (12 Monate ohne letzten Monat), Terzil-Portfolios P1–P3 [Bezug Zielhorizont 4 h–4 T: niedrig]",
+      "gross_or_net": "brutto",
+      "sharpe": 1.45,
+      "sharpe_note": "1,45 = 50/50 Value+Momentum, global über alle 8 Märkte inkl. Einzelaktien (inverse Vola-Gewichtung) – kein reiner Futures-Momentum-Wert. Momentum P3–P1 brutto je Futures-Klasse: Länderindizes 0,73; Währungen 0,34; Anleihen 0,06; Rohstoffe 0,53 (Spaltenfolge P1, P2, P3, P3–P1, Faktor laut Transkription, in drei Abrufen konsistent).",
+      "cost_assumption": "Keine Kosten; Autoren: schwächere Renditen der Nicht-Aktien-Klassen würden bei Kostenberücksichtigung teilweise relativiert.",
+      "other_key_numbers": [
+        {
+          "name": "Sharpe Value+Momentum 50/50 global",
+          "value": 1.45,
+          "unit": "Sharpe p.a., brutto",
+          "source": 1
+        },
+        {
+          "name": "Sharpe Momentum P3–P1 Länderindizes",
+          "value": 0.73,
+          "unit": "Sharpe p.a., brutto",
+          "source": 3
+        },
+        {
+          "name": "Sharpe Momentum-Faktor Länderindizes",
+          "value": 0.63,
+          "unit": "Sharpe p.a., brutto",
+          "source": 3
+        },
+        {
+          "name": "Sharpe Momentum P3–P1 Währungen",
+          "value": 0.34,
+          "unit": "Sharpe p.a., brutto",
+          "source": 4
+        },
+        {
+          "name": "Sharpe Momentum-Faktor Währungen",
+          "value": 0.32,
+          "unit": "Sharpe p.a., brutto",
+          "source": 4
+        },
+        {
+          "name": "Sharpe Momentum P3–P1 Anleihen",
+          "value": 0.06,
+          "unit": "Sharpe p.a., brutto",
+          "source": 5
+        },
+        {
+          "name": "Sharpe Momentum-Faktor Anleihen",
+          "value": 0.17,
+          "unit": "Sharpe p.a., brutto",
+          "source": 5
+        },
+        {
+          "name": "Sharpe Momentum P3–P1 Rohstoffe",
+          "value": 0.53,
+          "unit": "Sharpe p.a., brutto",
+          "source": 6
+        },
+        {
+          "name": "Sharpe Momentum-Faktor Rohstoffe",
+          "value": 0.51,
+          "unit": "Sharpe p.a., brutto",
+          "source": 6
+        },
+        {
+          "name": "Anzahl Märkte/Anlageklassen",
+          "value": 8,
+          "unit": "Märkte",
+          "source": 0
+        }
+      ],
+      "status": "VERIFIZIERT",
+      "sources": [
+        {
+          "url": "https://afajof.org/issue/volume-68-issue-3/",
+          "quote": "We find consistent value and momentum return premia across eight diverse markets and asset classes, and a strong common factor structure among their returns."
+        },
+        {
+          "url": "https://w4.stern.nyu.edu/facdir/lpederse/papers/ValMomEverywhere.pdf",
+          "quote": "The 50/50 value and momentum combination portfolio produces an annual Sharpe ratio of 1.45"
+        },
+        {
+          "url": "https://w4.stern.nyu.edu/facdir/lpederse/papers/ValMomEverywhere.pdf",
+          "quote": "We combine the global stock strategies with the global nonstock other asset class strategies by weighting each by the inverse of their in-sample volatility"
+        },
+        {
+          "url": "https://w4.stern.nyu.edu/facdir/lpederse/papers/ValMomEverywhere.pdf",
+          "quote": "[Table I, Panel B, Country indices, momentum] Sharpe 0.14 0.37 0.65 0.73 0.63"
+        },
+        {
+          "url": "https://w4.stern.nyu.edu/facdir/lpederse/papers/ValMomEverywhere.pdf",
+          "quote": "[Table I, Panel B, Currencies, momentum] Sharpe − 0.07 0.04 0.34 0.34 0.32"
+        },
+        {
+          "url": "https://w4.stern.nyu.edu/facdir/lpederse/papers/ValMomEverywhere.pdf",
+          "quote": "[Table I, Panel B, Fixed income, momentum] Sharpe 0.64 0.66 0.61 0.06 0.17"
+        },
+        {
+          "url": "https://w4.stern.nyu.edu/facdir/lpederse/papers/ValMomEverywhere.pdf",
+          "quote": "[Table I, Panel B, Commodities, momentum] Sharpe 0.04 0.37 0.60 0.53 0.51"
+        },
+        {
+          "url": "https://w4.stern.nyu.edu/facdir/lpederse/papers/ValMomEverywhere.pdf",
+          "quote": "The past 12-month cumulative raw return on the asset, skipping the most recent month's return, MOM2–12."
+        },
+        {
+          "url": "https://w4.stern.nyu.edu/facdir/lpederse/papers/ValMomEverywhere.pdf",
+          "quote": "The data cover the period January 1979 to July 2011"
+        },
+        {
+          "url": "https://w4.stern.nyu.edu/facdir/lpederse/papers/ValMomEverywhere.pdf",
+          "quote": "The somewhat weaker returns for the nonstock asset classes would be partially attenuated if transactions costs were considered."
+        }
+      ]
+    },
+    {
+      "id": "INTRA-GHLZ-2018",
+      "citation": "Gao, L., Han, Y., Li, S. Z., Zhou, G. (2018): Market intraday momentum. Journal of Financial Economics 129(2), 394–414.",
+      "journal_year": "Journal of Financial Economics, 2018",
+      "period": "1993–2013",
+      "universe": "S&P-500-ETF (SPY), Hochfrequenzdaten; Effekt zusätzlich in zehn weiteren ETFs",
+      "horizon_or_frequency": "Intraday: Signal = Rendite der ersten halben Stunde (ab Vortagesschluss), Position in der letzten halben Stunde; täglich [Bezug Zielhorizont 4 h–4 T: mittel – Signal intraday, Haltedauer 30 Min.]",
+      "gross_or_net": "brutto (Kostenrobustheit nur qualitativ)",
+      "sharpe": 1.08,
+      "sharpe_note": "Timing-Strategie nach Vorzeichen der ersten halben Stunde: 6,67 % p.a., Std.-Abw. 6,19 %, Sharpe 1,08 gegenüber 0,29 für tägliches Buy-and-hold. Einzelmarkt (SPY), kein Futures-Portfolio.",
+      "cost_assumption": "Outperformance laut Autoren nach Transaktionskosten weiter signifikant (Kosten seit Dezimalisierung 2001 gesunken); konkreter bp-Wert im Abruf nicht enthalten.",
+      "other_key_numbers": [
+        {
+          "name": "Rendite Timing-Strategie",
+          "value": 6.67,
+          "unit": "% p.a., brutto",
+          "source": 2
+        },
+        {
+          "name": "Standardabweichung Timing-Strategie",
+          "value": 6.19,
+          "unit": "% p.a.",
+          "source": 2
+        },
+        {
+          "name": "Sharpe Timing-Strategie",
+          "value": 1.08,
+          "unit": "Sharpe p.a., brutto",
+          "source": 3
+        },
+        {
+          "name": "Sharpe tägliches Buy-and-hold",
+          "value": 0.29,
+          "unit": "Sharpe p.a.",
+          "source": 3
+        },
+        {
+          "name": "Weitere ETFs mit Effekt",
+          "value": 10,
+          "unit": "ETFs",
+          "source": 5
+        }
+      ],
+      "status": "VERIFIZIERT",
+      "sources": [
+        {
+          "url": "https://www.sciencedirect.com/science/article/abs/pii/S0304405X18301351",
+          "quote": "Based on high frequency S & P 500 exchange-traded fund (ETF) data from 1993–2013, we show an intraday momentum pattern"
+        },
+        {
+          "url": "https://www.sciencedirect.com/science/article/abs/pii/S0304405X18301351",
+          "quote": "the first half-hour return on the market as measured from the previous day's market close predicts the last half-hour return."
+        },
+        {
+          "url": "https://www.sciencedirect.com/science/article/abs/pii/S0304405X18301351",
+          "quote": "The average return of the timing strategy using the sign of the first half-hour return is 6.67% per annum with a standard deviation of 6.19%."
+        },
+        {
+          "url": "https://www.sciencedirect.com/science/article/abs/pii/S0304405X18301351",
+          "quote": "The Sharpe ratio is thus 1.08, fairly remarkable compared to a ratio of 0.29 for a daily Buy-and-hold strategy."
+        },
+        {
+          "url": "https://www.sciencedirect.com/science/article/abs/pii/S0304405X18301351",
+          "quote": "Moreover, the outperformance remains significant even after accounting for transaction costs, which have become increasingly lower due to quote decimalization in 2001 and advances in trading technology."
+        },
+        {
+          "url": "https://www.sciencedirect.com/science/article/abs/pii/S0304405X18301351",
+          "quote": "Intraday momentum also exists for ten other most actively traded domestic and international ETFs."
+        }
+      ]
+    },
+    {
+      "id": "INTRA-BDLM-2021",
+      "citation": "Baltussen, G., Da, Z., Lammers, S., Martens, M. (2021): Hedging demand and market intraday momentum. Journal of Financial Economics 142(1), 377–403.",
+      "journal_year": "Journal of Financial Economics, 2021",
+      "period": "Dezember 1974 – Mai 2020",
+      "universe": "über 60 Futures: 17 Aktienindex-, 16 Staatsanleihe-, 21 Rohstoff-, 8 Währungsfutures (entwickelte Märkte)",
+      "horizon_or_frequency": "Intraday: Signal = Rendite vom Vortagesschluss bis 30 Min. vor Schluss; Position long/short in den letzten 30 Minuten; täglich [Bezug Zielhorizont 4 h–4 T: mittel – Haltedauer 30 Min.; Effekt kehrt über die Folgetage um]",
+      "gross_or_net": "brutto (keine Transaktionskosten)",
+      "sharpe": null,
+      "sharpe_note": "NICHT_BERICHTET: kein diversifizierter Gesamtwert. Je Anlageklasse brutto: Aktienindex 1,73; Anleihen 1,62; Rohstoffe 1,42; Währungen 0,87 (Spanne 0,87–1,73). Sehr niedrige Volatilität (nur 30 Min. investiert), daher hohe Sharpe bei kleinen Renditen.",
+      "cost_assumption": "Keine Kosten; Autoren: wegen häufigen Umschichtens für viele Investoren nach Kosten womöglich nicht ausbeutbar; S&P-500-Future mit Kosten von 1 Tick: positive Netto-Sharpe (Wert nicht genannt).",
+      "other_key_numbers": [
+        {
+          "name": "Anzahl Aktienindexfutures",
+          "value": 17,
+          "unit": "Kontrakte",
+          "source": 4
+        },
+        {
+          "name": "Anzahl Anleihefutures",
+          "value": 16,
+          "unit": "Kontrakte",
+          "source": 4
+        },
+        {
+          "name": "Anzahl Rohstofffutures",
+          "value": 21,
+          "unit": "Kontrakte",
+          "source": 4
+        },
+        {
+          "name": "Anzahl Währungsfutures",
+          "value": 8,
+          "unit": "Kontrakte",
+          "source": 4
+        },
+        {
+          "name": "Sharpe Aktienindexfutures",
+          "value": 1.73,
+          "unit": "Sharpe p.a., brutto",
+          "source": 6
+        },
+        {
+          "name": "Rendite Aktienindexfutures",
+          "value": 6.86,
+          "unit": "% p.a., brutto",
+          "source": 6
+        },
+        {
+          "name": "Volatilität Aktienindexfutures",
+          "value": 3.96,
+          "unit": "% p.a.",
+          "source": 6
+        },
+        {
+          "name": "Sharpe Anleihefutures",
+          "value": 1.62,
+          "unit": "Sharpe p.a., brutto",
+          "source": 6
+        },
+        {
+          "name": "Rendite Anleihefutures",
+          "value": 2.16,
+          "unit": "% p.a., brutto",
+          "source": 6
+        },
+        {
+          "name": "Sharpe Rohstofffutures",
+          "value": 1.42,
+          "unit": "Sharpe p.a., brutto",
+          "source": 6
+        },
+        {
+          "name": "Rendite Rohstofffutures",
+          "value": 4.34,
+          "unit": "% p.a., brutto",
+          "source": 6
+        },
+        {
+          "name": "Sharpe Währungsfutures",
+          "value": 0.87,
+          "unit": "Sharpe p.a., brutto",
+          "source": 6
+        },
+        {
+          "name": "Rendite Währungsfutures",
+          "value": 0.85,
+          "unit": "% p.a., brutto",
+          "source": 6
+        },
+        {
+          "name": "Haltedauer je Handelstag",
+          "value": 30,
+          "unit": "Minuten",
+          "source": 1
+        }
+      ],
+      "status": "VERIFIZIERT",
+      "sources": [
+        {
+          "url": "https://www.sciencedirect.com/science/article/abs/pii/S0304405X21001598",
+          "quote": "Using intraday returns on over 60 futures on equities, bonds, commodities, and currencies between 1974 and 2020, we find strong market intraday momentum everywhere."
+        },
+        {
+          "url": "https://www.sciencedirect.com/science/article/abs/pii/S0304405X21001598",
+          "quote": "The return during the last 30 minutes before the market close is positively predicted by the return during the rest of the day"
+        },
+        {
+          "url": "https://www.sciencedirect.com/science/article/abs/pii/S0304405X21001598",
+          "quote": "The predictive power is economically and statistically highly significant, and reverts over the next days."
+        },
+        {
+          "url": "https://www.sciencedirect.com/science/article/abs/pii/S0304405X21001598",
+          "quote": "A simple market intraday momentum trading strategy produces consistent returns over time, translating into high and attractive (annualized) Sharpe ratios between 0.87 and 1.73 at the asset class level."
+        },
+        {
+          "url": "https://academicweb.nd.edu/~zda/intramom.pdf",
+          "quote": "17 developed markets equity index futures (6 North American, 8 European, 3 Asian or Australian); 16 developed market bond futures; 21 commodity futures; and 8 currency futures."
+        },
+        {
+          "url": "https://academicweb.nd.edu/~zda/intramom.pdf",
+          "quote": "Our sample period covers almost 45 years from December 1974 to May 2020."
+        },
+        {
+          "url": "https://academicweb.nd.edu/~zda/intramom.pdf",
+          "quote": "[Table 6, row η(rROD); per panel Avg ret(%) Std dev(%) SR Success] η(rROD) 6.86 3.96 1.73 0.55 2.16 1.33 1.62 0.55 4.34 3.05 1.42 0.56 0.85 0.98 0.87 0.53"
+        },
+        {
+          "url": "https://academicweb.nd.edu/~zda/intramom.pdf",
+          "quote": "Note that we do not consider transaction costs."
+        },
+        {
+          "url": "https://academicweb.nd.edu/~zda/intramom.pdf",
+          "quote": "the strategy as presented might not be exploitable to many investors after accounting for transaction costs."
+        },
+        {
+          "url": "https://academicweb.nd.edu/~zda/intramom.pdf",
+          "quote": "exploiting the effect in the S&P 500 futures yields a positive net Sharpe ratio when we assume transaction cost equal to a tick"
+        },
+        {
+          "url": "https://academicweb.nd.edu/~zda/intramom.pdf",
+          "quote": "Timing strategy η(rROD) takes a long position when the return until 30 minutes before close rROD is positive, and a short position otherwise."
+        },
+        {
+          "url": "https://academicweb.nd.edu/~zda/intramom.pdf",
+          "quote": "The results are similar in the first and second half of our sample."
+        }
+      ]
+    },
+    {
+      "id": "INTRA-LSU-2022",
+      "citation": "Li, Z., Sakkas, A., Urquhart, A. (2022): Intraday time series momentum: Global evidence and links to market characteristics. Journal of Financial Markets 57, 100619.",
+      "journal_year": "Journal of Financial Markets, 2022",
+      "period": null,
+      "universe": "16 entwickelte Märkte (Hochfrequenzdaten; Instrumenttyp im Abruf nicht belegt)",
+      "horizon_or_frequency": "Intraday-Zeitreihenmomentum (ITSM) [Bezug Zielhorizont 4 h–4 T: mittel]",
+      "gross_or_net": "unbekannt (Volltext nicht abrufbar)",
+      "sharpe": null,
+      "sharpe_note": "NICHT_GEPRUEFT: Sharpe-Werte nicht auffindbar (SSRN-Volltext HTTP 429, Verlags-Volltext nicht frei, Hochschul-Portale ohne PDF). Belegt: signifikant positive Rendite in 13 von 16 Märkten, Sharpe über Buy-and-hold in 12 Märkten.",
+      "cost_assumption": "NICHT_GEPRUEFT",
+      "other_key_numbers": [
+        {
+          "name": "Anzahl Märkte",
+          "value": 16,
+          "unit": "Märkte",
+          "source": 0
+        },
+        {
+          "name": "Märkte mit signifikant positiver ITSM-Rendite",
+          "value": 13,
+          "unit": "Märkte",
+          "source": 1
+        },
+        {
+          "name": "Märkte mit Sharpe über Buy-and-hold",
+          "value": 12,
+          "unit": "Märkte",
+          "source": 1
+        }
+      ],
+      "status": "TEILWEISE",
+      "sources": [
+        {
+          "url": "https://www.sciencedirect.com/science/article/abs/pii/S138641812100001X",
+          "quote": "We examine intraday time series momentum (ITSM) in an international setting by employing high-frequency data of 16 developed markets."
+        },
+        {
+          "url": "https://www.sciencedirect.com/science/article/abs/pii/S138641812100001X",
+          "quote": "A simple trading strategy based on ITSM produces a significant positive return in 13 markets and beats the passive buy-and-hold benchmark in terms of Sharpe ratio in 12 markets."
+        },
+        {
+          "url": "https://www.sciencedirect.com/science/article/abs/pii/S138641812100001X",
+          "quote": "We document both in the cross-section and time series dimension that ITSM is stronger when liquidity is low, volatility is high, and new information is discrete."
+        }
+      ]
+    },
+    {
+      "id": "TF-BK-2013",
+      "citation": "Baltas, N., Kosowski, R. (2013): Momentum Strategies in Futures Markets and Trend-Following Funds. SSRN Working Paper 1968996 (Fassung vom 5. Januar 2013).",
+      "journal_year": "SSRN Working Paper, 2013",
+      "period": null,
+      "universe": null,
+      "horizon_or_frequency": "TSMOM-Benchmarkportfolios; Rebalancing täglich/wöchentlich/monatlich laut Literatur – im Abruf NICHT_GEPRUEFT [Bezug Zielhorizont 4 h–4 T: potenziell hoch]",
+      "gross_or_net": "NICHT_GEPRUEFT",
+      "sharpe": null,
+      "sharpe_note": "NICHT_GEPRUEFT: Sharpe je Rebalancing-Frequenz nicht abrufbar (SSRN-Volltext HTTP 429 bzw. Timeout; Konferenz-Kopien nicht zulässig). Belegt nur das Abstract: CTAs folgen TSMOM; keine signifikanten Kapazitätsgrenzen.",
+      "cost_assumption": "NICHT_GEPRUEFT",
+      "other_key_numbers": [
+        {
+          "name": "Methoden zur Kapazitätsprüfung",
+          "value": 2,
+          "unit": "Methoden (keine signifikanten Kapazitätsgrenzen)",
+          "source": 1
+        }
+      ],
+      "status": "TEILWEISE",
+      "sources": [
+        {
+          "url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=1968996",
+          "quote": "we provide evidence that CTAs follow time-series momentum strategies, by showing that such benchmark strategies have high explanatory power in the time-series of CTA index returns"
+        },
+        {
+          "url": "https://papers.ssrn.com/sol3/papers.cfm?abstract_id=1968996",
+          "quote": "we do not find evidence of statistically significant capacity constraints based on two different methodologies and several robustness tests."
+        }
+      ]
+    },
+    {
+      "id": "TF-LP-2016",
+      "citation": "Levine, A., Pedersen, L. H. (2016): Which Trend Is Your Friend? Financial Analysts Journal 72(3), DOI 10.2469/faj.v72.n3.3.",
+      "journal_year": "Financial Analysts Journal, 2016",
+      "period": null,
+      "universe": null,
+      "horizon_or_frequency": "Trendfilter allgemein: TSMOM, gleitende-Durchschnitt-Crossover, weitere Filter [Bezug Zielhorizont: methodisch]",
+      "gross_or_net": "NICHT_GEPRUEFT",
+      "sharpe": null,
+      "sharpe_note": "NICHT_GEPRUEFT: Volltext (Verlag HTTP 403, SSRN HTTP 429) nicht abrufbar. Belegt nur: TSMOM und MA-Crossover sind Varianten derselben Trendfilter; Umsetzungsqualität (u. a. Transaktionskosten) entscheidend.",
+      "cost_assumption": "Qualitativ: optimales Management der Transaktionskosten und dynamisches Handeln als zentrale Umsetzungsfaktoren.",
+      "other_key_numbers": [],
+      "status": "TEILWEISE",
+      "sources": [
+        {
+          "url": "https://www.aqr.com/Insights/Research/Journal-Article/Which-Trend-Is-Your-Friend",
+          "quote": "They show that trends can be filtered out from prices or returns using a variety of methods, including time series momentum, moving-average crossovers, and other popular filters."
+        },
+        {
+          "url": "https://www.aqr.com/Insights/Research/Journal-Article/Which-Trend-Is-Your-Friend",
+          "quote": "investors and managers focus on the robustness and quality of implementation — including optimally managing transaction costs, dynamic trading, diversification, position sizing"
+        }
+      ]
+    },
+    {
+      "id": "TF-GGHM-2023",
+      "citation": "Garg, A., Goulding, C. L., Harvey, C. R., Mazzoleni, M.: Breaking Bad Trends. Financial Analysts Journal (online 2023), DOI 10.1080/0015198X.2023.2270084.",
+      "journal_year": "Financial Analysts Journal, 2023 (online)",
+      "period": "1990–2022",
+      "universe": "43 Futures: 11 Aktienindizes, 8 Anleihemärkte, 24 Rohstoffe (keine Währungen)",
+      "horizon_or_frequency": "TSMOM statisch 1 Monat, 12 Monate, Mittel aus 1/3/12 Monaten sowie dynamische Mischung; Monatsrenditen [Bezug Zielhorizont 4 h–4 T: mittel – liefert Umschlag schneller Signale]",
+      "gross_or_net": "brutto (ohne Roll- und Transaktionskosten)",
+      "sharpe": 0.59,
+      "sharpe_note": "Hauptwert 0,59 = statisches Mittel aus 1-, 3-, 12-Monats-Trend (nächstes Analogon zu 'mehreren Geschwindigkeiten'), 1990–2022, brutto. 1 Monat 0,36; 12 Monate 0,64; dynamisch 0,80.",
+      "cost_assumption": "Brutto; Umschlag p.a.: 1 Monat 1135 %, 12 Monate 229 %, Mittel 600 %, dynamisch 399 %. Dynamische Strategie bleibt bis zu mittleren Kosten von 29 bp profitabler.",
+      "other_key_numbers": [
+        {
+          "name": "Anzahl Futures",
+          "value": 43,
+          "unit": "Märkte",
+          "source": 0
+        },
+        {
+          "name": "Sharpe 1-Monats-Trend",
+          "value": 0.36,
+          "unit": "Sharpe p.a., brutto",
+          "source": 3
+        },
+        {
+          "name": "Sharpe 12-Monats-Trend",
+          "value": 0.64,
+          "unit": "Sharpe p.a., brutto",
+          "source": 3
+        },
+        {
+          "name": "Sharpe Mittel 1/3/12",
+          "value": 0.59,
+          "unit": "Sharpe p.a., brutto",
+          "source": 3
+        },
+        {
+          "name": "Sharpe dynamischer Trend",
+          "value": 0.8,
+          "unit": "Sharpe p.a., brutto",
+          "source": 3
+        },
+        {
+          "name": "Umschlag 1-Monats-Trend",
+          "value": 1135,
+          "unit": "% p.a.",
+          "source": 4
+        },
+        {
+          "name": "Umschlag 12-Monats-Trend",
+          "value": 229,
+          "unit": "% p.a.",
+          "source": 4
+        },
+        {
+          "name": "Umschlag Mittel 1/3/12",
+          "value": 600,
+          "unit": "% p.a.",
+          "source": 4
+        },
+        {
+          "name": "Umschlag dynamischer Trend",
+          "value": 399,
+          "unit": "% p.a.",
+          "source": 4
+        },
+        {
+          "name": "Break-even-Kosten dynamisch vs. statisch",
+          "value": 29,
+          "unit": "bp (mittlere Transaktionskosten)",
+          "source": 6
+        }
+      ],
+      "status": "VERIFIZIERT",
+      "sources": [
+        {
+          "url": "https://people.duke.edu/~charvey/Research/Published_Papers/P167_Breaking_bad_trends.pdf",
+          "quote": "We use monthly returns for 43 futures markets across three major asset classes: 11 equity indices, 8 bond markets, and 24 commodities"
+        },
+        {
+          "url": "https://people.duke.edu/~charvey/Research/Published_Papers/P167_Breaking_bad_trends.pdf",
+          "quote": "Our evaluations focus on the period 1990–2022, for which we have enough return data to compute 12-month trend-following strategies for at least four assets in each asset class."
+        },
+        {
+          "url": "https://people.duke.edu/~charvey/Research/Published_Papers/P167_Breaking_bad_trends.pdf",
+          "quote": "[Table E.1, Panel A header] Full Sample: 1990–2022 1-Month 12-Month Avg. 1, 3, 12 Trend"
+        },
+        {
+          "url": "https://people.duke.edu/~charvey/Research/Published_Papers/P167_Breaking_bad_trends.pdf",
+          "quote": "[Table E.1, Panel A] Sharpe Ratio 0.36 0.64 0.59 0.80"
+        },
+        {
+          "url": "https://people.duke.edu/~charvey/Research/Published_Papers/P167_Breaking_bad_trends.pdf",
+          "quote": "[Table E.1, Panel A] Turnover (Anlzd., %) 1135 229 600 399"
+        },
+        {
+          "url": "https://people.duke.edu/~charvey/Research/Published_Papers/P167_Breaking_bad_trends.pdf",
+          "quote": "Performance is gross of costs to roll contracts or of any transaction costs."
+        },
+        {
+          "url": "https://people.duke.edu/~charvey/Research/Published_Papers/P167_Breaking_bad_trends.pdf",
+          "quote": "For average transaction costs below 29 basis points—a comfortable upper bound for these assets—the dynamic strategy remains more profitable"
+        }
+      ]
+    },
+    {
+      "id": "COST-GP-2013",
+      "citation": "Gârleanu, N., Pedersen, L. H. (2013): Dynamic Trading with Predictable Returns and Transaction Costs. Journal of Finance 68(6), 2309–2340. Zahlen aus NBER Working Paper 15205 (2009).",
+      "journal_year": "Journal of Finance, 2013 (Zahlen: NBER WP 15205, 2009)",
+      "period": "01/01/1996 – 01/23/2009",
+      "universe": "15 liquide Rohstoff-Futures",
+      "horizon_or_frequency": "Signale mit unterschiedlicher Abklinggeschwindigkeit: 5-Tage-, 1-Jahres- und 5-Jahres-Preisänderung (volatilitätsnormiert) [Bezug Zielhorizont 4 h–4 T: hoch für Kostenwirkung schneller Signale]",
+      "gross_or_net": "brutto und netto (Kostenmodell mit Preiseinfluss)",
+      "sharpe": 0.58,
+      "sharpe_note": "Hauptwert 0,58 = optimale dynamische Strategie netto (Basiskosten), brutto 0,62. Myopische Markowitz-Strategie (handelt alle Signale inkl. 5-Tage-Signal voll): brutto 0,83, netto −9,84. Hohe Kosten: Markowitz netto −10,11, dynamisch 0,53 (brutto 0,58).",
+      "cost_assumption": "Kostenmodell proportional zum Risiko (Λ = λΣ), kalibriert an Preiseinfluss-Literatur; Panel A Basiskosten, Panel B hohe Kosten (laut Transkription).",
+      "other_key_numbers": [
+        {
+          "name": "Sharpe Markowitz brutto",
+          "value": 0.83,
+          "unit": "Sharpe p.a.",
+          "source": 3
+        },
+        {
+          "name": "Sharpe Markowitz netto (Basiskosten)",
+          "value": -9.84,
+          "unit": "Sharpe p.a.",
+          "source": 3
+        },
+        {
+          "name": "Sharpe Markowitz netto (hohe Kosten)",
+          "value": -10.11,
+          "unit": "Sharpe p.a.",
+          "source": 3
+        },
+        {
+          "name": "Sharpe dynamisch brutto (Basiskosten)",
+          "value": 0.62,
+          "unit": "Sharpe p.a.",
+          "source": 4
+        },
+        {
+          "name": "Sharpe dynamisch netto (Basiskosten)",
+          "value": 0.58,
+          "unit": "Sharpe p.a.",
+          "source": 4
+        },
+        {
+          "name": "Sharpe dynamisch netto (hohe Kosten)",
+          "value": 0.53,
+          "unit": "Sharpe p.a.",
+          "source": 4
+        },
+        {
+          "name": "Vorsprung Netto-Sharpe dynamisch vs. beste statische",
+          "value": 20,
+          "unit": "% ('about')",
+          "source": 6
+        },
+        {
+          "name": "Anzahl Rohstoff-Futures",
+          "value": 15,
+          "unit": "Kontrakte",
+          "source": 8
+        }
+      ],
+      "status": "VERIFIZIERT",
+      "sources": [
+        {
+          "url": "https://afajof.org/issue/volume-68-issue-6/",
+          "quote": "Intuitively, predictors with slower mean‐reversion (alpha decay) get more weight in the aim portfolio."
+        },
+        {
+          "url": "https://afajof.org/issue/volume-68-issue-6/",
+          "quote": "We implement the optimal strategy for commodity futures and find superior net returns relative to more naive benchmarks."
+        },
+        {
+          "url": "https://www.nber.org/system/files/working_papers/w15205/w15205.pdf",
+          "quote": "is the average past five days' price change, divided by the past five days' standard deviation of daily price changes"
+        },
+        {
+          "url": "https://www.nber.org/system/files/working_papers/w15205/w15205.pdf",
+          "quote": "[Table II; columns Gross SR, Net SR (Panel A) | Gross SR, Net SR (Panel B)] Markowitz 0.83 -9.84 0.83 -10.11"
+        },
+        {
+          "url": "https://www.nber.org/system/files/working_papers/w15205/w15205.pdf",
+          "quote": "[Table II; same columns] Dynamic optimization 0.62 0.58 0.58 0.53"
+        },
+        {
+          "url": "https://www.nber.org/system/files/working_papers/w15205/w15205.pdf",
+          "quote": "Our optimal portfolio performs the best net of transaction costs among all the strategies that we consider."
+        },
+        {
+          "url": "https://www.nber.org/system/files/working_papers/w15205/w15205.pdf",
+          "quote": "Its net Sharpe ratio is about 20% better than that of the best strategy among all the static strategies."
+        },
+        {
+          "url": "https://www.nber.org/system/files/working_papers/w15205/w15205.pdf",
+          "quote": "the Markowitz strategy incurs enormous trading costs"
+        },
+        {
+          "url": "https://www.nber.org/system/files/working_papers/w15205/w15205.pdf",
+          "quote": "15 different liquid commodity futures"
+        },
+        {
+          "url": "https://www.nber.org/system/files/working_papers/w15205/w15205.pdf",
+          "quote": "01/01/1996–01/23/2009"
+        }
+      ]
+    },
+    {
+      "id": "REV-WY-2004",
+      "citation": "Wang, C., Yu, M. (2004): Trading activity and price reversals in futures markets. Journal of Banking & Finance 28(6), 1337–1361.",
+      "journal_year": "Journal of Banking & Finance, 2004",
+      "period": "Juli 1983 – Juni 2000",
+      "universe": "24 US-Futures-Märkte",
+      "horizon_or_frequency": "Querschnitts-Contrarian, 1 Woche Formation/Haltedauer [Bezug Zielhorizont 4 h–4 T: hoch]",
+      "gross_or_net": "brutto; Break-even-Kosten angegeben",
+      "sharpe": null,
+      "sharpe_note": "NICHT_GEPRUEFT: keine Sharpe-Ratio auf der Verlagsseite; belegt sind 0,31 % pro Woche (16,12 % p.a.) für die 1-Wochen-Contrarian-Strategie. Stichprobe endet 2000.",
+      "cost_assumption": "Robust bis zu einseitigen Kosten (Kommission plus halber Spread) von 0,16 %.",
+      "other_key_numbers": [
+        {
+          "name": "Anzahl Futures-Märkte",
+          "value": 24,
+          "unit": "Märkte",
+          "source": 0
+        },
+        {
+          "name": "Rendite Contrarian, 1 Woche",
+          "value": 0.31,
+          "unit": "% pro Woche, brutto",
+          "source": 2
+        },
+        {
+          "name": "Rendite Contrarian, annualisiert",
+          "value": 16.12,
+          "unit": "% p.a., brutto",
+          "source": 2
+        },
+        {
+          "name": "Break-even-Kosten einseitig",
+          "value": 0.16,
+          "unit": "% je Transaktion",
+          "source": 3
+        }
+      ],
+      "status": "TEILWEISE",
+      "sources": [
+        {
+          "url": "https://www.sciencedirect.com/science/article/abs/pii/S0378426603001201",
+          "quote": "We use the standard contrarian portfolio approach to examine short-horizon return predictability in 24 US futures markets."
+        },
+        {
+          "url": "https://www.sciencedirect.com/science/article/abs/pii/S0378426603001201",
+          "quote": "We find strong evidence of weekly return reversals, similar to the findings from equity market studies."
+        },
+        {
+          "url": "https://www.sciencedirect.com/science/article/abs/pii/S0378426603001201",
+          "quote": "A contrarian strategy of buying past losers and selling past winners gives rise to an average return of 0.31% per week (16.12% per annum)."
+        },
+        {
+          "url": "https://www.sciencedirect.com/science/article/abs/pii/S0378426603001201",
+          "quote": "robust to a one-way transaction cost (commissions and one-half the bid–ask spread) of up to 0.16%"
+        },
+        {
+          "url": "https://www.sciencedirect.com/science/article/abs/pii/S0378426603001201",
+          "quote": "over the July 1983–June 2000 interval"
+        }
+      ]
+    },
+    {
+      "id": "REV-UZ-2020",
+      "citation": "Urquhart, A., Zhang, H. (2020): Do momentum and reversal strategies work in commodity futures? A comprehensive study. Review of Behavioral Finance (online 15.10.2020), DOI 10.1108/RBF-05-2019-0067.",
+      "journal_year": "Review of Behavioral Finance, 2020",
+      "period": null,
+      "universe": "Rohstoff-Futures (Anzahl im Abruf nicht belegt)",
+      "horizon_or_frequency": "189 Kombinationen aus Formations- und Haltedauer; Momentum, 52-Wochen-Hoch, Pairs-Trading [Bezug Zielhorizont: mittel]",
+      "gross_or_net": "NICHT_GEPRUEFT",
+      "sharpe": null,
+      "sharpe_note": "NICHT_GEPRUEFT: Volltext nicht abrufbar (Verlag CAPTCHA, Repository Anubis-Sperre). Belegt: kein signifikanter Umkehrgewinn in 189 Fenstern; Momentum signifikant, steigend mit längeren Fenstern.",
+      "cost_assumption": "NICHT_GEPRUEFT",
+      "other_key_numbers": [
+        {
+          "name": "Formations-/Halte-Fenster ohne signifikanten Umkehrgewinn",
+          "value": 189,
+          "unit": "Fenster",
+          "source": 0
+        }
+      ],
+      "status": "TEILWEISE",
+      "sources": [
+        {
+          "url": "https://research.bangor.ac.uk/portal/en/researchoutputs/do-momentum-and-reversal-strategies-work-in-commodity-futures-a-comprehensive-study(8a009491-ed70-4078-9d1b-4e25821389c3).html",
+          "quote": "The authors find that there is no significant reversal profit across 189 formation-holding windows for all the three strategies."
+        },
+        {
+          "url": "https://research.bangor.ac.uk/portal/en/researchoutputs/do-momentum-and-reversal-strategies-work-in-commodity-futures-a-comprehensive-study(8a009491-ed70-4078-9d1b-4e25821389c3).html",
+          "quote": "However, there are statistical and economically significant momentum profits, and the profitability increases with the rising of formation-holding periods."
+        }
+      ]
+    },
+    {
+      "id": "REV-KRT-2020",
+      "citation": "Kang, W., Rouwenhorst, K. G., Tang, K. (2020): A Tale of Two Premiums: The Role of Hedgers and Speculators in Commodity Futures Markets. Journal of Finance 75(1), 377–417.",
+      "journal_year": "Journal of Finance, 2020",
+      "period": null,
+      "universe": "Rohstoff-Futures (Positionen von Hedgern und Spekulanten)",
+      "horizon_or_frequency": "kurzfristige Positionsänderungen (Liquiditätsnachfrage) vs. langfristige Hedging-Nachfrage [Bezug Zielhorizont: Mechanismus für Kurzfrist-Umkehr]",
+      "gross_or_net": "NICHT_GEPRUEFT",
+      "sharpe": null,
+      "sharpe_note": "NICHT_GEPRUEFT: nur Abstract abrufbar (Wiley HTTP 403, SSRN HTTP 429). Belegt qualitativ: kurzfristige Liquiditätsnachfrage der Spekulanten und Hedging-Prämie wirken mit entgegengesetztem Vorzeichen.",
+      "cost_assumption": "NICHT_GEPRUEFT",
+      "other_key_numbers": [],
+      "status": "TEILWEISE",
+      "sources": [
+        {
+          "url": "https://afajof.org/issue/volume-75-issue-1/",
+          "quote": "Short‐term position changes are driven mainly by the liquidity demands of noncommercial traders, while long‐term variation is driven primarily by the hedging demands of commercial traders."
+        },
+        {
+          "url": "https://afajof.org/issue/volume-75-issue-1/",
+          "quote": "These two components influence expected futures returns with opposite signs."
+        },
+        {
+          "url": "https://afajof.org/issue/volume-75-issue-1/",
+          "quote": "The gains from providing liquidity by commercials largely offset the premium they pay for obtaining price insurance."
+        }
+      ]
+    },
+    {
+      "id": "FX-MSSS-2012",
+      "citation": "Menkhoff, L., Sarno, L., Schmeling, M., Schrimpf, A. (2012): Currency momentum strategies. Journal of Financial Economics 106(3), 660–684.",
+      "journal_year": "Journal of Financial Economics, 2012",
+      "period": "Januar 1976 – Januar 2010",
+      "universe": "bis zu 48 Währungen (Spot und 1-Monats-Forwards)",
+      "horizon_or_frequency": "Querschnittsmomentum, Formation und Haltedauer 1–12 Monate; MOM(1,1) = 1 Monat/1 Monat [Bezug Zielhorizont 4 h–4 T: niedrig bis mittel]",
+      "gross_or_net": "brutto und nach Geld-Brief-Spannen",
+      "sharpe": 0.95,
+      "sharpe_note": "MOM(1,1) Sharpe 0,95 vor Transaktionskosten (Abschnitt mit unbereinigten Renditen laut Abruf). Mit vollem Spread fällt die Rendite der besten Strategie (f = h = 1) von knapp 10 % auf etwa 4 % p.a.; Netto-Sharpe nicht als Zahl belegt.",
+      "cost_assumption": "Geld-Brief-Spannen (voll sowie realistischere Teilanpassungen); Umschlag der 1/1-Strategie über 70 % pro Monat; Momentum-Portfolios in Währungen mit hohen Kosten konzentriert.",
+      "other_key_numbers": [
+        {
+          "name": "Renditespanne Gewinner–Verlierer",
+          "value": 10,
+          "unit": "% p.a., brutto ('up to')",
+          "source": 0
+        },
+        {
+          "name": "Sharpe MOM(1,1)",
+          "value": 0.95,
+          "unit": "Sharpe p.a., brutto",
+          "source": 4
+        },
+        {
+          "name": "Rendite beste Strategie vor Spread",
+          "value": 10,
+          "unit": "% p.a. ('nearly')",
+          "source": 5
+        },
+        {
+          "name": "Rendite beste Strategie nach vollem Spread",
+          "value": 4,
+          "unit": "% p.a. ('about')",
+          "source": 5
+        },
+        {
+          "name": "Umschlag MOM(1,1)",
+          "value": 70,
+          "unit": "% pro Monat ('more than')",
+          "source": 6
+        },
+        {
+          "name": "Anzahl Währungen",
+          "value": 48,
+          "unit": "Währungen ('up to')",
+          "source": 3
+        }
+      ],
+      "status": "VERIFIZIERT",
+      "sources": [
+        {
+          "url": "https://www.sciencedirect.com/science/article/abs/pii/S0304405X12001353",
+          "quote": "We find a significant cross-sectional spread in excess returns of up to 10% per annum (p.a.) between past winner and loser currencies."
+        },
+        {
+          "url": "https://www.sciencedirect.com/science/article/abs/pii/S0304405X12001353",
+          "quote": "Adjusting returns for bid–ask spreads lowers the profitability of momentum strategies significantly."
+        },
+        {
+          "url": "https://www.sciencedirect.com/science/article/abs/pii/S0304405X12001353",
+          "quote": "However, there seem to be very effective limits to arbitrage that prevent momentum returns from being easily exploitable in currency markets."
+        },
+        {
+          "url": "https://openaccess.city.ac.uk/id/eprint/3296/1/Currency%20Momentum%20Strategies.pdf",
+          "quote": "data cover the period from January 1976 to January 2010, and we study a cross-section of up to 48 currencies"
+        },
+        {
+          "url": "https://openaccess.city.ac.uk/id/eprint/3296/1/Currency%20Momentum%20Strategies.pdf",
+          "quote": "For example, the annualized Sharpe Ratio of the MOM(1,1) strategy is 0.95, which seems very high"
+        },
+        {
+          "url": "https://openaccess.city.ac.uk/id/eprint/3296/1/Currency%20Momentum%20Strategies.pdf",
+          "quote": "When applying the full spread, returns for the best strategy (with f, h = 1) drop from nearly 10% to about 4% p.a."
+        },
+        {
+          "url": "https://openaccess.city.ac.uk/id/eprint/3296/1/Currency%20Momentum%20Strategies.pdf",
+          "quote": "First, turnover can be extremely high, reaching values of more than 70% per month for the strategy with a one month formation and holding period."
+        },
+        {
+          "url": "https://openaccess.city.ac.uk/id/eprint/3296/1/Currency%20Momentum%20Strategies.pdf",
+          "quote": "Results for these more realistic bid-ask spread adjustments indicate that transaction costs clearly matter but that they are not the sole driver of FX momentum returns"
+        }
+      ]
+    },
+    {
+      "id": "FX-RMV-2014",
+      "citation": "Raza, A., Marshall, B. R., Visaltanachoti, N. (2014): Is there momentum or reversal in weekly currency returns? Journal of International Money and Finance 45, 38–60.",
+      "journal_year": "Journal of International Money and Finance, 2014",
+      "period": null,
+      "universe": "63 Währungen (Schwellen- und Industrieländer)",
+      "horizon_or_frequency": "Lookback und Haltedauer 1–4 Wochen [Bezug Zielhorizont 4 h–4 T: hoch]",
+      "gross_or_net": "brutto; Break-even-Kosten angegeben",
+      "sharpe": null,
+      "sharpe_note": "NICHT_GEPRUEFT: keine Sharpe-Ratio auf der Verlagsseite. Belegt: Momentum statt Umkehr auf 1–4 Wochen; Renditen bis 8 % p.a.; in der jüngeren Teilperiode kleiner, aber vorhanden.",
+      "cost_assumption": "Break-even-Kosten 2 bp für die sehr kurzfristigen (häufig handelnden) Strategien bis 97 bp für die Monatsstrategie.",
+      "other_key_numbers": [
+        {
+          "name": "Anzahl Währungen",
+          "value": 63,
+          "unit": "Währungen",
+          "source": 1
+        },
+        {
+          "name": "Maximale Momentumrendite",
+          "value": 8,
+          "unit": "% p.a., brutto ('as large as')",
+          "source": 2
+        },
+        {
+          "name": "Break-even-Kosten sehr kurzfristige Strategien",
+          "value": 2,
+          "unit": "bp",
+          "source": 3
+        },
+        {
+          "name": "Break-even-Kosten Monatsstrategie",
+          "value": 97,
+          "unit": "bp",
+          "source": 3
+        }
+      ],
+      "status": "TEILWEISE",
+      "sources": [
+        {
+          "url": "https://www.sciencedirect.com/science/article/abs/pii/S0261560614000400",
+          "quote": "We investigate whether momentum or reversal is the dominant phenomenon in short horizon (one- to four-week) foreign exchange rate returns."
+        },
+        {
+          "url": "https://www.sciencedirect.com/science/article/abs/pii/S0261560614000400",
+          "quote": "We find, based on a broad sample of 63 emerging and developed market currencies, evidence of momentum rather than reversal."
+        },
+        {
+          "url": "https://www.sciencedirect.com/science/article/abs/pii/S0261560614000400",
+          "quote": "Momentum strategy returns are as large as 8% p.a."
+        },
+        {
+          "url": "https://www.sciencedirect.com/science/article/abs/pii/S0261560614000400",
+          "quote": "Finally, breakeven transaction costs range from 2 bps for the very short-term strategies which involve more frequent trading to 97 bps for the monthly strategy."
+        },
+        {
+          "url": "https://www.sciencedirect.com/science/article/abs/pii/S0261560614000400",
+          "quote": "Returns are larger in the earlier sub-period but still exist in the more recent period."
+        }
+      ]
+    },
+    {
+      "id": "MOM-ZLK-2019",
+      "citation": "Zaremba, A., Long, H., Karathanasopoulos, A. (2019): Short-term momentum (almost) everywhere. Journal of International Financial Markets, Institutions and Money 63.",
+      "journal_year": "Journal of International Financial Markets, Institutions and Money, 2019",
+      "period": "mehr als zwei Jahrhunderte (Beginn je Anlageklasse verschieden)",
+      "universe": "Aktienindizes, Staatsanleihen, T-Bills, Rohstoffe, Währungen",
+      "horizon_or_frequency": "Querschnitt, Signal = Vormonatsrendite (Renditen je Monat berichtet) [Bezug Zielhorizont 4 h–4 T: niedrig bis mittel]",
+      "gross_or_net": "brutto (Kosten nicht berücksichtigt; nicht als handelbare Strategie gedacht)",
+      "sharpe": 1.08,
+      "sharpe_note": "Hauptwert 1,08 = H-L über alle Anlagen (1,30 % pro Monat, Vola 4,17). Rohstoffe H-L 1,14 (2,37 % pro Monat, Vola 7,20). Kurzfrist-Momentum statt Umkehr außerhalb von Einzelaktien.",
+      "cost_assumption": "Keine Kosten; Autoren: Portfolios nicht als Wertentwicklung einer handelbaren Strategie zu interpretieren.",
+      "other_key_numbers": [
+        {
+          "name": "Sharpe H-L alle Anlagen",
+          "value": 1.08,
+          "unit": "Sharpe p.a., brutto",
+          "source": 3
+        },
+        {
+          "name": "Rendite H-L alle Anlagen",
+          "value": 1.3,
+          "unit": "% pro Monat, brutto",
+          "source": 3
+        },
+        {
+          "name": "Sharpe H-L Rohstoffe",
+          "value": 1.14,
+          "unit": "Sharpe p.a., brutto",
+          "source": 2
+        },
+        {
+          "name": "Rendite H-L Rohstoffe",
+          "value": 2.37,
+          "unit": "% pro Monat, brutto",
+          "source": 2
+        },
+        {
+          "name": "Rendite Kombination (Panel F)",
+          "value": 0.84,
+          "unit": "% pro Monat, brutto",
+          "source": 4
+        }
+      ],
+      "status": "VERIFIZIERT",
+      "sources": [
+        {
+          "url": "https://www.sciencedirect.com/science/article/pii/S1042443119300976",
+          "quote": "we investigate a comprehensive dataset of more than two centuries of returns on five major asset classes: equity indices, government bonds, treasury bills, commodities, and currencies."
+        },
+        {
+          "url": "https://www.sciencedirect.com/science/article/pii/S1042443119300976",
+          "quote": "Contrary to stock-level evidence, we find a striking short-term momentum pattern: the most recent month's return positively predicts future performance."
+        },
+        {
+          "url": "https://www.sciencedirect.com/science/article/pii/S1042443119300976",
+          "quote": "[Table 2, Panel D Commodities, H-L] R | 2.37*** | (13.81) | Vol | 7.20 | SR | 1.14"
+        },
+        {
+          "url": "https://www.sciencedirect.com/science/article/pii/S1042443119300976",
+          "quote": "[Table 2, Panel G All Assets, H-L] R | 1.30*** | (15.40) | Vol | 4.17 | SR | 1.08"
+        },
+        {
+          "url": "https://www.sciencedirect.com/science/article/pii/S1042443119300976",
+          "quote": "The mean returns on the multi-asset long-short strategies in Panels F and G amount to 0.84% and 1.30% per month, respectively"
+        },
+        {
+          "url": "https://www.sciencedirect.com/science/article/pii/S1042443119300976",
+          "quote": "it should not be explicitly interpreted as the performance of the tradable strategy"
+        },
+        {
+          "url": "https://www.sciencedirect.com/science/article/pii/S1042443119300976",
+          "quote": "[Table 2 title] Performance of Portfolios from One-Way Sorts on Prior-Month Return"
+        }
+      ]
+    },
+    {
+      "id": "DECAY-MP-2016",
+      "citation": "McLean, R. D., Pontiff, J. (2016): Does Academic Research Destroy Stock Return Predictability? Journal of Finance 71(1), 5–32.",
+      "journal_year": "Journal of Finance, 2016",
+      "period": null,
+      "universe": "97 Prädiktoren für US-Aktienrenditen im Querschnitt",
+      "horizon_or_frequency": "Vergleich In-Sample / Out-of-Sample / nach Veröffentlichung [Bezug: Abschlag Veröffentlichung]",
+      "gross_or_net": "nicht anwendbar (Renditerückgang)",
+      "sharpe": null,
+      "sharpe_note": "NICHT_ANWENDBAR: Studie misst Renditerückgang, keine Sharpe-Ratio. Rückgang 26 % außerhalb der Stichprobe, 58 % nach Veröffentlichung, 32 % durch publikationsinformiertes Handeln. Aktien, nicht Futures.",
+      "cost_assumption": "nicht anwendbar",
+      "other_key_numbers": [
+        {
+          "name": "Anzahl Prädiktoren",
+          "value": 97,
+          "unit": "Variablen",
+          "source": 0
+        },
+        {
+          "name": "Renditerückgang außerhalb der Stichprobe",
+          "value": 26,
+          "unit": "%",
+          "source": 1
+        },
+        {
+          "name": "Renditerückgang nach Veröffentlichung",
+          "value": 58,
+          "unit": "%",
+          "source": 1
+        },
+        {
+          "name": "Rückgang durch publikationsinformiertes Handeln",
+          "value": 32,
+          "unit": "% (58 % − 26 %)",
+          "source": 2
+        }
+      ],
+      "status": "VERIFIZIERT",
+      "sources": [
+        {
+          "url": "https://afajof.org/issue/volume-71-issue-1/",
+          "quote": "We study the out‐of‐sample and post‐publication return predictability of 97 variables shown to predict cross‐sectional stock returns."
+        },
+        {
+          "url": "https://afajof.org/issue/volume-71-issue-1/",
+          "quote": "Portfolio returns are 26% lower out‐of‐sample and 58% lower post‐publication."
+        },
+        {
+          "url": "https://afajof.org/issue/volume-71-issue-1/",
+          "quote": "We estimate a 32% (58%–26%) lower return from publication‐informed trading."
+        },
+        {
+          "url": "https://afajof.org/issue/volume-71-issue-1/",
+          "quote": "Post‐publication declines are greater for predictors with higher in‐sample returns"
+        }
+      ]
+    },
+    {
+      "id": "DECAY-HLZ-2016",
+      "citation": "Harvey, C. R., Liu, Y., Zhu, H. (2016): … and the Cross-Section of Expected Returns. Review of Financial Studies 29(1), 5–68.",
+      "journal_year": "Review of Financial Studies, 2016",
+      "period": "Signifikanzschwellen seit 1967, Projektion 20 Jahre voraus",
+      "universe": "Faktor-Literatur zum Aktienquerschnitt",
+      "horizon_or_frequency": "Mehrfachtest-Rahmen [Bezug: Hürde für neue Signale]",
+      "gross_or_net": "nicht anwendbar",
+      "sharpe": null,
+      "sharpe_note": "NICHT_ANWENDBAR: Hürde t > 3,0 statt t > 2,0 für neu entdeckte Faktoren.",
+      "cost_assumption": "nicht anwendbar",
+      "other_key_numbers": [
+        {
+          "name": "Übliche t-Hürde",
+          "value": 2.0,
+          "unit": "t-Statistik",
+          "source": 0
+        },
+        {
+          "name": "Empfohlene t-Hürde für neue Faktoren",
+          "value": 3.0,
+          "unit": "t-Statistik",
+          "source": 1
+        },
+        {
+          "name": "Beginn historischer Schwellen",
+          "value": 1967,
+          "unit": "Jahr",
+          "source": 3
+        },
+        {
+          "name": "Projektionshorizont",
+          "value": 20,
+          "unit": "Jahre",
+          "source": 4
+        }
+      ],
+      "status": "VERIFIZIERT",
+      "sources": [
+        {
+          "url": "https://www.nber.org/papers/w20592",
+          "quote": "it does not make any economic or statistical sense to use the usual significance criteria for a newly discovered factor, e.g., a t-ratio greater than 2.0."
+        },
+        {
+          "url": "https://www.nber.org/papers/w20592",
+          "quote": "a newly discovered factor needs to clear a much higher hurdle, with a t-ratio greater than 3.0."
+        },
+        {
+          "url": "https://www.nber.org/papers/w20592",
+          "quote": "we argue that most claimed research findings in financial economics are likely false."
+        },
+        {
+          "url": "https://www.nber.org/papers/w20592",
+          "quote": "provides a time series of historical significance cutoffs from the first empirical tests in 1967 to today. Our new method allows for correlation among the tests"
+        },
+        {
+          "url": "https://www.nber.org/papers/w20592",
+          "quote": "We also project forward 20 years assuming the rate of factor production remains similar to the experience of the last few years."
+        }
+      ]
+    },
+    {
+      "id": "DECAY-HL-2015",
+      "citation": "Harvey, C. R., Liu, Y. (2015): Backtesting. Journal of Portfolio Management (Fall 2015).",
+      "journal_year": "Journal of Portfolio Management, 2015",
+      "period": null,
+      "universe": "methodisch (Backtest-Abschlag bei Mehrfachtests)",
+      "horizon_or_frequency": "Beispiel: 20 Jahre Monatsrenditen (T = 240) [Bezug: Abschlag Datenschürfen]",
+      "gross_or_net": "nicht anwendbar",
+      "sharpe": null,
+      "sharpe_note": "NICHT_ANWENDBAR (Methodik). Beispiel: Sharpe 0,75 (T = 240) → 0,32 bei N = 200 Tests; pauschaler 50-%-Abschlag ist gängige, aber nichtlineare Wirklichkeit verfehlende Praxis.",
+      "cost_assumption": "nicht anwendbar",
+      "other_key_numbers": [
+        {
+          "name": "Pauschaler Praxis-Abschlag",
+          "value": 50,
+          "unit": "% der Sharpe",
+          "source": 0
+        },
+        {
+          "name": "Beispiel Sharpe vor Abschlag",
+          "value": 0.75,
+          "unit": "Sharpe p.a.",
+          "source": 2
+        },
+        {
+          "name": "Beispiel Monatsbeobachtungen",
+          "value": 240,
+          "unit": "Monate",
+          "source": 2
+        },
+        {
+          "name": "Beispiel Anzahl Tests",
+          "value": 200,
+          "unit": "Tests",
+          "source": 3
+        },
+        {
+          "name": "Beispiel Sharpe nach Abschlag",
+          "value": 0.32,
+          "unit": "Sharpe p.a.",
+          "source": 3
+        }
+      ],
+      "status": "VERIFIZIERT",
+      "sources": [
+        {
+          "url": "https://people.duke.edu/~charvey/Research/Published_Papers/P120_Backtesting.PDF",
+          "quote": "A common practice in evaluating backtests of trading strategies is to discount the reported Sharpe ratios by 50%."
+        },
+        {
+          "url": "https://people.duke.edu/~charvey/Research/Published_Papers/P120_Backtesting.PDF",
+          "quote": "The multiple testing haircut is nonlinear. The highest Sharpe ratios are only moderately penalized, while the marginal Sharpe ratios are heavily penalized."
+        },
+        {
+          "url": "https://people.duke.edu/~charvey/Research/Published_Papers/P120_Backtesting.PDF",
+          "quote": "For instance, assuming there are twenty years of monthly returns (T = 240), an annual Sharpe ratio of 0.75 yields a p-value of 0.0008 for a single test."
+        },
+        {
+          "url": "https://people.duke.edu/~charvey/Research/Published_Papers/P120_Backtesting.PDF",
+          "quote": "When N = 200, pM = 0.15, implying an adjusted annual Sharpe ratio of 0.32."
+        }
+      ]
+    },
+    {
+      "id": "DECAY-CV-2020",
+      "citation": "Chen, A. Y., Velikov, M. (2020): Zeroing in on the Expected Returns of Anomalies. Finance and Economics Discussion Series 2020-039, Federal Reserve Board.",
+      "journal_year": "FEDS Working Paper, 2020",
+      "period": null,
+      "universe": "120 Aktienmarkt-Anomalien (Long-Short)",
+      "horizon_or_frequency": "überwiegend monatlich [Bezug: kombinierter Kosten- und Veröffentlichungsabschlag]",
+      "gross_or_net": "netto (effektive Spreads, Veröffentlichungseffekte, moderne Handelstechnik)",
+      "sharpe": null,
+      "sharpe_note": "NICHT_ANWENDBAR: berichtet erwartete Nettorendite statt Sharpe – im Mittel 8 bp pro Monat; stärkste Anomalien 10–20 bp nach Datenschürf-Korrektur. Aktien, nicht Futures.",
+      "cost_assumption": "Effektive Geld-Brief-Spannen; Preiseinfluss nicht berücksichtigt (Ergebnis daher eher zu hoch).",
+      "other_key_numbers": [
+        {
+          "name": "Anzahl Anomalien",
+          "value": 120,
+          "unit": "Anomalien",
+          "source": 0
+        },
+        {
+          "name": "Erwartete Nettorendite mittlere Anomalie",
+          "value": 8,
+          "unit": "bp pro Monat",
+          "source": 1
+        },
+        {
+          "name": "Erwartete Rendite stärkste Anomalien, untere Grenze",
+          "value": 10,
+          "unit": "bp",
+          "source": 2
+        },
+        {
+          "name": "Erwartete Rendite stärkste Anomalien, obere Grenze",
+          "value": 20,
+          "unit": "bp",
+          "source": 2
+        }
+      ],
+      "status": "VERIFIZIERT",
+      "sources": [
+        {
+          "url": "https://www.federalreserve.gov/econres/feds/zeroing-in-on-the-expected-returns-of-anomalies.htm",
+          "quote": "We zero in on the expected returns of long-short portfolios based on 120 stock market anomalies by accounting for (1) effective bid-ask spreads, (2) post-publication effects"
+        },
+        {
+          "url": "https://www.federalreserve.gov/econres/feds/zeroing-in-on-the-expected-returns-of-anomalies.htm",
+          "quote": "Net of these effects, the average anomaly's expected return is a measly 8 bps per month."
+        },
+        {
+          "url": "https://www.federalreserve.gov/econres/feds/zeroing-in-on-the-expected-returns-of-anomalies.htm",
+          "quote": "The strongest anomalies return only 10-20 bps after accounting for data-mining with either out-of-sample tests or empirical Bayesian methods."
+        },
+        {
+          "url": "https://www.federalreserve.gov/econres/feds/zeroing-in-on-the-expected-returns-of-anomalies.htm",
+          "quote": "the omission of additional trading costs like price impact"
+        }
+      ]
+    },
+    {
+      "id": "COST-NMV-2016",
+      "citation": "Novy-Marx, R., Velikov, M. (2016): A Taxonomy of Anomalies and Their Trading Costs. Review of Financial Studies 29(1), 104–147.",
+      "journal_year": "Review of Financial Studies, 2016",
+      "period": null,
+      "universe": "zahlreiche Aktienmarkt-Anomalien",
+      "horizon_or_frequency": "Umschlagklassen (einseitiger Monatsumschlag) [Bezug: Umschlag-Schwelle für Kostenfestigkeit]",
+      "gross_or_net": "netto (nach Transaktionskosten)",
+      "sharpe": null,
+      "sharpe_note": "NICHT_ANWENDBAR: keine Sharpe im Abstract. Kernaussage: Anomalien mit einseitigem Monatsumschlag unter 50 % bleiben meist netto signifikant, darüber nur wenige. Aktien, nicht Futures.",
+      "cost_assumption": "Geschätzte Aktien-Transaktionskosten; wirksamste einfache Minderung: Kauf-/Halte-Spanne (Puffer).",
+      "other_key_numbers": [
+        {
+          "name": "Umschlag-Schwelle",
+          "value": 50,
+          "unit": "% einseitig pro Monat",
+          "source": 0
+        }
+      ],
+      "status": "VERIFIZIERT",
+      "sources": [
+        {
+          "url": "https://www.nber.org/papers/w20721",
+          "quote": "Most of the anomalies that we consider with one-sided monthly turnover lower than 50% continue to generate statistically significant net spreads, at least when designed to mitigate transaction costs."
+        },
+        {
+          "url": "https://www.nber.org/papers/w20721",
+          "quote": "Few of the strategies with higher turnover do."
+        },
+        {
+          "url": "https://www.nber.org/papers/w20721",
+          "quote": "introducing a buy/hold spread, which allows investors to continue to hold stocks that they would not actively trade into, is the single most effective simple cost mitigation strategy."
+        },
+        {
+          "url": "https://www.nber.org/papers/w20721",
+          "quote": "In all cases transaction costs reduce the strategies' profitability and its associated statistical significance, increasing concerns related to data snooping."
+        }
+      ]
+    },
+    {
+      "id": "CTA-BGR-2014",
+      "citation": "Bhardwaj, G., Gorton, G. B., Rouwenhorst, K. G. (2014): Fooling Some of the People All of the Time: The Inefficient Performance and Persistence of Commodity Trading Advisors. Review of Financial Studies 27(11), 3099–3132. Zahlen aus NBER Working Paper 14424 (2008).",
+      "journal_year": "Review of Financial Studies, 2014 (Zahlen: NBER WP 14424, 2008)",
+      "period": "1994–2007 (NBER-Fassung; Zeitraum der RFS-Fassung nicht geprüft)",
+      "universe": "CTAs (Commodity Trading Advisors) aus freiwillig meldenden Datenbanken",
+      "horizon_or_frequency": "Fondsrenditen; gemischte Handelsgeschwindigkeiten [Bezug: Umsetzungsrealität nach Gebühren]",
+      "gross_or_net": "netto nach Gebühren (85 bp) und brutto vor Gebühren (5,4 %)",
+      "sharpe": null,
+      "sharpe_note": "NICHT_BERICHTET im Abstract: Überschussrendite netto 0,85 % p.a. über T-Bills (nicht signifikant), brutto 5,4 %; selbst brutto kein Alpha gegenüber öffentlich bekannten Futures-Strategien.",
+      "cost_assumption": "Realisierte Fondsrenditen; Gebühren schöpfen den Großteil der Bruttorendite ab.",
+      "other_key_numbers": [
+        {
+          "name": "Netto-Überschussrendite CTAs über T-Bills",
+          "value": 0.85,
+          "unit": "% p.a. (85 bp)",
+          "source": 0
+        },
+        {
+          "name": "Brutto-Überschussrendite CTAs vor Gebühren",
+          "value": 5.4,
+          "unit": "% p.a.",
+          "source": 1
+        }
+      ],
+      "status": "VERIFIZIERT",
+      "sources": [
+        {
+          "url": "https://www.nber.org/papers/w14424",
+          "quote": "during the period 1994-2007 CTA excess returns to investors (i.e., net of fees) averaged 85 basis points per annum over US T-bills, which is insignificantly different from zero."
+        },
+        {
+          "url": "https://www.nber.org/papers/w14424",
+          "quote": "We estimate that CTAs on average earned gross excess returns (i.e., before fees) of 5.4%, which implies that funds captured most of their performance through charging fees."
+        },
+        {
+          "url": "https://www.nber.org/papers/w14424",
+          "quote": "even before fees we find that CTAs display no alpha relative to simple futures strategies that are in the public domain."
+        },
+        {
+          "url": "https://academic.oup.com/rfs/article-abstract/27/11/3099/1597777?redirectedFrom=fulltext",
+          "quote": "Investors face significant barriers in evaluating the performance of investment advisors."
+        }
+      ]
+    },
+    {
+      "id": "SKEPT-HLWZ-2020",
+      "citation": "Huang, D., Li, J., Wang, L., Zhou, G. (2020): Time series momentum: Is it there? Journal of Financial Economics 135(3), 774–794.",
+      "journal_year": "Journal of Financial Economics, 2020",
+      "period": null,
+      "universe": "breiter Querschnitt von Anlagen (Details im Abruf nicht belegt)",
+      "horizon_or_frequency": "12-Monats-Rendite sagt Folgemonat voraus (TSMOM-Definition) [Bezug: Gegenevidenz]",
+      "gross_or_net": "NICHT_GEPRUEFT",
+      "sharpe": null,
+      "sharpe_note": "NICHT_GEPRUEFT (nur Abstract): Einzelanlagen zeigen wenig TSMOM-Evidenz; gepoolte t-Statistik unter Bootstrap-Kritischen Werten; TSMOM-Strategie ähnlich einer Strategie auf Basis historischer Mittelwerte.",
+      "cost_assumption": "NICHT_GEPRUEFT",
+      "other_key_numbers": [
+        {
+          "name": "TSMOM-Lookback laut Definition",
+          "value": 12,
+          "unit": "Monate",
+          "source": 0
+        }
+      ],
+      "status": "TEILWEISE",
+      "sources": [
+        {
+          "url": "https://www.sciencedirect.com/science/article/pii/S0304405X19301953",
+          "quote": "Time series momentum (TSM) refers to the predictability of the past 12-month return on the next one-month return"
+        },
+        {
+          "url": "https://www.sciencedirect.com/science/article/pii/S0304405X19301953",
+          "quote": "This paper shows that asset-by-asset time series regressions reveal little evidence of TSM, both in- and out-of-sample."
+        },
+        {
+          "url": "https://www.sciencedirect.com/science/article/pii/S0304405X19301953",
+          "quote": "From an investment perspective, the TSM strategy is profitable, but its performance is virtually the same as that of a similar strategy that is based on historical sample mean"
+        },
+        {
+          "url": "https://www.sciencedirect.com/science/article/pii/S0304405X19301953",
+          "quote": "Overall, the evidence on TSM is weak, particularly for the large cross section of assets."
+        }
+      ]
+    },
+    {
+      "id": "SKEPT-KTW-2016",
+      "citation": "Kim, A. Y., Tse, Y., Wald, J. K. (2016): Time series momentum and volatility scaling. Journal of Financial Markets 30, 103–124.",
+      "journal_year": "Journal of Financial Markets, 2016",
+      "period": null,
+      "universe": "internationale Futures (Datensatz wie Moskowitz/Ooi/Pedersen 2012)",
+      "horizon_or_frequency": "12-Monats-TSMOM mit und ohne Volatilitätsskalierung [Bezug: Gegenevidenz]",
+      "gross_or_net": "NICHT_GEPRUEFT",
+      "sharpe": null,
+      "sharpe_note": "NICHT_GEPRUEFT (nur Abstract): Ergebnisse weitgehend durch Volatilitätsskalierung getrieben; ohne Skalierung ähnlich Buy-and-hold.",
+      "cost_assumption": "NICHT_GEPRUEFT",
+      "other_key_numbers": [],
+      "status": "TEILWEISE",
+      "sources": [
+        {
+          "url": "https://www.sciencedirect.com/science/article/abs/pii/S1386418116301379",
+          "quote": "We find that their results are largely driven by volatility-scaling returns (or the so-called risk parity approach to asset allocation) rather than by time series momentum."
+        },
+        {
+          "url": "https://www.sciencedirect.com/science/article/abs/pii/S1386418116301379",
+          "quote": "Without scaling by volatility, time series momentum and a buy-and-hold strategy offer similar cumulative returns, and their alphas are not significantly different."
+        }
+      ]
+    },
+    {
+      "id": "TF-SSS-2010",
+      "citation": "Szakmary, A. C., Shen, Q., Sharma, S. C. (2010): Trend-following trading strategies in commodity futures: A re-examination. Journal of Banking & Finance 34(2), 409–426.",
+      "journal_year": "Journal of Banking & Finance, 2010",
+      "period": "48 Jahre (Monatsdaten; genaue Jahre im Abruf nicht belegt)",
+      "universe": "28 Rohstoff-Futures-Märkte",
+      "horizon_or_frequency": "Doppelte gleitende Durchschnitte und Kanalregeln, Monatsdaten [Bezug Zielhorizont 4 h–4 T: niedrig]",
+      "gross_or_net": "netto (nach Transaktionskosten)",
+      "sharpe": null,
+      "sharpe_note": "NICHT_GEPRUEFT: keine Sharpe im Abstract; belegt: alle Parametrisierungen netto positiv in mindestens 22 von 28 Märkten, robust gegen Datenschürf-Korrektur.",
+      "cost_assumption": "Transaktionskosten berücksichtigt (Höhe im Abruf nicht belegt).",
+      "other_key_numbers": [
+        {
+          "name": "Jahre Monatsdaten",
+          "value": 48,
+          "unit": "Jahre",
+          "source": 0
+        },
+        {
+          "name": "Anzahl Märkte",
+          "value": 28,
+          "unit": "Märkte",
+          "source": 0
+        },
+        {
+          "name": "Märkte mit positiver Nettorendite (Minimum je Regel)",
+          "value": 22,
+          "unit": "von 28",
+          "source": 1
+        }
+      ],
+      "status": "TEILWEISE",
+      "sources": [
+        {
+          "url": "https://www.sciencedirect.com/science/article/abs/pii/S037842660900199X",
+          "quote": "This paper examines the performance of trend-following trading strategies in commodity futures markets using a monthly dataset spanning 48 years and 28 markets."
+        },
+        {
+          "url": "https://www.sciencedirect.com/science/article/abs/pii/S037842660900199X",
+          "quote": "strategies that we implement yield positive mean excess returns net of transactions costs in at least 22 of the 28 markets."
+        },
+        {
+          "url": "https://www.sciencedirect.com/science/article/abs/pii/S037842660900199X",
+          "quote": "These results are robust with respect to the set of commodities the trading rules are implemented with, distributional assumptions, data-mining adjustments and transactions costs"
+        }
+      ]
+    },
+    {
+      "id": "FX-NWU-2009",
+      "citation": "Neely, C. J., Weller, P. A., Ulrich, J. M.: The Adaptive Markets Hypothesis: Evidence from the Foreign Exchange Market. Federal Reserve Bank of St. Louis Working Paper 2006-046 (später JFQA 2009 – Veröffentlichungsangabe nicht separat geprüft).",
+      "journal_year": "FRB St. Louis Working Paper 2006-046",
+      "period": "April 1973 – Juni 2005",
+      "universe": "Hauptwährungen gegen USD (Tageskurse, Fed H.10)",
+      "horizon_or_frequency": "technische Regeln auf Tagesdaten (Filter, gleitende Durchschnitte, Kanalregeln) [Bezug Zielhorizont 4 h–4 T: hoch]",
+      "gross_or_net": "netto (nach Kosten je Positionswechsel)",
+      "sharpe": null,
+      "sharpe_note": "NICHT_GEPRUEFT: keine Sharpe-Zahl entnommen. Belegt: Nettoüberrendite (Kanalregeln) fällt von 5,74 % auf 1,91 % p.a.; Filter- und MA-Gewinne bis Anfang der 1990er verschwunden.",
+      "cost_assumption": "10 bp je Positionswechsel am 1.1.1973, linear fallend auf 1,88 bp am 30.6.2005.",
+      "other_key_numbers": [
+        {
+          "name": "Nettoüberrendite früh",
+          "value": 5.74,
+          "unit": "% p.a.",
+          "source": 1
+        },
+        {
+          "name": "Nettoüberrendite später",
+          "value": 1.91,
+          "unit": "% p.a.",
+          "source": 1
+        },
+        {
+          "name": "Kosten je Positionswechsel 1973",
+          "value": 10,
+          "unit": "bp",
+          "source": 2
+        },
+        {
+          "name": "Kosten je Positionswechsel 2005",
+          "value": 1.88,
+          "unit": "bp",
+          "source": 2
+        }
+      ],
+      "status": "TEILWEISE",
+      "sources": [
+        {
+          "url": "https://s3.amazonaws.com/real.stlouisfed.org/wp/2006/2006-046.pdf",
+          "quote": "But these profit opportunities had disappeared by the early 1990s for filter and moving average rules."
+        },
+        {
+          "url": "https://s3.amazonaws.com/real.stlouisfed.org/wp/2006/2006-046.pdf",
+          "quote": "The mean net excess return across currencies falls from 5.74 percent per annum to 1.91 percent"
+        },
+        {
+          "url": "https://s3.amazonaws.com/real.stlouisfed.org/wp/2006/2006-046.pdf",
+          "quote": "Costs were 10 basis points per switch of position on January 1, 1973 and declined linearly to 1.88 basis points on June 30, 2005."
+        },
+        {
+          "url": "https://s3.amazonaws.com/real.stlouisfed.org/wp/2006/2006-046.pdf",
+          "quote": "All our analysis uses daily exchange rate data from the Federal Reserve H.10 Statistical Release"
+        },
+        {
+          "url": "https://s3.amazonaws.com/real.stlouisfed.org/wp/2006/2006-046.pdf",
+          "quote": "The data span April 1973 through June 2005."
+        }
+      ]
+    },
+    {
+      "id": "FX-OLSON-2004",
+      "citation": "Olson, D. (2004): Have trading rule profits in the currency markets declined over time? Journal of Banking & Finance 28(1), 85–105.",
+      "journal_year": "Journal of Banking & Finance, 2004",
+      "period": "1971–2000",
+      "universe": "18 Wechselkurse",
+      "horizon_or_frequency": "Gleitende-Durchschnitt-Regeln, 5-Jahres-Optimierung und Out-of-Sample-Test [Bezug: Zerfall]",
+      "gross_or_net": "risikoadjustierte Gewinne (Kostenbasis im Abruf nicht belegt)",
+      "sharpe": null,
+      "sharpe_note": "NICHT_GEPRUEFT: keine Sharpe im Abstract; risikoadjustierte Gewinne fielen von über 3 % (späte 1970er/frühe 1980er) auf etwa null (1990er).",
+      "cost_assumption": "NICHT_GEPRUEFT",
+      "other_key_numbers": [
+        {
+          "name": "Anzahl Wechselkurse",
+          "value": 18,
+          "unit": "Reihen",
+          "source": 1
+        },
+        {
+          "name": "Risikoadjustierter Gewinn früh",
+          "value": 3,
+          "unit": "% ('over')",
+          "source": 2
+        },
+        {
+          "name": "Risikoadjustierter Gewinn 1990er",
+          "value": 0,
+          "unit": "% ('about zero')",
+          "source": 2
+        }
+      ],
+      "status": "TEILWEISE",
+      "sources": [
+        {
+          "url": "https://www.sciencedirect.com/science/article/abs/pii/S0378426602003990",
+          "quote": "This paper tests whether moving average trading rule profits have declined over the period from 1971 to 2000."
+        },
+        {
+          "url": "https://www.sciencedirect.com/science/article/abs/pii/S0378426602003990",
+          "quote": "The hypothesis is tested using 18 exchange rate series over a longer time period than in previous studies."
+        },
+        {
+          "url": "https://www.sciencedirect.com/science/article/abs/pii/S0378426602003990",
+          "quote": "Results show that risk-adjusted trading rule profits have declined over time-from an average of over 3% in the late 1970s and early 1980s to about zero in the 1990s."
+        }
+      ]
+    },
+    {
+      "id": "FX-HUTCH-2022",
+      "citation": "Hutchinson, M. C., Kyziropoulos, P. E., O'Brien, J., O'Reilly, P., Sharma, T. (2022): Technical trading rule profitability in currencies: It's all about momentum. Research in International Business and Finance, Artikel 101779 (akzeptiertes Manuskript).",
+      "journal_year": "Research in International Business and Finance, 2022",
+      "period": "1. Januar 1980 – 30. April 2020",
+      "universe": "G11-Währungen (zehn liquideste gegen USD) plus globale Stichprobe",
+      "horizon_or_frequency": "388 Portfolios technischer Regeln (Filter, MA, Kanal, Range-Breakout) [Bezug Zielhorizont 4 h–4 T: mittel]",
+      "gross_or_net": "Sharpe-Werte vor Kosten laut Kontext nicht ausdrücklich belegt; nach moderaten Kosten negativ oder insignifikant",
+      "sharpe": 0.06,
+      "sharpe_note": "Mittlere Sharpe der 388 Regelportfolios: 0,62 in-sample → 0,06 out-of-sample. (v2.0 nannte 0,66 – im Abruf 0,62.)",
+      "cost_assumption": "Moderate, über die Zeit fallende Transaktionskosten; danach Überrenditen negativ oder nicht signifikant.",
+      "other_key_numbers": [
+        {
+          "name": "Anzahl Regelportfolios",
+          "value": 388,
+          "unit": "Portfolios",
+          "source": 0
+        },
+        {
+          "name": "Sharpe in-sample (Mittel)",
+          "value": 0.62,
+          "unit": "Sharpe p.a.",
+          "source": 0
+        },
+        {
+          "name": "Sharpe out-of-sample (Mittel)",
+          "value": 0.06,
+          "unit": "Sharpe p.a.",
+          "source": 0
+        }
+      ],
+      "status": "VERIFIZIERT",
+      "sources": [
+        {
+          "url": "https://pureadmin.qub.ac.uk/ws/portalfiles/portal/370624058/1_s2.0_S0275531922001659_main_1_.pdf",
+          "quote": "The average Sharpe ratio of the 388 strategy portfolios is 0.62 in the in-sample period but this falls to 0.06 when measured out-of-sample."
+        },
+        {
+          "url": "https://pureadmin.qub.ac.uk/ws/portalfiles/portal/370624058/1_s2.0_S0275531922001659_main_1_.pdf",
+          "quote": "Following the application of modest transaction costs (decreasing over time), excess returns are either negative or not significantly different from zero."
+        },
+        {
+          "url": "https://pureadmin.qub.ac.uk/ws/portalfiles/portal/370624058/1_s2.0_S0275531922001659_main_1_.pdf",
+          "quote": "ten most liquid currencies against the US Dollar (G11 currencies)"
+        },
+        {
+          "url": "https://pureadmin.qub.ac.uk/ws/portalfiles/portal/370624058/1_s2.0_S0275531922001659_main_1_.pdf",
+          "quote": "1st January 1980"
+        },
+        {
+          "url": "https://pureadmin.qub.ac.uk/ws/portalfiles/portal/370624058/1_s2.0_S0275531922001659_main_1_.pdf",
+          "quote": "30th April 2020"
+        }
+      ]
+    },
+    {
+      "id": "IDX-SG-STTI",
+      "citation": "Société Générale Prime Services: SG Short-Term Traders Index (Bloomberg NEIXSTTI) – Indexseite.",
+      "journal_year": "Indexanbieter (Primärquelle Société Générale)",
+      "period": null,
+      "universe": "CTAs und Global-Macro-Manager mit diversifizierten Strategien und durchschnittlicher Haltedauer unter 10 Tagen",
+      "horizon_or_frequency": "Haltedauer im Mittel < 10 Tage; tägliche Indexberechnung [Bezug Zielhorizont 4 h–4 T: hoch]",
+      "gross_or_net": "NICHT_GEPRUEFT",
+      "sharpe": null,
+      "sharpe_note": "NICHT_GEPRUEFT: Rendite, Volatilität, Sharpe und Zeitraum aus Primärquelle nicht abrufbar (Methodik-PDF HTTP 403; Indexseite ohne Historie, zeigte nur Datenstand 'Apr 23, 2015'; Daten nur über SG-Plattform). Belegt ist nur die Definition.",
+      "cost_assumption": "NICHT_GEPRUEFT",
+      "other_key_numbers": [
+        {
+          "name": "Maximale durchschnittliche Haltedauer der Mitglieder",
+          "value": 10,
+          "unit": "Tage ('less than')",
+          "source": 1
+        }
+      ],
+      "status": "TEILWEISE",
+      "sources": [
+        {
+          "url": "https://wholesale.banking.societegenerale.com/en/prime-services-indices/",
+          "quote": "The SG Short-Term Traders Index is designed to track the daily performance of a portfolio of CTAs and Global Macro managers executing diversified trading strategies"
+        },
+        {
+          "url": "https://wholesale.banking.societegenerale.com/en/prime-services-indices/",
+          "quote": "with a less than 10-day average holding period"
+        }
+      ]
+    },
+    {
+      "id": "TF-MAN-SPEED",
+      "citation": "Mackic, A. (Man Group): The Need for Speed in Trend-Following Strategies. Man Group Insights (Datum auf der Seite nicht angegeben; Daten bis 31.08.2022).",
+      "journal_year": "Industrie-Research (Man Group), nicht begutachtet",
+      "period": "1995–2022",
+      "universe": "50 liquideste Futures- und FX-Forward-Märkte",
+      "horizon_or_frequency": "Trendfolge verschiedener Geschwindigkeiten [Bezug Zielhorizont 4 h–4 T: mittel]",
+      "gross_or_net": "NICHT_GEPRUEFT (qualitativ)",
+      "sharpe": null,
+      "sharpe_note": "NICHT_GEPRUEFT: keine Sharpe-Zahlen auf der Seite belegt. Qualitativ: risikoadjustierte Rendite steigt mit langsamerer Geschwindigkeit; Krisen-Konvexität steigt mit Geschwindigkeit.",
+      "cost_assumption": "Qualitativ: Transaktionskosten treffen schnellere Geschwindigkeiten wegen höheren Umschlags überproportional.",
+      "other_key_numbers": [
+        {
+          "name": "Anzahl Märkte",
+          "value": 50,
+          "unit": "Märkte",
+          "source": 0
+        }
+      ],
+      "status": "TEILWEISE",
+      "sources": [
+        {
+          "url": "https://www.man.com/insights/need-for-speed-trend-following",
+          "quote": "We backtest it from 1995 through to 2022 across the 50 most liquid futures and FX forward markets."
+        },
+        {
+          "url": "https://www.man.com/insights/need-for-speed-trend-following",
+          "quote": "returns increase with slower speed, but risk-management properties, via skewness here, deteriorate"
+        },
+        {
+          "url": "https://www.man.com/insights/need-for-speed-trend-following",
+          "quote": "Transaction costs impact faster trading speeds disproportionately because of the higher turnover."
+        }
+      ]
+    },
+    {
+      "id": "DECAY-SLP-2017",
+      "citation": "Suhonen, A., Lennkh, M., Perez, F. (2017): Quantifying Backtest Overfitting in Alternative Beta Strategies. Journal of Portfolio Management (Angaben nicht geprüft).",
+      "journal_year": "Journal of Portfolio Management, 2017 (nicht geprüft)",
+      "period": null,
+      "universe": null,
+      "horizon_or_frequency": null,
+      "gross_or_net": "NICHT_GEPRUEFT",
+      "sharpe": null,
+      "sharpe_note": "NICHT_GEPRUEFT: Verlagsseite pm-research.com robots-gesperrt; SSRN HTTP 429; v2.0-Quelle (Forum-Upload) nach R3-Regeln unzulässig. Die v2.0-Werte (Backtest 1,20 → live 0,31) bleiben ungeprüft und dürfen nicht verwendet werden.",
+      "cost_assumption": "NICHT_GEPRUEFT",
+      "other_key_numbers": [],
+      "status": "NICHT_GEPRUEFT",
+      "sources": []
+    }
+  ]
+}

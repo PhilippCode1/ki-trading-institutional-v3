@@ -1,0 +1,104 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:ki-trading-v3:safety_observation",
+  "title": "Sicherheitsbeobachtung (IF-12)",
+  "description": "Jede Beobachtung trägt eine Messung mit Schwellenverweis.",
+  "x-version": "3.0.0",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "$ref": "urn:ki-trading-v3:common#/$defs/schema_version"
+    },
+    "message_id": {
+      "$ref": "urn:ki-trading-v3:common#/$defs/uuid"
+    },
+    "correlation_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "producer": {
+      "$ref": "urn:ki-trading-v3:common#/$defs/producer"
+    },
+    "created_utc": {
+      "$ref": "urn:ki-trading-v3:common#/$defs/utc"
+    },
+    "observation_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "reporter": {
+      "enum": [
+        "HERMES",
+        "MONITOR",
+        "OPERATOR",
+        "EVALUATOR"
+      ]
+    },
+    "kind": {
+      "enum": [
+        "LIMIT_NAHE",
+        "DATENQUALITAET",
+        "KOSTENDRIFT",
+        "AKTIVITAET",
+        "SICHERHEIT",
+        "BETRIEB"
+      ]
+    },
+    "measurement": {
+      "type": "object",
+      "properties": {
+        "metric": {
+          "type": "string",
+          "minLength": 1
+        },
+        "value": {
+          "$ref": "urn:ki-trading-v3:common#/$defs/decimal"
+        },
+        "unit": {
+          "type": "string",
+          "minLength": 1
+        },
+        "threshold_ref": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "metric",
+        "value",
+        "unit",
+        "threshold_ref"
+      ],
+      "additionalProperties": false
+    },
+    "severity": {
+      "enum": [
+        "INFO",
+        "WARNUNG",
+        "KRITISCH"
+      ]
+    },
+    "refs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 0
+    }
+  },
+  "required": [
+    "schema_version",
+    "message_id",
+    "correlation_id",
+    "producer",
+    "created_utc",
+    "observation_id",
+    "reporter",
+    "kind",
+    "measurement",
+    "severity",
+    "refs"
+  ],
+  "additionalProperties": false
+}

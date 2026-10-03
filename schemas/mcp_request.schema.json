@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:ki-trading-v3:mcp_request",
+  "title": "Anfrage des Agenten an die Projektschnittstelle (IF-07)",
+  "description": "Werkzeug-Allowlist ohne jede Order; Nutzlast höchstens P-AI-PAYLOAD-MAX-MIB (Beispielregel R-EX-08).",
+  "x-version": "3.0.0",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "$ref": "urn:ki-trading-v3:common#/$defs/schema_version"
+    },
+    "message_id": {
+      "$ref": "urn:ki-trading-v3:common#/$defs/uuid"
+    },
+    "correlation_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "producer": {
+      "$ref": "urn:ki-trading-v3:common#/$defs/producer"
+    },
+    "created_utc": {
+      "$ref": "urn:ki-trading-v3:common#/$defs/utc"
+    },
+    "request_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "identity": {
+      "const": "svc-hermes"
+    },
+    "tool": {
+      "enum": [
+        "get_health",
+        "get_metrics",
+        "get_incident",
+        "get_release",
+        "get_gate_results",
+        "create_proposal",
+        "submit_experiment",
+        "get_experiment",
+        "submit_candidate",
+        "append_note",
+        "report_safety_observation",
+        "request_maintenance",
+        "list_work_items",
+        "update_work_item"
+      ]
+    },
+    "idempotency_key": {
+      "type": "string",
+      "minLength": 1
+    },
+    "payload": {
+      "type": "object"
+    },
+    "payload_bytes": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "deadline_utc": {
+      "$ref": "urn:ki-trading-v3:common#/$defs/utc"
+    }
+  },
+  "required": [
+    "schema_version",
+    "message_id",
+    "correlation_id",
+    "producer",
+    "created_utc",
+    "request_id",
+    "identity",
+    "tool",
+    "idempotency_key",
+    "payload",
+    "payload_bytes",
+    "deadline_utc"
+  ],
+  "additionalProperties": false
+}

@@ -1,0 +1,31 @@
+{
+ "schema_version": "3.0",
+ "id": "TR-WORK-003",
+ "machine": "SM-WORKITEM",
+ "description": "Zu großes Budget oder zu viele offene Vorschläge verhindern den Start",
+ "scenarios": [
+  "OS-GV-09"
+ ],
+ "start": null,
+ "initial_reasons": null,
+ "steps": [
+  {
+   "event": "SCOPE_SET",
+   "context": {
+    "budget_h": 60,
+    "open_proposals": 1
+   },
+   "expect_state": "NEW",
+   "expect_invalid": true
+  },
+  {
+   "event": "SCOPE_SET",
+   "context": {
+    "budget_h": 10,
+    "open_proposals": 4
+   },
+   "expect_state": "NEW",
+   "expect_invalid": true
+  }
+ ]
+}

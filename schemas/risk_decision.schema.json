@@ -1,0 +1,177 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:ki-trading-v3:risk_decision",
+  "title": "Risikoentscheidung (IF-03)",
+  "description": "Verkleinerung rundet immer ab (Beispielregel R-EX-01).",
+  "x-version": "3.0.0",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "$ref": "urn:ki-trading-v3:common#/$defs/schema_version"
+    },
+    "message_id": {
+      "$ref": "urn:ki-trading-v3:common#/$defs/uuid"
+    },
+    "correlation_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "producer": {
+      "enum": [
+        "RISK_ENGINE"
+      ],
+      "description": "Geldpfad: nur Geldpfad-Komponenten als Erzeuger (R-05)"
+    },
+    "created_utc": {
+      "$ref": "urn:ki-trading-v3:common#/$defs/utc"
+    },
+    "decision_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "command_id": {
+      "$ref": "urn:ki-trading-v3:common#/$defs/command_id"
+    },
+    "result": {
+      "enum": [
+        "PASS",
+        "REDUCE",
+        "REJECT"
+      ]
+    },
+    "controls": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "control_id": {
+            "type": "string",
+            "pattern": "^PTC-\\d{2}$"
+          },
+          "passed": {
+            "type": "boolean"
+          },
+          "value": {
+            "type": "string",
+            "minLength": 1
+          },
+          "limit": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "control_id",
+          "passed",
+          "value",
+          "limit"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 1
+    },
+    "qty_requested": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "qty_approved": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "reason_code": {
+      "type": "string",
+      "pattern": "^(PTC-\\d{2}|LIM-[A-Z0-9-]+|[A-Z_]+)$"
+    },
+    "profile": {
+      "enum": [
+        "PILOT_H5",
+        "H5",
+        "H10",
+        "H15",
+        "H20"
+      ]
+    },
+    "gap_stress_share": {
+      "$ref": "urn:ki-trading-v3:common#/$defs/decimal"
+    },
+    "day_loss_share": {
+      "$ref": "urn:ki-trading-v3:common#/$defs/decimal"
+    },
+    "me_after": {
+      "$ref": "urn:ki-trading-v3:common#/$defs/decimal"
+    },
+    "lg_after": {
+      "$ref": "urn:ki-trading-v3:common#/$defs/decimal"
+    },
+    "parameters_sha256": {
+      "$ref": "urn:ki-trading-v3:common#/$defs/sha256"
+    }
+  },
+  "required": [
+    "schema_version",
+    "message_id",
+    "correlation_id",
+    "producer",
+    "created_utc",
+    "decision_id",
+    "command_id",
+    "result",
+    "controls",
+    "qty_requested",
+    "qty_approved",
+    "profile",
+    "gap_stress_share",
+    "day_loss_share",
+    "me_after",
+    "lg_after",
+    "parameters_sha256"
+  ],
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "result": {
+            "const": "REJECT"
+          }
+        },
+        "required": [
+          "result"
+        ]
+      },
+      "then": {
+        "required": [
+          "reason_code"
+        ],
+        "properties": {
+          "qty_approved": {
+            "const": 0
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "result": {
+            "const": "REDUCE"
+          }
+        },
+        "required": [
+          "result"
+        ]
+      },
+      "then": {
+        "required": [
+          "reason_code"
+        ],
+        "properties": {
+          "qty_approved": {
+            "type": "integer",
+            "minimum": 1
+          }
+        }
+      }
+    }
+  ]
+}

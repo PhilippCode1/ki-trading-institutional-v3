@@ -1,0 +1,44 @@
+{
+ "schema_version": "3.0",
+ "id": "TR-ORDER-002",
+ "machine": "SM-ORDER",
+ "description": "UNKNOWN: Negativnachweis erst nach Ablauf der Gültigkeit und genügend sauberen Zyklen; später Deal nach Negativnachweis wird übernommen (Incident)",
+ "scenarios": [
+  "OS-EX-04"
+ ],
+ "start": "SUBMITTING",
+ "initial_reasons": null,
+ "steps": [
+  {
+   "event": "TIMEOUT",
+   "context": {},
+   "expect_state": "UNKNOWN"
+  },
+  {
+   "event": "RECON_NEGATIVE_PROOF",
+   "context": {
+    "time_specified_expired": true,
+    "clean_cycles_after_expiry": 1,
+    "no_trace_found": true
+   },
+   "expect_state": "UNKNOWN",
+   "expect_invalid": true
+  },
+  {
+   "event": "RECON_NEGATIVE_PROOF",
+   "context": {
+    "time_specified_expired": true,
+    "clean_cycles_after_expiry": 2,
+    "no_trace_found": true
+   },
+   "expect_state": "NOT_EXECUTED_PROVEN"
+  },
+  {
+   "event": "LATE_FILL",
+   "context": {
+    "late_fill_complete": true
+   },
+   "expect_state": "FILLED"
+  }
+ ]
+}

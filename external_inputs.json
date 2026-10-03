@@ -1,0 +1,578 @@
+{
+  "schema_version": "3.0",
+  "document": "Externe Eingaben mit Sperrwirkung",
+  "as_of": "2026-09-24",
+  "rules": [
+    "Status UNBESTAETIGT sperrt die genannten Tore und Pfade.",
+    "Standardwerte sind markierte Rechenannahmen (default_marked) und gelten nur für Rechnungen, nie als Tatsache oder Betreiberangabe; der Betreiber hat sie nicht ausdrücklich zugelassen (DEC-CF-08), deshalb lösen sie keine Sperre.",
+    "Eine Bestätigung braucht den genannten Nachweis und wird im Tor-Ergebnis signiert."
+  ],
+  "block_targets": {
+    "CFD-PFAD": "CFD-Rückfallpfad (BQ-09: CFD optional)",
+    "DRITTE": "Nutzung für Gelder Dritter",
+    "UNIVERSUM-AKTIENINDEX": "Aktienindex-Futures im Universum (BQ-06)",
+    "UNIVERSUM-ICE-EURONEXT": "Kontrakte an ICE und Euronext",
+    "KI-MIT-NICHTOEFFENTLICHEN-DATEN": "KI-Schicht mit nicht öffentlichen Daten",
+    "K-100": "K-Score über der Obergrenze ohne Gegenprüfung"
+  },
+  "inputs": [
+    {
+      "id": "X-OP-CAPITAL",
+      "name": "Kapital je Echtgeldstufe (Pilot, Standard)",
+      "owner": "Betreiber",
+      "status": "UNBESTAETIGT",
+      "default_value": null,
+      "default_marked": false,
+      "blocks": [
+        "GATE-G8",
+        "GATE-G9"
+      ],
+      "evidence_required": "Signierter Grant mit Kapitalbetrag und Risikoakzeptanz (§7.10)",
+      "refs": [
+        "DEC-OP-01"
+      ],
+      "note": "Das System ist kapitaladaptiv; ein Betrag ist erst für den Echtgeld-Grant nötig."
+    },
+    {
+      "id": "X-OP-RISK-ACCEPT",
+      "name": "Signierte Risikoakzeptanz je Profil (Klartextzahlen)",
+      "owner": "Betreiber",
+      "status": "UNBESTAETIGT",
+      "default_value": null,
+      "default_marked": false,
+      "blocks": [
+        "GATE-G8",
+        "GATE-G9"
+      ],
+      "evidence_required": "Signiertes Dokument aus governance/grants_and_risk_acceptance.md",
+      "refs": [
+        "DEC-OP-05"
+      ],
+      "note": ""
+    },
+    {
+      "id": "X-OP-DLC-MODE",
+      "name": "Auslegung der 9-%-Tagesgrenze (streng oder mit ausgewiesener Restwahrscheinlichkeit)",
+      "owner": "Betreiber",
+      "status": "UNBESTAETIGT",
+      "default_value": "STRENG",
+      "default_marked": true,
+      "blocks": [
+        "GATE-G8"
+      ],
+      "evidence_required": "Signierte Wahl; Standard ist die strenge Auslegung",
+      "refs": [
+        "DEC-CF-02",
+        "DEC-CF-08"
+      ],
+      "note": ""
+    },
+    {
+      "id": "X-OP-RATE",
+      "name": "Bewertung der eigenen Arbeitsstunde",
+      "owner": "Betreiber",
+      "status": "UNBESTAETIGT",
+      "default_value": 50,
+      "default_marked": true,
+      "blocks": [
+        "GATE-G0"
+      ],
+      "evidence_required": "Angabe in EUR/h",
+      "refs": [
+        "P-ECO-HOURLY-RATE",
+        "DEC-CF-08"
+      ],
+      "note": ""
+    },
+    {
+      "id": "X-OP-BUDGET",
+      "name": "Budget für Aufbau, Daten, KI und Prüfungen; Ausgabendeckel",
+      "owner": "Betreiber",
+      "status": "UNBESTAETIGT",
+      "default_value": 25000,
+      "default_marked": true,
+      "blocks": [
+        "GATE-G0",
+        "GATE-G5"
+      ],
+      "evidence_required": "Angabe in EUR",
+      "refs": [
+        "P-ECO-SPEND-CAP",
+        "DEC-CF-08"
+      ],
+      "note": ""
+    },
+    {
+      "id": "X-OP-CFD",
+      "name": "Freigabe des CFD-Rückfallpfads",
+      "owner": "Betreiber",
+      "status": "UNBESTAETIGT",
+      "default_value": null,
+      "default_marked": false,
+      "blocks": [
+        "CFD-PFAD"
+      ],
+      "evidence_required": "Signierte Freigabe; ohne sie kein CFD-Handel",
+      "refs": [
+        "DEC-CF-05"
+      ],
+      "note": ""
+    },
+    {
+      "id": "X-SCOPE-THIRD",
+      "name": "Keine Nutzung für Gelder Dritter",
+      "owner": "Betreiber",
+      "status": "UNBESTAETIGT",
+      "default_value": null,
+      "default_marked": false,
+      "blocks": [
+        "DRITTE"
+      ],
+      "evidence_required": "Bestätigung; jede Drittnutzung braucht eine eigene Prüfung",
+      "refs": [
+        "DEC-CF-03"
+      ],
+      "note": ""
+    },
+    {
+      "id": "X-EQ-INDEX",
+      "name": "Nachweis eines rüstungsfreien Aktienindex-Futures",
+      "owner": "Betreiber",
+      "status": "UNBESTAETIGT",
+      "default_value": null,
+      "default_marked": false,
+      "blocks": [
+        "UNIVERSUM-AKTIENINDEX"
+      ],
+      "evidence_required": "Indexmethodik mit Umsatzschwelle für Waffen/Militär und vollständige Komponentenliste",
+      "refs": [
+        "DEC-OP-06A"
+      ],
+      "note": ""
+    },
+    {
+      "id": "X-INF-ZONES",
+      "name": "Aufteilung der Vertrauensbereiche auf Instanzen",
+      "owner": "Betreiber",
+      "status": "UNBESTAETIGT",
+      "default_value": "DREI_INSTANZEN",
+      "default_marked": true,
+      "blocks": [
+        "GATE-G5"
+      ],
+      "evidence_required": "Entscheidung: drei Instanzen (empfohlen) oder ein VPS mit Restrisiko",
+      "refs": [
+        "DEC-CF-04",
+        "DEC-CF-08"
+      ],
+      "note": ""
+    },
+    {
+      "id": "X-INF-VPS",
+      "name": "Leistungsdaten und Kosten des Windows-VPS",
+      "owner": "Betreiber",
+      "status": "UNBESTAETIGT",
+      "default_value": null,
+      "default_marked": false,
+      "blocks": [
+        "GATE-G5"
+      ],
+      "evidence_required": "Anbieter, Region (EU), vCPU/RAM, Preis",
+      "refs": [
+        "COST-INF-VPS-MONEY"
+      ],
+      "note": ""
+    },
+    {
+      "id": "X-ORG-RISK",
+      "name": "Externe unabhängige Risikofunktion mit Lese- und Vetorecht",
+      "owner": "Betreiber",
+      "status": "UNBESTAETIGT",
+      "default_value": null,
+      "default_marked": false,
+      "blocks": [
+        "GATE-G9"
+      ],
+      "evidence_required": "Vertrag oder schriftliche Zusage; Person ≠ Betreiber",
+      "refs": [
+        "DEC-CF-06"
+      ],
+      "note": ""
+    },
+    {
+      "id": "X-ORG-DEPUTY",
+      "name": "Notfallvertretung mit Nur-Abbau-Recht",
+      "owner": "Betreiber",
+      "status": "UNBESTAETIGT",
+      "default_value": null,
+      "default_marked": false,
+      "blocks": [
+        "GATE-G8"
+      ],
+      "evidence_required": "Benannte Person, hinterlegter Break-glass-Zugang",
+      "refs": [
+        "DEC-DS-06"
+      ],
+      "note": ""
+    },
+    {
+      "id": "X-BRK-ACCOUNT",
+      "name": "Konto beim MT5-Futures-Broker (Demo und Echtgeld)",
+      "owner": "Betreiber/Broker",
+      "status": "UNBESTAETIGT",
+      "default_value": null,
+      "default_marked": false,
+      "blocks": [
+        "GATE-G1"
+      ],
+      "evidence_required": "Kontozugang; Kontomodus (Hedging/Netting)",
+      "refs": [
+        "DEC-DS-16"
+      ],
+      "note": ""
+    },
+    {
+      "id": "X-BRK-CONTRACTS",
+      "name": "Kontraktliste in MT5 mit Symbolen, Kontraktwerten und Rollterminen",
+      "owner": "Broker",
+      "status": "UNBESTAETIGT",
+      "default_value": null,
+      "default_marked": false,
+      "blocks": [
+        "GATE-G1"
+      ],
+      "evidence_required": "Schriftliche Liste oder symbol_info()-Export",
+      "refs": [
+        "SRC-BRK-FXFLAT"
+      ],
+      "note": ""
+    },
+    {
+      "id": "X-BRK-FEES",
+      "name": "Gebührentabelle je Kontrakt und Seite",
+      "owner": "Broker",
+      "status": "UNBESTAETIGT",
+      "default_value": null,
+      "default_marked": false,
+      "blocks": [
+        "GATE-G0"
+      ],
+      "evidence_required": "Schriftliche Gebührentabelle mit Datum",
+      "refs": [
+        "COST-COMM-FXFLAT"
+      ],
+      "note": ""
+    },
+    {
+      "id": "X-BRK-MARGIN",
+      "name": "Intraday- und Übernacht-Margins je Kontrakt",
+      "owner": "Broker",
+      "status": "UNBESTAETIGT",
+      "default_value": null,
+      "default_marked": false,
+      "blocks": [
+        "GATE-G1"
+      ],
+      "evidence_required": "Tabelle mit Datum; Regel für Ende der Intraday-Margin",
+      "refs": [
+        "P-MRG-INTRADAY-FXFLAT"
+      ],
+      "note": ""
+    },
+    {
+      "id": "X-BRK-LIQ",
+      "name": "Liquidationsregel des Brokers (Stop-out-Level, Zeitpunkt, Reihenfolge)",
+      "owner": "Broker",
+      "status": "UNBESTAETIGT",
+      "default_value": 0.5,
+      "default_marked": true,
+      "blocks": [
+        "GATE-G1"
+      ],
+      "evidence_required": "Schriftliche Regel",
+      "refs": [
+        "P-MRG-BROKER-STOPOUT",
+        "DEC-CF-08"
+      ],
+      "note": ""
+    },
+    {
+      "id": "X-BRK-NACHSCHUSS",
+      "name": "Vertraglicher Ausschluss der Nachschusspflicht für Futures",
+      "owner": "Broker",
+      "status": "UNBESTAETIGT",
+      "default_value": null,
+      "default_marked": false,
+      "blocks": [
+        "GATE-G1"
+      ],
+      "evidence_required": "Vertragsklausel (BaFin-Allgemeinverfügung Futures)",
+      "refs": [
+        "SRC-REG-BAFIN-FUT",
+        "DEC-DS-07"
+      ],
+      "note": ""
+    },
+    {
+      "id": "X-BRK-API",
+      "name": "Erlaubnis für Python-Schnittstelle/EA bei Futures; Grenzen der Orderfrequenz",
+      "owner": "Broker",
+      "status": "UNBESTAETIGT",
+      "default_value": null,
+      "default_marked": false,
+      "blocks": [
+        "GATE-G1"
+      ],
+      "evidence_required": "Schriftliche Bestätigung",
+      "refs": [
+        "SRC-MT5-API"
+      ],
+      "note": ""
+    },
+    {
+      "id": "X-BRK-DEMO",
+      "name": "Futures im Demokonto",
+      "owner": "Broker",
+      "status": "UNBESTAETIGT",
+      "default_value": null,
+      "default_marked": false,
+      "blocks": [
+        "GATE-G1"
+      ],
+      "evidence_required": "Demo-Zugang mit denselben Symbolen",
+      "refs": [
+        "SRC-BRK-FXFLAT"
+      ],
+      "note": ""
+    },
+    {
+      "id": "X-BRK-INTEREST",
+      "name": "Verzinsung des Kontoguthabens",
+      "owner": "Broker",
+      "status": "UNBESTAETIGT",
+      "default_value": 0.0,
+      "default_marked": true,
+      "blocks": [
+        "GATE-G0"
+      ],
+      "evidence_required": "Zinssatz mit Datum",
+      "refs": [
+        "P-ECO-BROKER-RATE",
+        "DEC-CF-08"
+      ],
+      "note": ""
+    },
+    {
+      "id": "X-BRK-ALT",
+      "name": "Zugang zu ICE und Euronext über einen weiteren MT5-Broker",
+      "owner": "Betreiber/Broker",
+      "status": "UNBESTAETIGT",
+      "default_value": null,
+      "default_marked": false,
+      "blocks": [
+        "UNIVERSUM-ICE-EURONEXT"
+      ],
+      "evidence_required": "Konto und Kontraktliste",
+      "refs": [
+        "DEC-DS-16"
+      ],
+      "note": ""
+    },
+    {
+      "id": "X-DATA-ND",
+      "name": "Einstufung der Marktdatennutzung (Anzeige/Non-Display, Pro/Non-Pro) bei vollautomatischem Handel",
+      "owner": "Broker/Börse",
+      "status": "UNBESTAETIGT",
+      "default_value": "ANZEIGE",
+      "default_marked": true,
+      "blocks": [
+        "GATE-G2",
+        "GATE-G8"
+      ],
+      "evidence_required": "Schriftliche Einstufung durch Broker bzw. Börse",
+      "refs": [
+        "DEC-DS-17",
+        "COST-MD-CME-ND-USER",
+        "DEC-CF-08"
+      ],
+      "note": ""
+    },
+    {
+      "id": "X-DATA-LIC",
+      "name": "Lizenz der historischen Daten (interne Nutzung, keine Weitergabe an LLM)",
+      "owner": "Datenanbieter",
+      "status": "UNBESTAETIGT",
+      "default_value": null,
+      "default_marked": false,
+      "blocks": [
+        "GATE-G2"
+      ],
+      "evidence_required": "Lizenzbedingungen",
+      "refs": [
+        "SRC-HIST-KIBOT",
+        "DEC-CF-07"
+      ],
+      "note": ""
+    },
+    {
+      "id": "X-DATA-VOL",
+      "name": "Gemessene Volatilitäten, Spreads, Tagesvolumina",
+      "owner": "System (G2)",
+      "status": "UNBESTAETIGT",
+      "default_value": null,
+      "default_marked": false,
+      "blocks": [
+        "GATE-G3"
+      ],
+      "evidence_required": "Messbericht aus lizenzierten Daten",
+      "refs": [
+        "DEC-DS-17"
+      ],
+      "note": ""
+    },
+    {
+      "id": "X-DATA-LIQ",
+      "name": "Gemessene Liquiditätsfenster je Instrument",
+      "owner": "System (G2)",
+      "status": "UNBESTAETIGT",
+      "default_value": null,
+      "default_marked": false,
+      "blocks": [
+        "GATE-G3"
+      ],
+      "evidence_required": "Messbericht aus Intraday-Daten",
+      "refs": [],
+      "note": ""
+    },
+    {
+      "id": "X-DATA-HIST",
+      "name": "Listungsdaten und tatsächlich verfügbare Intraday-Historie je Kontrakt",
+      "owner": "Datenanbieter/System (G2)",
+      "status": "UNBESTAETIGT",
+      "default_value": null,
+      "default_marked": false,
+      "blocks": [
+        "GATE-G3"
+      ],
+      "evidence_required": "Anbieterbestätigung und Datenprüfbericht; ersetzt die Listungsjahre mit Status ANNAHME in registers/instruments.json",
+      "refs": [],
+      "note": "Zulassung verlangt P-RES-DEV-YEARS + P-RES-HOLDOUT-YEARS Jahre Historie oder einen Proxy mit gleichem Basiswert (§6.5)."
+    },
+    {
+      "id": "X-EXEC-TCA",
+      "name": "Gemessener Schlupf je Instrumentgruppe",
+      "owner": "System (G1/G7)",
+      "status": "UNBESTAETIGT",
+      "default_value": null,
+      "default_marked": false,
+      "blocks": [
+        "GATE-G8"
+      ],
+      "evidence_required": "TCA-Bericht",
+      "refs": [
+        "COST-EXEC-SLIP-TICKS"
+      ],
+      "note": ""
+    },
+    {
+      "id": "X-CFD-SPREADS",
+      "name": "Gemessene CFD-Spreads und Finanzierungskosten",
+      "owner": "System (Demo)",
+      "status": "UNBESTAETIGT",
+      "default_value": null,
+      "default_marked": false,
+      "blocks": [
+        "CFD-PFAD"
+      ],
+      "evidence_required": "Messbericht",
+      "refs": [
+        "COST-CFD-SPREAD-MULT"
+      ],
+      "note": ""
+    },
+    {
+      "id": "X-AI-DPA",
+      "name": "Datenverarbeitung des LLM-Anbieters (Region, Aufbewahrung, Training)",
+      "owner": "externe Person",
+      "status": "UNBESTAETIGT",
+      "default_value": null,
+      "default_marked": false,
+      "blocks": [
+        "KI-MIT-NICHTOEFFENTLICHEN-DATEN"
+      ],
+      "evidence_required": "Vertrag/AGB-Prüfung",
+      "refs": [
+        "SRC-NOUS-PORTAL",
+        "DEC-CF-07"
+      ],
+      "note": ""
+    },
+    {
+      "id": "X-LEGAL-01",
+      "name": "Bestätigung der externen Person: Eigenhandel ohne Erlaubnispflicht, Pflichten aus algorithmischem Handel, Marktverhalten",
+      "owner": "externe Person",
+      "status": "UNBESTAETIGT",
+      "default_value": null,
+      "default_marked": false,
+      "blocks": [
+        "GATE-G8"
+      ],
+      "evidence_required": "Schriftliche Bestätigung",
+      "refs": [
+        "DEC-OP-03",
+        "DEC-CF-01"
+      ],
+      "note": ""
+    },
+    {
+      "id": "X-TAX-01",
+      "name": "Steuerliche Behandlung und Übergabeformat",
+      "owner": "externe Person",
+      "status": "UNBESTAETIGT",
+      "default_value": 0.3,
+      "default_marked": true,
+      "blocks": [
+        "GATE-G8"
+      ],
+      "evidence_required": "Bestätigung, dass der Export (legal/handover_external.md) genügt",
+      "refs": [
+        "P-ECO-TAX-SENS",
+        "DEC-CF-01",
+        "DEC-CF-08"
+      ],
+      "note": ""
+    },
+    {
+      "id": "X-V1-PRODUCTS",
+      "name": "Konkrete Trendfolge-/Managed-Futures-Produkte (V1) mit Kosten, Liquidität und Abbildungsqualität",
+      "owner": "Betreiber",
+      "status": "UNBESTAETIGT",
+      "default_value": null,
+      "default_marked": false,
+      "blocks": [
+        "GATE-G0"
+      ],
+      "evidence_required": "Produktliste mit Datum; Recherche war wegen erschöpften Suchbudgets nicht möglich",
+      "refs": [
+        "P-ECO-V1-SR"
+      ],
+      "note": ""
+    },
+    {
+      "id": "X-REVIEW",
+      "name": "Unabhängige Gegenprüfung nach §20.4",
+      "owner": "Betreiber",
+      "status": "UNBESTAETIGT",
+      "default_value": null,
+      "default_marked": false,
+      "blocks": [
+        "K-100"
+      ],
+      "evidence_required": "Prüfergebnis im Paket (audit/independent_review_result.json) nach audit/independent_review_request.md",
+      "refs": [
+        "SRC-MASTERPROMPT-V3"
+      ],
+      "note": ""
+    }
+  ]
+}

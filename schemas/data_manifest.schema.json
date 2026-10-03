@@ -1,0 +1,130 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:ki-trading-v3:data_manifest",
+  "title": "Datenmanifest (IF-09)",
+  "description": "Holdout versiegelt im Prüfmodul; Entwicklungs- und Holdout-Fenster überlappen nicht (Beispielregel R-EX-04).",
+  "x-version": "3.0.0",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "$ref": "urn:ki-trading-v3:common#/$defs/schema_version"
+    },
+    "message_id": {
+      "$ref": "urn:ki-trading-v3:common#/$defs/uuid"
+    },
+    "correlation_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "producer": {
+      "$ref": "urn:ki-trading-v3:common#/$defs/producer"
+    },
+    "created_utc": {
+      "$ref": "urn:ki-trading-v3:common#/$defs/utc"
+    },
+    "manifest_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "vendor": {
+      "type": "string",
+      "minLength": 1
+    },
+    "license_ref": {
+      "const": "X-DATA-LIC"
+    },
+    "instruments": {
+      "type": "array",
+      "items": {
+        "$ref": "urn:ki-trading-v3:common#/$defs/instrument_id"
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "dev_window": {
+      "type": "object",
+      "properties": {
+        "start": {
+          "$ref": "urn:ki-trading-v3:common#/$defs/date"
+        },
+        "end": {
+          "$ref": "urn:ki-trading-v3:common#/$defs/date"
+        }
+      },
+      "required": [
+        "start",
+        "end"
+      ],
+      "additionalProperties": false
+    },
+    "holdout_window": {
+      "type": "object",
+      "properties": {
+        "start": {
+          "$ref": "urn:ki-trading-v3:common#/$defs/date"
+        },
+        "end": {
+          "$ref": "urn:ki-trading-v3:common#/$defs/date"
+        },
+        "sealed": {
+          "const": true
+        },
+        "sha256": {
+          "$ref": "urn:ki-trading-v3:common#/$defs/sha256"
+        },
+        "location": {
+          "const": "PRUEFMODUL"
+        }
+      },
+      "required": [
+        "start",
+        "end",
+        "sealed",
+        "sha256",
+        "location"
+      ],
+      "additionalProperties": false
+    },
+    "files": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "minLength": 1
+          },
+          "sha256": {
+            "$ref": "urn:ki-trading-v3:common#/$defs/sha256"
+          },
+          "rows": {
+            "type": "integer",
+            "minimum": 1
+          }
+        },
+        "required": [
+          "path",
+          "sha256",
+          "rows"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 1
+    }
+  },
+  "required": [
+    "schema_version",
+    "message_id",
+    "correlation_id",
+    "producer",
+    "created_utc",
+    "manifest_id",
+    "vendor",
+    "license_ref",
+    "instruments",
+    "dev_window",
+    "holdout_window",
+    "files"
+  ],
+  "additionalProperties": false
+}

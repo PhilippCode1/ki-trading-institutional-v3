@@ -1,0 +1,268 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:ki-trading-v3:v2_to_v3_mapping",
+  "title": "Abbildung v2.0 → v3.0",
+  "x-version": "3.0.0",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "3.0"
+    },
+    "document": {
+      "const": "Abbildung v2.0 → v3.0"
+    },
+    "as_of": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+    },
+    "rule": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source": {
+      "type": "string",
+      "minLength": 1
+    },
+    "adoptions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^C\\d{2}$"
+          },
+          "concept": {
+            "type": "string",
+            "minLength": 1
+          },
+          "adaptation": {
+            "type": "string",
+            "minLength": 1
+          },
+          "locations": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "minItems": 1
+          },
+          "parameters": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "minItems": 0
+          },
+          "sources": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "minItems": 0
+          }
+        },
+        "required": [
+          "id",
+          "concept",
+          "adaptation",
+          "locations"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 14
+    },
+    "artifacts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "v2": {
+            "type": "string",
+            "minLength": 1
+          },
+          "v3": {
+            "type": "string",
+            "minLength": 1
+          },
+          "disposition": {
+            "enum": [
+              "UEBERNOMMEN",
+              "TEILWEISE_UEBERNOMMEN",
+              "ANGEPASST",
+              "ERSETZT"
+            ]
+          },
+          "note": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "v2",
+          "v3",
+          "disposition",
+          "note"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 1
+    },
+    "criteria_mapping": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "v2": {
+            "type": "string",
+            "pattern": "^[A-M]\\d$"
+          },
+          "v2_name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "v2_weight": {
+            "type": "number"
+          },
+          "v2_self_factor": {
+            "type": "number"
+          },
+          "k_subcriteria": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^[A-J]\\d$"
+            },
+            "minItems": 1
+          }
+        },
+        "required": [
+          "v2",
+          "v2_name",
+          "v2_weight",
+          "v2_self_factor",
+          "k_subcriteria"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 52
+    },
+    "baseline": {
+      "type": "object",
+      "properties": {
+        "v2_self_score": {
+          "type": "number"
+        },
+        "independent_2026_09_24": {
+          "type": "number"
+        },
+        "source": {
+          "type": "string",
+          "minLength": 1
+        },
+        "areas": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "area": {
+                "type": "string",
+                "minLength": 1
+              },
+              "name": {
+                "type": "string",
+                "minLength": 1
+              },
+              "max": {
+                "type": "number"
+              },
+              "v2_independent": {
+                "type": "number"
+              },
+              "main_deficit": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "area",
+              "name",
+              "max",
+              "v2_independent",
+              "main_deficit"
+            ],
+            "additionalProperties": false
+          },
+          "minItems": 10
+        }
+      },
+      "required": [
+        "v2_self_score",
+        "independent_2026_09_24",
+        "source",
+        "areas"
+      ],
+      "additionalProperties": false
+    },
+    "comparisons": {
+      "type": "object",
+      "properties": {
+        "v2_agent_days": {
+          "type": "object",
+          "properties": {
+            "low": {
+              "type": "number"
+            },
+            "high": {
+              "type": "number"
+            },
+            "stages": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "minLength": 1
+              },
+              "minItems": 1
+            },
+            "method": {
+              "type": "string",
+              "minLength": 1
+            },
+            "source": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "required": [
+            "low",
+            "high",
+            "stages",
+            "method",
+            "source"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "v2_agent_days"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "schema_version",
+    "document",
+    "as_of",
+    "rule",
+    "source",
+    "adoptions",
+    "artifacts",
+    "criteria_mapping",
+    "baseline",
+    "comparisons"
+  ],
+  "additionalProperties": false
+}

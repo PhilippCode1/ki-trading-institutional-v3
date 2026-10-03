@@ -1,0 +1,67 @@
+{
+ "schema_version": "3.0",
+ "id": "TR-DATA-001",
+ "machine": "SM-DATAFEED",
+ "description": "Aufwärmen, frisch, veraltet, stale, frisch; Sitzungsende und -beginn",
+ "scenarios": [
+  "OS-DA-01"
+ ],
+ "start": null,
+ "initial_reasons": null,
+ "steps": [
+  {
+   "event": "BARS_LOADED",
+   "context": {},
+   "expect_state": "WARMING_UP"
+  },
+  {
+   "event": "BARS_LOADED",
+   "context": {
+    "history_days": 40
+   },
+   "expect_state": "HEALTHY"
+  },
+  {
+   "event": "QUOTE_UPDATE",
+   "context": {
+    "quote_age_s": 7,
+    "xcheck_share": 0.995
+   },
+   "expect_state": "DEGRADED"
+  },
+  {
+   "event": "QUOTE_UPDATE",
+   "context": {
+    "quote_age_s": 12,
+    "xcheck_share": 0.995
+   },
+   "expect_state": "STALE"
+  },
+  {
+   "event": "QUOTE_UPDATE",
+   "context": {
+    "quote_age_s": 1,
+    "xcheck_share": 0.995
+   },
+   "expect_state": "HEALTHY"
+  },
+  {
+   "event": "SESSION_CLOSED",
+   "context": {},
+   "expect_state": "CLOSED"
+  },
+  {
+   "event": "SESSION_OPENED",
+   "context": {},
+   "expect_state": "DEGRADED"
+  },
+  {
+   "event": "QUOTE_UPDATE",
+   "context": {
+    "quote_age_s": 1,
+    "xcheck_share": 0.999
+   },
+   "expect_state": "HEALTHY"
+  }
+ ]
+}

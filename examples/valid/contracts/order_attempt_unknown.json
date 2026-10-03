@@ -1,0 +1,15 @@
+{
+ "schema_version": "3.0",
+ "message_id": "00000000-0000-4000-8000-000000000005",
+ "correlation_id": "COR-0005",
+ "producer": "ADAPTER",
+ "created_utc": "2026-09-24T09:00:00Z",
+ "attempt_id": "ATT-0002",
+ "command_id": "CMD-00000000000D",
+ "state": "UNKNOWN",
+ "sent_at_utc": "2026-09-24T09:05:00Z",
+ "retcode": 10012,
+ "order_ticket": null,
+ "deal_tickets": [],
+ "filled_qty": 0
+}

@@ -1,0 +1,27 @@
+{
+ "calculator": "financials/tax_scenarios.py",
+ "scope": "BQ-03: nur pauschale Sensitivität, keine Steuerszenarien (keine Beratung)",
+ "inputs": {
+  "parameters.json": "38f7ce22d3184218e02001b719b137e4f0ad0faaf239b53bff44e8c6ebc576b6"
+ },
+ "rate": 0.3,
+ "external_input": "X-TAX-01",
+ "examples": [
+  {
+   "before_eur": "-5000.00",
+   "after_sensitivity_eur": "-5000.00"
+  },
+  {
+   "before_eur": "0.00",
+   "after_sensitivity_eur": "0.00"
+  },
+  {
+   "before_eur": "1000.00",
+   "after_sensitivity_eur": "700.00"
+  },
+  {
+   "before_eur": "25000.55",
+   "after_sensitivity_eur": "17500.38"
+  }
+ ]
+}

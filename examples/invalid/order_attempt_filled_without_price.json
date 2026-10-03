@@ -1,0 +1,17 @@
+{
+ "schema_version": "3.0",
+ "message_id": "00000000-0000-4000-8000-000000000004",
+ "correlation_id": "COR-0004",
+ "producer": "ADAPTER",
+ "created_utc": "2026-09-24T09:00:00Z",
+ "attempt_id": "ATT-0001",
+ "command_id": "CMD-00000000000A",
+ "state": "FILLED",
+ "sent_at_utc": "2026-09-24T09:00:01Z",
+ "retcode": 10009,
+ "order_ticket": 7770001,
+ "deal_tickets": [
+  8880001
+ ],
+ "filled_qty": 1
+}

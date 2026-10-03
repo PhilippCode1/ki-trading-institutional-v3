@@ -1,0 +1,193 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:ki-trading-v3:account_snapshot",
+  "title": "Kontosnapshot (IF-02)",
+  "description": "Für Risikoentscheidungen nur, wenn complete = true, gap_since_last = false und jünger als P-EXE-SNAPSHOT-MAX-S.",
+  "x-version": "3.0.0",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "$ref": "urn:ki-trading-v3:common#/$defs/schema_version"
+    },
+    "message_id": {
+      "$ref": "urn:ki-trading-v3:common#/$defs/uuid"
+    },
+    "correlation_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "producer": {
+      "enum": [
+        "RECONCILER"
+      ],
+      "description": "Geldpfad: nur Geldpfad-Komponenten als Erzeuger (R-05)"
+    },
+    "created_utc": {
+      "$ref": "urn:ki-trading-v3:common#/$defs/utc"
+    },
+    "snapshot_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "taken_at_utc": {
+      "$ref": "urn:ki-trading-v3:common#/$defs/utc"
+    },
+    "account_ref": {
+      "$ref": "urn:ki-trading-v3:common#/$defs/account_ref"
+    },
+    "account_type": {
+      "$ref": "urn:ki-trading-v3:common#/$defs/account_type"
+    },
+    "margin_mode": {
+      "enum": [
+        "HEDGING",
+        "NETTING"
+      ]
+    },
+    "currency": {
+      "$ref": "urn:ki-trading-v3:common#/$defs/currency"
+    },
+    "balance": {
+      "$ref": "urn:ki-trading-v3:common#/$defs/decimal"
+    },
+    "equity": {
+      "$ref": "urn:ki-trading-v3:common#/$defs/decimal"
+    },
+    "margin": {
+      "$ref": "urn:ki-trading-v3:common#/$defs/nonneg_decimal"
+    },
+    "margin_free": {
+      "$ref": "urn:ki-trading-v3:common#/$defs/decimal"
+    },
+    "margin_level": {
+      "anyOf": [
+        {
+          "$ref": "urn:ki-trading-v3:common#/$defs/decimal"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "stop_out_level": {
+      "anyOf": [
+        {
+          "$ref": "urn:ki-trading-v3:common#/$defs/decimal"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "deal_cursor": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "positions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "position_ticket": {
+            "$ref": "urn:ki-trading-v3:common#/$defs/ticket"
+          },
+          "broker_symbol": {
+            "type": "string",
+            "minLength": 1
+          },
+          "side": {
+            "$ref": "urn:ki-trading-v3:common#/$defs/side"
+          },
+          "qty": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "sl_price": {
+            "anyOf": [
+              {
+                "$ref": "urn:ki-trading-v3:common#/$defs/decimal"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "position_ticket",
+          "broker_symbol",
+          "side",
+          "qty",
+          "sl_price"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 0
+    },
+    "open_orders": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "order_ticket": {
+            "$ref": "urn:ki-trading-v3:common#/$defs/ticket"
+          },
+          "broker_symbol": {
+            "type": "string",
+            "minLength": 1
+          },
+          "role": {
+            "enum": [
+              "ENTRY",
+              "PROTECT",
+              "OTHER"
+            ]
+          },
+          "qty": {
+            "type": "integer",
+            "minimum": 1
+          }
+        },
+        "required": [
+          "order_ticket",
+          "broker_symbol",
+          "role",
+          "qty"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 0
+    },
+    "complete": {
+      "type": "boolean"
+    },
+    "gap_since_last": {
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "schema_version",
+    "message_id",
+    "correlation_id",
+    "producer",
+    "created_utc",
+    "snapshot_id",
+    "taken_at_utc",
+    "account_ref",
+    "account_type",
+    "margin_mode",
+    "currency",
+    "balance",
+    "equity",
+    "margin",
+    "margin_free",
+    "margin_level",
+    "stop_out_level",
+    "deal_cursor",
+    "positions",
+    "open_orders",
+    "complete",
+    "gap_since_last"
+  ],
+  "additionalProperties": false
+}

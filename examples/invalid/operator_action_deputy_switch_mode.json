@@ -1,0 +1,16 @@
+{
+ "schema_version": "3.0",
+ "message_id": "00000000-0000-4000-8000-000000000013",
+ "correlation_id": "COR-0013",
+ "producer": "OPERATOR",
+ "created_utc": "2026-09-24T09:00:00Z",
+ "action_id": "OA-0002",
+ "action": "SWITCH_MODE",
+ "actor_role": "VERTRETUNG",
+ "key_fingerprint": "FP-00000000000000B1",
+ "signed_payload_sha256": "0000000000000000000000000000000000000000000000000000000000000008",
+ "signature": "SIG-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+ "expires_utc": "2026-09-24T09:10:00Z",
+ "target_mode": "PAPER",
+ "account_type_broker": "DEMO"
+}

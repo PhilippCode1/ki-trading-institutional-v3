@@ -1,0 +1,591 @@
+{
+ "calculator": "research/operating_characteristics.py",
+ "model": "MOD-OC",
+ "seed": 662026,
+ "strategies_per_class": 4000,
+ "inputs": {
+  "financials/cost_model_results.json": "9e0fad44f653da712f77878cca0778637d6cd753f575b58eb8b587e3b8489946",
+  "implementation/build_stages.json": "e87f0facd938568f5d626f58e5619547f6b0ed062f7cd91d0cd098e28b343b32",
+  "parameters.json": "38f7ce22d3184218e02001b719b137e4f0ad0faaf239b53bff44e8c6ebc576b6",
+  "research/prior_results.json": "bf31b7168f7bc6ec91bcc216b3df369b3ed7f19055d29be3545ef90305e8f713"
+ },
+ "priors": {
+  "SKEPTISCH": {
+   "mean": 0.0,
+   "sd": 0.25
+  },
+  "LITERATUR": {
+   "mean": 0.09890564738,
+   "sd": 0.07863060768
+  },
+  "source": "research/prior_results.json#/portfolio/U-BREAKEVEN/5000000/S-TF",
+  "registered": "SKEPTISCH"
+ },
+ "registered_dsr_min": 0.95,
+ "cumulative_cost_eur": {
+  "BS-00": "1200.00",
+  "BS-01": "3528.40",
+  "BS-02": "9043.61",
+  "BS-03": "12790.94",
+  "BS-04": "13700.41",
+  "BS-05": "32571.87",
+  "BS-06": "34390.80",
+  "BS-07": "46269.06",
+  "BS-08": "58147.32"
+ },
+ "v2_reference": "v2.0: Strategie ohne Edge bestand E1 und E2 zu etwa 89 % (EV-05)",
+ "registered": {
+  "SCHAEDLICH": {
+   "true_sharpe": -0.2,
+   "ohne_futility": {
+    "rates": {
+     "passed_G3": 0.00025,
+     "stopped_futility_G3": 0.0,
+     "passed_G4": 0.0,
+     "stopped_futility_G4": 0.0,
+     "reached_G5_build": 0.0,
+     "passed_G7": 0.0,
+     "passed_G8": 0.0,
+     "accepted_final": 0.0
+    },
+    "expected_cost_eur": "12791.17"
+   },
+   "mit_futility": {
+    "rates": {
+     "passed_G3": 0.00025,
+     "stopped_futility_G3": 0.0,
+     "passed_G4": 0.0,
+     "stopped_futility_G4": 0.0,
+     "reached_G5_build": 0.0,
+     "passed_G7": 0.0,
+     "passed_G8": 0.0,
+     "accepted_final": 0.0
+    },
+    "expected_cost_eur": "12791.17"
+   },
+   "saved_cost_eur_per_strategy": "0.00"
+  },
+  "WERTLOS": {
+   "true_sharpe": 0.0,
+   "ohne_futility": {
+    "rates": {
+     "passed_G3": 0.00125,
+     "stopped_futility_G3": 0.0,
+     "passed_G4": 0.0005,
+     "stopped_futility_G4": 0.0,
+     "reached_G5_build": 0.0005,
+     "passed_G7": 0.00025,
+     "passed_G8": 0.00025,
+     "accepted_final": 0.0
+    },
+    "expected_cost_eur": "12811.33"
+   },
+   "mit_futility": {
+    "rates": {
+     "passed_G3": 0.00125,
+     "stopped_futility_G3": 0.0,
+     "passed_G4": 0.0005,
+     "stopped_futility_G4": 0.0,
+     "reached_G5_build": 0.0005,
+     "passed_G7": 0.00025,
+     "passed_G8": 0.00025,
+     "accepted_final": 0.0
+    },
+    "expected_cost_eur": "12811.33"
+   },
+   "saved_cost_eur_per_strategy": "0.00"
+  },
+  "BRAUCHBAR": {
+   "true_sharpe": 0.3,
+   "ohne_futility": {
+    "rates": {
+     "passed_G3": 0.0225,
+     "stopped_futility_G3": 0.0,
+     "passed_G4": 0.014,
+     "stopped_futility_G4": 0.0,
+     "reached_G5_build": 0.014,
+     "passed_G7": 0.0125,
+     "passed_G8": 0.0095,
+     "accepted_final": 0.00875
+    },
+    "expected_cost_eur": "13415.84"
+   },
+   "mit_futility": {
+    "rates": {
+     "passed_G3": 0.0225,
+     "stopped_futility_G3": 0.0,
+     "passed_G4": 0.014,
+     "stopped_futility_G4": 0.0,
+     "reached_G5_build": 0.014,
+     "passed_G7": 0.0125,
+     "passed_G8": 0.0095,
+     "accepted_final": 0.00875
+    },
+    "expected_cost_eur": "13415.84"
+   },
+   "saved_cost_eur_per_strategy": "0.00"
+  }
+ },
+ "sensitivity": {
+  "SKEPTISCH|DSR0.8": {
+   "SCHAEDLICH": {
+    "true_sharpe": -0.2,
+    "ohne_futility": {
+     "rates": {
+      "passed_G3": 0.00175,
+      "stopped_futility_G3": 0.0,
+      "passed_G4": 0.0005,
+      "stopped_futility_G4": 0.0,
+      "reached_G5_build": 0.0005,
+      "passed_G7": 0.00025,
+      "passed_G8": 0.00025,
+      "accepted_final": 0.0
+     },
+     "expected_cost_eur": "12811.79"
+    },
+    "mit_futility": {
+     "rates": {
+      "passed_G3": 0.00175,
+      "stopped_futility_G3": 0.0,
+      "passed_G4": 0.0005,
+      "stopped_futility_G4": 0.0,
+      "reached_G5_build": 0.0005,
+      "passed_G7": 0.00025,
+      "passed_G8": 0.00025,
+      "accepted_final": 0.0
+     },
+     "expected_cost_eur": "12811.79"
+    },
+    "saved_cost_eur_per_strategy": "0.00"
+   },
+   "WERTLOS": {
+    "true_sharpe": 0.0,
+    "ohne_futility": {
+     "rates": {
+      "passed_G3": 0.0155,
+      "stopped_futility_G3": 0.0,
+      "passed_G4": 0.00725,
+      "stopped_futility_G4": 0.0,
+      "reached_G5_build": 0.00725,
+      "passed_G7": 0.0045,
+      "passed_G8": 0.003,
+      "accepted_final": 0.0025
+     },
+     "expected_cost_eur": "13094.61"
+    },
+    "mit_futility": {
+     "rates": {
+      "passed_G3": 0.0155,
+      "stopped_futility_G3": 0.0,
+      "passed_G4": 0.00725,
+      "stopped_futility_G4": 0.00025,
+      "reached_G5_build": 0.007,
+      "passed_G7": 0.0045,
+      "passed_G8": 0.003,
+      "accepted_final": 0.0025
+     },
+     "expected_cost_eur": "13086.47"
+    },
+    "saved_cost_eur_per_strategy": "8.14"
+   },
+   "BRAUCHBAR": {
+    "true_sharpe": 0.3,
+    "ohne_futility": {
+     "rates": {
+      "passed_G3": 0.13425,
+      "stopped_futility_G3": 0.0,
+      "passed_G4": 0.089,
+      "stopped_futility_G4": 0.0,
+      "reached_G5_build": 0.089,
+      "passed_G7": 0.07475,
+      "passed_G8": 0.061,
+      "accepted_final": 0.039
+     },
+     "expected_cost_eur": "16699.55"
+    },
+    "mit_futility": {
+     "rates": {
+      "passed_G3": 0.13425,
+      "stopped_futility_G3": 0.0,
+      "passed_G4": 0.089,
+      "stopped_futility_G4": 0.00625,
+      "reached_G5_build": 0.08275,
+      "passed_G7": 0.069,
+      "passed_G8": 0.05675,
+      "accepted_final": 0.03875
+     },
+     "expected_cost_eur": "16427.69"
+    },
+    "saved_cost_eur_per_strategy": "271.86"
+   }
+  },
+  "SKEPTISCH|DSR0.5": {
+   "SCHAEDLICH": {
+    "true_sharpe": -0.2,
+    "ohne_futility": {
+     "rates": {
+      "passed_G3": 0.03625,
+      "stopped_futility_G3": 0.0,
+      "passed_G4": 0.014,
+      "stopped_futility_G4": 0.0,
+      "reached_G5_build": 0.014,
+      "passed_G7": 0.01075,
+      "passed_G8": 0.00775,
+      "accepted_final": 0.001
+     },
+     "expected_cost_eur": "13407.56"
+    },
+    "mit_futility": {
+     "rates": {
+      "passed_G3": 0.03625,
+      "stopped_futility_G3": 0.0205,
+      "passed_G4": 0.007,
+      "stopped_futility_G4": 0.0045,
+      "reached_G5_build": 0.0025,
+      "passed_G7": 0.0015,
+      "passed_G8": 0.00125,
+      "accepted_final": 0.0005
+     },
+     "expected_cost_eur": "12904.50"
+    },
+    "saved_cost_eur_per_strategy": "503.06"
+   },
+   "WERTLOS": {
+    "true_sharpe": 0.0,
+    "ohne_futility": {
+     "rates": {
+      "passed_G3": 0.143,
+      "stopped_futility_G3": 0.0,
+      "passed_G4": 0.069,
+      "stopped_futility_G4": 0.0,
+      "reached_G5_build": 0.069,
+      "passed_G7": 0.05025,
+      "passed_G8": 0.0365,
+      "accepted_final": 0.01
+     },
+     "expected_cost_eur": "15765.11"
+    },
+    "mit_futility": {
+     "rates": {
+      "passed_G3": 0.143,
+      "stopped_futility_G3": 0.06775,
+      "passed_G4": 0.03725,
+      "stopped_futility_G4": 0.0115,
+      "reached_G5_build": 0.02575,
+      "passed_G7": 0.01825,
+      "passed_G8": 0.01325,
+      "accepted_final": 0.00675
+     },
+     "expected_cost_eur": "13914.80"
+    },
+    "saved_cost_eur_per_strategy": "1850.31"
+   },
+   "BRAUCHBAR": {
+    "true_sharpe": 0.3,
+    "ohne_futility": {
+     "rates": {
+      "passed_G3": 0.53775,
+      "stopped_futility_G3": 0.0,
+      "passed_G4": 0.35325,
+      "stopped_futility_G4": 0.0,
+      "reached_G5_build": 0.35325,
+      "passed_G7": 0.291,
+      "passed_G8": 0.23475,
+      "accepted_final": 0.09475
+     },
+     "expected_cost_eur": "28241.46"
+    },
+    "mit_futility": {
+     "rates": {
+      "passed_G3": 0.53775,
+      "stopped_futility_G3": 0.186,
+      "passed_G4": 0.23,
+      "stopped_futility_G4": 0.06025,
+      "reached_G5_build": 0.16975,
+      "passed_G7": 0.14,
+      "passed_G8": 0.11325,
+      "accepted_final": 0.06875
+     },
+     "expected_cost_eur": "20302.33"
+    },
+    "saved_cost_eur_per_strategy": "7939.13"
+   }
+  },
+  "LITERATUR|DSR0.95": {
+   "SCHAEDLICH": {
+    "true_sharpe": -0.2,
+    "ohne_futility": {
+     "rates": {
+      "passed_G3": 0.00025,
+      "stopped_futility_G3": 0.0,
+      "passed_G4": 0.0,
+      "stopped_futility_G4": 0.0,
+      "reached_G5_build": 0.0,
+      "passed_G7": 0.0,
+      "passed_G8": 0.0,
+      "accepted_final": 0.0
+     },
+     "expected_cost_eur": "12791.17"
+    },
+    "mit_futility": {
+     "rates": {
+      "passed_G3": 0.00025,
+      "stopped_futility_G3": 0.0,
+      "passed_G4": 0.0,
+      "stopped_futility_G4": 0.0,
+      "reached_G5_build": 0.0,
+      "passed_G7": 0.0,
+      "passed_G8": 0.0,
+      "accepted_final": 0.0
+     },
+     "expected_cost_eur": "12791.17"
+    },
+    "saved_cost_eur_per_strategy": "0.00"
+   },
+   "WERTLOS": {
+    "true_sharpe": 0.0,
+    "ohne_futility": {
+     "rates": {
+      "passed_G3": 0.00125,
+      "stopped_futility_G3": 0.0,
+      "passed_G4": 0.0005,
+      "stopped_futility_G4": 0.0,
+      "reached_G5_build": 0.0005,
+      "passed_G7": 0.00025,
+      "passed_G8": 0.00025,
+      "accepted_final": 0.00025
+     },
+     "expected_cost_eur": "12811.33"
+    },
+    "mit_futility": {
+     "rates": {
+      "passed_G3": 0.00125,
+      "stopped_futility_G3": 0.0,
+      "passed_G4": 0.0005,
+      "stopped_futility_G4": 0.0,
+      "reached_G5_build": 0.0005,
+      "passed_G7": 0.00025,
+      "passed_G8": 0.00025,
+      "accepted_final": 0.00025
+     },
+     "expected_cost_eur": "12811.33"
+    },
+    "saved_cost_eur_per_strategy": "0.00"
+   },
+   "BRAUCHBAR": {
+    "true_sharpe": 0.3,
+    "ohne_futility": {
+     "rates": {
+      "passed_G3": 0.0225,
+      "stopped_futility_G3": 0.0,
+      "passed_G4": 0.014,
+      "stopped_futility_G4": 0.0,
+      "reached_G5_build": 0.014,
+      "passed_G7": 0.0125,
+      "passed_G8": 0.0095,
+      "accepted_final": 0.0095
+     },
+     "expected_cost_eur": "13415.84"
+    },
+    "mit_futility": {
+     "rates": {
+      "passed_G3": 0.0225,
+      "stopped_futility_G3": 0.0,
+      "passed_G4": 0.014,
+      "stopped_futility_G4": 0.0,
+      "reached_G5_build": 0.014,
+      "passed_G7": 0.0125,
+      "passed_G8": 0.0095,
+      "accepted_final": 0.0095
+     },
+     "expected_cost_eur": "13415.84"
+    },
+    "saved_cost_eur_per_strategy": "0.00"
+   }
+  },
+  "LITERATUR|DSR0.8": {
+   "SCHAEDLICH": {
+    "true_sharpe": -0.2,
+    "ohne_futility": {
+     "rates": {
+      "passed_G3": 0.00175,
+      "stopped_futility_G3": 0.0,
+      "passed_G4": 0.0005,
+      "stopped_futility_G4": 0.0,
+      "reached_G5_build": 0.0005,
+      "passed_G7": 0.00025,
+      "passed_G8": 0.00025,
+      "accepted_final": 0.00025
+     },
+     "expected_cost_eur": "12811.79"
+    },
+    "mit_futility": {
+     "rates": {
+      "passed_G3": 0.00175,
+      "stopped_futility_G3": 0.0,
+      "passed_G4": 0.0005,
+      "stopped_futility_G4": 0.0,
+      "reached_G5_build": 0.0005,
+      "passed_G7": 0.00025,
+      "passed_G8": 0.00025,
+      "accepted_final": 0.00025
+     },
+     "expected_cost_eur": "12811.79"
+    },
+    "saved_cost_eur_per_strategy": "0.00"
+   },
+   "WERTLOS": {
+    "true_sharpe": 0.0,
+    "ohne_futility": {
+     "rates": {
+      "passed_G3": 0.0155,
+      "stopped_futility_G3": 0.0,
+      "passed_G4": 0.00725,
+      "stopped_futility_G4": 0.0,
+      "reached_G5_build": 0.00725,
+      "passed_G7": 0.0045,
+      "passed_G8": 0.003,
+      "accepted_final": 0.003
+     },
+     "expected_cost_eur": "13094.61"
+    },
+    "mit_futility": {
+     "rates": {
+      "passed_G3": 0.0155,
+      "stopped_futility_G3": 0.0,
+      "passed_G4": 0.00725,
+      "stopped_futility_G4": 0.0,
+      "reached_G5_build": 0.00725,
+      "passed_G7": 0.0045,
+      "passed_G8": 0.003,
+      "accepted_final": 0.003
+     },
+     "expected_cost_eur": "13094.61"
+    },
+    "saved_cost_eur_per_strategy": "0.00"
+   },
+   "BRAUCHBAR": {
+    "true_sharpe": 0.3,
+    "ohne_futility": {
+     "rates": {
+      "passed_G3": 0.13425,
+      "stopped_futility_G3": 0.0,
+      "passed_G4": 0.089,
+      "stopped_futility_G4": 0.0,
+      "reached_G5_build": 0.089,
+      "passed_G7": 0.07475,
+      "passed_G8": 0.061,
+      "accepted_final": 0.061
+     },
+     "expected_cost_eur": "16699.55"
+    },
+    "mit_futility": {
+     "rates": {
+      "passed_G3": 0.13425,
+      "stopped_futility_G3": 0.0,
+      "passed_G4": 0.089,
+      "stopped_futility_G4": 0.0,
+      "reached_G5_build": 0.089,
+      "passed_G7": 0.07475,
+      "passed_G8": 0.061,
+      "accepted_final": 0.061
+     },
+     "expected_cost_eur": "16699.55"
+    },
+    "saved_cost_eur_per_strategy": "0.00"
+   }
+  },
+  "LITERATUR|DSR0.5": {
+   "SCHAEDLICH": {
+    "true_sharpe": -0.2,
+    "ohne_futility": {
+     "rates": {
+      "passed_G3": 0.03625,
+      "stopped_futility_G3": 0.0,
+      "passed_G4": 0.014,
+      "stopped_futility_G4": 0.0,
+      "reached_G5_build": 0.014,
+      "passed_G7": 0.01075,
+      "passed_G8": 0.00775,
+      "accepted_final": 0.00775
+     },
+     "expected_cost_eur": "13407.56"
+    },
+    "mit_futility": {
+     "rates": {
+      "passed_G3": 0.03625,
+      "stopped_futility_G3": 0.0,
+      "passed_G4": 0.014,
+      "stopped_futility_G4": 0.0,
+      "reached_G5_build": 0.014,
+      "passed_G7": 0.01075,
+      "passed_G8": 0.00775,
+      "accepted_final": 0.00775
+     },
+     "expected_cost_eur": "13407.56"
+    },
+    "saved_cost_eur_per_strategy": "0.00"
+   },
+   "WERTLOS": {
+    "true_sharpe": 0.0,
+    "ohne_futility": {
+     "rates": {
+      "passed_G3": 0.143,
+      "stopped_futility_G3": 0.0,
+      "passed_G4": 0.069,
+      "stopped_futility_G4": 0.0,
+      "reached_G5_build": 0.069,
+      "passed_G7": 0.05025,
+      "passed_G8": 0.0365,
+      "accepted_final": 0.0365
+     },
+     "expected_cost_eur": "15765.11"
+    },
+    "mit_futility": {
+     "rates": {
+      "passed_G3": 0.143,
+      "stopped_futility_G3": 0.0,
+      "passed_G4": 0.069,
+      "stopped_futility_G4": 0.0,
+      "reached_G5_build": 0.069,
+      "passed_G7": 0.05025,
+      "passed_G8": 0.0365,
+      "accepted_final": 0.0365
+     },
+     "expected_cost_eur": "15765.11"
+    },
+    "saved_cost_eur_per_strategy": "0.00"
+   },
+   "BRAUCHBAR": {
+    "true_sharpe": 0.3,
+    "ohne_futility": {
+     "rates": {
+      "passed_G3": 0.53775,
+      "stopped_futility_G3": 0.0,
+      "passed_G4": 0.35325,
+      "stopped_futility_G4": 0.0,
+      "reached_G5_build": 0.35325,
+      "passed_G7": 0.291,
+      "passed_G8": 0.23475,
+      "accepted_final": 0.23475
+     },
+     "expected_cost_eur": "28241.46"
+    },
+    "mit_futility": {
+     "rates": {
+      "passed_G3": 0.53775,
+      "stopped_futility_G3": 0.0,
+      "passed_G4": 0.35325,
+      "stopped_futility_G4": 0.0,
+      "reached_G5_build": 0.35325,
+      "passed_G7": 0.291,
+      "passed_G8": 0.23475,
+      "accepted_final": 0.23475
+     },
+     "expected_cost_eur": "28241.46"
+    },
+    "saved_cost_eur_per_strategy": "0.00"
+   }
+  }
+ }
+}

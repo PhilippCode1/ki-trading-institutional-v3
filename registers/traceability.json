@@ -1,0 +1,1513 @@
+{
+  "schema_version": "3.0",
+  "document": "Rückverfolgbarkeit (abgeleitet)",
+  "requirements": [
+    {
+      "id": "REQ-ECO-001",
+      "tests": [
+        "T-CALC-COST-001",
+        "T-SEM-COST-001",
+        "T-PKG-RENDER-001"
+      ],
+      "tests_known": true,
+      "stage": "BS-00",
+      "status": "IM_PAKET_NACHGEWIESEN",
+      "basis": "§5.1, R-04, EV-01"
+    },
+    {
+      "id": "REQ-ECO-002",
+      "tests": [
+        "T-CALC-DMC-001"
+      ],
+      "tests_known": true,
+      "stage": "BS-00",
+      "status": "IM_PAKET_NACHGEWIESEN",
+      "basis": "§5.6, EV-03"
+    },
+    {
+      "id": "REQ-ECO-003",
+      "tests": [
+        "T-CALC-DMC-002",
+        "T-GATE-001"
+      ],
+      "tests_known": true,
+      "stage": "BS-00",
+      "status": "IM_PAKET_NACHGEWIESEN",
+      "basis": "§5.5, EV-04"
+    },
+    {
+      "id": "REQ-ECO-004",
+      "tests": [
+        "T-GATE-001"
+      ],
+      "tests_known": true,
+      "stage": "BS-05",
+      "status": "IM_PAKET_NACHGEWIESEN",
+      "basis": "§5.8"
+    },
+    {
+      "id": "REQ-ECO-005",
+      "tests": [
+        "T-CALC-TAX-001",
+        "T-SEM-TAX-001"
+      ],
+      "tests_known": true,
+      "stage": "BS-00",
+      "status": "IM_PAKET_NACHGEWIESEN",
+      "basis": "§5.3, BQ-03, EV-02"
+    },
+    {
+      "id": "REQ-ECO-006",
+      "tests": [
+        "T-CALC-DMC-001"
+      ],
+      "tests_known": true,
+      "stage": "BS-00",
+      "status": "IM_PAKET_NACHGEWIESEN",
+      "basis": "§5.4, EV-02"
+    },
+    {
+      "id": "REQ-RES-001",
+      "tests": [
+        "T-GATE-001",
+        "T-CON-001",
+        "T-RES-PREREG-001"
+      ],
+      "tests_known": true,
+      "stage": "BS-03",
+      "status": "TEILWEISE_NACHGEWIESEN",
+      "basis": "§6.4"
+    },
+    {
+      "id": "REQ-RES-002",
+      "tests": [
+        "T-CALC-STAT-001",
+        "T-CALC-STAT-002",
+        "T-GATE-001"
+      ],
+      "tests_known": true,
+      "stage": "BS-03",
+      "status": "IM_PAKET_NACHGEWIESEN",
+      "basis": "§6.4"
+    },
+    {
+      "id": "REQ-RES-003",
+      "tests": [
+        "T-CALC-OC-001",
+        "T-GATE-001",
+        "T-SEM-GATE-001"
+      ],
+      "tests_known": true,
+      "stage": "BS-03",
+      "status": "IM_PAKET_NACHGEWIESEN",
+      "basis": "§6.6, EV-05, DEC-DS-21"
+    },
+    {
+      "id": "REQ-RES-004",
+      "tests": [
+        "T-SM-001",
+        "T-RES-HOLDOUT-001"
+      ],
+      "tests_known": true,
+      "stage": "BS-04",
+      "status": "TEILWEISE_NACHGEWIESEN",
+      "basis": "§6.4, v2.0"
+    },
+    {
+      "id": "REQ-RES-005",
+      "tests": [
+        "T-CALC-PRIOR-001"
+      ],
+      "tests_known": true,
+      "stage": "BS-00",
+      "status": "IM_PAKET_NACHGEWIESEN",
+      "basis": "§6.3"
+    },
+    {
+      "id": "REQ-RES-006",
+      "tests": [
+        "T-CALC-PRIOR-002",
+        "T-GATE-001",
+        "T-SEM-PROXY-001"
+      ],
+      "tests_known": true,
+      "stage": "BS-02",
+      "status": "IM_PAKET_NACHGEWIESEN",
+      "basis": "§6.5, EV-08, DEC-DS-24"
+    },
+    {
+      "id": "REQ-RES-007",
+      "tests": [
+        "T-STR-TF-001",
+        "T-STR-IM-001",
+        "T-STR-REV-001",
+        "T-STR-CA-001",
+        "T-STR-BASE-001",
+        "T-STR-EQ-001"
+      ],
+      "tests_known": true,
+      "stage": "BS-05",
+      "status": "TEILWEISE_NACHGEWIESEN",
+      "basis": "§6.1"
+    },
+    {
+      "id": "REQ-RES-008",
+      "tests": [
+        "T-CALC-TURN-001",
+        "T-GATE-001"
+      ],
+      "tests_known": true,
+      "stage": "BS-03",
+      "status": "IM_PAKET_NACHGEWIESEN",
+      "basis": "§6.1, BQ-04"
+    },
+    {
+      "id": "REQ-RES-009",
+      "tests": [
+        "T-GATE-001",
+        "T-CON-001"
+      ],
+      "tests_known": true,
+      "stage": "BS-03",
+      "status": "IM_PAKET_NACHGEWIESEN",
+      "basis": "§6.4"
+    },
+    {
+      "id": "REQ-RES-010",
+      "tests": [
+        "T-DAT-LEAK-001",
+        "T-GATE-001"
+      ],
+      "tests_known": true,
+      "stage": "BS-02",
+      "status": "TEILWEISE_NACHGEWIESEN",
+      "basis": "§6.4, v2.0"
+    },
+    {
+      "id": "REQ-RSK-001",
+      "tests": [
+        "T-CALC-LEV-001",
+        "T-RISK-GAP-001",
+        "T-PTC-013"
+      ],
+      "tests_known": true,
+      "stage": "BS-05",
+      "status": "TEILWEISE_NACHGEWIESEN",
+      "basis": "§7.4, BQ-04, DEC-DS-10"
+    },
+    {
+      "id": "REQ-RSK-002",
+      "tests": [
+        "T-SM-001",
+        "T-RISK-LADDER-001",
+        "T-DRL-005"
+      ],
+      "tests_known": true,
+      "stage": "BS-05",
+      "status": "TEILWEISE_NACHGEWIESEN",
+      "basis": "§7.5, DEC-DS-01"
+    },
+    {
+      "id": "REQ-RSK-003",
+      "tests": [
+        "T-SM-001",
+        "T-RISK-LADDER-002"
+      ],
+      "tests_known": true,
+      "stage": "BS-05",
+      "status": "TEILWEISE_NACHGEWIESEN",
+      "basis": "§7.5"
+    },
+    {
+      "id": "REQ-RSK-004",
+      "tests": [
+        "T-CALC-LEV-001",
+        "T-SEM-LEV-001"
+      ],
+      "tests_known": true,
+      "stage": "BS-00",
+      "status": "IM_PAKET_NACHGEWIESEN",
+      "basis": "§7.3, D3-02"
+    },
+    {
+      "id": "REQ-RSK-005",
+      "tests": [
+        "T-CALC-KELLY-001"
+      ],
+      "tests_known": true,
+      "stage": "BS-00",
+      "status": "IM_PAKET_NACHGEWIESEN",
+      "basis": "§7.4"
+    },
+    {
+      "id": "REQ-RSK-006",
+      "tests": [
+        "T-CALC-STRESS-001",
+        "T-SEM-STRESS-001"
+      ],
+      "tests_known": true,
+      "stage": "BS-00",
+      "status": "IM_PAKET_NACHGEWIESEN",
+      "basis": "§7.9"
+    },
+    {
+      "id": "REQ-RSK-007",
+      "tests": [
+        "T-RISK-MRG-001",
+        "T-SM-001",
+        "T-DRL-005"
+      ],
+      "tests_known": true,
+      "stage": "BS-05",
+      "status": "TEILWEISE_NACHGEWIESEN",
+      "basis": "§7.7, EV-09"
+    },
+    {
+      "id": "REQ-RSK-008",
+      "tests": [
+        "T-SM-001",
+        "T-RISK-STEP-001"
+      ],
+      "tests_known": true,
+      "stage": "BS-05",
+      "status": "TEILWEISE_NACHGEWIESEN",
+      "basis": "§7.8, RK-06"
+    },
+    {
+      "id": "REQ-RSK-009",
+      "tests": [
+        "T-KILL-001",
+        "T-DRL-010",
+        "T-SM-001"
+      ],
+      "tests_known": true,
+      "stage": "BS-05",
+      "status": "TEILWEISE_NACHGEWIESEN",
+      "basis": "§7.5, §8.5"
+    },
+    {
+      "id": "REQ-RSK-010",
+      "tests": [
+        "T-PKG-VAL-001",
+        "T-SEM-LIM-001"
+      ],
+      "tests_known": true,
+      "stage": "BS-00",
+      "status": "IM_PAKET_NACHGEWIESEN",
+      "basis": "§7.5, R-04"
+    },
+    {
+      "id": "REQ-RSK-011",
+      "tests": [
+        "T-RISK-NAV-001"
+      ],
+      "tests_known": true,
+      "stage": "BS-05",
+      "status": "SPEZIFIZIERT",
+      "basis": "§3.2"
+    },
+    {
+      "id": "REQ-RSK-012",
+      "tests": [
+        "T-PTC-007",
+        "T-SEM-CAP-001"
+      ],
+      "tests_known": true,
+      "stage": "BS-05",
+      "status": "TEILWEISE_NACHGEWIESEN",
+      "basis": "§7.5, DEC-DS-18"
+    },
+    {
+      "id": "REQ-RSK-013",
+      "tests": [
+        "T-RISK-COV-001"
+      ],
+      "tests_known": true,
+      "stage": "BS-05",
+      "status": "SPEZIFIZIERT",
+      "basis": "§7.1, RK-07"
+    },
+    {
+      "id": "REQ-RSK-014",
+      "tests": [
+        "T-RISK-SIZE-001",
+        "T-CON-001"
+      ],
+      "tests_known": true,
+      "stage": "BS-05",
+      "status": "TEILWEISE_NACHGEWIESEN",
+      "basis": "§7.4, v2.0"
+    },
+    {
+      "id": "REQ-EXE-001",
+      "tests": [
+        "T-EXE-001",
+        "T-EXE-002",
+        "T-SM-001"
+      ],
+      "tests_known": true,
+      "stage": "BS-05",
+      "status": "TEILWEISE_NACHGEWIESEN",
+      "basis": "§8.1, v2.0"
+    },
+    {
+      "id": "REQ-EXE-002",
+      "tests": [
+        "T-EXE-003",
+        "T-SM-001",
+        "KT-05"
+      ],
+      "tests_known": true,
+      "stage": "BS-05",
+      "status": "TEILWEISE_NACHGEWIESEN",
+      "basis": "§8.1, v2.0, RK-10"
+    },
+    {
+      "id": "REQ-EXE-003",
+      "tests": [
+        "T-SM-001",
+        "T-CON-001",
+        "T-EXE-004"
+      ],
+      "tests_known": true,
+      "stage": "BS-05",
+      "status": "TEILWEISE_NACHGEWIESEN",
+      "basis": "§8.1, v2.0"
+    },
+    {
+      "id": "REQ-EXE-004",
+      "tests": [
+        "T-SM-001",
+        "T-EXE-005",
+        "KT-12"
+      ],
+      "tests_known": true,
+      "stage": "BS-05",
+      "status": "TEILWEISE_NACHGEWIESEN",
+      "basis": "§8.1"
+    },
+    {
+      "id": "REQ-EXE-005",
+      "tests": [
+        "T-SM-001",
+        "T-CON-001",
+        "T-EXE-006",
+        "KT-04"
+      ],
+      "tests_known": true,
+      "stage": "BS-05",
+      "status": "TEILWEISE_NACHGEWIESEN",
+      "basis": "DEC-DS-11"
+    },
+    {
+      "id": "REQ-EXE-006",
+      "tests": [
+        "T-SM-001",
+        "KT-06",
+        "T-EXE-007"
+      ],
+      "tests_known": true,
+      "stage": "BS-05",
+      "status": "TEILWEISE_NACHGEWIESEN",
+      "basis": "DEC-DS-20, CR-5"
+    },
+    {
+      "id": "REQ-EXE-007",
+      "tests": [
+        "T-SM-001",
+        "KT-07",
+        "T-EXE-008"
+      ],
+      "tests_known": true,
+      "stage": "BS-05",
+      "status": "TEILWEISE_NACHGEWIESEN",
+      "basis": "§8.1, v2.0"
+    },
+    {
+      "id": "REQ-EXE-008",
+      "tests": [
+        "T-SM-001",
+        "KT-16",
+        "T-DRL-009"
+      ],
+      "tests_known": true,
+      "stage": "BS-05",
+      "status": "TEILWEISE_NACHGEWIESEN",
+      "basis": "§10.5, v2.0"
+    },
+    {
+      "id": "REQ-EXE-009",
+      "tests": [
+        "T-ADP-001",
+        "KT-15"
+      ],
+      "tests_known": true,
+      "stage": "BS-05",
+      "status": "SPEZIFIZIERT",
+      "basis": "§8.1"
+    },
+    {
+      "id": "REQ-EXE-010",
+      "tests": [
+        "T-ADP-002",
+        "KT-05"
+      ],
+      "tests_known": true,
+      "stage": "BS-05",
+      "status": "SPEZIFIZIERT",
+      "basis": "§8.1, RK-10"
+    },
+    {
+      "id": "REQ-EXE-011",
+      "tests": [
+        "T-ADP-003",
+        "KT-03",
+        "T-CON-001"
+      ],
+      "tests_known": true,
+      "stage": "BS-05",
+      "status": "TEILWEISE_NACHGEWIESEN",
+      "basis": "§8.1, RK-11"
+    },
+    {
+      "id": "REQ-EXE-012",
+      "tests": [
+        "T-SM-001",
+        "T-EXE-009",
+        "T-GATE-001"
+      ],
+      "tests_known": true,
+      "stage": "BS-05",
+      "status": "TEILWEISE_NACHGEWIESEN",
+      "basis": "BQ-04"
+    },
+    {
+      "id": "REQ-EXE-013",
+      "tests": [
+        "T-SM-001",
+        "KT-11",
+        "T-EXE-010"
+      ],
+      "tests_known": true,
+      "stage": "BS-05",
+      "status": "TEILWEISE_NACHGEWIESEN",
+      "basis": "§8.6, DEC-DS-12"
+    },
+    {
+      "id": "REQ-EXE-014",
+      "tests": [
+        "T-CON-001",
+        "T-OMS-NET-001"
+      ],
+      "tests_known": true,
+      "stage": "BS-05",
+      "status": "TEILWEISE_NACHGEWIESEN",
+      "basis": "§8.1, DEC-DS-11"
+    },
+    {
+      "id": "REQ-EXE-015",
+      "tests": [
+        "T-ADP-004",
+        "KT-04"
+      ],
+      "tests_known": true,
+      "stage": "BS-05",
+      "status": "SPEZIFIZIERT",
+      "basis": "§8.2"
+    },
+    {
+      "id": "REQ-EXE-016",
+      "tests": [
+        "T-EXE-011",
+        "T-DRL-002",
+        "T-SM-001"
+      ],
+      "tests_known": true,
+      "stage": "BS-05",
+      "status": "TEILWEISE_NACHGEWIESEN",
+      "basis": "§8.1, v2.0"
+    },
+    {
+      "id": "REQ-EXE-017",
+      "tests": [
+        "T-EMS-001"
+      ],
+      "tests_known": true,
+      "stage": "BS-05",
+      "status": "SPEZIFIZIERT",
+      "basis": "§8.4"
+    },
+    {
+      "id": "REQ-EXE-018",
+      "tests": [
+        "T-EXE-NEGPRICE-001"
+      ],
+      "tests_known": true,
+      "stage": "BS-05",
+      "status": "SPEZIFIZIERT",
+      "basis": "§8.6, RK-20"
+    },
+    {
+      "id": "REQ-EXE-019",
+      "tests": [
+        "T-TCA-001",
+        "KT-14"
+      ],
+      "tests_known": true,
+      "stage": "BS-07",
+      "status": "SPEZIFIZIERT",
+      "basis": "§8.4"
+    },
+    {
+      "id": "REQ-PTC-001",
+      "tests": [
+        "T-PTC-001",
+        "T-SM-001"
+      ],
+      "tests_known": true,
+      "stage": "BS-05",
+      "status": "TEILWEISE_NACHGEWIESEN",
+      "basis": "§8.5"
+    },
+    {
+      "id": "REQ-PTC-002",
+      "tests": [
+        "T-PTC-010",
+        "T-SM-001",
+        "T-DRL-008"
+      ],
+      "tests_known": true,
+      "stage": "BS-05",
+      "status": "TEILWEISE_NACHGEWIESEN",
+      "basis": "BQ-09, RK-21"
+    },
+    {
+      "id": "REQ-PTC-003",
+      "tests": [
+        "T-PTC-005",
+        "T-PTC-006"
+      ],
+      "tests_known": true,
+      "stage": "BS-05",
+      "status": "SPEZIFIZIERT",
+      "basis": "§15, SRC-REG-MAR"
+    },
+    {
+      "id": "REQ-PTC-004",
+      "tests": [
+        "T-EVAL-001",
+        "T-SM-001"
+      ],
+      "tests_known": true,
+      "stage": "BS-05",
+      "status": "TEILWEISE_NACHGEWIESEN",
+      "basis": "§8.5"
+    },
+    {
+      "id": "REQ-DAT-001",
+      "tests": [
+        "T-DAT-001",
+        "T-GATE-001",
+        "T-SM-001"
+      ],
+      "tests_known": true,
+      "stage": "BS-02",
+      "status": "TEILWEISE_NACHGEWIESEN",
+      "basis": "§9"
+    },
+    {
+      "id": "REQ-DAT-002",
+      "tests": [
+        "T-SM-001",
+        "T-DRL-004"
+      ],
+      "tests_known": true,
+      "stage": "BS-05",
+      "status": "TEILWEISE_NACHGEWIESEN",
+      "basis": "§9"
+    },
+    {
+      "id": "REQ-DAT-003",
+      "tests": [
+        "T-CON-001",
+        "T-DAT-002"
+      ],
+      "tests_known": true,
+      "stage": "BS-05",
+      "status": "TEILWEISE_NACHGEWIESEN",
+      "basis": "§9"
+    },
+    {
+      "id": "REQ-DAT-004",
+      "tests": [
+        "T-DAT-003"
+      ],
+      "tests_known": true,
+      "stage": "BS-05",
+      "status": "SPEZIFIZIERT",
+      "basis": "§9"
+    },
+    {
+      "id": "REQ-DAT-005",
+      "tests": [
+        "T-SEC-012"
+      ],
+      "tests_known": true,
+      "stage": "BS-05",
+      "status": "SPEZIFIZIERT",
+      "basis": "§9, §11"
+    },
+    {
+      "id": "REQ-DAT-006",
+      "tests": [
+        "T-DAT-004"
+      ],
+      "tests_known": true,
+      "stage": "BS-02",
+      "status": "SPEZIFIZIERT",
+      "basis": "§9, §17.3"
+    },
+    {
+      "id": "REQ-ARC-001",
+      "tests": [
+        "T-ARC-001",
+        "T-REL-002"
+      ],
+      "tests_known": true,
+      "stage": "BS-05",
+      "status": "SPEZIFIZIERT",
+      "basis": "§10.1"
+    },
+    {
+      "id": "REQ-ARC-002",
+      "tests": [
+        "T-ARC-002"
+      ],
+      "tests_known": true,
+      "stage": "BS-05",
+      "status": "SPEZIFIZIERT",
+      "basis": "§10.1"
+    },
+    {
+      "id": "REQ-ARC-003",
+      "tests": [
+        "T-CON-001"
+      ],
+      "tests_known": true,
+      "stage": "BS-05",
+      "status": "IM_PAKET_NACHGEWIESEN",
+      "basis": "§10.1"
+    },
+    {
+      "id": "REQ-ARC-004",
+      "tests": [
+        "T-SEC-001",
+        "T-SEC-003",
+        "T-SEC-010"
+      ],
+      "tests_known": true,
+      "stage": "BS-05",
+      "status": "SPEZIFIZIERT",
+      "basis": "§10, §12, DEC-DS-13"
+    },
+    {
+      "id": "REQ-ARC-005",
+      "tests": [
+        "T-DRL-001",
+        "T-OPS-BACKUP-001"
+      ],
+      "tests_known": true,
+      "stage": "BS-05",
+      "status": "SPEZIFIZIERT",
+      "basis": "§10.5"
+    },
+    {
+      "id": "REQ-ARC-006",
+      "tests": [
+        "T-DRL-008",
+        "T-OPS-ALERT-001"
+      ],
+      "tests_known": true,
+      "stage": "BS-05",
+      "status": "SPEZIFIZIERT",
+      "basis": "§10.6"
+    },
+    {
+      "id": "REQ-ARC-007",
+      "tests": [
+        "T-UI-001",
+        "T-UI-002"
+      ],
+      "tests_known": true,
+      "stage": "BS-05",
+      "status": "SPEZIFIZIERT",
+      "basis": "§10.7"
+    },
+    {
+      "id": "REQ-ARC-008",
+      "tests": [
+        "T-SM-001"
+      ],
+      "tests_known": true,
+      "stage": "BS-05",
+      "status": "IM_PAKET_NACHGEWIESEN",
+      "basis": "§10, E1"
+    },
+    {
+      "id": "REQ-ARC-009",
+      "tests": [
+        "T-GATE-001",
+        "T-SEC-011"
+      ],
+      "tests_known": true,
+      "stage": "BS-00",
+      "status": "TEILWEISE_NACHGEWIESEN",
+      "basis": "§16"
+    },
+    {
+      "id": "REQ-ARC-010",
+      "tests": [
+        "T-PKG-MULTI-001",
+        "T-QA-CI-001"
+      ],
+      "tests_known": true,
+      "stage": "BS-05",
+      "status": "TEILWEISE_NACHGEWIESEN",
+      "basis": "§10.4, EV-12"
+    },
+    {
+      "id": "REQ-ARC-011",
+      "tests": [
+        "T-REL-003"
+      ],
+      "tests_known": true,
+      "stage": "BS-05",
+      "status": "SPEZIFIZIERT",
+      "basis": "§17.3, DEC-DS-22"
+    },
+    {
+      "id": "REQ-SEC-001",
+      "tests": [
+        "T-SEC-009",
+        "T-CON-001"
+      ],
+      "tests_known": true,
+      "stage": "BS-05",
+      "status": "TEILWEISE_NACHGEWIESEN",
+      "basis": "§12"
+    },
+    {
+      "id": "REQ-SEC-002",
+      "tests": [
+        "T-SEC-013",
+        "T-DRL-006"
+      ],
+      "tests_known": true,
+      "stage": "BS-06",
+      "status": "SPEZIFIZIERT",
+      "basis": "§12"
+    },
+    {
+      "id": "REQ-SEC-003",
+      "tests": [
+        "T-SEC-007"
+      ],
+      "tests_known": true,
+      "stage": "BS-01",
+      "status": "SPEZIFIZIERT",
+      "basis": "§12"
+    },
+    {
+      "id": "REQ-SEC-004",
+      "tests": [
+        "T-SEC-008",
+        "T-SEC-001"
+      ],
+      "tests_known": true,
+      "stage": "BS-01",
+      "status": "SPEZIFIZIERT",
+      "basis": "§12"
+    },
+    {
+      "id": "REQ-SEC-005",
+      "tests": [
+        "T-SEC-006",
+        "T-GATE-001"
+      ],
+      "tests_known": true,
+      "stage": "BS-05",
+      "status": "TEILWEISE_NACHGEWIESEN",
+      "basis": "§10.3, §12"
+    },
+    {
+      "id": "REQ-SEC-006",
+      "tests": [
+        "T-SEC-014"
+      ],
+      "tests_known": true,
+      "stage": "BS-05",
+      "status": "SPEZIFIZIERT",
+      "basis": "§12"
+    },
+    {
+      "id": "REQ-SEC-007",
+      "tests": [
+        "T-SEC-015"
+      ],
+      "tests_known": true,
+      "stage": "BS-05",
+      "status": "SPEZIFIZIERT",
+      "basis": "§12"
+    },
+    {
+      "id": "REQ-SEC-008",
+      "tests": [
+        "T-SEC-003"
+      ],
+      "tests_known": true,
+      "stage": "BS-05",
+      "status": "SPEZIFIZIERT",
+      "basis": "§11, §12"
+    },
+    {
+      "id": "REQ-AI-001",
+      "tests": [
+        "T-AI-001",
+        "T-AI-002",
+        "T-AI-003",
+        "T-AI-004"
+      ],
+      "tests_known": true,
+      "stage": "BS-05",
+      "status": "SPEZIFIZIERT",
+      "basis": "D3-05, §23"
+    },
+    {
+      "id": "REQ-AI-002",
+      "tests": [
+        "T-SEC-005",
+        "T-CON-001"
+      ],
+      "tests_known": true,
+      "stage": "BS-05",
+      "status": "TEILWEISE_NACHGEWIESEN",
+      "basis": "§11, IF-07"
+    },
+    {
+      "id": "REQ-AI-003",
+      "tests": [
+        "T-SEC-004"
+      ],
+      "tests_known": true,
+      "stage": "BS-05",
+      "status": "SPEZIFIZIERT",
+      "basis": "§11"
+    },
+    {
+      "id": "REQ-AI-004",
+      "tests": [
+        "T-AI-005",
+        "T-SM-001"
+      ],
+      "tests_known": true,
+      "stage": "BS-05",
+      "status": "TEILWEISE_NACHGEWIESEN",
+      "basis": "§11.3, EV-10"
+    },
+    {
+      "id": "REQ-AI-005",
+      "tests": [
+        "T-GATE-001",
+        "T-SM-001"
+      ],
+      "tests_known": true,
+      "stage": "BS-05",
+      "status": "IM_PAKET_NACHGEWIESEN",
+      "basis": "§11.4, EV-10"
+    },
+    {
+      "id": "REQ-AI-006",
+      "tests": [
+        "T-SEC-002"
+      ],
+      "tests_known": true,
+      "stage": "BS-05",
+      "status": "SPEZIFIZIERT",
+      "basis": "§12"
+    },
+    {
+      "id": "REQ-AI-007",
+      "tests": [
+        "T-CON-001"
+      ],
+      "tests_known": true,
+      "stage": "BS-05",
+      "status": "IM_PAKET_NACHGEWIESEN",
+      "basis": "§6, §11"
+    },
+    {
+      "id": "REQ-AI-008",
+      "tests": [
+        "T-AI-006",
+        "T-SM-001"
+      ],
+      "tests_known": true,
+      "stage": "BS-05",
+      "status": "TEILWEISE_NACHGEWIESEN",
+      "basis": "§11, DEC-DS-14"
+    },
+    {
+      "id": "REQ-AI-009",
+      "tests": [
+        "T-DRL-007",
+        "T-SM-001"
+      ],
+      "tests_known": true,
+      "stage": "BS-06",
+      "status": "TEILWEISE_NACHGEWIESEN",
+      "basis": "§11, §12"
+    },
+    {
+      "id": "REQ-ML-001",
+      "tests": [
+        "T-SM-001",
+        "T-ML-001",
+        "T-ML-002"
+      ],
+      "tests_known": true,
+      "stage": "BS-03",
+      "status": "TEILWEISE_NACHGEWIESEN",
+      "basis": "§11.5"
+    },
+    {
+      "id": "REQ-ML-002",
+      "tests": [
+        "T-SM-001",
+        "T-ML-003"
+      ],
+      "tests_known": true,
+      "stage": "BS-05",
+      "status": "TEILWEISE_NACHGEWIESEN",
+      "basis": "§11.5"
+    },
+    {
+      "id": "REQ-GOV-001",
+      "tests": [
+        "T-SM-001",
+        "T-CON-001",
+        "T-DRL-008"
+      ],
+      "tests_known": true,
+      "stage": "BS-05",
+      "status": "TEILWEISE_NACHGEWIESEN",
+      "basis": "BQ-09"
+    },
+    {
+      "id": "REQ-GOV-002",
+      "tests": [
+        "T-SM-001",
+        "T-CON-001",
+        "T-REL-001"
+      ],
+      "tests_known": true,
+      "stage": "BS-05",
+      "status": "TEILWEISE_NACHGEWIESEN",
+      "basis": "§13, EV-13"
+    },
+    {
+      "id": "REQ-GOV-003",
+      "tests": [
+        "T-SM-001",
+        "T-CON-001"
+      ],
+      "tests_known": true,
+      "stage": "BS-05",
+      "status": "IM_PAKET_NACHGEWIESEN",
+      "basis": "§7.10, §13"
+    },
+    {
+      "id": "REQ-GOV-004",
+      "tests": [
+        "T-CALC-KELLY-001",
+        "T-GOV-001"
+      ],
+      "tests_known": true,
+      "stage": "BS-07",
+      "status": "TEILWEISE_NACHGEWIESEN",
+      "basis": "§7.10"
+    },
+    {
+      "id": "REQ-GOV-005",
+      "tests": [
+        "T-SM-001",
+        "T-CON-001"
+      ],
+      "tests_known": true,
+      "stage": "BS-05",
+      "status": "IM_PAKET_NACHGEWIESEN",
+      "basis": "§13"
+    },
+    {
+      "id": "REQ-GOV-006",
+      "tests": [
+        "T-SM-001",
+        "T-GATE-001"
+      ],
+      "tests_known": true,
+      "stage": "BS-09",
+      "status": "IM_PAKET_NACHGEWIESEN",
+      "basis": "§13, EV-13"
+    },
+    {
+      "id": "REQ-GOV-007",
+      "tests": [
+        "T-GOV-002"
+      ],
+      "tests_known": true,
+      "stage": "BS-01",
+      "status": "SPEZIFIZIERT",
+      "basis": "§8.3, §13"
+    },
+    {
+      "id": "REQ-OPS-001",
+      "tests": [
+        "T-SEM-RB-001"
+      ],
+      "tests_known": true,
+      "stage": "BS-06",
+      "status": "IM_PAKET_NACHGEWIESEN",
+      "basis": "§14.1"
+    },
+    {
+      "id": "REQ-OPS-002",
+      "tests": [
+        "T-DRL-001",
+        "T-DRL-002",
+        "T-DRL-003",
+        "T-DRL-004",
+        "T-DRL-005",
+        "T-DRL-006",
+        "T-DRL-007",
+        "T-DRL-008",
+        "T-DRL-009",
+        "T-DRL-010"
+      ],
+      "tests_known": true,
+      "stage": "BS-06",
+      "status": "SPEZIFIZIERT",
+      "basis": "§14.1, §16"
+    },
+    {
+      "id": "REQ-OPS-003",
+      "tests": [
+        "T-CALC-DRIFT-001",
+        "T-GATE-001"
+      ],
+      "tests_known": true,
+      "stage": "BS-07",
+      "status": "IM_PAKET_NACHGEWIESEN",
+      "basis": "§14.2, EV-07"
+    },
+    {
+      "id": "REQ-OPS-005",
+      "tests": [
+        "T-CALC-MON-001"
+      ],
+      "tests_known": true,
+      "stage": "BS-07",
+      "status": "IM_PAKET_NACHGEWIESEN",
+      "basis": "§16, §20 C3"
+    },
+    {
+      "id": "REQ-OPS-004",
+      "tests": [
+        "T-OPS-SLO-001"
+      ],
+      "tests_known": true,
+      "stage": "BS-07",
+      "status": "SPEZIFIZIERT",
+      "basis": "§14"
+    },
+    {
+      "id": "REQ-OPS-005",
+      "tests": [
+        "T-SM-001",
+        "T-CON-001"
+      ],
+      "tests_known": true,
+      "stage": "BS-05",
+      "status": "IM_PAKET_NACHGEWIESEN",
+      "basis": "§14"
+    },
+    {
+      "id": "REQ-OPS-006",
+      "tests": [
+        "T-OPS-RECON-001"
+      ],
+      "tests_known": true,
+      "stage": "BS-07",
+      "status": "SPEZIFIZIERT",
+      "basis": "§14"
+    },
+    {
+      "id": "REQ-OPS-007",
+      "tests": [
+        "T-QA-SOAK-001",
+        "T-QA-LOAD-001",
+        "T-QA-CHAOS-001"
+      ],
+      "tests_known": true,
+      "stage": "BS-06",
+      "status": "SPEZIFIZIERT",
+      "basis": "§10.4"
+    },
+    {
+      "id": "REQ-LEG-001",
+      "tests": [
+        "T-GATE-001"
+      ],
+      "tests_known": true,
+      "stage": "BS-08",
+      "status": "IM_PAKET_NACHGEWIESEN",
+      "basis": "§15, BQ-03"
+    },
+    {
+      "id": "REQ-LEG-002",
+      "tests": [
+        "T-LEG-001"
+      ],
+      "tests_known": true,
+      "stage": "BS-07",
+      "status": "SPEZIFIZIERT",
+      "basis": "§15"
+    },
+    {
+      "id": "REQ-QA-001",
+      "tests": [
+        "T-QA-MUT-001",
+        "T-QA-COV-001",
+        "T-GATE-001"
+      ],
+      "tests_known": true,
+      "stage": "BS-05",
+      "status": "TEILWEISE_NACHGEWIESEN",
+      "basis": "§10.4"
+    },
+    {
+      "id": "REQ-QA-002",
+      "tests": [
+        "T-EXE-001",
+        "T-EXE-003"
+      ],
+      "tests_known": true,
+      "stage": "BS-05",
+      "status": "SPEZIFIZIERT",
+      "basis": "§10.4"
+    },
+    {
+      "id": "REQ-QA-003",
+      "tests": [
+        "T-PTC-013",
+        "T-RISK-LADDER-001",
+        "T-EXE-008"
+      ],
+      "tests_known": true,
+      "stage": "BS-05",
+      "status": "SPEZIFIZIERT",
+      "basis": "§10.4"
+    },
+    {
+      "id": "REQ-PKG-001",
+      "tests": [
+        "T-PKG-RENDER-001"
+      ],
+      "tests_known": true,
+      "stage": "BS-00",
+      "status": "IM_PAKET_NACHGEWIESEN",
+      "basis": "R-03"
+    },
+    {
+      "id": "REQ-PKG-002",
+      "tests": [
+        "T-PKG-VAL-001",
+        "T-PKG-MUT-001",
+        "T-PKG-MULTI-001"
+      ],
+      "tests_known": true,
+      "stage": "BS-00",
+      "status": "IM_PAKET_NACHGEWIESEN",
+      "basis": "§19"
+    },
+    {
+      "id": "REQ-PKG-003",
+      "tests": [
+        "T-SEM-OP-001"
+      ],
+      "tests_known": true,
+      "stage": "BS-00",
+      "status": "IM_PAKET_NACHGEWIESEN",
+      "basis": "R-07, §21"
+    },
+    {
+      "id": "REQ-PKG-004",
+      "tests": [
+        "T-SEM-SCORE-001",
+        "T-PKG-VAL-001"
+      ],
+      "tests_known": true,
+      "stage": "BS-00",
+      "status": "IM_PAKET_NACHGEWIESEN",
+      "basis": "§20, R-08"
+    }
+  ],
+  "findings": [
+    {
+      "id": "EV-01",
+      "status": "AUFGELOEST",
+      "evidence": [
+        "registers/costs.json",
+        "financials/cost_model.py",
+        "financials/cost_model_results.json",
+        "T-CALC-COST-001",
+        "T-SEM-COST-001",
+        "validation/mutation_tests.py"
+      ]
+    },
+    {
+      "id": "EV-02",
+      "status": "TEILWEISE",
+      "evidence": [
+        "financials/tax_scenarios.py",
+        "implementation/build_stages.json",
+        "financials/stage_costs.py",
+        "financials/decision_montecarlo_results.json",
+        "T-CALC-TAX-001"
+      ]
+    },
+    {
+      "id": "EV-03",
+      "status": "AUFGELOEST",
+      "evidence": [
+        "financials/decision_montecarlo.py",
+        "financials/decision_montecarlo_results.json",
+        "T-CALC-DMC-001"
+      ]
+    },
+    {
+      "id": "EV-04",
+      "status": "AUFGELOEST",
+      "evidence": [
+        "financials/buy_vs_build.md",
+        "financials/decision_montecarlo_results.json",
+        "research/evidence_gates.json",
+        "T-CALC-DMC-002"
+      ]
+    },
+    {
+      "id": "EV-05",
+      "status": "AUFGELOEST",
+      "evidence": [
+        "research/operating_characteristics.py",
+        "research/operating_characteristics_results.json",
+        "research/evidence_gates.json",
+        "T-CALC-OC-001",
+        "T-SEM-GATE-001"
+      ]
+    },
+    {
+      "id": "EV-06",
+      "status": "AUFGELOEST_IM_KONZEPT",
+      "evidence": [
+        "implementation/test_catalog.json",
+        "execution/broker_killer_tests.md",
+        "research/evidence_gates.json",
+        "SRC-MT5-API"
+      ]
+    },
+    {
+      "id": "EV-07",
+      "status": "AUFGELOEST",
+      "evidence": [
+        "operations/costdrift_monitor.py",
+        "operations/costdrift_results.json",
+        "T-CALC-DRIFT-001",
+        "research/evidence_gates.json"
+      ]
+    },
+    {
+      "id": "EV-08",
+      "status": "AUFGELOEST",
+      "evidence": [
+        "data/proxy_rules.md",
+        "registers/instruments.json",
+        "research/prior_results.json",
+        "T-CALC-PRIOR-002",
+        "T-SEM-PROXY-001"
+      ]
+    },
+    {
+      "id": "EV-09",
+      "status": "AUFGELOEST_IM_KONZEPT",
+      "evidence": [
+        "risk/margin_liquidity.md",
+        "operations/runbook_register.json",
+        "operations/drill_register.json",
+        "T-RISK-MRG-001",
+        "architecture/state_machines.json"
+      ]
+    },
+    {
+      "id": "EV-10",
+      "status": "AUFGELOEST_IM_KONZEPT",
+      "evidence": [
+        "ai/ai_layer.md",
+        "ai/hermes_integration.md",
+        "research/evidence_gates.json",
+        "architecture/state_machines.json",
+        "SRC-HERMES-UPSTREAM"
+      ]
+    },
+    {
+      "id": "EV-11",
+      "status": "OFFEN_EXTERN",
+      "evidence": [
+        "audit/independent_review_request.md",
+        "audit/scorecard_K.json",
+        "X-REVIEW"
+      ]
+    },
+    {
+      "id": "EV-12",
+      "status": "AUFGELOEST",
+      "evidence": [
+        "validation/execution_log.txt",
+        "validation/validate_package.py",
+        "T-PKG-MULTI-001"
+      ]
+    },
+    {
+      "id": "EV-13",
+      "status": "TEILWEISE",
+      "evidence": [
+        "governance/organisation_raci.md",
+        "legal/applicability_matrix.md",
+        "registers/instruments.json",
+        "research/evidence_gates.json"
+      ]
+    },
+    {
+      "id": "CR5-01",
+      "status": "AUFGELOEST",
+      "evidence": [
+        "research/prior_derivation.py",
+        "research/prior_results.json",
+        "T-CALC-PRIOR-001"
+      ]
+    },
+    {
+      "id": "CR5-02",
+      "status": "AUFGELOEST",
+      "evidence": [
+        "research/operating_characteristics_results.json",
+        "research/evidence_gates.json"
+      ]
+    },
+    {
+      "id": "CR5-03",
+      "status": "AUFGELOEST_IM_KONZEPT",
+      "evidence": [
+        "execution/oms_ems.md",
+        "implementation/test_catalog.json",
+        "architecture/state_machines.json"
+      ]
+    },
+    {
+      "id": "CR5-04",
+      "status": "TEILWEISE",
+      "evidence": [
+        "registers/instruments.json",
+        "research/evidence_gates.json"
+      ]
+    },
+    {
+      "id": "CR5-05",
+      "status": "AUFGELOEST",
+      "evidence": [
+        "architecture/state_machines.json",
+        "operations/runbook_register.json",
+        "T-EXE-010"
+      ]
+    },
+    {
+      "id": "CR5-06",
+      "status": "AUFGELOEST",
+      "evidence": [
+        "registers/decision_register.json",
+        "architecture/state_machines.json",
+        "operations/runbook_register.json"
+      ]
+    },
+    {
+      "id": "CR5-07",
+      "status": "AUFGELOEST",
+      "evidence": [
+        "validation/validation_report.json",
+        "validation/mutation_tests.py",
+        "README.md"
+      ]
+    }
+  ],
+  "parameters_unused": [
+    "P-ECO-CASH-RATE-LOW"
+  ],
+  "sources_unused": [
+    "SRC-BRK-ADMIRALS",
+    "SRC-BRK-AMP-EU",
+    "SRC-BRK-OPTIMUS",
+    "SRC-HERMES-README",
+    "SRC-IDX-FAZIT-INDEX-SCREENING",
+    "SRC-LIMIT-LM01",
+    "SRC-LIMIT-LM02",
+    "SRC-LIMIT-LM03",
+    "SRC-LIMIT-LM05",
+    "SRC-LIMIT-LM06",
+    "SRC-LIMIT-LM07",
+    "SRC-LIMIT-LM08",
+    "SRC-LIMIT-LM09",
+    "SRC-LIMIT-LM10",
+    "SRC-LIT-COST-GP-2013",
+    "SRC-LIT-COST-NMV-2016",
+    "SRC-LIT-CTA-BGR-2014",
+    "SRC-LIT-DECAY-CV-2020",
+    "SRC-LIT-DECAY-HL-2015",
+    "SRC-LIT-DECAY-SLP-2017",
+    "SRC-LIT-FX-HUTCH-2022",
+    "SRC-LIT-FX-MSSS-2012",
+    "SRC-LIT-FX-NWU-2009",
+    "SRC-LIT-FX-OLSON-2004",
+    "SRC-LIT-FX-RMV-2014",
+    "SRC-LIT-IDX-SG-STTI",
+    "SRC-LIT-MOM-AMP-2013",
+    "SRC-LIT-MOM-ZLK-2019",
+    "SRC-LIT-MTZ-2011",
+    "SRC-LIT-SKEPT-HLWZ-2020",
+    "SRC-LIT-SKEPT-KTW-2016",
+    "SRC-LIT-TF-BK-2013",
+    "SRC-LIT-TF-HOP-2013",
+    "SRC-LIT-TF-SSS-2010",
+    "SRC-MARGIN-MH02",
+    "SRC-MARGIN-MH03",
+    "SRC-MARGIN-MH04",
+    "SRC-MARGIN-MH06",
+    "SRC-MARGIN-MH07",
+    "SRC-MARGIN-MH08",
+    "SRC-MARGIN-MH09"
+  ],
+  "tests_unreferenced": [
+    "KT-01",
+    "KT-02",
+    "KT-08",
+    "KT-13"
+  ],
+  "scenarios_without_test": []
+}

@@ -1,0 +1,225 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:ki-trading-v3:broker_event",
+  "title": "Brokerereignis aus Abfragen (IF-02)",
+  "description": "Brokerzeit wird getrennt von der Systemzeit geführt (Widerspruch der Dokumentation, KT-03).",
+  "x-version": "3.0.0",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "$ref": "urn:ki-trading-v3:common#/$defs/schema_version"
+    },
+    "message_id": {
+      "$ref": "urn:ki-trading-v3:common#/$defs/uuid"
+    },
+    "correlation_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "producer": {
+      "enum": [
+        "ADAPTER"
+      ],
+      "description": "Geldpfad: nur Geldpfad-Komponenten als Erzeuger (R-05)"
+    },
+    "created_utc": {
+      "$ref": "urn:ki-trading-v3:common#/$defs/utc"
+    },
+    "event_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "origin": {
+      "enum": [
+        "POLL_DIFF",
+        "ORDER_SEND_RESULT",
+        "STATEMENT"
+      ]
+    },
+    "kind": {
+      "enum": [
+        "ACK",
+        "PARTIAL_FILL",
+        "FILL",
+        "REJECT",
+        "CANCELLED",
+        "EXPIRED",
+        "POSITION_CHANGED",
+        "SESSION_UP",
+        "SESSION_DOWN",
+        "CORRECTION"
+      ]
+    },
+    "system_time_utc": {
+      "$ref": "urn:ki-trading-v3:common#/$defs/utc"
+    },
+    "broker_time": {
+      "anyOf": [
+        {
+          "type": "string",
+          "minLength": 1
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "order_ticket": {
+      "anyOf": [
+        {
+          "$ref": "urn:ki-trading-v3:common#/$defs/ticket"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "deal_ticket": {
+      "anyOf": [
+        {
+          "$ref": "urn:ki-trading-v3:common#/$defs/ticket"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "position_ticket": {
+      "anyOf": [
+        {
+          "$ref": "urn:ki-trading-v3:common#/$defs/ticket"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "broker_symbol": {
+      "anyOf": [
+        {
+          "type": "string",
+          "minLength": 1
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "volume": {
+      "anyOf": [
+        {
+          "type": "integer",
+          "minimum": 0
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "price": {
+      "anyOf": [
+        {
+          "$ref": "urn:ki-trading-v3:common#/$defs/decimal"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "commission": {
+      "anyOf": [
+        {
+          "$ref": "urn:ki-trading-v3:common#/$defs/decimal"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "magic": {
+      "anyOf": [
+        {
+          "type": "integer",
+          "minimum": 0
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "comment": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "retcode": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "duplicate": {
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "schema_version",
+    "message_id",
+    "correlation_id",
+    "producer",
+    "created_utc",
+    "event_id",
+    "origin",
+    "kind",
+    "system_time_utc",
+    "broker_time",
+    "duplicate"
+  ],
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "kind": {
+            "enum": [
+              "FILL",
+              "PARTIAL_FILL"
+            ]
+          }
+        },
+        "required": [
+          "kind"
+        ]
+      },
+      "then": {
+        "required": [
+          "deal_ticket",
+          "volume",
+          "price",
+          "position_ticket"
+        ],
+        "properties": {
+          "deal_ticket": {
+            "$ref": "urn:ki-trading-v3:common#/$defs/ticket"
+          },
+          "volume": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "price": {
+            "$ref": "urn:ki-trading-v3:common#/$defs/decimal"
+          }
+        }
+      }
+    }
+  ]
+}

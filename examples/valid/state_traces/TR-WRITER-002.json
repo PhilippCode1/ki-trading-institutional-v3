@@ -1,0 +1,30 @@
+{
+ "schema_version": "3.0",
+ "id": "TR-WRITER-002",
+ "machine": "SM-WRITER",
+ "description": "Neustart auf demselben Host: Writer ohne Rotation; Sitzungsverlust",
+ "scenarios": [
+  "HA-SESSION-LOST"
+ ],
+ "start": null,
+ "initial_reasons": null,
+ "steps": [
+  {
+   "event": "HOST_STARTED",
+   "context": {},
+   "expect_state": "STARTING"
+  },
+  {
+   "event": "LEASE_GRANTED",
+   "context": {
+    "host_changed_or_restored": false
+   },
+   "expect_state": "ACTIVE_WRITER"
+  },
+  {
+   "event": "SESSION_LOST",
+   "context": {},
+   "expect_state": "READ_ONLY"
+  }
+ ]
+}

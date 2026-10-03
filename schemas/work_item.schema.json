@@ -1,0 +1,95 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:ki-trading-v3:work_item",
+  "title": "Arbeitsauftrag (SM-WORKITEM)",
+  "description": "Prüfer ist immer ein Mensch; Prüfrunden höchstens P-AI-REVIEW-ROUNDS (Beispielregel R-EX-07).",
+  "x-version": "3.0.0",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "$ref": "urn:ki-trading-v3:common#/$defs/schema_version"
+    },
+    "message_id": {
+      "$ref": "urn:ki-trading-v3:common#/$defs/uuid"
+    },
+    "correlation_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "producer": {
+      "$ref": "urn:ki-trading-v3:common#/$defs/producer"
+    },
+    "created_utc": {
+      "$ref": "urn:ki-trading-v3:common#/$defs/utc"
+    },
+    "work_item_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "state": {
+      "enum": [
+        "NEW",
+        "SCOPED",
+        "RUNNING",
+        "WAITING_EXTERNAL",
+        "IN_REVIEW",
+        "APPROVED",
+        "DEPLOYED",
+        "CLOSED",
+        "REJECTED",
+        "NO_CHANGE",
+        "BUDGET_EXHAUSTED",
+        "CANCELLED"
+      ]
+    },
+    "owner_role": {
+      "enum": [
+        "HERMES",
+        "BETREIBER"
+      ]
+    },
+    "budget_h": {
+      "type": "number",
+      "exclusiveMinimum": 0
+    },
+    "hours_used": {
+      "type": "number",
+      "minimum": 0
+    },
+    "review_round": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "reviewer_role": {
+      "enum": [
+        "BETREIBER",
+        "RISIKOFUNKTION",
+        "EXTERN"
+      ]
+    },
+    "proposal_ref": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "required": [
+    "schema_version",
+    "message_id",
+    "correlation_id",
+    "producer",
+    "created_utc",
+    "work_item_id",
+    "title",
+    "state",
+    "owner_role",
+    "budget_h",
+    "hours_used",
+    "review_round",
+    "reviewer_role"
+  ],
+  "additionalProperties": false
+}

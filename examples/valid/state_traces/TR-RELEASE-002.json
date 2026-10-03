@@ -1,0 +1,27 @@
+{
+ "schema_version": "3.0",
+ "id": "TR-RELEASE-002",
+ "machine": "SM-RELEASE",
+ "description": "Agenten-Update unter der Bestehensquote der Evaluationssuite wird abgelehnt",
+ "scenarios": [
+  "OS-GV-09"
+ ],
+ "start": "CLASSIFIED",
+ "initial_reasons": null,
+ "steps": [
+  {
+   "event": "TESTS_PASS",
+   "context": {
+    "is_agent_update": true,
+    "eval_pass_rate": 0.9
+   },
+   "expect_state": "CLASSIFIED",
+   "expect_invalid": true
+  },
+  {
+   "event": "TESTS_FAIL",
+   "context": {},
+   "expect_state": "REJECTED"
+  }
+ ]
+}

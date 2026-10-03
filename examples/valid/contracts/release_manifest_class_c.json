@@ -1,0 +1,26 @@
+{
+ "schema_version": "3.0",
+ "message_id": "00000000-0000-4000-8000-000000000024",
+ "correlation_id": "COR-0024",
+ "producer": "RELEASE_CONTROLLER",
+ "created_utc": "2026-09-24T09:00:00Z",
+ "release_id": "REL-0001",
+ "change_class": "C",
+ "artifact_sha256": "0000000000000000000000000000000000000000000000000000000000000001",
+ "sbom_sha256": "0000000000000000000000000000000000000000000000000000000000000002",
+ "provenance": "CI-Lauf mit Lock-Datei und Herkunftsnachweis",
+ "author_key": "FP-00000000000000A1",
+ "reviewer_key": "FP-00000000000000B1",
+ "review_report_utc": "2026-09-22T08:00:00Z",
+ "approval_utc": "2026-09-23T10:00:00Z",
+ "second_approval_key": "FP-00000000000000F1",
+ "equivalence": "ERKLAERT",
+ "ci_python_versions": [
+  "3.11",
+  "3.12",
+  "3.13"
+ ],
+ "warnings_as_errors": true,
+ "is_agent_update": false,
+ "signature": "SIG-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+}

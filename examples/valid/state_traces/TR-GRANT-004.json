@@ -1,0 +1,28 @@
+{
+ "schema_version": "3.0",
+ "id": "TR-GRANT-004",
+ "machine": "SM-GRANT",
+ "description": "Stand 24.09.2026: Pilot-Grant scheitert, weil kein Profil zulässig ist",
+ "scenarios": [
+  "OS-RI-09"
+ ],
+ "start": null,
+ "initial_reasons": null,
+ "steps": [
+  {
+   "event": "SIGNATURE_VERIFIED",
+   "context": {
+    "signature_valid": true,
+    "signer_role": "BETREIBER",
+    "kind": "PILOT",
+    "duration_days": 30,
+    "gate_g7": "PASS",
+    "account_type": "REAL",
+    "profile": "H5",
+    "profile_admissible": false
+   },
+   "expect_state": "DRAFT",
+   "expect_invalid": true
+  }
+ ]
+}

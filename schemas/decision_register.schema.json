@@ -1,0 +1,130 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:ki-trading-v3:decision_register",
+  "title": "Entscheidungsregister",
+  "x-version": "3.0.0",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "3.0"
+    },
+    "document": {
+      "const": "Entscheidungsregister"
+    },
+    "as_of": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+    },
+    "ranking": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 0
+    },
+    "decisions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^DEC-[A-Z0-9]+(-[A-Z0-9]+)+$"
+          },
+          "date": {
+            "type": "string",
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+          },
+          "rank": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 6
+          },
+          "type": {
+            "enum": [
+              "BETREIBER",
+              "AUFTRAG",
+              "KONFLIKT",
+              "ENTWURF"
+            ]
+          },
+          "title": {
+            "type": "string",
+            "minLength": 1
+          },
+          "decision": {
+            "type": "string",
+            "minLength": 1
+          },
+          "rationale": {
+            "type": "string",
+            "minLength": 1
+          },
+          "consequences": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "minItems": 0
+          },
+          "alternatives_rejected": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "minItems": 0
+          },
+          "refs": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "minItems": 0
+          },
+          "status": {
+            "enum": [
+              "GILT",
+              "OFFEN",
+              "ERSETZT"
+            ]
+          },
+          "operator_answer_verbatim": {
+            "type": "string",
+            "minLength": 1
+          },
+          "review": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "id",
+          "date",
+          "rank",
+          "type",
+          "title",
+          "decision",
+          "rationale",
+          "consequences",
+          "alternatives_rejected",
+          "refs",
+          "status"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 1
+    }
+  },
+  "required": [
+    "schema_version",
+    "document",
+    "as_of",
+    "ranking",
+    "decisions"
+  ],
+  "additionalProperties": false
+}

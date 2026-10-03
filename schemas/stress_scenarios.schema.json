@@ -1,0 +1,237 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:ki-trading-v3:stress_scenarios",
+  "title": "Stressszenarien",
+  "x-version": "3.0.0",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "3.0"
+    },
+    "document": {
+      "const": "Stressszenarien"
+    },
+    "as_of": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+    },
+    "conventions": {
+      "type": "object"
+    },
+    "historical": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^SC-[HX]-[A-Z0-9]+$"
+          },
+          "event_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "sources": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "minItems": 0
+          },
+          "margin_increase": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "expiring_contract_only": {
+            "type": "boolean"
+          },
+          "margin_source": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "market_structure": {
+            "type": "string"
+          },
+          "moves": {
+            "type": "object"
+          },
+          "extra": {
+            "type": "object"
+          },
+          "rule": {
+            "type": "string",
+            "minLength": 1
+          },
+          "k_sigma": {
+            "type": "number"
+          },
+          "spread_multiple": {
+            "type": "number"
+          },
+          "days": {
+            "type": "integer"
+          },
+          "d1_pp": {
+            "type": "number"
+          },
+          "multi_pp": {
+            "type": "number"
+          },
+          "halt": {
+            "type": "object",
+            "properties": {
+              "classes": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "minItems": 1
+              },
+              "days": {
+                "type": "integer"
+              },
+              "basis": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "classes",
+              "days",
+              "basis"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "id",
+          "name"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 1
+    },
+    "hypothetical": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^SC-[HX]-[A-Z0-9]+$"
+          },
+          "event_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "sources": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "minItems": 0
+          },
+          "margin_increase": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "expiring_contract_only": {
+            "type": "boolean"
+          },
+          "margin_source": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "market_structure": {
+            "type": "string"
+          },
+          "moves": {
+            "type": "object"
+          },
+          "extra": {
+            "type": "object"
+          },
+          "rule": {
+            "type": "string",
+            "minLength": 1
+          },
+          "k_sigma": {
+            "type": "number"
+          },
+          "spread_multiple": {
+            "type": "number"
+          },
+          "days": {
+            "type": "integer"
+          },
+          "d1_pp": {
+            "type": "number"
+          },
+          "multi_pp": {
+            "type": "number"
+          },
+          "halt": {
+            "type": "object",
+            "properties": {
+              "classes": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "minItems": 1
+              },
+              "days": {
+                "type": "integer"
+              },
+              "basis": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "classes",
+              "days",
+              "basis"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "id",
+          "name"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 1
+    }
+  },
+  "required": [
+    "schema_version",
+    "document",
+    "as_of",
+    "conventions",
+    "historical",
+    "hypothetical"
+  ],
+  "additionalProperties": false
+}

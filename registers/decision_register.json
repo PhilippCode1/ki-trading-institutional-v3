@@ -1,0 +1,854 @@
+{
+  "schema_version": "3.0",
+  "document": "Entscheidungsregister",
+  "as_of": "2026-09-24",
+  "ranking": [
+    "1 Integritätsregeln",
+    "2 Betreiberentscheidungen (§3.3 und §22.2)",
+    "3 Masterprompt",
+    "4 Befunde der Bewertung (§21)",
+    "5 Konzeptpaket v2.0",
+    "6 Eigene Entwurfsentscheidungen"
+  ],
+  "decisions": [
+    {
+      "id": "DEC-OP-01",
+      "date": "2026-09-24",
+      "rank": 2,
+      "type": "BETREIBER",
+      "title": "BQ-01 Kapital",
+      "decision": "Kein fester Kapitalbetrag. Das System handelt mit dem jeweils vorhandenen Budget auf Demo- oder Echtgeldkonto und passt Universum, Kontraktgrößen und Strategie an.",
+      "rationale": "Betreiberantwort.",
+      "consequences": [
+        "Kapitalstufen 0,25–100 Mio. EUR werden als Szenarien gerechnet (§4.3).",
+        "Kapitaladaptive Zulassung je Stufe (Micro → Standard).",
+        "Keine erfundene Kapitalangabe (R-07): X-OP-CAPITAL bleibt offen, jede Echtgeldstufe braucht eine signierte Risikoakzeptanz (§7.10)."
+      ],
+      "alternatives_rejected": [],
+      "refs": [
+        "P-OP-CAPITAL",
+        "X-OP-CAPITAL"
+      ],
+      "status": "GILT",
+      "operator_answer_verbatim": "Irrelevant für das System, es kann im System auf Echtgeld und oder auf Demogeld laufen. Bedeutet es nimmt immer das Budget her was es hat und Trader damit, es passt daran intelligent seine Strategie an"
+    },
+    {
+      "id": "DEC-OP-02",
+      "date": "2026-09-24",
+      "rank": 2,
+      "type": "BETREIBER",
+      "title": "BQ-02 Betriebsmodell",
+      "decision": "Betriebsmodelle B1–B4 sind nicht Aufgabe des Systems und werden nicht bewertet.",
+      "rationale": "Betreiberantwort.",
+      "consequences": [
+        "§4.2 und A5 (Geschäftsmodell je Betriebsmodell) entfallen im Umfang; A5 wird ohne Umdeutung mit 0 bewertet (R-08).",
+        "Die Rechnungen gelten für ein eigenes Handelskonto des Betreibers (Eigenhandel ohne Dritte); jede Nutzung für Dritte ist gesperrt (X-SCOPE-THIRD)."
+      ],
+      "alternatives_rejected": [],
+      "refs": [
+        "P-OP-SCOPE-OPMODEL",
+        "DEC-CF-03"
+      ],
+      "status": "GILT",
+      "operator_answer_verbatim": "Irrelevant für system das gehört nicht zu ihren Aufgaben Bereich"
+    },
+    {
+      "id": "DEC-OP-03",
+      "date": "2026-09-24",
+      "rank": 2,
+      "type": "BETREIBER",
+      "title": "BQ-03 Recht und Steuern",
+      "decision": "Recht und Steuern regelt eine externe Person; das System handelt nur.",
+      "rationale": "Betreiberantwort.",
+      "consequences": [
+        "Keine Rechts- und Steueranalyse im Paket (A2-Steuerteil, H1, H2 ohne Punkte).",
+        "Im System bleiben nur technische Rechtsgrenzen, die der Handel selbst verletzen könnte (BaFin-Futures-Regel, ESMA-CFD-Grenzen, Marktmissbrauchskontrollen, Datenlizenzen, Positionslimits) – siehe DEC-DS-07.",
+        "Übergabeschnittstelle: Handels- und P&L-Export für die externe Person (legal/handover_external.md)."
+      ],
+      "alternatives_rejected": [],
+      "refs": [
+        "P-OP-SCOPE-LEGAL-TAX",
+        "DEC-CF-01",
+        "DEC-DS-07"
+      ],
+      "status": "GILT",
+      "operator_answer_verbatim": "Irrelevant, das System wir nur handeln. Es ist nicht um rechtliches und steuerlich zu kümmern das wird extern von einer Person geregelt"
+    },
+    {
+      "id": "DEC-OP-04",
+      "date": "2026-09-24",
+      "rank": 2,
+      "type": "BETREIBER",
+      "title": "BQ-04 Haltedauer und Verlustgrenze",
+      "decision": "Tagesnaher Handel: Standard-Haltedauer 4 h bis 4 Tage, höchstens 7 Tage. Der Verlust eines Tages darf niemals mehr als 9 % des Gesamtkapitals betragen.",
+      "rationale": "Betreiberantwort.",
+      "consequences": [
+        "Harte Zeitgrenze 168 h je Position (P-OP-HOLD-MAX-H).",
+        "Tagesverlust-Obergrenze 9 % (P-OP-DAILY-LOSS-CAP) mit interner Leiter davor (DEC-DS-01).",
+        "„Niemals“ verlangt eine Größenregel gegen Kurslücken (DEC-DS-10); eine absolute Garantie ist technisch unmöglich (DEC-CF-02).",
+        "TF-D1 (Haltedauer ≈ Wochen) ist nur noch Vergleichsbasis (DEC-DS-08)."
+      ],
+      "alternatives_rejected": [],
+      "refs": [
+        "P-OP-DAILY-LOSS-CAP",
+        "P-OP-HOLD-MAX-H",
+        "DEC-CF-02"
+      ],
+      "status": "GILT",
+      "operator_answer_verbatim": "Das Programm geht richtigung daytrading. Maximale halte dauer 7 Tage in der Regeln 4 h bis 4 Tage Haltedauer sind Standard Trades. Verlust pro Tag darf niemals mehr als 9 % des gesamt Kapitals sein"
+    },
+    {
+      "id": "DEC-OP-05",
+      "date": "2026-09-24",
+      "rank": 2,
+      "type": "BETREIBER",
+      "title": "BQ-05 Hebel",
+      "decision": "Adaptiver Konto-Brutto-Hebel bis 20×; kein erzwungener Mindesthebel.",
+      "rationale": "Betreiberantwort (empfohlene Option).",
+      "consequences": [
+        "Profile H5–H20 mit Zulässigkeitsprüfung; der Hebel bleibt jedem Risikolimit untergeordnet (R-06).",
+        "Pilot immer in H5 (DEC-DS-02); Aufstieg nur stufenweise nach Evidenz (§7.8)."
+      ],
+      "alternatives_rejected": [],
+      "refs": [
+        "P-OP-LEV-MAX",
+        "P-OP-LEV-MIN"
+      ],
+      "status": "GILT",
+      "operator_answer_verbatim": "Adaptiv bis 20× (empfohlen)"
+    },
+    {
+      "id": "DEC-OP-06",
+      "date": "2026-09-24",
+      "rank": 2,
+      "type": "BETREIBER",
+      "title": "BQ-06 Ausschlüsse",
+      "decision": "Gesamtes Anlageklassen-Universum.",
+      "rationale": "Betreiberantwort.",
+      "consequences": [
+        "Zinsen, Anleihen, Devisen, Energie, Metalle, Agrar und Krypto-Futures sind Kandidaten; Aktienindizes nach DEC-OP-06A."
+      ],
+      "alternatives_rejected": [],
+      "refs": [
+        "P-OP-UNIVERSE"
+      ],
+      "status": "GILT",
+      "operator_answer_verbatim": "Gesamtes Anlagenklassen Universum"
+    },
+    {
+      "id": "DEC-OP-06A",
+      "date": "2026-09-24",
+      "rank": 2,
+      "type": "BETREIBER",
+      "title": "BQ-06a Aktienindizes",
+      "decision": "Aktienindex-Futures nur, wenn der Index keine Rüstungsunternehmen enthält.",
+      "rationale": "Betreiberantwort.",
+      "consequences": [
+        "Kein geprüfter Index-Future erfüllt die Bedingung nachweislich (R5) → alle Aktienindex-Futures gesperrt bis zum Nachweis (X-EQ-INDEX).",
+        "Die Variante mit einem rüstungsfreien Index wird zusätzlich gerechnet (D3-01: beide Varianten)."
+      ],
+      "alternatives_rejected": [],
+      "refs": [
+        "P-OP-UNIVERSE",
+        "X-EQ-INDEX",
+        "DEC-DS-04"
+      ],
+      "status": "GILT",
+      "operator_answer_verbatim": "Nur Indizes ohne Rüstung"
+    },
+    {
+      "id": "DEC-OP-07",
+      "date": "2026-09-24",
+      "rank": 2,
+      "type": "BETREIBER",
+      "title": "BQ-07 Budget, KI-Abrechnung, Betrieb",
+      "decision": "Hermes wird über Abo-Modelle statt nutzungsabhängiger API-Kosten betrieben; breites Intraday-Universum; großes, professionelles Vorhaben; Betrieb auf eigenem Windows-VPS.",
+      "rationale": "Betreiberantwort.",
+      "consequences": [
+        "LLM-Kosten als Abo-Zeile (Nous Portal, SRC-NOUS-PORTAL); harte Budgetgrenze; Kern läuft ohne KI weiter, wenn das Kontingent erschöpft ist.",
+        "Kein Budgetbetrag, kein Stundensatz genannt → markierte Standardwerte (P-ECO-HOURLY-RATE, P-ECO-SPEND-CAP) und externe Eingaben X-OP-RATE, X-OP-BUDGET.",
+        "Windows-VPS passt zu MT5 (nur Windows); Vertrauensbereiche siehe DEC-CF-04."
+      ],
+      "alternatives_rejected": [],
+      "refs": [
+        "P-OP-LLM-BILLING",
+        "P-OP-HOSTING",
+        "DEC-CF-04",
+        "DEC-DS-14"
+      ],
+      "status": "GILT",
+      "operator_answer_verbatim": "Ich würde Hermes dafür nutzen dieser wird mit Abo Modellen betrieben um Kosten zu sparen. Geplant ist nicht direkt mit API kosten sondern Abo Modellen zu koppeln um Preis Leistung zu verbessern. Breites intraday Universum Wichtig das ist ein großer hochprofessionell ki Trading. Kein kleines Projekt. Es läuft auf einen eignen Windows vps"
+    },
+    {
+      "id": "DEC-OP-08",
+      "date": "2026-09-24",
+      "rank": 2,
+      "type": "BETREIBER",
+      "title": "BQ-08 Broker",
+      "decision": "Ausschließlich MetaTrader 5.",
+      "rationale": "Betreiberantwort.",
+      "consequences": [
+        "Ein Brokeradapter (MT5-Python-Schnittstelle); die interne Schnittstelle bleibt brokerneutral.",
+        "FIX/FCM-Anbindung entfällt (nur für B3/B4 relevant)."
+      ],
+      "alternatives_rejected": [],
+      "refs": [
+        "P-OP-PLATFORM",
+        "DEC-DS-16"
+      ],
+      "status": "GILT",
+      "operator_answer_verbatim": "Ausschließlich mt5 als Broker"
+    },
+    {
+      "id": "DEC-OP-08A",
+      "date": "2026-09-24",
+      "rank": 2,
+      "type": "BETREIBER",
+      "title": "BQ-08a Plattform und Instrumente",
+      "decision": "Ausschließlich MT5 als Plattform; Futures bevorzugt, andere Instrumente als Option.",
+      "rationale": "Betreiberantwort.",
+      "consequences": [
+        "Futures sind der Standardweg; CFD sind eine abschaltbare Rückfalloption mit ESMA-Grenzen (DEC-DS-05, DEC-CF-05)."
+      ],
+      "alternatives_rejected": [],
+      "refs": [
+        "P-OP-INSTRUMENT-PREF",
+        "DEC-CF-05"
+      ],
+      "status": "GILT",
+      "operator_answer_verbatim": "Ausschließlich mt5 als Plattform, Futures bevorzugt aber auch andere als Option möglich"
+    },
+    {
+      "id": "DEC-OP-09",
+      "date": "2026-09-24",
+      "rank": 2,
+      "type": "BETREIBER",
+      "title": "BQ-09 Team und Befugnis",
+      "decision": "Nur der Betreiber darf zwischen Demo und Echtgeld schalten; nur er hat diese Erlaubnis.",
+      "rationale": "Betreiberantwort.",
+      "consequences": [
+        "Zustandsautomat SM-MODE: Wechsel nur mit Hardware-Schlüssel des Betreibers.",
+        "Kein menschliches Vier-Augen-Prinzip vorhanden → Abzug G1 und Sperre für Echtgeld-Standardbetrieb ohne unabhängige Risikofunktion (DEC-CF-06, DEC-DS-06)."
+      ],
+      "alternatives_rejected": [],
+      "refs": [
+        "P-OP-MODE-AUTHORITY",
+        "DEC-CF-06"
+      ],
+      "status": "GILT",
+      "operator_answer_verbatim": "Nur ich [Vorname entfernt, R-13] kann auf Demo oder Echtgeld schalten. Nur ich hab die Erlaubnis dazu"
+    },
+    {
+      "id": "DEC-OP-10",
+      "date": "2026-09-24",
+      "rank": 2,
+      "type": "BETREIBER",
+      "title": "BQ-10 Rolle der KI",
+      "decision": "Hermes plus geprüfte ML-Modelle.",
+      "rationale": "Betreiberantwort (empfohlene Option).",
+      "consequences": [
+        "Hermes nur außerhalb des Geldpfads (R-05).",
+        "ML-Modelle im Signal- oder Größenpfad nur nach §11.5 (Modellrisikomanagement, DSR, PBO, Mehrwert nach Kosten)."
+      ],
+      "alternatives_rejected": [],
+      "refs": [
+        "P-OP-AI-ROLE"
+      ],
+      "status": "GILT",
+      "operator_answer_verbatim": "Hermes plus geprüfte ML-Modelle (empfohlen)"
+    },
+    {
+      "id": "DEC-MP-D3-01",
+      "date": "2026-09-24",
+      "rank": 2,
+      "type": "AUFTRAG",
+      "title": "D3-01 Nur börsengehandelte Futures",
+      "decision": "Futures sind der Standardweg; Krypto-Futures zugelassen (BQ-06), Aktienindex-Futures gesperrt (BQ-06a).",
+      "rationale": "Auftrag §3.3.",
+      "consequences": [
+        "Konflikt mit BQ-08a (CFD als Option) → DEC-CF-05."
+      ],
+      "alternatives_rejected": [],
+      "refs": [
+        "DEC-CF-05"
+      ],
+      "status": "GILT"
+    },
+    {
+      "id": "DEC-MP-D3-02",
+      "date": "2026-09-24",
+      "rank": 2,
+      "type": "AUFTRAG",
+      "title": "D3-02 Hebelrahmen 5×–20×",
+      "decision": "Konto-Brutto-Hebel; Profile H5–H20 vollständig gerechnet; Kontrakt-Hebel zusätzlich ausgewiesen.",
+      "rationale": "Auftrag §3.3, bestätigt durch BQ-05.",
+      "consequences": [
+        "Unvereinbarkeit hoher Profile mit der Tagesgrenze wird ausgewiesen (DEC-CF-02, R-06)."
+      ],
+      "alternatives_rejected": [],
+      "refs": [
+        "DEC-OP-05",
+        "DEC-CF-02"
+      ],
+      "status": "GILT"
+    },
+    {
+      "id": "DEC-MP-D3-03",
+      "date": "2026-09-24",
+      "rank": 2,
+      "type": "AUFTRAG",
+      "title": "D3-03 Institutionelle Plattform",
+      "decision": "Plattformarchitektur wie §4.1; Bewertung der Betriebsmodelle entfällt nach BQ-02.",
+      "rationale": "Auftrag §3.3 gegen BQ-02.",
+      "consequences": [
+        "DEC-CF-03."
+      ],
+      "alternatives_rejected": [],
+      "refs": [
+        "DEC-OP-02",
+        "DEC-CF-03"
+      ],
+      "status": "GILT"
+    },
+    {
+      "id": "DEC-MP-D3-04",
+      "date": "2026-09-24",
+      "rank": 2,
+      "type": "AUFTRAG",
+      "title": "D3-04 Kein Bestandsschutz für TF-D1",
+      "decision": "TF-D1 bleibt Referenz-Baseline in der Strategiefamilie.",
+      "rationale": "Auftrag §3.3.",
+      "consequences": [
+        "TF-D1 verletzt die 7-Tage-Grenze → nur Vergleichsbasis (DEC-DS-08)."
+      ],
+      "alternatives_rejected": [],
+      "refs": [
+        "DEC-DS-08"
+      ],
+      "status": "GILT"
+    },
+    {
+      "id": "DEC-MP-D3-05",
+      "date": "2026-09-24",
+      "rank": 2,
+      "type": "AUFTRAG",
+      "title": "D3-05 Kein Sprachmodell im Geldpfad",
+      "decision": "Übernommen aus v2.0, bestätigt; technisch erzwungen (Netztrennung, keine Brokerrechte der Agenten).",
+      "rationale": "Auftrag §3.3, R-05, BQ-10.",
+      "consequences": [
+        "Architekturregel AR-01; Test T-AI-001…T-AI-004."
+      ],
+      "alternatives_rejected": [],
+      "refs": [
+        "DEC-OP-10"
+      ],
+      "status": "GILT"
+    },
+    {
+      "id": "DEC-CF-01",
+      "date": "2026-09-24",
+      "rank": 2,
+      "type": "KONFLIKT",
+      "title": "Recht/Steuern extern gegen §5.3, §15, §20 A2/H",
+      "decision": "Betreiberentscheidung gilt (Rang 2 vor Rang 3). Das Paket enthält keine Rechts- und Steuerprüfung; es liefert eine Übergabeliste und technische Rechtsgrenzen.",
+      "rationale": "BQ-03.",
+      "consequences": [
+        "K-Abzüge A2 (Steueranteil), H1, H2, H3 (teilweise) ohne Umdeutung der Kriterien.",
+        "Rechnungen werden „vor Steuern“ ausgewiesen; ein pauschaler Abschlag ist nur Sensitivität (P-ECO-TAX-SENS).",
+        "Nötige Betreiberentscheidung: Beauftragung der externen Person mit den Punkten aus legal/handover_external.md (X-LEGAL-01, X-TAX-01)."
+      ],
+      "alternatives_rejected": [
+        "Steuerszenarien B1/B2 trotzdem rechnen (verworfen: widerspricht BQ-03 und wäre Beratungsnähe ohne Auftrag)"
+      ],
+      "refs": [
+        "DEC-OP-03",
+        "SRC-MASTERPROMPT-V3"
+      ],
+      "status": "GILT"
+    },
+    {
+      "id": "DEC-CF-02",
+      "date": "2026-09-24",
+      "rank": 2,
+      "type": "KONFLIKT",
+      "title": "„Niemals mehr als 9 % Tagesverlust“ gegen Kurslücken und Hebel bis 20×",
+      "decision": "Die Grenze wird als harte Größenregel umgesetzt: Lückenstress aller Positionen in ungünstigster Richtung plus bereits erlittener Tagesverlust ≤ 9 % − Reserve. Eine absolute Garantie gibt es nicht (Lücken jenseits der Historie, Handelsaussetzungen, Brokerausfall).",
+      "rationale": "BQ-04, BQ-05, R-06.",
+      "consequences": [
+        "Die Größenregel begrenzt den erreichbaren Brutto-Hebel stark; hohe Profile sind nur mit Zinsfutures-Schwerpunkt und oft gar nicht zulässig (risk/leverage_results.json).",
+        "Restwahrscheinlichkeit einer Überschreitung wird simuliert und ausgewiesen (risk/kelly_ruin_results.json).",
+        "Nötige Betreiberentscheidung: Bestätigung der strengen Auslegung oder signierte Annahme einer Restwahrscheinlichkeit (X-OP-DLC-MODE)."
+      ],
+      "alternatives_rejected": [
+        "Tagesgrenze nur als VaR-Limit (verworfen: widerspricht „niemals“)"
+      ],
+      "refs": [
+        "DEC-OP-04",
+        "DEC-OP-05",
+        "DEC-DS-10"
+      ],
+      "status": "GILT"
+    },
+    {
+      "id": "DEC-CF-03",
+      "date": "2026-09-24",
+      "rank": 2,
+      "type": "KONFLIKT",
+      "title": "Betriebsmodelle nicht Systemaufgabe gegen §4.2/D3-03",
+      "decision": "Keine Bewertung von B1–B4; alle Rechnungen für ein Eigenkonto des Betreibers.",
+      "rationale": "BQ-02.",
+      "consequences": [
+        "A5 = 0 Punkte, H1 = 0 Punkte; Nutzung für Dritte gesperrt (X-SCOPE-THIRD)."
+      ],
+      "alternatives_rejected": [],
+      "refs": [
+        "DEC-OP-02"
+      ],
+      "status": "GILT"
+    },
+    {
+      "id": "DEC-CF-04",
+      "date": "2026-09-24",
+      "rank": 2,
+      "type": "KONFLIKT",
+      "title": "Ein eigener Windows-VPS gegen drei getrennte Vertrauensbereiche (§5.2, §12)",
+      "decision": "Empfehlung: Geldpfad auf dem Betreiber-VPS; Forschung/KI und Evaluator auf getrennten kleinen Instanzen. Falls der Betreiber nur einen VPS will: getrennte Windows-Konten, Firewall-Regeln und kein Hermes auf dem Geldpfad-Host – mit ausgewiesenem Restrisiko.",
+      "rationale": "BQ-07, §12.",
+      "consequences": [
+        "Kosten für zwei Zusatzinstanzen im Basisfall (registers/costs.json).",
+        "Nötige Betreiberentscheidung X-INF-ZONES."
+      ],
+      "alternatives_rejected": [],
+      "refs": [
+        "DEC-OP-07",
+        "DEC-DS-13"
+      ],
+      "status": "GILT"
+    },
+    {
+      "id": "DEC-CF-05",
+      "date": "2026-09-24",
+      "rank": 2,
+      "type": "KONFLIKT",
+      "title": "CFD als Option (BQ-08a) gegen „keine CFD“ (D3-01)",
+      "decision": "Futures sind Standard; der CFD-Pfad ist spezifiziert, aber standardmäßig abgeschaltet und nur mit signierter Betreiberfreigabe aktivierbar. Es gelten die ESMA/BaFin-Hebelgrenzen als harte Limits.",
+      "rationale": "BQ-08a ist die jüngere, ausdrückliche Betreiberantwort; D3-01 bleibt als Standard gewahrt.",
+      "consequences": [
+        "X-OP-CFD bleibt offen; ohne Freigabe kein CFD-Handel."
+      ],
+      "alternatives_rejected": [],
+      "refs": [
+        "DEC-OP-08A",
+        "DEC-MP-D3-01",
+        "DEC-DS-05"
+      ],
+      "status": "GILT"
+    },
+    {
+      "id": "DEC-CF-06",
+      "date": "2026-09-24",
+      "rank": 2,
+      "type": "KONFLIKT",
+      "title": "Einziger Befugter (BQ-09) gegen menschliches Vier-Augen-Prinzip und unabhängige Risikofunktion (§13, EV-13)",
+      "decision": "Die Befugnis des Betreibers bleibt unangetastet. Das Paket verlangt für Echtgeld-Standardbetrieb (G9) eine externe unabhängige Risikofunktion mit Leserechten und Vetorecht bei Profilaufstiegen; ohne sie bleibt G9 gesperrt. Pilot H5 (G8) ist mit dokumentiertem Restrisiko zulässig.",
+      "rationale": "R-09; §13 verlangt mindestens zwei handlungsfähige Personen für Produktion.",
+      "consequences": [
+        "G1-Abzug im Raster; Sperre X-ORG-RISK für G9.",
+        "Die Moduswahl Demo/Echtgeld bleibt allein beim Betreiber (SM-MODE)."
+      ],
+      "alternatives_rejected": [],
+      "refs": [
+        "DEC-OP-09",
+        "DEC-DS-06"
+      ],
+      "status": "GILT"
+    },
+    {
+      "id": "DEC-CF-07",
+      "date": "2026-09-24",
+      "rank": 2,
+      "type": "KONFLIKT",
+      "title": "LLM-Abo gegen Datenlizenzen",
+      "decision": "Keine Kurs-Rohdaten an LLM-Anbieter; Hermes erhält nur abgeleitete Kennzahlen und Metadaten.",
+      "rationale": "R5: kein Datenanbieter erlaubt die Weitergabe von Rohdaten; Nous Portal nennt keine Angaben zu Aufbewahrung, Training und Region.",
+      "consequences": [
+        "X-AI-DPA: Datenschutz- und Lizenzprüfung durch die externe Person."
+      ],
+      "alternatives_rejected": [],
+      "refs": [
+        "DEC-OP-07",
+        "SRC-NOUS-PORTAL",
+        "SRC-HIST-KIBOT"
+      ],
+      "status": "GILT"
+    },
+    {
+      "id": "DEC-CF-08",
+      "date": "2026-09-24",
+      "rank": 1,
+      "type": "KONFLIKT",
+      "title": "Markierte Rechenannahmen ohne ausdrückliche Zulassung von Standardwerten (R-07)",
+      "decision": "Der Betreiber hat keine Standardwerte ausdrücklich zugelassen. Die Rechner nutzen für acht offene Eingaben markierte Rechenannahmen (default_marked), die nie als Betreiberangabe gelten: Der Status bleibt UNBESTAETIGT, jedes abhängige Tor bleibt gesperrt, und jede Rechnung damit ist als Annahme ausgewiesen.",
+      "rationale": "R-07 verlangt für Standardwerte eine ausdrückliche Zulassung; ohne Rechenannahmen gäbe es keine Wirtschaftlichkeits- und Risikorechnung, mit der der Betreiber über G0 entscheiden kann (R-09: beste zulässige Alternative).",
+      "consequences": [
+        "Keine Sperre wird durch eine Rechenannahme gelöst; validation/semantic_checks.py::check_operator prüft Status, Markierung und Verweise.",
+        "Nötige Betreiberentscheidung: echte Werte liefern (X-OP-RATE, X-OP-BUDGET, X-OP-DLC-MODE, X-INF-ZONES) bzw. Broker- und Datenangaben beschaffen (X-BRK-LIQ, X-BRK-INTEREST, X-DATA-ND) oder die Rechenannahmen ausdrücklich zulassen; X-TAX-01 beantwortet die externe Person."
+      ],
+      "alternatives_rejected": [],
+      "refs": [
+        "X-OP-RATE",
+        "X-OP-BUDGET",
+        "X-OP-DLC-MODE",
+        "X-INF-ZONES",
+        "X-BRK-LIQ",
+        "X-BRK-INTEREST",
+        "X-DATA-ND",
+        "X-TAX-01"
+      ],
+      "status": "GILT"
+    },
+    {
+      "id": "DEC-DS-01",
+      "date": "2026-09-24",
+      "rank": 6,
+      "type": "ENTWURF",
+      "title": "Interne Verlustleiter vor der Betreiber-Grenze",
+      "decision": "Tagesverluststufen 3 % (Risikoziel halbieren), 5 % (Einstiegssperre), 6,5 % (geordneter Abbau); Drawdown-Leiter 10/15/20/30 %.",
+      "rationale": "Die Leiter greift vor der Betreiber-Grenze und vor der Brokerliquidation (§7.5, §7.6).",
+      "consequences": [],
+      "alternatives_rejected": [
+        "Nur harte 9-%-Grenze ohne Leiter (verworfen: Abbau käme zu spät)"
+      ],
+      "refs": [],
+      "status": "GILT"
+    },
+    {
+      "id": "DEC-DS-02",
+      "date": "2026-09-24",
+      "rank": 6,
+      "type": "ENTWURF",
+      "title": "Pilot immer in H5 mit halber Größe",
+      "decision": "Echtgeldpilot (G8) nur in H5 mit 50 % des H5-Risikoziels; Aufstieg eine Stufe nach 90 Handelstagen Evidenz.",
+      "rationale": "§7.8.",
+      "consequences": [],
+      "alternatives_rejected": [],
+      "refs": [],
+      "status": "GILT"
+    },
+    {
+      "id": "DEC-DS-03",
+      "date": "2026-09-24",
+      "rank": 6,
+      "type": "ENTWURF",
+      "title": "Kein Sprachmodell im Geldpfad",
+      "decision": "Signal → Portfolio → Risiko → Order → Ausführung ohne LLM; Agenten ohne Brokerzugang, getrennter Host.",
+      "rationale": "R-05, D3-05.",
+      "consequences": [],
+      "alternatives_rejected": [],
+      "refs": [],
+      "status": "GILT"
+    },
+    {
+      "id": "DEC-DS-04",
+      "date": "2026-09-24",
+      "rank": 6,
+      "type": "ENTWURF",
+      "title": "Aktienindex-Futures gesperrt",
+      "decision": "Sperre bis zum Nachweis eines rüstungsfreien Index mit Methodik und vollständiger Komponentenliste.",
+      "rationale": "BQ-06a, R5.",
+      "consequences": [],
+      "alternatives_rejected": [
+        "STOXX Europe 600 SRI ohne Nachweis zulassen (verworfen)"
+      ],
+      "refs": [],
+      "status": "GILT"
+    },
+    {
+      "id": "DEC-DS-05",
+      "date": "2026-09-24",
+      "rank": 6,
+      "type": "ENTWURF",
+      "title": "CFD nur als abgeschaltete Rückfalloption",
+      "decision": "ESMA/BaFin-Hebelgrenzen als harte Limits; Finanzierungskosten im Kostenmodell; Aktivierung nur signiert.",
+      "rationale": "BQ-08a, D3-01.",
+      "consequences": [],
+      "alternatives_rejected": [],
+      "refs": [],
+      "status": "GILT"
+    },
+    {
+      "id": "DEC-DS-06",
+      "date": "2026-09-24",
+      "rank": 6,
+      "type": "ENTWURF",
+      "title": "Einzelbetreiber als Restrisiko mit externer Risikofunktion",
+      "decision": "Externe Risikofunktion mit Lese- und Vetorecht für Profilaufstiege und Grants ab G9; Notfallvertretung mit Nur-Abbau-Recht.",
+      "rationale": "EV-13, §13.",
+      "consequences": [],
+      "alternatives_rejected": [
+        "Zweite Person mit Handelsrechten (verworfen: widerspricht BQ-09)"
+      ],
+      "refs": [],
+      "status": "GILT"
+    },
+    {
+      "id": "DEC-DS-07",
+      "date": "2026-09-24",
+      "rank": 6,
+      "type": "ENTWURF",
+      "title": "Technische Rechtsgrenzen bleiben im System",
+      "decision": "Das System prüft nur, was der Handel selbst verletzen kann: BaFin-Futures-Regel (Nachschussausschluss als Kontovoraussetzung), ESMA-CFD-Grenzen, Marktmissbrauchsmuster, Positionslimits, Datenlizenzen.",
+      "rationale": "BQ-03 schließt Rechtsberatung aus, nicht technische Sperren.",
+      "consequences": [],
+      "alternatives_rejected": [],
+      "refs": [],
+      "status": "GILT"
+    },
+    {
+      "id": "DEC-DS-08",
+      "date": "2026-09-24",
+      "rank": 6,
+      "type": "ENTWURF",
+      "title": "TF-D1 nur Vergleichsbasis",
+      "decision": "TF-D1 (55/20-Kanal) hält Wochen und verletzt die 7-Tage-Grenze; Variante TF-D1-7T mit Zeitstopp wird als zulässige Baseline gerechnet.",
+      "rationale": "BQ-04, D3-04.",
+      "consequences": [],
+      "alternatives_rejected": [],
+      "refs": [],
+      "status": "GILT"
+    },
+    {
+      "id": "DEC-DS-09",
+      "date": "2026-09-24",
+      "rank": 6,
+      "type": "ENTWURF",
+      "title": "Nominal-Konvention Multiplikator × Preis",
+      "decision": "Hebel nach §7.1 mit Multiplikator × Preis; bei Zinsfutures ist das der IMM-Index-Wert, nicht der Nennwert.",
+      "rationale": "§7.1 verbindlich; Nennwert-Konvention zusätzlich ausgewiesen.",
+      "consequences": [],
+      "alternatives_rejected": [],
+      "refs": [],
+      "status": "GILT"
+    },
+    {
+      "id": "DEC-DS-10",
+      "date": "2026-09-24",
+      "rank": 6,
+      "type": "ENTWURF",
+      "title": "Größenregel gegen Kurslücken",
+      "decision": "Vor jeder risikoerhöhenden Order: Σ|w_i|·Lücke_i (ungünstigste Richtung, max(historische Klassenlücke, 10σ_Tag), Wochenende × 1,5) + Tagesverlust ≤ 9 % − 1 %.",
+      "rationale": "BQ-04 „niemals“, §7.4.",
+      "consequences": [],
+      "alternatives_rejected": [
+        "Clusterweise Korrelation 1 mit Unabhängigkeit zwischen Clustern (nur informativ)"
+      ],
+      "refs": [],
+      "status": "GILT"
+    },
+    {
+      "id": "DEC-DS-11",
+      "date": "2026-09-24",
+      "rank": 6,
+      "type": "ENTWURF",
+      "title": "Hedging-Konto mit interner Nettung",
+      "decision": "Das OMS führt je Instrument eine Nettoposition und ordnet Fills den Strategien virtuell zu; im Hedging-Konto wird mit Positionsticket geschlossen.",
+      "rationale": "R1: FXFlat Hedging, AMP/Ava Netting; §8.1 Netting und Zuordnung.",
+      "consequences": [],
+      "alternatives_rejected": [],
+      "refs": [],
+      "status": "GILT"
+    },
+    {
+      "id": "DEC-DS-12",
+      "date": "2026-09-24",
+      "rank": 6,
+      "type": "ENTWURF",
+      "title": "Rollen ohne Kalenderspread",
+      "decision": "MT5 bietet keine Kalenderspread-Orders; mit Haltedauer ≤ 7 Tage werden neue Einstiege 5 Geschäftstage vor FND/LTD in den Folgekontrakt verlegt; überlappende Positionen werden geschlossen.",
+      "rationale": "R1, §8.6.",
+      "consequences": [],
+      "alternatives_rejected": [
+        "Rollen per zwei Einzelaufträgen (nur Rückfall mit Legging-Risiko)"
+      ],
+      "refs": [],
+      "status": "GILT"
+    },
+    {
+      "id": "DEC-DS-13",
+      "date": "2026-09-24",
+      "rank": 6,
+      "type": "ENTWURF",
+      "title": "Drei Vertrauensbereiche auf getrennten Instanzen",
+      "decision": "Geldpfad (Windows-VPS mit MT5), Forschung/KI (eigene Instanz), Evaluator (eigene kleine Instanz).",
+      "rationale": "§12, v2.0.",
+      "consequences": [],
+      "alternatives_rejected": [],
+      "refs": [],
+      "status": "GILT"
+    },
+    {
+      "id": "DEC-DS-14",
+      "date": "2026-09-24",
+      "rank": 6,
+      "type": "ENTWURF",
+      "title": "Nous-Portal-Abo mit harter Budgetgrenze",
+      "decision": "Hermes nutzt ein Abo (Basis Super); bei erschöpftem Guthaben stoppt die KI-Schicht, der Kern handelt unverändert weiter.",
+      "rationale": "BQ-07, SRC-NOUS-PORTAL.",
+      "consequences": [],
+      "alternatives_rejected": [],
+      "refs": [],
+      "status": "GILT"
+    },
+    {
+      "id": "DEC-DS-15",
+      "date": "2026-09-24",
+      "rank": 6,
+      "type": "ENTWURF",
+      "title": "Rechner nur mit Standardbibliothek",
+      "decision": "Alle Rechner laufen ohne Fremdpakete und reproduzierbar unter Python 3.11–3.13; die Paketprüfung nutzt jsonschema und referencing, der Linter ruff, alle mit Version und Hash gepinnt in validation/requirements-validation.txt.",
+      "rationale": "R-10.",
+      "consequences": [],
+      "alternatives_rejected": [],
+      "refs": [],
+      "status": "GILT"
+    },
+    {
+      "id": "DEC-DS-16",
+      "date": "2026-09-24",
+      "rank": 6,
+      "type": "ENTWURF",
+      "title": "Primärbroker-Kandidat FXFlat",
+      "decision": "Einziger belegter MT5-Anbieter von Eurex/CME-Futures für deutsche Privatkunden; Bestätigungen X-BRK-* vor G1; Alternativen AvaFutures (EU) und AMP (nur technische Referenz).",
+      "rationale": "R1.",
+      "consequences": [],
+      "alternatives_rejected": [],
+      "refs": [],
+      "status": "GILT"
+    },
+    {
+      "id": "DEC-DS-17",
+      "date": "2026-09-24",
+      "rank": 6,
+      "type": "ENTWURF",
+      "title": "Datenlizenz-Szenarien",
+      "decision": "Basis: Broker-Kursgebühren (Anzeige); Sensitivität: Non-Display-Lizenzen CME/Eurex bei vollautomatischem Handel.",
+      "rationale": "R5; Einstufung ist offen (X-DATA-ND).",
+      "consequences": [],
+      "alternatives_rejected": [],
+      "refs": [],
+      "status": "GILT"
+    },
+    {
+      "id": "DEC-DS-18",
+      "date": "2026-09-24",
+      "rank": 6,
+      "type": "ENTWURF",
+      "title": "Kapazitätsgrenzen",
+      "decision": "Order ≤ 1 % des Tagesvolumens; Position ≤ 0,5 % des Open Interest.",
+      "rationale": "§7.5.",
+      "consequences": [],
+      "alternatives_rejected": [],
+      "refs": [],
+      "status": "GILT"
+    },
+    {
+      "id": "DEC-DS-19",
+      "date": "2026-09-24",
+      "rank": 6,
+      "type": "ENTWURF",
+      "title": "Margin-Puffer vor Stop-out",
+      "decision": "Eigene De-Risking-Schwelle bei Margin-Level 150 %; Größenrechnung immer mit Übernacht-Margin; M/E-Grenzen je Profil.",
+      "rationale": "§7.7, EV-09.",
+      "consequences": [],
+      "alternatives_rejected": [],
+      "refs": [],
+      "status": "GILT"
+    },
+    {
+      "id": "DEC-DS-20",
+      "date": "2026-09-24",
+      "rank": 6,
+      "type": "ENTWURF",
+      "title": "Serverseitiger Schutzstopp je Position",
+      "decision": "Jede Position trägt einen Stopp beim Broker; ohne gültige Lease wird kein Einstieg gesendet, Schutzstopps bleiben bestehen.",
+      "rationale": "CR-5 (Schutz ohne Lease), §10.5.",
+      "consequences": [],
+      "alternatives_rejected": [],
+      "refs": [],
+      "status": "GILT"
+    },
+    {
+      "id": "DEC-DS-21",
+      "date": "2026-09-24",
+      "rank": 6,
+      "type": "ENTWURF",
+      "title": "Futility-Regel",
+      "decision": "Nach G3 und G4 wird die prädiktive Wahrscheinlichkeit berechnet, das Endtor (Posterior P(Sharpe > 0) ≥ P-RES-FINAL-P nach dem Pilot, GATE-G8) zu bestehen; unter P-RES-FUTILITY Stopp vor dem Bau (GATE-G3, GATE-G4 in research/evidence_gates.json).",
+      "rationale": "§6.6, EV-05; Wirkung simuliert in research/operating_characteristics.py.",
+      "consequences": [],
+      "alternatives_rejected": [],
+      "refs": [],
+      "status": "GILT"
+    },
+    {
+      "id": "DEC-DS-23",
+      "date": "2026-09-24",
+      "rank": 6,
+      "type": "ENTWURF",
+      "title": "S-TF-Geschwindigkeiten auf die Haltedauer-Vorgabe kalibriert",
+      "decision": "EWMA-Paare 4/16 bis 32/128 Stunden, Einstieg ab Prognose 8, Ausstieg unter 3; Auswahl allein nach Haltedauer und Umschlag auf synthetischen Preisen (keine Renditen, keine Ergebnisansicht).",
+      "rationale": "BQ-04 verlangt in der Regel 4 h–4 T; die langsamere Vorversion (bis 64/256) hatte einen Median von rund 89 h und rund 25 % Zeitstopps.",
+      "consequences": [],
+      "alternatives_rejected": [
+        "Langsamere Geschwindigkeiten (verworfen: Haltedauer-Vorgabe)"
+      ],
+      "refs": [],
+      "status": "GILT"
+    },
+    {
+      "id": "DEC-DS-22",
+      "date": "2026-09-24",
+      "rank": 6,
+      "type": "ENTWURF",
+      "title": "Make-or-Buy: eigener deterministischer Kern",
+      "decision": "Eigener schlanker Kern in Python mit MT5-Adapter; NautilusTrader, LEAN und pysystemtrade als Referenz und Testorakel, nicht als Laufzeitbasis.",
+      "rationale": "§17.3; implementation/make_or_buy.md.",
+      "consequences": [],
+      "alternatives_rejected": [],
+      "refs": [],
+      "status": "GILT"
+    },
+    {
+      "id": "DEC-DS-24",
+      "date": "2026-09-24",
+      "rank": 6,
+      "type": "ENTWURF",
+      "title": "Datenhistorie als Zulassungskriterium",
+      "decision": "Zulassung nur mit P-RES-DEV-YEARS + P-RES-HOLDOUT-YEARS Jahren Intraday-Historie beim geplanten Anbieter oder mit Proxy auf denselben Basiswert; die hypothetische Hebelkalibrierung (U-HANDELBAR) ignoriert die Regel und ist als nicht forschungsfähig markiert.",
+      "rationale": "§6.2 und §6.5; ohne ausreichende Historie ist weder Entwicklung noch versiegelter Holdout möglich.",
+      "consequences": [],
+      "alternatives_rejected": [
+        "Kürzere Entwicklungsjahre für neue Kontrakte (verworfen: schwächt Teststärke, die ohnehin knapp ist)",
+        "Proxy über Eurodollar für SOFR (verworfen: anderer Basiswert)"
+      ],
+      "refs": [],
+      "status": "GILT"
+    },
+    {
+      "id": "DEC-DS-25",
+      "date": "2026-09-24",
+      "rank": 6,
+      "type": "ENTWURF",
+      "title": "Befund bei leerem Universum",
+      "decision": "Erfüllt bei einem Kapital kein Instrument die Zulassung (Kosten je Risikoeinheit, Kontraktgröße, Kapazität nach DEC-DS-18), lautet der Befund der Zelle NOT_VIABLE_AT_CAPITAL mit dem Grund „kein Instrument“; die Hebelrechnung führt die Zelle zugleich als unzulässig (risk/leverage_results.json). Der Jahreswert ist dann höchstens die negativen Fixkosten.",
+      "rationale": "§5.7 nennt für NOT_VIABLE_AT_CAPITAL die Folge „Kapitalentscheidung oder Abbruch“; ohne Instrument gibt es weder eine Rate noch ein Profil, das geprüft werden könnte, und die handlungsleitende Folge ist die Kapitalfrage (Micro-Kontrakte unten, Kapazität oben).",
+      "consequences": [],
+      "alternatives_rejected": [
+        "PROFILE_NOT_ADMISSIBLE (verworfen: kein Profil wird geprüft, die Folge „Profil gesperrt“ wäre irreführend)",
+        "Zelle weglassen (verworfen: Go/No-Go verlangt jede Stufe)"
+      ],
+      "refs": [],
+      "status": "GILT"
+    }
+  ]
+}

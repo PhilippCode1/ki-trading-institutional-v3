@@ -1,0 +1,104 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:ki-trading-v3:state_trace",
+  "title": "Zustandstrace",
+  "x-version": "3.0.0",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "3.0"
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^TR-[A-Z]+-\\d{3}$"
+    },
+    "machine": {
+      "type": "string",
+      "pattern": "^SM-[A-Z]+$"
+    },
+    "description": {
+      "type": "string",
+      "minLength": 1
+    },
+    "scenarios": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 1
+    },
+    "start": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "initial_reasons": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "steps": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "event": {
+            "type": "string",
+            "minLength": 1
+          },
+          "context": {
+            "type": "object"
+          },
+          "expect_state": {
+            "type": "string",
+            "minLength": 1
+          },
+          "expect_invalid": {
+            "type": "boolean"
+          },
+          "expect_reasons": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "minItems": 0
+          },
+          "expect_allowed": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "minItems": 0
+          }
+        },
+        "required": [
+          "event",
+          "context",
+          "expect_state"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 1
+    }
+  },
+  "required": [
+    "schema_version",
+    "id",
+    "machine",
+    "description",
+    "scenarios",
+    "start",
+    "initial_reasons",
+    "steps"
+  ],
+  "additionalProperties": false
+}

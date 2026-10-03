@@ -1,0 +1,65 @@
+{
+ "schema_version": "3.0",
+ "id": "TR-SAFETY-004",
+ "machine": "SM-SAFETY",
+ "description": "Mehrere Stufen: fehlender Schutz und Journalfehler – Schutzbasis bleibt, keine Erweiterung",
+ "scenarios": [
+  "OS-EX-06",
+  "HA-JOURNAL"
+ ],
+ "start": null,
+ "initial_reasons": [],
+ "steps": [
+  {
+   "event": "STOP_MISSING_DETECTED",
+   "context": {},
+   "expect_state": "RECOVERY",
+   "expect_reasons": [
+    "STOP_MISSING"
+   ],
+   "expect_allowed": [
+    "CANCEL_ORDER",
+    "CLOSE_REDUCE",
+    "EMERGENCY_PROTECT",
+    "RECONCILE",
+    "ROLL_AS_CLOSE",
+    "STOP_AMEND_RECONCILED_ONLY"
+   ]
+  },
+  {
+   "event": "JOURNAL_ERROR",
+   "context": {},
+   "expect_state": "HALTED",
+   "expect_reasons": [
+    "JOURNAL_WRITE_FAILURE",
+    "STOP_MISSING"
+   ],
+   "expect_allowed": [
+    "CANCEL_ORDER",
+    "EMERGENCY_PROTECT",
+    "RECONCILE",
+    "ROLL_AS_CLOSE",
+    "STOP_AMEND_RECONCILED_ONLY"
+   ]
+  },
+  {
+   "event": "OPERATOR_ACK_SIGNED",
+   "context": {
+    "signed": true,
+    "reason": "STOP_MISSING",
+    "all_positions_protected": true
+   },
+   "expect_state": "HALTED",
+   "expect_reasons": [
+    "JOURNAL_WRITE_FAILURE"
+   ],
+   "expect_allowed": [
+    "CANCEL_ORDER",
+    "EMERGENCY_PROTECT",
+    "RECONCILE",
+    "ROLL_AS_CLOSE",
+    "STOP_AMEND_RECONCILED_ONLY"
+   ]
+  }
+ ]
+}

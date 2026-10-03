@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:ki-trading-v3:gate_case",
+  "title": "Torfall",
+  "x-version": "3.0.0",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "3.0"
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^GC-(G([0-9]|10)|MON-[A-Z]+)-\\d{3}$"
+    },
+    "gate": {
+      "type": "string",
+      "pattern": "^(GATE-G([0-9]|10)|MON-[A-Z]+)$"
+    },
+    "description": {
+      "type": "string",
+      "minLength": 1
+    },
+    "facts": {
+      "type": "object"
+    },
+    "expect_outcome": {
+      "enum": [
+        "PASS",
+        "FAIL",
+        "INCONCLUSIVE",
+        "INVALID",
+        "ERROR",
+        "BLOCKED_EXTERNAL"
+      ]
+    },
+    "expect_rule": {
+      "type": "string",
+      "minLength": 1
+    },
+    "expect_flags": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 0,
+      "uniqueItems": true
+    },
+    "facts_source": {
+      "type": "string",
+      "minLength": 1
+    }
+  },
+  "required": [
+    "schema_version",
+    "id",
+    "gate",
+    "description",
+    "facts",
+    "expect_outcome",
+    "expect_rule"
+  ],
+  "additionalProperties": false
+}

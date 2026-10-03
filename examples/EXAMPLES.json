@@ -1,0 +1,754 @@
+{
+  "schema_version": "3.0",
+  "document": "Beispielverzeichnis",
+  "as_of": "2026-09-24",
+  "rule": "Gültige Beispiele bestehen Schema und Beispielregeln; ungültige scheitern genau wie erwartet (Schema oder benannte Regel aus validation/example_rules.py).",
+  "examples": [
+    {
+      "file": "examples/valid/contracts/order_intent_entry.json",
+      "schema": "order_intent",
+      "valid": true,
+      "note": "Einstieg als marktfähige Limit-Order mit Gültigkeit und geplantem Schutzstopp"
+    },
+    {
+      "file": "examples/valid/contracts/order_intent_close_by_ticket.json",
+      "schema": "order_intent",
+      "valid": true,
+      "note": "Schließen mit position=Ticket"
+    },
+    {
+      "file": "examples/valid/contracts/order_intent_protect.json",
+      "schema": "order_intent",
+      "valid": true,
+      "note": "Initialer Schutzstopp als SL der Position"
+    },
+    {
+      "file": "examples/valid/contracts/order_attempt_filled.json",
+      "schema": "order_attempt",
+      "valid": true,
+      "note": "vollständig ausgeführt"
+    },
+    {
+      "file": "examples/valid/contracts/order_attempt_unknown.json",
+      "schema": "order_attempt",
+      "valid": true,
+      "note": "Zeitüberschreitung (10012) → UNKNOWN"
+    },
+    {
+      "file": "examples/valid/contracts/order_attempt_not_executed_proven.json",
+      "schema": "order_attempt",
+      "valid": true,
+      "note": "Negativnachweis mit zwei sauberen Zyklen"
+    },
+    {
+      "file": "examples/valid/contracts/broker_event_fill.json",
+      "schema": "broker_event",
+      "valid": true,
+      "note": "Deal aus der Abfrage-Differenz; Kommission nur im Auszug"
+    },
+    {
+      "file": "examples/valid/contracts/account_snapshot_complete.json",
+      "schema": "account_snapshot",
+      "valid": true,
+      "note": "vollständiger Snapshot eines Demokontos"
+    },
+    {
+      "file": "examples/valid/contracts/position_open_protected.json",
+      "schema": "position",
+      "valid": true,
+      "note": "geschützte Position mit Teilpositionen zweier Strategien"
+    },
+    {
+      "file": "examples/valid/contracts/risk_decision_pass.json",
+      "schema": "risk_decision",
+      "valid": true,
+      "note": "Freigabe mit Kontrollwerten"
+    },
+    {
+      "file": "examples/valid/contracts/risk_decision_reduce.json",
+      "schema": "risk_decision",
+      "valid": true,
+      "note": "Verkleinerung durch die Lückenregel"
+    },
+    {
+      "file": "examples/valid/contracts/decision_record_sizing.json",
+      "schema": "decision_record",
+      "valid": true,
+      "note": "nachrechenbare Größenentscheidung"
+    },
+    {
+      "file": "examples/valid/contracts/operator_action_deputy_pause.json",
+      "schema": "operator_action",
+      "valid": true,
+      "note": "Pause durch die Vertretung"
+    },
+    {
+      "file": "examples/valid/contracts/operator_action_switch_mode.json",
+      "schema": "operator_action",
+      "valid": true,
+      "note": "Moduswechsel durch den Betreiber"
+    },
+    {
+      "file": "examples/valid/contracts/operator_action_step_up.json",
+      "schema": "operator_action",
+      "valid": true,
+      "note": "Profilaufstieg mit zweiter Freigabe"
+    },
+    {
+      "file": "examples/valid/contracts/live_grant_paper.json",
+      "schema": "live_grant",
+      "valid": true,
+      "note": "Paper-Grant im Demokonto"
+    },
+    {
+      "file": "examples/valid/contracts/live_grant_pilot_hypothetical.json",
+      "schema": "live_grant",
+      "valid": true,
+      "note": "hypothetischer Pilot-Grant (heute nicht erteilbar, kein Profil zulässig)"
+    },
+    {
+      "file": "examples/valid/contracts/gate_result_g3_fail.json",
+      "schema": "gate_result",
+      "valid": true,
+      "note": "signiertes Torergebnis"
+    },
+    {
+      "file": "examples/valid/contracts/mcp_request_submit_experiment.json",
+      "schema": "mcp_request",
+      "valid": true,
+      "note": "erlaubtes Werkzeug"
+    },
+    {
+      "file": "examples/valid/contracts/mcp_response_completed.json",
+      "schema": "mcp_response",
+      "valid": true,
+      "note": "abgeschlossen mit Beleg"
+    },
+    {
+      "file": "examples/valid/contracts/mcp_response_rejected.json",
+      "schema": "mcp_response",
+      "valid": true,
+      "note": "Abweisung mit Sicherheitsereignis"
+    },
+    {
+      "file": "examples/valid/contracts/contract_spec_example.json",
+      "schema": "contract_spec",
+      "valid": true,
+      "note": "Kontraktdaten mit Gültigkeit (Werte als Annahme bis X-BRK-CONTRACTS)"
+    },
+    {
+      "file": "examples/valid/contracts/data_manifest_sealed.json",
+      "schema": "data_manifest",
+      "valid": true,
+      "note": "Entwicklungsdaten mit versiegeltem Holdout"
+    },
+    {
+      "file": "examples/valid/contracts/experiment_manifest_registered.json",
+      "schema": "experiment_manifest",
+      "valid": true,
+      "note": "vorregistriert, Ergebnis noch nicht angesehen"
+    },
+    {
+      "file": "examples/valid/contracts/knowledge_entry_hypothesis.json",
+      "schema": "knowledge_entry",
+      "valid": true,
+      "note": "Hypothese des Agenten"
+    },
+    {
+      "file": "examples/valid/contracts/knowledge_entry_confirmed.json",
+      "schema": "knowledge_entry",
+      "valid": true,
+      "note": "vom Betreiber bestätigt mit Beleg"
+    },
+    {
+      "file": "examples/valid/contracts/release_manifest_class_c.json",
+      "schema": "release_manifest",
+      "valid": true,
+      "note": "Klasse C mit zweiter Freigabe"
+    },
+    {
+      "file": "examples/valid/contracts/incident_closed.json",
+      "schema": "incident",
+      "valid": true,
+      "note": "geschlossen mit Ursache und Post-Mortem"
+    },
+    {
+      "file": "examples/valid/contracts/safety_observation_costdrift.json",
+      "schema": "safety_observation",
+      "valid": true,
+      "note": "Beobachtung mit Messung"
+    },
+    {
+      "file": "examples/valid/contracts/work_item_running.json",
+      "schema": "work_item",
+      "valid": true,
+      "note": "laufender Auftrag"
+    },
+    {
+      "file": "examples/valid/contracts/change_proposal_open.json",
+      "schema": "change_proposal",
+      "valid": true,
+      "note": "offener Vorschlag"
+    },
+    {
+      "file": "examples/invalid/order_intent_close_without_ticket.json",
+      "schema": "order_intent",
+      "valid": false,
+      "note": "freie Gegenorder ohne Positions-Ticket (würde im Hedging-Konto eine Gegenposition eröffnen)",
+      "expected": {
+        "type": "SCHEMA",
+        "rule": null
+      }
+    },
+    {
+      "file": "examples/invalid/order_intent_entry_without_expiry.json",
+      "schema": "order_intent",
+      "valid": false,
+      "note": "Einstieg ohne Gültigkeit: kein Negativnachweis möglich",
+      "expected": {
+        "type": "SCHEMA",
+        "rule": null
+      }
+    },
+    {
+      "file": "examples/invalid/order_intent_float_qty.json",
+      "schema": "order_intent",
+      "valid": false,
+      "note": "Menge nicht ganzzahlig",
+      "expected": {
+        "type": "SCHEMA",
+        "rule": null
+      }
+    },
+    {
+      "file": "examples/invalid/order_intent_research_mode.json",
+      "schema": "order_intent",
+      "valid": false,
+      "note": "Order im Forschungsmodus",
+      "expected": {
+        "type": "SCHEMA",
+        "rule": null
+      }
+    },
+    {
+      "file": "examples/invalid/order_intent_entry_with_ticket.json",
+      "schema": "order_intent",
+      "valid": false,
+      "note": "Einstieg mit Positions-Ticket (Vermischung)",
+      "expected": {
+        "type": "SCHEMA",
+        "rule": null
+      }
+    },
+    {
+      "file": "examples/invalid/order_attempt_filled_without_price.json",
+      "schema": "order_attempt",
+      "valid": false,
+      "note": "Ausführung ohne Preis",
+      "expected": {
+        "type": "SCHEMA",
+        "rule": null
+      }
+    },
+    {
+      "file": "examples/invalid/order_attempt_proof_without_expiry.json",
+      "schema": "order_attempt",
+      "valid": false,
+      "note": "Negativnachweis vor Ablauf der Gültigkeit",
+      "expected": {
+        "type": "SCHEMA",
+        "rule": null
+      }
+    },
+    {
+      "file": "examples/invalid/order_attempt_proof_one_cycle.json",
+      "schema": "order_attempt",
+      "valid": false,
+      "note": "Negativnachweis mit zu wenigen Zyklen",
+      "expected": {
+        "type": "SEMANTIC",
+        "rule": "R-EX-11"
+      }
+    },
+    {
+      "file": "examples/invalid/order_attempt_unknown_unsent.json",
+      "schema": "order_attempt",
+      "valid": false,
+      "note": "UNKNOWN ohne sent_at",
+      "expected": {
+        "type": "SCHEMA",
+        "rule": null
+      }
+    },
+    {
+      "file": "examples/invalid/broker_event_fill_without_deal.json",
+      "schema": "broker_event",
+      "valid": false,
+      "note": "Ausführung ohne Deal-Ticket",
+      "expected": {
+        "type": "SCHEMA",
+        "rule": null
+      }
+    },
+    {
+      "file": "examples/invalid/broker_event_local_time.json",
+      "schema": "broker_event",
+      "valid": false,
+      "note": "Systemzeit nicht in UTC",
+      "expected": {
+        "type": "SCHEMA",
+        "rule": null
+      }
+    },
+    {
+      "file": "examples/invalid/account_snapshot_without_type.json",
+      "schema": "account_snapshot",
+      "valid": false,
+      "note": "Kontotyp fehlt (Moduskontrolle PTC-10 unmöglich)",
+      "expected": {
+        "type": "SCHEMA",
+        "rule": null
+      }
+    },
+    {
+      "file": "examples/invalid/account_snapshot_margin_level_wrong.json",
+      "schema": "account_snapshot",
+      "valid": false,
+      "note": "Margin-Level passt nicht zu Equity/Margin",
+      "expected": {
+        "type": "SEMANTIC",
+        "rule": "R-EX-12"
+      }
+    },
+    {
+      "file": "examples/invalid/position_protected_without_sl.json",
+      "schema": "position",
+      "valid": false,
+      "note": "OPEN_PROTECTED ohne Schutzstopp",
+      "expected": {
+        "type": "SCHEMA",
+        "rule": null
+      }
+    },
+    {
+      "file": "examples/invalid/position_allocation_mismatch.json",
+      "schema": "position",
+      "valid": false,
+      "note": "Teilpositionen ergeben nicht die Brokerposition",
+      "expected": {
+        "type": "SEMANTIC",
+        "rule": "R-EX-10"
+      }
+    },
+    {
+      "file": "examples/invalid/risk_decision_reject_without_reason.json",
+      "schema": "risk_decision",
+      "valid": false,
+      "note": "Ablehnung ohne Grund",
+      "expected": {
+        "type": "SCHEMA",
+        "rule": null
+      }
+    },
+    {
+      "file": "examples/invalid/risk_decision_rounded_up.json",
+      "schema": "risk_decision",
+      "valid": false,
+      "note": "Verkleinerung rundet auf",
+      "expected": {
+        "type": "SEMANTIC",
+        "rule": "R-EX-01"
+      }
+    },
+    {
+      "file": "examples/invalid/decision_record_without_rules.json",
+      "schema": "decision_record",
+      "valid": false,
+      "note": "Entscheidung ohne Regelverweis",
+      "expected": {
+        "type": "SCHEMA",
+        "rule": null
+      }
+    },
+    {
+      "file": "examples/invalid/operator_action_deputy_switch_mode.json",
+      "schema": "operator_action",
+      "valid": false,
+      "note": "Vertretung schaltet den Modus (BQ-09 verletzt)",
+      "expected": {
+        "type": "SCHEMA",
+        "rule": null
+      }
+    },
+    {
+      "file": "examples/invalid/operator_action_clear_without_reason.json",
+      "schema": "operator_action",
+      "valid": false,
+      "note": "Freigabe ohne benannten Grund",
+      "expected": {
+        "type": "SCHEMA",
+        "rule": null
+      }
+    },
+    {
+      "file": "examples/invalid/operator_action_step_up_without_cosign.json",
+      "schema": "operator_action",
+      "valid": false,
+      "note": "Aufstieg ohne Risikofunktion",
+      "expected": {
+        "type": "SCHEMA",
+        "rule": null
+      }
+    },
+    {
+      "file": "examples/invalid/operator_action_wind_down_without_snapshot.json",
+      "schema": "operator_action",
+      "valid": false,
+      "note": "Abbau ohne Snapshotbindung",
+      "expected": {
+        "type": "SCHEMA",
+        "rule": null
+      }
+    },
+    {
+      "file": "examples/invalid/operator_action_order.json",
+      "schema": "operator_action",
+      "valid": false,
+      "note": "Aktion außerhalb der Liste (keine Order per Betreiberaktion)",
+      "expected": {
+        "type": "SCHEMA",
+        "rule": null
+      }
+    },
+    {
+      "file": "examples/invalid/operator_action_expiry_too_long.json",
+      "schema": "operator_action",
+      "valid": false,
+      "note": "Signatur länger gültig als erlaubt",
+      "expected": {
+        "type": "SEMANTIC",
+        "rule": "R-EX-02"
+      }
+    },
+    {
+      "file": "examples/invalid/live_grant_paper_on_real_account.json",
+      "schema": "live_grant",
+      "valid": false,
+      "note": "Paper-Grant auf Echtgeldkonto",
+      "expected": {
+        "type": "SCHEMA",
+        "rule": null
+      }
+    },
+    {
+      "file": "examples/invalid/live_grant_pilot_h10.json",
+      "schema": "live_grant",
+      "valid": false,
+      "note": "Pilot nicht in H5",
+      "expected": {
+        "type": "SCHEMA",
+        "rule": null
+      }
+    },
+    {
+      "file": "examples/invalid/live_grant_pilot_without_risk_acceptance.json",
+      "schema": "live_grant",
+      "valid": false,
+      "note": "Pilot ohne Risikoakzeptanz",
+      "expected": {
+        "type": "SCHEMA",
+        "rule": null
+      }
+    },
+    {
+      "file": "examples/invalid/live_grant_standard_without_g8.json",
+      "schema": "live_grant",
+      "valid": false,
+      "note": "Standard ohne bestandenes G8",
+      "expected": {
+        "type": "SCHEMA",
+        "rule": null
+      }
+    },
+    {
+      "file": "examples/invalid/live_grant_pilot_45_days.json",
+      "schema": "live_grant",
+      "valid": false,
+      "note": "Pilot länger als erlaubt",
+      "expected": {
+        "type": "SEMANTIC",
+        "rule": "R-EX-03"
+      }
+    },
+    {
+      "file": "examples/invalid/gate_result_pass_with_error_exit.json",
+      "schema": "gate_result",
+      "valid": false,
+      "note": "PASS trotz Exitcode ≠ 0",
+      "expected": {
+        "type": "SCHEMA",
+        "rule": null
+      }
+    },
+    {
+      "file": "examples/invalid/gate_result_unsigned.json",
+      "schema": "gate_result",
+      "valid": false,
+      "note": "Torergebnis ohne Evaluator-Signatur",
+      "expected": {
+        "type": "SCHEMA",
+        "rule": null
+      }
+    },
+    {
+      "file": "examples/invalid/mcp_request_place_order.json",
+      "schema": "mcp_request",
+      "valid": false,
+      "note": "Order über die Projektschnittstelle",
+      "expected": {
+        "type": "SCHEMA",
+        "rule": null
+      }
+    },
+    {
+      "file": "examples/invalid/mcp_request_foreign_identity.json",
+      "schema": "mcp_request",
+      "valid": false,
+      "note": "fremde Dienstidentität",
+      "expected": {
+        "type": "SCHEMA",
+        "rule": null
+      }
+    },
+    {
+      "file": "examples/invalid/mcp_request_oversized.json",
+      "schema": "mcp_request",
+      "valid": false,
+      "note": "Nutzlast über der Grenze",
+      "expected": {
+        "type": "SEMANTIC",
+        "rule": "R-EX-08"
+      }
+    },
+    {
+      "file": "examples/invalid/mcp_response_completed_without_evidence.json",
+      "schema": "mcp_response",
+      "valid": false,
+      "note": "Abschluss ohne Beleg",
+      "expected": {
+        "type": "SCHEMA",
+        "rule": null
+      }
+    },
+    {
+      "file": "examples/invalid/contract_spec_without_validity.json",
+      "schema": "contract_spec",
+      "valid": false,
+      "note": "ohne Gültigkeitsende",
+      "expected": {
+        "type": "SCHEMA",
+        "rule": null
+      }
+    },
+    {
+      "file": "examples/invalid/contract_spec_tick_value_wrong.json",
+      "schema": "contract_spec",
+      "valid": false,
+      "note": "Tickwert ≠ Multiplikator × Tick",
+      "expected": {
+        "type": "SEMANTIC",
+        "rule": "R-EX-09"
+      }
+    },
+    {
+      "file": "examples/invalid/data_manifest_holdout_unsealed.json",
+      "schema": "data_manifest",
+      "valid": false,
+      "note": "Holdout nicht versiegelt",
+      "expected": {
+        "type": "SCHEMA",
+        "rule": null
+      }
+    },
+    {
+      "file": "examples/invalid/data_manifest_overlap.json",
+      "schema": "data_manifest",
+      "valid": false,
+      "note": "Fenster überlappen",
+      "expected": {
+        "type": "SEMANTIC",
+        "rule": "R-EX-04"
+      }
+    },
+    {
+      "file": "examples/invalid/experiment_manifest_viewed_before_registration.json",
+      "schema": "experiment_manifest",
+      "valid": false,
+      "note": "Ergebnis vor der Registrierung angesehen",
+      "expected": {
+        "type": "SEMANTIC",
+        "rule": "R-EX-05"
+      }
+    },
+    {
+      "file": "examples/invalid/experiment_manifest_over_budget.json",
+      "schema": "experiment_manifest",
+      "valid": false,
+      "note": "Versuch über dem registrierten Budget",
+      "expected": {
+        "type": "SEMANTIC",
+        "rule": "R-EX-05"
+      }
+    },
+    {
+      "file": "examples/invalid/knowledge_entry_agent_as_fact.json",
+      "schema": "knowledge_entry",
+      "valid": false,
+      "note": "Agent markiert Tatsache",
+      "expected": {
+        "type": "SCHEMA",
+        "rule": null
+      }
+    },
+    {
+      "file": "examples/invalid/knowledge_entry_without_validity.json",
+      "schema": "knowledge_entry",
+      "valid": false,
+      "note": "ohne Gültigkeit",
+      "expected": {
+        "type": "SCHEMA",
+        "rule": null
+      }
+    },
+    {
+      "file": "examples/invalid/release_manifest_c_without_second.json",
+      "schema": "release_manifest",
+      "valid": false,
+      "note": "Klasse C ohne zweite Freigabe",
+      "expected": {
+        "type": "SCHEMA",
+        "rule": null
+      }
+    },
+    {
+      "file": "examples/invalid/release_manifest_b_not_equivalent.json",
+      "schema": "release_manifest",
+      "valid": false,
+      "note": "Klasse B mit Handelswirkung",
+      "expected": {
+        "type": "SCHEMA",
+        "rule": null
+      }
+    },
+    {
+      "file": "examples/invalid/release_manifest_self_review.json",
+      "schema": "release_manifest",
+      "valid": false,
+      "note": "Autor prüft selbst",
+      "expected": {
+        "type": "SEMANTIC",
+        "rule": "R-EX-06"
+      }
+    },
+    {
+      "file": "examples/invalid/release_manifest_agent_update_without_eval.json",
+      "schema": "release_manifest",
+      "valid": false,
+      "note": "Agenten-Update ohne Evaluationssuite",
+      "expected": {
+        "type": "SCHEMA",
+        "rule": null
+      }
+    },
+    {
+      "file": "examples/invalid/incident_closed_without_cause.json",
+      "schema": "incident",
+      "valid": false,
+      "note": "Abschluss ohne Ursache",
+      "expected": {
+        "type": "SCHEMA",
+        "rule": null
+      }
+    },
+    {
+      "file": "examples/invalid/incident_high_without_postmortem.json",
+      "schema": "incident",
+      "valid": false,
+      "note": "Schwere HOCH ohne Post-Mortem",
+      "expected": {
+        "type": "SCHEMA",
+        "rule": null
+      }
+    },
+    {
+      "file": "examples/invalid/safety_observation_without_measurement.json",
+      "schema": "safety_observation",
+      "valid": false,
+      "note": "ohne Messung",
+      "expected": {
+        "type": "SCHEMA",
+        "rule": null
+      }
+    },
+    {
+      "file": "examples/invalid/work_item_agent_reviewer.json",
+      "schema": "work_item",
+      "valid": false,
+      "note": "Agent als Prüfer",
+      "expected": {
+        "type": "SCHEMA",
+        "rule": null
+      }
+    },
+    {
+      "file": "examples/invalid/work_item_four_rounds.json",
+      "schema": "work_item",
+      "valid": false,
+      "note": "mehr Prüfrunden als erlaubt",
+      "expected": {
+        "type": "SEMANTIC",
+        "rule": "R-EX-07"
+      }
+    },
+    {
+      "file": "examples/invalid/change_proposal_without_paths.json",
+      "schema": "change_proposal",
+      "valid": false,
+      "note": "ohne betroffene Dateien",
+      "expected": {
+        "type": "SCHEMA",
+        "rule": null
+      }
+    },
+    {
+      "file": "examples/invalid/order_intent_from_hermes.json",
+      "schema": "order_intent",
+      "valid": false,
+      "note": "Handelsabsicht mit Erzeuger HERMES: Sprachmodell im Geldpfad (R-05)",
+      "expected": {
+        "type": "SCHEMA",
+        "rule": null
+      }
+    },
+    {
+      "file": "examples/invalid/risk_decision_from_hermes.json",
+      "schema": "risk_decision",
+      "valid": false,
+      "note": "Risikoentscheidung mit Erzeuger HERMES: Sprachmodell im Geldpfad (R-05)",
+      "expected": {
+        "type": "SCHEMA",
+        "rule": null
+      }
+    },
+    {
+      "file": "examples/invalid/order_intent_from_project_ops.json",
+      "schema": "order_intent",
+      "valid": false,
+      "note": "Handelsabsicht aus dem Projektdienst (Agentenschnittstelle)",
+      "expected": {
+        "type": "SCHEMA",
+        "rule": null
+      }
+    }
+  ]
+}

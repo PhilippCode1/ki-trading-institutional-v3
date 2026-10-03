@@ -1,0 +1,57 @@
+{
+ "schema_version": "3.0",
+ "id": "TR-ORDER-010",
+ "machine": "SM-ORDER",
+ "description": "Schließen ohne frischen Snapshot oder ohne Ticket wird nicht gesendet (keine freie Gegenorder)",
+ "scenarios": [
+  "OS-EX-09"
+ ],
+ "start": "PERSISTED",
+ "initial_reasons": null,
+ "steps": [
+  {
+   "event": "SEND_STARTED",
+   "context": {
+    "writer_state": "ACTIVE_WRITER",
+    "lease_age_s": 3,
+    "permission": "CLOSE_REDUCE",
+    "allowed_actions": [
+     "CANCEL_ORDER",
+     "CLOSE_REDUCE",
+     "EMERGENCY_PROTECT",
+     "RECONCILE",
+     "ROLL_AS_CLOSE",
+     "STOP_AMEND_RECONCILED_ONLY"
+    ],
+    "order_kind": "CLOSE",
+    "has_position_ticket": true,
+    "qty_le_confirmed": true,
+    "snapshot_age_s": 95
+   },
+   "expect_state": "PERSISTED",
+   "expect_invalid": true
+  },
+  {
+   "event": "SEND_STARTED",
+   "context": {
+    "writer_state": "ACTIVE_WRITER",
+    "lease_age_s": 3,
+    "permission": "CLOSE_REDUCE",
+    "allowed_actions": [
+     "CANCEL_ORDER",
+     "CLOSE_REDUCE",
+     "EMERGENCY_PROTECT",
+     "RECONCILE",
+     "ROLL_AS_CLOSE",
+     "STOP_AMEND_RECONCILED_ONLY"
+    ],
+    "order_kind": "CLOSE",
+    "has_position_ticket": false,
+    "qty_le_confirmed": true,
+    "snapshot_age_s": 20
+   },
+   "expect_state": "PERSISTED",
+   "expect_invalid": true
+  }
+ ]
+}

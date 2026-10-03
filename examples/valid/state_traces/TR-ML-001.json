@@ -1,0 +1,38 @@
+{
+ "schema_version": "3.0",
+ "id": "TR-ML-001",
+ "machine": "SM-MLMODEL",
+ "description": "Meta-Labeling besteht die Hürden nicht: Verzicht (erwarteter Fall)",
+ "scenarios": [
+  "OS-GV-11"
+ ],
+ "start": null,
+ "initial_reasons": null,
+ "steps": [
+  {
+   "event": "REGISTER",
+   "context": {
+    "manifest_before_results": true
+   },
+   "expect_state": "REGISTERED"
+  },
+  {
+   "event": "DEVELOP_DONE",
+   "context": {
+    "embargo_h": 168
+   },
+   "expect_state": "DEVELOPED"
+  },
+  {
+   "event": "VALIDATION_RESULT",
+   "context": {
+    "dsr": 0.6,
+    "pbo": 0.3,
+    "uplift_sr": 0.02,
+    "independent_validator": true,
+    "is_language_model": false
+   },
+   "expect_state": "REJECTED"
+  }
+ ]
+}

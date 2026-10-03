@@ -1,0 +1,16 @@
+{
+ "schema_version": "3.0",
+ "message_id": "00000000-0000-4000-8000-000000000027",
+ "correlation_id": "COR-0027",
+ "producer": "PROJECT_OPS",
+ "created_utc": "2026-09-24T09:00:00Z",
+ "work_item_id": "WI-0001",
+ "title": "Kostenbericht Q4 entwerfen",
+ "state": "RUNNING",
+ "owner_role": "HERMES",
+ "budget_h": 8,
+ "hours_used": 2,
+ "review_round": 1,
+ "reviewer_role": "BETREIBER",
+ "proposal_ref": "CP-0001"
+}

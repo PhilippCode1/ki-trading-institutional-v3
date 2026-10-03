@@ -1,0 +1,312 @@
+{
+  "schema_version": "3.0",
+  "document": "Modellinventar (SR 11-7)",
+  "as_of": "2026-09-24",
+  "models": [
+    {
+      "id": "MOD-COST",
+      "name": "Kostenmodell je Instrument",
+      "type": "RECHNER",
+      "purpose": "Kosten je Round-Turn und je Risikoeinheit; Zulassung",
+      "file": "financials/cost_model.py",
+      "tests": [
+        "T-CALC-COST-001",
+        "T-SEM-COST-001"
+      ],
+      "materiality": "HOCH",
+      "validation_status": "REFERENZ_GETESTET",
+      "limitations": "Spreads, Schlupf, Volatilität sind Annahmen bis G1/G2",
+      "owner": "Betreiber (B)",
+      "independent_validation": "AUSSTEHEND: externe Risikofunktion (R) oder externer Prüfer (P) (§20.4, SR 11-7)"
+    },
+    {
+      "id": "MOD-PRIOR",
+      "name": "Prior-Herleitung",
+      "type": "RECHNER",
+      "purpose": "Verteilung der Netto-Sharpe je Strategie und Portfolio",
+      "file": "research/prior_derivation.py",
+      "tests": [
+        "T-CALC-PRIOR-001"
+      ],
+      "materiality": "HOCH",
+      "validation_status": "REFERENZ_GETESTET",
+      "limitations": "Literatur misst den Zielhorizont nicht; Abschläge sind Annahmen",
+      "owner": "Betreiber (B)",
+      "independent_validation": "AUSSTEHEND: externe Risikofunktion (R) oder externer Prüfer (P) (§20.4, SR 11-7)"
+    },
+    {
+      "id": "MOD-LEV",
+      "name": "Hebel- und Profilrechner",
+      "type": "RECHNER",
+      "purpose": "L_g = D·σ_p/σ_h, Klassendeckel, Zulässigkeit",
+      "file": "risk/leverage_calculator.py",
+      "tests": [
+        "T-CALC-LEV-001",
+        "T-SEM-LEV-001"
+      ],
+      "materiality": "HOCH",
+      "validation_status": "REFERENZ_GETESTET",
+      "limitations": "Korrelationen sind Annahmen",
+      "owner": "Betreiber (B); Prüfung durch die externe Risikofunktion (R) ab G9",
+      "independent_validation": "AUSSTEHEND: externe Risikofunktion (R) oder externer Prüfer (P) (§20.4, SR 11-7)"
+    },
+    {
+      "id": "MOD-KELLY",
+      "name": "Kelly-, Ruin- und Drawdown-Simulator",
+      "type": "RECHNER",
+      "purpose": "Verteilungen je Profil unter Parameterunsicherheit",
+      "file": "risk/kelly_ruin_simulator.py",
+      "tests": [
+        "T-CALC-KELLY-001"
+      ],
+      "materiality": "HOCH",
+      "validation_status": "REFERENZ_GETESTET",
+      "limitations": "Synthetische Pfade; keine Evidenz für eine Edge",
+      "owner": "Betreiber (B); Prüfung durch die externe Risikofunktion (R) ab G9",
+      "independent_validation": "AUSSTEHEND: externe Risikofunktion (R) oder externer Prüfer (P) (§20.4, SR 11-7)"
+    },
+    {
+      "id": "MOD-STRESS",
+      "name": "Stresstest-Engine",
+      "type": "RECHNER",
+      "purpose": "13 historische und 8 hypothetische Szenarien je Profil",
+      "file": "risk/stress_test_engine.py",
+      "tests": [
+        "T-CALC-STRESS-001",
+        "T-SEM-STRESS-001"
+      ],
+      "materiality": "HOCH",
+      "validation_status": "REFERENZ_GETESTET",
+      "limitations": "Lücken in den Szenariodaten werden mit markierten Ersatzregeln gefüllt",
+      "owner": "Betreiber (B); Prüfung durch die externe Risikofunktion (R) ab G9",
+      "independent_validation": "AUSSTEHEND: externe Risikofunktion (R) oder externer Prüfer (P) (§20.4, SR 11-7)"
+    },
+    {
+      "id": "MOD-OC",
+      "name": "Betriebscharakteristik der Tore",
+      "type": "RECHNER",
+      "purpose": "Durchlaufquoten mit und ohne Futility; eingesparte Kosten",
+      "file": "research/operating_characteristics.py",
+      "tests": [
+        "T-CALC-OC-001"
+      ],
+      "materiality": "MITTEL",
+      "validation_status": "REFERENZ_GETESTET",
+      "limitations": "Normalapproximation der Sharpe-Schätzung",
+      "owner": "Betreiber (B); Prüfung durch die externe Risikofunktion (R) ab G9",
+      "independent_validation": "AUSSTEHEND: externe Risikofunktion (R) oder externer Prüfer (P) (§20.4, SR 11-7)"
+    },
+    {
+      "id": "MOD-DMC",
+      "name": "Entscheidungs-Monte-Carlo",
+      "type": "RECHNER",
+      "purpose": "NPV-Verteilung je Kapitalstufe × Profil; Befundklassen",
+      "file": "financials/decision_montecarlo.py",
+      "tests": [
+        "T-CALC-DMC-001"
+      ],
+      "materiality": "HOCH",
+      "validation_status": "REFERENZ_GETESTET",
+      "limitations": "Vor Steuern; Steuern nur als Sensitivität (BQ-03)",
+      "owner": "Betreiber (B)",
+      "independent_validation": "AUSSTEHEND: externe Risikofunktion (R) oder externer Prüfer (P) (§20.4, SR 11-7)"
+    },
+    {
+      "id": "MOD-STAT",
+      "name": "Statistikrechner (Lo, Teststärke, PSR, DSR, PBO)",
+      "type": "RECHNER",
+      "purpose": "Forschungsprotokoll",
+      "file": "research/statistical_calculator.py",
+      "tests": [
+        "T-CALC-STAT-001",
+        "T-CALC-STAT-002"
+      ],
+      "materiality": "MITTEL",
+      "validation_status": "REFERENZ_GETESTET",
+      "limitations": "DSR gegen Zahlenbeispiel der Originalquelle geprüft",
+      "owner": "Betreiber (B); Prüfung durch die externe Risikofunktion (R) ab G9",
+      "independent_validation": "AUSSTEHEND: externe Risikofunktion (R) oder externer Prüfer (P) (§20.4, SR 11-7)"
+    },
+    {
+      "id": "MOD-TURN",
+      "name": "Umschlagssimulation der Strategiefamilie",
+      "type": "RECHNER",
+      "purpose": "Trades je Jahr, Haltedauer, Zeitstopp-Anteil",
+      "file": "research/reference_strategies/turnover_simulation.py",
+      "tests": [
+        "T-CALC-TURN-001"
+      ],
+      "materiality": "HOCH",
+      "validation_status": "REFERENZ_GETESTET",
+      "limitations": "Synthetische Preise; misst nur Umschlag, keine Edge",
+      "owner": "Betreiber (B)",
+      "independent_validation": "AUSSTEHEND: externe Risikofunktion (R) oder externer Prüfer (P) (§20.4, SR 11-7)"
+    },
+    {
+      "id": "MOD-DRIFT",
+      "name": "Kostendrift-Monitor (Simulation der Auslösezeit)",
+      "type": "RECHNER",
+      "purpose": "Nachweis der Trennschärfe im Pilot",
+      "file": "operations/costdrift_monitor.py",
+      "tests": [
+        "T-CALC-DRIFT-001"
+      ],
+      "materiality": "MITTEL",
+      "validation_status": "REFERENZ_GETESTET",
+      "limitations": "Fills normalverteilt um Modellkosten",
+      "owner": "Betreiber (B)",
+      "independent_validation": "AUSSTEHEND: externe Risikofunktion (R) oder externer Prüfer (P) (§20.4, SR 11-7)"
+    },
+    {
+      "id": "MOD-MON",
+      "name": "Auslösezeiten der Monitore MON-HARM und MON-DRIFT",
+      "type": "RECHNER",
+      "purpose": "Nachweis, wie schnell Harm- und Volatilitätsmonitor auslösen",
+      "file": "operations/monitor_simulation.py",
+      "tests": [
+        "T-CALC-MON-001"
+      ],
+      "materiality": "MITTEL",
+      "validation_status": "REFERENZ_GETESTET",
+      "limitations": "Normal-Normal-Modell der Sharpe-Schätzung; Futility im Betrieb (MH-R2) und Umschlag (MD-R2) nicht simuliert",
+      "owner": "Betreiber (B); Prüfung durch die externe Risikofunktion (R) ab G9",
+      "independent_validation": "AUSSTEHEND: externe Risikofunktion (R) oder externer Prüfer (P) (§20.4, SR 11-7)"
+    },
+    {
+      "id": "MOD-S-TF",
+      "name": "Trendfolge mehrerer Geschwindigkeiten (schnell)",
+      "type": "STRATEGIE",
+      "purpose": "Referenzimplementierung der vorregistrierten Strategie",
+      "file": "research/reference_strategies/s_tf.py",
+      "tests": [
+        "T-STR-TF-001"
+      ],
+      "materiality": "HOCH",
+      "validation_status": "REFERENZ_GETESTET",
+      "limitations": "Keine Performance-Aussage ohne lizenzierte Daten (R-02)",
+      "owner": "Betreiber (B)",
+      "independent_validation": "AUSSTEHEND: externe Risikofunktion (R) oder externer Prüfer (P) (§20.4, SR 11-7)"
+    },
+    {
+      "id": "MOD-S-IM",
+      "name": "Intraday-Momentum",
+      "type": "STRATEGIE",
+      "purpose": "Referenzimplementierung der vorregistrierten Strategie",
+      "file": "research/reference_strategies/s_im.py",
+      "tests": [
+        "T-STR-IM-001"
+      ],
+      "materiality": "HOCH",
+      "validation_status": "REFERENZ_GETESTET",
+      "limitations": "Keine Performance-Aussage ohne lizenzierte Daten (R-02)",
+      "owner": "Betreiber (B)",
+      "independent_validation": "AUSSTEHEND: externe Risikofunktion (R) oder externer Prüfer (P) (§20.4, SR 11-7)"
+    },
+    {
+      "id": "MOD-S-REV",
+      "name": "Kurzfrist-Umkehr",
+      "type": "STRATEGIE",
+      "purpose": "Referenzimplementierung der vorregistrierten Strategie",
+      "file": "research/reference_strategies/s_rev.py",
+      "tests": [
+        "T-STR-REV-001"
+      ],
+      "materiality": "HOCH",
+      "validation_status": "REFERENZ_GETESTET",
+      "limitations": "Keine Performance-Aussage ohne lizenzierte Daten (R-02)",
+      "owner": "Betreiber (B)",
+      "independent_validation": "AUSSTEHEND: externe Risikofunktion (R) oder externer Prüfer (P) (§20.4, SR 11-7)"
+    },
+    {
+      "id": "MOD-S-CA",
+      "name": "Carry-Filter",
+      "type": "STRATEGIE",
+      "purpose": "Referenzimplementierung der vorregistrierten Strategie",
+      "file": "research/reference_strategies/s_ca.py",
+      "tests": [
+        "T-STR-CA-001"
+      ],
+      "materiality": "HOCH",
+      "validation_status": "REFERENZ_GETESTET",
+      "limitations": "Keine Performance-Aussage ohne lizenzierte Daten (R-02)",
+      "owner": "Betreiber (B)",
+      "independent_validation": "AUSSTEHEND: externe Risikofunktion (R) oder externer Prüfer (P) (§20.4, SR 11-7)"
+    },
+    {
+      "id": "MOD-S-BASE",
+      "name": "TF-D1 und TF-D1-7T (Baseline)",
+      "type": "STRATEGIE",
+      "purpose": "Referenzimplementierung der vorregistrierten Strategie",
+      "file": "research/reference_strategies/s_base.py",
+      "tests": [
+        "T-STR-BASE-001"
+      ],
+      "materiality": "HOCH",
+      "validation_status": "REFERENZ_GETESTET",
+      "limitations": "Keine Performance-Aussage ohne lizenzierte Daten (R-02)",
+      "owner": "Betreiber (B)",
+      "independent_validation": "AUSSTEHEND: externe Risikofunktion (R) oder externer Prüfer (P) (§20.4, SR 11-7)"
+    },
+    {
+      "id": "MOD-ML-META",
+      "name": "Meta-Labeling für S-TF (Größensteuerung)",
+      "type": "ML",
+      "purpose": "Wahrscheinlichkeit eines erfolgreichen Trades → Größe",
+      "file": "noch nicht gebaut",
+      "tests": [
+        "T-ML-001"
+      ],
+      "materiality": "HOCH",
+      "validation_status": "GEPLANT",
+      "limitations": "Nur nach §11.5; sonst Verzicht mit Begründung",
+      "owner": "Betreiber (B)",
+      "independent_validation": "AUSSTEHEND: externe Risikofunktion (R) oder externer Prüfer (P) (§20.4, SR 11-7)"
+    },
+    {
+      "id": "MOD-ML-REGIME",
+      "name": "Regimeerkennung (Volatilitätsregime)",
+      "type": "ML",
+      "purpose": "Risikoziel im Hochvolatilitätsregime senken",
+      "file": "noch nicht gebaut",
+      "tests": [
+        "T-ML-002"
+      ],
+      "materiality": "MITTEL",
+      "validation_status": "GEPLANT",
+      "limitations": "Nur nach §11.5",
+      "owner": "Betreiber (B)",
+      "independent_validation": "AUSSTEHEND: externe Risikofunktion (R) oder externer Prüfer (P) (§20.4, SR 11-7)"
+    },
+    {
+      "id": "MOD-COV",
+      "name": "Kovarianzschätzer (EWMA + Schockregime)",
+      "type": "RISIKOMODELL",
+      "purpose": "σ_p, VaR/ES ex ante",
+      "file": "Kern (Bau G5)",
+      "tests": [
+        "T-RISK-COV-001"
+      ],
+      "materiality": "HOCH",
+      "validation_status": "SPEZIFIZIERT",
+      "limitations": "Schätzfehler in Regimewechseln",
+      "owner": "Betreiber (B); Prüfung durch die externe Risikofunktion (R) ab G9",
+      "independent_validation": "AUSSTEHEND: externe Risikofunktion (R) oder externer Prüfer (P) (§20.4, SR 11-7)"
+    },
+    {
+      "id": "MOD-SLIP",
+      "name": "Schlupf- und Marktwirkungsmodell",
+      "type": "RISIKOMODELL",
+      "purpose": "Vorhandelskosten, TCA-Vergleich",
+      "file": "financials/cost_model.py (Teil)",
+      "tests": [
+        "T-CALC-COST-001",
+        "T-TCA-001"
+      ],
+      "materiality": "MITTEL",
+      "validation_status": "REFERENZ_GETESTET",
+      "limitations": "Kalibrierung erst ab G1",
+      "owner": "Betreiber (B)",
+      "independent_validation": "AUSSTEHEND: externe Risikofunktion (R) oder externer Prüfer (P) (§20.4, SR 11-7)"
+    }
+  ]
+}

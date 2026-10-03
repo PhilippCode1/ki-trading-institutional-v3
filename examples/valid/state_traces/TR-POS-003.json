@@ -1,0 +1,35 @@
+{
+ "schema_version": "3.0",
+ "id": "TR-POS-003",
+ "machine": "SM-POSITION",
+ "description": "Teilweiser Einstieg, Rest verfällt, Schutz für die gefüllte Menge",
+ "scenarios": [
+  "OS-EX-02"
+ ],
+ "start": null,
+ "initial_reasons": null,
+ "steps": [
+  {
+   "event": "ENTRY_FILL_PARTIAL",
+   "context": {},
+   "expect_state": "OPENING"
+  },
+  {
+   "event": "ENTRY_FILL_PARTIAL",
+   "context": {},
+   "expect_state": "OPENING"
+  },
+  {
+   "event": "ENTRY_ENDED_PARTIAL",
+   "context": {},
+   "expect_state": "OPEN_UNPROTECTED"
+  },
+  {
+   "event": "SL_CONFIRMED",
+   "context": {
+    "sl_covers_full_qty": true
+   },
+   "expect_state": "OPEN_PROTECTED"
+  }
+ ]
+}

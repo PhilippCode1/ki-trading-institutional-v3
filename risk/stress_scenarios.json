@@ -1,0 +1,1637 @@
+{
+  "schema_version": "3.0",
+  "document": "Stressszenarien",
+  "as_of": "2026-09-24",
+  "conventions": {
+    "rates": "Zinsklassen in Prozentpunkten Rendite; Kursänderung = Duration × Renditeänderung, STIR: Punkte = Prozentpunkte / Preis",
+    "others": "Prozent des Preises, ohne Vorzeichen (ungünstigste Richtung)",
+    "d1": "größte Eintagesbewegung",
+    "multi": "größte Bewegung über 2–5 Handelstage; längere Horizonte mit √(5/h) skaliert (Status BERECHNET_SKALIERT)",
+    "substitute": "fehlende Klassen: ERSATZWERT = P-RISK-STRESS-SUBST-SHARE × ungünstigste Tageslücke der Klasse (P-GAP-*), multi = d1·√P-RISK-STRESS-MULTI-DAYS",
+    "fx_chf": "FX_CHF gilt für CHF-Kontrakte (6S, MSF); FX für übrige Devisen"
+  },
+  "historical": [
+    {
+      "id": "SC-H-1987",
+      "event_id": "E1987_BLACK_MONDAY",
+      "name": "Aktiencrash 19.10.1987",
+      "sources": [
+        "SRC-STRESS-E1987-BLACK-MONDAY"
+      ],
+      "margin_increase": null,
+      "expiring_contract_only": false,
+      "margin_source": null,
+      "market_structure": "Rekord-Margin-Calls (etwa das Zehnfache), Handelsaussetzungen am 20.10.",
+      "moves": {
+        "STIR": {
+          "d1": 0.5,
+          "d1_status": "BELEGT_PRIMAER",
+          "multi": 1.06,
+          "multi_status": "BERECHNET_SKALIERT",
+          "basis": "Fed Funds −50 bp (1 T); T-Bills −150 bp über 10 T"
+        },
+        "ANLEIHE_KURZ": {
+          "d1": null,
+          "d1_status": "ERSATZWERT",
+          "multi": null,
+          "multi_status": "ERSATZWERT",
+          "basis": "keine belegte Bewegung – Ersatzwert der Engine (halbe Konstruktionslücke)"
+        },
+        "ANLEIHE_MITTEL": {
+          "d1": null,
+          "d1_status": "ERSATZWERT",
+          "multi": null,
+          "multi_status": "ERSATZWERT",
+          "basis": "keine belegte Bewegung – Ersatzwert der Engine (halbe Konstruktionslücke)"
+        },
+        "ANLEIHE_LANG": {
+          "d1": null,
+          "d1_status": "ERSATZWERT",
+          "multi": null,
+          "multi_status": "ERSATZWERT",
+          "basis": "Kurs +5,2 % über 2 T belegt (Preisangabe, siehe price_pct)"
+        },
+        "RENDITE": {
+          "d1": null,
+          "d1_status": "ERSATZWERT",
+          "multi": null,
+          "multi_status": "ERSATZWERT",
+          "basis": "keine belegte Bewegung – Ersatzwert der Engine (halbe Konstruktionslücke)"
+        },
+        "FX": {
+          "d1": null,
+          "d1_status": "ERSATZWERT",
+          "multi": 1.84,
+          "multi_status": "BERECHNET_SKALIERT",
+          "basis": "USD −4,5 % über die FOMC-Zwischenperiode"
+        },
+        "FX_CHF": {
+          "d1": null,
+          "d1_status": "ERSATZWERT",
+          "multi": null,
+          "multi_status": "ERSATZWERT",
+          "basis": "keine belegte Bewegung – Ersatzwert der Engine (halbe Konstruktionslücke)"
+        },
+        "ENERGIE": {
+          "d1": null,
+          "d1_status": "ERSATZWERT",
+          "multi": null,
+          "multi_status": "ERSATZWERT",
+          "basis": "keine belegte Bewegung – Ersatzwert der Engine (halbe Konstruktionslücke)"
+        },
+        "EDELMETALL": {
+          "d1": null,
+          "d1_status": "ERSATZWERT",
+          "multi": null,
+          "multi_status": "ERSATZWERT",
+          "basis": "keine belegte Bewegung – Ersatzwert der Engine (halbe Konstruktionslücke)"
+        },
+        "INDUSTRIEMETALL": {
+          "d1": null,
+          "d1_status": "ERSATZWERT",
+          "multi": null,
+          "multi_status": "ERSATZWERT",
+          "basis": "keine belegte Bewegung – Ersatzwert der Engine (halbe Konstruktionslücke)"
+        },
+        "AGRAR": {
+          "d1": null,
+          "d1_status": "ERSATZWERT",
+          "multi": null,
+          "multi_status": "ERSATZWERT",
+          "basis": "keine belegte Bewegung – Ersatzwert der Engine (halbe Konstruktionslücke)"
+        },
+        "VIEH": {
+          "d1": null,
+          "d1_status": "ERSATZWERT",
+          "multi": null,
+          "multi_status": "ERSATZWERT",
+          "basis": "keine belegte Bewegung – Ersatzwert der Engine (halbe Konstruktionslücke)"
+        },
+        "SOFTS": {
+          "d1": null,
+          "d1_status": "ERSATZWERT",
+          "multi": null,
+          "multi_status": "ERSATZWERT",
+          "basis": "keine belegte Bewegung – Ersatzwert der Engine (halbe Konstruktionslücke)"
+        },
+        "KRYPTO": {
+          "d1": null,
+          "d1_status": "ERSATZWERT",
+          "multi": null,
+          "multi_status": "ERSATZWERT",
+          "basis": "keine belegte Bewegung – Ersatzwert der Engine (halbe Konstruktionslücke)"
+        },
+        "AKTIENINDEX": {
+          "d1": 29.0,
+          "d1_status": "BELEGT_PRIMAER",
+          "multi": 29.0,
+          "multi_status": "BELEGT_PRIMAER",
+          "basis": "S&P-500-Futures −29 % (CME)"
+        }
+      },
+      "extra": {
+        "ANLEIHE_LANG_price_pct_multi": 5.2
+      }
+    },
+    {
+      "id": "SC-H-1994",
+      "event_id": "E1994_BOND_CRASH",
+      "name": "Anleihecrash 1994",
+      "sources": [
+        "SRC-STRESS-E1994-BOND-CRASH"
+      ],
+      "margin_increase": null,
+      "expiring_contract_only": false,
+      "margin_source": null,
+      "market_structure": "",
+      "moves": {
+        "STIR": {
+          "d1": 0.26,
+          "d1_status": "BERECHNET_PRIMAER",
+          "multi": 0.34,
+          "multi_status": "BERECHNET_PRIMAER",
+          "basis": "UST 3M +26 bp (1 T) / +34 bp (5 T)"
+        },
+        "ANLEIHE_KURZ": {
+          "d1": 0.36,
+          "d1_status": "BERECHNET_PRIMAER",
+          "multi": 0.47,
+          "multi_status": "BERECHNET_PRIMAER",
+          "basis": "UST 2J +36 / +47 bp"
+        },
+        "ANLEIHE_MITTEL": {
+          "d1": 0.39,
+          "d1_status": "BERECHNET_PRIMAER",
+          "multi": 0.55,
+          "multi_status": "BERECHNET_PRIMAER",
+          "basis": "UST 10J +39 / +55 bp"
+        },
+        "ANLEIHE_LANG": {
+          "d1": 0.32,
+          "d1_status": "BERECHNET_PRIMAER",
+          "multi": 0.45,
+          "multi_status": "BERECHNET_PRIMAER",
+          "basis": "UST 30J +32 / +45 bp"
+        },
+        "RENDITE": {
+          "d1": 0.36,
+          "d1_status": "BERECHNET_PRIMAER",
+          "multi": 0.47,
+          "multi_status": "BERECHNET_PRIMAER",
+          "basis": "wie UST 2J"
+        },
+        "FX": {
+          "d1": null,
+          "d1_status": "ERSATZWERT",
+          "multi": null,
+          "multi_status": "ERSATZWERT",
+          "basis": "keine belegte Bewegung – Ersatzwert der Engine (halbe Konstruktionslücke)"
+        },
+        "FX_CHF": {
+          "d1": null,
+          "d1_status": "ERSATZWERT",
+          "multi": null,
+          "multi_status": "ERSATZWERT",
+          "basis": "keine belegte Bewegung – Ersatzwert der Engine (halbe Konstruktionslücke)"
+        },
+        "ENERGIE": {
+          "d1": null,
+          "d1_status": "ERSATZWERT",
+          "multi": null,
+          "multi_status": "ERSATZWERT",
+          "basis": "keine belegte Bewegung – Ersatzwert der Engine (halbe Konstruktionslücke)"
+        },
+        "EDELMETALL": {
+          "d1": null,
+          "d1_status": "ERSATZWERT",
+          "multi": null,
+          "multi_status": "ERSATZWERT",
+          "basis": "keine belegte Bewegung – Ersatzwert der Engine (halbe Konstruktionslücke)"
+        },
+        "INDUSTRIEMETALL": {
+          "d1": null,
+          "d1_status": "ERSATZWERT",
+          "multi": null,
+          "multi_status": "ERSATZWERT",
+          "basis": "keine belegte Bewegung – Ersatzwert der Engine (halbe Konstruktionslücke)"
+        },
+        "AGRAR": {
+          "d1": null,
+          "d1_status": "ERSATZWERT",
+          "multi": null,
+          "multi_status": "ERSATZWERT",
+          "basis": "keine belegte Bewegung – Ersatzwert der Engine (halbe Konstruktionslücke)"
+        },
+        "VIEH": {
+          "d1": null,
+          "d1_status": "ERSATZWERT",
+          "multi": null,
+          "multi_status": "ERSATZWERT",
+          "basis": "keine belegte Bewegung – Ersatzwert der Engine (halbe Konstruktionslücke)"
+        },
+        "SOFTS": {
+          "d1": null,
+          "d1_status": "ERSATZWERT",
+          "multi": null,
+          "multi_status": "ERSATZWERT",
+          "basis": "keine belegte Bewegung – Ersatzwert der Engine (halbe Konstruktionslücke)"
+        },
+        "KRYPTO": {
+          "d1": null,
+          "d1_status": "ERSATZWERT",
+          "multi": null,
+          "multi_status": "ERSATZWERT",
+          "basis": "keine belegte Bewegung – Ersatzwert der Engine (halbe Konstruktionslücke)"
+        },
+        "AKTIENINDEX": {
+          "d1": null,
+          "d1_status": "ERSATZWERT",
+          "multi": null,
+          "multi_status": "ERSATZWERT",
+          "basis": "keine belegte Bewegung – Ersatzwert der Engine (halbe Konstruktionslücke)"
+        }
+      },
+      "extra": {}
+    },
+    {
+      "id": "SC-H-1998",
+      "event_id": "E1998_LTCM_RUSSIA",
+      "name": "LTCM/Russland 1998",
+      "sources": [
+        "SRC-STRESS-E1998-LTCM-RUSSIA"
+      ],
+      "margin_increase": null,
+      "expiring_contract_only": false,
+      "margin_source": null,
+      "market_structure": "",
+      "moves": {
+        "STIR": {
+          "d1": 0.5,
+          "d1_status": "BERECHNET_PRIMAER",
+          "multi": 0.5,
+          "multi_status": "BERECHNET_PRIMAER",
+          "basis": "UST 3M −50 bp (1 T)"
+        },
+        "ANLEIHE_KURZ": {
+          "d1": 0.27,
+          "d1_status": "BERECHNET_PRIMAER",
+          "multi": 0.43,
+          "multi_status": "BERECHNET_PRIMAER",
+          "basis": "UST 2J −27 / −43 bp"
+        },
+        "ANLEIHE_MITTEL": {
+          "d1": 0.22,
+          "d1_status": "BERECHNET_PRIMAER",
+          "multi": 0.61,
+          "multi_status": "BERECHNET_PRIMAER",
+          "basis": "UST 10J +22 bp (1 T), +61 bp (4 T)"
+        },
+        "ANLEIHE_LANG": {
+          "d1": 0.16,
+          "d1_status": "BERECHNET_PRIMAER",
+          "multi": 0.45,
+          "multi_status": "BERECHNET_PRIMAER",
+          "basis": "UST 30J +16 / −45 bp"
+        },
+        "RENDITE": {
+          "d1": 0.27,
+          "d1_status": "BERECHNET_PRIMAER",
+          "multi": 0.43,
+          "multi_status": "BERECHNET_PRIMAER",
+          "basis": "wie UST 2J"
+        },
+        "FX": {
+          "d1": 6.7,
+          "d1_status": "BELEGT_PRIMAER",
+          "multi": 15.0,
+          "multi_status": "BELEGT_PRIMAER",
+          "basis": "USD/JPY −6,7 % (1 T), −15 % (3 T)"
+        },
+        "FX_CHF": {
+          "d1": null,
+          "d1_status": "ERSATZWERT",
+          "multi": null,
+          "multi_status": "ERSATZWERT",
+          "basis": "keine belegte Bewegung – Ersatzwert der Engine (halbe Konstruktionslücke)"
+        },
+        "ENERGIE": {
+          "d1": null,
+          "d1_status": "ERSATZWERT",
+          "multi": null,
+          "multi_status": "ERSATZWERT",
+          "basis": "keine belegte Bewegung – Ersatzwert der Engine (halbe Konstruktionslücke)"
+        },
+        "EDELMETALL": {
+          "d1": null,
+          "d1_status": "ERSATZWERT",
+          "multi": null,
+          "multi_status": "ERSATZWERT",
+          "basis": "keine belegte Bewegung – Ersatzwert der Engine (halbe Konstruktionslücke)"
+        },
+        "INDUSTRIEMETALL": {
+          "d1": null,
+          "d1_status": "ERSATZWERT",
+          "multi": null,
+          "multi_status": "ERSATZWERT",
+          "basis": "keine belegte Bewegung – Ersatzwert der Engine (halbe Konstruktionslücke)"
+        },
+        "AGRAR": {
+          "d1": null,
+          "d1_status": "ERSATZWERT",
+          "multi": null,
+          "multi_status": "ERSATZWERT",
+          "basis": "keine belegte Bewegung – Ersatzwert der Engine (halbe Konstruktionslücke)"
+        },
+        "VIEH": {
+          "d1": null,
+          "d1_status": "ERSATZWERT",
+          "multi": null,
+          "multi_status": "ERSATZWERT",
+          "basis": "keine belegte Bewegung – Ersatzwert der Engine (halbe Konstruktionslücke)"
+        },
+        "SOFTS": {
+          "d1": null,
+          "d1_status": "ERSATZWERT",
+          "multi": null,
+          "multi_status": "ERSATZWERT",
+          "basis": "keine belegte Bewegung – Ersatzwert der Engine (halbe Konstruktionslücke)"
+        },
+        "KRYPTO": {
+          "d1": null,
+          "d1_status": "ERSATZWERT",
+          "multi": null,
+          "multi_status": "ERSATZWERT",
+          "basis": "keine belegte Bewegung – Ersatzwert der Engine (halbe Konstruktionslücke)"
+        },
+        "AKTIENINDEX": {
+          "d1": 6.8,
+          "d1_status": "BELEGT_SEKUNDAER",
+          "multi": 11.6,
+          "multi_status": "BELEGT_PRIMAER",
+          "basis": "S&P 500 −6,8 % (sekundär), Dow −11,6 % (4 T)"
+        }
+      },
+      "extra": {}
+    },
+    {
+      "id": "SC-H-2008",
+      "event_id": "E2008_GFC_AUTUMN",
+      "name": "Finanzkrise Herbst 2008",
+      "sources": [
+        "SRC-STRESS-E2008-GFC-AUTUMN"
+      ],
+      "margin_increase": null,
+      "expiring_contract_only": false,
+      "margin_source": null,
+      "market_structure": "Margin-Erhöhung CME im Mittel +18,9 % je Schritt (allgemein)",
+      "moves": {
+        "STIR": {
+          "d1": 0.81,
+          "d1_status": "BERECHNET_PRIMAER",
+          "multi": 1.62,
+          "multi_status": "BERECHNET_PRIMAER",
+          "basis": "UST 3M −81 bp (1 T), −162 bp (5 T)"
+        },
+        "ANLEIHE_KURZ": {
+          "d1": 0.45,
+          "d1_status": "BERECHNET_PRIMAER",
+          "multi": 0.59,
+          "multi_status": "BERECHNET_PRIMAER",
+          "basis": "UST 2J −45 / −59 bp"
+        },
+        "ANLEIHE_MITTEL": {
+          "d1": 0.27,
+          "d1_status": "BERECHNET_PRIMAER",
+          "multi": 0.6,
+          "multi_status": "BERECHNET_PRIMAER",
+          "basis": "UST 10J −27 bp (1 T), +60 bp (5 T)"
+        },
+        "ANLEIHE_LANG": {
+          "d1": 0.23,
+          "d1_status": "BERECHNET_PRIMAER",
+          "multi": 0.35,
+          "multi_status": "BERECHNET_PRIMAER",
+          "basis": "UST 30J −23 / +35 bp"
+        },
+        "RENDITE": {
+          "d1": 0.45,
+          "d1_status": "BERECHNET_PRIMAER",
+          "multi": 0.59,
+          "multi_status": "BERECHNET_PRIMAER",
+          "basis": "wie UST 2J"
+        },
+        "FX": {
+          "d1": null,
+          "d1_status": "ERSATZWERT",
+          "multi": 6.64,
+          "multi_status": "BERECHNET_SKALIERT",
+          "basis": "USD/JPY −12,6 % über 18 T"
+        },
+        "FX_CHF": {
+          "d1": null,
+          "d1_status": "ERSATZWERT",
+          "multi": null,
+          "multi_status": "ERSATZWERT",
+          "basis": "keine belegte Bewegung – Ersatzwert der Engine (halbe Konstruktionslücke)"
+        },
+        "ENERGIE": {
+          "d1": 15.7,
+          "d1_status": "BELEGT_SEKUNDAER",
+          "multi": 14.09,
+          "multi_status": "BERECHNET_SKALIERT",
+          "basis": "WTI-Frontmonat +16,37 USD/bbl am Verfallstag (≈ +15,7 %, sekundär); Rohöl −50 % über 63 T"
+        },
+        "EDELMETALL": {
+          "d1": 8.97,
+          "d1_status": "BELEGT_SEKUNDAER",
+          "multi": 8.97,
+          "multi_status": "BELEGT_SEKUNDAER",
+          "basis": "Gold +8,97 % (sekundär)"
+        },
+        "INDUSTRIEMETALL": {
+          "d1": null,
+          "d1_status": "ERSATZWERT",
+          "multi": 8.45,
+          "multi_status": "BERECHNET_SKALIERT",
+          "basis": "Rohstoffe −30 % über 63 T"
+        },
+        "AGRAR": {
+          "d1": null,
+          "d1_status": "ERSATZWERT",
+          "multi": null,
+          "multi_status": "ERSATZWERT",
+          "basis": "keine belegte Bewegung – Ersatzwert der Engine (halbe Konstruktionslücke)"
+        },
+        "VIEH": {
+          "d1": null,
+          "d1_status": "ERSATZWERT",
+          "multi": null,
+          "multi_status": "ERSATZWERT",
+          "basis": "keine belegte Bewegung – Ersatzwert der Engine (halbe Konstruktionslücke)"
+        },
+        "SOFTS": {
+          "d1": null,
+          "d1_status": "ERSATZWERT",
+          "multi": null,
+          "multi_status": "ERSATZWERT",
+          "basis": "keine belegte Bewegung – Ersatzwert der Engine (halbe Konstruktionslücke)"
+        },
+        "KRYPTO": {
+          "d1": null,
+          "d1_status": "ERSATZWERT",
+          "multi": null,
+          "multi_status": "ERSATZWERT",
+          "basis": "keine belegte Bewegung – Ersatzwert der Engine (halbe Konstruktionslücke)"
+        },
+        "AKTIENINDEX": {
+          "d1": 11.58,
+          "d1_status": "BELEGT_SEKUNDAER",
+          "multi": 25.0,
+          "multi_status": "BELEGT_PRIMAER",
+          "basis": "S&P 500 −8,8 % / +11,58 % (1 T), −25 % (14 T)"
+        }
+      },
+      "extra": {}
+    },
+    {
+      "id": "SC-H-2010",
+      "event_id": "E2010_FLASH_CRASH",
+      "name": "Flash Crash 06.05.2010",
+      "sources": [
+        "SRC-STRESS-E2010-FLASH-CRASH"
+      ],
+      "margin_increase": null,
+      "expiring_contract_only": false,
+      "margin_source": null,
+      "market_structure": "Stop-Orders wurden zu extremen Preisen ausgeführt",
+      "moves": {
+        "STIR": {
+          "d1": 0.04,
+          "d1_status": "BERECHNET_PRIMAER",
+          "multi": 0.06,
+          "multi_status": "BERECHNET_PRIMAER",
+          "basis": "UST 3M −4 / −6 bp"
+        },
+        "ANLEIHE_KURZ": {
+          "d1": 0.13,
+          "d1_status": "BERECHNET_PRIMAER",
+          "multi": 0.25,
+          "multi_status": "BERECHNET_PRIMAER",
+          "basis": "UST 2J −13 / −25 bp"
+        },
+        "ANLEIHE_MITTEL": {
+          "d1": 0.17,
+          "d1_status": "BERECHNET_PRIMAER",
+          "multi": 0.31,
+          "multi_status": "BERECHNET_PRIMAER",
+          "basis": "UST 10J −17 / −31 bp"
+        },
+        "ANLEIHE_LANG": {
+          "d1": 0.2,
+          "d1_status": "BERECHNET_PRIMAER",
+          "multi": 0.34,
+          "multi_status": "BERECHNET_PRIMAER",
+          "basis": "UST 30J −20 / −34 bp"
+        },
+        "RENDITE": {
+          "d1": 0.13,
+          "d1_status": "BERECHNET_PRIMAER",
+          "multi": 0.25,
+          "multi_status": "BERECHNET_PRIMAER",
+          "basis": "wie UST 2J"
+        },
+        "FX": {
+          "d1": null,
+          "d1_status": "ERSATZWERT",
+          "multi": null,
+          "multi_status": "ERSATZWERT",
+          "basis": "keine belegte Bewegung – Ersatzwert der Engine (halbe Konstruktionslücke)"
+        },
+        "FX_CHF": {
+          "d1": null,
+          "d1_status": "ERSATZWERT",
+          "multi": null,
+          "multi_status": "ERSATZWERT",
+          "basis": "keine belegte Bewegung – Ersatzwert der Engine (halbe Konstruktionslücke)"
+        },
+        "ENERGIE": {
+          "d1": null,
+          "d1_status": "ERSATZWERT",
+          "multi": null,
+          "multi_status": "ERSATZWERT",
+          "basis": "keine belegte Bewegung – Ersatzwert der Engine (halbe Konstruktionslücke)"
+        },
+        "EDELMETALL": {
+          "d1": 2.5,
+          "d1_status": "BELEGT_PRIMAER",
+          "multi": 2.5,
+          "multi_status": "BELEGT_PRIMAER",
+          "basis": "Gold-Futures +2,5 %"
+        },
+        "INDUSTRIEMETALL": {
+          "d1": null,
+          "d1_status": "ERSATZWERT",
+          "multi": null,
+          "multi_status": "ERSATZWERT",
+          "basis": "keine belegte Bewegung – Ersatzwert der Engine (halbe Konstruktionslücke)"
+        },
+        "AGRAR": {
+          "d1": null,
+          "d1_status": "ERSATZWERT",
+          "multi": null,
+          "multi_status": "ERSATZWERT",
+          "basis": "keine belegte Bewegung – Ersatzwert der Engine (halbe Konstruktionslücke)"
+        },
+        "VIEH": {
+          "d1": null,
+          "d1_status": "ERSATZWERT",
+          "multi": null,
+          "multi_status": "ERSATZWERT",
+          "basis": "keine belegte Bewegung – Ersatzwert der Engine (halbe Konstruktionslücke)"
+        },
+        "SOFTS": {
+          "d1": null,
+          "d1_status": "ERSATZWERT",
+          "multi": null,
+          "multi_status": "ERSATZWERT",
+          "basis": "keine belegte Bewegung – Ersatzwert der Engine (halbe Konstruktionslücke)"
+        },
+        "KRYPTO": {
+          "d1": null,
+          "d1_status": "ERSATZWERT",
+          "multi": null,
+          "multi_status": "ERSATZWERT",
+          "basis": "keine belegte Bewegung – Ersatzwert der Engine (halbe Konstruktionslücke)"
+        },
+        "AKTIENINDEX": {
+          "d1": 9.0,
+          "d1_status": "BELEGT_PRIMAER",
+          "multi": 9.0,
+          "multi_status": "BELEGT_PRIMAER",
+          "basis": "US-Indizes −9 % intraday"
+        }
+      },
+      "extra": {}
+    },
+    {
+      "id": "SC-H-2015",
+      "event_id": "E2015_SNB_FLOOR",
+      "name": "SNB-Mindestkursaufgabe 15.01.2015",
+      "sources": [
+        "SRC-STRESS-E2015-SNB-FLOOR"
+      ],
+      "margin_increase": null,
+      "expiring_contract_only": false,
+      "margin_source": null,
+      "market_structure": "Brokerausfälle durch negative Salden (FXCM)",
+      "moves": {
+        "STIR": {
+          "d1": null,
+          "d1_status": "ERSATZWERT",
+          "multi": null,
+          "multi_status": "ERSATZWERT",
+          "basis": "keine belegte Bewegung – Ersatzwert der Engine (halbe Konstruktionslücke)"
+        },
+        "ANLEIHE_KURZ": {
+          "d1": null,
+          "d1_status": "ERSATZWERT",
+          "multi": null,
+          "multi_status": "ERSATZWERT",
+          "basis": "keine belegte Bewegung – Ersatzwert der Engine (halbe Konstruktionslücke)"
+        },
+        "ANLEIHE_MITTEL": {
+          "d1": 0.09,
+          "d1_status": "BERECHNET_PRIMAER",
+          "multi": 0.26,
+          "multi_status": "BERECHNET_PRIMAER",
+          "basis": "UST 10J −9 / −26 bp"
+        },
+        "ANLEIHE_LANG": {
+          "d1": null,
+          "d1_status": "ERSATZWERT",
+          "multi": null,
+          "multi_status": "ERSATZWERT",
+          "basis": "keine belegte Bewegung – Ersatzwert der Engine (halbe Konstruktionslücke)"
+        },
+        "RENDITE": {
+          "d1": null,
+          "d1_status": "ERSATZWERT",
+          "multi": null,
+          "multi_status": "ERSATZWERT",
+          "basis": "keine belegte Bewegung – Ersatzwert der Engine (halbe Konstruktionslücke)"
+        },
+        "FX": {
+          "d1": null,
+          "d1_status": "ERSATZWERT",
+          "multi": null,
+          "multi_status": "ERSATZWERT",
+          "basis": "keine belegte Bewegung – Ersatzwert der Engine (halbe Konstruktionslücke)"
+        },
+        "FX_CHF": {
+          "d1": 41.0,
+          "d1_status": "BELEGT_PRIMAER",
+          "multi": 41.0,
+          "multi_status": "BELEGT_PRIMAER",
+          "basis": "EUR/CHF: CHF +41 % intraday (konservative Übertragung auf CHF-Futures); Tagesschluss +10 %"
+        },
+        "ENERGIE": {
+          "d1": null,
+          "d1_status": "ERSATZWERT",
+          "multi": 14.94,
+          "multi_status": "BERECHNET_SKALIERT",
+          "basis": "Brent −36,6 % über 30 T"
+        },
+        "EDELMETALL": {
+          "d1": null,
+          "d1_status": "ERSATZWERT",
+          "multi": null,
+          "multi_status": "ERSATZWERT",
+          "basis": "keine belegte Bewegung – Ersatzwert der Engine (halbe Konstruktionslücke)"
+        },
+        "INDUSTRIEMETALL": {
+          "d1": null,
+          "d1_status": "ERSATZWERT",
+          "multi": 3.02,
+          "multi_status": "BERECHNET_SKALIERT",
+          "basis": "Kupfer −10 % über 55 T"
+        },
+        "AGRAR": {
+          "d1": null,
+          "d1_status": "ERSATZWERT",
+          "multi": null,
+          "multi_status": "ERSATZWERT",
+          "basis": "keine belegte Bewegung – Ersatzwert der Engine (halbe Konstruktionslücke)"
+        },
+        "VIEH": {
+          "d1": null,
+          "d1_status": "ERSATZWERT",
+          "multi": null,
+          "multi_status": "ERSATZWERT",
+          "basis": "keine belegte Bewegung – Ersatzwert der Engine (halbe Konstruktionslücke)"
+        },
+        "SOFTS": {
+          "d1": null,
+          "d1_status": "ERSATZWERT",
+          "multi": null,
+          "multi_status": "ERSATZWERT",
+          "basis": "keine belegte Bewegung – Ersatzwert der Engine (halbe Konstruktionslücke)"
+        },
+        "KRYPTO": {
+          "d1": null,
+          "d1_status": "ERSATZWERT",
+          "multi": null,
+          "multi_status": "ERSATZWERT",
+          "basis": "keine belegte Bewegung – Ersatzwert der Engine (halbe Konstruktionslücke)"
+        },
+        "AKTIENINDEX": {
+          "d1": 9.0,
+          "d1_status": "BELEGT_PRIMAER",
+          "multi": 9.0,
+          "multi_status": "BELEGT_PRIMAER",
+          "basis": "SMI −9 %"
+        }
+      },
+      "extra": {}
+    },
+    {
+      "id": "SC-H-2018",
+      "event_id": "E2018_VOLMAGEDDON",
+      "name": "Volatilitätsschock Februar 2018",
+      "sources": [
+        "SRC-STRESS-E2018-VOLMAGEDDON"
+      ],
+      "margin_increase": null,
+      "expiring_contract_only": false,
+      "margin_source": null,
+      "market_structure": "VIX +20 Punkte; volatilitätsbasierte Produkte eingestellt",
+      "moves": {
+        "STIR": {
+          "d1": 0.07,
+          "d1_status": "BERECHNET_PRIMAER",
+          "multi": 0.11,
+          "multi_status": "BERECHNET_PRIMAER",
+          "basis": "UST 3M +7 / +11 bp"
+        },
+        "ANLEIHE_KURZ": {
+          "d1": 0.08,
+          "d1_status": "BERECHNET_PRIMAER",
+          "multi": 0.16,
+          "multi_status": "BERECHNET_PRIMAER",
+          "basis": "UST 2J −8 / +16 bp"
+        },
+        "ANLEIHE_MITTEL": {
+          "d1": 0.08,
+          "d1_status": "BERECHNET_PRIMAER",
+          "multi": 0.09,
+          "multi_status": "BERECHNET_PRIMAER",
+          "basis": "UST 10J +8 / +9 bp"
+        },
+        "ANLEIHE_LANG": {
+          "d1": 0.07,
+          "d1_status": "BERECHNET_PRIMAER",
+          "multi": 0.13,
+          "multi_status": "BERECHNET_PRIMAER",
+          "basis": "UST 30J +7 / +13 bp"
+        },
+        "RENDITE": {
+          "d1": 0.08,
+          "d1_status": "BERECHNET_PRIMAER",
+          "multi": 0.16,
+          "multi_status": "BERECHNET_PRIMAER",
+          "basis": "wie UST 2J"
+        },
+        "FX": {
+          "d1": null,
+          "d1_status": "ERSATZWERT",
+          "multi": null,
+          "multi_status": "ERSATZWERT",
+          "basis": "keine belegte Bewegung – Ersatzwert der Engine (halbe Konstruktionslücke)"
+        },
+        "FX_CHF": {
+          "d1": null,
+          "d1_status": "ERSATZWERT",
+          "multi": null,
+          "multi_status": "ERSATZWERT",
+          "basis": "keine belegte Bewegung – Ersatzwert der Engine (halbe Konstruktionslücke)"
+        },
+        "ENERGIE": {
+          "d1": null,
+          "d1_status": "ERSATZWERT",
+          "multi": null,
+          "multi_status": "ERSATZWERT",
+          "basis": "keine belegte Bewegung – Ersatzwert der Engine (halbe Konstruktionslücke)"
+        },
+        "EDELMETALL": {
+          "d1": null,
+          "d1_status": "ERSATZWERT",
+          "multi": null,
+          "multi_status": "ERSATZWERT",
+          "basis": "keine belegte Bewegung – Ersatzwert der Engine (halbe Konstruktionslücke)"
+        },
+        "INDUSTRIEMETALL": {
+          "d1": null,
+          "d1_status": "ERSATZWERT",
+          "multi": null,
+          "multi_status": "ERSATZWERT",
+          "basis": "keine belegte Bewegung – Ersatzwert der Engine (halbe Konstruktionslücke)"
+        },
+        "AGRAR": {
+          "d1": null,
+          "d1_status": "ERSATZWERT",
+          "multi": null,
+          "multi_status": "ERSATZWERT",
+          "basis": "keine belegte Bewegung – Ersatzwert der Engine (halbe Konstruktionslücke)"
+        },
+        "VIEH": {
+          "d1": null,
+          "d1_status": "ERSATZWERT",
+          "multi": null,
+          "multi_status": "ERSATZWERT",
+          "basis": "keine belegte Bewegung – Ersatzwert der Engine (halbe Konstruktionslücke)"
+        },
+        "SOFTS": {
+          "d1": null,
+          "d1_status": "ERSATZWERT",
+          "multi": null,
+          "multi_status": "ERSATZWERT",
+          "basis": "keine belegte Bewegung – Ersatzwert der Engine (halbe Konstruktionslücke)"
+        },
+        "KRYPTO": {
+          "d1": null,
+          "d1_status": "ERSATZWERT",
+          "multi": 27.95,
+          "multi_status": "BERECHNET_SKALIERT",
+          "basis": "Bitcoin −50 % über 16 T (sekundär)"
+        },
+        "AKTIENINDEX": {
+          "d1": 4.0,
+          "d1_status": "BELEGT_PRIMAER",
+          "multi": 10.0,
+          "multi_status": "BELEGT_PRIMAER",
+          "basis": "S&P 500 −4 % (1 T), −10 % (5 T)"
+        }
+      },
+      "extra": {}
+    },
+    {
+      "id": "SC-H-2020",
+      "event_id": "E2020_COVID_MARCH",
+      "name": "März 2020",
+      "sources": [
+        "SRC-STRESS-E2020-COVID-MARCH"
+      ],
+      "margin_increase": 0.62,
+      "expiring_contract_only": false,
+      "margin_source": "SRC-MARGIN-MH05",
+      "market_structure": "ETD-Initial-Margin +62 % (BCBS/CPMI/IOSCO); Circuit Breaker 9., 12., 16.03.",
+      "moves": {
+        "STIR": {
+          "d1": 0.23,
+          "d1_status": "BERECHNET_PRIMAER",
+          "multi": 0.8,
+          "multi_status": "BERECHNET_PRIMAER",
+          "basis": "UST 3M −23 / −80 bp; Fed −100 bp am 15.03."
+        },
+        "ANLEIHE_KURZ": {
+          "d1": 0.13,
+          "d1_status": "BERECHNET_PRIMAER",
+          "multi": 0.46,
+          "multi_status": "BERECHNET_PRIMAER",
+          "basis": "UST 2J −13 / −46 bp"
+        },
+        "ANLEIHE_MITTEL": {
+          "d1": 0.29,
+          "d1_status": "BERECHNET_PRIMAER",
+          "multi": 0.56,
+          "multi_status": "BERECHNET_PRIMAER",
+          "basis": "UST 10J +29 / −56 bp"
+        },
+        "ANLEIHE_LANG": {
+          "d1": 0.31,
+          "d1_status": "BERECHNET_PRIMAER",
+          "multi": 0.68,
+          "multi_status": "BERECHNET_PRIMAER",
+          "basis": "UST 30J −31 / −68 bp"
+        },
+        "RENDITE": {
+          "d1": 0.13,
+          "d1_status": "BERECHNET_PRIMAER",
+          "multi": 0.46,
+          "multi_status": "BERECHNET_PRIMAER",
+          "basis": "wie UST 2J"
+        },
+        "FX": {
+          "d1": null,
+          "d1_status": "ERSATZWERT",
+          "multi": 5.66,
+          "multi_status": "BERECHNET_SKALIERT",
+          "basis": "USD +8 % über 10 T"
+        },
+        "FX_CHF": {
+          "d1": null,
+          "d1_status": "ERSATZWERT",
+          "multi": null,
+          "multi_status": "ERSATZWERT",
+          "basis": "keine belegte Bewegung – Ersatzwert der Engine (halbe Konstruktionslücke)"
+        },
+        "ENERGIE": {
+          "d1": 24.6,
+          "d1_status": "BELEGT_SEKUNDAER",
+          "multi": 28.28,
+          "multi_status": "BERECHNET_SKALIERT",
+          "basis": "WTI/Brent −24,6 % (sekundär); Rohöl −40 % über 10 T"
+        },
+        "EDELMETALL": {
+          "d1": null,
+          "d1_status": "ERSATZWERT",
+          "multi": null,
+          "multi_status": "ERSATZWERT",
+          "basis": "keine belegte Bewegung – Ersatzwert der Engine (halbe Konstruktionslücke)"
+        },
+        "INDUSTRIEMETALL": {
+          "d1": null,
+          "d1_status": "ERSATZWERT",
+          "multi": null,
+          "multi_status": "ERSATZWERT",
+          "basis": "keine belegte Bewegung – Ersatzwert der Engine (halbe Konstruktionslücke)"
+        },
+        "AGRAR": {
+          "d1": null,
+          "d1_status": "ERSATZWERT",
+          "multi": null,
+          "multi_status": "ERSATZWERT",
+          "basis": "keine belegte Bewegung – Ersatzwert der Engine (halbe Konstruktionslücke)"
+        },
+        "VIEH": {
+          "d1": null,
+          "d1_status": "ERSATZWERT",
+          "multi": null,
+          "multi_status": "ERSATZWERT",
+          "basis": "keine belegte Bewegung – Ersatzwert der Engine (halbe Konstruktionslücke)"
+        },
+        "SOFTS": {
+          "d1": null,
+          "d1_status": "ERSATZWERT",
+          "multi": null,
+          "multi_status": "ERSATZWERT",
+          "basis": "keine belegte Bewegung – Ersatzwert der Engine (halbe Konstruktionslücke)"
+        },
+        "KRYPTO": {
+          "d1": 25.0,
+          "d1_status": "BELEGT_SEKUNDAER",
+          "multi": 25.0,
+          "multi_status": "BELEGT_SEKUNDAER",
+          "basis": "Bitcoin −25 % in 24 h (sekundär)"
+        },
+        "AKTIENINDEX": {
+          "d1": 12.0,
+          "d1_status": "BELEGT_PRIMAER",
+          "multi": 25.0,
+          "multi_status": "BELEGT_PRIMAER",
+          "basis": "S&P 500 −12 % / −25 % (10 T)"
+        }
+      },
+      "extra": {}
+    },
+    {
+      "id": "SC-H-2020WTI",
+      "event_id": "E2020_WTI_NEGATIVE",
+      "name": "Negativer WTI-Preis 20.04.2020",
+      "sources": [
+        "SRC-STRESS-E2020-WTI-NEGATIVE"
+      ],
+      "margin_increase": null,
+      "expiring_contract_only": true,
+      "margin_source": null,
+      "market_structure": "Untere Limits aufgehoben; über 30 Dynamic-Circuit-Breaker-Halts; Verfallsregel P-UNI-ENERGY-EXPIRY-DAYS schließt den Kontrakt aus",
+      "moves": {
+        "STIR": {
+          "d1": null,
+          "d1_status": "ERSATZWERT",
+          "multi": null,
+          "multi_status": "ERSATZWERT",
+          "basis": "keine belegte Bewegung – Ersatzwert der Engine (halbe Konstruktionslücke)"
+        },
+        "ANLEIHE_KURZ": {
+          "d1": null,
+          "d1_status": "ERSATZWERT",
+          "multi": null,
+          "multi_status": "ERSATZWERT",
+          "basis": "keine belegte Bewegung – Ersatzwert der Engine (halbe Konstruktionslücke)"
+        },
+        "ANLEIHE_MITTEL": {
+          "d1": null,
+          "d1_status": "ERSATZWERT",
+          "multi": null,
+          "multi_status": "ERSATZWERT",
+          "basis": "keine belegte Bewegung – Ersatzwert der Engine (halbe Konstruktionslücke)"
+        },
+        "ANLEIHE_LANG": {
+          "d1": null,
+          "d1_status": "ERSATZWERT",
+          "multi": null,
+          "multi_status": "ERSATZWERT",
+          "basis": "keine belegte Bewegung – Ersatzwert der Engine (halbe Konstruktionslücke)"
+        },
+        "RENDITE": {
+          "d1": null,
+          "d1_status": "ERSATZWERT",
+          "multi": null,
+          "multi_status": "ERSATZWERT",
+          "basis": "keine belegte Bewegung – Ersatzwert der Engine (halbe Konstruktionslücke)"
+        },
+        "FX": {
+          "d1": null,
+          "d1_status": "ERSATZWERT",
+          "multi": null,
+          "multi_status": "ERSATZWERT",
+          "basis": "keine belegte Bewegung – Ersatzwert der Engine (halbe Konstruktionslücke)"
+        },
+        "FX_CHF": {
+          "d1": null,
+          "d1_status": "ERSATZWERT",
+          "multi": null,
+          "multi_status": "ERSATZWERT",
+          "basis": "keine belegte Bewegung – Ersatzwert der Engine (halbe Konstruktionslücke)"
+        },
+        "ENERGIE": {
+          "d1": 306.0,
+          "d1_status": "BERECHNET_PRIMAER",
+          "multi": 306.0,
+          "multi_status": "BERECHNET_PRIMAER",
+          "basis": "WTI Mai-2020 −55,36 USD/bbl bei Eröffnung ≈ 18 USD (≈ −306 %); nur im auslaufenden Kontrakt"
+        },
+        "EDELMETALL": {
+          "d1": null,
+          "d1_status": "ERSATZWERT",
+          "multi": null,
+          "multi_status": "ERSATZWERT",
+          "basis": "keine belegte Bewegung – Ersatzwert der Engine (halbe Konstruktionslücke)"
+        },
+        "INDUSTRIEMETALL": {
+          "d1": null,
+          "d1_status": "ERSATZWERT",
+          "multi": null,
+          "multi_status": "ERSATZWERT",
+          "basis": "keine belegte Bewegung – Ersatzwert der Engine (halbe Konstruktionslücke)"
+        },
+        "AGRAR": {
+          "d1": null,
+          "d1_status": "ERSATZWERT",
+          "multi": null,
+          "multi_status": "ERSATZWERT",
+          "basis": "keine belegte Bewegung – Ersatzwert der Engine (halbe Konstruktionslücke)"
+        },
+        "VIEH": {
+          "d1": null,
+          "d1_status": "ERSATZWERT",
+          "multi": null,
+          "multi_status": "ERSATZWERT",
+          "basis": "keine belegte Bewegung – Ersatzwert der Engine (halbe Konstruktionslücke)"
+        },
+        "SOFTS": {
+          "d1": null,
+          "d1_status": "ERSATZWERT",
+          "multi": null,
+          "multi_status": "ERSATZWERT",
+          "basis": "keine belegte Bewegung – Ersatzwert der Engine (halbe Konstruktionslücke)"
+        },
+        "KRYPTO": {
+          "d1": null,
+          "d1_status": "ERSATZWERT",
+          "multi": null,
+          "multi_status": "ERSATZWERT",
+          "basis": "keine belegte Bewegung – Ersatzwert der Engine (halbe Konstruktionslücke)"
+        },
+        "AKTIENINDEX": {
+          "d1": null,
+          "d1_status": "ERSATZWERT",
+          "multi": null,
+          "multi_status": "ERSATZWERT",
+          "basis": "keine belegte Bewegung – Ersatzwert der Engine (halbe Konstruktionslücke)"
+        }
+      },
+      "extra": {}
+    },
+    {
+      "id": "SC-H-2022NI",
+      "event_id": "E2022_LME_NICKEL",
+      "name": "LME-Nickel März 2022",
+      "sources": [
+        "SRC-STRESS-E2022-LME-NICKEL"
+      ],
+      "margin_increase": null,
+      "expiring_contract_only": false,
+      "margin_source": null,
+      "market_structure": "Handel 8 Tage ausgesetzt; Trades ab 00:00 UK-Zeit am 08.03. storniert; danach 15-%-Tageslimit",
+      "moves": {
+        "STIR": {
+          "d1": null,
+          "d1_status": "ERSATZWERT",
+          "multi": null,
+          "multi_status": "ERSATZWERT",
+          "basis": "keine belegte Bewegung – Ersatzwert der Engine (halbe Konstruktionslücke)"
+        },
+        "ANLEIHE_KURZ": {
+          "d1": null,
+          "d1_status": "ERSATZWERT",
+          "multi": null,
+          "multi_status": "ERSATZWERT",
+          "basis": "keine belegte Bewegung – Ersatzwert der Engine (halbe Konstruktionslücke)"
+        },
+        "ANLEIHE_MITTEL": {
+          "d1": null,
+          "d1_status": "ERSATZWERT",
+          "multi": null,
+          "multi_status": "ERSATZWERT",
+          "basis": "keine belegte Bewegung – Ersatzwert der Engine (halbe Konstruktionslücke)"
+        },
+        "ANLEIHE_LANG": {
+          "d1": null,
+          "d1_status": "ERSATZWERT",
+          "multi": null,
+          "multi_status": "ERSATZWERT",
+          "basis": "keine belegte Bewegung – Ersatzwert der Engine (halbe Konstruktionslücke)"
+        },
+        "RENDITE": {
+          "d1": null,
+          "d1_status": "ERSATZWERT",
+          "multi": null,
+          "multi_status": "ERSATZWERT",
+          "basis": "keine belegte Bewegung – Ersatzwert der Engine (halbe Konstruktionslücke)"
+        },
+        "FX": {
+          "d1": null,
+          "d1_status": "ERSATZWERT",
+          "multi": null,
+          "multi_status": "ERSATZWERT",
+          "basis": "keine belegte Bewegung – Ersatzwert der Engine (halbe Konstruktionslücke)"
+        },
+        "FX_CHF": {
+          "d1": null,
+          "d1_status": "ERSATZWERT",
+          "multi": null,
+          "multi_status": "ERSATZWERT",
+          "basis": "keine belegte Bewegung – Ersatzwert der Engine (halbe Konstruktionslücke)"
+        },
+        "ENERGIE": {
+          "d1": null,
+          "d1_status": "ERSATZWERT",
+          "multi": null,
+          "multi_status": "ERSATZWERT",
+          "basis": "keine belegte Bewegung – Ersatzwert der Engine (halbe Konstruktionslücke)"
+        },
+        "EDELMETALL": {
+          "d1": null,
+          "d1_status": "ERSATZWERT",
+          "multi": null,
+          "multi_status": "ERSATZWERT",
+          "basis": "keine belegte Bewegung – Ersatzwert der Engine (halbe Konstruktionslücke)"
+        },
+        "INDUSTRIEMETALL": {
+          "d1": 101.5,
+          "d1_status": "BERECHNET_PRIMAER",
+          "multi": 238.0,
+          "multi_status": "BERECHNET_PRIMAER",
+          "basis": "Nickel +101,5 % (Schluss → Hoch), +238 % in 2 T; Übertragung auf Industriemetalle konservativ"
+        },
+        "AGRAR": {
+          "d1": null,
+          "d1_status": "ERSATZWERT",
+          "multi": null,
+          "multi_status": "ERSATZWERT",
+          "basis": "keine belegte Bewegung – Ersatzwert der Engine (halbe Konstruktionslücke)"
+        },
+        "VIEH": {
+          "d1": null,
+          "d1_status": "ERSATZWERT",
+          "multi": null,
+          "multi_status": "ERSATZWERT",
+          "basis": "keine belegte Bewegung – Ersatzwert der Engine (halbe Konstruktionslücke)"
+        },
+        "SOFTS": {
+          "d1": null,
+          "d1_status": "ERSATZWERT",
+          "multi": null,
+          "multi_status": "ERSATZWERT",
+          "basis": "keine belegte Bewegung – Ersatzwert der Engine (halbe Konstruktionslücke)"
+        },
+        "KRYPTO": {
+          "d1": null,
+          "d1_status": "ERSATZWERT",
+          "multi": null,
+          "multi_status": "ERSATZWERT",
+          "basis": "keine belegte Bewegung – Ersatzwert der Engine (halbe Konstruktionslücke)"
+        },
+        "AKTIENINDEX": {
+          "d1": null,
+          "d1_status": "ERSATZWERT",
+          "multi": null,
+          "multi_status": "ERSATZWERT",
+          "basis": "keine belegte Bewegung – Ersatzwert der Engine (halbe Konstruktionslücke)"
+        }
+      },
+      "extra": {},
+      "halt": {
+        "classes": [
+          "INDUSTRIEMETALL"
+        ],
+        "days": 8,
+        "basis": "LME-Nickel: Handel 8 Tage ausgesetzt und Trades storniert; wie die Bewegung konservativ auf Industriemetalle übertragen"
+      }
+    },
+    {
+      "id": "SC-H-2022GILT",
+      "event_id": "E2022_UK_GILTS_LDI",
+      "name": "UK-Gilts Herbst 2022",
+      "sources": [
+        "SRC-STRESS-E2022-UK-GILTS-LDI"
+      ],
+      "margin_increase": null,
+      "expiring_contract_only": false,
+      "margin_source": null,
+      "market_structure": "LDI-Collateral-Calls; Eingriff der Bank of England",
+      "moves": {
+        "STIR": {
+          "d1": null,
+          "d1_status": "ERSATZWERT",
+          "multi": null,
+          "multi_status": "ERSATZWERT",
+          "basis": "keine belegte Bewegung – Ersatzwert der Engine (halbe Konstruktionslücke)"
+        },
+        "ANLEIHE_KURZ": {
+          "d1": null,
+          "d1_status": "ERSATZWERT",
+          "multi": null,
+          "multi_status": "ERSATZWERT",
+          "basis": "keine belegte Bewegung – Ersatzwert der Engine (halbe Konstruktionslücke)"
+        },
+        "ANLEIHE_MITTEL": {
+          "d1": 0.58,
+          "d1_status": "BERECHNET_SKALIERT",
+          "multi": 1.0,
+          "multi_status": "BELEGT_PRIMAER",
+          "basis": "Gilts mehr als 100 bp in 3 T (Eintageswert aus 3-Tage-Wert skaliert)"
+        },
+        "ANLEIHE_LANG": {
+          "d1": 0.58,
+          "d1_status": "BERECHNET_SKALIERT",
+          "multi": 1.0,
+          "multi_status": "BELEGT_PRIMAER",
+          "basis": "wie mittlere Laufzeiten"
+        },
+        "RENDITE": {
+          "d1": null,
+          "d1_status": "ERSATZWERT",
+          "multi": null,
+          "multi_status": "ERSATZWERT",
+          "basis": "keine belegte Bewegung – Ersatzwert der Engine (halbe Konstruktionslücke)"
+        },
+        "FX": {
+          "d1": 3.0,
+          "d1_status": "BELEGT_SEKUNDAER",
+          "multi": 3.0,
+          "multi_status": "BELEGT_SEKUNDAER",
+          "basis": "GBP/USD −3 % (sekundär)"
+        },
+        "FX_CHF": {
+          "d1": null,
+          "d1_status": "ERSATZWERT",
+          "multi": null,
+          "multi_status": "ERSATZWERT",
+          "basis": "keine belegte Bewegung – Ersatzwert der Engine (halbe Konstruktionslücke)"
+        },
+        "ENERGIE": {
+          "d1": null,
+          "d1_status": "ERSATZWERT",
+          "multi": null,
+          "multi_status": "ERSATZWERT",
+          "basis": "keine belegte Bewegung – Ersatzwert der Engine (halbe Konstruktionslücke)"
+        },
+        "EDELMETALL": {
+          "d1": null,
+          "d1_status": "ERSATZWERT",
+          "multi": null,
+          "multi_status": "ERSATZWERT",
+          "basis": "keine belegte Bewegung – Ersatzwert der Engine (halbe Konstruktionslücke)"
+        },
+        "INDUSTRIEMETALL": {
+          "d1": null,
+          "d1_status": "ERSATZWERT",
+          "multi": null,
+          "multi_status": "ERSATZWERT",
+          "basis": "keine belegte Bewegung – Ersatzwert der Engine (halbe Konstruktionslücke)"
+        },
+        "AGRAR": {
+          "d1": null,
+          "d1_status": "ERSATZWERT",
+          "multi": null,
+          "multi_status": "ERSATZWERT",
+          "basis": "keine belegte Bewegung – Ersatzwert der Engine (halbe Konstruktionslücke)"
+        },
+        "VIEH": {
+          "d1": null,
+          "d1_status": "ERSATZWERT",
+          "multi": null,
+          "multi_status": "ERSATZWERT",
+          "basis": "keine belegte Bewegung – Ersatzwert der Engine (halbe Konstruktionslücke)"
+        },
+        "SOFTS": {
+          "d1": null,
+          "d1_status": "ERSATZWERT",
+          "multi": null,
+          "multi_status": "ERSATZWERT",
+          "basis": "keine belegte Bewegung – Ersatzwert der Engine (halbe Konstruktionslücke)"
+        },
+        "KRYPTO": {
+          "d1": null,
+          "d1_status": "ERSATZWERT",
+          "multi": null,
+          "multi_status": "ERSATZWERT",
+          "basis": "keine belegte Bewegung – Ersatzwert der Engine (halbe Konstruktionslücke)"
+        },
+        "AKTIENINDEX": {
+          "d1": null,
+          "d1_status": "ERSATZWERT",
+          "multi": null,
+          "multi_status": "ERSATZWERT",
+          "basis": "keine belegte Bewegung – Ersatzwert der Engine (halbe Konstruktionslücke)"
+        }
+      },
+      "extra": {}
+    },
+    {
+      "id": "SC-H-2023",
+      "event_id": "E2023_BANK_STRESS",
+      "name": "Bankenstress März 2023",
+      "sources": [
+        "SRC-STRESS-E2023-BANK-STRESS"
+      ],
+      "margin_increase": null,
+      "expiring_contract_only": false,
+      "margin_source": null,
+      "market_structure": "",
+      "moves": {
+        "STIR": {
+          "d1": 0.29,
+          "d1_status": "BERECHNET_PRIMAER",
+          "multi": 0.49,
+          "multi_status": "BERECHNET_PRIMAER",
+          "basis": "UST 3M +29 / −49 bp"
+        },
+        "ANLEIHE_KURZ": {
+          "d1": 0.6,
+          "d1_status": "BELEGT_PRIMAER",
+          "multi": 1.12,
+          "multi_status": "BERECHNET_PRIMAER",
+          "basis": "UST 2J −60 bp (1 T), −112 bp (5 T)"
+        },
+        "ANLEIHE_MITTEL": {
+          "d1": 0.23,
+          "d1_status": "BERECHNET_PRIMAER",
+          "multi": 0.47,
+          "multi_status": "BERECHNET_PRIMAER",
+          "basis": "UST 10J −23 / −47 bp"
+        },
+        "ANLEIHE_LANG": {
+          "d1": 0.18,
+          "d1_status": "BERECHNET_PRIMAER",
+          "multi": 0.22,
+          "multi_status": "BERECHNET_PRIMAER",
+          "basis": "UST 30J −18 / −22 bp"
+        },
+        "RENDITE": {
+          "d1": 0.6,
+          "d1_status": "BELEGT_PRIMAER",
+          "multi": 1.12,
+          "multi_status": "BERECHNET_PRIMAER",
+          "basis": "wie UST 2J"
+        },
+        "FX": {
+          "d1": null,
+          "d1_status": "ERSATZWERT",
+          "multi": null,
+          "multi_status": "ERSATZWERT",
+          "basis": "keine belegte Bewegung – Ersatzwert der Engine (halbe Konstruktionslücke)"
+        },
+        "FX_CHF": {
+          "d1": null,
+          "d1_status": "ERSATZWERT",
+          "multi": null,
+          "multi_status": "ERSATZWERT",
+          "basis": "keine belegte Bewegung – Ersatzwert der Engine (halbe Konstruktionslücke)"
+        },
+        "ENERGIE": {
+          "d1": null,
+          "d1_status": "ERSATZWERT",
+          "multi": null,
+          "multi_status": "ERSATZWERT",
+          "basis": "keine belegte Bewegung – Ersatzwert der Engine (halbe Konstruktionslücke)"
+        },
+        "EDELMETALL": {
+          "d1": null,
+          "d1_status": "ERSATZWERT",
+          "multi": null,
+          "multi_status": "ERSATZWERT",
+          "basis": "keine belegte Bewegung – Ersatzwert der Engine (halbe Konstruktionslücke)"
+        },
+        "INDUSTRIEMETALL": {
+          "d1": null,
+          "d1_status": "ERSATZWERT",
+          "multi": null,
+          "multi_status": "ERSATZWERT",
+          "basis": "keine belegte Bewegung – Ersatzwert der Engine (halbe Konstruktionslücke)"
+        },
+        "AGRAR": {
+          "d1": null,
+          "d1_status": "ERSATZWERT",
+          "multi": null,
+          "multi_status": "ERSATZWERT",
+          "basis": "keine belegte Bewegung – Ersatzwert der Engine (halbe Konstruktionslücke)"
+        },
+        "VIEH": {
+          "d1": null,
+          "d1_status": "ERSATZWERT",
+          "multi": null,
+          "multi_status": "ERSATZWERT",
+          "basis": "keine belegte Bewegung – Ersatzwert der Engine (halbe Konstruktionslücke)"
+        },
+        "SOFTS": {
+          "d1": null,
+          "d1_status": "ERSATZWERT",
+          "multi": null,
+          "multi_status": "ERSATZWERT",
+          "basis": "keine belegte Bewegung – Ersatzwert der Engine (halbe Konstruktionslücke)"
+        },
+        "KRYPTO": {
+          "d1": null,
+          "d1_status": "ERSATZWERT",
+          "multi": null,
+          "multi_status": "ERSATZWERT",
+          "basis": "keine belegte Bewegung – Ersatzwert der Engine (halbe Konstruktionslücke)"
+        },
+        "AKTIENINDEX": {
+          "d1": null,
+          "d1_status": "ERSATZWERT",
+          "multi": null,
+          "multi_status": "ERSATZWERT",
+          "basis": "keine belegte Bewegung – Ersatzwert der Engine (halbe Konstruktionslücke)"
+        }
+      },
+      "extra": {}
+    },
+    {
+      "id": "SC-H-2025",
+      "event_id": "E2025_TARIFF_SHOCK",
+      "name": "Zollschock April 2025",
+      "sources": [
+        "SRC-STRESS-E2025-TARIFF-SHOCK"
+      ],
+      "margin_increase": null,
+      "expiring_contract_only": false,
+      "margin_source": null,
+      "market_structure": "Aussetzung des Nikkei-Futures-Handels (sekundär)",
+      "moves": {
+        "STIR": {
+          "d1": 0.04,
+          "d1_status": "BERECHNET_PRIMAER",
+          "multi": 0.07,
+          "multi_status": "BERECHNET_PRIMAER",
+          "basis": "UST 3M +4 / +7 bp"
+        },
+        "ANLEIHE_KURZ": {
+          "d1": 0.2,
+          "d1_status": "BERECHNET_PRIMAER",
+          "multi": 0.28,
+          "multi_status": "BERECHNET_PRIMAER",
+          "basis": "UST 2J −20 / +28 bp"
+        },
+        "ANLEIHE_MITTEL": {
+          "d1": 0.14,
+          "d1_status": "BERECHNET_PRIMAER",
+          "multi": 0.47,
+          "multi_status": "BERECHNET_PRIMAER",
+          "basis": "UST 10J −14 / +47 bp"
+        },
+        "ANLEIHE_LANG": {
+          "d1": 0.17,
+          "d1_status": "BERECHNET_PRIMAER",
+          "multi": 0.54,
+          "multi_status": "BELEGT_SEKUNDAER",
+          "basis": "UST 30J +17 bp (1 T), +54 bp (3 T, sekundär)"
+        },
+        "RENDITE": {
+          "d1": 0.2,
+          "d1_status": "BERECHNET_PRIMAER",
+          "multi": 0.28,
+          "multi_status": "BERECHNET_PRIMAER",
+          "basis": "wie UST 2J"
+        },
+        "FX": {
+          "d1": null,
+          "d1_status": "ERSATZWERT",
+          "multi": 1.51,
+          "multi_status": "BERECHNET_SKALIERT",
+          "basis": "USD-Index −5 % über 55 T"
+        },
+        "FX_CHF": {
+          "d1": null,
+          "d1_status": "ERSATZWERT",
+          "multi": null,
+          "multi_status": "ERSATZWERT",
+          "basis": "keine belegte Bewegung – Ersatzwert der Engine (halbe Konstruktionslücke)"
+        },
+        "ENERGIE": {
+          "d1": 8.08,
+          "d1_status": "BERECHNET_SKALIERT",
+          "multi": 14.0,
+          "multi_status": "BELEGT_PRIMAER",
+          "basis": "Brent −14 % in 3 T"
+        },
+        "EDELMETALL": {
+          "d1": null,
+          "d1_status": "ERSATZWERT",
+          "multi": null,
+          "multi_status": "ERSATZWERT",
+          "basis": "keine belegte Bewegung – Ersatzwert der Engine (halbe Konstruktionslücke)"
+        },
+        "INDUSTRIEMETALL": {
+          "d1": null,
+          "d1_status": "ERSATZWERT",
+          "multi": null,
+          "multi_status": "ERSATZWERT",
+          "basis": "keine belegte Bewegung – Ersatzwert der Engine (halbe Konstruktionslücke)"
+        },
+        "AGRAR": {
+          "d1": null,
+          "d1_status": "ERSATZWERT",
+          "multi": null,
+          "multi_status": "ERSATZWERT",
+          "basis": "keine belegte Bewegung – Ersatzwert der Engine (halbe Konstruktionslücke)"
+        },
+        "VIEH": {
+          "d1": null,
+          "d1_status": "ERSATZWERT",
+          "multi": null,
+          "multi_status": "ERSATZWERT",
+          "basis": "keine belegte Bewegung – Ersatzwert der Engine (halbe Konstruktionslücke)"
+        },
+        "SOFTS": {
+          "d1": null,
+          "d1_status": "ERSATZWERT",
+          "multi": null,
+          "multi_status": "ERSATZWERT",
+          "basis": "keine belegte Bewegung – Ersatzwert der Engine (halbe Konstruktionslücke)"
+        },
+        "KRYPTO": {
+          "d1": null,
+          "d1_status": "ERSATZWERT",
+          "multi": null,
+          "multi_status": "ERSATZWERT",
+          "basis": "keine belegte Bewegung – Ersatzwert der Engine (halbe Konstruktionslücke)"
+        },
+        "AKTIENINDEX": {
+          "d1": 9.52,
+          "d1_status": "BELEGT_SEKUNDAER",
+          "multi": 12.0,
+          "multi_status": "BELEGT_PRIMAER",
+          "basis": "S&P 500 −5,97 % / +9,52 % (sekundär), −12 % (4 T)"
+        }
+      },
+      "extra": {}
+    }
+  ],
+  "hypothetical": [
+    {
+      "id": "SC-X-CORR1",
+      "name": "Korrelationen → 1",
+      "rule": "alle Positionen gleichzeitig ungünstig um 3 σ_Tag",
+      "k_sigma": 3.0
+    },
+    {
+      "id": "SC-X-LIQ",
+      "name": "Liquiditätsausfall",
+      "rule": "ein Tag ohne Ausstieg, danach Ausstieg mit zehnfachem Spread; Bewegung 2 σ_Tag",
+      "k_sigma": 2.0,
+      "spread_multiple": 10
+    },
+    {
+      "id": "SC-X-BROKER",
+      "name": "Ausfall von Broker oder FCM",
+      "rule": "fünf Tage kein Zugang, Bewegung 2 σ_Tag·√5; zusätzlich ist das Guthaben beim Broker (P-ECO-CASH-AT-BROKER) bis zur Klärung nicht verfügbar und im ungünstigsten Fall verloren",
+      "k_sigma": 2.0,
+      "days": 5
+    },
+    {
+      "id": "SC-X-EXCH",
+      "name": "Ausfall einer Börse",
+      "rule": "Positionen der größten Börse einen Tag eingefroren, Wiedereröffnung mit 5 σ_Tag",
+      "k_sigma": 5.0
+    },
+    {
+      "id": "SC-X-DATA",
+      "name": "Datenausfall",
+      "rule": "keine neuen Orders; Schutzstopps beim Broker aktiv; Bewegung 1 σ_Tag bis zum Abbau",
+      "k_sigma": 1.0
+    },
+    {
+      "id": "SC-X-GAP5",
+      "name": "Kurslücke 5 σ",
+      "rule": "alle Positionen ungünstig um 5 σ_Tag",
+      "k_sigma": 5.0
+    },
+    {
+      "id": "SC-X-GAP10",
+      "name": "Kurslücke 10 σ",
+      "rule": "alle Positionen ungünstig um 10 σ_Tag",
+      "k_sigma": 10.0
+    },
+    {
+      "id": "SC-X-RATESHOCK",
+      "name": "Zinsschock (Zinswende) auf die Zinsfutures-Allokation",
+      "rule": "Zinsen +50 bp am ersten Tag, +100 bp über 5 Tage, nur Zinsklassen",
+      "d1_pp": 0.5,
+      "multi_pp": 1.0
+    }
+  ]
+}

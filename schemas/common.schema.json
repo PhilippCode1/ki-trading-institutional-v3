@@ -1,0 +1,155 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:ki-trading-v3:common",
+  "title": "Gemeinsame Definitionen der Datenverträge",
+  "x-version": "3.0.0",
+  "description": "Geldbeträge und Preise sind Dezimaltexte, Mengen ganze Kontrakte, Zeiten UTC mit Suffix Z; Brokerzeit getrennt als Text (KT-03).",
+  "$defs": {
+    "schema_version": {
+      "const": "3.0"
+    },
+    "utc": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d{1,6})?Z$"
+    },
+    "date": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+    },
+    "decimal": {
+      "type": "string",
+      "pattern": "^-?(0|[1-9]\\d*)(\\.\\d+)?$"
+    },
+    "nonneg_decimal": {
+      "type": "string",
+      "pattern": "^(0|[1-9]\\d*)(\\.\\d+)?$"
+    },
+    "currency": {
+      "enum": [
+        "EUR",
+        "USD",
+        "GBP"
+      ]
+    },
+    "money": {
+      "type": "object",
+      "properties": {
+        "amount": {
+          "$ref": "#/$defs/decimal"
+        },
+        "currency": {
+          "$ref": "#/$defs/currency"
+        }
+      },
+      "required": [
+        "amount",
+        "currency"
+      ],
+      "additionalProperties": false
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "uuid": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+    },
+    "command_id": {
+      "type": "string",
+      "pattern": "^CMD-[0-9A-F]{12}$"
+    },
+    "instrument_id": {
+      "type": "string",
+      "pattern": "^INS-[A-Z]+-[A-Z0-9]+$"
+    },
+    "account_ref": {
+      "type": "string",
+      "pattern": "^ACC-[A-Z0-9]{4,16}$",
+      "description": "Referenz, nie die echte Kontonummer"
+    },
+    "ticket": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "strategy_id": {
+      "type": "string",
+      "pattern": "^S-[A-Z0-9-]+$"
+    },
+    "key_fingerprint": {
+      "type": "string",
+      "pattern": "^FP-[0-9A-F]{16}$"
+    },
+    "signature": {
+      "type": "string",
+      "pattern": "^SIG-[0-9a-f]{64}$"
+    },
+    "mode": {
+      "enum": [
+        "RESEARCH",
+        "PAPER",
+        "PILOT",
+        "STANDARD",
+        "WIND_DOWN",
+        "STOPPED"
+      ]
+    },
+    "trading_mode": {
+      "enum": [
+        "PAPER",
+        "PILOT",
+        "STANDARD"
+      ]
+    },
+    "account_type": {
+      "enum": [
+        "DEMO",
+        "REAL"
+      ]
+    },
+    "profile": {
+      "enum": [
+        "H5",
+        "H10",
+        "H15",
+        "H20"
+      ]
+    },
+    "side": {
+      "enum": [
+        "BUY",
+        "SELL"
+      ]
+    },
+    "gate_id": {
+      "type": "string",
+      "pattern": "^(GATE-G([0-9]|10)|MON-[A-Z]+)$"
+    },
+    "producer": {
+      "enum": [
+        "TRADE_CORE",
+        "RISK_ENGINE",
+        "ADAPTER",
+        "RECONCILER",
+        "GUARDIAN",
+        "DATA_SERVICE",
+        "EVALUATOR",
+        "RELEASE_CONTROLLER",
+        "GRANT_REGISTRY",
+        "PROJECT_OPS",
+        "HERMES",
+        "OPERATOR",
+        "MONITOR",
+        "CI"
+      ]
+    },
+    "safety_reason": {
+      "type": "string",
+      "pattern": "^[A-Z][A-Z_]+$"
+    },
+    "ref_id": {
+      "type": "string",
+      "pattern": "^[A-Z][A-Z0-9]*(-[A-Za-z0-9_]+)+$"
+    }
+  }
+}

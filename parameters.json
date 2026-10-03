@@ -1,0 +1,5488 @@
+{
+  "schema_version": "3.0",
+  "document": "Parameterregister",
+  "as_of": "2026-09-24",
+  "status_values": {
+    "BETREIBER": "ausdrückliche Betreiberentscheidung (Rang 2)",
+    "BELEGT": "Wert aus Quelle im Quellenregister",
+    "ENTWURF": "eigene, begründete Festlegung (Entscheidungsregister)",
+    "ANNAHME": "unbelegter Planungswert; ersetzt durch Messung oder externe Eingabe",
+    "ABGELEITET": "aus anderen Parametern berechnet"
+  },
+  "parameters": [
+    {
+      "id": "P-OP-DAILY-LOSS-CAP",
+      "group": "BETREIBER",
+      "name": "Höchster Tagesverlust in Anteilen des Kapitals zu Tagesbeginn",
+      "value": 0.09,
+      "unit": "Anteil NAV",
+      "status": "BETREIBER",
+      "basis": "BQ-04: „Verlust pro Tag darf niemals mehr als 9 % des Gesamtkapitals sein“.",
+      "refs": [
+        "DEC-OP-04"
+      ],
+      "used_in": [
+        "KURZFASSUNG_BETREIBER.md",
+        "Masterkonzept_v3.0.md",
+        "architecture/state_machines.json",
+        "governance/policies/risk_policy.md",
+        "implementation/test_catalog.json",
+        "lib/calc.py",
+        "operations/runbook_register.json",
+        "operations/runbooks.md",
+        "registers/decision_register.json",
+        "registers/limits.json",
+        "registers/operator_seal.json",
+        "requirements.json",
+        "risk/kelly_ruin_simulator.py",
+        "risk/leverage_calculator.py",
+        "risk/leverage_results.json",
+        "risk/leverage_risk_model.md",
+        "risk/limits.md",
+        "risk/stress_test_engine.py",
+        "validation/mutation_catalog.json",
+        "validation/render_blocks.py",
+        "validation/semantic_checks.py",
+        "validation/test_reference_models.py"
+      ]
+    },
+    {
+      "id": "P-OP-HOLD-MAX-H",
+      "group": "BETREIBER",
+      "name": "Höchste Haltedauer einer Position",
+      "value": 168,
+      "unit": "Stunden",
+      "status": "BETREIBER",
+      "basis": "BQ-04: maximale Haltedauer 7 Tage (Kalendertage).",
+      "refs": [
+        "DEC-OP-04"
+      ],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "architecture/scenario_catalog.json",
+        "architecture/state_machines.json",
+        "execution/pretrade_controls.md",
+        "implementation/test_catalog.json",
+        "registers/decision_register.json",
+        "registers/limits.json",
+        "registers/operator_seal.json",
+        "requirements.json",
+        "research/evidence_gates.json",
+        "research/reference_strategies/s_base.py",
+        "research/reference_strategies/s_im.py",
+        "research/reference_strategies/s_rev.py",
+        "research/reference_strategies/s_tf.py",
+        "research/reference_strategies/turnover_simulation.py",
+        "research/strategy_family.md",
+        "risk/limits.md",
+        "validation/render_blocks.py",
+        "validation/test_reference_models.py"
+      ]
+    },
+    {
+      "id": "P-OP-HOLD-STD-MIN-H",
+      "group": "BETREIBER",
+      "name": "Untere Grenze der Standard-Haltedauer",
+      "value": 4,
+      "unit": "Stunden",
+      "status": "BETREIBER",
+      "basis": "BQ-04: in der Regel 4 h bis 4 Tage.",
+      "refs": [
+        "DEC-OP-04"
+      ],
+      "used_in": [
+        "KURZFASSUNG_BETREIBER.md",
+        "Masterkonzept_v3.0.md",
+        "legal/handover_external.md",
+        "registers/operator_seal.json",
+        "research/strategy_family.md",
+        "risk/margin_liquidity.md"
+      ]
+    },
+    {
+      "id": "P-OP-HOLD-STD-MAX-H",
+      "group": "BETREIBER",
+      "name": "Obere Grenze der Standard-Haltedauer",
+      "value": 96,
+      "unit": "Stunden",
+      "status": "BETREIBER",
+      "basis": "BQ-04: in der Regel 4 h bis 4 Tage.",
+      "refs": [
+        "DEC-OP-04"
+      ],
+      "used_in": [
+        "registers/operator_seal.json",
+        "validation/render_blocks.py"
+      ]
+    },
+    {
+      "id": "P-OP-LEV-MAX",
+      "group": "BETREIBER",
+      "name": "Höchster Konto-Brutto-Hebel L_g",
+      "value": 20,
+      "unit": "x",
+      "status": "BETREIBER",
+      "basis": "BQ-05: adaptiv bis 20×; Auslegung Konto-Brutto-Hebel (§7.1).",
+      "refs": [
+        "DEC-OP-05"
+      ],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "registers/decision_register.json",
+        "registers/operator_seal.json",
+        "validation/semantic_checks.py"
+      ]
+    },
+    {
+      "id": "P-OP-LEV-MIN",
+      "group": "BETREIBER",
+      "name": "Erzwungener Mindesthebel",
+      "value": 0,
+      "unit": "x",
+      "status": "BETREIBER",
+      "basis": "BQ-05: kein Zwangshebel; ohne Signale darf L_g auf 0 fallen (§7.3).",
+      "refs": [
+        "DEC-OP-05"
+      ],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "governance/policies/risk_policy.md",
+        "registers/decision_register.json",
+        "registers/operator_seal.json"
+      ]
+    },
+    {
+      "id": "P-OP-CAPITAL",
+      "group": "BETREIBER",
+      "name": "Handelskapital",
+      "value": "ADAPTIV",
+      "unit": "Text",
+      "status": "BETREIBER",
+      "basis": "BQ-01: das System nutzt das vorhandene Budget (Demo oder Echtgeld) und passt Universum und Größen an; Kapitalstufen werden als Szenarien gerechnet.",
+      "refs": [
+        "DEC-OP-01"
+      ],
+      "used_in": [
+        "registers/decision_register.json",
+        "registers/operator_seal.json"
+      ]
+    },
+    {
+      "id": "P-OP-PLATFORM",
+      "group": "BETREIBER",
+      "name": "Handelsplattform",
+      "value": "MT5",
+      "unit": "Text",
+      "status": "BETREIBER",
+      "basis": "BQ-08/BQ-08a: ausschließlich MetaTrader 5.",
+      "refs": [
+        "DEC-OP-08",
+        "DEC-OP-08A"
+      ],
+      "used_in": [
+        "registers/decision_register.json",
+        "registers/operator_seal.json"
+      ]
+    },
+    {
+      "id": "P-OP-INSTRUMENT-PREF",
+      "group": "BETREIBER",
+      "name": "Instrumentart",
+      "value": "FUTURES_BEVORZUGT_CFD_OPTION",
+      "unit": "Text",
+      "status": "BETREIBER",
+      "basis": "BQ-08a: Futures bevorzugt, andere Instrumente (CFD) als Option.",
+      "refs": [
+        "DEC-OP-08A"
+      ],
+      "used_in": [
+        "registers/decision_register.json",
+        "registers/operator_seal.json"
+      ]
+    },
+    {
+      "id": "P-OP-UNIVERSE",
+      "group": "BETREIBER",
+      "name": "Anlageklassen",
+      "value": "ALLE_KLASSEN_INDEX_NUR_RUESTUNGSFREI",
+      "unit": "Text",
+      "status": "BETREIBER",
+      "basis": "BQ-06/BQ-06a: gesamtes Anlageklassen-Universum; Aktienindizes nur ohne Rüstungsunternehmen.",
+      "refs": [
+        "DEC-OP-06",
+        "DEC-OP-06A"
+      ],
+      "used_in": [
+        "registers/decision_register.json",
+        "registers/operator_seal.json"
+      ]
+    },
+    {
+      "id": "P-OP-MODE-AUTHORITY",
+      "group": "BETREIBER",
+      "name": "Befugnis zum Wechsel Demo ↔ Echtgeld",
+      "value": "NUR_BETREIBER",
+      "unit": "Text",
+      "status": "BETREIBER",
+      "basis": "BQ-09: nur der Betreiber darf zwischen Demo und Echtgeld schalten.",
+      "refs": [
+        "DEC-OP-09"
+      ],
+      "used_in": [
+        "architecture/state_machines.json",
+        "execution/pretrade_controls.md",
+        "registers/decision_register.json",
+        "registers/operator_seal.json"
+      ]
+    },
+    {
+      "id": "P-OP-AI-ROLE",
+      "group": "BETREIBER",
+      "name": "Rolle der KI",
+      "value": "HERMES_PLUS_GEPRUEFTE_ML",
+      "unit": "Text",
+      "status": "BETREIBER",
+      "basis": "BQ-10: Hermes plus geprüfte ML-Modelle.",
+      "refs": [
+        "DEC-OP-10"
+      ],
+      "used_in": [
+        "registers/decision_register.json",
+        "registers/operator_seal.json"
+      ]
+    },
+    {
+      "id": "P-OP-LLM-BILLING",
+      "group": "BETREIBER",
+      "name": "Abrechnung der Sprachmodelle",
+      "value": "ABO",
+      "unit": "Text",
+      "status": "BETREIBER",
+      "basis": "BQ-07: Abo-Modelle statt nutzungsabhängiger API-Kosten.",
+      "refs": [
+        "DEC-OP-07"
+      ],
+      "used_in": [
+        "registers/decision_register.json",
+        "registers/operator_seal.json"
+      ]
+    },
+    {
+      "id": "P-OP-HOSTING",
+      "group": "BETREIBER",
+      "name": "Betriebsort",
+      "value": "EIGENER_WINDOWS_VPS",
+      "unit": "Text",
+      "status": "BETREIBER",
+      "basis": "BQ-07: läuft auf einem eigenen Windows-VPS.",
+      "refs": [
+        "DEC-OP-07"
+      ],
+      "used_in": [
+        "registers/decision_register.json",
+        "registers/operator_seal.json"
+      ]
+    },
+    {
+      "id": "P-OP-SCOPE-LEGAL-TAX",
+      "group": "BETREIBER",
+      "name": "Recht und Steuern",
+      "value": "EXTERN",
+      "unit": "Text",
+      "status": "BETREIBER",
+      "basis": "BQ-03: Recht und Steuern regelt eine externe Person; das System handelt nur.",
+      "refs": [
+        "DEC-OP-03"
+      ],
+      "used_in": [
+        "registers/decision_register.json",
+        "registers/operator_seal.json"
+      ]
+    },
+    {
+      "id": "P-OP-SCOPE-OPMODEL",
+      "group": "BETREIBER",
+      "name": "Betriebsmodelle B1–B4",
+      "value": "NICHT_SYSTEMAUFGABE",
+      "unit": "Text",
+      "status": "BETREIBER",
+      "basis": "BQ-02: nicht Aufgabe des Systems.",
+      "refs": [
+        "DEC-OP-02"
+      ],
+      "used_in": [
+        "registers/decision_register.json",
+        "registers/operator_seal.json"
+      ]
+    },
+    {
+      "id": "P-RISK-DL-L1",
+      "group": "RISIKO",
+      "name": "Tagesverluststufe 1: Risikoziel halbieren",
+      "value": 0.03,
+      "unit": "Anteil NAV",
+      "status": "ENTWURF",
+      "basis": "Ein Drittel der Betreiber-Grenze; lässt nach Stufe 3 noch Raum für Kurslücken (Rechnung risk/leverage_calculator.py).",
+      "refs": [
+        "DEC-DS-01"
+      ],
+      "recalibration": "nach Paper-Forward (G7) mit gemessener Intraday-Verteilung",
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "architecture/state_machines.json",
+        "governance/policies/risk_policy.md",
+        "implementation/test_catalog.json",
+        "lib/calc.py",
+        "operations/runbook_register.json",
+        "operations/runbooks.md",
+        "registers/limits.json",
+        "risk/limits.md",
+        "risk/margin_liquidity.md",
+        "validation/mutation_catalog.json",
+        "validation/semantic_checks.py",
+        "validation/test_reference_models.py"
+      ]
+    },
+    {
+      "id": "P-RISK-DL-L2",
+      "group": "RISIKO",
+      "name": "Tagesverluststufe 2: Einstiegssperre",
+      "value": 0.05,
+      "unit": "Anteil NAV",
+      "status": "ENTWURF",
+      "basis": "Nach Stufe 1 keine neuen risikoerhöhenden Orders.",
+      "refs": [
+        "DEC-DS-01"
+      ],
+      "recalibration": "nach G7",
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "architecture/scenario_catalog.json",
+        "architecture/state_machines.json",
+        "governance/policies/risk_policy.md",
+        "implementation/test_catalog.json",
+        "lib/calc.py",
+        "operations/runbook_register.json",
+        "operations/runbooks.md",
+        "registers/limits.json",
+        "risk/limits.md",
+        "risk/margin_liquidity.md",
+        "validation/mutation_catalog.json",
+        "validation/semantic_checks.py"
+      ]
+    },
+    {
+      "id": "P-RISK-DL-L3",
+      "group": "RISIKO",
+      "name": "Tagesverluststufe 3: geordneter Abbau aller Positionen",
+      "value": 0.065,
+      "unit": "Anteil NAV",
+      "status": "ENTWURF",
+      "basis": "Abbau beginnt mit 2,5 Prozentpunkten Abstand zur Betreiber-Grenze.",
+      "refs": [
+        "DEC-DS-01"
+      ],
+      "recalibration": "nach G7",
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "architecture/scenario_catalog.json",
+        "architecture/state_machines.json",
+        "governance/policies/risk_policy.md",
+        "implementation/test_catalog.json",
+        "operations/runbook_register.json",
+        "operations/runbooks.md",
+        "registers/limits.json",
+        "risk/kelly_ruin_simulator.py",
+        "risk/limits.md",
+        "risk/margin_liquidity.md",
+        "risk/stress_test_engine.py",
+        "validation/render_blocks.py",
+        "validation/semantic_checks.py",
+        "validation/test_reference_models.py"
+      ]
+    },
+    {
+      "id": "P-RISK-GAP-RESERVE",
+      "group": "RISIKO",
+      "name": "Sicherheitsabstand zwischen Lückenstress plus Tagesverlust und Betreiber-Grenze",
+      "value": 0.01,
+      "unit": "Anteil NAV",
+      "status": "ENTWURF",
+      "basis": "Vorhandelsregel: Lückenstress(t) + Tagesverlust(t) ≤ P-OP-DAILY-LOSS-CAP − Reserve; deckt Modell- und Ausführungsfehler.",
+      "refs": [
+        "DEC-DS-10"
+      ],
+      "used_in": [
+        "implementation/test_catalog.json",
+        "lib/calc.py",
+        "registers/limits.json",
+        "requirements.json",
+        "risk/leverage_calculator.py",
+        "risk/leverage_results.json",
+        "risk/leverage_risk_model.md",
+        "risk/limits.md",
+        "validation/render_blocks.py",
+        "validation/semantic_checks.py",
+        "validation/test_reference_models.py"
+      ]
+    },
+    {
+      "id": "P-RISK-DAY-START",
+      "group": "RISIKO",
+      "name": "Beginn des Handelstags für die Tagesverlustmessung",
+      "value": "00:00 Europe/Berlin",
+      "unit": "Uhrzeit",
+      "status": "ENTWURF",
+      "basis": "Ein fester Kalendertag ist für den Betreiber eindeutig; Sitzungsgrenzen der Börsen liegen 22:00–00:00.",
+      "refs": [
+        "DEC-DS-01"
+      ],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "risk/limits.md"
+      ]
+    },
+    {
+      "id": "P-RISK-WEEK-LOSS",
+      "group": "RISIKO",
+      "name": "Wochenverlust mit Einstiegssperre bis Wochenende",
+      "value": 0.15,
+      "unit": "Anteil NAV",
+      "status": "ENTWURF",
+      "basis": "Begrenzt Verlustserien knapp unter der Tagesgrenze.",
+      "refs": [
+        "DEC-DS-01"
+      ],
+      "used_in": [
+        "architecture/scenario_catalog.json",
+        "architecture/state_machines.json",
+        "implementation/test_catalog.json",
+        "registers/limits.json",
+        "requirements.json",
+        "risk/limits.md",
+        "validation/semantic_checks.py"
+      ]
+    },
+    {
+      "id": "P-RISK-DD-L1",
+      "group": "RISIKO",
+      "name": "Drawdown-Stufe 1 (vom Höchststand): Risikoziel × 0,75",
+      "value": 0.1,
+      "unit": "Anteil NAV",
+      "status": "ENTWURF",
+      "basis": "Drawdown-Leiter §7.5.",
+      "refs": [
+        "DEC-DS-01"
+      ],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "architecture/state_machines.json",
+        "implementation/test_catalog.json",
+        "lib/calc.py",
+        "operations/runbook_register.json",
+        "operations/runbooks.md",
+        "registers/limits.json",
+        "risk/limits.md",
+        "validation/semantic_checks.py"
+      ]
+    },
+    {
+      "id": "P-RISK-DD-L2",
+      "group": "RISIKO",
+      "name": "Drawdown-Stufe 2: Risikoziel × 0,5 und Profilabstieg",
+      "value": 0.15,
+      "unit": "Anteil NAV",
+      "status": "ENTWURF",
+      "basis": "Drawdown-Leiter §7.5; Abstieg nach §7.8.",
+      "refs": [
+        "DEC-DS-01"
+      ],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "architecture/state_machines.json",
+        "implementation/test_catalog.json",
+        "lib/calc.py",
+        "registers/limits.json",
+        "risk/limits.md",
+        "validation/semantic_checks.py"
+      ]
+    },
+    {
+      "id": "P-RISK-DD-L3",
+      "group": "RISIKO",
+      "name": "Drawdown-Stufe 3: Einstiegssperre, Betreiberprüfung",
+      "value": 0.2,
+      "unit": "Anteil NAV",
+      "status": "ENTWURF",
+      "basis": "Drawdown-Leiter §7.5.",
+      "refs": [
+        "DEC-DS-01"
+      ],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "architecture/state_machines.json",
+        "implementation/test_catalog.json",
+        "lib/calc.py",
+        "registers/limits.json",
+        "risk/limits.md",
+        "validation/semantic_checks.py"
+      ]
+    },
+    {
+      "id": "P-RISK-DD-KILL",
+      "group": "RISIKO",
+      "name": "Drawdown-Stufe 4: Abbau und Stopp, Neustart nur signiert",
+      "value": 0.3,
+      "unit": "Anteil NAV",
+      "status": "ENTWURF",
+      "basis": "Ruin-Definition des Pakets liegt bei 50 %; Stopp bei 30 % lässt Abstand.",
+      "refs": [
+        "DEC-DS-01"
+      ],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "architecture/scenario_catalog.json",
+        "architecture/state_machines.json",
+        "implementation/test_catalog.json",
+        "operations/runbook_register.json",
+        "operations/runbooks.md",
+        "registers/limits.json",
+        "risk/kelly_ruin_simulator.py",
+        "risk/limits.md",
+        "risk/stress_test_engine.py",
+        "validation/semantic_checks.py"
+      ]
+    },
+    {
+      "id": "P-RISK-RUIN",
+      "group": "RISIKO",
+      "name": "Ruin-Definition",
+      "value": 0.5,
+      "unit": "Anteil NAV",
+      "status": "ENTWURF",
+      "basis": "§7.4: Verlust ≥ 50 % oder Zwangsliquidation durch den Broker.",
+      "refs": [
+        "DEC-DS-01"
+      ],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "risk/kelly_ruin_results.json",
+        "risk/kelly_ruin_simulator.py",
+        "risk/leverage_risk_model.md",
+        "validation/semantic_checks.py"
+      ]
+    },
+    {
+      "id": "P-RISK-ES-CONF",
+      "group": "RISIKO",
+      "name": "Konfidenz Expected Shortfall",
+      "value": 0.975,
+      "unit": "Anteil",
+      "status": "ENTWURF",
+      "basis": "§7.1.",
+      "refs": [],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "risk/leverage_calculator.py",
+        "risk/leverage_risk_model.md",
+        "validation/test_reference_models.py"
+      ]
+    },
+    {
+      "id": "P-RISK-VAR-CONF",
+      "group": "RISIKO",
+      "name": "Konfidenz Value at Risk",
+      "value": 0.99,
+      "unit": "Anteil",
+      "status": "ENTWURF",
+      "basis": "§7.1.",
+      "refs": [],
+      "used_in": [
+        "Masterkonzept_v3.0.md"
+      ]
+    },
+    {
+      "id": "P-RISK-MAX-ADV-SHARE",
+      "group": "RISIKO",
+      "name": "Höchster Anteil einer Order am Tagesvolumen",
+      "value": 0.01,
+      "unit": "Anteil",
+      "status": "ENTWURF",
+      "basis": "Kapazitätsgrenze §7.5; Marktwirkung bleibt klein.",
+      "refs": [
+        "DEC-DS-18"
+      ],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "execution/pretrade_controls.md",
+        "execution/tca_model.md",
+        "financials/decision_montecarlo.py",
+        "implementation/test_catalog.json",
+        "registers/limits.json",
+        "requirements.json",
+        "risk/limits.md",
+        "validation/mutation_catalog.json",
+        "validation/semantic_checks.py"
+      ]
+    },
+    {
+      "id": "P-RISK-MAX-OI-SHARE",
+      "group": "RISIKO",
+      "name": "Höchster Anteil einer Position am Open Interest",
+      "value": 0.005,
+      "unit": "Anteil",
+      "status": "ENTWURF",
+      "basis": "Konzentrationsgrenze §7.5.",
+      "refs": [
+        "DEC-DS-18"
+      ],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "execution/pretrade_controls.md",
+        "governance/policies/trading_policy.md",
+        "implementation/test_catalog.json",
+        "legal/applicability_matrix.md",
+        "registers/limits.json",
+        "requirements.json",
+        "risk/limits.md",
+        "validation/semantic_checks.py"
+      ]
+    },
+    {
+      "id": "P-RISK-WEEKEND-FACTOR",
+      "group": "RISIKO",
+      "name": "Lückenfaktor für Positionen über Wochenenden und Feiertage",
+      "value": 1.5,
+      "unit": "Faktor",
+      "status": "ENTWURF",
+      "basis": "Längere Schließzeit; Lückenstress am Freitag wird mit diesem Faktor bewertet.",
+      "refs": [
+        "DEC-DS-10"
+      ],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "architecture/scenario_catalog.json",
+        "execution/pretrade_controls.md",
+        "lib/calc.py",
+        "registers/risk_register.json",
+        "risk/leverage_calculator.py",
+        "risk/leverage_results.json",
+        "risk/leverage_risk_model.md",
+        "risk/limits.md",
+        "validation/semantic_checks.py",
+        "validation/test_reference_models.py"
+      ]
+    },
+    {
+      "id": "P-RISK-EVENT-BLACKOUT-MIN",
+      "group": "RISIKO",
+      "name": "Keine neuen Einstiege vor registrierten Ereignissen (Notenbank, Verfall, Berichte)",
+      "value": 30,
+      "unit": "Minuten",
+      "status": "ENTWURF",
+      "basis": "§7.6.",
+      "refs": [],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "execution/pretrade_controls.md",
+        "registers/limits.json",
+        "risk/limits.md"
+      ]
+    },
+    {
+      "id": "P-RISK-KILL-CANCEL-S",
+      "group": "RISIKO",
+      "name": "Zielzeit Kill-Switch: alle offenen Orders storniert",
+      "value": 5,
+      "unit": "Sekunden",
+      "status": "ENTWURF",
+      "basis": "§7.5; Test T-KILL-001.",
+      "refs": [],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "execution/pretrade_controls.md",
+        "implementation/test_catalog.json",
+        "operations/drill_register.json",
+        "operations/drills.md",
+        "operations/runbook_register.json",
+        "operations/runbooks.md",
+        "operations/sla_slo.md",
+        "requirements.json",
+        "risk/limits.md"
+      ]
+    },
+    {
+      "id": "P-RISK-LADDER-FACTORS",
+      "group": "RISIKO",
+      "name": "Exposure-Faktoren der Leitern im Tagesraster der Simulationen (Kelly/Ruin und Stress)",
+      "value": {
+        "DL_L1": 0.5,
+        "DL_L2": 0.25,
+        "DD_L1": 0.75,
+        "DD_L2": 0.5,
+        "DD_L3": 0.25
+      },
+      "unit": "Faktor",
+      "status": "ENTWURF",
+      "basis": "§7.5 und risk/limits.md: L1 halbiert das Risikoziel, L2 sperrt Einstiege (laufende Positionen bis zum Zeitstopp als Restexposure), Drawdown-Leiter ×0,75/×0,5 und Einstiegssperre ab DD-L3; im Tagesraster wirkt eine Tagesstufe am Folgetag, L3 und die Kill-Stufe bauen sofort ab.",
+      "refs": [],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "lib/calc.py",
+        "risk/leverage_risk_model.md",
+        "validation/semantic_checks.py",
+        "validation/test_reference_models.py"
+      ]
+    },
+    {
+      "id": "P-RISK-L3-SLIPPAGE",
+      "group": "RISIKO",
+      "name": "Zusatzverlust beim Abbau auf Stufe L3 im Tagesraster (ohne Kurslücke)",
+      "value": 0.005,
+      "unit": "Anteil NAV",
+      "status": "ENTWURF",
+      "basis": "Kelly/Ruin-Simulation: Abbau greift intraday; Lücken über die Konstruktionslücke hinaus werden nicht gekappt.",
+      "refs": [],
+      "used_in": [
+        "risk/kelly_ruin_simulator.py",
+        "risk/leverage_risk_model.md"
+      ]
+    },
+    {
+      "id": "P-RISK-STRESS-SUBST-SHARE",
+      "group": "RISIKO",
+      "name": "Stress: Ersatzwert für fehlende Klassenbewegung als Anteil der ungünstigsten Tageslücke der Klasse (P-GAP-*)",
+      "value": 0.5,
+      "unit": "Anteil",
+      "status": "ENTWURF",
+      "basis": "§7.9; Konvention in risk/stress_scenarios.json (ERSATZWERT).",
+      "refs": [],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "risk/stress_scenarios.json",
+        "risk/stress_test_engine.py",
+        "validation/test_reference_models.py"
+      ]
+    },
+    {
+      "id": "P-RISK-STRESS-MULTI-DAYS",
+      "group": "RISIKO",
+      "name": "Stress: Ersatz der Mehrtagesbewegung als Tagesbewegung × √Tage",
+      "value": 3,
+      "unit": "Handelstage",
+      "status": "ENTWURF",
+      "basis": "§7.9; Konvention in risk/stress_scenarios.json (multi = d1·√Tage).",
+      "refs": [],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "risk/stress_scenarios.json",
+        "risk/stress_test_engine.py",
+        "validation/test_reference_models.py"
+      ]
+    },
+    {
+      "id": "P-GAP-STIR",
+      "group": "LUECKE",
+      "name": "Ungünstigste Tageslücke STIR",
+      "value": 0.81,
+      "unit": "Preispunkte",
+      "status": "ENTWURF",
+      "basis": "3M-Rendite −81 bp an einem Tag (Sept. 2008, R4 E2008_GFC_AUTUMN; Gegenrichtung +76 bp); Preisänderung = Zinsänderung in Punkten",
+      "refs": [
+        "SRC-STRESS-E2008-GFC-AUTUMN"
+      ],
+      "recalibration": "jährlich und nach jedem Stressereignis",
+      "used_in": [
+        "risk/leverage_risk_model.md"
+      ]
+    },
+    {
+      "id": "P-GAP-ANLEIHE-KURZ",
+      "group": "LUECKE",
+      "name": "Ungünstigste Tageslücke ANLEIHE_KURZ",
+      "value": 0.5,
+      "unit": "Prozentpunkte Rendite",
+      "status": "ENTWURF",
+      "basis": "2J −45 bp (2008) und +36 bp (1994), gerundet 50 bp (R4)",
+      "refs": [
+        "SRC-STRESS-E2008-GFC-AUTUMN",
+        "SRC-STRESS-E1994-BOND-CRASH"
+      ],
+      "recalibration": "jährlich und nach jedem Stressereignis",
+      "used_in": [
+        "risk/leverage_risk_model.md"
+      ]
+    },
+    {
+      "id": "P-GAP-ANLEIHE-MITTEL",
+      "group": "LUECKE",
+      "name": "Ungünstigste Tageslücke ANLEIHE_MITTEL",
+      "value": 0.4,
+      "unit": "Prozentpunkte Rendite",
+      "status": "ENTWURF",
+      "basis": "10J +39 bp (1994) (R4)",
+      "refs": [
+        "SRC-STRESS-E1994-BOND-CRASH"
+      ],
+      "recalibration": "jährlich und nach jedem Stressereignis",
+      "used_in": [
+        "risk/leverage_risk_model.md"
+      ]
+    },
+    {
+      "id": "P-GAP-ANLEIHE-LANG",
+      "group": "LUECKE",
+      "name": "Ungünstigste Tageslücke ANLEIHE_LANG",
+      "value": 0.45,
+      "unit": "Prozentpunkte Rendite",
+      "status": "ENTWURF",
+      "basis": "30J +32 bp (1994); Gilts 2022 mehr als 100 bp in wenigen Tagen → 45 bp (R4)",
+      "refs": [
+        "SRC-STRESS-E1994-BOND-CRASH",
+        "SRC-STRESS-E2022-UK-GILTS-LDI"
+      ],
+      "recalibration": "jährlich und nach jedem Stressereignis",
+      "used_in": [
+        "risk/leverage_risk_model.md"
+      ]
+    },
+    {
+      "id": "P-GAP-RENDITE",
+      "group": "LUECKE",
+      "name": "Ungünstigste Tageslücke RENDITE",
+      "value": 0.5,
+      "unit": "Prozentpunkte Rendite",
+      "status": "ENTWURF",
+      "basis": "wie kurze Anleihen; Preis = Rendite",
+      "refs": [
+        "SRC-STRESS-E2008-GFC-AUTUMN"
+      ],
+      "recalibration": "jährlich und nach jedem Stressereignis",
+      "used_in": [
+        "risk/leverage_risk_model.md"
+      ]
+    },
+    {
+      "id": "P-GAP-FX",
+      "group": "LUECKE",
+      "name": "Ungünstigste Tageslücke FX",
+      "value": 7.0,
+      "unit": "% Preis",
+      "status": "ENTWURF",
+      "basis": "USD/JPY −6,7 % am 08.10.1998 (R4)",
+      "refs": [
+        "SRC-STRESS-E1998-LTCM-RUSSIA"
+      ],
+      "recalibration": "jährlich und nach jedem Stressereignis",
+      "used_in": [
+        "risk/leverage_risk_model.md"
+      ]
+    },
+    {
+      "id": "P-GAP-FX-CHF",
+      "group": "LUECKE",
+      "name": "Ungünstigste Tageslücke FX_CHF",
+      "value": 20.0,
+      "unit": "% Preis",
+      "status": "ENTWURF",
+      "basis": "SNB-Mindestkursaufgabe 15.01.2015 (R4); Sonderregel für CHF-Kontrakte",
+      "refs": [
+        "SRC-STRESS-E2015-SNB-FLOOR"
+      ],
+      "recalibration": "jährlich und nach jedem Stressereignis",
+      "used_in": [
+        "risk/leverage_risk_model.md"
+      ]
+    },
+    {
+      "id": "P-GAP-ENERGIE",
+      "group": "LUECKE",
+      "name": "Ungünstigste Tageslücke ENERGIE",
+      "value": 25.0,
+      "unit": "% Preis",
+      "status": "ENTWURF",
+      "basis": "WTI −24,6 % am 09.03.2020 (sekundär); Negativpreis 2020 durch Verfallsregel ausgeschlossen (R4)",
+      "refs": [
+        "SRC-STRESS-E2020-WTI-NEGATIVE",
+        "SRC-STRESS-E2020-COVID-MARCH"
+      ],
+      "recalibration": "jährlich und nach jedem Stressereignis",
+      "used_in": [
+        "risk/leverage_risk_model.md"
+      ]
+    },
+    {
+      "id": "P-GAP-EDELMETALL",
+      "group": "LUECKE",
+      "name": "Ungünstigste Tageslücke EDELMETALL",
+      "value": 10.0,
+      "unit": "% Preis",
+      "status": "ENTWURF",
+      "basis": "Gold +8,97 % am 17.09.2008 (sekundär); für Silber, Platin, Palladium ANNAHME",
+      "refs": [
+        "SRC-STRESS-E2008-GFC-AUTUMN"
+      ],
+      "recalibration": "jährlich und nach jedem Stressereignis",
+      "used_in": [
+        "risk/leverage_risk_model.md"
+      ]
+    },
+    {
+      "id": "P-GAP-INDUSTRIEMETALL",
+      "group": "LUECKE",
+      "name": "Ungünstigste Tageslücke INDUSTRIEMETALL",
+      "value": 15.0,
+      "unit": "% Preis",
+      "status": "ENTWURF",
+      "basis": "LME-Tageslimit 15 % nach Nickel 2022 (R4); ANNAHME für Kupfer/Aluminium",
+      "refs": [
+        "SRC-LIMIT-LM07"
+      ],
+      "recalibration": "jährlich und nach jedem Stressereignis",
+      "used_in": [
+        "risk/leverage_risk_model.md"
+      ]
+    },
+    {
+      "id": "P-GAP-AGRAR",
+      "group": "LUECKE",
+      "name": "Ungünstigste Tageslücke AGRAR",
+      "value": 9.0,
+      "unit": "% Preis",
+      "status": "ENTWURF",
+      "basis": "CBOT-Tageslimit Mais 0,30 USD (erweitert 0,45 USD ≈ 9 %) (R4, LM04); mehrtägige Limitsperren möglich",
+      "refs": [
+        "SRC-LIMIT-LM04"
+      ],
+      "recalibration": "jährlich und nach jedem Stressereignis",
+      "used_in": [
+        "risk/leverage_risk_model.md"
+      ]
+    },
+    {
+      "id": "P-GAP-VIEH",
+      "group": "LUECKE",
+      "name": "Ungünstigste Tageslücke VIEH",
+      "value": 6.0,
+      "unit": "% Preis",
+      "status": "ENTWURF",
+      "basis": "Livestock-Limits 2020 (R4, LM06); ANNAHME",
+      "refs": [
+        "SRC-LIMIT-LM06"
+      ],
+      "recalibration": "jährlich und nach jedem Stressereignis",
+      "used_in": [
+        "risk/leverage_risk_model.md"
+      ]
+    },
+    {
+      "id": "P-GAP-SOFTS",
+      "group": "LUECKE",
+      "name": "Ungünstigste Tageslücke SOFTS",
+      "value": 12.0,
+      "unit": "% Preis",
+      "status": "ANNAHME",
+      "basis": "ANNAHME: keine belegte Tageslücke; Kakao/Kaffee mit hoher Volatilität",
+      "refs": [],
+      "recalibration": "jährlich und nach jedem Stressereignis",
+      "used_in": [
+        "risk/leverage_risk_model.md"
+      ]
+    },
+    {
+      "id": "P-GAP-KRYPTO",
+      "group": "LUECKE",
+      "name": "Ungünstigste Tageslücke KRYPTO",
+      "value": 25.0,
+      "unit": "% Preis",
+      "status": "ENTWURF",
+      "basis": "Bitcoin −25 % in 24 Stunden (März 2020, sekundär) (R4)",
+      "refs": [
+        "SRC-STRESS-E2020-COVID-MARCH"
+      ],
+      "recalibration": "jährlich und nach jedem Stressereignis",
+      "used_in": [
+        "risk/leverage_risk_model.md"
+      ]
+    },
+    {
+      "id": "P-GAP-AKTIENINDEX",
+      "group": "LUECKE",
+      "name": "Ungünstigste Tageslücke AKTIENINDEX",
+      "value": 20.0,
+      "unit": "% Preis",
+      "status": "ENTWURF",
+      "basis": "S&P 500 −20 % am 19.10.1987 (R4); nur für die gesperrte Variante",
+      "refs": [
+        "SRC-STRESS-E1987-BLACK-MONDAY"
+      ],
+      "recalibration": "jährlich und nach jedem Stressereignis",
+      "used_in": [
+        "risk/leverage_risk_model.md"
+      ]
+    },
+    {
+      "id": "P-GAP-K-HYP-LOW",
+      "group": "LUECKE",
+      "name": "Hypothetische Lücke k·σ (untere Stufe)",
+      "value": 5,
+      "unit": "σ (Tag)",
+      "status": "ENTWURF",
+      "basis": "§7.9: Kurslücken von 5–10 σ.",
+      "refs": [],
+      "used_in": [
+        "operations/runbook_register.json",
+        "operations/runbooks.md",
+        "risk/leverage_calculator.py",
+        "risk/leverage_risk_model.md"
+      ]
+    },
+    {
+      "id": "P-GAP-K-HYP-HIGH",
+      "group": "LUECKE",
+      "name": "Hypothetische Lücke k·σ (obere Stufe) und Mindestlücke der Größenregel",
+      "value": 10,
+      "unit": "σ (Tag)",
+      "status": "ENTWURF",
+      "basis": "§7.9; die Größenregel nutzt max(historische Klassenlücke, k·σ_Tag).",
+      "refs": [
+        "DEC-DS-10"
+      ],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "risk/leverage_calculator.py",
+        "risk/leverage_results.json",
+        "risk/leverage_risk_model.md",
+        "validation/test_reference_models.py"
+      ]
+    },
+    {
+      "id": "P-LEV-H5-CAP",
+      "group": "PROFIL",
+      "name": "Profil H5: harte Obergrenze L_g",
+      "value": 5,
+      "unit": "x",
+      "status": "ENTWURF",
+      "basis": "§7.3; H20 ist die Betreiber-Obergrenze (BQ-05).",
+      "refs": [
+        "DEC-OP-05"
+      ],
+      "used_in": [
+        "risk/leverage_risk_model.md"
+      ]
+    },
+    {
+      "id": "P-LEV-H5-SIGMA",
+      "group": "PROFIL",
+      "name": "Profil H5: Ziel-Volatilität σ_p p. a.",
+      "value": 0.06,
+      "unit": "Anteil",
+      "status": "ENTWURF",
+      "basis": "Steigt mit dem Profil; Zulässigkeit prüft risk/leverage_calculator.py gegen Tagesgrenze, Margin und Liquidität.",
+      "refs": [
+        "DEC-DS-10"
+      ],
+      "used_in": [
+        "research/prior_derivation.py",
+        "risk/leverage_risk_model.md"
+      ]
+    },
+    {
+      "id": "P-LEV-H5-ME",
+      "group": "PROFIL",
+      "name": "Profil H5: Obergrenze Margin-Auslastung M/E",
+      "value": 0.25,
+      "unit": "Anteil NAV",
+      "status": "ENTWURF",
+      "basis": "Liquidationspuffer §7.7; Margin-Pfad +100 % muss < 1 bleiben.",
+      "refs": [
+        "DEC-DS-19"
+      ],
+      "used_in": [
+        "risk/leverage_risk_model.md"
+      ]
+    },
+    {
+      "id": "P-LEV-H5-ES",
+      "group": "PROFIL",
+      "name": "Profil H5: ES-Limit (97,5 %, 1 Tag)",
+      "value": 0.02,
+      "unit": "Anteil NAV",
+      "status": "ENTWURF",
+      "basis": "§7.3.",
+      "refs": [],
+      "used_in": [
+        "risk/leverage_risk_model.md"
+      ]
+    },
+    {
+      "id": "P-LEV-H5-MINDIV",
+      "group": "PROFIL",
+      "name": "Profil H5: Mindestzahl effektiver Instrumente",
+      "value": 8,
+      "unit": "Anzahl",
+      "status": "ENTWURF",
+      "basis": "Mindestdiversifikation §7.3.",
+      "refs": [],
+      "used_in": [
+        "KURZFASSUNG_BETREIBER.md",
+        "Masterkonzept_v3.0.md",
+        "research/evidence_gates.json",
+        "risk/leverage_risk_model.md"
+      ]
+    },
+    {
+      "id": "P-LEV-H10-CAP",
+      "group": "PROFIL",
+      "name": "Profil H10: harte Obergrenze L_g",
+      "value": 10,
+      "unit": "x",
+      "status": "ENTWURF",
+      "basis": "§7.3; H20 ist die Betreiber-Obergrenze (BQ-05).",
+      "refs": [
+        "DEC-OP-05"
+      ],
+      "used_in": [
+        "risk/leverage_risk_model.md"
+      ]
+    },
+    {
+      "id": "P-LEV-H10-SIGMA",
+      "group": "PROFIL",
+      "name": "Profil H10: Ziel-Volatilität σ_p p. a.",
+      "value": 0.09,
+      "unit": "Anteil",
+      "status": "ENTWURF",
+      "basis": "Steigt mit dem Profil; Zulässigkeit prüft risk/leverage_calculator.py gegen Tagesgrenze, Margin und Liquidität.",
+      "refs": [
+        "DEC-DS-10"
+      ],
+      "used_in": [
+        "risk/leverage_risk_model.md"
+      ]
+    },
+    {
+      "id": "P-LEV-H10-ME",
+      "group": "PROFIL",
+      "name": "Profil H10: Obergrenze Margin-Auslastung M/E",
+      "value": 0.35,
+      "unit": "Anteil NAV",
+      "status": "ENTWURF",
+      "basis": "Liquidationspuffer §7.7; Margin-Pfad +100 % muss < 1 bleiben.",
+      "refs": [
+        "DEC-DS-19"
+      ],
+      "used_in": [
+        "risk/leverage_risk_model.md"
+      ]
+    },
+    {
+      "id": "P-LEV-H10-ES",
+      "group": "PROFIL",
+      "name": "Profil H10: ES-Limit (97,5 %, 1 Tag)",
+      "value": 0.03,
+      "unit": "Anteil NAV",
+      "status": "ENTWURF",
+      "basis": "§7.3.",
+      "refs": [],
+      "used_in": [
+        "risk/leverage_risk_model.md"
+      ]
+    },
+    {
+      "id": "P-LEV-H10-MINDIV",
+      "group": "PROFIL",
+      "name": "Profil H10: Mindestzahl effektiver Instrumente",
+      "value": 8,
+      "unit": "Anzahl",
+      "status": "ENTWURF",
+      "basis": "Mindestdiversifikation §7.3.",
+      "refs": [],
+      "used_in": [
+        "risk/leverage_risk_model.md"
+      ]
+    },
+    {
+      "id": "P-LEV-H15-CAP",
+      "group": "PROFIL",
+      "name": "Profil H15: harte Obergrenze L_g",
+      "value": 15,
+      "unit": "x",
+      "status": "ENTWURF",
+      "basis": "§7.3; H20 ist die Betreiber-Obergrenze (BQ-05).",
+      "refs": [
+        "DEC-OP-05"
+      ],
+      "used_in": [
+        "risk/leverage_risk_model.md"
+      ]
+    },
+    {
+      "id": "P-LEV-H15-SIGMA",
+      "group": "PROFIL",
+      "name": "Profil H15: Ziel-Volatilität σ_p p. a.",
+      "value": 0.12,
+      "unit": "Anteil",
+      "status": "ENTWURF",
+      "basis": "Steigt mit dem Profil; Zulässigkeit prüft risk/leverage_calculator.py gegen Tagesgrenze, Margin und Liquidität.",
+      "refs": [
+        "DEC-DS-10"
+      ],
+      "used_in": [
+        "risk/leverage_risk_model.md"
+      ]
+    },
+    {
+      "id": "P-LEV-H15-ME",
+      "group": "PROFIL",
+      "name": "Profil H15: Obergrenze Margin-Auslastung M/E",
+      "value": 0.45,
+      "unit": "Anteil NAV",
+      "status": "ENTWURF",
+      "basis": "Liquidationspuffer §7.7; Margin-Pfad +100 % muss < 1 bleiben.",
+      "refs": [
+        "DEC-DS-19"
+      ],
+      "used_in": [
+        "risk/leverage_risk_model.md"
+      ]
+    },
+    {
+      "id": "P-LEV-H15-ES",
+      "group": "PROFIL",
+      "name": "Profil H15: ES-Limit (97,5 %, 1 Tag)",
+      "value": 0.04,
+      "unit": "Anteil NAV",
+      "status": "ENTWURF",
+      "basis": "§7.3.",
+      "refs": [],
+      "used_in": [
+        "risk/leverage_risk_model.md"
+      ]
+    },
+    {
+      "id": "P-LEV-H15-MINDIV",
+      "group": "PROFIL",
+      "name": "Profil H15: Mindestzahl effektiver Instrumente",
+      "value": 10,
+      "unit": "Anzahl",
+      "status": "ENTWURF",
+      "basis": "Mindestdiversifikation §7.3.",
+      "refs": [],
+      "used_in": [
+        "risk/leverage_risk_model.md"
+      ]
+    },
+    {
+      "id": "P-LEV-H20-CAP",
+      "group": "PROFIL",
+      "name": "Profil H20: harte Obergrenze L_g",
+      "value": 20,
+      "unit": "x",
+      "status": "BETREIBER",
+      "basis": "§7.3; H20 ist die Betreiber-Obergrenze (BQ-05).",
+      "refs": [
+        "DEC-OP-05"
+      ],
+      "used_in": [
+        "registers/operator_seal.json",
+        "risk/leverage_risk_model.md",
+        "validation/mutation_catalog.json"
+      ]
+    },
+    {
+      "id": "P-LEV-H20-SIGMA",
+      "group": "PROFIL",
+      "name": "Profil H20: Ziel-Volatilität σ_p p. a.",
+      "value": 0.15,
+      "unit": "Anteil",
+      "status": "ENTWURF",
+      "basis": "Steigt mit dem Profil; Zulässigkeit prüft risk/leverage_calculator.py gegen Tagesgrenze, Margin und Liquidität.",
+      "refs": [
+        "DEC-DS-10"
+      ],
+      "used_in": [
+        "risk/leverage_risk_model.md"
+      ]
+    },
+    {
+      "id": "P-LEV-H20-ME",
+      "group": "PROFIL",
+      "name": "Profil H20: Obergrenze Margin-Auslastung M/E",
+      "value": 0.5,
+      "unit": "Anteil NAV",
+      "status": "ENTWURF",
+      "basis": "Liquidationspuffer §7.7; Margin-Pfad +100 % muss < 1 bleiben.",
+      "refs": [
+        "DEC-DS-19"
+      ],
+      "used_in": [
+        "risk/leverage_risk_model.md"
+      ]
+    },
+    {
+      "id": "P-LEV-H20-ES",
+      "group": "PROFIL",
+      "name": "Profil H20: ES-Limit (97,5 %, 1 Tag)",
+      "value": 0.05,
+      "unit": "Anteil NAV",
+      "status": "ENTWURF",
+      "basis": "§7.3.",
+      "refs": [],
+      "used_in": [
+        "risk/leverage_risk_model.md"
+      ]
+    },
+    {
+      "id": "P-LEV-H20-MINDIV",
+      "group": "PROFIL",
+      "name": "Profil H20: Mindestzahl effektiver Instrumente",
+      "value": 10,
+      "unit": "Anzahl",
+      "status": "ENTWURF",
+      "basis": "Mindestdiversifikation §7.3.",
+      "refs": [],
+      "used_in": [
+        "risk/leverage_risk_model.md"
+      ]
+    },
+    {
+      "id": "P-LEV-SIGMA-TOLERANCE",
+      "group": "PROFIL",
+      "name": "Mindestanteil des σ-Ziels, der nach der Lückenregel erreichbar sein muss",
+      "value": 0.9,
+      "unit": "Anteil",
+      "status": "ENTWURF",
+      "basis": "Sonst ist das Profil mit dem Verlustbudget unvereinbar (§7.4 Nr. 5) und vom nächstniedrigeren nicht unterscheidbar.",
+      "refs": [
+        "DEC-DS-10"
+      ],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "risk/leverage_calculator.py",
+        "risk/leverage_risk_model.md",
+        "validation/semantic_checks.py"
+      ]
+    },
+    {
+      "id": "P-LEV-H5-SIGMA-MIN",
+      "group": "PROFIL",
+      "name": "H5: kleinste sinnvolle Volatilität nach Lückenregel (Ziel-σ von H5 ist Obergrenze)",
+      "value": 0.03,
+      "unit": "Anteil",
+      "status": "ENTWURF",
+      "basis": "Unterhalb von 3 % p. a. decken Erträge die Fixkosten praktisch nie; höhere Profile müssen ihr σ-Ziel zu P-LEV-SIGMA-TOLERANCE erreichen.",
+      "refs": [
+        "DEC-DS-10"
+      ],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "risk/leverage_calculator.py",
+        "risk/leverage_risk_model.md",
+        "validation/render_blocks.py",
+        "validation/semantic_checks.py"
+      ]
+    },
+    {
+      "id": "P-LEV-BAND-LOW",
+      "group": "PROFIL",
+      "name": "Unteres Ende des Betriebsbands L_g",
+      "value": 5,
+      "unit": "x",
+      "status": "ENTWURF",
+      "basis": "§7.3 Betriebsband 5×–20×; kein Zwangshebel (P-OP-LEV-MIN).",
+      "refs": [],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "risk/leverage_calculator.py",
+        "risk/leverage_risk_model.md"
+      ]
+    },
+    {
+      "id": "P-LEV-STEP-MIN-DAYS",
+      "group": "PROFIL",
+      "name": "Mindestdauer je Profilstufe vor Aufstieg",
+      "value": 90,
+      "unit": "Handelstage",
+      "status": "ENTWURF",
+      "basis": "§7.8; Evidenz über ein Quartal.",
+      "refs": [
+        "DEC-DS-02"
+      ],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "architecture/state_machines.json",
+        "implementation/test_catalog.json",
+        "risk/leverage_risk_model.md"
+      ]
+    },
+    {
+      "id": "P-LEV-STEP-COST-BAND",
+      "group": "PROFIL",
+      "name": "Zulässige Abweichung gemessener Kosten vom Modell für einen Aufstieg",
+      "value": 0.25,
+      "unit": "Anteil",
+      "status": "ENTWURF",
+      "basis": "§7.8.",
+      "refs": [],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "architecture/state_machines.json",
+        "execution/tca_model.md",
+        "implementation/test_catalog.json",
+        "risk/leverage_risk_model.md"
+      ]
+    },
+    {
+      "id": "P-LEV-STEP-VOL-BAND",
+      "group": "PROFIL",
+      "name": "Zulässige Abweichung realisierter von Ziel-Volatilität für einen Aufstieg",
+      "value": 0.3,
+      "unit": "Anteil",
+      "status": "ENTWURF",
+      "basis": "§7.8.",
+      "refs": [],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "architecture/state_machines.json",
+        "implementation/test_catalog.json",
+        "risk/leverage_risk_model.md"
+      ]
+    },
+    {
+      "id": "P-LEV-PILOT-SIZE",
+      "group": "PROFIL",
+      "name": "Pilotgröße als Anteil des Risikoziels von H5",
+      "value": 0.5,
+      "unit": "Anteil",
+      "status": "ENTWURF",
+      "basis": "§7.8: Pilot im niedrigsten Profil mit reduzierter Größe.",
+      "refs": [
+        "DEC-DS-02"
+      ],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "architecture/state_machines.json",
+        "governance/grants_and_risk_acceptance.md",
+        "governance/policies/risk_policy.md",
+        "implementation/build_program.md",
+        "implementation/build_stages.json",
+        "risk/leverage_risk_model.md"
+      ]
+    },
+    {
+      "id": "P-LEV-CLUSTER-MODE",
+      "group": "PROFIL",
+      "name": "Aggregation des Lückenstresses",
+      "value": "ALLE_UNGUENSTIG",
+      "unit": "Text",
+      "status": "ENTWURF",
+      "basis": "„niemals“ (BQ-04) verlangt die ungünstigste Richtung aller Positionen gleichzeitig; Clusterrechnung nur informativ.",
+      "refs": [
+        "DEC-DS-10"
+      ],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "registers/limits.json",
+        "registers/risk_register.json",
+        "risk/leverage_calculator.py",
+        "risk/leverage_results.json",
+        "risk/leverage_risk_model.md",
+        "risk/limits.md"
+      ]
+    },
+    {
+      "id": "P-SIM-T-DF",
+      "group": "SIMULATION",
+      "name": "Freiheitsgrade der t-Verteilung (fette Ränder)",
+      "value": 4,
+      "unit": "Anzahl",
+      "status": "ANNAHME",
+      "basis": "Übliche Wahl für Tagesrenditen von Futures-Portfolios.",
+      "refs": [],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "operations/monitor_simulation.py",
+        "risk/kelly_ruin_results.json",
+        "risk/kelly_ruin_simulator.py",
+        "risk/leverage_calculator.py",
+        "risk/leverage_risk_model.md",
+        "validation/test_reference_models.py"
+      ]
+    },
+    {
+      "id": "P-SIM-REGIME",
+      "group": "SIMULATION",
+      "name": "Volatilitätsregime: Eintritt, Austritt (je Tag), Volatilitätsfaktor im Stress (Korrelationsschock)",
+      "value": {
+        "enter": 0.01,
+        "exit": 0.05,
+        "vol_multiple": 2.0
+      },
+      "unit": "Wahrscheinlichkeit/Faktor",
+      "status": "ANNAHME",
+      "basis": "Stressregime im Mittel 20 Tage, etwa ein Sechstel der Zeit.",
+      "refs": [],
+      "used_in": [
+        "risk/kelly_ruin_results.json",
+        "risk/kelly_ruin_simulator.py",
+        "risk/leverage_risk_model.md"
+      ]
+    },
+    {
+      "id": "P-SIM-JUMPS-PER-YEAR",
+      "group": "SIMULATION",
+      "name": "Häufigkeit ungünstiger Kurslücken innerhalb der Konstruktionslücke",
+      "value": 1.0,
+      "unit": "je Jahr",
+      "status": "ANNAHME",
+      "basis": "Typische Übernacht- und Ereignislücken; Größe als Anteil der Konstruktionslücke (P-SIM-JUMP-SIZE).",
+      "refs": [],
+      "used_in": [
+        "risk/kelly_ruin_results.json",
+        "risk/kelly_ruin_simulator.py",
+        "risk/leverage_risk_model.md"
+      ]
+    },
+    {
+      "id": "P-SIM-JUMP-SIZE",
+      "group": "SIMULATION",
+      "name": "Größe dieser Lücken als Anteil der Konstruktionslücke (gleichverteilt)",
+      "value": [
+        0.05,
+        0.4
+      ],
+      "unit": "Anteil",
+      "status": "ANNAHME",
+      "basis": "Die Konstruktionslücke ist das historische Extrem je Klasse; übliche Lücken sind deutlich kleiner.",
+      "refs": [],
+      "used_in": [
+        "risk/kelly_ruin_results.json",
+        "risk/kelly_ruin_simulator.py",
+        "risk/leverage_risk_model.md"
+      ]
+    },
+    {
+      "id": "P-SIM-BEYOND-PER-YEAR",
+      "group": "SIMULATION",
+      "name": "Häufigkeit von Lücken jenseits der Konstruktionslücke",
+      "value": 0.02,
+      "unit": "je Jahr",
+      "status": "ANNAHME",
+      "basis": "Ereignisse schlimmer als alles in R4; etwa einmal in 50 Jahren. Treibt die Restwahrscheinlichkeit einer Überschreitung der 9-%-Grenze.",
+      "refs": [],
+      "used_in": [
+        "risk/kelly_ruin_results.json",
+        "risk/kelly_ruin_simulator.py",
+        "risk/leverage_risk_model.md"
+      ]
+    },
+    {
+      "id": "P-SIM-BEYOND-SIZE",
+      "group": "SIMULATION",
+      "name": "Größe dieser Lücken als Vielfaches der Konstruktionslücke (gleichverteilt)",
+      "value": [
+        1.0,
+        2.0
+      ],
+      "unit": "Faktor",
+      "status": "ANNAHME",
+      "basis": "Tail-Szenario.",
+      "refs": [],
+      "used_in": [
+        "risk/kelly_ruin_results.json",
+        "risk/kelly_ruin_simulator.py",
+        "risk/leverage_risk_model.md"
+      ]
+    },
+    {
+      "id": "P-SIM-PATHS",
+      "group": "SIMULATION",
+      "name": "Pfade je Variante",
+      "value": 1000,
+      "unit": "Anzahl",
+      "status": "ENTWURF",
+      "basis": "Feste Seeds (R-10); Auflösung 0,1 Prozentpunkte.",
+      "refs": [],
+      "used_in": [
+        "risk/kelly_ruin_simulator.py",
+        "risk/leverage_risk_model.md",
+        "validation/test_reference_models.py"
+      ]
+    },
+    {
+      "id": "P-SIM-DIFF-VAR-FLOOR",
+      "group": "SIMULATION",
+      "name": "Untergrenze des Diffusionsanteils an der Gesamtvarianz, wenn Sprünge modelliert sind",
+      "value": 0.25,
+      "unit": "Anteil",
+      "status": "ENTWURF",
+      "basis": "Kelly/Ruin-Simulation: verhindert, dass Sprünge die Diffusion vollständig ersetzen; Gesamtvolatilität bleibt σ_p.",
+      "refs": [],
+      "used_in": [
+        "risk/kelly_ruin_simulator.py",
+        "risk/leverage_risk_model.md"
+      ]
+    },
+    {
+      "id": "P-RISK-STRESS-REF-STAGE",
+      "group": "RISIKO",
+      "name": "Referenz-Kapitalstufe der Stresstabellen",
+      "value": 5000000,
+      "unit": "EUR",
+      "status": "ENTWURF",
+      "basis": "Kleinste Stufe mit einem zulässigen Profil in der Sensitivitätsvariante U-BREAKEVEN (risk/leverage_results.json); Ergebnisse in % NAV.",
+      "refs": [
+        "DEC-DS-10"
+      ],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "financials/buy_vs_build.md",
+        "operations/costdrift_monitor.py",
+        "research/operating_characteristics.py",
+        "risk/kelly_ruin_simulator.py",
+        "risk/stress_test_engine.py",
+        "validation/render_blocks.py",
+        "validation/semantic_checks.py",
+        "validation/test_reference_models.py"
+      ]
+    },
+    {
+      "id": "P-MRG-STRESS-1",
+      "group": "MARGIN",
+      "name": "Margin-Pfad Stufe 1",
+      "value": 0.5,
+      "unit": "Anteil Erhöhung",
+      "status": "ENTWURF",
+      "basis": "§7.4; belegt: CME Ø +18,9 % je Schritt, März 2020 +62 % (R4).",
+      "refs": [
+        "SRC-MARGIN-MH04",
+        "SRC-MARGIN-MH05"
+      ],
+      "used_in": [
+        "registers/risk_register.json",
+        "risk/leverage_calculator.py",
+        "risk/margin_liquidity.md",
+        "risk/stress_test_engine.py"
+      ]
+    },
+    {
+      "id": "P-MRG-STRESS-2",
+      "group": "MARGIN",
+      "name": "Margin-Pfad Stufe 2",
+      "value": 1.0,
+      "unit": "Anteil Erhöhung",
+      "status": "ENTWURF",
+      "basis": "§7.4; einzelne CCPs über +100 % (R4).",
+      "refs": [
+        "SRC-MARGIN-MH06"
+      ],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "implementation/test_catalog.json",
+        "operations/drill_register.json",
+        "operations/drills.md",
+        "registers/risk_register.json",
+        "risk/leverage_calculator.py",
+        "risk/leverage_risk_model.md",
+        "risk/margin_liquidity.md",
+        "risk/stress_test_engine.py",
+        "validation/render_blocks.py",
+        "validation/test_reference_models.py"
+      ]
+    },
+    {
+      "id": "P-MRG-BROKER-STOPOUT",
+      "group": "MARGIN",
+      "name": "Stop-out des Brokers (Margin-Level)",
+      "value": 0.5,
+      "unit": "Anteil der Initial-Margin",
+      "status": "ANNAHME",
+      "basis": "Unbelegt für FXFlat-Futures; 50 % wie CFD-Regel als Planungswert (X-BRK-LIQ).",
+      "refs": [
+        "SRC-REG-ESMA-CFD"
+      ],
+      "external_input": "X-BRK-LIQ",
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "external_inputs.json",
+        "risk/margin_liquidity.md",
+        "risk/stress_test_engine.py",
+        "validation/render_blocks.py",
+        "validation/semantic_checks.py"
+      ]
+    },
+    {
+      "id": "P-MRG-DERISK-TRIGGER",
+      "group": "MARGIN",
+      "name": "Eigene De-Risking-Schwelle Margin-Level",
+      "value": 1.5,
+      "unit": "Anteil der Initial-Margin",
+      "status": "ENTWURF",
+      "basis": "Greift weit vor dem Stop-out; De-Risking vor Brokerliquidation (§7.6).",
+      "refs": [
+        "DEC-DS-19"
+      ],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "architecture/scenario_catalog.json",
+        "architecture/state_machines.json",
+        "execution/pretrade_controls.md",
+        "implementation/test_catalog.json",
+        "operations/runbook_register.json",
+        "operations/runbooks.md",
+        "registers/limits.json",
+        "registers/resolution_matrix.json",
+        "registers/risk_register.json",
+        "requirements.json",
+        "risk/leverage_calculator.py",
+        "risk/limits.md",
+        "risk/margin_liquidity.md",
+        "risk/stress_test_engine.py",
+        "validation/render_blocks.py",
+        "validation/semantic_checks.py",
+        "validation/test_reference_models.py"
+      ]
+    },
+    {
+      "id": "P-MRG-INTRADAY-FXFLAT",
+      "group": "MARGIN",
+      "name": "Intraday-Margin beim Primärbroker",
+      "value": 0.1,
+      "unit": "Anteil der Börsenmargin",
+      "status": "BELEGT",
+      "basis": "FXFlat: rund 10 % der Eurex-Margin intraday (Seite undatiert).",
+      "refs": [
+        "SRC-BRK-FXFLAT"
+      ],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "external_inputs.json",
+        "risk/margin_liquidity.md"
+      ]
+    },
+    {
+      "id": "P-MRG-USE-INTRADAY",
+      "group": "MARGIN",
+      "name": "Intraday-Margin für die Größenbestimmung nutzen",
+      "value": false,
+      "unit": "bool",
+      "status": "ENTWURF",
+      "basis": "Positionen halten über Nacht (4 h–4 T); die Größenrechnung nutzt immer die Übernacht-Margin.",
+      "refs": [
+        "DEC-DS-19"
+      ],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "risk/margin_liquidity.md"
+      ]
+    },
+    {
+      "id": "P-MRG-TOPUP-DAYS",
+      "group": "MARGIN",
+      "name": "Dauer eines Nachschusses (Überweisung bis Gutschrift)",
+      "value": 2,
+      "unit": "Geschäftstage",
+      "status": "ANNAHME",
+      "basis": "SEPA-Überweisung; Szenario „Nachschuss unmöglich“ wird gerechnet (§7.7).",
+      "refs": [],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "lib/calc.py",
+        "risk/margin_liquidity.md"
+      ]
+    },
+    {
+      "id": "P-UNI-COST-SHARE-MAX",
+      "group": "UNIVERSUM",
+      "name": "Höchster Anteil der erwarteten Brutto-Sharpe, der für Kosten ausgegeben werden darf",
+      "value": 0.33,
+      "unit": "Anteil",
+      "status": "ENTWURF",
+      "basis": "Zulassungsschwelle der Kosten je Risikoeinheit (§5.1); Carver (2015) empfiehlt höchstens ein Drittel.",
+      "refs": [
+        "SRC-LIT-CARVER-2015"
+      ],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "research/prior_derivation.py"
+      ]
+    },
+    {
+      "id": "P-UNI-MIN-ADV",
+      "group": "UNIVERSUM",
+      "name": "Mindest-Tagesvolumen",
+      "value": 5000,
+      "unit": "Kontrakte",
+      "status": "ENTWURF",
+      "basis": "Liquidität §6.2; darunter Spread und Aussetzungsrisiko hoch.",
+      "refs": [],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "implementation/test_catalog.json",
+        "research/prior_derivation.py",
+        "validation/semantic_checks.py"
+      ]
+    },
+    {
+      "id": "P-UNI-MAX-CONTRACT-RISK",
+      "group": "UNIVERSUM",
+      "name": "Höchstes Jahresrisiko eines Kontrakts relativ zum Risikobudget des Instruments",
+      "value": 0.5,
+      "unit": "Anteil",
+      "status": "ENTWURF",
+      "basis": "Kontraktgröße gegenüber Kapital (§6.2): ein Kontrakt darf höchstens die Hälfte des Instrumentbudgets ausmachen.",
+      "refs": [],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "registers/risk_register.json",
+        "research/prior_derivation.py"
+      ]
+    },
+    {
+      "id": "P-UNI-REQUIRE-ACCESS",
+      "group": "UNIVERSUM",
+      "name": "Nur Börsen des Primärbrokers zulassen",
+      "value": true,
+      "unit": "bool",
+      "status": "ENTWURF",
+      "basis": "Börsenzugang des Kontos (§6.2).",
+      "refs": [
+        "DEC-DS-16"
+      ],
+      "used_in": [
+        "Masterkonzept_v3.0.md"
+      ]
+    },
+    {
+      "id": "P-UNI-ROLL-DAYS",
+      "group": "UNIVERSUM",
+      "name": "Keine neuen Einstiege in einen Kontrakt so viele Geschäftstage vor FND/LTD",
+      "value": 5,
+      "unit": "Geschäftstage",
+      "status": "ENTWURF",
+      "basis": "Liefervermeidung (§8.6); Haltedauer ≤ 7 Tage macht Kalenderspreads entbehrlich.",
+      "refs": [
+        "DEC-DS-12"
+      ],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "architecture/state_machines.json",
+        "data/reference_data_spec.md",
+        "execution/pretrade_controls.md",
+        "implementation/test_catalog.json",
+        "operations/runbook_register.json",
+        "operations/runbooks.md",
+        "registers/limits.json",
+        "registers/resolution_matrix.json",
+        "requirements.json",
+        "risk/limits.md"
+      ]
+    },
+    {
+      "id": "P-UNI-ROLLS-PER-YEAR",
+      "group": "UNIVERSUM",
+      "name": "Aktive Rollmonate je Jahr und Risikoklasse (Zwangsausstiege am Rollfenster)",
+      "value": {
+        "STIR": 4,
+        "ANLEIHE_KURZ": 4,
+        "ANLEIHE_MITTEL": 4,
+        "ANLEIHE_LANG": 4,
+        "RENDITE": 4,
+        "FX": 4,
+        "ENERGIE": 12,
+        "EDELMETALL": 6,
+        "INDUSTRIEMETALL": 5,
+        "AGRAR": 5,
+        "VIEH": 6,
+        "SOFTS": 5,
+        "KRYPTO": 12
+      },
+      "unit": "je Jahr",
+      "status": "ENTWURF",
+      "basis": "Aus den gelisteten Kontraktmonaten (research/sources/R2a/R2b) abgeleitete Arbeitswerte; offene Positionen im Rollfenster werden geschlossen (DEC-DS-12).",
+      "refs": [
+        "DEC-DS-12"
+      ],
+      "used_in": [
+        "financials/cost_model.py",
+        "financials/economic_model.md"
+      ]
+    },
+    {
+      "id": "P-UNI-ENERGY-EXPIRY-DAYS",
+      "group": "UNIVERSUM",
+      "name": "Energie: Frontmonat so viele Geschäftstage vor LTD nicht halten",
+      "value": 7,
+      "unit": "Geschäftstage",
+      "status": "ENTWURF",
+      "basis": "Negativer WTI-Preis 20.04.2020 im auslaufenden Kontrakt (R4).",
+      "refs": [
+        "SRC-STRESS-E2020-WTI-NEGATIVE"
+      ],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "architecture/scenario_catalog.json",
+        "data/reference_data_spec.md",
+        "governance/policies/trading_policy.md",
+        "operations/runbook_register.json",
+        "operations/runbooks.md",
+        "registers/risk_register.json",
+        "risk/stress_scenarios.json",
+        "risk/stress_test_engine.py"
+      ]
+    },
+    {
+      "id": "P-STR-FC-SCALE",
+      "group": "STRATEGIE",
+      "name": "Mittlerer Betrag der skalierten Prognose",
+      "value": 10,
+      "unit": "Punkte",
+      "status": "ENTWURF",
+      "basis": "Prognoseskalierung (Carver 2015).",
+      "refs": [
+        "SRC-LIT-CARVER-2015"
+      ],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "research/reference_strategies/s_tf.py",
+        "research/reference_strategies/turnover_simulation.py",
+        "research/strategy_family.md",
+        "risk/leverage_calculator.py"
+      ]
+    },
+    {
+      "id": "P-STR-FC-CAP",
+      "group": "STRATEGIE",
+      "name": "Kappung der Prognose",
+      "value": 20,
+      "unit": "Punkte",
+      "status": "ENTWURF",
+      "basis": "Prognosekappung (Carver 2015).",
+      "refs": [
+        "SRC-LIT-CARVER-2015"
+      ],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "research/reference_strategies/s_tf.py",
+        "research/reference_strategies/turnover_simulation.py",
+        "research/strategy_family.md",
+        "risk/leverage_calculator.py"
+      ]
+    },
+    {
+      "id": "P-STR-FDM-CAP",
+      "group": "STRATEGIE",
+      "name": "Obergrenze Prognose-Diversifikationsmultiplikator",
+      "value": 2.0,
+      "unit": "Faktor",
+      "status": "ENTWURF",
+      "basis": "Gedeckelter Diversifikationsmultiplikator (§6.1).",
+      "refs": [],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "research/reference_strategies/s_tf.py",
+        "research/reference_strategies/turnover_simulation.py",
+        "research/strategy_family.md"
+      ]
+    },
+    {
+      "id": "P-STR-IDM-CAP",
+      "group": "STRATEGIE",
+      "name": "Obergrenze Instrument-Diversifikationsmultiplikator",
+      "value": 2.5,
+      "unit": "Faktor",
+      "status": "ENTWURF",
+      "basis": "Schätzunsicherheit der Korrelationen.",
+      "refs": [],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "registers/risk_register.json",
+        "research/prior_derivation.py",
+        "research/strategy_family.md",
+        "validation/test_reference_models.py"
+      ]
+    },
+    {
+      "id": "P-STR-BUFFER",
+      "group": "STRATEGIE",
+      "name": "Positionspuffer (Anteil der Durchschnittsposition)",
+      "value": 0.1,
+      "unit": "Anteil",
+      "status": "ENTWURF",
+      "basis": "Pufferung senkt Umschlag (Carver 2015).",
+      "refs": [
+        "SRC-LIT-CARVER-2015"
+      ],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "audit/scorecard_K.json",
+        "research/strategy_family.md"
+      ]
+    },
+    {
+      "id": "P-STR-TF-SPEEDS",
+      "group": "STRATEGIE",
+      "name": "S-TF: EWMA-Paare (schnell/langsam) in Handelsstunden",
+      "value": [
+        [
+          4,
+          16
+        ],
+        [
+          8,
+          32
+        ],
+        [
+          16,
+          64
+        ],
+        [
+          32,
+          128
+        ]
+      ],
+      "unit": "Stunden",
+      "status": "ENTWURF",
+      "basis": "Auf die Haltedauer-Vorgabe 4 h–4 T kalibriert (nur Umschlag und Haltedauer auf synthetischen Preisen, keine Renditen; research/turnover_results.json).",
+      "refs": [
+        "DEC-DS-23"
+      ],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "research/reference_strategies/s_tf.py",
+        "research/reference_strategies/turnover_simulation.py",
+        "research/strategy_family.md"
+      ]
+    },
+    {
+      "id": "P-STR-TF-ENTRY",
+      "group": "STRATEGIE",
+      "name": "S-TF: Einstiegsschwelle der kombinierten Prognose",
+      "value": 8,
+      "unit": "Punkte",
+      "status": "ENTWURF",
+      "basis": "Handel nur bei deutlicher Prognose; senkt Umschlag.",
+      "refs": [
+        "DEC-DS-23"
+      ],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "research/reference_strategies/s_tf.py",
+        "research/reference_strategies/turnover_simulation.py",
+        "research/strategy_family.md"
+      ]
+    },
+    {
+      "id": "P-STR-TF-EXIT",
+      "group": "STRATEGIE",
+      "name": "S-TF: Ausstieg bei Prognose unter",
+      "value": 3,
+      "unit": "Punkte",
+      "status": "ENTWURF",
+      "basis": "Hysterese zwischen Ein- und Ausstieg.",
+      "refs": [
+        "DEC-DS-23"
+      ],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "research/reference_strategies/s_tf.py",
+        "research/reference_strategies/turnover_simulation.py",
+        "research/strategy_family.md"
+      ]
+    },
+    {
+      "id": "P-STR-STOP-ATR",
+      "group": "STRATEGIE",
+      "name": "Schutzstopp beim Broker in Vielfachen der stündlichen ATR×√24",
+      "value": 2.5,
+      "unit": "Faktor",
+      "status": "ENTWURF",
+      "basis": "Jede Position hat einen serverseitigen Stopp (Schutz ohne Lease, CR-5).",
+      "refs": [
+        "DEC-DS-20"
+      ],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "research/reference_strategies/s_im.py",
+        "research/reference_strategies/s_rev.py",
+        "research/reference_strategies/s_tf.py",
+        "research/reference_strategies/turnover_simulation.py",
+        "research/strategy_family.md"
+      ]
+    },
+    {
+      "id": "P-STR-IM-SIGNAL-MIN",
+      "group": "STRATEGIE",
+      "name": "S-IM: Messfenster ab Sitzungsbeginn der Kernzeit",
+      "value": 120,
+      "unit": "Minuten",
+      "status": "ENTWURF",
+      "basis": "Intraday-Momentum (Gao u. a. 2018; Baltussen u. a. 2021).",
+      "refs": [
+        "SRC-LIT-INTRA-GHLZ-2018",
+        "SRC-LIT-INTRA-BDLM-2021"
+      ],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "research/reference_strategies/s_im.py",
+        "research/reference_strategies/turnover_simulation.py",
+        "research/strategy_family.md"
+      ]
+    },
+    {
+      "id": "P-STR-IM-HOLD-H",
+      "group": "STRATEGIE",
+      "name": "S-IM: Haltedauer bis Kernzeitende",
+      "value": 4,
+      "unit": "Stunden",
+      "status": "ENTWURF",
+      "basis": "Standard-Haltedauer ab 4 h (BQ-04).",
+      "refs": [
+        "DEC-OP-04"
+      ],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "research/reference_strategies/s_im.py",
+        "research/reference_strategies/turnover_simulation.py",
+        "research/strategy_family.md",
+        "validation/test_reference_models.py"
+      ]
+    },
+    {
+      "id": "P-STR-REV-Z",
+      "group": "STRATEGIE",
+      "name": "S-REV: Schwelle der 3-Tage-Rendite in σ",
+      "value": 2.0,
+      "unit": "σ",
+      "status": "ENTWURF",
+      "basis": "Kurzfrist-Umkehr; Prior nahe null, Hürde t > 3.",
+      "refs": [
+        "SRC-LIT-REV-WY-2004"
+      ],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "research/reference_strategies/s_rev.py",
+        "research/reference_strategies/turnover_simulation.py",
+        "research/strategy_family.md"
+      ]
+    },
+    {
+      "id": "P-STR-REV-HOLD-H",
+      "group": "STRATEGIE",
+      "name": "S-REV: höchste Haltedauer",
+      "value": 72,
+      "unit": "Stunden",
+      "status": "ENTWURF",
+      "basis": "Innerhalb der Standard-Haltedauer.",
+      "refs": [],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "research/reference_strategies/s_rev.py",
+        "research/reference_strategies/turnover_simulation.py",
+        "research/strategy_family.md",
+        "validation/test_reference_models.py"
+      ]
+    },
+    {
+      "id": "P-STR-CA-TILT",
+      "group": "STRATEGIE",
+      "name": "S-CA: Größenfaktor für Trades mit (1 + x) bzw. gegen (1 − x) den Carry",
+      "value": 0.2,
+      "unit": "Anteil",
+      "status": "ENTWURF",
+      "basis": "Carry als Filter; eigenständiger Carry scheitert an der 7-Tage-Grenze (Umschlag).",
+      "refs": [
+        "SRC-LIT-CARRY-KMPV-2018"
+      ],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "research/reference_strategies/s_ca.py",
+        "research/strategy_family.md",
+        "validation/test_reference_models.py"
+      ]
+    },
+    {
+      "id": "P-STR-REENTRY-COOLDOWN-H",
+      "group": "STRATEGIE",
+      "name": "Sperrzeit nach Zeitstopp für denselben Kontrakt und dieselbe Richtung",
+      "value": 24,
+      "unit": "Stunden",
+      "status": "ENTWURF",
+      "basis": "Verhindert, dass die 7-Tage-Grenze durch sofortigen Wiedereinstieg umgangen wird.",
+      "refs": [
+        "DEC-OP-04"
+      ],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "research/reference_strategies/s_base.py",
+        "research/reference_strategies/s_rev.py",
+        "research/reference_strategies/s_tf.py",
+        "research/reference_strategies/turnover_simulation.py",
+        "research/strategy_family.md",
+        "validation/test_reference_models.py"
+      ]
+    },
+    {
+      "id": "P-STR-VOL-SPAN-D",
+      "group": "STRATEGIE",
+      "name": "Spanne der EWMA-Volatilität (Stundenrenditen) für Prognosen, Stopps und Größen",
+      "value": 20,
+      "unit": "Handelstage",
+      "status": "ENTWURF",
+      "basis": "Etwa ein Handelsmonat; übliche Wahl für Volatilitätsskalierung (SRC-LIT-CARVER-2015).",
+      "refs": [
+        "SRC-LIT-CARVER-2015"
+      ],
+      "used_in": [
+        "architecture/state_machines.json",
+        "research/reference_strategies/s_im.py",
+        "research/reference_strategies/s_rev.py",
+        "research/reference_strategies/s_tf.py",
+        "research/reference_strategies/turnover_simulation.py",
+        "research/strategy_family.md"
+      ]
+    },
+    {
+      "id": "P-STR-IM-MIN-MOVE-SD",
+      "group": "STRATEGIE",
+      "name": "S-IM: Mindestbewegung seit Beginn der Kernzeit bis zum Messpunkt",
+      "value": 0.25,
+      "unit": "σ (Tag)",
+      "status": "ENTWURF",
+      "basis": "Filtert Tage ohne Richtung; vor jeder Ergebnisansicht registriert.",
+      "refs": [],
+      "used_in": [
+        "research/reference_strategies/s_im.py",
+        "research/reference_strategies/turnover_simulation.py",
+        "research/strategy_family.md"
+      ]
+    },
+    {
+      "id": "P-STR-IM-STOP-FACTOR",
+      "group": "STRATEGIE",
+      "name": "S-IM: Schutzstopp als Anteil von P-STR-STOP-ATR",
+      "value": 0.5,
+      "unit": "Faktor",
+      "status": "ENTWURF",
+      "basis": "Kurze Haltedauer, engerer Stopp.",
+      "refs": [],
+      "used_in": [
+        "research/reference_strategies/s_im.py",
+        "research/reference_strategies/turnover_simulation.py",
+        "research/strategy_family.md"
+      ]
+    },
+    {
+      "id": "P-STR-REV-LOOKBACK-D",
+      "group": "STRATEGIE",
+      "name": "S-REV: Messfenster der Ausgangsbewegung",
+      "value": 3,
+      "unit": "Handelstage",
+      "status": "ENTWURF",
+      "basis": "Kurzfrist-Umkehr über ein bis drei Tage (SRC-LIT-REV-WY-2004).",
+      "refs": [
+        "SRC-LIT-REV-WY-2004"
+      ],
+      "used_in": [
+        "research/reference_strategies/s_rev.py",
+        "research/reference_strategies/turnover_simulation.py",
+        "research/strategy_family.md"
+      ]
+    },
+    {
+      "id": "P-STR-REV-STOP-FACTOR",
+      "group": "STRATEGIE",
+      "name": "S-REV: Schutzstopp als Vielfaches von P-STR-STOP-ATR",
+      "value": 1.5,
+      "unit": "Faktor",
+      "status": "ENTWURF",
+      "basis": "Gegenbewegung braucht Raum; Stopp weiter als bei S-TF.",
+      "refs": [],
+      "used_in": [
+        "research/reference_strategies/s_rev.py",
+        "research/reference_strategies/turnover_simulation.py",
+        "research/strategy_family.md"
+      ]
+    },
+    {
+      "id": "P-STR-BASE-ENTRY-N",
+      "group": "STRATEGIE",
+      "name": "TF-D1: Einstiegskanal",
+      "value": 55,
+      "unit": "Handelstage",
+      "status": "ENTWURF",
+      "basis": "Übernommen aus v2.0 (TF-D1).",
+      "refs": [
+        "SRC-V2-PAKET"
+      ],
+      "used_in": [
+        "audit/v2_to_v3_mapping.json",
+        "research/reference_strategies/s_base.py",
+        "research/reference_strategies/turnover_simulation.py",
+        "research/strategy_family.md"
+      ]
+    },
+    {
+      "id": "P-STR-BASE-EXIT-N",
+      "group": "STRATEGIE",
+      "name": "TF-D1: Ausstiegskanal",
+      "value": 20,
+      "unit": "Handelstage",
+      "status": "ENTWURF",
+      "basis": "Übernommen aus v2.0 (TF-D1).",
+      "refs": [
+        "SRC-V2-PAKET"
+      ],
+      "used_in": [
+        "audit/v2_to_v3_mapping.json",
+        "research/reference_strategies/s_base.py",
+        "research/reference_strategies/turnover_simulation.py",
+        "research/strategy_family.md"
+      ]
+    },
+    {
+      "id": "P-STR-BASE-ATR-N",
+      "group": "STRATEGIE",
+      "name": "TF-D1: Spanne der ATR",
+      "value": 20,
+      "unit": "Handelstage",
+      "status": "ENTWURF",
+      "basis": "Übernommen aus v2.0 (TF-D1).",
+      "refs": [
+        "SRC-V2-PAKET"
+      ],
+      "used_in": [
+        "audit/v2_to_v3_mapping.json",
+        "research/reference_strategies/s_base.py",
+        "research/reference_strategies/turnover_simulation.py",
+        "research/strategy_family.md"
+      ]
+    },
+    {
+      "id": "P-STR-BASE-STOP-ATR",
+      "group": "STRATEGIE",
+      "name": "TF-D1: Schutzstopp in ATR",
+      "value": 2.0,
+      "unit": "ATR",
+      "status": "ENTWURF",
+      "basis": "Übernommen aus v2.0 (TF-D1).",
+      "refs": [
+        "SRC-V2-PAKET"
+      ],
+      "used_in": [
+        "audit/v2_to_v3_mapping.json",
+        "research/reference_strategies/s_base.py",
+        "research/reference_strategies/turnover_simulation.py",
+        "research/strategy_family.md"
+      ]
+    },
+    {
+      "id": "P-STR-RISK-SHARES",
+      "group": "STRATEGIE",
+      "name": "Risikobudget je Strategie (S-TF, S-IM, S-REV)",
+      "value": {
+        "S-TF": 0.6,
+        "S-IM": 0.2,
+        "S-REV": 0.2
+      },
+      "unit": "Anteile",
+      "status": "ENTWURF",
+      "basis": "Vorregistriert; Gewichte nicht nach Ergebnis (§6.1).",
+      "refs": [],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "registers/limits.json",
+        "research/prior_derivation.py",
+        "research/strategy_family.md",
+        "risk/limits.md"
+      ]
+    },
+    {
+      "id": "P-PRI-ANCHORS",
+      "group": "PRIOR",
+      "name": "Ankerwerte aus der Literaturtabelle (Studie, Kennzahl) – Werte werden aus research/sources/R3_literature_prior.json gelesen",
+      "value": {
+        "TF12_INSTR": [
+          [
+            "TF-BABU-2020-JOIM",
+            "Median-Sharpe je Einzelanlage, traditionell"
+          ],
+          [
+            "TF-HOP-2017",
+            "Mittlere Sharpe je Einzelmarkt"
+          ]
+        ],
+        "TF_RATIO_1M_12M": [
+          [
+            [
+              "TF-HOP-2013",
+              "Sharpe 1-Monats-TSMOM"
+            ],
+            [
+              "TF-HOP-2013",
+              "Sharpe 12-Monats-TSMOM"
+            ]
+          ],
+          [
+            [
+              "TF-GGHM-2023",
+              "Sharpe 1-Monats-Trend"
+            ],
+            [
+              "TF-GGHM-2023",
+              "Sharpe 12-Monats-Trend"
+            ]
+          ]
+        ],
+        "TF_RATIO_3M_12M": [
+          [
+            [
+              "TF-HOP-2013",
+              "Sharpe 3-Monats-TSMOM"
+            ],
+            [
+              "TF-HOP-2013",
+              "Sharpe 12-Monats-TSMOM"
+            ]
+          ]
+        ],
+        "IM_CLASS_SR": {
+          "ANLEIHE": [
+            "INTRA-BDLM-2021",
+            "Sharpe Anleihefutures"
+          ],
+          "ROHSTOFF": [
+            "INTRA-BDLM-2021",
+            "Sharpe Rohstofffutures"
+          ],
+          "FX": [
+            "INTRA-BDLM-2021",
+            "Sharpe Währungsfutures"
+          ]
+        },
+        "IM_CLASS_N": {
+          "ANLEIHE": [
+            "INTRA-BDLM-2021",
+            "Anzahl Anleihefutures"
+          ],
+          "ROHSTOFF": [
+            "INTRA-BDLM-2021",
+            "Anzahl Rohstofffutures"
+          ],
+          "FX": [
+            "INTRA-BDLM-2021",
+            "Anzahl Währungsfutures"
+          ]
+        },
+        "DECAY_POST_PUB": [
+          "DECAY-MP-2016",
+          "Renditerückgang nach Veröffentlichung"
+        ],
+        "MT_EXAMPLE": [
+          [
+            "DECAY-HL-2015",
+            "Beispiel Sharpe nach Abschlag"
+          ],
+          [
+            "DECAY-HL-2015",
+            "Beispiel Sharpe vor Abschlag"
+          ]
+        ],
+        "PLAUS_NET": [
+          [
+            "IDX-SGTREND-BABU-2020",
+            "Sharpe SG Trend Index 2000–2018"
+          ],
+          [
+            "IDX-SGTREND-BABU-2020",
+            "Sharpe SG Trend Index 2010–2018"
+          ]
+        ]
+      },
+      "unit": "Verweise",
+      "status": "BELEGT",
+      "basis": "Anker nur aus VERIFIZIERT/TEILWEISE-Einträgen mit Zahl (R3-Notiz Abschnitt 6).",
+      "refs": [
+        "SRC-LIT-TF-BABU-2020-JOIM",
+        "SRC-LIT-TF-HOP-2017",
+        "SRC-LIT-TF-HOP-2013",
+        "SRC-LIT-TF-GGHM-2023",
+        "SRC-LIT-INTRA-BDLM-2021",
+        "SRC-LIT-DECAY-MP-2016",
+        "SRC-LIT-DECAY-HL-2015",
+        "SRC-LIT-IDX-SGTREND-BABU-2020"
+      ],
+      "used_in": [
+        "research/prior_derivation.py",
+        "research/strategy_family.md"
+      ]
+    },
+    {
+      "id": "P-PRI-H-TF",
+      "group": "PRIOR",
+      "name": "Übertragungsfaktor S-TF: 1-Monats-Lookback → Geschwindigkeiten 4–128 h (gleichverteilt)",
+      "value": [
+        0.1,
+        0.9
+      ],
+      "unit": "Faktor",
+      "status": "ANNAHME",
+      "basis": "Belege uneinheitlich: Umkehr auf Wochenbasis in US-Futures bis 2000 (REV-WY-2004), Momentum 1–4 Wochen in Devisen (FX-RMV-2014); schnellere Signale schwächer (TF-GGHM-2023).",
+      "refs": [
+        "SRC-LIT-REV-WY-2004",
+        "SRC-LIT-FX-RMV-2014",
+        "SRC-LIT-TF-GGHM-2023"
+      ],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "research/prior_derivation.py",
+        "research/strategy_family.md"
+      ]
+    },
+    {
+      "id": "P-PRI-H-IM",
+      "group": "PRIOR",
+      "name": "Übertragungsfaktor S-IM: letzte 30 Minuten → Haltedauer bis Kernzeitende (≈ 4 h)",
+      "value": [
+        0.2,
+        0.8
+      ],
+      "unit": "Faktor",
+      "status": "ANNAHME",
+      "basis": "Die Literatur misst nur die letzte halbe Stunde; die Vorhersagekraft kehrt über Folgetage um (INTRA-BDLM-2021).",
+      "refs": [
+        "SRC-LIT-INTRA-BDLM-2021"
+      ],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "research/prior_derivation.py",
+        "research/strategy_family.md"
+      ]
+    },
+    {
+      "id": "P-PRI-DECAY",
+      "group": "PRIOR",
+      "name": "Behaltener Anteil nach Veröffentlichung (gleichverteilt; Untergrenze aus 1 − 58 %)",
+      "value": [
+        0.42,
+        1.0
+      ],
+      "unit": "Anteil",
+      "status": "ANNAHME",
+      "basis": "McLean/Pontiff (2016) messen −58 % bei Aktienprädiktoren; Übertragung auf Futures ist eine Annahme (R3-Notiz).",
+      "refs": [
+        "SRC-LIT-DECAY-MP-2016"
+      ],
+      "used_in": [
+        "research/prior_derivation.py",
+        "research/strategy_family.md"
+      ]
+    },
+    {
+      "id": "P-PRI-MT-TF",
+      "group": "PRIOR",
+      "name": "Behaltener Anteil nach Mehrfachtests, S-TF (vorregistrierte, bekannte Familie)",
+      "value": [
+        0.8,
+        1.0
+      ],
+      "unit": "Anteil",
+      "status": "ANNAHME",
+      "basis": "Geringer Abschlag, weil die Familie vor jeder Ergebnisansicht festgelegt ist.",
+      "refs": [],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "research/prior_derivation.py",
+        "research/strategy_family.md"
+      ]
+    },
+    {
+      "id": "P-PRI-MT-IM",
+      "group": "PRIOR",
+      "name": "Behaltener Anteil nach Mehrfachtests, S-IM (Untergrenze aus Harvey/Liu-Beispiel 0,32/0,75)",
+      "value": [
+        0.43,
+        1.0
+      ],
+      "unit": "Anteil",
+      "status": "ANNAHME",
+      "basis": "Harvey/Liu (2015): Beispiel 0,75 → 0,32 bei 200 Tests.",
+      "refs": [
+        "SRC-LIT-DECAY-HL-2015"
+      ],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "research/prior_derivation.py",
+        "research/strategy_family.md"
+      ]
+    },
+    {
+      "id": "P-PRI-IMPL",
+      "group": "PRIOR",
+      "name": "Behaltener Anteil nach Umsetzung (Datenqualität, Ausführung, Plattform)",
+      "value": [
+        0.8,
+        1.0
+      ],
+      "unit": "Anteil",
+      "status": "ANNAHME",
+      "basis": "Umsetzungsabschlag §6.3.",
+      "refs": [],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "research/prior_derivation.py",
+        "research/strategy_family.md"
+      ]
+    },
+    {
+      "id": "P-PRI-REV-SD",
+      "group": "PRIOR",
+      "name": "S-REV: Streuung der Brutto-Sharpe je Instrument um null",
+      "value": 0.1,
+      "unit": "Sharpe p. a.",
+      "status": "ANNAHME",
+      "basis": "Kein belastbarer Netto-Prior; Empfehlung der R3-Notiz: Prior bei null bis zu eigener Evidenz (Hürde t > 3).",
+      "refs": [
+        "SRC-LIT-REV-UZ-2020",
+        "SRC-LIT-DECAY-HLZ-2016"
+      ],
+      "used_in": [
+        "research/prior_derivation.py",
+        "research/strategy_family.md"
+      ]
+    },
+    {
+      "id": "P-PRI-CA-UPLIFT",
+      "group": "PRIOR",
+      "name": "S-CA-Filter: Zuschlag auf die Brutto-Sharpe von S-TF je Instrument (gleichverteilt)",
+      "value": [
+        0.0,
+        0.05
+      ],
+      "unit": "Sharpe p. a.",
+      "status": "ANNAHME",
+      "basis": "Carry ist über alle Klassen belegt (1,1 diversifiziert), als Filter für 4 h–4 T nur indirekt (R3).",
+      "refs": [
+        "SRC-LIT-CARRY-KMPV-2018"
+      ],
+      "used_in": [
+        "research/prior_derivation.py",
+        "research/strategy_family.md"
+      ]
+    },
+    {
+      "id": "P-PRI-TFD1-7T",
+      "group": "PRIOR",
+      "name": "TF-D1-7T: behaltener Anteil der Trend-Brutto-Sharpe bei Zeitstopp 7 Tage (gleichverteilt)",
+      "value": [
+        0.3,
+        0.7
+      ],
+      "unit": "Anteil",
+      "status": "ANNAHME",
+      "basis": "Trendfolge verdient überwiegend in langen Trades; 62 % der TF-D1-7T-Trades enden am Zeitstopp (research/turnover_results.json).",
+      "refs": [],
+      "used_in": [
+        "research/prior_derivation.py",
+        "research/strategy_family.md"
+      ]
+    },
+    {
+      "id": "P-PRI-RHO-WITHIN",
+      "group": "PRIOR",
+      "name": "Korrelation der Strategierenditen innerhalb einer Risikoklasse",
+      "value": {
+        "STIR": 0.6,
+        "ANLEIHE_KURZ": 0.6,
+        "ANLEIHE_MITTEL": 0.6,
+        "ANLEIHE_LANG": 0.6,
+        "RENDITE": 0.6,
+        "FX": 0.3,
+        "ENERGIE": 0.4,
+        "EDELMETALL": 0.4,
+        "INDUSTRIEMETALL": 0.3,
+        "AGRAR": 0.2,
+        "VIEH": 0.3,
+        "SOFTS": 0.1,
+        "KRYPTO": 0.7
+      },
+      "unit": "Korrelation",
+      "status": "ANNAHME",
+      "basis": "Größenordnung; Schätzung aus lizenzierten Daten in G2/G3 (X-DATA-VOL).",
+      "refs": [],
+      "used_in": [
+        "research/prior_derivation.py",
+        "research/strategy_family.md",
+        "validation/test_reference_models.py"
+      ]
+    },
+    {
+      "id": "P-PRI-RHO-ANLEIHE-GROUP",
+      "group": "PRIOR",
+      "name": "Korrelation zwischen Zins-Risikoklassen (STIR, kurze/mittlere/lange Anleihen, Rendite)",
+      "value": 0.5,
+      "unit": "Korrelation",
+      "status": "ANNAHME",
+      "basis": "Zinsinstrumente teilen den Zinsfaktor.",
+      "refs": [],
+      "used_in": [
+        "research/prior_derivation.py",
+        "research/strategy_family.md"
+      ]
+    },
+    {
+      "id": "P-PRI-RHO-BETWEEN",
+      "group": "PRIOR",
+      "name": "Korrelation der Strategierenditen zwischen Risikoklassen",
+      "value": 0.05,
+      "unit": "Korrelation",
+      "status": "ANNAHME",
+      "basis": "Größenordnung.",
+      "refs": [],
+      "used_in": [
+        "research/prior_derivation.py",
+        "research/strategy_family.md",
+        "validation/test_reference_models.py"
+      ]
+    },
+    {
+      "id": "P-PRI-RHO-STRAT",
+      "group": "PRIOR",
+      "name": "Korrelation zwischen den Strategien",
+      "value": {
+        "S-TF|S-IM": 0.3,
+        "S-TF|S-REV": -0.3,
+        "S-IM|S-REV": -0.1
+      },
+      "unit": "Korrelation",
+      "status": "ANNAHME",
+      "basis": "Trend und Umkehr gegenläufig; Intraday-Momentum teilt den Trendanteil.",
+      "refs": [],
+      "used_in": [
+        "research/prior_derivation.py",
+        "research/strategy_family.md"
+      ]
+    },
+    {
+      "id": "P-PRI-IM-RHO-CLASS",
+      "group": "PRIOR",
+      "name": "Korrelation innerhalb einer Klasse zur Umrechnung der Klassen-Sharpe (S-IM) auf ein Instrument",
+      "value": 0.3,
+      "unit": "Korrelation",
+      "status": "ANNAHME",
+      "basis": "N_eff = N / (1 + (N − 1)·ρ).",
+      "refs": [],
+      "used_in": [
+        "research/prior_derivation.py",
+        "research/strategy_family.md"
+      ]
+    },
+    {
+      "id": "P-PRI-DECISION-RULE",
+      "group": "PRIOR",
+      "name": "Strategien im Entscheidungsfall",
+      "value": "NUR_P_NETTO_POSITIV_GROESSER_0_5",
+      "unit": "Text",
+      "status": "ENTWURF",
+      "basis": "Strategien mit P(Netto-Sharpe > 0) ≤ 0,5 würden an G3 scheitern; ihr Risikobudget verfällt im Entscheidungsfall (keine Umverteilung).",
+      "refs": [
+        "DEC-DS-21"
+      ],
+      "used_in": [
+        "research/strategy_family.md"
+      ]
+    },
+    {
+      "id": "P-RES-ALPHA",
+      "group": "FORSCHUNG",
+      "name": "Signifikanzniveau (einseitig)",
+      "value": 0.05,
+      "unit": "Anteil",
+      "status": "ENTWURF",
+      "basis": "§6.4.",
+      "refs": [],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "requirements.json",
+        "research/evidence_gates.json",
+        "research/research_plan.md",
+        "research/statistical_calculator.py",
+        "validation/test_reference_models.py"
+      ]
+    },
+    {
+      "id": "P-RES-POWER",
+      "group": "FORSCHUNG",
+      "name": "Ziel-Teststärke",
+      "value": 0.8,
+      "unit": "Anteil",
+      "status": "ENTWURF",
+      "basis": "Anhang A.",
+      "refs": [],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "research/research_plan.md",
+        "research/statistical_calculator.py",
+        "validation/test_reference_models.py"
+      ]
+    },
+    {
+      "id": "P-RES-T-HURDLE",
+      "group": "FORSCHUNG",
+      "name": "t-Hürde für Faktoren ohne Literatur-Prior",
+      "value": 3.0,
+      "unit": "t",
+      "status": "BELEGT",
+      "basis": "Harvey, Liu, Zhu (2016).",
+      "refs": [
+        "SRC-LIT-DECAY-HLZ-2016"
+      ],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "research/research_plan.md",
+        "research/statistical_calculator.py",
+        "research/strategy_family.md"
+      ]
+    },
+    {
+      "id": "P-RES-DSR-MIN",
+      "group": "FORSCHUNG",
+      "name": "Mindest-DSR (Wahrscheinlichkeit)",
+      "value": 0.95,
+      "unit": "Anteil",
+      "status": "ENTWURF",
+      "basis": "Bailey, López de Prado (2014).",
+      "refs": [
+        "SRC-LIT-BLP-2014-DSR"
+      ],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "requirements.json",
+        "research/evidence_gates.json",
+        "research/operating_characteristics.py",
+        "research/research_plan.md",
+        "research/strategy_family.md",
+        "validation/mutation_catalog.json",
+        "validation/semantic_checks.py"
+      ]
+    },
+    {
+      "id": "P-RES-PBO-MAX",
+      "group": "FORSCHUNG",
+      "name": "Höchste Probability of Backtest Overfitting",
+      "value": 0.2,
+      "unit": "Anteil",
+      "status": "ENTWURF",
+      "basis": "CSCV (Bailey u. a.).",
+      "refs": [
+        "SRC-LIT-BBLZ-PBO"
+      ],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "ai/mrm_policy.md",
+        "architecture/state_machines.json",
+        "implementation/test_catalog.json",
+        "requirements.json",
+        "research/evidence_gates.json",
+        "research/research_plan.md",
+        "research/strategy_family.md"
+      ]
+    },
+    {
+      "id": "P-RES-EMBARGO-H",
+      "group": "FORSCHUNG",
+      "name": "Embargo der Purged CV",
+      "value": 168,
+      "unit": "Stunden",
+      "status": "ENTWURF",
+      "basis": "Mindestens höchste Haltedauer (López de Prado 2018).",
+      "refs": [
+        "SRC-LIT-LDP-2018"
+      ],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "ai/mrm_policy.md",
+        "architecture/state_machines.json",
+        "research/research_plan.md"
+      ]
+    },
+    {
+      "id": "P-RES-HOLDOUT-YEARS",
+      "group": "FORSCHUNG",
+      "name": "Versiegelter Holdout (letzte Jahre der Historie)",
+      "value": 2,
+      "unit": "Jahre",
+      "status": "ENTWURF",
+      "basis": "Holdout-Versiegelung (übernommen aus v2.0).",
+      "refs": [],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "audit/v2_to_v3_mapping.json",
+        "data/data_plan.md",
+        "external_inputs.json",
+        "implementation/test_catalog.json",
+        "registers/decision_register.json",
+        "requirements.json",
+        "research/evidence_gates.json",
+        "research/operating_characteristics.py",
+        "research/prior_derivation.py",
+        "research/research_plan.md",
+        "validation/render_blocks.py",
+        "validation/semantic_checks.py",
+        "validation/test_reference_models.py"
+      ]
+    },
+    {
+      "id": "P-RES-DEV-YEARS",
+      "group": "FORSCHUNG",
+      "name": "Entwicklungsdaten vor dem Holdout",
+      "value": 8,
+      "unit": "Jahre",
+      "status": "ENTWURF",
+      "basis": "Kibot 1-Minute ab 2009 für CME; Eurex über andere Anbieter.",
+      "refs": [
+        "SRC-HIST-KIBOT"
+      ],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "external_inputs.json",
+        "implementation/test_catalog.json",
+        "registers/decision_register.json",
+        "requirements.json",
+        "research/evidence_gates.json",
+        "research/operating_characteristics.py",
+        "research/prior_derivation.py",
+        "research/research_plan.md",
+        "validation/render_blocks.py",
+        "validation/semantic_checks.py",
+        "validation/test_reference_models.py"
+      ]
+    },
+    {
+      "id": "P-RES-FUTILITY",
+      "group": "FORSCHUNG",
+      "name": "Futility-Schwelle: prädiktive Wahrscheinlichkeit, das Endtor zu bestehen",
+      "value": 0.1,
+      "unit": "Anteil",
+      "status": "ENTWURF",
+      "basis": "§6.6; Wirkung in research/operating_characteristics.py.",
+      "refs": [
+        "DEC-DS-21"
+      ],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "audit/v2_to_v3_mapping.json",
+        "registers/decision_register.json",
+        "requirements.json",
+        "research/evidence_gates.json",
+        "research/operating_characteristics.py",
+        "research/research_plan.md",
+        "validation/mutation_catalog.json",
+        "validation/semantic_checks.py"
+      ]
+    },
+    {
+      "id": "P-RES-SR-USEFUL",
+      "group": "FORSCHUNG",
+      "name": "Netto-Sharpe, ab der eine Strategie als brauchbar gilt",
+      "value": 0.3,
+      "unit": "Sharpe p. a.",
+      "status": "ENTWURF",
+      "basis": "Betriebscharakteristik §6.6.",
+      "refs": [],
+      "used_in": [
+        "KURZFASSUNG_BETREIBER.md",
+        "Masterkonzept_v3.0.md",
+        "operations/monitor_simulation.py",
+        "research/operating_characteristics.py",
+        "research/research_plan.md"
+      ]
+    },
+    {
+      "id": "P-RES-SR-HARMFUL",
+      "group": "FORSCHUNG",
+      "name": "Netto-Sharpe, unter der eine Strategie als schädlich gilt",
+      "value": -0.2,
+      "unit": "Sharpe p. a.",
+      "status": "ENTWURF",
+      "basis": "Betriebscharakteristik §6.6.",
+      "refs": [],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "operations/monitor_simulation.py",
+        "research/operating_characteristics.py"
+      ]
+    },
+    {
+      "id": "P-RES-TURNOVER-TOL",
+      "group": "FORSCHUNG",
+      "name": "Widerlegung: höchste relative Abweichung des gemessenen vom simulierten Umschlag",
+      "value": 0.3,
+      "unit": "Anteil",
+      "status": "ENTWURF",
+      "basis": "Größere Abweichung heißt, dass Kosten- und Kapazitätsrechnung nicht mehr gelten (research/strategy_family.md).",
+      "refs": [],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "requirements.json",
+        "research/evidence_gates.json",
+        "research/strategy_family.md"
+      ]
+    },
+    {
+      "id": "P-RES-PAPER-MONTHS",
+      "group": "FORSCHUNG",
+      "name": "Mindestdauer Paper-Forward (G7)",
+      "value": 6,
+      "unit": "Monate",
+      "status": "ENTWURF",
+      "basis": "§16; kurze Haltedauer liefert viele Trades.",
+      "refs": [],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "implementation/build_program.md",
+        "implementation/build_stages.json",
+        "research/evidence_gates.json",
+        "research/operating_characteristics.py",
+        "research/research_plan.md"
+      ]
+    },
+    {
+      "id": "P-RES-STANDARD-MONTHS",
+      "group": "FORSCHUNG",
+      "name": "Mindestdauer Standardbetrieb vor dem externen Audit (G9)",
+      "value": 12,
+      "unit": "Monate",
+      "status": "BELEGT",
+      "basis": "§20.3 E-9: mindestens zwölf Monate Standardbetrieb ohne schwere Incidents (Auftrag).",
+      "refs": [
+        "SRC-MASTERPROMPT-V3"
+      ],
+      "used_in": [
+        "implementation/build_program.md",
+        "implementation/build_stages.json",
+        "research/evidence_gates.json",
+        "validation/mutation_catalog.json"
+      ]
+    },
+    {
+      "id": "P-RES-PILOT-MONTHS",
+      "group": "FORSCHUNG",
+      "name": "Mindestdauer Pilot H5 (G8)",
+      "value": 6,
+      "unit": "Monate",
+      "status": "ENTWURF",
+      "basis": "§16.",
+      "refs": [],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "operations/costdrift_monitor.py",
+        "operations/monitor_simulation.py",
+        "research/evidence_gates.json",
+        "research/operating_characteristics.py",
+        "research/research_plan.md"
+      ]
+    },
+    {
+      "id": "P-RES-PILOT-LOSS-BUDGET",
+      "group": "FORSCHUNG",
+      "name": "Pilot-Verlustbudget (Anteil Pilotkapital)",
+      "value": 0.15,
+      "unit": "Anteil",
+      "status": "ENTWURF",
+      "basis": "Abbruch des Piloten bei Erreichen (§16 G8).",
+      "refs": [],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "architecture/scenario_catalog.json",
+        "architecture/state_machines.json",
+        "implementation/build_program.md",
+        "implementation/build_stages.json",
+        "research/evidence_gates.json",
+        "risk/limits.md"
+      ]
+    },
+    {
+      "id": "P-RES-FINAL-P",
+      "group": "FORSCHUNG",
+      "name": "Endtor G8: Mindest-Posterior P(Netto-Sharpe > 0) nach dem Pilot",
+      "value": 0.8,
+      "unit": "Anteil",
+      "status": "ENTWURF",
+      "basis": "§16 G8; registriert vor jeder Datenansicht; gleich hoch wie die Schwelle VIABLE der Entscheidungsrechnung (P-ECO-VIABLE-P), damit Evidenz- und Wirtschaftlichkeitsmaß dieselbe Sicherheit verlangen.",
+      "refs": [],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "implementation/build_program.md",
+        "implementation/build_stages.json",
+        "registers/decision_register.json",
+        "research/evidence_gates.json",
+        "research/operating_characteristics.py",
+        "research/research_plan.md",
+        "validation/semantic_checks.py"
+      ]
+    },
+    {
+      "id": "P-OC-DEV-VAR-FACTOR",
+      "group": "FORSCHUNG",
+      "name": "Varianzfaktor der Entwicklungsevidenz im Posterior (Deflation nach Selektion)",
+      "value": 2.0,
+      "unit": "Faktor",
+      "status": "ENTWURF",
+      "basis": "Betriebscharakteristik: Entwicklungsergebnis zählt nach Abzug der Selektionsverzerrung nur mit halber Präzision (Varianz × Faktor).",
+      "refs": [],
+      "used_in": [
+        "research/operating_characteristics.py"
+      ]
+    },
+    {
+      "id": "P-OC-TRIALS",
+      "group": "FORSCHUNG",
+      "name": "Registriertes Mehrfachtest-Budget je Kampagne (Varianten in G3)",
+      "value": 20,
+      "unit": "Anzahl",
+      "status": "ENTWURF",
+      "basis": "Grundlage der Deflation (DSR) und der Selektionsverzerrung (§6.4).",
+      "refs": [],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "examples/valid/gate_cases/GC-G3-004.json",
+        "requirements.json",
+        "research/evidence_gates.json",
+        "research/operating_characteristics.py",
+        "research/research_plan.md",
+        "schemas/experiment_manifest.schema.json",
+        "validation/example_rules.py"
+      ]
+    },
+    {
+      "id": "P-OC-NEFF",
+      "group": "FORSCHUNG",
+      "name": "Effektive Zahl unabhängiger Varianten (Selektionsverzerrung)",
+      "value": 5,
+      "unit": "Anzahl",
+      "status": "ANNAHME",
+      "basis": "Varianten einer Familie sind korreliert; wirksam sind weniger unabhängige Versuche als registrierte.",
+      "refs": [],
+      "used_in": [
+        "research/operating_characteristics.py",
+        "research/research_plan.md"
+      ]
+    },
+    {
+      "id": "P-OC-HARM-SCREEN",
+      "group": "FORSCHUNG",
+      "name": "Harm-Screen in Paper und Pilot: Abbruch, wenn geschätzte Sharpe darunter",
+      "value": -1.0,
+      "unit": "Sharpe p. a.",
+      "status": "ENTWURF",
+      "basis": "Kurze Zeiträume erlauben nur das Aussortieren klar schädlicher Strategien.",
+      "refs": [],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "operations/monitor_simulation.py",
+        "research/evidence_gates.json",
+        "research/operating_characteristics.py",
+        "validation/semantic_checks.py"
+      ]
+    },
+    {
+      "id": "P-OC-DSR-SENS",
+      "group": "FORSCHUNG",
+      "name": "Sensitivität der G3-Schwelle (DSR) in der Betriebscharakteristik",
+      "value": [
+        0.8,
+        0.5
+      ],
+      "unit": "Anteil",
+      "status": "ENTWURF",
+      "basis": "Zeigt den Tausch zwischen Teststärke und Fehlalarmen; registriert bleibt P-RES-DSR-MIN.",
+      "refs": [],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "research/operating_characteristics.py",
+        "research/research_plan.md"
+      ]
+    },
+    {
+      "id": "P-OC-PRIOR-MODE",
+      "group": "FORSCHUNG",
+      "name": "Prior für Futility und Endtor",
+      "value": "SKEPTISCH",
+      "unit": "Text",
+      "status": "ENTWURF",
+      "basis": "Skeptischer Prior: Mittel 0, Streuung P-OC-PRIOR-SD; verhindert, dass ein optimistischer Prior schwache Daten überstimmt. Literatur-Prior als Sensitivität.",
+      "refs": [
+        "DEC-DS-21"
+      ],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "research/operating_characteristics.py",
+        "research/research_plan.md"
+      ]
+    },
+    {
+      "id": "P-OC-PRIOR-SD",
+      "group": "FORSCHUNG",
+      "name": "Streuung des skeptischen Priors (wahre Netto-Sharpe einer neuen Kurzfriststrategie)",
+      "value": 0.25,
+      "unit": "Sharpe p. a.",
+      "status": "ENTWURF",
+      "basis": "Deckt die Spanne von schädlich (−0,2) bis brauchbar (0,3) ab; enger als die Datenpräzision würde Daten bedeutungslos machen.",
+      "refs": [
+        "DEC-DS-21"
+      ],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "research/operating_characteristics.py"
+      ]
+    },
+    {
+      "id": "P-RES-PRIOR-DRAWS",
+      "group": "FORSCHUNG",
+      "name": "Ziehungen der Prior-Simulation",
+      "value": 20000,
+      "unit": "Anzahl",
+      "status": "ENTWURF",
+      "basis": "Feste Seeds (R-10).",
+      "refs": [],
+      "used_in": [
+        "research/prior_derivation.py"
+      ]
+    },
+    {
+      "id": "P-RES-OC-STRATEGIES",
+      "group": "FORSCHUNG",
+      "name": "Simulierte Strategien je Klasse in der Betriebscharakteristik",
+      "value": 4000,
+      "unit": "Anzahl",
+      "status": "ENTWURF",
+      "basis": "Feste Seeds (R-10).",
+      "refs": [],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "research/operating_characteristics.py",
+        "research/research_plan.md"
+      ]
+    },
+    {
+      "id": "P-ECO-HORIZON-Y",
+      "group": "WIRTSCHAFT",
+      "name": "Planungshorizont",
+      "value": 5,
+      "unit": "Jahre",
+      "status": "ENTWURF",
+      "basis": "§5.6.",
+      "refs": [],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "financials/assumptions.json",
+        "financials/decision_montecarlo.py",
+        "financials/economic_model.md",
+        "risk/kelly_ruin_simulator.py",
+        "validation/test_reference_models.py"
+      ]
+    },
+    {
+      "id": "P-ECO-DISCOUNT",
+      "group": "WIRTSCHAFT",
+      "name": "Diskontsatz",
+      "value": 0.06,
+      "unit": "Anteil p. a.",
+      "status": "ANNAHME",
+      "basis": "Opportunitätskosten eines risikobehafteten Vorhabens; Sensitivität im Rechner.",
+      "refs": [],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "financials/assumptions.json",
+        "financials/decision_montecarlo.py",
+        "validation/mutation_catalog.json",
+        "validation/test_reference_models.py"
+      ]
+    },
+    {
+      "id": "P-ECO-CASH-RATE",
+      "group": "WIRTSCHAFT",
+      "name": "Geldmarktsatz (Vergleich V0)",
+      "value": 0.0244,
+      "unit": "Anteil p. a.",
+      "status": "BELEGT",
+      "basis": "€STR 2,440 % für den 17.09.2026.",
+      "refs": [
+        "SRC-ECB-ESTR"
+      ],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "financials/assumptions.json",
+        "financials/buy_vs_build.md",
+        "financials/cost_model.py",
+        "financials/decision_montecarlo.py",
+        "financials/economic_model.md",
+        "validation/render_blocks.py",
+        "validation/test_reference_models.py"
+      ]
+    },
+    {
+      "id": "P-ECO-CASH-RATE-LOW",
+      "group": "WIRTSCHAFT",
+      "name": "Einlagenzins Tagesgeld (Sensitivität)",
+      "value": 0.005,
+      "unit": "Anteil p. a.",
+      "status": "BELEGT",
+      "basis": "Bundesbank MFI-Statistik Juli 2026.",
+      "refs": [
+        "SRC-BBK-MFI"
+      ],
+      "used_in": []
+    },
+    {
+      "id": "P-ECO-BROKER-RATE",
+      "group": "WIRTSCHAFT",
+      "name": "Verzinsung des Kontoguthabens beim Broker",
+      "value": 0.0,
+      "unit": "Anteil p. a.",
+      "status": "ANNAHME",
+      "basis": "Unbelegt; konservativ null (X-BRK-INTEREST).",
+      "refs": [],
+      "external_input": "X-BRK-INTEREST",
+      "used_in": [
+        "external_inputs.json",
+        "financials/assumptions.json",
+        "financials/decision_montecarlo.py",
+        "financials/economic_model.md",
+        "validation/render_blocks.py",
+        "validation/test_reference_models.py"
+      ]
+    },
+    {
+      "id": "P-ECO-CASH-AT-BROKER",
+      "group": "WIRTSCHAFT",
+      "name": "Anteil des Gesamtkapitals auf dem Handelskonto (Rest im Geldmarkt, Liquiditätssteuerung §7.7)",
+      "value": 0.25,
+      "unit": "Anteil",
+      "status": "ENTWURF",
+      "basis": "Mindestens Tagesgrenze 9 % + doppelte Stress-Margin (≈ 8 %) + Puffer; Überschussliquidität extern verzinst. Sensitivität: alles beim Broker (1,0).",
+      "refs": [
+        "DEC-DS-19"
+      ],
+      "used_in": [
+        "KURZFASSUNG_BETREIBER.md",
+        "Masterkonzept_v3.0.md",
+        "architecture/threat_model.md",
+        "audit/concept_review.md",
+        "financials/assumptions.json",
+        "financials/decision_montecarlo.py",
+        "financials/economic_model.md",
+        "lib/calc.py",
+        "operations/runbook_register.json",
+        "operations/runbooks.md",
+        "registers/resolution_matrix.json",
+        "registers/risk_register.json",
+        "risk/leverage_calculator.py",
+        "risk/margin_liquidity.md",
+        "risk/stress_scenarios.json",
+        "risk/stress_test_engine.py",
+        "validation/render_blocks.py",
+        "validation/semantic_checks.py",
+        "validation/test_reference_models.py"
+      ]
+    },
+    {
+      "id": "P-ECO-EURUSD",
+      "group": "WIRTSCHAFT",
+      "name": "Wechselkurs EUR/USD",
+      "value": 1.1411,
+      "unit": "USD je EUR",
+      "status": "BELEGT",
+      "basis": "EZB-Referenzkurs 23.09.2026.",
+      "refs": [
+        "SRC-ECB-FXREF"
+      ],
+      "used_in": [
+        "financials/assumptions.json",
+        "financials/cost_model.py",
+        "validation/render_blocks.py",
+        "validation/semantic_checks.py",
+        "validation/test_reference_models.py"
+      ]
+    },
+    {
+      "id": "P-ECO-EURGBP",
+      "group": "WIRTSCHAFT",
+      "name": "Wechselkurs EUR/GBP",
+      "value": 0.8595,
+      "unit": "GBP je EUR",
+      "status": "BELEGT",
+      "basis": "EZB-Referenzkurs 23.09.2026.",
+      "refs": [
+        "SRC-ECB-FXREF"
+      ],
+      "used_in": [
+        "financials/cost_model.py",
+        "validation/semantic_checks.py",
+        "validation/test_reference_models.py"
+      ]
+    },
+    {
+      "id": "P-ECO-HOURLY-RATE",
+      "group": "WIRTSCHAFT",
+      "name": "Bewertung der Betreiberstunde",
+      "value": 50,
+      "unit": "EUR/h",
+      "status": "ANNAHME",
+      "basis": "Standardwert nach §5.4, weil BQ-07 keinen Stundensatz nennt; Sensitivität 0 und 100 EUR/h.",
+      "refs": [],
+      "external_input": "X-OP-RATE",
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "external_inputs.json",
+        "financials/assumptions.json",
+        "financials/decision_montecarlo.py",
+        "financials/economic_model.md",
+        "financials/stage_costs.py",
+        "implementation/build_program.md",
+        "operations/operations_plan.md",
+        "registers/decision_register.json",
+        "requirements.json",
+        "research/evidence_gates.json",
+        "validation/test_reference_models.py"
+      ]
+    },
+    {
+      "id": "P-ECO-HOURS-PER-PERSON-DAY",
+      "group": "WIRTSCHAFT",
+      "name": "Arbeitsstunden je Personentag (Umrechnung der Aufbauschätzung in Kosten)",
+      "value": 8,
+      "unit": "Stunden",
+      "status": "ENTWURF",
+      "basis": "Konvention für financials/stage_costs.py; Personentage des Bauprogramms × Stunden × P-ECO-HOURLY-RATE.",
+      "refs": [],
+      "used_in": [
+        "financials/stage_costs.py",
+        "implementation/build_program.md"
+      ]
+    },
+    {
+      "id": "P-ECO-VIABLE-P",
+      "group": "WIRTSCHAFT",
+      "name": "Schwelle P(NPV > 0) für VIABLE",
+      "value": 0.8,
+      "unit": "Anteil",
+      "status": "ENTWURF",
+      "basis": "§5.7; registriert vor der Rechnung.",
+      "refs": [],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "financials/assumptions.json",
+        "financials/decision_montecarlo.py",
+        "financials/economic_model.md",
+        "research/evidence_gates.json",
+        "validation/test_reference_models.py"
+      ]
+    },
+    {
+      "id": "P-ECO-MARGINAL-P",
+      "group": "WIRTSCHAFT",
+      "name": "Schwelle P(NPV > 0) für MARGINAL",
+      "value": 0.5,
+      "unit": "Anteil",
+      "status": "ENTWURF",
+      "basis": "§5.7.",
+      "refs": [],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "financials/assumptions.json",
+        "financials/decision_montecarlo.py",
+        "financials/economic_model.md",
+        "research/evidence_gates.json",
+        "validation/test_reference_models.py"
+      ]
+    },
+    {
+      "id": "P-ECO-TAX-SENS",
+      "group": "WIRTSCHAFT",
+      "name": "Pauschaler Steuerabschlag auf positive Jahresergebnisse (nur Sensitivität)",
+      "value": 0.3,
+      "unit": "Anteil",
+      "status": "ANNAHME",
+      "basis": "BQ-03: Steuern extern; runder Sensitivitätswert ohne Rechtsaussage (keine Beratung, R-11).",
+      "refs": [
+        "DEC-OP-03"
+      ],
+      "external_input": "X-TAX-01",
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "external_inputs.json",
+        "financials/assumptions.json",
+        "financials/decision_montecarlo.py",
+        "financials/tax_scenarios.py",
+        "implementation/test_catalog.json",
+        "legal/tax_matrix.md",
+        "registers/decision_register.json",
+        "requirements.json",
+        "validation/semantic_checks.py",
+        "validation/test_reference_models.py"
+      ]
+    },
+    {
+      "id": "P-ECO-CAPITAL-STAGES",
+      "group": "WIRTSCHAFT",
+      "name": "Kapitalstufen (Szenarien)",
+      "value": [
+        250000,
+        500000,
+        1000000,
+        5000000,
+        25000000,
+        100000000
+      ],
+      "unit": "EUR",
+      "status": "ENTWURF",
+      "basis": "§4.3; das System selbst ist kapitaladaptiv (BQ-01).",
+      "refs": [
+        "DEC-OP-01"
+      ],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "financials/assumptions.json",
+        "financials/decision_montecarlo.py",
+        "research/prior_derivation.py",
+        "risk/leverage_calculator.py",
+        "validation/render_blocks.py"
+      ]
+    },
+    {
+      "id": "P-ECO-MC-DRAWS",
+      "group": "WIRTSCHAFT",
+      "name": "Ziehungen der Entscheidungs-Monte-Carlo",
+      "value": 20000,
+      "unit": "Anzahl",
+      "status": "ENTWURF",
+      "basis": "Feste Seeds (R-10).",
+      "refs": [],
+      "used_in": [
+        "financials/assumptions.json",
+        "financials/decision_montecarlo.py"
+      ]
+    },
+    {
+      "id": "P-ECO-SPEND-CAP",
+      "group": "WIRTSCHAFT",
+      "name": "Projektausgabendeckel bis G5 (ohne Handelskapital)",
+      "value": 25000,
+      "unit": "EUR",
+      "status": "ANNAHME",
+      "basis": "Abbruchkriterium §5.8; Betreiberbudget nicht genannt (X-OP-BUDGET).",
+      "refs": [],
+      "external_input": "X-OP-BUDGET",
+      "used_in": [
+        "KURZFASSUNG_BETREIBER.md",
+        "Masterkonzept_v3.0.md",
+        "examples/valid/gate_cases/GC-G5-007.json",
+        "external_inputs.json",
+        "financials/assumptions.json",
+        "financials/economic_model.md",
+        "registers/decision_register.json",
+        "requirements.json",
+        "research/evidence_gates.json"
+      ]
+    },
+    {
+      "id": "P-ECO-MAX-MONTHS-G5",
+      "group": "WIRTSCHAFT",
+      "name": "Höchstdauer bis G5",
+      "value": 12,
+      "unit": "Monate",
+      "status": "ENTWURF",
+      "basis": "Abbruchkriterium §5.8.",
+      "refs": [],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "examples/valid/gate_cases/GC-G5-008.json",
+        "financials/assumptions.json",
+        "implementation/build_program.md",
+        "requirements.json",
+        "research/evidence_gates.json",
+        "research/research_plan.md"
+      ]
+    },
+    {
+      "id": "P-ECO-RAMP-YEARS",
+      "group": "WIRTSCHAFT",
+      "name": "Jahre ohne Standardhandel (Forschung, Bau, Paper, Pilot)",
+      "value": 1,
+      "unit": "Jahre",
+      "status": "ENTWURF",
+      "basis": "Kritischer Pfad BS-00…BS-08 dauert rund 16–20 Monate (implementation/build_stages.json); Pilot mit halber Größe ist darin enthalten.",
+      "refs": [],
+      "used_in": [
+        "financials/assumptions.json",
+        "financials/decision_montecarlo.py",
+        "financials/economic_model.md",
+        "validation/test_reference_models.py"
+      ]
+    },
+    {
+      "id": "P-ECO-COST-UNC-SD",
+      "group": "WIRTSCHAFT",
+      "name": "Unsicherheit der Handelskosten (Lognormal-Faktor, Standardabweichung)",
+      "value": 0.25,
+      "unit": "Anteil",
+      "status": "ANNAHME",
+      "basis": "Spreads, Schlupf und Volatilitäten sind bis G1/G2 Annahmen.",
+      "refs": [],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "financials/assumptions.json",
+        "financials/decision_montecarlo.py",
+        "financials/economic_model.md",
+        "validation/test_reference_models.py"
+      ]
+    },
+    {
+      "id": "P-ECO-V1-SR",
+      "group": "WIRTSCHAFT",
+      "name": "V1 Trendfolge-/Managed-Futures-Produkt: realisierte Netto-Sharpe (Spanne)",
+      "value": [
+        0.05,
+        0.28
+      ],
+      "unit": "Sharpe p. a.",
+      "status": "BELEGT",
+      "basis": "SG Trend Index 2010–2018 bzw. 2000–2018 (Indexrenditen nach Gebühren); konkrete Produkte sind X-V1-PRODUCTS.",
+      "refs": [
+        "SRC-LIT-IDX-SGTREND-BABU-2020"
+      ],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "external_inputs.json",
+        "financials/assumptions.json",
+        "financials/buy_vs_build.md",
+        "financials/decision_montecarlo.py",
+        "financials/economic_model.md",
+        "validation/render_blocks.py",
+        "validation/test_reference_models.py"
+      ]
+    },
+    {
+      "id": "P-ECO-V1-SIGMA",
+      "group": "WIRTSCHAFT",
+      "name": "V1: Volatilität des Trendfolgeprodukts für die Umrechnung der Index-Sharpe in Euro",
+      "value": 0.1,
+      "unit": "Anteil p. a.",
+      "status": "ANNAHME",
+      "basis": "Typische Zielvolatilität von Trendfolgefonds; Messung mit den konkreten Produkten (X-V1-PRODUCTS).",
+      "refs": [],
+      "external_input": "X-V1-PRODUCTS",
+      "used_in": [
+        "financials/buy_vs_build.md",
+        "financials/decision_montecarlo.py",
+        "validation/test_reference_models.py"
+      ]
+    },
+    {
+      "id": "P-ECO-V1-OPS-MIN",
+      "group": "WIRTSCHAFT",
+      "name": "V1: Betreiberzeit",
+      "value": 60,
+      "unit": "Minuten je Monat",
+      "status": "ANNAHME",
+      "basis": "Kauf, Überwachung, Rebalancing.",
+      "refs": [],
+      "used_in": [
+        "financials/buy_vs_build.md",
+        "financials/decision_montecarlo.py",
+        "validation/test_reference_models.py"
+      ]
+    },
+    {
+      "id": "P-ECO-V2-EDGE-FACTOR",
+      "group": "WIRTSCHAFT",
+      "name": "V2 halbautomatisch: behaltener Anteil der Brutto-Sharpe (verspätete manuelle Ausführung)",
+      "value": 0.8,
+      "unit": "Anteil",
+      "status": "ANNAHME",
+      "basis": "Manuelle Orders verpassen Signale außerhalb der Anwesenheit.",
+      "refs": [],
+      "used_in": [
+        "financials/assumptions.json",
+        "financials/buy_vs_build.md",
+        "financials/decision_montecarlo.py"
+      ]
+    },
+    {
+      "id": "P-ECO-V2-MIN-PER-ORDER",
+      "group": "WIRTSCHAFT",
+      "name": "V2: Betreiberzeit je Order",
+      "value": 2,
+      "unit": "Minuten",
+      "status": "ANNAHME",
+      "basis": "Order prüfen und senden, Schutzstopp setzen.",
+      "refs": [],
+      "used_in": [
+        "financials/buy_vs_build.md",
+        "financials/decision_montecarlo.py"
+      ]
+    },
+    {
+      "id": "P-ECO-V2-BUILD-FACTOR",
+      "group": "WIRTSCHAFT",
+      "name": "V2: Aufbauaufwand relativ zur Eigenentwicklung",
+      "value": 0.25,
+      "unit": "Anteil",
+      "status": "ANNAHME",
+      "basis": "Nur Signal-Skript und Berichte.",
+      "refs": [],
+      "used_in": [
+        "financials/buy_vs_build.md",
+        "financials/decision_montecarlo.py"
+      ]
+    },
+    {
+      "id": "P-ECO-V3-BUILD-FACTOR",
+      "group": "WIRTSCHAFT",
+      "name": "V3 bestehende Plattform/Framework: Aufbauaufwand relativ zur Eigenentwicklung",
+      "value": 0.7,
+      "unit": "Anteil",
+      "status": "ANNAHME",
+      "basis": "Kein geprüftes Open-Source-Framework mit MT5-Anbindung (implementation/make_or_buy.md); Einsparung vor allem in Backtest und Datenhaltung.",
+      "refs": [],
+      "used_in": [
+        "financials/assumptions.json",
+        "financials/buy_vs_build.md",
+        "financials/decision_montecarlo.py"
+      ]
+    },
+    {
+      "id": "P-ECO-AUDIT-YEAR",
+      "group": "WIRTSCHAFT",
+      "name": "Jahr des externen Audits (G10)",
+      "value": 2,
+      "unit": "Jahr",
+      "status": "ENTWURF",
+      "basis": "Nach zwölf Monaten Standardbetrieb (E-9).",
+      "refs": [],
+      "used_in": [
+        "financials/decision_montecarlo.py",
+        "financials/economic_model.md",
+        "validation/test_reference_models.py"
+      ]
+    },
+    {
+      "id": "P-EXE-SNAPSHOT-MAX-S",
+      "group": "AUSFUEHRUNG",
+      "name": "Höchstalter eines vollständigen Kontosnapshots für Risikoentscheidungen",
+      "value": 60,
+      "unit": "Sekunden",
+      "status": "ENTWURF",
+      "basis": "Übernommen aus v2.0 (P-EXE-001); monotone Uhr; ohne bekannte Ereignislücke.",
+      "refs": [
+        "SRC-V2-PAKET"
+      ],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "architecture/scenario_catalog.json",
+        "architecture/state_machines.json",
+        "audit/v2_to_v3_mapping.json",
+        "execution/oms_ems.md",
+        "execution/pretrade_controls.md",
+        "implementation/test_catalog.json",
+        "operations/runbook_register.json",
+        "operations/runbooks.md",
+        "operations/sla_slo.md",
+        "schemas/account_snapshot.schema.json"
+      ]
+    },
+    {
+      "id": "P-EXE-RECON-ACTIVE-S",
+      "group": "AUSFUEHRUNG",
+      "name": "Vollabgleich bei offenen Orders oder UNKNOWN",
+      "value": 30,
+      "unit": "Sekunden",
+      "status": "ENTWURF",
+      "basis": "Übernommen aus v2.0 (P-EXE-002).",
+      "refs": [
+        "SRC-V2-PAKET"
+      ],
+      "used_in": [
+        "audit/v2_to_v3_mapping.json",
+        "execution/oms_ems.md",
+        "risk/limits.md"
+      ]
+    },
+    {
+      "id": "P-EXE-RECON-IDLE-S",
+      "group": "AUSFUEHRUNG",
+      "name": "Vollabgleich ohne offene Orders in Handelszeiten",
+      "value": 300,
+      "unit": "Sekunden",
+      "status": "ENTWURF",
+      "basis": "Übernommen aus v2.0 (P-EXE-002).",
+      "refs": [
+        "SRC-V2-PAKET"
+      ],
+      "used_in": [
+        "audit/v2_to_v3_mapping.json",
+        "execution/oms_ems.md",
+        "risk/limits.md"
+      ]
+    },
+    {
+      "id": "P-EXE-POLL-MS",
+      "group": "AUSFUEHRUNG",
+      "name": "Abfrageintervall für Orders, Positionen und Deals über die MT5-Python-Schnittstelle",
+      "value": 500,
+      "unit": "Millisekunden",
+      "status": "ANNAHME",
+      "basis": "Die Python-Schnittstelle liefert keine Ereignisse; Zustand nur per Abfrage (R1). Grenzen der Abfragefrequenz klärt X-BRK-API.",
+      "refs": [
+        "SRC-MT5-API"
+      ],
+      "external_input": "X-BRK-API",
+      "used_in": [
+        "execution/broker_killer_tests.md",
+        "execution/oms_ems.md",
+        "implementation/test_catalog.json",
+        "requirements.json"
+      ]
+    },
+    {
+      "id": "P-EXE-UNKNOWN-POLL-S",
+      "group": "AUSFUEHRUNG",
+      "name": "Klärung eines UNKNOWN-Sendeversuchs: erste Abfragen nach",
+      "value": [
+        5,
+        15,
+        60
+      ],
+      "unit": "Sekunden",
+      "status": "ENTWURF",
+      "basis": "Übernommen aus v2.0 (P-EXE-003); danach Intervall P-EXE-UNKNOWN-POLL-LATER-S.",
+      "refs": [
+        "SRC-V2-PAKET"
+      ],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "architecture/scenario_catalog.json",
+        "architecture/state_machines.json",
+        "audit/v2_to_v3_mapping.json",
+        "execution/oms_ems.md",
+        "operations/runbook_register.json",
+        "operations/runbooks.md"
+      ]
+    },
+    {
+      "id": "P-EXE-UNKNOWN-POLL-LATER-S",
+      "group": "AUSFUEHRUNG",
+      "name": "Klärung UNKNOWN: Intervall nach den ersten Abfragen",
+      "value": 300,
+      "unit": "Sekunden",
+      "status": "ENTWURF",
+      "basis": "Übernommen aus v2.0.",
+      "refs": [
+        "SRC-V2-PAKET"
+      ],
+      "used_in": [
+        "audit/v2_to_v3_mapping.json",
+        "execution/oms_ems.md",
+        "operations/runbook_register.json",
+        "operations/runbooks.md"
+      ]
+    },
+    {
+      "id": "P-EXE-UNKNOWN-MAX-H",
+      "group": "AUSFUEHRUNG",
+      "name": "Klärung UNKNOWN: Höchstdauer bis Eskalation an den Betreiber",
+      "value": 24,
+      "unit": "Stunden",
+      "status": "ENTWURF",
+      "basis": "Übernommen aus v2.0.",
+      "refs": [
+        "SRC-V2-PAKET"
+      ],
+      "used_in": [
+        "architecture/state_machines.json",
+        "audit/v2_to_v3_mapping.json",
+        "execution/oms_ems.md",
+        "operations/runbook_register.json",
+        "operations/runbooks.md"
+      ]
+    },
+    {
+      "id": "P-EXE-STOP-CONFIRM-S",
+      "group": "AUSFUEHRUNG",
+      "name": "Frist für einen bestätigten serverseitigen Schutzstopp je neuer Position",
+      "value": 30,
+      "unit": "Sekunden",
+      "status": "ENTWURF",
+      "basis": "Übernommen aus v2.0 (P-EXE-004); in MT5 als SL der Position oder eigene Stop-Order (DEC-DS-20, Killer-Test KT-06).",
+      "refs": [
+        "SRC-V2-PAKET",
+        "DEC-DS-20"
+      ],
+      "used_in": [
+        "architecture/scenario_catalog.json",
+        "architecture/state_machines.json",
+        "audit/v2_to_v3_mapping.json",
+        "execution/oms_ems.md",
+        "implementation/test_catalog.json",
+        "operations/runbook_register.json",
+        "operations/runbooks.md",
+        "requirements.json"
+      ]
+    },
+    {
+      "id": "P-EXE-LEASE-S",
+      "group": "AUSFUEHRUNG",
+      "name": "Lease des Guardians für den einzigen Writer",
+      "value": 15,
+      "unit": "Sekunden",
+      "status": "ENTWURF",
+      "basis": "Übernommen aus v2.0 (P-EXE-008).",
+      "refs": [
+        "SRC-V2-PAKET"
+      ],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "architecture/state_machines.json",
+        "architecture/system_design.md",
+        "audit/v2_to_v3_mapping.json",
+        "execution/oms_ems.md",
+        "execution/pretrade_controls.md",
+        "requirements.json"
+      ]
+    },
+    {
+      "id": "P-EXE-QUOTE-MAX-AGE-S",
+      "group": "AUSFUEHRUNG",
+      "name": "Höchstalter des Referenzkurses für Einstiege und Preiskorridor",
+      "value": 5,
+      "unit": "Sekunden",
+      "status": "ENTWURF",
+      "basis": "Einstiege nur mit frischem Kurs; ältere Kurse setzen den Datenzustand auf DEGRADED (SM-DATAFEED).",
+      "refs": [],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "architecture/scenario_catalog.json",
+        "architecture/state_machines.json",
+        "execution/pretrade_controls.md"
+      ]
+    },
+    {
+      "id": "P-EXE-ALGO-THRESHOLD",
+      "group": "AUSFUEHRUNG",
+      "name": "Ab dieser Kontraktzahl wird eine Parent-Order in Child-Orders zerlegt",
+      "value": 10,
+      "unit": "Kontrakte",
+      "status": "ENTWURF",
+      "basis": "Algo-Orders (§8.1) erst in höheren Kapitalstufen relevant; Zerlegung hält die Marktwirkung unter dem Modell.",
+      "refs": [],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "execution/oms_ems.md",
+        "execution/tca_model.md",
+        "implementation/test_catalog.json",
+        "requirements.json"
+      ]
+    },
+    {
+      "id": "P-EXE-ALGO-INTERVAL-S",
+      "group": "AUSFUEHRUNG",
+      "name": "Mindestabstand zwischen Child-Orders einer Parent-Order",
+      "value": 60,
+      "unit": "Sekunden",
+      "status": "ENTWURF",
+      "basis": "Zeitgesteuerte Zerlegung (TWAP) im Liquiditätsfenster.",
+      "refs": [],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "execution/oms_ems.md",
+        "implementation/test_catalog.json",
+        "requirements.json"
+      ]
+    },
+    {
+      "id": "P-EXE-NEGPROOF-CYCLES",
+      "group": "AUSFUEHRUNG",
+      "name": "Negativnachweis UNKNOWN: saubere Abfragezyklen nach Ablauf der Gültigkeit (ORDER_TIME_SPECIFIED)",
+      "value": 2,
+      "unit": "Anzahl",
+      "status": "ENTWURF",
+      "basis": "Übernommen aus v2.0 (Negativnachweis mit mindestens zwei Belegen); je Zyklus Abfrage von orders_get, history_orders_get, history_deals_get und positions_get.",
+      "refs": [
+        "SRC-V2-PAKET"
+      ],
+      "used_in": [
+        "architecture/interfaces.md",
+        "architecture/scenario_catalog.json",
+        "architecture/state_machines.json",
+        "audit/v2_to_v3_mapping.json",
+        "execution/oms_ems.md",
+        "implementation/test_catalog.json",
+        "operations/runbook_register.json",
+        "operations/runbooks.md",
+        "requirements.json",
+        "validation/example_rules.py"
+      ]
+    },
+    {
+      "id": "P-EXE-KT-LOSS-CAP-EUR",
+      "group": "AUSFUEHRUNG",
+      "name": "Verlustdeckel der Echtgeld-Killer-Tests in BS-01",
+      "value": 250,
+      "unit": "EUR",
+      "status": "ENTWURF",
+      "basis": "Nur KT-04, KT-06 und KT-14 brauchen Echtgeld; Minimalgröße, Schutzstopp, jede Order vom Betreiber ausgelöst (kein Systemhandel, kein Grant).",
+      "refs": [],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "execution/broker_killer_tests.md",
+        "governance/grants_and_risk_acceptance.md",
+        "implementation/build_program.md",
+        "implementation/build_stages.json",
+        "implementation/test_catalog.json",
+        "requirements.json"
+      ]
+    },
+    {
+      "id": "P-QA-MUTATION-MIN",
+      "group": "QUALITAET",
+      "name": "Mindestanteil erkannter Mutanten im Geldpfad (Mutationstests)",
+      "value": 0.8,
+      "unit": "Anteil",
+      "status": "ENTWURF",
+      "basis": "§10.4 Mutationstests für den Geldpfad; Abnahmekriterium von GATE-G5.",
+      "refs": [],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "implementation/build_program.md",
+        "implementation/build_stages.json",
+        "implementation/test_catalog.json",
+        "requirements.json",
+        "research/evidence_gates.json"
+      ]
+    },
+    {
+      "id": "P-QA-COVERAGE-MIN",
+      "group": "QUALITAET",
+      "name": "Mindest-Zweigabdeckung des Geldpfads (Kern, Risikomotor, OMS, Adapter)",
+      "value": 0.9,
+      "unit": "Anteil",
+      "status": "ENTWURF",
+      "basis": "§10.4 Abdeckungsziele.",
+      "refs": [],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "implementation/build_program.md",
+        "implementation/build_stages.json",
+        "implementation/test_catalog.json",
+        "requirements.json",
+        "research/evidence_gates.json"
+      ]
+    },
+    {
+      "id": "P-QA-SOAK-H",
+      "group": "QUALITAET",
+      "name": "Dauer des Dauerlaufs im Demokonto vor G6",
+      "value": 72,
+      "unit": "Stunden",
+      "status": "ENTWURF",
+      "basis": "Dauertest über mindestens einen Sitzungswechsel und einen Neustart des Terminals.",
+      "refs": [],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "implementation/build_program.md",
+        "implementation/build_stages.json",
+        "implementation/test_catalog.json",
+        "requirements.json",
+        "research/evidence_gates.json"
+      ]
+    },
+    {
+      "id": "P-QA-LOAD-FACTOR",
+      "group": "QUALITAET",
+      "name": "Lasttest: Vielfaches der erwarteten Spitzenrate von Abfragen und Nachrichten",
+      "value": 5,
+      "unit": "Faktor",
+      "status": "ENTWURF",
+      "basis": "Reserve gegenüber P-PTC-MSG-PER-MIN und P-EXE-POLL-MS.",
+      "refs": [],
+      "used_in": [
+        "implementation/build_program.md",
+        "implementation/test_catalog.json",
+        "requirements.json"
+      ]
+    },
+    {
+      "id": "P-QA-FAULT-REPEATS",
+      "group": "QUALITAET",
+      "name": "Wiederholungen je Fehlerinjektionsfall (Abbruch, Zeitüberschreitung, Verbindungsverlust)",
+      "value": 50,
+      "unit": "Anzahl",
+      "status": "ENTWURF",
+      "basis": "Übernommen aus v2.0 (T-EXE-003 mit 50 Wiederholungen).",
+      "refs": [
+        "SRC-V2-PAKET"
+      ],
+      "used_in": [
+        "architecture/scenario_catalog.json",
+        "audit/v2_to_v3_mapping.json",
+        "implementation/build_program.md",
+        "implementation/test_catalog.json",
+        "requirements.json"
+      ]
+    },
+    {
+      "id": "P-QA-PROPERTY-CASES",
+      "group": "QUALITAET",
+      "name": "Zufallsbeispiele je Eigenschaftstest (Lückenregel, Größenregel, Leitern, Verband)",
+      "value": 1000,
+      "unit": "Anzahl",
+      "status": "ENTWURF",
+      "basis": "Feste Samen (R-10).",
+      "refs": [],
+      "used_in": [
+        "implementation/build_program.md",
+        "implementation/test_catalog.json",
+        "requirements.json"
+      ]
+    },
+    {
+      "id": "P-PTC-COLLAR-SIGMA",
+      "group": "AUSFUEHRUNG",
+      "name": "Preiskorridor: höchste Abweichung des Limitpreises vom Referenzkurs",
+      "value": 0.5,
+      "unit": "σ (Tag)",
+      "status": "ENTWURF",
+      "basis": "PTC-01; ausgerichtet an den Vorhandelskontrollen der Delegierten Verordnung (EU) 2017/589 (SRC-REG-RTS6, nicht geprüft), auch ohne Anwendbarkeit.",
+      "refs": [
+        "SRC-REG-RTS6"
+      ],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "execution/pretrade_controls.md"
+      ]
+    },
+    {
+      "id": "P-PTC-NOTIONAL-SHARE-OF-CAP",
+      "group": "AUSFUEHRUNG",
+      "name": "Höchstnominal einer einzelnen Order als Anteil der Profilobergrenze L_g × NAV",
+      "value": 0.25,
+      "unit": "Anteil",
+      "status": "ENTWURF",
+      "basis": "PTC-03 (Fat-Finger-Schutz).",
+      "refs": [],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "execution/pretrade_controls.md"
+      ]
+    },
+    {
+      "id": "P-PTC-MSG-PER-MIN",
+      "group": "AUSFUEHRUNG",
+      "name": "Nachrichtendrosselung: höchste Zahl sendender Aufrufe je Minute und Konto",
+      "value": 30,
+      "unit": "Aufrufe",
+      "status": "ANNAHME",
+      "basis": "PTC-05; Brokergrenzen offen (X-BRK-API).",
+      "refs": [],
+      "external_input": "X-BRK-API",
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "execution/broker_killer_tests.md",
+        "execution/pretrade_controls.md",
+        "implementation/test_catalog.json"
+      ]
+    },
+    {
+      "id": "P-PTC-DUP-WINDOW-S",
+      "group": "AUSFUEHRUNG",
+      "name": "Duplikaterkennung: Zeitfenster für gleiche Instrument-Seite-Menge ohne neue Absicht",
+      "value": 60,
+      "unit": "Sekunden",
+      "status": "ENTWURF",
+      "basis": "PTC-06.",
+      "refs": [],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "execution/pretrade_controls.md",
+        "implementation/test_catalog.json"
+      ]
+    },
+    {
+      "id": "P-DATA-CONT-ADJUST",
+      "group": "DATEN",
+      "name": "Anpassung fortlaufender Reihen für Signale",
+      "value": "RUECKWAERTS_DIFFERENZ",
+      "unit": "Text",
+      "status": "ENTWURF",
+      "basis": "Signale auf rückwärts differenzangepassten Reihen (keine negativen Verzerrungen durch Verhältnisanpassung bei Preisen nahe null); P&L immer auf Einzelkontrakten.",
+      "refs": [],
+      "used_in": [
+        "Masterkonzept_v3.0.md"
+      ]
+    },
+    {
+      "id": "P-DATA-GAP-MAX-MIN",
+      "group": "DATEN",
+      "name": "Höchste Datenlücke im Liquiditätsfenster, bevor ein Handelstag des Instruments ungültig ist",
+      "value": 15,
+      "unit": "Minuten",
+      "status": "ENTWURF",
+      "basis": "§9.3 Lückenpolitik.",
+      "refs": [],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "architecture/scenario_catalog.json",
+        "architecture/state_machines.json",
+        "data/data_plan.md"
+      ]
+    },
+    {
+      "id": "P-DATA-XCHECK-TOL-TICKS",
+      "group": "DATEN",
+      "name": "Abgleich zweier Quellen: zulässige Abweichung eines Schlusskurses",
+      "value": 1,
+      "unit": "Ticks",
+      "status": "ENTWURF",
+      "basis": "§9.3.",
+      "refs": [],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "data/data_plan.md",
+        "implementation/test_catalog.json",
+        "requirements.json",
+        "research/evidence_gates.json"
+      ]
+    },
+    {
+      "id": "P-DATA-PROXY-PRICE-TOL",
+      "group": "DATEN",
+      "name": "Proxy: zulässige Abweichung der Notierung zwischen Kontrakt und Standardkontrakt",
+      "value": 0.02,
+      "unit": "Anteil",
+      "status": "ENTWURF",
+      "basis": "PX-1: derselbe Basiswert wird gleich notiert (Micro/Mini wie Standard); ein anderer Basiswert gleicher Klasse (Gold/Silber) fällt auf.",
+      "refs": [],
+      "used_in": [
+        "audit/concept_review.md",
+        "data/proxy_rules.md",
+        "validation/render_blocks.py",
+        "validation/semantic_checks.py"
+      ]
+    },
+    {
+      "id": "P-DATA-XCHECK-SHARE-MIN",
+      "group": "DATEN",
+      "name": "Abgleich zweier Quellen: Mindestanteil übereinstimmender Balken",
+      "value": 0.99,
+      "unit": "Anteil",
+      "status": "ENTWURF",
+      "basis": "§9.3; darunter Datensatz gesperrt bis Klärung.",
+      "refs": [],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "architecture/state_machines.json",
+        "data/data_plan.md",
+        "implementation/test_catalog.json",
+        "requirements.json",
+        "research/evidence_gates.json",
+        "research/research_plan.md"
+      ]
+    },
+    {
+      "id": "P-DATA-STALE-S",
+      "group": "DATEN",
+      "name": "Live-Kurs gilt in Handelszeiten als veraltet nach",
+      "value": 10,
+      "unit": "Sekunden",
+      "status": "ENTWURF",
+      "basis": "SM-DATAFEED; Sperrgrund MARKET_DATA_DOWN.",
+      "refs": [],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "architecture/scenario_catalog.json",
+        "architecture/state_machines.json",
+        "execution/pretrade_controls.md",
+        "implementation/test_catalog.json",
+        "operations/drill_register.json",
+        "operations/drills.md",
+        "operations/runbook_register.json",
+        "operations/runbooks.md"
+      ]
+    },
+    {
+      "id": "P-DATA-REVISION-DAYS",
+      "group": "DATEN",
+      "name": "Revisionsfenster: Korrekturen des Anbieters werden bis so viele Geschäftstage übernommen",
+      "value": 5,
+      "unit": "Geschäftstage",
+      "status": "ENTWURF",
+      "basis": "Danach eingefroren (Hash); spätere Korrekturen nur als neue Version mit Begründung.",
+      "refs": [],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "architecture/scenario_catalog.json",
+        "data/data_plan.md",
+        "implementation/test_catalog.json",
+        "requirements.json"
+      ]
+    },
+    {
+      "id": "P-AI-PORTAL-TIER",
+      "group": "KI",
+      "name": "Abostufe des Sprachmodellzugangs",
+      "value": "SUPER",
+      "unit": "Text",
+      "status": "ENTWURF",
+      "basis": "Nous Portal Super 100 $/Monat; Kosten in registers/costs.json.",
+      "refs": [
+        "SRC-NOUS-PORTAL",
+        "DEC-DS-14"
+      ],
+      "used_in": [
+        "ai/hermes_integration.md",
+        "financials/cost_model.py",
+        "financials/stage_costs.py",
+        "registers/costs.json"
+      ]
+    },
+    {
+      "id": "P-AI-ROLLBACK-QUARTERS",
+      "group": "KI",
+      "name": "Rückbau nach so vielen Quartalen mit negativer Nutzenbilanz",
+      "value": 2,
+      "unit": "Quartale",
+      "status": "BELEGT",
+      "basis": "§11.4 (Auftrag).",
+      "refs": [
+        "SRC-MASTERPROMPT-V3"
+      ],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "ai/ai_layer.md",
+        "architecture/state_machines.json",
+        "governance/policies/ai_policy.md",
+        "requirements.json",
+        "research/evidence_gates.json"
+      ]
+    },
+    {
+      "id": "P-SCORE-MAX",
+      "group": "BEWERTUNG",
+      "name": "Höchstpunktzahl von K und E",
+      "value": 100,
+      "unit": "Punkte",
+      "status": "BELEGT",
+      "basis": "§20.1, §20.3 (Auftrag).",
+      "refs": [
+        "SRC-MASTERPROMPT-V3"
+      ],
+      "used_in": [
+        "KURZFASSUNG_BETREIBER.md",
+        "Masterkonzept_v3.0.md"
+      ]
+    },
+    {
+      "id": "P-SCORE-K-CAP",
+      "group": "BEWERTUNG",
+      "name": "K ohne bestandene unabhängige Gegenprüfung höchstens",
+      "value": 99,
+      "unit": "Punkte",
+      "status": "BELEGT",
+      "basis": "§20.2 (Auftrag).",
+      "refs": [
+        "SRC-MASTERPROMPT-V3"
+      ],
+      "used_in": [
+        "KURZFASSUNG_BETREIBER.md",
+        "Masterkonzept_v3.0.md",
+        "audit/independent_review_request.md"
+      ]
+    },
+    {
+      "id": "P-SCORE-REVIEW-DEV",
+      "group": "BEWERTUNG",
+      "name": "Abweichung der Gegenprüfung, ab der Befunde aufgelöst und erneut geprüft werden",
+      "value": 5,
+      "unit": "Punkte",
+      "status": "BELEGT",
+      "basis": "§20.4 (Auftrag).",
+      "refs": [
+        "SRC-MASTERPROMPT-V3"
+      ],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "audit/independent_review_request.md"
+      ]
+    },
+    {
+      "id": "P-SCORE-FACTORS",
+      "group": "BEWERTUNG",
+      "name": "zulässige Faktoren je Unterkriterium",
+      "value": [
+        0,
+        0.25,
+        0.5,
+        0.75,
+        1
+      ],
+      "unit": "Faktor",
+      "status": "BELEGT",
+      "basis": "§20.1 (Auftrag).",
+      "refs": [
+        "SRC-MASTERPROMPT-V3"
+      ],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "audit/independent_review_request.md"
+      ]
+    },
+    {
+      "id": "P-AI-EVAL-PASS",
+      "group": "KI",
+      "name": "Mindestbestehensquote der Evaluationssuite vor jedem Update",
+      "value": 0.95,
+      "unit": "Anteil",
+      "status": "ENTWURF",
+      "basis": "§11.3.",
+      "refs": [],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "ai/eval_suite_spec.md",
+        "ai/hermes_integration.md",
+        "architecture/state_machines.json",
+        "implementation/test_catalog.json",
+        "registers/risk_register.json",
+        "requirements.json",
+        "research/evidence_gates.json"
+      ]
+    },
+    {
+      "id": "P-AI-UPDATE-MIN-DAYS",
+      "group": "KI",
+      "name": "Mindestabstand zwischen Hermes-Updates",
+      "value": 30,
+      "unit": "Tage",
+      "status": "ENTWURF",
+      "basis": "Upstream: ein Release alle 5,6 Tage (R5); Pflegeaufwand begrenzen.",
+      "refs": [
+        "SRC-HERMES-UPSTREAM"
+      ],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "ai/hermes_integration.md",
+        "financials/stage_costs.py",
+        "implementation/test_catalog.json",
+        "registers/risk_register.json",
+        "requirements.json",
+        "validation/render_blocks.py"
+      ]
+    },
+    {
+      "id": "P-AI-ML-DSR-MIN",
+      "group": "KI",
+      "name": "ML-Komponente: Mindest-DSR",
+      "value": 0.95,
+      "unit": "Anteil",
+      "status": "ENTWURF",
+      "basis": "§11.5.",
+      "refs": [],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "ai/mrm_policy.md",
+        "architecture/state_machines.json",
+        "implementation/test_catalog.json",
+        "research/strategy_family.md"
+      ]
+    },
+    {
+      "id": "P-AI-ML-UPLIFT-MIN",
+      "group": "KI",
+      "name": "ML-Komponente: Mindestmehrwert gegenüber Regelbasis nach Kosten",
+      "value": 0.1,
+      "unit": "Sharpe p. a.",
+      "status": "ENTWURF",
+      "basis": "§11.5.",
+      "refs": [],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "ai/mrm_policy.md",
+        "architecture/state_machines.json",
+        "implementation/test_catalog.json",
+        "research/strategy_family.md"
+      ]
+    },
+    {
+      "id": "P-AI-ML-SHADOW-MIN-DAYS",
+      "group": "KI",
+      "name": "ML-Komponente: Mindestdauer des Schattenbetriebs vor der Wirkung",
+      "value": 90,
+      "unit": "Kalendertage",
+      "status": "ENTWURF",
+      "basis": "§11.5; ein Quartal, damit die Schattenbilanz nicht an einer einzelnen Marktphase hängt (SM-MLMODEL ML-07, ML-12).",
+      "refs": [],
+      "used_in": [
+        "architecture/state_machines.json",
+        "audit/concept_review.md"
+      ]
+    },
+    {
+      "id": "P-OPS-DAILY-MIN",
+      "group": "BETRIEB",
+      "name": "Tägliche Routine des Betreibers",
+      "value": 20,
+      "unit": "Minuten je Handelstag",
+      "status": "ANNAHME",
+      "basis": "Bericht lesen, Abgleich bestätigen (operations/operations_plan.md).",
+      "refs": [],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "financials/assumptions.json",
+        "financials/economic_model.md",
+        "financials/stage_costs.py",
+        "governance/organisation_raci.md",
+        "operations/operations_plan.md"
+      ]
+    },
+    {
+      "id": "P-OPS-WEEKLY-MIN",
+      "group": "BETRIEB",
+      "name": "Wöchentliche Risikorunde",
+      "value": 90,
+      "unit": "Minuten je Woche",
+      "status": "ANNAHME",
+      "basis": "§13.",
+      "refs": [],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "financials/economic_model.md",
+        "financials/stage_costs.py",
+        "governance/organisation_raci.md",
+        "operations/operations_plan.md"
+      ]
+    },
+    {
+      "id": "P-OPS-MONTHLY-MIN",
+      "group": "BETRIEB",
+      "name": "Monatliche Attribution und Abgleich",
+      "value": 240,
+      "unit": "Minuten je Monat",
+      "status": "ANNAHME",
+      "basis": "§13.",
+      "refs": [],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "financials/economic_model.md",
+        "financials/stage_costs.py",
+        "governance/organisation_raci.md",
+        "operations/operations_plan.md"
+      ]
+    },
+    {
+      "id": "P-OPS-INCIDENT-MIN",
+      "group": "BETRIEB",
+      "name": "Erwartete Incident-Zeit",
+      "value": 180,
+      "unit": "Minuten je Monat",
+      "status": "ANNAHME",
+      "basis": "Erfahrungswert unbelegt; Messung im Paper-Betrieb.",
+      "refs": [],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "financials/economic_model.md",
+        "financials/stage_costs.py",
+        "operations/operations_plan.md"
+      ]
+    },
+    {
+      "id": "P-OPS-QUARTERLY-MIN",
+      "group": "BETRIEB",
+      "name": "Quartalsweise Modellprüfung und Drills",
+      "value": 480,
+      "unit": "Minuten je Quartal",
+      "status": "ANNAHME",
+      "basis": "§13, §14.",
+      "refs": [],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "financials/economic_model.md",
+        "financials/stage_costs.py",
+        "governance/organisation_raci.md",
+        "operations/operations_plan.md"
+      ]
+    },
+    {
+      "id": "P-OPS-HEARTBEAT-S",
+      "group": "BETRIEB",
+      "name": "Heartbeat des Kerns",
+      "value": 5,
+      "unit": "Sekunden",
+      "status": "ENTWURF",
+      "basis": "Übernommen aus v2.0 (P-EXE-007).",
+      "refs": [
+        "SRC-V2-PAKET"
+      ],
+      "used_in": [
+        "architecture/system_design.md",
+        "audit/v2_to_v3_mapping.json"
+      ]
+    },
+    {
+      "id": "P-OPS-HEARTBEAT-CRIT-S",
+      "group": "BETRIEB",
+      "name": "Heartbeat fehlt: kritischer Alarm nach",
+      "value": 15,
+      "unit": "Sekunden",
+      "status": "ENTWURF",
+      "basis": "Übernommen aus v2.0 (P-EXE-007).",
+      "refs": [
+        "SRC-V2-PAKET"
+      ],
+      "used_in": [
+        "architecture/scenario_catalog.json",
+        "architecture/system_design.md",
+        "audit/v2_to_v3_mapping.json",
+        "operations/runbook_register.json",
+        "operations/runbooks.md"
+      ]
+    },
+    {
+      "id": "P-OPS-RESTART-MAX-N",
+      "group": "BETRIEB",
+      "name": "Automatische Neustarts des Kerns je Fenster, danach Eskalation",
+      "value": 3,
+      "unit": "Anzahl",
+      "status": "ENTWURF",
+      "basis": "Übernommen aus v2.0 (P-EXE-009).",
+      "refs": [
+        "SRC-V2-PAKET"
+      ],
+      "used_in": [
+        "architecture/scenario_catalog.json",
+        "architecture/system_design.md",
+        "audit/v2_to_v3_mapping.json"
+      ]
+    },
+    {
+      "id": "P-OPS-RESTART-WINDOW-MIN",
+      "group": "BETRIEB",
+      "name": "Fenster für die Neustartgrenze",
+      "value": 15,
+      "unit": "Minuten",
+      "status": "ENTWURF",
+      "basis": "Übernommen aus v2.0 (P-EXE-009).",
+      "refs": [
+        "SRC-V2-PAKET"
+      ],
+      "used_in": [
+        "architecture/scenario_catalog.json",
+        "architecture/system_design.md",
+        "audit/v2_to_v3_mapping.json"
+      ]
+    },
+    {
+      "id": "P-OPS-RESTART-S",
+      "group": "BETRIEB",
+      "name": "Ziel für einen normalen Wiederanlauf einschließlich Abgleich",
+      "value": 120,
+      "unit": "Sekunden",
+      "status": "ENTWURF",
+      "basis": "Übernommen aus v2.0 (P-OPS-011).",
+      "refs": [
+        "SRC-V2-PAKET"
+      ],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "architecture/system_design.md",
+        "audit/v2_to_v3_mapping.json",
+        "implementation/test_catalog.json",
+        "operations/drill_register.json",
+        "operations/drills.md",
+        "operations/sla_slo.md"
+      ]
+    },
+    {
+      "id": "P-OPS-RPO-JOURNAL-MIN",
+      "group": "BETRIEB",
+      "name": "Wiederherstellungspunkt Journal: verschlüsselte Offsite-Kopie mindestens alle",
+      "value": 5,
+      "unit": "Minuten",
+      "status": "ENTWURF",
+      "basis": "Übernommen aus v2.0 (P-OPS-003).",
+      "refs": [
+        "SRC-V2-PAKET"
+      ],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "architecture/system_design.md",
+        "audit/v2_to_v3_mapping.json",
+        "governance/policies/retention_policy.md",
+        "implementation/test_catalog.json",
+        "operations/drill_register.json",
+        "operations/drills.md",
+        "operations/runbook_register.json",
+        "operations/runbooks.md",
+        "operations/sla_slo.md",
+        "requirements.json"
+      ]
+    },
+    {
+      "id": "P-OPS-RTO-CORE-H",
+      "group": "BETRIEB",
+      "name": "Wiederherstellungszeit Geldpfad nach Totalausfall (Restore auf Ersatzinstanz)",
+      "value": 4,
+      "unit": "Stunden",
+      "status": "ENTWURF",
+      "basis": "Übernommen aus v2.0 (P-OPS-010); offene Positionen schützen in dieser Zeit die Stopps beim Broker.",
+      "refs": [
+        "SRC-V2-PAKET"
+      ],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "architecture/system_design.md",
+        "audit/v2_to_v3_mapping.json",
+        "implementation/test_catalog.json",
+        "operations/drill_register.json",
+        "operations/drills.md",
+        "operations/runbook_register.json",
+        "operations/runbooks.md",
+        "operations/sla_slo.md",
+        "requirements.json"
+      ]
+    },
+    {
+      "id": "P-OPS-BACKUP-DAILY",
+      "group": "BETRIEB",
+      "name": "Aufbewahrte tägliche Sicherungen",
+      "value": 14,
+      "unit": "Anzahl",
+      "status": "ENTWURF",
+      "basis": "Übernommen aus v2.0 (P-OPS-005).",
+      "refs": [
+        "SRC-V2-PAKET"
+      ],
+      "used_in": [
+        "architecture/system_design.md",
+        "audit/v2_to_v3_mapping.json",
+        "implementation/test_catalog.json"
+      ]
+    },
+    {
+      "id": "P-OPS-BACKUP-WEEKLY",
+      "group": "BETRIEB",
+      "name": "Aufbewahrte wöchentliche Sicherungen",
+      "value": 8,
+      "unit": "Anzahl",
+      "status": "ENTWURF",
+      "basis": "Übernommen aus v2.0 (P-OPS-005).",
+      "refs": [
+        "SRC-V2-PAKET"
+      ],
+      "used_in": [
+        "architecture/system_design.md",
+        "audit/v2_to_v3_mapping.json",
+        "implementation/test_catalog.json"
+      ]
+    },
+    {
+      "id": "P-OPS-RESTORE-DRILL-D",
+      "group": "BETRIEB",
+      "name": "Abstand der Restoreproben",
+      "value": 30,
+      "unit": "Tage",
+      "status": "ENTWURF",
+      "basis": "Übernommen aus v2.0 (P-OPS-004, monatlich).",
+      "refs": [
+        "SRC-V2-PAKET"
+      ],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "architecture/system_design.md",
+        "audit/v2_to_v3_mapping.json",
+        "implementation/test_catalog.json",
+        "operations/drill_register.json",
+        "operations/drills.md",
+        "requirements.json"
+      ]
+    },
+    {
+      "id": "P-OPS-CLOCK-WARN-S",
+      "group": "BETRIEB",
+      "name": "Uhrabweichung: Warnung ab",
+      "value": 1,
+      "unit": "Sekunden",
+      "status": "ENTWURF",
+      "basis": "Übernommen aus v2.0 (P-OPS-007).",
+      "refs": [
+        "SRC-V2-PAKET"
+      ],
+      "used_in": [
+        "architecture/state_machines.json",
+        "architecture/system_design.md",
+        "audit/v2_to_v3_mapping.json",
+        "operations/runbook_register.json",
+        "operations/runbooks.md"
+      ]
+    },
+    {
+      "id": "P-OPS-CLOCK-BLOCK-S",
+      "group": "BETRIEB",
+      "name": "Uhrabweichung: Einstiegssperre ab",
+      "value": 2,
+      "unit": "Sekunden",
+      "status": "ENTWURF",
+      "basis": "Übernommen aus v2.0 (P-OPS-007).",
+      "refs": [
+        "SRC-V2-PAKET"
+      ],
+      "used_in": [
+        "architecture/scenario_catalog.json",
+        "architecture/state_machines.json",
+        "architecture/system_design.md",
+        "audit/v2_to_v3_mapping.json",
+        "operations/runbook_register.json",
+        "operations/runbooks.md"
+      ]
+    },
+    {
+      "id": "P-OPS-DISK-LEVELS",
+      "group": "BETRIEB",
+      "name": "Plattenbelegung: Warnung, Stopp von Nebenaufgaben, Einstiegssperre",
+      "value": [
+        0.75,
+        0.85,
+        0.9
+      ],
+      "unit": "Anteile",
+      "status": "ENTWURF",
+      "basis": "Übernommen aus v2.0 (P-OPS-006).",
+      "refs": [
+        "SRC-V2-PAKET"
+      ],
+      "used_in": [
+        "architecture/scenario_catalog.json",
+        "architecture/state_machines.json",
+        "architecture/system_design.md",
+        "audit/v2_to_v3_mapping.json",
+        "operations/runbook_register.json",
+        "operations/runbooks.md"
+      ]
+    },
+    {
+      "id": "P-OPS-ALERT-ACK-H",
+      "group": "BETRIEB",
+      "name": "Täglicher Testalarm: Quittung spätestens nach",
+      "value": 12,
+      "unit": "Stunden",
+      "status": "ENTWURF",
+      "basis": "Übernommen aus v2.0 (P-OPS-001).",
+      "refs": [
+        "SRC-V2-PAKET"
+      ],
+      "used_in": [
+        "architecture/system_design.md",
+        "audit/v2_to_v3_mapping.json",
+        "implementation/test_catalog.json",
+        "operations/drill_register.json",
+        "operations/drills.md"
+      ]
+    },
+    {
+      "id": "P-OPS-ALERT-DOWN-H",
+      "group": "BETRIEB",
+      "name": "Alarmkanal ausgefallen: Einstiegssperre nach",
+      "value": 24,
+      "unit": "Stunden",
+      "status": "ENTWURF",
+      "basis": "Übernommen aus v2.0 (P-OPS-002); beide Kanäle aus: sofort.",
+      "refs": [
+        "SRC-V2-PAKET"
+      ],
+      "used_in": [
+        "audit/v2_to_v3_mapping.json",
+        "operations/runbook_register.json",
+        "operations/runbooks.md"
+      ]
+    },
+    {
+      "id": "P-OPS-PRESENCE-MAX-D",
+      "group": "BETRIEB",
+      "name": "Ohne bestätigte Erreichbarkeit des Betreibers: Einstiegssperre nach",
+      "value": 7,
+      "unit": "Tage",
+      "status": "ENTWURF",
+      "basis": "Übernommen aus v2.0 (P-RSK-030).",
+      "refs": [
+        "SRC-V2-PAKET"
+      ],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "architecture/scenario_catalog.json",
+        "architecture/state_machines.json",
+        "audit/v2_to_v3_mapping.json",
+        "governance/organisation_raci.md",
+        "operations/runbook_register.json",
+        "operations/runbooks.md",
+        "security/key_management.md"
+      ]
+    },
+    {
+      "id": "P-OPS-ISOLATE-MIN",
+      "group": "BETRIEB",
+      "name": "Isolation der KI-Zone bei Kompromittierungsverdacht binnen",
+      "value": 15,
+      "unit": "Minuten",
+      "status": "ENTWURF",
+      "basis": "Übernommen aus v2.0 (RB-12).",
+      "refs": [
+        "SRC-V2-PAKET"
+      ],
+      "used_in": [
+        "ai/hermes_integration.md",
+        "architecture/state_machines.json",
+        "audit/v2_to_v3_mapping.json",
+        "implementation/test_catalog.json",
+        "operations/drill_register.json",
+        "operations/drills.md",
+        "operations/runbook_register.json",
+        "operations/runbooks.md",
+        "requirements.json"
+      ]
+    },
+    {
+      "id": "P-OPS-CHANGE-COOLDOWN-H",
+      "group": "BETRIEB",
+      "name": "Karenzzeit zwischen Prüfbericht und Freigabe eigener Änderungen der Klassen C und D",
+      "value": 24,
+      "unit": "Stunden",
+      "status": "ENTWURF",
+      "basis": "Übernommen aus v2.0 (P-OPS-012).",
+      "refs": [
+        "SRC-V2-PAKET"
+      ],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "architecture/state_machines.json",
+        "audit/v2_to_v3_mapping.json",
+        "governance/policies/change_policy.md",
+        "implementation/test_catalog.json",
+        "requirements.json",
+        "schemas/release_manifest.schema.json"
+      ]
+    },
+    {
+      "id": "P-SLO-CORE-AVAIL",
+      "group": "BETRIEB",
+      "name": "SLO Verfügbarkeit des Geldpfads in Handelszeiten",
+      "value": 0.995,
+      "unit": "Anteil je Monat",
+      "status": "ENTWURF",
+      "basis": "§10.6; Grundlage für Fehlerbudget und Alarmierung.",
+      "refs": [],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "implementation/test_catalog.json",
+        "operations/sla_slo.md"
+      ]
+    },
+    {
+      "id": "P-SLO-ALERT-LATENCY-S",
+      "group": "BETRIEB",
+      "name": "SLO Zustellung kritischer Alarme",
+      "value": 60,
+      "unit": "Sekunden",
+      "status": "ENTWURF",
+      "basis": "§10.6; zwei unabhängige Kanäle.",
+      "refs": [],
+      "used_in": [
+        "implementation/test_catalog.json",
+        "operations/sla_slo.md"
+      ]
+    },
+    {
+      "id": "P-SLO-INCIDENT-ACK-MIN",
+      "group": "BETRIEB",
+      "name": "SLO Quittung eines kritischen Incidents in Handelszeiten",
+      "value": 30,
+      "unit": "Minuten",
+      "status": "ENTWURF",
+      "basis": "Mit einer Person nicht zusicherbar; deshalb Notfallvertretung (X-ORG-DEPUTY) für G8.",
+      "refs": [],
+      "external_input": "X-ORG-DEPUTY",
+      "used_in": [
+        "architecture/scenario_catalog.json",
+        "architecture/state_machines.json",
+        "governance/policies/incident_policy.md",
+        "operations/sla_slo.md",
+        "requirements.json"
+      ]
+    },
+    {
+      "id": "P-SLO-REPORT-LAG-H",
+      "group": "BETRIEB",
+      "name": "SLO Tagesbericht verfügbar nach Handelstagesende",
+      "value": 2,
+      "unit": "Stunden",
+      "status": "ENTWURF",
+      "basis": "§13 täglicher Risikobericht.",
+      "refs": [],
+      "used_in": [
+        "operations/sla_slo.md"
+      ]
+    },
+    {
+      "id": "P-SEC-SIG-EXPIRY-MIN",
+      "group": "SICHERHEIT",
+      "name": "Gültigkeit einer signierten Betreiberaktion",
+      "value": 15,
+      "unit": "Minuten",
+      "status": "ENTWURF",
+      "basis": "Übernommen aus v2.0 (P-SEC-003).",
+      "refs": [
+        "SRC-V2-PAKET"
+      ],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "architecture/interfaces.md",
+        "architecture/threat_model.md",
+        "audit/v2_to_v3_mapping.json",
+        "requirements.json",
+        "schemas/operator_action.schema.json",
+        "security/key_management.md",
+        "validation/example_rules.py"
+      ]
+    },
+    {
+      "id": "P-SEC-GRANT-DAYS",
+      "group": "SICHERHEIT",
+      "name": "Höchstlaufzeit je Grant-Art",
+      "value": {
+        "PAPER": 90,
+        "PILOT": 30,
+        "STANDARD": 90
+      },
+      "unit": "Tage",
+      "status": "ENTWURF",
+      "basis": "Übernommen aus v2.0 (P-SEC-001).",
+      "refs": [
+        "SRC-V2-PAKET"
+      ],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "architecture/state_machines.json",
+        "audit/v2_to_v3_mapping.json",
+        "examples/valid/state_traces/TR-GRANT-001.json",
+        "governance/grants_and_risk_acceptance.md",
+        "requirements.json",
+        "research/evidence_gates.json",
+        "schemas/live_grant.schema.json",
+        "validation/example_rules.py"
+      ]
+    },
+    {
+      "id": "P-SEC-CRED-ROTATION-D",
+      "group": "SICHERHEIT",
+      "name": "Regelmäßige Rotation von Broker- und Dienst-Credentials",
+      "value": 90,
+      "unit": "Tage",
+      "status": "ENTWURF",
+      "basis": "Zusätzlich bei Host-Wechsel, Restore und Verdacht.",
+      "refs": [],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "architecture/threat_model.md",
+        "operations/runbook_register.json",
+        "operations/runbooks.md",
+        "registers/risk_register.json",
+        "security/key_management.md"
+      ]
+    },
+    {
+      "id": "P-SEC-INJECTION-CASES",
+      "group": "SICHERHEIT",
+      "name": "Umfang des Prompt-Injection-Korpus für die Abnahme der KI-Zone",
+      "value": 30,
+      "unit": "Fälle",
+      "status": "ENTWURF",
+      "basis": "Übernommen aus v2.0 (T-SEC-002).",
+      "refs": [
+        "SRC-V2-PAKET"
+      ],
+      "used_in": [
+        "architecture/threat_model.md",
+        "audit/v2_to_v3_mapping.json",
+        "implementation/test_catalog.json"
+      ]
+    },
+    {
+      "id": "P-SEC-PATCH-CRIT-D",
+      "group": "SICHERHEIT",
+      "name": "Frist für kritische Sicherheitsupdates (Betriebssystem, Abhängigkeiten, KI-Agent)",
+      "value": 14,
+      "unit": "Tage",
+      "status": "ENTWURF",
+      "basis": "Übernommen aus v2.0 (P-HRM-002, Sicherheitskorrekturen).",
+      "refs": [
+        "SRC-V2-PAKET"
+      ],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "ai/hermes_integration.md",
+        "architecture/threat_model.md",
+        "audit/v2_to_v3_mapping.json",
+        "governance/policies/infosec_policy.md",
+        "implementation/test_catalog.json",
+        "requirements.json",
+        "security/security_architecture.md"
+      ]
+    },
+    {
+      "id": "P-AI-EVAL-CASES",
+      "group": "KI",
+      "name": "Fälle der Evaluationssuite",
+      "value": 40,
+      "unit": "Anzahl",
+      "status": "ENTWURF",
+      "basis": "Übernommen aus v2.0 (P-HRM-005).",
+      "refs": [
+        "SRC-V2-PAKET"
+      ],
+      "used_in": [
+        "ai/eval_suite_spec.md",
+        "audit/v2_to_v3_mapping.json"
+      ]
+    },
+    {
+      "id": "P-AI-EVAL-HIDDEN",
+      "group": "KI",
+      "name": "davon für den Agenten unsichtbar",
+      "value": 10,
+      "unit": "Anzahl",
+      "status": "ENTWURF",
+      "basis": "Übernommen aus v2.0 (P-HRM-005).",
+      "refs": [
+        "SRC-V2-PAKET"
+      ],
+      "used_in": [
+        "ai/eval_suite_spec.md",
+        "audit/v2_to_v3_mapping.json"
+      ]
+    },
+    {
+      "id": "P-AI-EVAL-ROTATE",
+      "group": "KI",
+      "name": "Anteil rotierter Fälle je Quartal",
+      "value": 0.25,
+      "unit": "Anteil",
+      "status": "ENTWURF",
+      "basis": "Übernommen aus v2.0 (P-HRM-006).",
+      "refs": [
+        "SRC-V2-PAKET"
+      ],
+      "used_in": [
+        "ai/eval_suite_spec.md",
+        "audit/v2_to_v3_mapping.json"
+      ]
+    },
+    {
+      "id": "P-AI-EVAL-REPEATS",
+      "group": "KI",
+      "name": "Wiederholungen nichtdeterministischer Fälle",
+      "value": 3,
+      "unit": "Anzahl",
+      "status": "ENTWURF",
+      "basis": "Übernommen aus v2.0 (P-HRM-006).",
+      "refs": [
+        "SRC-V2-PAKET"
+      ],
+      "used_in": [
+        "ai/eval_suite_spec.md",
+        "audit/v2_to_v3_mapping.json"
+      ]
+    },
+    {
+      "id": "P-AI-ACCEPT-MIN",
+      "group": "KI",
+      "name": "Mindestannahmequote der Vorschläge in der Nutzenbilanz",
+      "value": 0.5,
+      "unit": "Anteil",
+      "status": "ENTWURF",
+      "basis": "Übernommen aus v2.0 (P-HRM-007).",
+      "refs": [
+        "SRC-V2-PAKET"
+      ],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "ai/ai_layer.md",
+        "audit/v2_to_v3_mapping.json",
+        "research/evidence_gates.json"
+      ]
+    },
+    {
+      "id": "P-AI-JOB-MAX-H",
+      "group": "KI",
+      "name": "Höchstdauer eines Forschungsjobs in der Sandbox (ohne Netz, ein Job gleichzeitig)",
+      "value": 4,
+      "unit": "Stunden",
+      "status": "ENTWURF",
+      "basis": "Übernommen aus v2.0 (P-HRM-004).",
+      "refs": [
+        "SRC-V2-PAKET"
+      ],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "audit/v2_to_v3_mapping.json"
+      ]
+    },
+    {
+      "id": "P-AI-PROPOSALS-OPEN-MAX",
+      "group": "KI",
+      "name": "Höchstzahl offener Vorschläge des Agenten",
+      "value": 3,
+      "unit": "Anzahl",
+      "status": "ENTWURF",
+      "basis": "Übernommen aus v2.0 (P-HRM-003).",
+      "refs": [
+        "SRC-V2-PAKET"
+      ],
+      "used_in": [
+        "ai/ai_layer.md",
+        "architecture/state_machines.json",
+        "audit/v2_to_v3_mapping.json"
+      ]
+    },
+    {
+      "id": "P-AI-PROPOSALS-WEEK-MAX",
+      "group": "KI",
+      "name": "Höchstzahl neuer Vorschläge je Woche",
+      "value": 5,
+      "unit": "Anzahl",
+      "status": "ENTWURF",
+      "basis": "Übernommen aus v2.0 (P-HRM-003).",
+      "refs": [
+        "SRC-V2-PAKET"
+      ],
+      "used_in": [
+        "ai/ai_layer.md",
+        "architecture/state_machines.json",
+        "audit/v2_to_v3_mapping.json"
+      ]
+    },
+    {
+      "id": "P-AI-PAYLOAD-MAX-MIB",
+      "group": "KI",
+      "name": "Größte Nutzlast einer Anfrage an die Projektschnittstelle",
+      "value": 1,
+      "unit": "MiB",
+      "status": "ENTWURF",
+      "basis": "Übernommen aus v2.0 (REQ-HRM-005).",
+      "refs": [
+        "SRC-V2-PAKET"
+      ],
+      "used_in": [
+        "architecture/interfaces.md",
+        "audit/v2_to_v3_mapping.json",
+        "implementation/test_catalog.json",
+        "schemas/mcp_request.schema.json",
+        "validation/example_rules.py"
+      ]
+    },
+    {
+      "id": "P-AI-WORK-BUDGET-H",
+      "group": "KI",
+      "name": "Zeitbudget je Arbeitsauftrag des Agenten",
+      "value": 40,
+      "unit": "Stunden",
+      "status": "ENTWURF",
+      "basis": "Übernommen aus v2.0 (SM-WORKITEM).",
+      "refs": [
+        "SRC-V2-PAKET"
+      ],
+      "used_in": [
+        "ai/ai_layer.md",
+        "architecture/state_machines.json",
+        "audit/v2_to_v3_mapping.json"
+      ]
+    },
+    {
+      "id": "P-AI-REVIEW-ROUNDS",
+      "group": "KI",
+      "name": "Höchstzahl Prüfrunden je Arbeitsauftrag",
+      "value": 3,
+      "unit": "Anzahl",
+      "status": "ENTWURF",
+      "basis": "Übernommen aus v2.0 (SM-WORKITEM).",
+      "refs": [
+        "SRC-V2-PAKET"
+      ],
+      "used_in": [
+        "ai/ai_layer.md",
+        "architecture/state_machines.json",
+        "audit/v2_to_v3_mapping.json",
+        "schemas/work_item.schema.json",
+        "validation/example_rules.py"
+      ]
+    },
+    {
+      "id": "P-AI-UPDATE-EFFORT-H",
+      "group": "KI",
+      "name": "Betreiberzeit je Update des KI-Agenten (Evaluationssuite prüfen, Release freigeben)",
+      "value": 3,
+      "unit": "Stunden",
+      "status": "ANNAHME",
+      "basis": "Upstream mit hoher Änderungsrate (R5); Pflegekosten gehen in die Betreiberzeit der Wirtschaftsrechnung ein (§11.3).",
+      "refs": [
+        "SRC-HERMES-UPSTREAM"
+      ],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "ai/hermes_integration.md",
+        "financials/stage_costs.py",
+        "operations/operations_plan.md",
+        "validation/render_blocks.py"
+      ]
+    },
+    {
+      "id": "P-AI-MONTHLY-BUDGET-EUR",
+      "group": "KI",
+      "name": "Harte Monatsgrenze für KI-Abos und Coding-Agent",
+      "value": 350,
+      "unit": "EUR",
+      "status": "ANNAHME",
+      "basis": "DEC-DS-14; Teil des Ausgabendeckels (X-OP-BUDGET).",
+      "refs": [
+        "DEC-DS-14"
+      ],
+      "external_input": "X-OP-BUDGET",
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "ai/hermes_integration.md",
+        "architecture/state_machines.json",
+        "governance/policies/ai_policy.md",
+        "implementation/test_catalog.json",
+        "requirements.json"
+      ]
+    },
+    {
+      "id": "P-MON-COSTDRIFT-RATIO",
+      "group": "MONITOR",
+      "name": "Kostendrift: auslösendes Verhältnis gemessen/Modell",
+      "value": 1.3,
+      "unit": "Faktor",
+      "status": "ENTWURF",
+      "basis": "§14.2.",
+      "refs": [],
+      "used_in": [
+        "examples/valid/contracts/safety_observation_costdrift.json",
+        "execution/tca_model.md",
+        "operations/costdrift_monitor.py",
+        "research/evidence_gates.json",
+        "validation/test_reference_models.py"
+      ]
+    },
+    {
+      "id": "P-MON-COSTDRIFT-PROB",
+      "group": "MONITOR",
+      "name": "Kostendrift: nötige Posterior-Wahrscheinlichkeit",
+      "value": 0.9,
+      "unit": "Anteil",
+      "status": "ENTWURF",
+      "basis": "§14.2.",
+      "refs": [],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "execution/tca_model.md",
+        "implementation/test_catalog.json",
+        "operations/costdrift_monitor.py",
+        "requirements.json",
+        "research/evidence_gates.json",
+        "validation/test_reference_models.py"
+      ]
+    },
+    {
+      "id": "P-MON-COSTDRIFT-SHRINK",
+      "group": "MONITOR",
+      "name": "Kostendrift: Schrumpfungsgewicht der Instrumentenschätzung (Pseudo-Fills)",
+      "value": 20,
+      "unit": "Fills",
+      "status": "ENTWURF",
+      "basis": "Gepoolte Schätzung §14.2.",
+      "refs": [],
+      "used_in": [
+        "execution/tca_model.md",
+        "operations/costdrift_monitor.py"
+      ]
+    },
+    {
+      "id": "P-MON-FILL-NOISE",
+      "group": "MONITOR",
+      "name": "Streuung des Kostenverhältnisses je Fill (gemessen/Modell)",
+      "value": 1.5,
+      "unit": "Faktor",
+      "status": "ANNAHME",
+      "basis": "Schlupf je Fill streut stark relativ zu seinem Mittel (etwa ein Tick bei einem Mittel unter einem Tick); Kalibrierung ab G1.",
+      "refs": [],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "execution/tca_model.md",
+        "operations/costdrift_monitor.py",
+        "registers/resolution_matrix.json",
+        "validation/test_reference_models.py"
+      ]
+    },
+    {
+      "id": "P-MON-HARM-SR",
+      "group": "MONITOR",
+      "name": "Harm-Monitor: Posterior-Wahrscheinlichkeit Netto-Sharpe < 0 für Stopp",
+      "value": 0.9,
+      "unit": "Anteil",
+      "status": "ENTWURF",
+      "basis": "§16 Monitore.",
+      "refs": [],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "audit/v2_to_v3_mapping.json",
+        "implementation/test_catalog.json",
+        "operations/monitor_simulation.py",
+        "research/evidence_gates.json",
+        "research/research_plan.md",
+        "validation/test_reference_models.py"
+      ]
+    },
+    {
+      "id": "P-MON-VOL-WINDOW-D",
+      "group": "MONITOR",
+      "name": "MON-DRIFT: Fenster der realisierten Volatilität",
+      "value": 126,
+      "unit": "Handelstage",
+      "status": "ENTWURF",
+      "basis": "Ein halbes Jahr; mit operations/monitor_simulation.py gewählt: kürzere Fenster lösen bei fetten Rändern häufig ohne Anlass aus (Vergleich in operations/monitor_results.json#/vol_design_grid).",
+      "refs": [],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "audit/concept_review.md",
+        "implementation/test_catalog.json",
+        "operations/monitor_simulation.py",
+        "research/evidence_gates.json"
+      ]
+    },
+    {
+      "id": "P-MON-VOL-BAND",
+      "group": "MONITOR",
+      "name": "MON-DRIFT: zulässige Abweichung realisierter von Ziel-Volatilität",
+      "value": 0.4,
+      "unit": "Anteil",
+      "status": "ENTWURF",
+      "basis": "Mit P-MON-VOL-WINDOW-D so gewählt, dass Fehlalarme selten bleiben und eine Verdopplung der Volatilität binnen eines Quartals meist erkannt wird (operations/monitor_results.json); getrennt von P-LEV-STEP-VOL-BAND, das nur für Profilaufstiege gilt.",
+      "refs": [],
+      "used_in": [
+        "Masterkonzept_v3.0.md",
+        "audit/concept_review.md",
+        "operations/monitor_simulation.py",
+        "research/evidence_gates.json"
+      ]
+    }
+  ]
+}

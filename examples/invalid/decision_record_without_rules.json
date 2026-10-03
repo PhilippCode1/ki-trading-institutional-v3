@@ -1,0 +1,16 @@
+{
+ "schema_version": "3.0",
+ "message_id": "00000000-0000-4000-8000-000000000011",
+ "correlation_id": "COR-0011",
+ "producer": "TRADE_CORE",
+ "created_utc": "2026-09-24T09:00:00Z",
+ "record_id": "REC-0001",
+ "kind": "SIZING",
+ "time_utc": "2026-09-24T09:00:00Z",
+ "inputs_sha256": "0000000000000000000000000000000000000000000000000000000000000005",
+ "rule_ids": [],
+ "parameters_sha256": "0000000000000000000000000000000000000000000000000000000000000004",
+ "release_sha256": "0000000000000000000000000000000000000000000000000000000000000006",
+ "result": "qty=1",
+ "explanation": "Lückenstress nach Order unter Grenze minus Reserve"
+}

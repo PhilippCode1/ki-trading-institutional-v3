@@ -1,0 +1,30 @@
+{
+ "schema_version": "3.0",
+ "id": "TR-POS-004",
+ "machine": "SM-POSITION",
+ "description": "Rollfenster erreicht: Schließen in Teilen, keine Lieferung",
+ "scenarios": [
+  "OS-EX-11"
+ ],
+ "start": "OPEN_PROTECTED",
+ "initial_reasons": null,
+ "steps": [
+  {
+   "event": "ROLL_WINDOW_REACHED",
+   "context": {
+    "business_days_to_fnd_ltd": 5
+   },
+   "expect_state": "CLOSING"
+  },
+  {
+   "event": "CLOSE_FILL_PARTIAL",
+   "context": {},
+   "expect_state": "CLOSING"
+  },
+  {
+   "event": "CLOSE_FILLED",
+   "context": {},
+   "expect_state": "FLAT"
+  }
+ ]
+}

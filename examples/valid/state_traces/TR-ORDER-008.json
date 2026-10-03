@@ -1,0 +1,33 @@
+{
+ "schema_version": "3.0",
+ "id": "TR-ORDER-008",
+ "machine": "SM-ORDER",
+ "description": "Doppelt gemeldeter Deal nach Wiederverbindung wird über das Ticket verworfen, auch im Endzustand",
+ "scenarios": [
+  "OS-EX-05"
+ ],
+ "start": "ACKNOWLEDGED",
+ "initial_reasons": null,
+ "steps": [
+  {
+   "event": "FILL_PARTIAL",
+   "context": {},
+   "expect_state": "PARTIALLY_FILLED"
+  },
+  {
+   "event": "FILL_DUPLICATE",
+   "context": {},
+   "expect_state": "PARTIALLY_FILLED"
+  },
+  {
+   "event": "FILL_COMPLETE",
+   "context": {},
+   "expect_state": "FILLED"
+  },
+  {
+   "event": "FILL_DUPLICATE",
+   "context": {},
+   "expect_state": "FILLED"
+  }
+ ]
+}

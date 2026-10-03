@@ -1,0 +1,44 @@
+{
+ "schema_version": "3.0",
+ "id": "TR-ML-004",
+ "machine": "SM-MLMODEL",
+ "description": "Neuvalidierung nach Drift mit PBO über der Schwelle und ohne unabhängige Validierung: Regelbasis bleibt aktiv",
+ "scenarios": [
+  "OS-GV-11"
+ ],
+ "start": "FALLBACK",
+ "initial_reasons": null,
+ "steps": [
+  {
+   "event": "REVALIDATED",
+   "context": {
+    "dsr": 0.97,
+    "pbo": 0.9,
+    "uplift_sr": 0.2,
+    "independent_validator": false,
+    "is_language_model": false,
+    "second_human_approval": true
+   },
+   "expect_state": "FALLBACK"
+  },
+  {
+   "event": "REVALIDATED",
+   "context": {
+    "dsr": 0.97,
+    "pbo": 0.1,
+    "uplift_sr": 0.2,
+    "independent_validator": true,
+    "is_language_model": false,
+    "second_human_approval": false
+   },
+   "expect_state": "FALLBACK"
+  },
+  {
+   "event": "RETIRE_SIGNED",
+   "context": {
+    "signed": true
+   },
+   "expect_state": "RETIRED"
+  }
+ ]
+}

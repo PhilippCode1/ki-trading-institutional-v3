@@ -1,0 +1,15 @@
+{
+ "schema_version": "3.0",
+ "message_id": "00000000-0000-4000-8000-000000000028",
+ "correlation_id": "COR-0028",
+ "producer": "HERMES",
+ "created_utc": "2026-09-24T09:00:00Z",
+ "proposal_id": "CP-0001",
+ "title": "Kostenbericht um Rollkosten ergänzen",
+ "author_role": "HERMES",
+ "suggested_class": "A0",
+ "rationale": "Rollkosten fehlen im Monatsbericht",
+ "affected_paths": [],
+ "evidence_refs": [],
+ "status": "OFFEN"
+}

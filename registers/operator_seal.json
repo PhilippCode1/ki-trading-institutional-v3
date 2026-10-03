@@ -1,0 +1,139 @@
+{
+  "schema_version": "3.0",
+  "document": "Siegel der Betreiberangaben",
+  "as_of": "2026-09-24",
+  "rule": "Wortlaut der Betreiberantworten (BQ-01 … BQ-10 mit Unterfragen) und daraus abgeleitete Betreiberwerte sind versiegelt; Änderung nur durch neue signierte Betreiberentscheidung mit neuem Siegel (R-07).",
+  "hash": "SHA-256 über kanonisches JSON (sortierte Schlüssel, ohne Leerzeichen)",
+  "decisions": [
+    {
+      "id": "DEC-OP-01",
+      "title": "BQ-01 Kapital",
+      "answer_sha256": "428bcf430fbad6738140d9d38c7fc695963a2c623d36fb1f5b18e2cfe9990f87"
+    },
+    {
+      "id": "DEC-OP-02",
+      "title": "BQ-02 Betriebsmodell",
+      "answer_sha256": "ccca896cfa9914d1470090adbbf55b2f587268ec714e0f31645078b42e5157fc"
+    },
+    {
+      "id": "DEC-OP-03",
+      "title": "BQ-03 Recht und Steuern",
+      "answer_sha256": "9075e7c6832af8cb7871202079fdba8bc3cec37058450baf3caa96fb68a7095b"
+    },
+    {
+      "id": "DEC-OP-04",
+      "title": "BQ-04 Haltedauer und Verlustgrenze",
+      "answer_sha256": "c52276d9ca2c9d314af006b94087a3988cbc7663898685d6e4e94507fe717b95"
+    },
+    {
+      "id": "DEC-OP-05",
+      "title": "BQ-05 Hebel",
+      "answer_sha256": "cd0176aa164d306bb974e967a3e3f7380ed98a99fd1549f88f9d201c2dc3df34"
+    },
+    {
+      "id": "DEC-OP-06",
+      "title": "BQ-06 Ausschlüsse",
+      "answer_sha256": "7d54bb836792e84dfd32529341a6d8f11df201f3b3016f65bda527e49ad34d34"
+    },
+    {
+      "id": "DEC-OP-06A",
+      "title": "BQ-06a Aktienindizes",
+      "answer_sha256": "a92833a4faec761b1ba94e4a57dc40f507cdafaba22e3d1ed9c40c314c137508"
+    },
+    {
+      "id": "DEC-OP-07",
+      "title": "BQ-07 Budget, KI-Abrechnung, Betrieb",
+      "answer_sha256": "3a34a9d7b21cf681189c96543420ac37d5ddfbbc2e85ae7da22578cf6eb8a626"
+    },
+    {
+      "id": "DEC-OP-08",
+      "title": "BQ-08 Broker",
+      "answer_sha256": "854d215b96bb16d10f06b7c9b7e7e851393e9ad43f9c80c27f448d45d0213d0b"
+    },
+    {
+      "id": "DEC-OP-08A",
+      "title": "BQ-08a Plattform und Instrumente",
+      "answer_sha256": "853cafa86ca62660458a9bb504b0035135d89b150e487498161e45b5b8d04b12"
+    },
+    {
+      "id": "DEC-OP-09",
+      "title": "BQ-09 Team und Befugnis",
+      "answer_sha256": "ae75ac384077aaf4e1d1b544b3cdb50f4e24d6d73ac3a1ef215e37698f10851b"
+    },
+    {
+      "id": "DEC-OP-10",
+      "title": "BQ-10 Rolle der KI",
+      "answer_sha256": "a451d600ddb6a7abb4d6ef526024d375ae4bb463625e5361d3043e057381c68d"
+    }
+  ],
+  "parameters": [
+    {
+      "id": "P-OP-DAILY-LOSS-CAP",
+      "value_sha256": "e0b251b07c5800bb057d5421b7fb9e398bc7f0cb759bb7f1dde9dfec2ba6c112"
+    },
+    {
+      "id": "P-OP-HOLD-MAX-H",
+      "value_sha256": "80c3cd40fa35f9088b8741bd8be6153de05f661cfeeb4625ffbf5f4a6c3c02c4"
+    },
+    {
+      "id": "P-OP-HOLD-STD-MIN-H",
+      "value_sha256": "4b227777d4dd1fc61c6f884f48641d02b4d121d3fd328cb08b5531fcacdabf8a"
+    },
+    {
+      "id": "P-OP-HOLD-STD-MAX-H",
+      "value_sha256": "7b1a278f5abe8e9da907fc9c29dfd432d60dc76e17b0fabab659d2a508bc65c4"
+    },
+    {
+      "id": "P-OP-LEV-MAX",
+      "value_sha256": "f5ca38f748a1d6eaf726b8a42fb575c3c71f1864a8143301782de13da2d9202b"
+    },
+    {
+      "id": "P-OP-LEV-MIN",
+      "value_sha256": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9"
+    },
+    {
+      "id": "P-OP-CAPITAL",
+      "value_sha256": "ff71f450a02f3538ca70f26a3ce5b2136cf0620648f18b792c6cda4d540653cf"
+    },
+    {
+      "id": "P-OP-PLATFORM",
+      "value_sha256": "553c2f6adf9577d31fe3591a9d82bb6738e64564e5ba3c9edff88d92545390e1"
+    },
+    {
+      "id": "P-OP-INSTRUMENT-PREF",
+      "value_sha256": "d35841074ea0c472490f671615c4673302aaf292ebffe18c72227ae236ad3629"
+    },
+    {
+      "id": "P-OP-UNIVERSE",
+      "value_sha256": "8a49121228834dc000f31f0662158d78c9576c15de16d157f91ebd39b13e2dbd"
+    },
+    {
+      "id": "P-OP-MODE-AUTHORITY",
+      "value_sha256": "a9385e2133c5b30e020e34ad22e25ba38870fa9e164bac4641c04a5e4a0a7be8"
+    },
+    {
+      "id": "P-OP-AI-ROLE",
+      "value_sha256": "271d63d24e4f9355f3f414cc1c3418b2280d123639aa8460a30861669ccc73b2"
+    },
+    {
+      "id": "P-OP-LLM-BILLING",
+      "value_sha256": "e68eeb64a84a0c0f2635d124dd9a8e344c771ba1deebce52ce966025f86714bb"
+    },
+    {
+      "id": "P-OP-HOSTING",
+      "value_sha256": "fc4ee14ce739a2e0fe96d2a69ed038dd0cafabde464e5241f4d4b907a46a4467"
+    },
+    {
+      "id": "P-OP-SCOPE-LEGAL-TAX",
+      "value_sha256": "eda705b6932a2b2654117d10a9018600130541918ebb0aadf233dc6100f10a85"
+    },
+    {
+      "id": "P-OP-SCOPE-OPMODEL",
+      "value_sha256": "fd0e3b6719546ddd59fcff0dbb8b2b666c9da6ebebfa43fa052eb3044871366b"
+    },
+    {
+      "id": "P-LEV-H20-CAP",
+      "value_sha256": "f5ca38f748a1d6eaf726b8a42fb575c3c71f1864a8143301782de13da2d9202b"
+    }
+  ]
+}

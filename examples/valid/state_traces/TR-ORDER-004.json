@@ -1,0 +1,30 @@
+{
+ "schema_version": "3.0",
+ "id": "TR-ORDER-004",
+ "machine": "SM-ORDER",
+ "description": "Teilausführung, danach bestätigte Stornierung des Rests",
+ "scenarios": [
+  "OS-EX-02"
+ ],
+ "start": "ACKNOWLEDGED",
+ "initial_reasons": null,
+ "steps": [
+  {
+   "event": "FILL_PARTIAL",
+   "context": {},
+   "expect_state": "PARTIALLY_FILLED"
+  },
+  {
+   "event": "CANCEL_REQUESTED",
+   "context": {},
+   "expect_state": "CANCEL_PENDING"
+  },
+  {
+   "event": "CANCEL_CONFIRMED",
+   "context": {
+    "filled_qty": 1
+   },
+   "expect_state": "PARTIAL_CANCELLED"
+  }
+ ]
+}

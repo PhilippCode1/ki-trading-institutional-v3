@@ -1,0 +1,95 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:ki-trading-v3:limits",
+  "title": "Limits-Hierarchie",
+  "x-version": "3.0.0",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "3.0"
+    },
+    "document": {
+      "const": "Limits-Hierarchie"
+    },
+    "as_of": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+    },
+    "levels": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 0
+    },
+    "rule": {
+      "type": "string",
+      "minLength": 1
+    },
+    "limits": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^LIM-[A-Z0-9-]+$"
+          },
+          "level": {
+            "enum": [
+              "KONTO",
+              "STRATEGIE",
+              "KLASSE",
+              "INSTRUMENT",
+              "CLUSTER"
+            ]
+          },
+          "type": {
+            "type": "string",
+            "minLength": 1
+          },
+          "value_ref": {
+            "type": "string",
+            "minLength": 1
+          },
+          "action": {
+            "type": "string",
+            "minLength": 1
+          },
+          "timing": {
+            "enum": [
+              "PRE_TRADE",
+              "INTRADAY",
+              "EOD",
+              "EOD_UND_INTRADAY"
+            ]
+          },
+          "note": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "level",
+          "type",
+          "value_ref",
+          "action",
+          "timing",
+          "note"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 1
+    }
+  },
+  "required": [
+    "schema_version",
+    "document",
+    "as_of",
+    "levels",
+    "rule",
+    "limits"
+  ],
+  "additionalProperties": false
+}

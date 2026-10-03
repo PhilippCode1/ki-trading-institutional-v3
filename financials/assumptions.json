@@ -1,0 +1,227 @@
+{
+  "schema_version": "3.0",
+  "document": "Annahmen der Wirtschaftsrechnung",
+  "as_of": "2026-09-24",
+  "rule": "Werte stehen nur in parameters.json, registers/costs.json und implementation/build_stages.json; hier Verweise und Szenariodefinitionen (R-04).",
+  "assumptions": [
+    {
+      "id": "A-01",
+      "name": "Geldmarktsatz (V0)",
+      "ref": "P-ECO-CASH-RATE"
+    },
+    {
+      "id": "A-02",
+      "name": "Verzinsung beim Broker",
+      "ref": "P-ECO-BROKER-RATE"
+    },
+    {
+      "id": "A-03",
+      "name": "Anteil Kapital beim Broker",
+      "ref": "P-ECO-CASH-AT-BROKER"
+    },
+    {
+      "id": "A-04",
+      "name": "Diskontsatz",
+      "ref": "P-ECO-DISCOUNT"
+    },
+    {
+      "id": "A-05",
+      "name": "Planungshorizont",
+      "ref": "P-ECO-HORIZON-Y"
+    },
+    {
+      "id": "A-06",
+      "name": "Jahre ohne Standardhandel",
+      "ref": "P-ECO-RAMP-YEARS"
+    },
+    {
+      "id": "A-07",
+      "name": "Stundensatz Betreiber",
+      "ref": "P-ECO-HOURLY-RATE"
+    },
+    {
+      "id": "A-08",
+      "name": "Routinezeiten Betrieb",
+      "ref": "P-OPS-DAILY-MIN"
+    },
+    {
+      "id": "A-09",
+      "name": "Schwelle VIABLE",
+      "ref": "P-ECO-VIABLE-P"
+    },
+    {
+      "id": "A-10",
+      "name": "Schwelle MARGINAL",
+      "ref": "P-ECO-MARGINAL-P"
+    },
+    {
+      "id": "A-11",
+      "name": "Steuer-Sensitivität (BQ-03)",
+      "ref": "P-ECO-TAX-SENS"
+    },
+    {
+      "id": "A-12",
+      "name": "Kapitalstufen",
+      "ref": "P-ECO-CAPITAL-STAGES"
+    },
+    {
+      "id": "A-13",
+      "name": "Ziehungen",
+      "ref": "P-ECO-MC-DRAWS"
+    },
+    {
+      "id": "A-14",
+      "name": "Kostenunsicherheit",
+      "ref": "P-ECO-COST-UNC-SD"
+    },
+    {
+      "id": "A-15",
+      "name": "V1-Sharpe (Index)",
+      "ref": "P-ECO-V1-SR"
+    },
+    {
+      "id": "A-16",
+      "name": "V2-Parameter",
+      "ref": "P-ECO-V2-EDGE-FACTOR"
+    },
+    {
+      "id": "A-17",
+      "name": "V3-Aufbaufaktor",
+      "ref": "P-ECO-V3-BUILD-FACTOR"
+    },
+    {
+      "id": "A-18",
+      "name": "Ausgabendeckel bis G5",
+      "ref": "P-ECO-SPEND-CAP"
+    },
+    {
+      "id": "A-19",
+      "name": "Höchstdauer bis G5",
+      "ref": "P-ECO-MAX-MONTHS-G5"
+    },
+    {
+      "id": "A-20",
+      "name": "Wechselkurs EUR/USD",
+      "ref": "P-ECO-EURUSD"
+    },
+    {
+      "id": "A-21",
+      "name": "Kommission (Basis)",
+      "ref": "COST-COMM-FXFLAT"
+    },
+    {
+      "id": "A-22",
+      "name": "Schlupf",
+      "ref": "COST-EXEC-SLIP-TICKS"
+    },
+    {
+      "id": "A-23",
+      "name": "Marktwirkung",
+      "ref": "COST-EXEC-IMPACT-Y"
+    },
+    {
+      "id": "A-24",
+      "name": "Marktdaten Anzeige",
+      "ref": "COST-MD-FXFLAT-CME"
+    },
+    {
+      "id": "A-25",
+      "name": "Marktdaten Non-Display",
+      "ref": "COST-MD-CME-ND-MANAGED"
+    },
+    {
+      "id": "A-26",
+      "name": "Infrastruktur Geldpfad",
+      "ref": "COST-INF-VPS-MONEY"
+    },
+    {
+      "id": "A-27",
+      "name": "KI-Abo",
+      "ref": "COST-AI-PORTAL-SUPER"
+    },
+    {
+      "id": "A-28",
+      "name": "Externe Risikofunktion",
+      "ref": "COST-EXT-RISK-ROLE"
+    },
+    {
+      "id": "A-29",
+      "name": "Penetrationstest",
+      "ref": "COST-EXT-PENTEST"
+    },
+    {
+      "id": "A-30",
+      "name": "Externes Audit",
+      "ref": "COST-EXT-AUDIT"
+    },
+    {
+      "id": "A-31",
+      "name": "Aufbauaufwand",
+      "ref": "implementation/build_stages.json"
+    }
+  ],
+  "scenarios": [
+    {
+      "id": "SZ-KOSTEN_X1_5",
+      "definition": "Handelskosten (Kosten je Risikoeinheit) × 1,5",
+      "calculator": "financials/decision_montecarlo.py"
+    },
+    {
+      "id": "SZ-KOSTEN_X2",
+      "definition": "Handelskosten × 2",
+      "calculator": "financials/decision_montecarlo.py"
+    },
+    {
+      "id": "SZ-KOSTEN_X3",
+      "definition": "Handelskosten × 3",
+      "calculator": "financials/decision_montecarlo.py"
+    },
+    {
+      "id": "SZ-PRIOR_MINUS_0_05",
+      "definition": "Netto-Sharpe des Portfolios − 0,05",
+      "calculator": "financials/decision_montecarlo.py"
+    },
+    {
+      "id": "SZ-PRIOR_MINUS_0_10",
+      "definition": "Netto-Sharpe − 0,10",
+      "calculator": "financials/decision_montecarlo.py"
+    },
+    {
+      "id": "SZ-FIXKOSTEN_HOCH",
+      "definition": "laufende Fixkosten × 1,5 und Non-Display-Daten (Managed)",
+      "calculator": "financials/decision_montecarlo.py"
+    },
+    {
+      "id": "SZ-BETREIBERZEIT_HOCH",
+      "definition": "Betreiberzeit × 2",
+      "calculator": "financials/decision_montecarlo.py"
+    },
+    {
+      "id": "SZ-DATEN_NON_DISPLAY_USER",
+      "definition": "Non-Display-Lizenz direkt (CME ×4, Eurex)",
+      "calculator": "financials/decision_montecarlo.py"
+    },
+    {
+      "id": "SZ-STEUER_SENSITIVITAET",
+      "definition": "pauschaler Abschlag auf positive Jahreswerte",
+      "calculator": "financials/decision_montecarlo.py"
+    },
+    {
+      "id": "SZ-ALLES_BEIM_BROKER",
+      "definition": "gesamtes Kapital unverzinst beim Broker",
+      "calculator": "financials/decision_montecarlo.py"
+    },
+    {
+      "id": "SZ-BROKER_ZAHLT_GELDMARKTZINS",
+      "definition": "Broker verzinst das Guthaben zum Geldmarktsatz",
+      "calculator": "financials/decision_montecarlo.py"
+    },
+    {
+      "id": "SZ-PRIOR_AUF_INDEXNIVEAU",
+      "definition": "Netto-Sharpe gleichverteilt in der Spanne realisierter Trendfolge-Indizes (P-ECO-V1-SR) statt hergeleitetem Prior",
+      "calculator": "financials/decision_montecarlo.py"
+    }
+  ],
+  "operating_model": "Eigenkonto des Betreibers (BQ-02: B1–B4 nicht Systemaufgabe)",
+  "taxes": "vor Steuern; pauschale Sensitivität (BQ-03)"
+}

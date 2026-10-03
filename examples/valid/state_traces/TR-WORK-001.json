@@ -1,0 +1,54 @@
+{
+ "schema_version": "3.0",
+ "id": "TR-WORK-001",
+ "machine": "SM-WORKITEM",
+ "description": "Drei Prüfrunden ohne Annahme: Ablehnung",
+ "scenarios": [
+  "OS-GV-09"
+ ],
+ "start": null,
+ "initial_reasons": null,
+ "steps": [
+  {
+   "event": "SCOPE_SET",
+   "context": {
+    "budget_h": 8,
+    "open_proposals": 1
+   },
+   "expect_state": "SCOPED"
+  },
+  {
+   "event": "START",
+   "context": {},
+   "expect_state": "RUNNING"
+  },
+  {
+   "event": "SUBMIT_REVIEW",
+   "context": {
+    "review_round": 1
+   },
+   "expect_state": "IN_REVIEW"
+  },
+  {
+   "event": "REVIEW_CHANGES",
+   "context": {
+    "review_round": 1
+   },
+   "expect_state": "RUNNING"
+  },
+  {
+   "event": "SUBMIT_REVIEW",
+   "context": {
+    "review_round": 3
+   },
+   "expect_state": "IN_REVIEW"
+  },
+  {
+   "event": "REVIEW_CHANGES",
+   "context": {
+    "review_round": 3
+   },
+   "expect_state": "REJECTED"
+  }
+ ]
+}

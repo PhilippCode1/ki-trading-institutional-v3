@@ -1,0 +1,38 @@
+{
+ "schema_version": "3.0",
+ "id": "TR-WORK-002",
+ "machine": "SM-WORKITEM",
+ "description": "Annahme nur durch einen Menschen; Aktivierung über Release; Abschluss",
+ "scenarios": [
+  "OS-GV-09"
+ ],
+ "start": "IN_REVIEW",
+ "initial_reasons": null,
+ "steps": [
+  {
+   "event": "REVIEW_APPROVE",
+   "context": {
+    "reviewer_is_human": false
+   },
+   "expect_state": "IN_REVIEW",
+   "expect_invalid": true
+  },
+  {
+   "event": "REVIEW_APPROVE",
+   "context": {
+    "reviewer_is_human": true
+   },
+   "expect_state": "APPROVED"
+  },
+  {
+   "event": "DEPLOY",
+   "context": {},
+   "expect_state": "DEPLOYED"
+  },
+  {
+   "event": "OBSERVE_OK",
+   "context": {},
+   "expect_state": "CLOSED"
+  }
+ ]
+}

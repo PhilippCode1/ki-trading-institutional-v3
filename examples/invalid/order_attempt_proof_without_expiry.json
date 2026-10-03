@@ -1,0 +1,26 @@
+{
+ "schema_version": "3.0",
+ "message_id": "00000000-0000-4000-8000-000000000006",
+ "correlation_id": "COR-0006",
+ "producer": "RECONCILER",
+ "created_utc": "2026-09-24T09:00:00Z",
+ "attempt_id": "ATT-0003",
+ "command_id": "CMD-00000000000E",
+ "state": "NOT_EXECUTED_PROVEN",
+ "sent_at_utc": "2026-09-24T09:10:00Z",
+ "retcode": 10012,
+ "order_ticket": null,
+ "deal_tickets": [],
+ "filled_qty": 0,
+ "negative_proof": {
+  "expiry_passed": false,
+  "cycles": 2,
+  "queries": [
+   "orders_get",
+   "history_orders_get",
+   "history_deals_get",
+   "positions_get"
+  ],
+  "cursor": 8880001
+ }
+}

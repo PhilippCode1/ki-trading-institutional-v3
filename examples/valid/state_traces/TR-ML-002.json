@@ -1,0 +1,78 @@
+{
+ "schema_version": "3.0",
+ "id": "TR-ML-002",
+ "machine": "SM-MLMODEL",
+ "description": "Hypothetisch bestandene Komponente: Schattenbetrieb, Drift, Rückfall, Neuvalidierung, Stilllegung",
+ "scenarios": [
+  "OS-GV-11"
+ ],
+ "start": "DEVELOPED",
+ "initial_reasons": null,
+ "steps": [
+  {
+   "event": "VALIDATION_RESULT",
+   "context": {
+    "dsr": 0.97,
+    "pbo": 0.1,
+    "uplift_sr": 0.12,
+    "independent_validator": true,
+    "is_language_model": false
+   },
+   "expect_state": "VALIDATED"
+  },
+  {
+   "event": "APPROVE_SIGNED",
+   "context": {
+    "signed": true,
+    "second_human_approval": true,
+    "fallback_rule_ready": true
+   },
+   "expect_state": "APPROVED"
+  },
+  {
+   "event": "SHADOW_START",
+   "context": {},
+   "expect_state": "SHADOW"
+  },
+  {
+   "event": "SHADOW_REVIEW",
+   "context": {
+    "shadow_uplift_sr": 0.05,
+    "shadow_days": 30
+   },
+   "expect_state": "SHADOW"
+  },
+  {
+   "event": "SHADOW_REVIEW",
+   "context": {
+    "shadow_uplift_sr": 0.05,
+    "shadow_days": 95
+   },
+   "expect_state": "ACTIVE"
+  },
+  {
+   "event": "DRIFT_DETECTED",
+   "context": {},
+   "expect_state": "FALLBACK"
+  },
+  {
+   "event": "REVALIDATED",
+   "context": {
+    "dsr": 0.96,
+    "pbo": 0.12,
+    "uplift_sr": 0.11,
+    "independent_validator": true,
+    "is_language_model": false,
+    "second_human_approval": true
+   },
+   "expect_state": "ACTIVE"
+  },
+  {
+   "event": "RETIRE_SIGNED",
+   "context": {
+    "signed": true
+   },
+   "expect_state": "RETIRED"
+  }
+ ]
+}

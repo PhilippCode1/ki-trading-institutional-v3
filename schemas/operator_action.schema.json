@@ -1,0 +1,261 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:ki-trading-v3:operator_action",
+  "title": "Signierte Betreiberaktion (IF-04)",
+  "description": "Nur der Betreiber schaltet zwischen Demo und Echtgeld (BQ-09); die Vertretung darf nur risikomindernd handeln; Ablauf höchstens P-SEC-SIG-EXPIRY-MIN nach Erstellung (Beispielregel R-EX-02).",
+  "x-version": "3.0.0",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "$ref": "urn:ki-trading-v3:common#/$defs/schema_version"
+    },
+    "message_id": {
+      "$ref": "urn:ki-trading-v3:common#/$defs/uuid"
+    },
+    "correlation_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "producer": {
+      "$ref": "urn:ki-trading-v3:common#/$defs/producer"
+    },
+    "created_utc": {
+      "$ref": "urn:ki-trading-v3:common#/$defs/utc"
+    },
+    "action_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "action": {
+      "enum": [
+        "ACK_GATE_RESULT",
+        "ACK_REASON",
+        "APPROVE_ML_MODEL",
+        "APPROVE_RELEASE",
+        "APPROVE_STEP_UP",
+        "APPROVE_WORK_ITEM",
+        "CANCEL_WORK_ITEM",
+        "CLEAR_REASON",
+        "CLOSE_INCIDENT",
+        "CONFIRM_EXTERNAL_INPUT",
+        "CONFIRM_PRESENCE",
+        "CONFIRM_PROJECT_END",
+        "DECLARE_MANUAL_INTERVENTION",
+        "KILL_SWITCH",
+        "PAUSE_ENTRIES",
+        "REDEPLOY_HERMES",
+        "RENEW_AI_BUDGET",
+        "REQUEST_WIND_DOWN",
+        "RESOLVE_CALENDAR",
+        "RESUME_ENTRIES",
+        "RESUME_RESEARCH",
+        "RETIRE_ML_MODEL",
+        "REVOKE_GRANT",
+        "ROTATE_CREDENTIAL",
+        "SIGN_GRANT",
+        "SIGN_RISK_ACCEPTANCE",
+        "STEP_DOWN_PROFILE",
+        "SWITCH_MODE"
+      ]
+    },
+    "actor_role": {
+      "enum": [
+        "BETREIBER",
+        "VERTRETUNG"
+      ]
+    },
+    "key_fingerprint": {
+      "$ref": "urn:ki-trading-v3:common#/$defs/key_fingerprint"
+    },
+    "signed_payload_sha256": {
+      "$ref": "urn:ki-trading-v3:common#/$defs/sha256"
+    },
+    "signature": {
+      "$ref": "urn:ki-trading-v3:common#/$defs/signature"
+    },
+    "expires_utc": {
+      "$ref": "urn:ki-trading-v3:common#/$defs/utc"
+    },
+    "reason": {
+      "$ref": "urn:ki-trading-v3:common#/$defs/safety_reason"
+    },
+    "snapshot_ref": {
+      "type": "string",
+      "minLength": 1
+    },
+    "target_mode": {
+      "$ref": "urn:ki-trading-v3:common#/$defs/trading_mode"
+    },
+    "account_type_broker": {
+      "$ref": "urn:ki-trading-v3:common#/$defs/account_type"
+    },
+    "kill_stage": {
+      "enum": [
+        1,
+        2
+      ]
+    },
+    "subject_ref": {
+      "type": "string",
+      "minLength": 1
+    },
+    "co_signature": {
+      "type": "object",
+      "properties": {
+        "role": {
+          "const": "RISIKOFUNKTION"
+        },
+        "key_fingerprint": {
+          "$ref": "urn:ki-trading-v3:common#/$defs/key_fingerprint"
+        },
+        "signature": {
+          "$ref": "urn:ki-trading-v3:common#/$defs/signature"
+        }
+      },
+      "required": [
+        "role",
+        "key_fingerprint",
+        "signature"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "schema_version",
+    "message_id",
+    "correlation_id",
+    "producer",
+    "created_utc",
+    "action_id",
+    "action",
+    "actor_role",
+    "key_fingerprint",
+    "signed_payload_sha256",
+    "signature",
+    "expires_utc"
+  ],
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "actor_role": {
+            "const": "VERTRETUNG"
+          }
+        },
+        "required": [
+          "actor_role"
+        ]
+      },
+      "then": {
+        "properties": {
+          "action": {
+            "enum": [
+              "PAUSE_ENTRIES",
+              "KILL_SWITCH",
+              "REQUEST_WIND_DOWN"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "action": {
+            "enum": [
+              "ACK_REASON",
+              "CLEAR_REASON"
+            ]
+          }
+        },
+        "required": [
+          "action"
+        ]
+      },
+      "then": {
+        "required": [
+          "reason"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "action": {
+            "const": "SWITCH_MODE"
+          }
+        },
+        "required": [
+          "action"
+        ]
+      },
+      "then": {
+        "required": [
+          "target_mode",
+          "account_type_broker"
+        ],
+        "properties": {
+          "actor_role": {
+            "const": "BETREIBER"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "action": {
+            "const": "APPROVE_STEP_UP"
+          }
+        },
+        "required": [
+          "action"
+        ]
+      },
+      "then": {
+        "required": [
+          "co_signature",
+          "subject_ref"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "action": {
+            "enum": [
+              "REQUEST_WIND_DOWN",
+              "DECLARE_MANUAL_INTERVENTION"
+            ]
+          }
+        },
+        "required": [
+          "action"
+        ]
+      },
+      "then": {
+        "required": [
+          "snapshot_ref"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "action": {
+            "const": "KILL_SWITCH"
+          }
+        },
+        "required": [
+          "action"
+        ]
+      },
+      "then": {
+        "required": [
+          "kill_stage"
+        ]
+      }
+    }
+  ]
+}

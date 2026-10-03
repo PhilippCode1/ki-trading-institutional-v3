@@ -1,0 +1,20 @@
+{
+ "schema_version": "3.0",
+ "id": "TR-RELEASE-003",
+ "machine": "SM-RELEASE",
+ "description": "Als Klasse B eingestufte Änderung mit Handelswirkung wird abgelehnt",
+ "scenarios": [
+  "OS-GV-05"
+ ],
+ "start": "TESTED",
+ "initial_reasons": null,
+ "steps": [
+  {
+   "event": "EQUIV_FAIL",
+   "context": {
+    "change_class": "B"
+   },
+   "expect_state": "REJECTED"
+  }
+ ]
+}

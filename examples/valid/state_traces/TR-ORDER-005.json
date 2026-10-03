@@ -1,0 +1,32 @@
+{
+ "schema_version": "3.0",
+ "id": "TR-ORDER-005",
+ "machine": "SM-ORDER",
+ "description": "Absturz nach Commit, vor dem Senden: nie gesendet, Einstieg verfällt",
+ "scenarios": [
+  "OS-EX-03"
+ ],
+ "start": null,
+ "initial_reasons": null,
+ "steps": [
+  {
+   "event": "RISK_APPROVED",
+   "context": {
+    "risk_units_after": 1
+   },
+   "expect_state": "RESERVED"
+  },
+  {
+   "event": "JOURNAL_COMMITTED",
+   "context": {
+    "fsync_ok": true
+   },
+   "expect_state": "PERSISTED"
+  },
+  {
+   "event": "PROCESS_RESTARTED",
+   "context": {},
+   "expect_state": "FAILED_BEFORE_SEND"
+  }
+ ]
+}

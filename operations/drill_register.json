@@ -1,0 +1,88 @@
+{
+  "schema_version": "3.0",
+  "document": "Drill-Register",
+  "as_of": "2026-09-24",
+  "rule": "Jeder Drill wird mit Datum, Ergebnis, Abweichungen und Maßnahmen protokolliert (operations/drills.md).",
+  "drills": [
+    {
+      "id": "DR-01",
+      "title": "Restore auf isolierter Instanz",
+      "interval": "P-OPS-RESTORE-DRILL-D",
+      "gate": "GATE-G6",
+      "procedure": "Journal aus Offsite-Kopie wiederherstellen, Halt und Widerruf unmittelbar vor der letzten Sicherung prüfen, Zeit messen.",
+      "pass": "Wiederherstellung innerhalb P-OPS-RTO-CORE-H; kein Datenverlust über P-OPS-RPO-JOURNAL-MIN; Grants ungültig."
+    },
+    {
+      "id": "DR-02",
+      "title": "Geldpfad-Neustart und Journalfehler",
+      "interval": "vierteljährlich",
+      "gate": "GATE-G6",
+      "procedure": "Prozessabbruch an vier Punkten (vor Commit, nach Commit, nach Senden, nach Antwort) im Demokonto; Journal schreibgeschützt setzen.",
+      "pass": "Kein Doppelsenden; Wiederanlauf innerhalb P-OPS-RESTART-S; Notfalljournal greift."
+    },
+    {
+      "id": "DR-03",
+      "title": "Brokerausfall und Brokerdirektkontrolle",
+      "interval": "halbjährlich",
+      "gate": "GATE-G6",
+      "procedure": "Brokerverbindung im Demokonto trennen; Betreiber führt Schutzaktionen über den eigenen Zugang aus; danach Abgleich.",
+      "pass": "Schutz erhalten; Eingriff vollständig abgeglichen."
+    },
+    {
+      "id": "DR-04",
+      "title": "Datenausfall",
+      "interval": "vierteljährlich",
+      "gate": "GATE-G6",
+      "procedure": "Kursstrom eines Instruments anhalten und veraltete Kurse einspeisen.",
+      "pass": "Einstiegssperre nach P-DATA-STALE-S; keine Order ohne frische Daten."
+    },
+    {
+      "id": "DR-05",
+      "title": "Margin-Erhöhung und Tagesverlust-Leiter",
+      "interval": "vierteljährlich",
+      "gate": "GATE-G6",
+      "procedure": "Im Demokonto simulierte Margin-Erhöhung um P-MRG-STRESS-2 und Verluststufen einspielen.",
+      "pass": "Größen und Leiter reagieren wie spezifiziert."
+    },
+    {
+      "id": "DR-06",
+      "title": "Schlüsselverlust und Kompromittierungsverdacht",
+      "interval": "jährlich",
+      "gate": "GATE-G6",
+      "procedure": "Verlust des Signaturschlüssels simulieren; Ersatz aus der Hinterlegung; alle Grants widerrufen; Credentials rotieren.",
+      "pass": "Keine geldwirksame Aktion ohne gültige Signatur; Ersatz binnen eines Arbeitstags."
+    },
+    {
+      "id": "DR-07",
+      "title": "Isolation der KI-Zone",
+      "interval": "halbjährlich",
+      "gate": "GATE-G6",
+      "procedure": "Kanarienwert in einer Anfrage auslösen.",
+      "pass": "Isolation binnen P-OPS-ISOLATE-MIN; Geldpfad unverändert."
+    },
+    {
+      "id": "DR-08",
+      "title": "Alarmkanäle und Moduskontrolle",
+      "interval": "monatlich",
+      "gate": "GATE-G6",
+      "procedure": "Testalarm über beide Kanäle; falschen Kontotyp simulieren.",
+      "pass": "Quittung innerhalb P-OPS-ALERT-ACK-H; Kill-Switch bei falschem Modus."
+    },
+    {
+      "id": "DR-09",
+      "title": "Fencing mit weiterlaufender Altinstanz",
+      "interval": "vor G6 und nach jedem Host-Wechsel",
+      "gate": "GATE-G6",
+      "procedure": "Neue Instanz aufsetzen, während die alte läuft; Hauptpasswort ändern.",
+      "pass": "Alte Instanz abgewiesen; genau ein Writer."
+    },
+    {
+      "id": "DR-10",
+      "title": "Kill-Switch und Terminal-Neustart",
+      "interval": "vierteljährlich",
+      "gate": "GATE-G6",
+      "procedure": "Kill-Switch Stufe 1 und 2 im Demokonto; Terminal während offener Orders neu starten.",
+      "pass": "Alle Orders binnen P-RISK-KILL-CANCEL-S storniert, kein Schutzstopp verloren, Abgleich konsistent."
+    }
+  ]
+}

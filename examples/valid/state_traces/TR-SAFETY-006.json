@@ -1,0 +1,98 @@
+{
+ "schema_version": "3.0",
+ "id": "TR-SAFETY-006",
+ "machine": "SM-SAFETY",
+ "description": "Kill-Switch Stufe 1 und 2: Vertretung kann auslösen, nur der Betreiber setzt fort",
+ "scenarios": [
+  "OS-RI-07"
+ ],
+ "start": null,
+ "initial_reasons": [],
+ "steps": [
+  {
+   "event": "KILL_STAGE1",
+   "context": {},
+   "expect_state": "ENTRY_PAUSED",
+   "expect_reasons": [
+    "KILL_SWITCH"
+   ],
+   "expect_allowed": [
+    "CANCEL_ORDER",
+    "CLOSE_REDUCE",
+    "EMERGENCY_PROTECT",
+    "RECONCILE",
+    "ROLL_AS_CLOSE",
+    "STOP_AMEND",
+    "STOP_AMEND_RECONCILED_ONLY"
+   ]
+  },
+  {
+   "event": "OPERATOR_RESUME_SIGNED",
+   "context": {
+    "signed": true,
+    "reason": "KILL_SWITCH",
+    "signer_role": "VERTRETUNG",
+    "orders_cancelled_verified": true
+   },
+   "expect_state": "ENTRY_PAUSED",
+   "expect_reasons": [
+    "KILL_SWITCH"
+   ]
+  },
+  {
+   "event": "KILL_STAGE2",
+   "context": {},
+   "expect_state": "EXIT_ONLY",
+   "expect_reasons": [
+    "KILL_SWITCH",
+    "KILL_SWITCH_EXIT"
+   ],
+   "expect_allowed": [
+    "CANCEL_ORDER",
+    "CLOSE_REDUCE",
+    "EMERGENCY_PROTECT",
+    "RECONCILE",
+    "ROLL_AS_CLOSE",
+    "STOP_AMEND_RECONCILED_ONLY"
+   ]
+  },
+  {
+   "event": "OPERATOR_RESUME_SIGNED",
+   "context": {
+    "signed": true,
+    "reason": "KILL_SWITCH_EXIT",
+    "signer_role": "BETREIBER",
+    "positions_flat": false
+   },
+   "expect_state": "EXIT_ONLY",
+   "expect_reasons": [
+    "KILL_SWITCH",
+    "KILL_SWITCH_EXIT"
+   ]
+  },
+  {
+   "event": "OPERATOR_RESUME_SIGNED",
+   "context": {
+    "signed": true,
+    "reason": "KILL_SWITCH_EXIT",
+    "signer_role": "BETREIBER",
+    "positions_flat": true
+   },
+   "expect_state": "ENTRY_PAUSED",
+   "expect_reasons": [
+    "KILL_SWITCH"
+   ]
+  },
+  {
+   "event": "OPERATOR_RESUME_SIGNED",
+   "context": {
+    "signed": true,
+    "reason": "KILL_SWITCH",
+    "signer_role": "BETREIBER",
+    "orders_cancelled_verified": true
+   },
+   "expect_state": "READY",
+   "expect_reasons": []
+  }
+ ]
+}

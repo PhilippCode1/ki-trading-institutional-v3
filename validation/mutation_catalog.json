@@ -1,0 +1,850 @@
+{
+  "schema_version": "3.0",
+  "document": "Mutationskatalog der Paketprüfung",
+  "as_of": "2026-09-24",
+  "rule": "Jede Mutation wird auf eine frische Kopie des Pakets angewandt; die genannten Phasen müssen mit einer Fehlermeldung scheitern, die das Muster enthält. Vorher bestehen dieselben Phasen auf der unveränderten Kopie (Grundlauf).",
+  "pointer_syntax": "JSON-Pointer; Segment [id=WERT] wählt das Listenelement mit diesem id-Feld",
+  "defuse_marker": "⟨⟩",
+  "defuse_rule": "Nutzlasten mit absichtlich verbotenen oder ungültigen Mustern (Geheimnis, E-Mail-Adresse, Platzhalter, absoluter Pfad, unbekannte Kennung) sind mit dem Trennzeichen entschärft, damit das ausgelieferte Paket selbst keine solchen Muster enthält; validation/mutation_tests.py entfernt das Trennzeichen aus allen Feldern vor dem Anwenden.",
+  "mutations": [
+    {
+      "id": "MUT-01",
+      "title": "Spread ändern ohne Kostenanpassung",
+      "category": "SEMANTIK",
+      "file": "registers/instruments.json",
+      "op": "json_set",
+      "phases": [
+        "P09"
+      ],
+      "expect": "halber Spread",
+      "pointer": "/instruments/[id=INS-COMEX-GC]/planning/spread_ticks/value",
+      "value": 3,
+      "required": "verlangt in §19.3"
+    },
+    {
+      "id": "MUT-02",
+      "title": "Hebelprofil über ein Limit setzen (H20-Obergrenze über der Betreibergrenze)",
+      "category": "SEMANTIK",
+      "file": "parameters.json",
+      "op": "json_set",
+      "phases": [
+        "P09"
+      ],
+      "expect": "über der Betreibergrenze",
+      "pointer": "/parameters/[id=P-LEV-H20-CAP]/value",
+      "value": 25,
+      "required": "verlangt in §19.3"
+    },
+    {
+      "id": "MUT-03",
+      "title": "Stresswert entfernen",
+      "category": "SEMANTIK",
+      "file": "risk/stress_results.json",
+      "op": "json_delete",
+      "phases": [
+        "P09"
+      ],
+      "expect": "Szenarien ohne Ergebnis",
+      "pointer": "/results/SYSTEM/H5/scenarios/SC-H-1987",
+      "required": "verlangt in §19.3"
+    },
+    {
+      "id": "MUT-04",
+      "title": "Betreiberangabe erfinden (Kapital als bestätigt ausgeben)",
+      "category": "SEMANTIK",
+      "file": "external_inputs.json",
+      "op": "json_set",
+      "phases": [
+        "P09"
+      ],
+      "expect": "ohne Nachweis",
+      "pointer": "/inputs/[id=X-OP-CAPITAL]/status",
+      "value": "BESTAETIGT",
+      "required": "verlangt in §19.3"
+    },
+    {
+      "id": "MUT-05",
+      "title": "Futility-Schwelle umgehen (Regel G3-R7 entfernen)",
+      "category": "SEMANTIK",
+      "file": "research/evidence_gates.json",
+      "op": "json_delete",
+      "phases": [
+        "P09"
+      ],
+      "expect": "Futility-Regel fehlt",
+      "pointer": "/gates/[id=GATE-G3]/outcome_rules/[id=G3-R7]",
+      "required": "verlangt in §19.3"
+    },
+    {
+      "id": "MUT-06",
+      "title": "E-Punkt ohne Laufbeleg vergeben",
+      "category": "SEMANTIK",
+      "file": "audit/scorecard_E.json",
+      "op": "json_set",
+      "phases": [
+        "P12"
+      ],
+      "expect": "ohne signiertes Torergebnis",
+      "pointer": "/blocks/[id=E-1]/points",
+      "value": 10,
+      "required": "verlangt in §19.3"
+    },
+    {
+      "id": "MUT-07",
+      "title": "Brokergebühr ändern ohne Neuberechnung",
+      "category": "SEMANTIK",
+      "file": "registers/costs.json",
+      "op": "json_set",
+      "phases": [
+        "P09"
+      ],
+      "expect": "Kommission je Seite",
+      "pointer": "/costs/[id=COST-COMM-FXFLAT]/amount",
+      "value": "0.50"
+    },
+    {
+      "id": "MUT-08",
+      "title": "Planpreis eines Kontrakts ändern ohne Neuberechnung",
+      "category": "SEMANTIK",
+      "file": "registers/instruments.json",
+      "op": "json_set",
+      "phases": [
+        "P09"
+      ],
+      "expect": "Nominal EUR",
+      "pointer": "/instruments/[id=INS-CBOT-ZN]/planning/price/value",
+      "value": "95"
+    },
+    {
+      "id": "MUT-09",
+      "title": "Kostentabelle CSV abweichend vom Kostenmodell",
+      "category": "SEMANTIK",
+      "file": "financials/cost_table.csv",
+      "op": "text_replace",
+      "phases": [
+        "P09"
+      ],
+      "expect": "cost_table.csv weicht",
+      "find": "INS-CME-SR3;SR3;STIR;STANDARD;",
+      "replace": "INS-CME-SR3;SR3;STIR;STANDARD;1;",
+      "regex": false
+    },
+    {
+      "id": "MUT-10",
+      "title": "Hebelzelle als zulässig ausweisen trotz verletzter Grenzen",
+      "category": "SEMANTIK",
+      "file": "risk/leverage_results.json",
+      "op": "json_set",
+      "phases": [
+        "P09"
+      ],
+      "expect": "widerspricht den Grenzen",
+      "pointer": "/cells/U-KOSTEN/5000000/H5/admissible",
+      "value": true
+    },
+    {
+      "id": "MUT-11",
+      "title": "Go/No-Go auf Echtgeld-Go setzen bei unzulässigem Profil",
+      "category": "SEMANTIK",
+      "file": "financials/decision_montecarlo_results.json",
+      "op": "json_set",
+      "phases": [
+        "P09",
+        "P13"
+      ],
+      "expect": "No-Go|widerspricht der Profilzulässigkeit",
+      "pointer": "/go_no_go/5000000/H5/decision_real_money",
+      "value": "GO"
+    },
+    {
+      "id": "MUT-12",
+      "title": "Wochenendfaktor der Größenregel weglassen",
+      "category": "SEMANTIK",
+      "file": "risk/leverage_results.json",
+      "op": "json_set",
+      "phases": [
+        "P09"
+      ],
+      "expect": "Wochenendfaktor",
+      "pointer": "/weekend_factor",
+      "value": 1.0
+    },
+    {
+      "id": "MUT-13",
+      "title": "Steuerbeispiel falsch",
+      "category": "SEMANTIK",
+      "file": "financials/tax_sensitivity_example.json",
+      "op": "json_set",
+      "phases": [
+        "P09"
+      ],
+      "expect": "Steuerbeispiel",
+      "pointer": "/examples/2/after_sensitivity_eur",
+      "value": "1000.00"
+    },
+    {
+      "id": "MUT-14",
+      "title": "Kapazitätsgrenze drastisch senken ohne Neuberechnung",
+      "category": "SEMANTIK",
+      "file": "parameters.json",
+      "op": "json_set",
+      "phases": [
+        "P09",
+        "P07"
+      ],
+      "expect": "Tagesvolumens|seit der Rechnung",
+      "pointer": "/parameters/[id=P-RISK-MAX-ADV-SHARE]/value",
+      "value": 1e-06
+    },
+    {
+      "id": "MUT-15",
+      "title": "Proxy auf anderen Basiswert (Micro Gold auf 10-Year Note)",
+      "category": "SEMANTIK",
+      "file": "registers/instruments.json",
+      "op": "json_set",
+      "phases": [
+        "P09"
+      ],
+      "expect": "anderer Risikoklasse",
+      "pointer": "/instruments/[id=INS-COMEX-MGC]/standard_ref",
+      "value": "INS-CBOT-ZN"
+    },
+    {
+      "id": "MUT-16",
+      "title": "Tagesverlust-Leiter nicht mehr steigend",
+      "category": "SEMANTIK",
+      "file": "parameters.json",
+      "op": "json_set",
+      "phases": [
+        "P09"
+      ],
+      "expect": "nicht streng steigend",
+      "pointer": "/parameters/[id=P-RISK-DL-L2]/value",
+      "value": 0.02
+    },
+    {
+      "id": "MUT-17",
+      "title": "Stressszenario ohne Runbook",
+      "category": "SEMANTIK",
+      "file": "operations/runbook_register.json",
+      "op": "json_set",
+      "phases": [
+        "P09"
+      ],
+      "expect": "SC-H-1987 ohne Runbook",
+      "pointer": "/runbooks/[id=RB-25]/scenarios",
+      "value": [],
+      "also": [
+        {
+          "pointer": "/runbooks/[id=RB-29]/scenarios",
+          "value": []
+        }
+      ]
+    },
+    {
+      "id": "MUT-18",
+      "title": "Externe Eingabe sperrt ihr Tor nicht mehr",
+      "category": "SEMANTIK",
+      "file": "external_inputs.json",
+      "op": "json_set",
+      "phases": [
+        "P09"
+      ],
+      "expect": "nicht abgeglichen|weichen vom Register ab",
+      "pointer": "/inputs/[id=X-BRK-FEES]/blocks",
+      "value": []
+    },
+    {
+      "id": "MUT-19",
+      "title": "Torschwelle als Zahl statt Parameter (G3 ohne P-RES-DSR-MIN)",
+      "category": "SEMANTIK",
+      "file": "research/evidence_gates.json",
+      "op": "json_set",
+      "phases": [
+        "P09"
+      ],
+      "expect": "Schwellen der Betriebscharakteristik fehlen",
+      "pointer": "/gates/[id=GATE-G3]/outcome_rules/[id=G3-R3]/when/lt/1",
+      "value": {
+        "const": 0.5
+      }
+    },
+    {
+      "id": "MUT-20",
+      "title": "Futility-Schwelle auf null (Regel wirkungslos)",
+      "category": "SEMANTIK",
+      "file": "parameters.json",
+      "op": "json_set",
+      "phases": [
+        "P09"
+      ],
+      "expect": "unwirksam",
+      "pointer": "/parameters/[id=P-RES-FUTILITY]/value",
+      "value": 0.0
+    },
+    {
+      "id": "MUT-21",
+      "title": "Betriebscharakteristik mit anderer DSR-Schwelle",
+      "category": "SEMANTIK",
+      "file": "research/operating_characteristics_results.json",
+      "op": "json_set",
+      "phases": [
+        "P09"
+      ],
+      "expect": "anderen DSR-Schwelle",
+      "pointer": "/registered_dsr_min",
+      "value": 0.5
+    },
+    {
+      "id": "MUT-22",
+      "title": "Wortlaut einer Betreiberantwort ändern",
+      "category": "SEMANTIK",
+      "file": "registers/decision_register.json",
+      "op": "json_set",
+      "phases": [
+        "P09"
+      ],
+      "expect": "Wortlaut",
+      "pointer": "/decisions/[id=DEC-OP-04]/operator_answer_verbatim",
+      "value": "Verlust pro Tag darf höchstens 12 % betragen"
+    },
+    {
+      "id": "MUT-23",
+      "title": "Betreiberwert ändern (Tagesgrenze)",
+      "category": "SEMANTIK",
+      "file": "parameters.json",
+      "op": "json_set",
+      "phases": [
+        "P09"
+      ],
+      "expect": "Betreiberwert weicht vom Siegel ab",
+      "pointer": "/parameters/[id=P-OP-DAILY-LOSS-CAP]/value",
+      "value": 0.12
+    },
+    {
+      "id": "MUT-24",
+      "title": "Heutiger Torfall veraltet (P(NPV > 0) im Fall verändert)",
+      "category": "SEMANTIK",
+      "file": "examples/valid/gate_cases/GC-G0-103.json",
+      "op": "json_set",
+      "phases": [
+        "P09"
+      ],
+      "expect": "heutiger Rechenwert",
+      "pointer": "/facts/p_npv_positive",
+      "value": 0.9
+    },
+    {
+      "id": "MUT-25",
+      "title": "K über 99 ohne unabhängige Gegenprüfung",
+      "category": "SEMANTIK",
+      "file": "audit/scorecard_K.json",
+      "op": "json_set",
+      "phases": [
+        "P12"
+      ],
+      "expect": "ohne bestandene unabhängige Gegenprüfung",
+      "pointer": "/subcriteria/[id=J3]/factor",
+      "value": 1
+    },
+    {
+      "id": "MUT-26",
+      "title": "Pflichtdatei entfernen",
+      "category": "STRUKTUR",
+      "file": "execution/broker_killer_tests.md",
+      "op": "file_delete",
+      "phases": [
+        "P01"
+      ],
+      "expect": "Pflichtdatei fehlt"
+    },
+    {
+      "id": "MUT-27",
+      "title": "JSON-Syntaxfehler",
+      "category": "STRUKTUR",
+      "file": "registers/limits.json",
+      "op": "text_append",
+      "phases": [
+        "P02"
+      ],
+      "expect": "limits.json",
+      "text": "{"
+    },
+    {
+      "id": "MUT-28",
+      "title": "Doppelter JSON-Schlüssel",
+      "category": "STRUKTUR",
+      "file": "registers/model_inventory.json",
+      "op": "text_replace",
+      "phases": [
+        "P02"
+      ],
+      "expect": "doppelter Schlüssel",
+      "find": "\"schema_version\": \"3.0\",",
+      "replace": "\"schema_version\": \"3.0\", \"schema_version\": \"3.0\",",
+      "regex": false
+    },
+    {
+      "id": "MUT-29",
+      "title": "Schemaverstoß (Parameter ohne Einheit)",
+      "category": "STRUKTUR",
+      "file": "parameters.json",
+      "op": "json_delete",
+      "phases": [
+        "P03"
+      ],
+      "expect": "unit",
+      "pointer": "/parameters/[id=P-ECO-DISCOUNT]/unit"
+    },
+    {
+      "id": "MUT-30",
+      "title": "Tickwert ≠ Multiplikator × Tick",
+      "category": "REGISTER",
+      "file": "registers/instruments.json",
+      "op": "json_set",
+      "phases": [
+        "P04"
+      ],
+      "expect": "Tickwert",
+      "pointer": "/instruments/[id=INS-COMEX-GC]/tick_value",
+      "value": "12.00"
+    },
+    {
+      "id": "MUT-31",
+      "title": "Parameter BELEGT ohne Quelle",
+      "category": "REGISTER",
+      "file": "parameters.json",
+      "op": "json_set",
+      "phases": [
+        "P04"
+      ],
+      "expect": "BELEGT ohne Quelle",
+      "pointer": "/parameters/[id=P-RES-STANDARD-MONTHS]/refs",
+      "value": []
+    },
+    {
+      "id": "MUT-32",
+      "title": "Risikoscore ≠ Wahrscheinlichkeit × Wirkung",
+      "category": "REGISTER",
+      "file": "registers/risk_register.json",
+      "op": "json_set",
+      "phases": [
+        "P04"
+      ],
+      "expect": "Score",
+      "pointer": "/risks/[id=RK-01]/score",
+      "value": 1
+    },
+    {
+      "id": "MUT-33",
+      "title": "Ungebundene Ergebniszahl im Fließtext",
+      "category": "BINDUNG",
+      "file": "financials/economic_model.md",
+      "op": "text_append",
+      "phases": [
+        "P06"
+      ],
+      "expect": "ungebundene Zahl",
+      "text": "\nDer Aufbau kostet zusätzlich 99.999 EUR.\n"
+    },
+    {
+      "id": "MUT-34",
+      "title": "Gebundenen Wert im Text verfälschen",
+      "category": "BINDUNG",
+      "file": "risk/limits.md",
+      "op": "text_replace",
+      "phases": [
+        "P06"
+      ],
+      "expect": "render_blocks",
+      "find": "(<!--v:param:P-RISK-DL-L1\\|pct0-->)[^<]*(<!--/v-->)",
+      "replace": "\\g<1>4 %\\g<2>",
+      "regex": true
+    },
+    {
+      "id": "MUT-35",
+      "title": "Betreiberfassung länger als sechs Sätze",
+      "category": "BINDUNG",
+      "file": "risk/margin_liquidity.md",
+      "op": "text_replace",
+      "phases": [
+        "P06"
+      ],
+      "expect": "Sätzen",
+      "find": "> **Betreiberfassung.**",
+      "replace": "> **Betreiberfassung.** Satz eins. Satz zwei. Satz drei. Satz vier. Satz fünf. Satz sechs.",
+      "regex": false
+    },
+    {
+      "id": "MUT-36",
+      "title": "Verweis auf fehlende Datei",
+      "category": "VERWEIS",
+      "file": "data/data_plan.md",
+      "op": "text_append",
+      "phases": [
+        "P05"
+      ],
+      "expect": "fehlt",
+      "text": "\nSiehe `financials/nicht_vorhanden.json`.\n"
+    },
+    {
+      "id": "MUT-37",
+      "title": "Verweis auf unbekanntes Risiko",
+      "category": "VERWEIS",
+      "file": "operations/runbooks.md",
+      "op": "text_append",
+      "phases": [
+        "P05"
+      ],
+      "expect": "RK-⟨⟩99",
+      "text": "\nSiehe RK-⟨⟩99.\n"
+    },
+    {
+      "id": "MUT-38",
+      "title": "Verweis auf unbekannten Parameter",
+      "category": "VERWEIS",
+      "file": "risk/limits.md",
+      "op": "text_append",
+      "phases": [
+        "P05"
+      ],
+      "expect": "P-RISK-⟨⟩NICHT-DA",
+      "text": "\nGrenze P-RISK-⟨⟩NICHT-DA.\n"
+    },
+    {
+      "id": "MUT-39",
+      "title": "Erwartung eines Torfalls verfälscht",
+      "category": "BEISPIEL",
+      "file": "examples/valid/gate_cases/GC-G0-101.json",
+      "op": "json_set",
+      "phases": [
+        "P08"
+      ],
+      "expect": "gate_engine",
+      "pointer": "/expect_outcome",
+      "value": "PASS"
+    },
+    {
+      "id": "MUT-40",
+      "title": "Zustandstrace verfälscht",
+      "category": "BEISPIEL",
+      "file": "examples/valid/state_traces/TR-DATA-001.json",
+      "op": "json_set",
+      "phases": [
+        "P08"
+      ],
+      "expect": "state_engine",
+      "pointer": "/steps/1/expect_state",
+      "value": "STALE"
+    },
+    {
+      "id": "MUT-41",
+      "title": "Gültiges Beispiel verletzt eine semantische Regel (Aufrunden)",
+      "category": "BEISPIEL",
+      "file": "examples/valid/contracts/risk_decision_reduce.json",
+      "op": "json_set",
+      "phases": [
+        "P08"
+      ],
+      "expect": "Erwartung verfehlt",
+      "pointer": "/qty_approved",
+      "value": 4
+    },
+    {
+      "id": "MUT-42",
+      "title": "Ungültiges Beispiel repariert (Erwartung nicht mehr erfüllt)",
+      "category": "BEISPIEL",
+      "file": "examples/invalid/risk_decision_rounded_up.json",
+      "op": "json_set",
+      "phases": [
+        "P08"
+      ],
+      "expect": "Erwartung verfehlt",
+      "pointer": "/qty_approved",
+      "value": 2
+    },
+    {
+      "id": "MUT-43",
+      "title": "Platzhalter im Text",
+      "category": "HYGIENE",
+      "file": "ai/ai_layer.md",
+      "op": "text_append",
+      "phases": [
+        "P11"
+      ],
+      "expect": "Platzhalter",
+      "text": "\nTO⟨⟩DO: später ergänzen.\n"
+    },
+    {
+      "id": "MUT-44",
+      "title": "Personenbezogene E-Mail-Adresse",
+      "category": "HYGIENE",
+      "file": "governance/organisation_raci.md",
+      "op": "text_append",
+      "phases": [
+        "P11"
+      ],
+      "expect": "E-Mail-Adresse",
+      "text": "\nKontakt: vorname.nachname⟨⟩@beispielfirma.de\n"
+    },
+    {
+      "id": "MUT-45",
+      "title": "Privater Schlüssel im Paket",
+      "category": "HYGIENE",
+      "file": "security/key_management.md",
+      "op": "text_append",
+      "phases": [
+        "P11"
+      ],
+      "expect": "Geheimnis",
+      "text": "\n-----BEGIN RSA ⟨⟩PRIVATE KEY-----\n"
+    },
+    {
+      "id": "MUT-46",
+      "title": "Absoluter lokaler Pfad",
+      "category": "HYGIENE",
+      "file": "implementation/build_program.md",
+      "op": "text_append",
+      "phases": [
+        "P11"
+      ],
+      "expect": "absoluter lokaler Pfad",
+      "text": "\nLog unter /ho⟨⟩me/betreiber/log.txt\n"
+    },
+    {
+      "id": "MUT-47",
+      "title": "Anforderung als im Paket nachgewiesen ausgegeben",
+      "category": "STATUS",
+      "file": "requirements.json",
+      "op": "json_set",
+      "phases": [
+        "P13"
+      ],
+      "expect": "aus den Tests folgt",
+      "pointer": "/requirements/[id=REQ-EXE-011]/status",
+      "value": "IM_PAKET_NACHGEWIESEN"
+    },
+    {
+      "id": "MUT-48",
+      "title": "Bautest als im Paket ausgeführt ausgegeben",
+      "category": "STATUS",
+      "file": "implementation/test_catalog.json",
+      "op": "json_set",
+      "phases": [
+        "P13"
+      ],
+      "expect": "ohne Ausführung im Paket",
+      "pointer": "/tests/[id=T-SEC-014]/status",
+      "value": "IM_PAKET_AUSGEFUEHRT"
+    },
+    {
+      "id": "MUT-49",
+      "title": "Befund mit fehlendem Nachweis",
+      "category": "STATUS",
+      "file": "registers/resolution_matrix.json",
+      "op": "json_append",
+      "phases": [
+        "P13"
+      ],
+      "expect": "nicht_vorhanden",
+      "pointer": "/findings/[id=EV-01]/evidence",
+      "value": "financials/nicht_vorhanden.json"
+    },
+    {
+      "id": "MUT-50",
+      "title": "Parameter ändern ohne Rechner neu laufen zu lassen",
+      "category": "RECHNER",
+      "file": "parameters.json",
+      "op": "json_set",
+      "phases": [
+        "P07"
+      ],
+      "expect": "seit der Rechnung geändert",
+      "pointer": "/parameters/[id=P-ECO-DISCOUNT]/value",
+      "value": 0.07
+    },
+    {
+      "id": "MUT-51",
+      "title": "Steuerfunktion kürzt auch Verluste",
+      "category": "RECHNER",
+      "file": "financials/tax_scenarios.py",
+      "op": "text_replace",
+      "phases": [
+        "P10"
+      ],
+      "expect": "test_tax_sensitivity",
+      "find": "return annual_value * (1.0 - rate) if annual_value > 0 else annual_value",
+      "replace": "return annual_value * (1.0 - rate)",
+      "regex": false
+    },
+    {
+      "id": "MUT-52",
+      "title": "Leiterfaktor im Stressmotor verfälscht",
+      "category": "RECHNER",
+      "file": "lib/calc.py",
+      "op": "text_replace",
+      "phases": [
+        "P10"
+      ],
+      "expect": "test_stress_single",
+      "find": "day = F[\"DL_L2\"] if day_loss >= P.f(\"P-RISK-DL-L2\") else (F[\"DL_L1\"] if day_loss >= P.f(\"P-RISK-DL-L1\") else 1.0)",
+      "replace": "day = 1.0",
+      "regex": false
+    },
+    {
+      "id": "MUT-53",
+      "title": "Inhalt ändern ohne neuen Mehrversionslauf (Beleg eines alten Paketstands)",
+      "category": "STATUS",
+      "file": "risk/limits.md",
+      "op": "text_append",
+      "phases": [
+        "P13"
+      ],
+      "expect": "anderen Paketstand",
+      "text": "\nErgänzung ohne neuen Lauf.\n"
+    },
+    {
+      "id": "MUT-54",
+      "title": "Gepinnte Abhängigkeiten entfernen",
+      "category": "STRUKTUR",
+      "file": "validation/requirements-validation.txt",
+      "op": "file_delete",
+      "phases": [
+        "P01"
+      ],
+      "expect": "Pflichtdatei fehlt"
+    },
+    {
+      "id": "MUT-55",
+      "title": "Sprachmodell als Erzeuger einer Handelsabsicht zulassen",
+      "category": "SEMANTIK",
+      "file": "schemas/order_intent.schema.json",
+      "op": "json_append",
+      "phases": [
+        "P08"
+      ],
+      "expect": "Erwartung verfehlt|erwartet",
+      "pointer": "/properties/producer/enum",
+      "value": "HERMES"
+    },
+    {
+      "id": "MUT-56",
+      "title": "Proxy auf anderen Basiswert gleicher Klasse (Micro Gold auf Silber)",
+      "category": "SEMANTIK",
+      "file": "registers/instruments.json",
+      "op": "json_set",
+      "phases": [
+        "P09"
+      ],
+      "expect": "anderer Notierung",
+      "pointer": "/instruments/[id=INS-COMEX-MGC]/standard_ref",
+      "value": "INS-COMEX-SI"
+    },
+    {
+      "id": "MUT-57",
+      "title": "Killer-Test-Tor nimmt unzulässige Ergebniswerte an (Regel G1-R2A entfernt)",
+      "category": "SEMANTIK",
+      "file": "research/evidence_gates.json",
+      "op": "json_delete",
+      "phases": [
+        "P08"
+      ],
+      "expect": "GC-G1|gate_engine",
+      "pointer": "/gates/[id=GATE-G1]/outcome_rules/[id=G1-R2A]"
+    },
+    {
+      "id": "MUT-58",
+      "title": "Margin-Level auf den gesamten NAV statt auf das Guthaben beim Broker bezogen",
+      "category": "SEMANTIK",
+      "file": "risk/stress_results.json",
+      "op": "json_set",
+      "phases": [
+        "P09"
+      ],
+      "expect": "Guthaben beim Broker",
+      "pointer": "/results/SYSTEM/H5/scenarios/SC-H-1987/margin_level_after",
+      "value": 40.0
+    },
+    {
+      "id": "MUT-59",
+      "title": "Rückkehr einer ML-Komponente ohne volle Neuvalidierung (Wächter ML-10 ausgehebelt)",
+      "category": "SEMANTIK",
+      "file": "architecture/state_machines.json",
+      "op": "json_set",
+      "phases": [
+        "P08"
+      ],
+      "expect": "TR-ML-004|state_engine",
+      "pointer": "/machines/[id=SM-MLMODEL]/transitions/[id=ML-10]/guard",
+      "value": {
+        "const": true
+      }
+    },
+    {
+      "id": "MUT-60",
+      "title": "Rechner liest das Kostenregister am Kostenmodell vorbei",
+      "category": "SEMANTIK",
+      "file": "research/statistical_calculator.py",
+      "op": "text_append",
+      "phases": [
+        "P09"
+      ],
+      "expect": "liest das Kostenregister direkt",
+      "text": "\n_KOSTEN = \"registers/costs.json\"\n"
+    }
+  ],
+  "known_limits": [
+    {
+      "id": "PG-01",
+      "text": "Aussagen in Worten ohne Zahl (etwa „in keiner Zelle“) prüft die Paketprüfung nicht gegen die Rechner; kritische Aussagen sind deshalb über Zählwerte gebunden (calc:dmc_class_count, calc:gate_today)."
+    },
+    {
+      "id": "PG-02",
+      "text": "Die Suche nach ungebundenen Zahlen lässt Gliederungs-, Kennungs-, Datums-, Versions- und Rechtsaktnummern sowie die Konstanten 0 und 1 zu (Liste NUM_ALLOW in validation/validate_package.py); eine als Kennung getarnte Zahl würde nicht erkannt."
+    },
+    {
+      "id": "PG-03",
+      "text": "Werden Eingaben und Ergebnisse gemeinsam und konsistent geändert (Rechner neu gelaufen), ist das eine zulässige Änderung und keine Mutation; die Paketprüfung erkennt dann nur Widersprüche zu Registern, Siegel und Texten."
+    },
+    {
+      "id": "PG-04",
+      "text": "Zeitabhängige Tatsachen (Gebühren, Spezifikationen, Rechtslage) prüft die Paketprüfung nur über Status und Belege im Quellenregister, nicht gegen die Primärquelle; die Aktualität verantwortet der Abruf mit Datum."
+    },
+    {
+      "id": "PG-05",
+      "text": "Im Mutationslauf prüft P07 nur die Eingangs-Hashes (--calc-mode hash); Änderungen am Code eines Rechners erkennt dort erst P10 oder der vollständige Lauf von run_calculators --check."
+    },
+    {
+      "id": "PG-06",
+      "text": "Die Satzzählung der Betreiberfassungen ist eine Heuristik mit Abkürzungsliste; ungewöhnliche Abkürzungen können als Satzende zählen."
+    },
+    {
+      "id": "PG-07",
+      "text": "Personenbezogene Daten werden über Muster (E-Mail, Telefonnummer, IBAN) gesucht; Namen ohne Muster erkennt die Prüfung nicht. Der Name des Betreibers ist im Wortlaut der Betreiberantwort entfernt (R-13)."
+    },
+    {
+      "id": "PG-08",
+      "text": "Die Referenztests der Strategien prüfen konstruierte Preisreihen; sie belegen die Regeln, nicht eine Kante (R-02)."
+    },
+    {
+      "id": "PG-09",
+      "text": "Das Siegel der Betreiberangaben schützt vor unbemerkten Änderungen, nicht vor einer gemeinsamen Änderung von Angabe und Siegel; diese ist nur mit neuer, signierter Betreiberentscheidung zulässig und im Entscheidungsregister sichtbar."
+    },
+    {
+      "id": "PG-10",
+      "text": "Der Linter prüft research/reference_strategies/tf_d1_baseline.py nicht: Die Datei ist bytegleich aus v2.0 übernommen (Vergleichsbasis S-BASE); sie läuft aber in den Referenztests unter -W error."
+    },
+    {
+      "id": "PG-11",
+      "text": "Laufbelege entstehen nacheinander (Mehrversionslauf, Mutationslauf, Prüfung vor dem Packen). Belege, die im laufenden Zyklus erst entstehen, nennt --pending-evidence; vollständig mit Paketstand geprüft werden alle drei erst in der Prüfung nach frischem Entpacken."
+    },
+    {
+      "id": "PG-12",
+      "text": "Der Mehrversionslauf vergleicht die Versionen der installierten Pakete mit den Pins; die Hashes prüft pip bei der Installation (--require-hashes), nicht die Paketprüfung."
+    },
+    {
+      "id": "PG-13",
+      "text": "Im Mutationslauf meldet P13 bei jeder Inhaltsänderung zusätzlich den abweichenden Paketstand; als erkannt zählt eine Mutation trotzdem nur, wenn ihr eigenes Fehlermuster erscheint."
+    }
+  ]
+}

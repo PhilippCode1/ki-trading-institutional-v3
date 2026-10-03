@@ -1,0 +1,85 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:ki-trading-v3:resolution_matrix",
+  "title": "Auflösungsmatrix",
+  "x-version": "3.0.0",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "3.0"
+    },
+    "document": {
+      "const": "Auflösungsmatrix der Befunde"
+    },
+    "as_of": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+    },
+    "status_values": {
+      "type": "object"
+    },
+    "findings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^(EV-\\d{2}|CR5-\\d{2})$"
+          },
+          "finding": {
+            "type": "string",
+            "minLength": 1
+          },
+          "required": {
+            "type": "string",
+            "minLength": 1
+          },
+          "status": {
+            "enum": [
+              "AUFGELOEST",
+              "AUFGELOEST_IM_KONZEPT",
+              "TEILWEISE",
+              "OFFEN_EXTERN"
+            ]
+          },
+          "treatment": {
+            "type": "string",
+            "minLength": 1
+          },
+          "evidence": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "minItems": 1
+          },
+          "residual": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "id",
+          "finding",
+          "required",
+          "status",
+          "treatment",
+          "evidence",
+          "residual"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 20
+    }
+  },
+  "required": [
+    "schema_version",
+    "document",
+    "as_of",
+    "status_values",
+    "findings"
+  ],
+  "additionalProperties": false
+}

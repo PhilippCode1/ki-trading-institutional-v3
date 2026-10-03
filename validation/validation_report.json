@@ -1,0 +1,163 @@
+{
+ "package": "KI_Trading_Institutional_v3_0",
+ "stage": "prepack",
+ "strict": true,
+ "calc_mode": "full",
+ "result": "PASS",
+ "package_state": "b19110757120fa49cb335bce98dc93ee648014cd0576db547221d8a8fec73a26",
+ "pending_evidence": [
+  "validation/validation_report.json"
+ ],
+ "phases_run": "alle",
+ "generated_utc": "2026-09-24T21:30:35Z",
+ "environment": {
+  "python": "3.12.3",
+  "platform": "Linux"
+ },
+ "phases": [
+  {
+   "id": "P01",
+   "title": "Struktur",
+   "status": "PASS",
+   "errors": [],
+   "warnings": [],
+   "info": [
+    "Laufbeleg entsteht in diesem Zyklus: validation/validation_report.json"
+   ],
+   "seconds": 0.03
+  },
+  {
+   "id": "P02",
+   "title": "JSON-Syntax",
+   "status": "PASS",
+   "errors": [],
+   "warnings": [],
+   "info": [
+    "423 JSON-Dateien gelesen"
+   ],
+   "seconds": 0.11
+  },
+  {
+   "id": "P03",
+   "title": "Schemas",
+   "status": "PASS",
+   "errors": [],
+   "warnings": [],
+   "info": [],
+   "seconds": 0.92
+  },
+  {
+   "id": "P04",
+   "title": "Registersemantik und Querverweise",
+   "status": "PASS",
+   "errors": [],
+   "warnings": [],
+   "info": [],
+   "seconds": 0.01
+  },
+  {
+   "id": "P05",
+   "title": "Verweise im Text",
+   "status": "PASS",
+   "errors": [],
+   "warnings": [],
+   "info": [
+    "11934 Kennungen, 426 Dateiverweise geprüft"
+   ],
+   "seconds": 0.28
+  },
+  {
+   "id": "P06",
+   "title": "Bindungen, Zahlen und Betreiberfassungen",
+   "status": "PASS",
+   "errors": [],
+   "warnings": [],
+   "info": [
+    "50 Markdown-Dateien auf ungebundene Zahlen und Betreiberfassungen geprüft"
+   ],
+   "seconds": 0.82
+  },
+  {
+   "id": "P07",
+   "title": "Referenzrechner",
+   "status": "PASS",
+   "errors": [],
+   "warnings": [],
+   "info": [
+    "ERGEBNIS PASS"
+   ],
+   "seconds": 72.9
+  },
+  {
+   "id": "P08",
+   "title": "Beispiele, Torfälle, Zustandstraces",
+   "status": "PASS",
+   "errors": [],
+   "warnings": [],
+   "info": [
+    "87/87 Beispiele wie erwartet; 172 Torfälle; 67 Traces"
+   ],
+   "seconds": 0.14
+  },
+  {
+   "id": "P09",
+   "title": "Semantische Querprüfungen",
+   "status": "PASS",
+   "errors": [],
+   "warnings": [],
+   "info": [
+    "11/11 semantische Prüfungen bestanden"
+   ],
+   "seconds": 0.07
+  },
+  {
+   "id": "P10",
+   "title": "Referenztests",
+   "status": "PASS",
+   "errors": [],
+   "warnings": [],
+   "info": [
+    "22 Referenztests bestanden"
+   ],
+   "seconds": 9.49
+  },
+  {
+   "id": "P11",
+   "title": "Hygiene",
+   "status": "PASS",
+   "errors": [],
+   "warnings": [],
+   "info": [],
+   "seconds": 1.61
+  },
+  {
+   "id": "P12",
+   "title": "Selbstbewertung K und E",
+   "status": "PASS",
+   "errors": [],
+   "warnings": [],
+   "info": [],
+   "seconds": 0.0
+  },
+  {
+   "id": "P13",
+   "title": "Statuswahrheit",
+   "status": "PASS",
+   "errors": [],
+   "warnings": [],
+   "info": [],
+   "seconds": 0.09
+  },
+  {
+   "id": "P14",
+   "title": "Manifest und Prüfsummen",
+   "status": "SKIPPED",
+   "errors": [],
+   "warnings": [],
+   "info": [
+    "nur in Stufe full"
+   ],
+   "seconds": 0.0
+  }
+ ]
+}

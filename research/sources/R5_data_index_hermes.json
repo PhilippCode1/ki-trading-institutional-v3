@@ -1,0 +1,2685 @@
+{
+  "retrieved": "2026-09-24",
+  "market_data_fees": [
+    {
+      "id": "CME_FEELIST_2026_06_01",
+      "exchange": "CME Group (CME, CBOT, NYMEX, COMEX)",
+      "document": "CME Group Fee List – CME, CBOT, NYMEX and COMEX Information",
+      "effective_date": "2026-06-01",
+      "gilt_am_2026_09_24": true,
+      "currency": "USD",
+      "unit_of_count": "je Börse (DCM) und Gerät bzw. Licensee/Licensee Group; 'Bundle' = alle 4 DCMs. Kopfzeile: Gebühren werden je Börse erhoben – Non-Display- und User-Non-Display-Beträge fallen damit je DCM an (bei CME+CBOT+NYMEX+COMEX bis zu 4-fach).",
+      "beispiel_4_dcms_eigene_rechnung_usd_pro_monat": {
+        "user_non_display_A": 1828,
+        "managed_user_non_display_A": 832,
+        "non_display_A1_basic": 2436,
+        "non_pro_depth_bundle": 36.5
+      },
+      "period": "monatlich",
+      "period_evidence": "Fee-List-Text trennt Spalten 'Annually'/'Monthly' nicht; Monatsbasis aus Schedule 5 (Geräte) und Non-Display-FAQ (Non-Display) abgeleitet; Distributionslizenzen jährlich.",
+      "fees": {
+        "non_professional_depth_of_market_per_exchange": 12.1,
+        "non_professional_depth_of_market_bundle_all_exchanges": 36.5,
+        "non_professional_top_of_book_per_exchange": 1.55,
+        "non_professional_top_of_book_bundle_all_exchanges": 4.65,
+        "professional_real_time_display_device_per_exchange": 134.5,
+        "professional_e_mini_only_device_CME": 73.0,
+        "non_display_category_A1_trading_as_principal": {
+          "basic_1_application": 609,
+          "premium_2_3_applications": 1820,
+          "enterprise_4plus_applications": 3640
+        },
+        "non_display_category_A_maximum_combined_A1_A2_A3": {
+          "basic": 2745,
+          "premium": 4275,
+          "enterprise": 7340
+        },
+        "non_display_category_C": {
+          "basic": 363,
+          "premium": 486,
+          "enterprise": 609
+        },
+        "user_non_display_category_A_single_natural_user": 457,
+        "managed_user_non_display_category_A": 208
+      },
+      "hinweis": "Die genannten Positionen sind in der Liste 'Effective January 1, 2026' betragsgleich (A1-Zeilen unten wörtlich aus der Januar-Liste). Non-Display-Beträge je Kategorie und Licensee Group; User Non-Display gilt für einen einzelnen natürlichen Nutzer als Licensee.",
+      "status": "BELEGT",
+      "sources": [
+        {
+          "url": "https://www.cmegroup.com/market-data/license-data/market-data-policy-education-center.html",
+          "quote": "June 2026 Market Data Fee List",
+          "kind": "primary_exchange_webpage"
+        },
+        {
+          "url": "https://www.cmegroup.com/market-data/files/june-2026-market-data-fee-list.pdf",
+          "quote": "Effective June 1, 2026",
+          "kind": "primary_fee_list"
+        },
+        {
+          "url": "https://www.cmegroup.com/market-data/files/june-2026-market-data-fee-list.pdf",
+          "quote": "CME, CBOT, NYMEX and COMEX Information (fees are assessed per exchange)",
+          "kind": "primary_fee_list"
+        },
+        {
+          "url": "https://www.cmegroup.com/market-data/files/june-2026-market-data-fee-list.pdf",
+          "quote": "Non-Professional Depth of Market4, 11 Device $12.10",
+          "kind": "primary_fee_list"
+        },
+        {
+          "url": "https://www.cmegroup.com/market-data/files/june-2026-market-data-fee-list.pdf",
+          "quote": "Bundle – all exchanges Device $36.50",
+          "kind": "primary_fee_list"
+        },
+        {
+          "url": "https://www.cmegroup.com/market-data/files/june-2026-market-data-fee-list.pdf",
+          "quote": "Non-Professional Top of Book4, 11 Device $1.55",
+          "kind": "primary_fee_list"
+        },
+        {
+          "url": "https://www.cmegroup.com/market-data/files/june-2026-market-data-fee-list.pdf",
+          "quote": "Bundle – all exchanges Device $4.65",
+          "kind": "primary_fee_list"
+        },
+        {
+          "url": "https://www.cmegroup.com/market-data/files/january-2026-market-data-fee-list.pdf",
+          "quote": "Real Time11, 14 Device $134.50",
+          "kind": "primary_fee_list"
+        },
+        {
+          "url": "https://www.cmegroup.com/market-data/files/january-2026-market-data-fee-list.pdf",
+          "quote": "Basic (1 Application) Licensee Group $609",
+          "kind": "primary_fee_list"
+        },
+        {
+          "url": "https://www.cmegroup.com/market-data/files/january-2026-market-data-fee-list.pdf",
+          "quote": "Category A1 – Trading As a Principal 5",
+          "kind": "primary_fee_list"
+        },
+        {
+          "url": "https://www.cmegroup.com/market-data/files/january-2026-market-data-fee-list.pdf",
+          "quote": "Enterprise (4+ Applications) Licensee Group $3,640",
+          "kind": "primary_fee_list"
+        },
+        {
+          "url": "https://www.cmegroup.com/market-data/files/june-2026-market-data-fee-list.pdf",
+          "quote": "Category C5, 6, 7 Basic (1 Application) Licensee Group $363",
+          "kind": "primary_fee_list"
+        },
+        {
+          "url": "https://www.cmegroup.com/market-data/files/june-2026-market-data-fee-list.pdf",
+          "quote": "User Non-Display Category A8 Licensee $457",
+          "kind": "primary_fee_list"
+        },
+        {
+          "url": "https://www.cmegroup.com/market-data/files/june-2026-market-data-fee-list.pdf",
+          "quote": "Managed User Non-Display Category A9 Licensee $208",
+          "kind": "primary_fee_list"
+        },
+        {
+          "url": "https://www.cmegroup.com/market-data/files/june-2026-market-data-fee-list.pdf",
+          "quote": "Fee applies for a Licensee who qualifies; is a single natural user.",
+          "kind": "primary_fee_list_footnote"
+        },
+        {
+          "url": "https://www.cmegroup.com/market-data/files/june-2026-market-data-fee-list.pdf",
+          "quote": "Fees listed indicate per DCM fee.",
+          "kind": "primary_fee_list_footnote"
+        },
+        {
+          "url": "https://www.cmegroup.com/market-data/files/schedule-5-to-the-ila-january-2026.pdf",
+          "quote": "per the Unit of Count identified in the Distribution Packages in section 1 of this Schedule on a monthly basis",
+          "kind": "primary_license_schedule"
+        },
+        {
+          "url": "https://www.cmegroup.com/market-data/files/schedule-5-to-the-ila-january-2026.pdf",
+          "quote": "The Distribution License Fees are charged on an annual basis.",
+          "kind": "primary_license_schedule"
+        },
+        {
+          "url": "https://www.cmegroup.com/market-data/distributor/files/cme-group-data-licensing-policy-guidelines-and-non-display-licensing-faq.pdf",
+          "quote": "fees are assessed on a monthly basis",
+          "kind": "primary_policy_faq"
+        }
+      ]
+    },
+    {
+      "id": "CME_FEELIST_2027_01_01",
+      "exchange": "CME Group (CME, CBOT, NYMEX, COMEX)",
+      "document": "CME Group Fee List (angekündigt)",
+      "effective_date": "2027-01-01",
+      "gilt_am_2026_09_24": false,
+      "currency": "USD",
+      "period": "monatlich (Ableitung wie oben)",
+      "fees": {
+        "non_professional_depth_of_market_per_exchange": 12.5,
+        "non_professional_depth_of_market_bundle_all_exchanges": 37.75,
+        "non_professional_top_of_book_per_exchange": 1.6,
+        "non_professional_top_of_book_bundle_all_exchanges": 4.8,
+        "professional_real_time_display_device_per_exchange": 139.2,
+        "non_display_category_A1_trading_as_principal": {
+          "basic_1_application": 630,
+          "premium_2_3_applications": 1833,
+          "enterprise_4plus_applications": 3767
+        },
+        "non_display_category_C": {
+          "basic": 375,
+          "premium": 503,
+          "enterprise": 630
+        },
+        "user_non_display_category_A_single_natural_user": 472,
+        "managed_user_non_display_category_A": 215
+      },
+      "status": "BELEGT",
+      "sources": [
+        {
+          "url": "https://www.cmegroup.com/market-data/license-data/market-data-policy-education-center.html",
+          "quote": "January 2027 Market Data Fee List",
+          "kind": "primary_exchange_webpage"
+        },
+        {
+          "url": "https://www.cmegroup.com/market-data/files/january-2027-market-data-fee-list.pdf",
+          "quote": "Effective January 1, 2027",
+          "kind": "primary_fee_list"
+        },
+        {
+          "url": "https://www.cmegroup.com/market-data/files/january-2027-market-data-fee-list.pdf",
+          "quote": "CME, CBOT, NYMEX and COMEX Information (fees are assessed per exchange)",
+          "kind": "primary_fee_list"
+        },
+        {
+          "url": "https://www.cmegroup.com/market-data/files/january-2027-market-data-fee-list.pdf",
+          "quote": "Non-Professional Depth of Market4, 11 Device $12.50",
+          "kind": "primary_fee_list"
+        },
+        {
+          "url": "https://www.cmegroup.com/market-data/files/january-2027-market-data-fee-list.pdf",
+          "quote": "Bundle – all exchanges Device $37.75",
+          "kind": "primary_fee_list"
+        },
+        {
+          "url": "https://www.cmegroup.com/market-data/files/january-2027-market-data-fee-list.pdf",
+          "quote": "Non-Professional Top of Book4, 11 Device $1.60",
+          "kind": "primary_fee_list"
+        },
+        {
+          "url": "https://www.cmegroup.com/market-data/files/january-2027-market-data-fee-list.pdf",
+          "quote": "Bundle – all exchanges Device $4.80",
+          "kind": "primary_fee_list"
+        },
+        {
+          "url": "https://www.cmegroup.com/market-data/files/january-2027-market-data-fee-list.pdf",
+          "quote": "Real Time11, 14 Device $139.20",
+          "kind": "primary_fee_list"
+        },
+        {
+          "url": "https://www.cmegroup.com/market-data/files/january-2027-market-data-fee-list.pdf",
+          "quote": "Basic (1 Application) Licensee Group $630",
+          "kind": "primary_fee_list"
+        },
+        {
+          "url": "https://www.cmegroup.com/market-data/files/january-2027-market-data-fee-list.pdf",
+          "quote": "User Non-Display Category A8 Licensee $472",
+          "kind": "primary_fee_list"
+        },
+        {
+          "url": "https://www.cmegroup.com/market-data/files/january-2027-market-data-fee-list.pdf",
+          "quote": "Managed User Non-Display Category A9 Licensee $215",
+          "kind": "primary_fee_list"
+        }
+      ]
+    },
+    {
+      "id": "CME_POLICY_NON_DISPLAY_NON_PRO",
+      "exchange": "CME Group",
+      "document": "Non-Display Use Guidelines/FAQ (Stand laut Dokument: Januar 2025) und Schedule 5 zum ILA (Version 5.04, Datei Januar 2026)",
+      "effective_date": null,
+      "inhalt": {
+        "non_display_definition": "Nicht angezeigte Nutzung in Systemen/Programmen/Berechnungen",
+        "category_A": "Automatisierter Handel (direkt auf Globex oder über Intermediär); A1 = Handel als Principal",
+        "non_professional": "natürliche Person oder bestimmte Kleinunternehmen",
+        "semi_automated": "Werkzeug auf Anzeigegerät eines einzelnen Nutzers; Geräte-Gebühren fallen an; Non-Professionals lizenzieren über ihren Datenanbieter",
+        "managed_user_non_display": "von CME autorisierter Service für interne Non-Display-Nutzung durch einen Subscriber, der natürliche Person ist; Anzeige, Weitergabe und abgeleitete Werke nicht erlaubt",
+        "relevanz_privatkunde_DE": "Vollautomatischer Handel (z. B. Server/VPS ohne Anzeige) fällt unter Non-Display Kategorie A; für Einzelpersonen existieren 'User Non-Display' (457 USD/Monat je Börse, Liste 1.6.2026) bzw. 'Managed User Non-Display' (208 USD/Monat je Börse) – welche Variante der MT5-Broker/Datenanbieter abdeckt, ist nicht öffentlich belegt (offene Frage an Broker/CME)."
+      },
+      "status": "BELEGT",
+      "sources": [
+        {
+          "url": "https://www.cmegroup.com/market-data/distributor/files/cme-group-data-licensing-policy-guidelines-and-non-display-licensing-faq.pdf",
+          "quote": "Non-viewable use of Information, internally within a Licensee's Group, by/in any system, process, program, machine or calculation",
+          "kind": "primary_policy_faq"
+        },
+        {
+          "url": "https://www.cmegroup.com/market-data/distributor/files/cme-group-data-licensing-policy-guidelines-and-non-display-licensing-faq.pdf",
+          "quote": "Automated use of Information to trade (either directly onto Globex or via an intermediary).",
+          "kind": "primary_policy_faq"
+        },
+        {
+          "url": "https://www.cmegroup.com/market-data/distributor/files/cme-group-data-licensing-policy-guidelines-and-non-display-licensing-faq.pdf",
+          "quote": "Trading as a principal (use of Information to trade as a principal on a CME Group exchange)",
+          "kind": "primary_policy_faq"
+        },
+        {
+          "url": "https://www.cmegroup.com/market-data/distributor/files/cme-group-data-licensing-policy-guidelines-and-non-display-licensing-faq.pdf",
+          "quote": "Semi-Automated Trading System is defined as any tool or functionality deployed on a display device by an individual user",
+          "kind": "primary_policy_faq"
+        },
+        {
+          "url": "https://www.cmegroup.com/market-data/distributor/files/cme-group-data-licensing-policy-guidelines-and-non-display-licensing-faq.pdf",
+          "quote": "Device fees for display use of the Information are applicable.",
+          "kind": "primary_policy_faq"
+        },
+        {
+          "url": "https://www.cmegroup.com/market-data/distributor/files/cme-group-data-licensing-policy-guidelines-and-non-display-licensing-faq.pdf",
+          "quote": "Non-Professional Subscribers always license directly with their Data Provider.",
+          "kind": "primary_policy_faq"
+        },
+        {
+          "url": "https://www.cmegroup.com/market-data/files/schedule-5-to-the-ila-january-2026.pdf",
+          "quote": "(i) an individual, natural person; or (ii) certain small business entities",
+          "kind": "primary_license_schedule"
+        },
+        {
+          "url": "https://www.cmegroup.com/market-data/files/schedule-5-to-the-ila-january-2026.pdf",
+          "quote": "a Service authorized by CME that facilitates the Non-Display Use of Information",
+          "kind": "primary_license_schedule"
+        },
+        {
+          "url": "https://www.cmegroup.com/market-data/files/schedule-5-to-the-ila-january-2026.pdf",
+          "quote": "for internal use by a Subscriber who is an individual natural person",
+          "kind": "primary_license_schedule"
+        },
+        {
+          "url": "https://www.cmegroup.com/market-data/files/schedule-5-to-the-ila-january-2026.pdf",
+          "quote": "Licensee must provide such Subscribers with the means to route automated orders to one or more CME Group markets",
+          "kind": "primary_license_schedule"
+        },
+        {
+          "url": "https://www.cmegroup.com/market-data/files/schedule-5-to-the-ila-january-2026.pdf",
+          "quote": "Viewable display and distribution of Information by the Subscriber and the creation of derivative works based on the Information are not permitted",
+          "kind": "primary_license_schedule"
+        }
+      ]
+    },
+    {
+      "id": "CME_DERIVED_DATA_2026",
+      "exchange": "CME Group",
+      "document": "Derived Data License Fees",
+      "effective_date": "2026-01-01",
+      "currency": "USD",
+      "period": "jährlich",
+      "fees": {
+        "beispiel_indices_series_I_category_1_per_instrument_jaehrlich": 34260
+      },
+      "hinweis": "Lizenz betrifft abgeleitete Werke (Indizes, ETP-Werte, CFDs, Zertifikate u. a.). Ob interne Handelssignale eines Privatkunden darunter fallen, ist im Dokument nicht beantwortet (rechtliche Prüfung).",
+      "status": "TEILWEISE",
+      "sources": [
+        {
+          "url": "https://www.cmegroup.com/market-data/files/2026-derived-data-fees.pdf",
+          "quote": "EFFECTIVE 1 JANUARY 2026",
+          "kind": "primary_fee_list"
+        },
+        {
+          "url": "https://www.cmegroup.com/market-data/files/2026-derived-data-fees.pdf",
+          "quote": "fees listed in this document are assessed and payable annually within thirty (30) days of receipt of invoice from CME.",
+          "kind": "primary_fee_list"
+        },
+        {
+          "url": "https://www.cmegroup.com/market-data/files/2026-derived-data-fees.pdf",
+          "quote": "in the creation, calculation, distribution, settlement, maintenance or support of any derivative work.",
+          "kind": "primary_fee_list"
+        },
+        {
+          "url": "https://www.cmegroup.com/market-data/files/2026-derived-data-fees.pdf",
+          "quote": "Series I Category 1 $34,260 (per instrument)",
+          "kind": "primary_fee_list"
+        }
+      ]
+    },
+    {
+      "id": "EUREX_DISPLAY_2026_08_01",
+      "exchange": "Eurex (Deutsche Börse Market Data + Services)",
+      "document": "Price List to the Market Data Dissemination Agreement, Version 16_1",
+      "effective_date": "2026-08-01",
+      "gilt_am_2026_09_24": true,
+      "currency": "EUR",
+      "period": "monatlich (Tabellenkopf '€/Month')",
+      "fees": {
+        "non_professional_eurex_core_level_2_per_access_id": 10.9,
+        "non_professional_eurex_core_level_1_per_access_id": 4.9,
+        "non_professional_eurex_retail_europe_per_access_id": 1.0,
+        "professional_eurex_core_access_id": 62.67,
+        "professional_eurex_core_physical_user_id": 68.94,
+        "professional_eurex_ultra_access_id": 68.37,
+        "professional_eurex_ultra_physical_user_id": 75.21
+      },
+      "hinweis": "Eurex Retail Europe = Level-1-Produkt für Non-Professionals, nur ausgewählte Eurex-Derivate. Eine eigene Non-Professional-Definition wurde in der Preisliste nicht gefunden.",
+      "status": "BELEGT",
+      "sources": [
+        {
+          "url": "https://www.mds.deutsche-boerse.com/mds-en/real-time-data/agreements",
+          "quote": "MDDA_Price_List_16_1.pdf",
+          "kind": "primary_exchange_webpage"
+        },
+        {
+          "url": "https://www.mds.deutsche-boerse.com/resource/blob/5353328/480628e5e12c9126a6a67030377d2a6e/data/MDDA_Price_List_16_1.pdf",
+          "quote": "Valid as of 1 August 2026 Version 16_1",
+          "kind": "primary_fee_list"
+        },
+        {
+          "url": "https://www.mds.deutsche-boerse.com/resource/blob/5353328/480628e5e12c9126a6a67030377d2a6e/data/MDDA_Price_List_16_1.pdf",
+          "quote": "Standard Data Fees Non-Professional Clients per Access ID",
+          "kind": "primary_fee_list"
+        },
+        {
+          "url": "https://www.mds.deutsche-boerse.com/resource/blob/5353328/480628e5e12c9126a6a67030377d2a6e/data/MDDA_Price_List_16_1.pdf",
+          "quote": "Eurex® Core Level 2 10.90",
+          "kind": "primary_fee_list"
+        },
+        {
+          "url": "https://www.mds.deutsche-boerse.com/resource/blob/5353328/480628e5e12c9126a6a67030377d2a6e/data/MDDA_Price_List_16_1.pdf",
+          "quote": "Eurex® Core Level 1 4.90",
+          "kind": "primary_fee_list"
+        },
+        {
+          "url": "https://www.mds.deutsche-boerse.com/resource/blob/5353328/480628e5e12c9126a6a67030377d2a6e/data/MDDA_Price_List_16_1.pdf",
+          "quote": "Eurex® Retail Europe 1.00",
+          "kind": "primary_fee_list"
+        },
+        {
+          "url": "https://www.mds.deutsche-boerse.com/resource/blob/5353328/480628e5e12c9126a6a67030377d2a6e/data/MDDA_Price_List_16_1.pdf",
+          "quote": "Access ID €/Month",
+          "kind": "primary_fee_list"
+        },
+        {
+          "url": "https://www.mds.deutsche-boerse.com/resource/blob/5353328/480628e5e12c9126a6a67030377d2a6e/data/MDDA_Price_List_16_1.pdf",
+          "quote": "Eurex® Core 62.67 68.94",
+          "kind": "primary_fee_list"
+        },
+        {
+          "url": "https://www.mds.deutsche-boerse.com/resource/blob/5353328/480628e5e12c9126a6a67030377d2a6e/data/MDDA_Price_List_16_1.pdf",
+          "quote": "Eurex® Ultra 68.37 75.21",
+          "kind": "primary_fee_list"
+        },
+        {
+          "url": "https://www.mds.deutsche-boerse.com/mds-en/real-time-data/derivatives-markets/Eurex-Retail-Europe-1339980",
+          "quote": "Information product especially designed for Non-Professional Customers",
+          "kind": "primary_product_page"
+        },
+        {
+          "url": "https://www.mds.deutsche-boerse.com/mds-en/real-time-data/derivatives-markets/Eurex-Retail-Europe-1339980",
+          "quote": "Data fees of only 1 Euro per month, no Distribution Licence Fees",
+          "kind": "primary_product_page"
+        },
+        {
+          "url": "https://www.mds.deutsche-boerse.com/mds-en/real-time-data/derivatives-markets/Eurex-Retail-Europe-1339980",
+          "quote": "Delivers level 1 data for important Eurex® derivatives in Real-time",
+          "kind": "primary_product_page"
+        }
+      ]
+    },
+    {
+      "id": "EUREX_NON_DISPLAY_2026_08_01",
+      "exchange": "Eurex (Deutsche Börse Market Data + Services)",
+      "document": "Non-Display Agreement – Price List, Version 11_1",
+      "effective_date": "2026-08-01",
+      "gilt_am_2026_09_24": true,
+      "currency": "EUR",
+      "period": "monatlich, je Market Data Client, Informationsprodukt und Kategorie",
+      "fees": {
+        "tier_3_trading_as_principal_or_brokerage_entry_1_2_device_accesses": {
+          "eurex_ultra": 786.0,
+          "eurex_order_by_order_futures": 1454.0,
+          "eurex_order_by_order_futures_plus_options": 1817.0
+        },
+        "eurex_ultra_tier_3_medium_3_10": 1010.0,
+        "eurex_enterprise_license": 10243.0
+      },
+      "hinweis": "Kategorie 'Trading as Principal' umfasst ausdrücklich algorithmische/automatisierte Ordergenerierung. Eine Ermäßigung für Privatpersonen wurde in der Non-Display-Preisliste nicht gefunden (Negativbefund). Ob ein Privatkunde über seinen Broker selbst Vertragspartner (Market Data Client) sein muss, ist offen.",
+      "status": "TEILWEISE",
+      "sources": [
+        {
+          "url": "https://www.mds.deutsche-boerse.com/mds-en/real-time-data/agreements",
+          "quote": "NonDisplay_Price_List_11_1.pdf",
+          "kind": "primary_exchange_webpage"
+        },
+        {
+          "url": "https://www.mds.deutsche-boerse.com/resource/blob/5353338/8f7afe9adafdbe5ed223cf804628e213/data/NonDisplay_Price_List_11_1.pdf",
+          "quote": "Valid as of 1 August 2026 Version 11_1",
+          "kind": "primary_fee_list"
+        },
+        {
+          "url": "https://www.mds.deutsche-boerse.com/resource/blob/5353338/8f7afe9adafdbe5ed223cf804628e213/data/NonDisplay_Price_List_11_1.pdf",
+          "quote": "Tier 3 – Trading as Principal or Brokerage",
+          "kind": "primary_fee_list"
+        },
+        {
+          "url": "https://www.mds.deutsche-boerse.com/resource/blob/5353338/8f7afe9adafdbe5ed223cf804628e213/data/NonDisplay_Price_List_11_1.pdf",
+          "quote": "Entry (1–2) 786.00 1,179.00 2,746.00",
+          "kind": "primary_fee_list"
+        },
+        {
+          "url": "https://www.mds.deutsche-boerse.com/resource/blob/5353338/8f7afe9adafdbe5ed223cf804628e213/data/NonDisplay_Price_List_11_1.pdf",
+          "quote": "Entry: 1–2 Device Accesses, Medium: 3–10 Device Accesses, Plus: 11–30 Device Accesses",
+          "kind": "primary_fee_list"
+        },
+        {
+          "url": "https://www.mds.deutsche-boerse.com/resource/blob/5353338/8f7afe9adafdbe5ed223cf804628e213/data/NonDisplay_Price_List_11_1.pdf",
+          "quote": "Non-Display Data License Fees apply once per Market Data Client per licensed Information Product",
+          "kind": "primary_fee_list"
+        },
+        {
+          "url": "https://www.mds.deutsche-boerse.com/resource/blob/5353338/8f7afe9adafdbe5ed223cf804628e213/data/NonDisplay_Price_List_11_1.pdf",
+          "quote": "algorithmic and/or automated and/or semi-automated order generation",
+          "kind": "primary_fee_list"
+        },
+        {
+          "url": "https://www.mds.deutsche-boerse.com/resource/blob/5353338/8f7afe9adafdbe5ed223cf804628e213/data/NonDisplay_Price_List_11_1.pdf",
+          "quote": "Eurex® Enterprise 10,243.00",
+          "kind": "primary_fee_list"
+        }
+      ]
+    },
+    {
+      "id": "ICE_FUTURES_EUROPE_2026",
+      "exchange": "ICE Futures Europe (IFEU)",
+      "document": "ICE Futures Technology & Market Data Fees 2026 v1; ICE Futures Europe Market Data Policy Version 4 (January 2026)",
+      "effective_date": "2026-01 (Dokumentstand; exaktes Inkrafttreten nicht zitiert)",
+      "currency": "USD",
+      "period": "monatlich ('Monthly Non-S2F Market Data Real Time Fees')",
+      "fees": {
+        "terminal_subscriber_ifeu_commodities": 144,
+        "terminal_subscriber_ifeu_financials": 123,
+        "terminal_subscriber_ifeu_equity_minis": 5,
+        "datafeed_non_display_ifeu_commodities": 865,
+        "datafeed_non_display_ifeu_financials": 740,
+        "datafeed_non_display_ifeu_equity_minis": 100,
+        "non_professional": null
+      },
+      "hinweis": "ICE Futures Europe unterscheidet laut Policy nicht zwischen Professional und Non-Professional; Privatkunden zahlen damit keine ermäßigte Gebühr (Schluss aus Policy-Zitat). Spaltenzuordnung: NDEX, IFAD, IFEU-Commodities, IFEU-Financials, IFEU-Equity Minis, IFSG, IFUS, IFUS-Canadian Grains.",
+      "status": "BELEGT",
+      "sources": [
+        {
+          "url": "https://www.ice.com/publicdocs/Fee_Overview_2026.pdf",
+          "quote": "ICE Futures Technology & Market Data Fees 2026 v1",
+          "kind": "primary_fee_list"
+        },
+        {
+          "url": "https://www.ice.com/publicdocs/Fee_Overview_2026.pdf",
+          "quote": "Monthly Non-S2F Market Data Real Time Fees",
+          "kind": "primary_fee_list"
+        },
+        {
+          "url": "https://www.ice.com/publicdocs/Fee_Overview_2026.pdf",
+          "quote": "NDEX IFAD IFEU - Commodities IFEU - Financials IFEU - Equity Minis IFSG IFUS IFUS - Canadian Grains",
+          "kind": "primary_fee_list"
+        },
+        {
+          "url": "https://www.ice.com/publicdocs/Fee_Overview_2026.pdf",
+          "quote": "Terminal / Subscriber: 144 $20 $144 $123 $5 $0 $132 $41",
+          "kind": "primary_fee_list"
+        },
+        {
+          "url": "https://www.ice.com/publicdocs/Fee_Overview_2026.pdf",
+          "quote": "Datafeed / Non-display $865 $120 $865 $740 $100 $0 $795 $245",
+          "kind": "primary_fee_list"
+        },
+        {
+          "url": "https://www.ice.com/publicdocs/futures/ICE_Futures_Europe_Market_Data_Policy.pdf",
+          "quote": "the definition of professional vs. non-professional customers is not relevant and not used in the Exchange's agreements",
+          "kind": "primary_policy"
+        },
+        {
+          "url": "https://www.ice.com/publicdocs/futures/ICE_Futures_Europe_Market_Data_Policy.pdf",
+          "quote": "accessing, processing or consuming the Exchange's market data for a purpose other than in support of the user's display or further internal / external redistribution",
+          "kind": "primary_policy"
+        }
+      ]
+    },
+    {
+      "id": "ICE_FUTURES_US_2026",
+      "exchange": "ICE Futures U.S. (IFUS)",
+      "document": "ICE Futures Technology & Market Data Fees 2026 v1; January 1st, 2026 Exchange and Market Data Access Fees",
+      "effective_date": "2026-01-01",
+      "currency": "USD",
+      "period": "monatlich",
+      "fees": {
+        "terminal_subscriber_ifus": 132,
+        "terminal_subscriber_ifus_canadian_grains": 41,
+        "datafeed_non_display_ifus": 795,
+        "datafeed_non_display_ifus_canadian_grains": 245,
+        "non_professional": null
+      },
+      "hinweis": "In den abgerufenen Gebührendokumenten wurde keine Non-Professional-Kategorie für IFUS gefunden; eine IFUS-spezifische Market-Data-Policy wurde nicht abgerufen (Websuche-Budget erschöpft).",
+      "status": "TEILWEISE",
+      "sources": [
+        {
+          "url": "https://www.ice.com/publicdocs/Fee_Overview_2026.pdf",
+          "quote": "Terminal / Subscriber: 144 $20 $144 $123 $5 $0 $132 $41",
+          "kind": "primary_fee_list"
+        },
+        {
+          "url": "https://www.ice.com/publicdocs/Fee_Overview_2026.pdf",
+          "quote": "Datafeed / Non-display $865 $120 $865 $740 $100 $0 $795 $245",
+          "kind": "primary_fee_list"
+        },
+        {
+          "url": "https://www.ice.com/publicdocs/data/Market_Data_Subscriber_Fees.pdf",
+          "quote": "January 1st, 2026 Exchange and Market Data Access Fees",
+          "kind": "primary_fee_list"
+        },
+        {
+          "url": "https://www.ice.com/publicdocs/data/Market_Data_Subscriber_Fees.pdf",
+          "quote": "$132 Per ID/Per Month",
+          "kind": "primary_fee_list"
+        }
+      ]
+    }
+  ],
+  "historical_data_vendors": [
+    {
+      "id": "DATABENTO",
+      "vendor": "Databento",
+      "coverage": "CME Globex MDP 3.0 seit 2010; Eurex, ICE, EEX seit 2018; alle gelisteten Verfallsmonate",
+      "granularity": [
+        "trades (tick)",
+        "OHLCV-1s/1m/1h/1d",
+        "MBP-1",
+        "MBP-10",
+        "MBO (L3)"
+      ],
+      "expired_contracts_included": true,
+      "expired_contracts_note": "abgeleitet aus 'all listed expirations' und Historie seit 2010",
+      "pricing": {
+        "usage_based": "$/GB (unkomprimierte Binärgröße); konkreter GB-Preis im Seitentext nicht sichtbar",
+        "standard_usd_per_month": 199,
+        "plus_usd_license_fees_per_month": 1750,
+        "unlimited_usd_license_fees_per_month": 4500,
+        "standard_history": "16+ Jahre L0 (OHLCV), 1 Jahr L1, 1 Monat L2/L3",
+        "exchange_license_fees": "werden ohne Aufschlag durchgereicht"
+      },
+      "license": {
+        "internal_use": null,
+        "automated_trading_allowed": null,
+        "redistribution_third_parties_incl_llm": "Laut Databento-Blog ist für historische Daten keine Börsenlizenz nötig, außer bei Weitergabe; AGB (Terms) nur per JavaScript abrufbar, nicht geprüft."
+      },
+      "status": "TEILWEISE",
+      "sources": [
+        {
+          "url": "https://databento.com/pricing",
+          "quote": "$199 per month",
+          "kind": "vendor_pricing_page"
+        },
+        {
+          "url": "https://databento.com/pricing",
+          "quote": "16+ years of L0 history",
+          "kind": "vendor_pricing_page"
+        },
+        {
+          "url": "https://databento.com/pricing",
+          "quote": "1 year of L1 history",
+          "kind": "vendor_pricing_page"
+        },
+        {
+          "url": "https://databento.com/pricing",
+          "quote": "$1,750 license fees per month",
+          "kind": "vendor_pricing_page"
+        },
+        {
+          "url": "https://databento.com/pricing",
+          "quote": "$4,500 license fees per month",
+          "kind": "vendor_pricing_page"
+        },
+        {
+          "url": "https://databento.com/pricing",
+          "quote": "We pass through these license fees with no upcharge.",
+          "kind": "vendor_pricing_page"
+        },
+        {
+          "url": "https://databento.com/pricing",
+          "quote": "All of our data is priced ($/GB) by the data's uncompressed size (GB) in binary encoding.",
+          "kind": "vendor_pricing_page"
+        },
+        {
+          "url": "https://databento.com/futures",
+          "quote": "all listed expirations–front-month and far-month contracts",
+          "kind": "vendor_product_page"
+        },
+        {
+          "url": "https://databento.com/futures",
+          "quote": "Since 2010",
+          "kind": "vendor_product_page"
+        },
+        {
+          "url": "https://databento.com/blog/introduction-market-data-licensing",
+          "quote": "You do NOT need a license to access historical (T+1) data.",
+          "kind": "vendor_blog_2023-10-02"
+        },
+        {
+          "url": "https://databento.com/blog/introduction-market-data-licensing",
+          "quote": "You plan to redistribute the data",
+          "kind": "vendor_blog_2023-10-02"
+        },
+        {
+          "url": "https://databento.com/blog/understanding-exchange-fees",
+          "quote": "Note that a license is not required for historical data.",
+          "kind": "vendor_blog_2023-10-03"
+        }
+      ]
+    },
+    {
+      "id": "CQG_DATA_FACTORY",
+      "vendor": "CQG Data Factory (CQG Inc.)",
+      "coverage": "über 20 Jahre Historie, über 10 Jahre Intraday",
+      "granularity": [
+        "Tick (Time & Sales)",
+        "1-Minuten-Bars",
+        "Tagesdaten"
+      ],
+      "expired_contracts_included": null,
+      "pricing": {
+        "futures_tick_usd_per_commodity_per_calendar_month": 16.0,
+        "futures_1min_usd_per_commodity_per_calendar_month": 14.0,
+        "eigene_rechnung_beispiel": "10 Jahre Tick für 1 Markt = 120 Monate × 16 USD = 1.920 USD (ob 'commodity' alle Kontraktmonate umfasst, nicht belegt)"
+      },
+      "license": {
+        "internal_use": null,
+        "automated_trading_allowed": null,
+        "redistribution_third_parties_incl_llm": null
+      },
+      "status": "TEILWEISE",
+      "sources": [
+        {
+          "url": "https://www.cqgdatafactory.com/?page=pricing",
+          "quote": "Prices for historical data are listed per commodity, per calendar month.",
+          "kind": "vendor_pricing_page"
+        },
+        {
+          "url": "https://www.cqgdatafactory.com/?page=pricing",
+          "quote": "Futures $16.00",
+          "kind": "vendor_pricing_page"
+        },
+        {
+          "url": "https://www.cqgdatafactory.com/?page=pricing",
+          "quote": "Futures $14.00",
+          "kind": "vendor_pricing_page"
+        },
+        {
+          "url": "https://www.cqgdatafactory.com/?page=features",
+          "quote": "Browse over 20 years of historical data, including over 10 years of intraday data.",
+          "kind": "vendor_product_page"
+        },
+        {
+          "url": "https://www.cqgdatafactory.com/?page=features",
+          "quote": "Availability of trade and best bid or ask size in subscriptions and historical orders.",
+          "kind": "vendor_product_page"
+        }
+      ],
+      "license_status": "NICHT_GEPRUEFT (keine Lizenzbedingungen auf Preis-, Feature- oder Registrierungsseite gefunden)"
+    },
+    {
+      "id": "KIBOT",
+      "vendor": "Kibot",
+      "coverage": "CME, CBOT, NYMEX, COMEX, CFE; seit 2009; 9.600+ Kontrakte inkl. delisteter",
+      "granularity": [
+        "1 Minute (plus 5/15/30 Min.)",
+        "Tick",
+        "30min + bid/ask"
+      ],
+      "expired_contracts_included": true,
+      "pricing": {
+        "all_futures_continuous_and_individual_1min_usd_one_time": 820.0,
+        "all_futures_continuous_and_individual_tick_usd_one_time": 2200.0,
+        "premium_subscription_usd_per_month": 139.0
+      },
+      "license": {
+        "internal_use": "nur eigene interne Nutzung",
+        "automated_trading_allowed": null,
+        "redistribution_third_parties_incl_llm": "Weiterverkauf/Weitergabe untersagt; Übermittlung von Rohdaten an externe LLM-Anbieter damit mindestens fraglich (Auslegung)"
+      },
+      "status": "BELEGT",
+      "sources": [
+        {
+          "url": "https://www.kibot.com/buy.html",
+          "quote": "$820.00",
+          "kind": "vendor_pricing_page"
+        },
+        {
+          "url": "https://www.kibot.com/buy.html",
+          "quote": "$2,200.00",
+          "kind": "vendor_pricing_page"
+        },
+        {
+          "url": "https://www.kibot.com/buy.html",
+          "quote": "$139.00 / month",
+          "kind": "vendor_pricing_page"
+        },
+        {
+          "url": "https://www.kibot.com/Historical_Data/Futures_Historical_Intraday_Data.aspx",
+          "quote": "Every futures market and every individual contract (9,600+ contracts)",
+          "kind": "vendor_product_page"
+        },
+        {
+          "url": "https://www.kibot.com/Historical_Data/Futures_Historical_Intraday_Data.aspx",
+          "quote": "Delisted and bankrupt tickers are included so your backtests stay survivorship-bias-honest.",
+          "kind": "vendor_product_page"
+        },
+        {
+          "url": "https://www.kibot.com/Historical_Data/Futures_Historical_Intraday_Data.aspx",
+          "quote": "$820.00 one-time, with no per-symbol fees and no subscription.",
+          "kind": "vendor_product_page"
+        },
+        {
+          "url": "https://www.kibot.com/license.html",
+          "quote": "The Data is for the Licensee's own internal use only.",
+          "kind": "vendor_license"
+        },
+        {
+          "url": "https://www.kibot.com/license.html",
+          "quote": "The Licensee warrants that he will not resell or redistribute the Data or the Software.",
+          "kind": "vendor_license"
+        }
+      ]
+    },
+    {
+      "id": "FIRSTRATE_DATA",
+      "vendor": "FirstRate Data",
+      "coverage": "Bundle 'Futures - Most Active' (130 Futures), u. a. CME, NYMEX, ICE, CBOT, EUREX; Einzelkontrakte und Continuous",
+      "granularity": [
+        "1-Minute",
+        "5-Minute",
+        "30-Minute",
+        "1-Hour",
+        "1-Day"
+      ],
+      "expired_contracts_included": true,
+      "pricing": {
+        "bundle_price": null,
+        "updates_usd_per_month": 59.95
+      },
+      "expired_contracts_note": "Bundle-Seite nennt laut Abruf-Zusammenfassung Einzelkontrakte inkl. verfallener Kontrakte; wörtlich belegt ist nur 'individual futures contracts'.",
+      "license": {
+        "internal_use": "private Nutzung des Subscribers; mehrere Nutzer nur innerhalb einer Organisation",
+        "automated_trading_allowed": "Einbindung in interne Modelle erlaubt; Live-Trading nicht ausdrücklich geregelt",
+        "redistribution_third_parties_incl_llm": "Rohdaten-Weitergabe untersagt; FAQ erlaubt ausdrücklich KI-Training und Veröffentlichung der Outputs. Übermittlung von Rohdaten an externe LLM-Anbieter nicht ausdrücklich geregelt (Auslegung)."
+      },
+      "status": "TEILWEISE",
+      "sources": [
+        {
+          "url": "https://firstratedata.com/it/futures",
+          "quote": "individual futures contracts and continuous futures data series",
+          "kind": "vendor_product_page"
+        },
+        {
+          "url": "https://firstratedata.com/b/29/futures-most-active",
+          "quote": "Updates are $59.95 per month thereafter.",
+          "kind": "vendor_product_page"
+        },
+        {
+          "url": "https://firstratedata.com/about/license",
+          "quote": "the Data is for the private use of the Subscriber only",
+          "kind": "vendor_license"
+        },
+        {
+          "url": "https://firstratedata.com/about/license",
+          "quote": "not to resell or otherwise redistribute the Data as part of a commercial agreement with other third-parties",
+          "kind": "vendor_license"
+        },
+        {
+          "url": "https://firstratedata.com/about/license",
+          "quote": "incorporating the Data into its internal models, published market research, or published academic research papers",
+          "kind": "vendor_license"
+        },
+        {
+          "url": "https://firstratedata.com/about/FAQ",
+          "quote": "The license does not allow for multiple unconnected parties to share the data.",
+          "kind": "vendor_faq"
+        },
+        {
+          "url": "https://firstratedata.com/about/FAQ",
+          "quote": "training AI models on the data and publishing their outputs",
+          "kind": "vendor_faq"
+        },
+        {
+          "url": "https://firstratedata.com/about/FAQ",
+          "quote": "Not permitted: giving users access to the raw data",
+          "kind": "vendor_faq"
+        }
+      ]
+    },
+    {
+      "id": "NORGATE_DATA",
+      "vendor": "Norgate Data",
+      "coverage": "rund 100 Futures-Märkte von 11 Börsen; Einzelkontrakte plus Continuous (unadjusted/back-adjusted); Historie bis ca. 1980",
+      "granularity": [
+        "nur Tagesdaten (End-of-Day)"
+      ],
+      "expired_contracts_included": null,
+      "expired_contracts_note": "Einzelkontrakte mit Historie ab ca. 1980 laut Produktseite; verfallene Kontrakte nicht wörtlich belegt.",
+      "pricing": {
+        "futures_package_usd_6_months": 148.5,
+        "futures_package_usd_12_months": 270
+      },
+      "license": {
+        "internal_use": "persönlicher Zweck, zwei Computer",
+        "automated_trading_allowed": "persönlicher Zweck 'investment or trading' erlaubt",
+        "redistribution_third_parties_incl_llm": "Weitergabe nur mit ausdrücklicher Erlaubnis"
+      },
+      "fuer_intraday_forschung_geeignet": false,
+      "status": "BELEGT",
+      "sources": [
+        {
+          "url": "https://norgatedata.com/",
+          "quote": "We do not provide live quotes, delayed quotes, intra-day or 'tick' data.",
+          "kind": "vendor_homepage"
+        },
+        {
+          "url": "https://norgatedata.com/futurespackage.php",
+          "quote": "Norgate Data covers around 100 Futures markets drawn from 11 worldwide exchanges (or exchange groups).",
+          "kind": "vendor_product_page"
+        },
+        {
+          "url": "https://norgatedata.com/futurespackage.php",
+          "quote": "6 months = USD 148.50",
+          "kind": "vendor_pricing_page"
+        },
+        {
+          "url": "https://norgatedata.com/futurespackage.php",
+          "quote": "12 months = USD 270",
+          "kind": "vendor_pricing_page"
+        },
+        {
+          "url": "https://norgatedata.com/data-package-faq.php",
+          "quote": "for each day, Open, High, Low, Close, Volume and Open Interest are provided",
+          "kind": "vendor_faq"
+        },
+        {
+          "url": "https://norgatedata.com/subscribe/eula.php",
+          "quote": "End User Licensing Agreement 20260825",
+          "kind": "vendor_license"
+        },
+        {
+          "url": "https://norgatedata.com/subscribe/eula.php",
+          "quote": "use the Content for a personal purpose such as investment or trading",
+          "kind": "vendor_license"
+        },
+        {
+          "url": "https://norgatedata.com/subscribe/eula.php",
+          "quote": "will not redistribute the Content in any way or form except where express permission has been sought",
+          "kind": "vendor_license"
+        }
+      ]
+    },
+    {
+      "id": "TICK_DATA_LLC",
+      "vendor": "Tick Data, LLC (tickdata.com)",
+      "coverage": "150+ globale Futures (u. a. CME, ICE, Eurex); Historie bis Dezember 1974 laut Anbieter",
+      "granularity": [
+        "Tick-by-tick Trades",
+        "Level-I-Quotes",
+        "selbst gebaute Bars (TickWrite)"
+      ],
+      "expired_contracts_included": null,
+      "pricing": {
+        "price": null,
+        "note": "nur 'Contact Sales'"
+      },
+      "license": {
+        "internal_use": null,
+        "automated_trading_allowed": null,
+        "redistribution_third_parties_incl_llm": null
+      },
+      "status": "TEILWEISE",
+      "license_status": "NICHT_GEPRUEFT",
+      "sources": [
+        {
+          "url": "https://www.tickdata.com/product/historical-futures-data/",
+          "quote": "150+ global futures from CME, ICE, Eurex, NYMEX, COMEX, BOVESPA, Liffe, TOCOM, KRX, MCX & more",
+          "kind": "vendor_product_page"
+        },
+        {
+          "url": "https://www.tickdata.com/futures-faq/",
+          "quote": "We deliver all of our data (both as-traded and time series) in comma-delimited text files.",
+          "kind": "vendor_faq"
+        }
+      ]
+    },
+    {
+      "id": "CME_HISTORICAL_DISTRIBUTION_LICENSE",
+      "vendor": "CME Group (Börsenlizenz, Kontext Weitergabe)",
+      "coverage": null,
+      "pricing": {
+        "historical_distribution_licensee_group_usd_per_year_2026": 35220
+      },
+      "license": {
+        "redistribution_third_parties_incl_llm": "Die Weitergabe (Distribution) historischer CME-Daten ist lizenz- und gebührenpflichtig (jährliche Distributionslizenz). Ob die Übermittlung an einen LLM-Anbieter als 'Distribution' gilt, ist nicht belegt (rechtliche Prüfung)."
+      },
+      "status": "TEILWEISE",
+      "sources": [
+        {
+          "url": "https://www.cmegroup.com/market-data/files/january-2026-market-data-fee-list.pdf",
+          "quote": "Historical2 Licensee Group $35,220",
+          "kind": "primary_fee_list"
+        },
+        {
+          "url": "https://www.cmegroup.com/market-data/files/schedule-5-to-the-ila-january-2026.pdf",
+          "quote": "The Distribution License Fees are charged on an annual basis.",
+          "kind": "primary_license_schedule"
+        }
+      ]
+    }
+  ],
+  "index_futures_screening": [
+    {
+      "id": "CME_ESG",
+      "venue": "CME",
+      "product": "E-mini S&P 500 ESG futures",
+      "product_code": "ESG",
+      "underlying_index": "S&P 500 Scored & Screened Index (bis 10.02.2025: S&P 500 ESG Index)",
+      "exclusion_rule": {
+        "controversial_weapons": ">0 % Beteiligung (inkl. Nuklearwaffen), ≥25 % Beteiligungsbesitz",
+        "military_contracting": "≥10 % für 'Integral Military Weapons' und 'Weapon-related'; nicht waffenbezogene Militäraufträge nicht erfasst",
+        "small_arms": ">0 % zivil und nicht-zivil; Handel ≥5 %",
+        "only_controversial_weapons": false,
+        "methodology_date": "März 2026"
+      },
+      "defense_names_check": {
+        "included": null,
+        "not_in_visible_top10": [
+          "Palantir",
+          "Honeywell",
+          "GE Aerospace",
+          "Boeing",
+          "Lockheed Martin",
+          "RTX",
+          "Northrop Grumman",
+          "General Dynamics",
+          "L3Harris"
+        ],
+        "note": "Nur Top-10 des ETF EFIV (bildet den Index ab) sichtbar, Stand 23.09.2026; vollständige Holdings nur als Excel-Download (nicht auswertbar).",
+        "status": "NICHT_GEPRUEFT"
+      },
+      "liquidity": {
+        "trade_date": "2026-09-21",
+        "volume": 451,
+        "open_interest": 6392,
+        "vergleich_ES_2026_09_23": {
+          "volume": 1559169,
+          "open_interest": 1903120
+        },
+        "note": "Tagesbulletin-TOTAL-Zeile: zwei Volumenspalten, dann Open Interest und Veränderung; Spaltenköpfe im PDF-Text nicht eindeutig, Zuordnung aus Zeilenformat abgeleitet.",
+        "status": "TEILWEISE"
+      },
+      "meets_no_defense_condition": "nicht belegbar (Schwelle 10 %: Unternehmen mit <10 % Waffenumsatz oder nicht waffenbezogenen Militäraufträgen bleiben zulässig)",
+      "status": "TEILWEISE",
+      "sources": [
+        {
+          "url": "https://www.cmegroup.com/markets/equities/sp/e-mini-sandp-500-esg-index.html",
+          "quote": "As of February 10, 2025, the S&P 500 ESG Index has changed its name to S&P 500 Scored & Screened Index.",
+          "kind": "primary_product_page"
+        },
+        {
+          "url": "https://www.spglobal.com/spdji/en/indices/sustainability/sp-500-esg-index/",
+          "quote": "E-mini S&P 500 ESG Index",
+          "kind": "primary_index_page"
+        },
+        {
+          "url": "https://www.spglobal.com/spdji/en/documents/additional-material/brochure-sp-500-scored-screened-index.pdf",
+          "quote": "Exclude companies involved in thermal coal, tobacco, small arms, military contracting, controversial weapons, and oil sands",
+          "kind": "primary_index_brochure"
+        },
+        {
+          "url": "https://www.spglobal.com/spdji/en/documents/methodologies/methodology-sp-ss-index-series.pdf",
+          "quote": "Integral Military Weapons: This screen covers companies which are involved in the manufacturing, assembling, sale and transportation of integral military weapons. | ≥10% | N/A",
+          "kind": "primary_methodology"
+        },
+        {
+          "url": "https://www.spglobal.com/spdji/en/documents/methodologies/methodology-sp-ss-index-series.pdf",
+          "quote": "Weapon-related: This screen covers companies which are involved in the manufacturing and sales of weapon-related products. | ≥10% | N/A",
+          "kind": "primary_methodology"
+        },
+        {
+          "url": "https://www.spglobal.com/spdji/en/documents/methodologies/methodology-sp-ss-index-series.pdf",
+          "quote": "Anti-Personnel Mines, Biological and Chemical Weapons, Blinding Laser Weapons, Cluster Munitions, Depleted Uranium, Incendiary Weapons and Nuclear Weapons.",
+          "kind": "primary_methodology"
+        },
+        {
+          "url": "https://www.ssga.com/us/en/intermediary/etfs/spdr-sp-500-esg-etf-efiv",
+          "quote": "as of Sep 23 2026",
+          "kind": "etf_issuer_holdings"
+        },
+        {
+          "url": "https://www.cmegroup.com/daily_bulletin/current/Section12_Equity_And_Index_Futures_Continued.pdf",
+          "quote": "TOTAL E-MINI S&P 500 ESG INDEX FUTURES 0 451 6392 - 1492",
+          "kind": "primary_exchange_statistics"
+        },
+        {
+          "url": "https://www.cmegroup.com/daily_bulletin/current/Section12_Equity_And_Index_Futures_Continued.pdf",
+          "quote": "PG12 BULLETIN # 181@ EQUITY AND INDEX FUTURES CONTINUED Mon, Sep 21, 2026 PG12",
+          "kind": "primary_exchange_statistics"
+        },
+        {
+          "url": "https://www.cmegroup.com/daily_bulletin/current/Section11_Equity_And_Index_Futures.pdf",
+          "quote": "TOTAL EMINI S&P FUT 15447 1543722 1903120 + 12467",
+          "kind": "primary_exchange_statistics"
+        }
+      ]
+    },
+    {
+      "id": "CME_XAK_TECHNOLOGY",
+      "venue": "CME",
+      "product": "E-mini Technology Select Sector futures",
+      "product_code": "XAK",
+      "underlying_index": "Technology Select Sector Index",
+      "exclusion_rule": {
+        "only_controversial_weapons": null,
+        "rule": "Keine Ausschlüsse: alle S&P-500-Werte werden nach GICS einem der 11 Sektorindizes zugeordnet",
+        "military_threshold": null
+      },
+      "defense_names_check": {
+        "included": [
+          "Palantir Technologies (2,51 % im ETF XLK, 23.09.2026)"
+        ],
+        "status": "BELEGT"
+      },
+      "liquidity": {
+        "trade_date": "2026-09-21",
+        "volume": 435,
+        "open_interest": 12946,
+        "note": "Tagesbulletin-TOTAL-Zeile: zwei Volumenspalten, dann Open Interest und Veränderung; Spaltenköpfe im PDF-Text nicht eindeutig, Zuordnung aus Zeilenformat abgeleitet.",
+        "status": "TEILWEISE"
+      },
+      "meets_no_defense_condition": "nein",
+      "status": "BELEGT",
+      "sources": [
+        {
+          "url": "https://www.spglobal.com/spdji/en/indices/equity/technology-select-sector-index/",
+          "quote": "All components of the S&P 500® are assigned to one of the eleven Select Sector Indices",
+          "kind": "primary_index_page"
+        },
+        {
+          "url": "https://www.spglobal.com/spdji/en/indices/equity/technology-select-sector-index/",
+          "quote": "E-mini S&P Technology Sector",
+          "kind": "primary_index_page"
+        },
+        {
+          "url": "https://www.ssga.com/us/en/intermediary/etfs/state-street-technology-select-sector-spdr-etf-xlk",
+          "quote": "PALANTIR TECHNOLOGIES INC A | 16,617,183 | 2.51%",
+          "kind": "etf_issuer_holdings"
+        },
+        {
+          "url": "https://www.ssga.com/us/en/intermediary/etfs/state-street-technology-select-sector-spdr-etf-xlk",
+          "quote": "Technology Select Sector Index",
+          "kind": "etf_issuer_holdings"
+        },
+        {
+          "url": "https://www.cmegroup.com/daily_bulletin/current/Section12_Equity_And_Index_Futures_Continued.pdf",
+          "quote": "TOTAL SP 500 TECHNOLOGY SECTOR INDEX 0 435 12946 - 2803",
+          "kind": "primary_exchange_statistics"
+        }
+      ]
+    },
+    {
+      "id": "CME_XAI_INDUSTRIAL",
+      "venue": "CME",
+      "product": "E-mini Industrial Select Sector futures",
+      "product_code": "XAI",
+      "underlying_index": "Industrial Select Sector Index",
+      "exclusion_rule": {
+        "rule": "Keine Ausschlüsse; GICS-Sektor Industrials enthält Aerospace & Defense",
+        "only_controversial_weapons": null
+      },
+      "defense_names_check": {
+        "included": [
+          "RTX (4,78 % im ETF XLI, 23.09.2026)"
+        ],
+        "note": "Laut Abruf-Zusammenfassung zusätzlich Boeing und GENERAL ELECTRIC (GE Aerospace) unter den Top-Positionen – nicht wörtlich zitiert.",
+        "status": "BELEGT"
+      },
+      "liquidity": {
+        "trade_date": "2026-09-21",
+        "volume": 945,
+        "open_interest": 12881,
+        "note": "Tagesbulletin-TOTAL-Zeile: zwei Volumenspalten, dann Open Interest und Veränderung; Spaltenköpfe im PDF-Text nicht eindeutig, Zuordnung aus Zeilenformat abgeleitet. Volumen = 100 + 845.",
+        "status": "TEILWEISE"
+      },
+      "meets_no_defense_condition": "nein",
+      "status": "BELEGT",
+      "sources": [
+        {
+          "url": "https://www.spglobal.com/spdji/en/landing/topic/gics/",
+          "quote": "Includes manufacturers and distributors of capital goods such as aerospace & defense, building products, electrical equipment and machinery",
+          "kind": "primary_classification"
+        },
+        {
+          "url": "https://www.ssga.com/us/en/intermediary/etfs/state-street-industrial-select-sector-spdr-etf-xli",
+          "quote": "RTX CORP | 4.78%",
+          "kind": "etf_issuer_holdings"
+        },
+        {
+          "url": "https://www.ssga.com/us/en/intermediary/etfs/state-street-industrial-select-sector-spdr-etf-xli",
+          "quote": "Industrial Select Sector Index",
+          "kind": "etf_issuer_holdings"
+        },
+        {
+          "url": "https://www.cmegroup.com/daily_bulletin/current/Section12_Equity_And_Index_Futures_Continued.pdf",
+          "quote": "TOTAL SP 500 INDUSTRIAL SECTOR INDEX 100 845 12881 - 7035",
+          "kind": "primary_exchange_statistics"
+        }
+      ]
+    },
+    {
+      "id": "CME_SELECT_SECTOR_OTHER_9",
+      "venue": "CME",
+      "product": "E-mini Select Sector futures: Communication Services, Consumer Discretionary, Consumer Staples, Energy, Financial, Health Care, Materials, Real Estate, Utilities",
+      "product_code": "XAZ, XAY, XAP, XAE, XAF, XAV, XAB, XAR, XAU",
+      "underlying_index": "jeweilige Select Sector Indices (GICS-Sektoren des S&P 500)",
+      "exclusion_rule": {
+        "rule": "Kein Rüstungs- oder Umsatz-Screen; Aerospace & Defense gehört per GICS zu Industrials und ist daher in diesen Sektoren nicht enthalten",
+        "only_controversial_weapons": null
+      },
+      "defense_names_check": {
+        "included": null,
+        "note": "Keines der Beispielunternehmen (Lockheed Martin, RTX, Northrop Grumman, General Dynamics, Palantir; europäische Werte nicht im S&P 500) liegt per GICS in diesen Sektoren – abgeleitet aus GICS, nicht aus vollständigen Holdings. Unternehmen mit Verteidigungs-Nebengeschäft außerhalb von GICS A&D werden nicht ausgeschlossen; nicht geprüft.",
+        "status": "TEILWEISE"
+      },
+      "liquidity": {
+        "trade_date": "2026-09-21",
+        "per_sector": {
+          "communication_services": {
+            "volume": 229,
+            "open_interest": 17131
+          },
+          "consumer_discretionary": {
+            "volume": 213,
+            "open_interest": 6338
+          },
+          "consumer_staples": {
+            "volume": 532,
+            "open_interest": 18984
+          },
+          "energy": {
+            "volume": 2214,
+            "open_interest": 29648
+          },
+          "financial": {
+            "volume": 456,
+            "open_interest": 60932
+          },
+          "health_care": {
+            "volume": 689,
+            "open_interest": 14166
+          },
+          "materials": {
+            "volume": 456,
+            "open_interest": 11818
+          },
+          "real_estate": {
+            "volume": 483,
+            "open_interest": 8546
+          },
+          "utilities": {
+            "volume": 1475,
+            "open_interest": 28243
+          }
+        },
+        "note": "Tagesbulletin-TOTAL-Zeile: zwei Volumenspalten, dann Open Interest und Veränderung; Spaltenköpfe im PDF-Text nicht eindeutig, Zuordnung aus Zeilenformat abgeleitet. Utilities: 100 + 1375.",
+        "status": "TEILWEISE"
+      },
+      "meets_no_defense_condition": "nur formal (GICS-basiert) – nicht umsatzbasiert belegt",
+      "status": "TEILWEISE",
+      "sources": [
+        {
+          "url": "https://www.spglobal.com/spdji/en/indices/equity/technology-select-sector-index/",
+          "quote": "All components of the S&P 500® are assigned to one of the eleven Select Sector Indices",
+          "kind": "primary_index_page"
+        },
+        {
+          "url": "https://www.spglobal.com/spdji/en/landing/topic/gics/",
+          "quote": "Includes manufacturers and distributors of capital goods such as aerospace & defense, building products, electrical equipment and machinery",
+          "kind": "primary_classification"
+        },
+        {
+          "url": "https://www.cmegroup.com/markets/equities/select-sectors.html",
+          "quote": "E-mini Health Care Select Sector futures",
+          "kind": "primary_product_page"
+        },
+        {
+          "url": "https://www.ssga.com/us/en/intermediary/etfs/state-street-health-care-select-sector-spdr-etf-xlv",
+          "quote": "Health Care Select Sector Index",
+          "kind": "etf_issuer_holdings"
+        },
+        {
+          "url": "https://www.cmegroup.com/daily_bulletin/current/Section12_Equity_And_Index_Futures_Continued.pdf",
+          "quote": "TOTAL E-MINI COM SERVICES SELECT SECTOR 0 229 17131 - 6247",
+          "kind": "primary_exchange_statistics"
+        },
+        {
+          "url": "https://www.cmegroup.com/daily_bulletin/current/Section12_Equity_And_Index_Futures_Continued.pdf",
+          "quote": "TOTAL SP 500 CONS DISCRETIONARY SECTOR IX 0 213 6338 - 5823",
+          "kind": "primary_exchange_statistics"
+        },
+        {
+          "url": "https://www.cmegroup.com/daily_bulletin/current/Section12_Equity_And_Index_Futures_Continued.pdf",
+          "quote": "TOTAL SP 500 CONSUMER STAPLES SECTOR IX 0 532 18984 - 8513",
+          "kind": "primary_exchange_statistics"
+        },
+        {
+          "url": "https://www.cmegroup.com/daily_bulletin/current/Section12_Equity_And_Index_Futures_Continued.pdf",
+          "quote": "TOTAL SP 500 ENERGY SECTOR INDEX 0 2214 29648 - 12655",
+          "kind": "primary_exchange_statistics"
+        },
+        {
+          "url": "https://www.cmegroup.com/daily_bulletin/current/Section12_Equity_And_Index_Futures_Continued.pdf",
+          "quote": "TOTAL SP 500 FINANCIAL SECTOR INDEX 0 456 60932 - 10617",
+          "kind": "primary_exchange_statistics"
+        },
+        {
+          "url": "https://www.cmegroup.com/daily_bulletin/current/Section12_Equity_And_Index_Futures_Continued.pdf",
+          "quote": "TOTAL SP 500 HEALTH CARE SECTOR INDEX 0 689 14166 - 6354",
+          "kind": "primary_exchange_statistics"
+        },
+        {
+          "url": "https://www.cmegroup.com/daily_bulletin/current/Section12_Equity_And_Index_Futures_Continued.pdf",
+          "quote": "TOTAL SP 500 MATERIALS SECTOR INDEX 0 456 11818 - 7262",
+          "kind": "primary_exchange_statistics"
+        },
+        {
+          "url": "https://www.cmegroup.com/daily_bulletin/current/Section12_Equity_And_Index_Futures_Continued.pdf",
+          "quote": "TOTAL REAL ESTATE SELECT SECTOR FUTURES 0 483 8546 - 4237",
+          "kind": "primary_exchange_statistics"
+        },
+        {
+          "url": "https://www.cmegroup.com/daily_bulletin/current/Section12_Equity_And_Index_Futures_Continued.pdf",
+          "quote": "TOTAL SP 500 UTILITIES SECTOR INDEX 100 1375 28243 - 15352",
+          "kind": "primary_exchange_statistics"
+        }
+      ]
+    },
+    {
+      "id": "CME_NQ",
+      "venue": "CME",
+      "product": "E-mini Nasdaq-100 futures (und Micro E-mini Nasdaq-100)",
+      "product_code": "NQ / MNQ",
+      "underlying_index": "Nasdaq-100 Index",
+      "exclusion_rule": {
+        "rule": "keine Ausschlussregeln (Standardindex)",
+        "only_controversial_weapons": null
+      },
+      "defense_names_check": {
+        "included": [
+          "Palantir (PLTR)",
+          "Honeywell (HON)",
+          "Axon (AXON)"
+        ],
+        "note": "Nasdaq-Liste mit Stand 'Last updated 05/19/2025' – Aktualität für 2026 nicht bestätigt.",
+        "status": "TEILWEISE"
+      },
+      "liquidity": {
+        "trade_date": "2026-09-23",
+        "volume": 545558,
+        "open_interest": 276244,
+        "note": "Tagesbulletin-TOTAL-Zeile: zwei Volumenspalten, dann Open Interest und Veränderung; Spaltenköpfe im PDF-Text nicht eindeutig, Zuordnung aus Zeilenformat abgeleitet.",
+        "status": "TEILWEISE"
+      },
+      "nasdaq_100_esg_future": "auf der CME-Nasdaq-Produktseite nicht gelistet (nur E-mini, Micro, Optionen, Crypto-Index) – NICHT_GEPRUEFT darüber hinaus",
+      "meets_no_defense_condition": "nein",
+      "status": "TEILWEISE",
+      "sources": [
+        {
+          "url": "https://www.nasdaq.com/solutions/global-indexes/nasdaq-100/companies",
+          "quote": "| PLTR       | PALANTIR TECHNOLOGIES INC.      |",
+          "kind": "primary_index_page"
+        },
+        {
+          "url": "https://www.nasdaq.com/solutions/global-indexes/nasdaq-100/companies",
+          "quote": "| HON        | HONEYWELL INTL INC              |",
+          "kind": "primary_index_page"
+        },
+        {
+          "url": "https://www.nasdaq.com/solutions/global-indexes/nasdaq-100/companies",
+          "quote": "Last updated 05/19/2025",
+          "kind": "primary_index_page"
+        },
+        {
+          "url": "https://www.cmegroup.com/daily_bulletin/current/Section11_Equity_And_Index_Futures.pdf",
+          "quote": "TOTAL EMINI NASD FUT 3370 542188 276244 - 10077",
+          "kind": "primary_exchange_statistics"
+        },
+        {
+          "url": "https://www.cmegroup.com/trading/equity-index/nasdaq-index-futures-and-options.html",
+          "quote": "Trade a basket of leading cryptocurrencies with Nasdaq CME Crypto Index futures",
+          "kind": "primary_product_page"
+        }
+      ]
+    },
+    {
+      "id": "EUREX_FSSX",
+      "venue": "Eurex",
+      "product": "EURO STOXX 50® ESG Index Futures",
+      "product_code": "FSSX",
+      "underlying_index": "EURO STOXX 50 ESG (ISIN CH0469557521)",
+      "exclusion_rule": {
+        "screens": "Norms-based, Controversial Weapons, Small Arms, Military Contracting, Thermal Coal, Unconventional Oil & Gas, ESG Controversies, ESG Risk, Tobacco; danach Ausschluss niedrigster ESG-Scores bis 20 %",
+        "military_threshold": null,
+        "only_controversial_weapons": false,
+        "replacement": "ausgeschlossene Werte werden durch EURO-STOXX-Werte desselben ICB-Supersektors ersetzt"
+      },
+      "defense_names_check": {
+        "included": null,
+        "not_in_visible_top10": [
+          "Airbus",
+          "Safran",
+          "Rheinmetall",
+          "Thales",
+          "Leonardo"
+        ],
+        "note": "Nur Top-10 sichtbar; STOXX-Methodik-PDF (www.stoxx.com) wegen TLS-Zertifikatsfehler nicht abrufbar, Schwellen daher offen.",
+        "status": "NICHT_GEPRUEFT"
+      },
+      "liquidity": {
+        "trade_date": "2026-09-23",
+        "volume": null,
+        "open_interest": null,
+        "group_STOXX_ESG_Indexes_futures": {
+          "volume": 1649,
+          "open_interest": 84915
+        },
+        "vergleich_Blue_Chip_EURO_STOXX_50": {
+          "volume": 610237,
+          "open_interest": 2030824
+        },
+        "note": "Nur Gruppensumme aller STOXX-ESG-Futures verfügbar.",
+        "status": "TEILWEISE"
+      },
+      "meets_no_defense_condition": "nicht belegbar (Militär-Screen vorhanden, Schwelle und Komponenten nicht geprüft)",
+      "status": "TEILWEISE",
+      "sources": [
+        {
+          "url": "https://www.eurex.com/ex-en/markets/idx/stx/esg",
+          "quote": "EURO STOXX 50® ESG Index Futures (FSSX)",
+          "kind": "primary_product_page"
+        },
+        {
+          "url": "https://www.eurex.com/ex-en/markets/idx/stx/esg/EURO-STOXX-50-ESG-Index-Futures-2319738",
+          "quote": "Underlying ISIN: CH0469557521",
+          "kind": "primary_product_page"
+        },
+        {
+          "url": "https://stoxx.com/index/SX5EESG/?factsheet=true",
+          "quote": "standardized ESG exclusion screens applied for Norms-based research, Controversial Weapons, Small Arms, Military Contracting, Thermal Coal",
+          "kind": "primary_index_factsheet"
+        },
+        {
+          "url": "https://stoxx.com/index/SX5EESG/?factsheet=true",
+          "quote": "Each exclusion is replaced by a EURO STOXX company with a higher ESG score from the same ICB Supersector as the excluded company.",
+          "kind": "primary_index_factsheet"
+        },
+        {
+          "url": "https://stoxx.com/index/SX5EESG/",
+          "quote": "ASML HLDG",
+          "kind": "primary_index_page"
+        },
+        {
+          "url": "https://www.eurex.com/ex-en/data/statistics/market-statistics-online",
+          "quote": "STOXX® ESG Indexes | Traded contracts | 0 | 0 | 0 | 1,649 | 1,649",
+          "kind": "primary_exchange_statistics"
+        },
+        {
+          "url": "https://www.eurex.com/ex-en/data/statistics/market-statistics-online",
+          "quote": "STOXX® ESG Indexes | Open interest | 62,050 | 52,959 | 115,009 | 84,915 | 199,924",
+          "kind": "primary_exchange_statistics"
+        }
+      ]
+    },
+    {
+      "id": "EUREX_FSEG",
+      "venue": "Eurex",
+      "product": "STOXX® Europe 600 ESG-X Index Futures",
+      "product_code": "FSEG",
+      "underlying_index": "STOXX Europe 600 ESG-X (ISIN CH0445431064)",
+      "exclusion_rule": {
+        "screens": "Norms-based (ISS ESG), Controversial Weapons, Tobacco Producers, Thermal Coal",
+        "military_threshold": null,
+        "only_controversial_weapons": true
+      },
+      "defense_names_check": {
+        "included": null,
+        "note": "Kein Ausschluss konventioneller Rüstung; Komponentenliste nicht abrufbar.",
+        "status": "NICHT_GEPRUEFT"
+      },
+      "liquidity": {
+        "trade_date": "2026-09-23",
+        "volume": null,
+        "open_interest": null,
+        "group_STOXX_ESG_Indexes_futures": {
+          "volume": 1649,
+          "open_interest": 84915
+        },
+        "status": "TEILWEISE"
+      },
+      "meets_no_defense_condition": "nein (Regel schließt nur kontroverse Waffen aus)",
+      "status": "BELEGT",
+      "sources": [
+        {
+          "url": "https://www.eurex.com/ex-en/markets/idx/stx/esg/STOXX-Europe-600-ESG-X-Index-Futures-1492066",
+          "quote": "STOXX® Europe 600 ESG-X Index Futures",
+          "kind": "primary_product_page"
+        },
+        {
+          "url": "https://stoxx.com/index/SXXPESGX/?factsheet=true",
+          "quote": "STOXX will exclude companies that ISS ESG considers to be non-compliant based on Norms-based research, are involved in Controversial Weapons, are Tobacco Producers",
+          "kind": "primary_index_factsheet"
+        },
+        {
+          "url": "https://www.eurex.com/ex-en/data/statistics/market-statistics-online",
+          "quote": "STOXX® ESG Indexes | Traded contracts | 0 | 0 | 0 | 1,649 | 1,649",
+          "kind": "primary_exchange_statistics"
+        }
+      ]
+    },
+    {
+      "id": "EUREX_FSUS",
+      "venue": "Eurex",
+      "product": "STOXX® USA 500 ESG-X Index Futures",
+      "product_code": "FSUS",
+      "underlying_index": "STOXX USA 500 ESG-X",
+      "exclusion_rule": {
+        "screens": "vermutlich ESG-X-Standard wie STOXX Europe 600 ESG-X (nicht separat geprüft)",
+        "only_controversial_weapons": null
+      },
+      "defense_names_check": {
+        "included": null,
+        "status": "NICHT_GEPRUEFT"
+      },
+      "liquidity": {
+        "volume": null,
+        "open_interest": null,
+        "status": "NICHT_GEPRUEFT"
+      },
+      "meets_no_defense_condition": "nicht belegbar",
+      "status": "TEILWEISE",
+      "sources": [
+        {
+          "url": "https://www.eurex.com/ex-en/markets/idx/stx/esg",
+          "quote": "STOXX® USA 500 ESG-X Index Futures (FSUS)",
+          "kind": "primary_product_page"
+        }
+      ]
+    },
+    {
+      "id": "EUREX_FSRI",
+      "venue": "Eurex",
+      "product": "STOXX® Europe 600 SRI Index Futures",
+      "product_code": "FSRI",
+      "underlying_index": "STOXX Europe 600 SRI (ISIN CH1110576233), rund ein Drittel des STOXX Europe 600",
+      "exclusion_rule": {
+        "screens": "Controversial Weapons (Ausschluss) plus Filter u. a. für 'Weapons', Nuclear Power, Tobacco, Alcohol, Gambling, Coal, Oil & Gas; höchste 10 % Emissionsintensität ausgeschlossen",
+        "military_threshold": null,
+        "only_controversial_weapons": false
+      },
+      "defense_names_check": {
+        "included": null,
+        "not_in_visible_top10": [
+          "Rheinmetall",
+          "BAE Systems",
+          "Thales",
+          "Leonardo",
+          "Airbus",
+          "Safran"
+        ],
+        "note": "Schwellenwert des 'Weapons'-Filters nicht abrufbar (STOXX-Index-Guide wegen TLS-Fehler nicht ladbar); nur Top-10 sichtbar.",
+        "status": "NICHT_GEPRUEFT"
+      },
+      "liquidity": {
+        "volume": null,
+        "open_interest": null,
+        "group_STOXX_ESG_Indexes_futures": {
+          "trade_date": "2026-09-23",
+          "volume": 1649,
+          "open_interest": 84915
+        },
+        "status": "TEILWEISE"
+      },
+      "meets_no_defense_condition": "nicht belegbar – aussichtsreichster Kandidat, sofern der 'Weapons'-Filter eine 0-%- oder sehr niedrige Umsatzschwelle hat",
+      "status": "TEILWEISE",
+      "sources": [
+        {
+          "url": "https://www.eurex.com/ex-en/markets/idx/stx/esg/STOXX-Europe-600-SRI-Index-Futures-3828306",
+          "quote": "STOXX® Europe 600 SRI Index",
+          "kind": "primary_product_page"
+        },
+        {
+          "url": "https://stoxx.com/index/SXXPSRI/?factsheet=true",
+          "quote": "Tobacco, Alcohol, Adult Entertainment, Gambling, Weapons, Nuclear Power, Coal, Oil & Gas and Energy production.",
+          "kind": "primary_index_factsheet"
+        },
+        {
+          "url": "https://stoxx.com/index/SXXPSRI/?factsheet=true",
+          "quote": "are involved in Controversial Weapons are not eligible for selection.",
+          "kind": "primary_index_factsheet"
+        },
+        {
+          "url": "https://stoxx.com/index/SXXPSRI/",
+          "quote": "ASML HLDG",
+          "kind": "primary_index_page"
+        },
+        {
+          "url": "https://www.eurex.com/ex-en/data/statistics/market-statistics-online",
+          "quote": "STOXX® ESG Indexes | Traded contracts | 0 | 0 | 0 | 1,649 | 1,649",
+          "kind": "primary_exchange_statistics"
+        }
+      ]
+    },
+    {
+      "id": "EUREX_FSCI",
+      "venue": "Eurex",
+      "product": "STOXX® Europe Climate Impact Ex Global Compact Controversial Weapons & Tobacco Index Futures",
+      "product_code": "FSCI",
+      "underlying_index": "STOXX Europe Climate Impact Ex Global Compact Controversial Weapons & Tobacco",
+      "exclusion_rule": {
+        "screens": "laut Indexname: Global Compact, kontroverse Waffen, Tabak (Methodik nicht separat geprüft)",
+        "only_controversial_weapons": true
+      },
+      "defense_names_check": {
+        "included": null,
+        "status": "NICHT_GEPRUEFT"
+      },
+      "liquidity": {
+        "volume": null,
+        "open_interest": null,
+        "status": "NICHT_GEPRUEFT"
+      },
+      "meets_no_defense_condition": "nein bzw. nicht belegbar (kein Ausschluss konventioneller Rüstung erkennbar)",
+      "status": "TEILWEISE",
+      "sources": [
+        {
+          "url": "https://www.eurex.com/ex-en/markets/idx/stx/esg",
+          "quote": "STOXX® Europe Climate Impact Ex Global Compact Controversial Weapons & Tobacco Index Futures (FSCI)",
+          "kind": "primary_product_page"
+        }
+      ]
+    },
+    {
+      "id": "EUREX_FSLS",
+      "venue": "Eurex",
+      "product": "STOXX® Europe ESG Leaders Select 30 Index Futures",
+      "product_code": "FSLS",
+      "underlying_index": "STOXX Europe ESG Leaders Select 30",
+      "exclusion_rule": null,
+      "defense_names_check": {
+        "included": null,
+        "status": "NICHT_GEPRUEFT"
+      },
+      "liquidity": {
+        "volume": null,
+        "open_interest": null,
+        "status": "NICHT_GEPRUEFT"
+      },
+      "meets_no_defense_condition": null,
+      "status": "NICHT_GEPRUEFT",
+      "sources": [
+        {
+          "url": "https://www.eurex.com/ex-en/markets/idx/stx/esg",
+          "quote": "STOXX® Europe ESG Leaders Select 30 Index Futures (FSLS)",
+          "kind": "primary_product_page"
+        }
+      ]
+    },
+    {
+      "id": "EUREX_MSCI_ESG_SCREENED",
+      "venue": "Eurex",
+      "product": "MSCI ESG (Screened) Index Futures – einzelne Produkt-IDs nicht abrufbar (Seite JavaScript)",
+      "product_code": null,
+      "underlying_index": "MSCI Screened Indexes (Methodik Februar 2025)",
+      "exclusion_rule": {
+        "controversial_weapons": "jede Verbindung",
+        "nuclear_weapons": "Hersteller von Sprengköpfen/ganzen Raketen und exklusiven Komponenten",
+        "civilian_firearms": "Produzenten ziviler Waffen; Militärlieferanten ausdrücklich nicht erfasst",
+        "conventional_weapons": "nicht ausgeschlossen",
+        "only_controversial_weapons": true
+      },
+      "defense_names_check": {
+        "included": null,
+        "status": "NICHT_GEPRUEFT"
+      },
+      "liquidity": {
+        "trade_date": "2026-09-23",
+        "group_MSCI_ESG_Indexes_futures": {
+          "volume": 450,
+          "open_interest": 26491
+        },
+        "status": "TEILWEISE"
+      },
+      "meets_no_defense_condition": "nein (konventionelle Rüstung nicht ausgeschlossen)",
+      "status": "BELEGT",
+      "sources": [
+        {
+          "url": "https://www.msci.com/our-solutions/indexes/esg-screened-indexes",
+          "quote": "Exclude controversial weapons and tobacco",
+          "kind": "primary_index_page"
+        },
+        {
+          "url": "https://www.msci.com/documents/10199/495d4283-2076-394e-865b-aa7d0b01c668",
+          "quote": "MSCI Screened Indexes Methodology | February 2025",
+          "kind": "primary_methodology"
+        },
+        {
+          "url": "https://www.msci.com/documents/10199/495d4283-2076-394e-865b-aa7d0b01c668",
+          "quote": "All companies that manufacture nuclear warheads and/or whole nuclear missiles.",
+          "kind": "primary_methodology"
+        },
+        {
+          "url": "https://www.msci.com/documents/10199/495d4283-2076-394e-865b-aa7d0b01c668",
+          "quote": "It does not include companies that cater to the military, government, and law enforcement markets.",
+          "kind": "primary_methodology"
+        },
+        {
+          "url": "https://www.eurex.com/ex-en/data/statistics/market-statistics-online",
+          "quote": "MSCI ESG Indexes | Traded contracts | 0 | 0 | 0 | 450 | 450",
+          "kind": "primary_exchange_statistics"
+        },
+        {
+          "url": "https://www.eurex.com/ex-en/data/statistics/market-statistics-online",
+          "quote": "MSCI ESG Indexes | Open interest | 0 | 0 | 0 | 26,491 | 26,491",
+          "kind": "primary_exchange_statistics"
+        }
+      ]
+    },
+    {
+      "id": "EUREX_DAX_ESG",
+      "venue": "Eurex",
+      "product": "DAX-ESG-Varianten (z. B. DAX 50 ESG) – auf der Eurex-DAX-Seite nicht gelistet",
+      "product_code": null,
+      "underlying_index": null,
+      "exclusion_rule": null,
+      "defense_names_check": {
+        "included": null,
+        "status": "NICHT_GEPRUEFT"
+      },
+      "liquidity": {
+        "status": "NICHT_GEPRUEFT"
+      },
+      "meets_no_defense_condition": null,
+      "status": "NICHT_GEPRUEFT",
+      "sources": [
+        {
+          "url": "https://www.eurex.com/ex-en/markets/idx/dax",
+          "quote": "TecDAX® Futures and Options",
+          "kind": "primary_product_page"
+        }
+      ]
+    },
+    {
+      "id": "ICE_US_MSCI_ESG",
+      "venue": "ICE Futures U.S.",
+      "product": "MSCI-ESG-Index-Futures (falls gelistet)",
+      "product_code": null,
+      "underlying_index": null,
+      "exclusion_rule": null,
+      "defense_names_check": {
+        "included": null,
+        "status": "NICHT_GEPRUEFT"
+      },
+      "liquidity": {
+        "status": "NICHT_GEPRUEFT"
+      },
+      "meets_no_defense_condition": null,
+      "status": "NICHT_GEPRUEFT",
+      "sources": []
+    },
+    {
+      "id": "FAZIT_INDEX_SCREENING",
+      "type": "fazit",
+      "venue": null,
+      "product": null,
+      "ergebnis": "Kein geprüfter börsengehandelter Index-Future erfüllt die Bedingung 'Index enthält nachweislich keine Rüstungsunternehmen' belegbar. Nächstliegende Kandidaten: STOXX Europe 600 SRI (FSRI; 'Weapons'-Filter, Schwelle offen) und CME-Select-Sector-Futures außerhalb Industrials/Technology (nur GICS-basiert). CME E-mini S&P 500 ESG schließt Waffen erst ab 10 % Umsatz aus. ESG-X-, MSCI-Screened-, Climate-Impact-Indizes schließen nur kontroverse Waffen aus; Nasdaq-100, Technology und Industrials enthalten belegte Rüstungs-/Militärzulieferer. Alle ESG-/Sektor-Futures sind im Vergleich zu ES/NQ/FESX sehr illiquide.",
+      "basis_ids": [
+        "CME_ESG",
+        "CME_XAK_TECHNOLOGY",
+        "CME_XAI_INDUSTRIAL",
+        "CME_SELECT_SECTOR_OTHER_9",
+        "CME_NQ",
+        "EUREX_FSSX",
+        "EUREX_FSEG",
+        "EUREX_FSUS",
+        "EUREX_FSRI",
+        "EUREX_FSCI",
+        "EUREX_FSLS",
+        "EUREX_MSCI_ESG_SCREENED",
+        "EUREX_DAX_ESG",
+        "ICE_US_MSCI_ESG"
+      ],
+      "empfehlung": "Index-Futures bis zur Vorlage der STOXX-SRI-Schwellen und einer Komponentenprüfung aus dem Universum ausschließen (BQ-06 als Betreiberentscheidung dokumentieren).",
+      "status": "TEILWEISE",
+      "sources": []
+    }
+  ],
+  "hermes_upstream": {
+    "repo": "https://github.com/NousResearch/hermes-agent",
+    "license": {
+      "value": "MIT",
+      "status": "BELEGT",
+      "sources": [
+        {
+          "url": "https://github.com/NousResearch/hermes-agent/blob/main/LICENSE",
+          "quote": "MIT License",
+          "kind": "github_repo_file"
+        },
+        {
+          "url": "https://github.com/NousResearch/hermes-agent/blob/main/LICENSE",
+          "quote": "Copyright (c) 2025 Nous Research",
+          "kind": "github_repo_file"
+        }
+      ]
+    },
+    "latest_release_2026_09_24": {
+      "version": "v0.21.5",
+      "tag": "v2026.9.24",
+      "published_displayed": "24 Sep 10:09",
+      "latest_badge": true,
+      "note": "Stand des Abrufs am 2026-09-24; am selben Tag weitere Releases möglich. Release-Notes verweisen kuratierte Notizen auf v0.22.0.",
+      "status": "BELEGT",
+      "sources": [
+        {
+          "url": "https://github.com/NousResearch/hermes-agent/releases/latest",
+          "quote": "Hermes Agent v0.21.5 (v2026.9.24)",
+          "kind": "github_release"
+        },
+        {
+          "url": "https://github.com/NousResearch/hermes-agent/releases?per_page=12&page=1",
+          "quote": "Hermes Agent v0.21.5 (v2026.9.24)",
+          "kind": "github_release_list"
+        },
+        {
+          "url": "https://github.com/NousResearch/hermes-agent/releases/tag/v2026.9.24",
+          "quote": "Full curated release notes for this window ship with v0.22.0",
+          "kind": "github_release_notes"
+        }
+      ]
+    },
+    "releases_last_12_months": [
+      {
+        "version": "v0.21.5",
+        "tag": "v2026.9.24",
+        "calver_date": "2026-09-24",
+        "published_displayed": "24 Sep 10:09",
+        "published_date": "2026-09-24",
+        "change_volume": "1.610 Non-Merge-Commits, 4.828 Dateien seit v0.21.4; kuratierte Notes erst mit v0.22.0",
+        "status": "BELEGT",
+        "sources": [
+          {
+            "url": "https://github.com/NousResearch/hermes-agent/releases/tag/v2026.9.24",
+            "quote": "Hermes Agent v0.21.5 (v2026.9.24)",
+            "kind": "github_release"
+          },
+          {
+            "url": "https://github.com/NousResearch/hermes-agent/releases/tag/v2026.9.24",
+            "quote": "460 merged PRs and 475 closed issues",
+            "kind": "github_release_notes"
+          }
+        ]
+      },
+      {
+        "version": "v0.21.4",
+        "tag": "v2026.9.21",
+        "calver_date": "2026-09-21",
+        "published_displayed": "September 21, 2026 at 18:10",
+        "published_date": "2026-09-21",
+        "change_volume": "5.071 Non-Merge-Commits, 1.812 PRs seit v0.21.3 (Patch-Release)",
+        "status": "BELEGT",
+        "sources": [
+          {
+            "url": "https://github.com/NousResearch/hermes-agent/releases/tag/v2026.9.21",
+            "quote": "Hermes Agent v0.21.4 (v2026.9.21)",
+            "kind": "github_release"
+          },
+          {
+            "url": "https://github.com/NousResearch/hermes-agent/releases/tag/v2026.9.21",
+            "quote": "the window since v0.21.3 contains 5,071 non-merge commits across 5,169 changed files",
+            "kind": "github_release_notes"
+          }
+        ]
+      },
+      {
+        "version": "v0.21.3",
+        "tag": "v2026.9.14",
+        "calver_date": "2026-09-14",
+        "published_displayed": "September 14, 2026 at 16:04",
+        "published_date": "2026-09-14",
+        "change_volume": "seit v0.21.2",
+        "status": "BELEGT",
+        "sources": [
+          {
+            "url": "https://github.com/NousResearch/hermes-agent/releases/tag/v2026.9.14",
+            "quote": "Hermes Agent v0.21.3 (v2026.9.14)",
+            "kind": "github_release"
+          },
+          {
+            "url": "https://github.com/NousResearch/hermes-agent/releases/tag/v2026.9.14",
+            "quote": "1,036 non-merge commits across 2,642 changed files (+131,690 / −37,096) and 338 merged PRs",
+            "kind": "github_release_notes"
+          }
+        ]
+      },
+      {
+        "version": "v0.21.2",
+        "tag": "v2026.9.11",
+        "calver_date": "2026-09-11",
+        "published_displayed": "September 11, 2026 at 19:20",
+        "published_date": "2026-09-11",
+        "change_volume": null,
+        "status": "BELEGT",
+        "sources": [
+          {
+            "url": "https://github.com/NousResearch/hermes-agent/releases?per_page=10&page=1",
+            "quote": "Hermes Agent v0.21.2 (v2026.9.11)",
+            "kind": "github_release"
+          }
+        ]
+      },
+      {
+        "version": "v0.21.1",
+        "tag": "v2026.9.7",
+        "calver_date": "2026-09-07",
+        "published_displayed": "September 7, 2026 at 22:17",
+        "published_date": "2026-09-07",
+        "change_volume": null,
+        "status": "BELEGT",
+        "sources": [
+          {
+            "url": "https://github.com/NousResearch/hermes-agent/releases?per_page=10&page=1",
+            "quote": "Hermes Agent v0.21.1 (v2026.9.7)",
+            "kind": "github_release"
+          }
+        ]
+      },
+      {
+        "version": "v0.21.0",
+        "tag": "v2026.8.31",
+        "calver_date": "2026-08-31",
+        "published_displayed": "August 31, 2026 at 19:29",
+        "published_date": "2026-08-31",
+        "change_volume": null,
+        "status": "BELEGT",
+        "sources": [
+          {
+            "url": "https://github.com/NousResearch/hermes-agent/releases/tag/v2026.8.31",
+            "quote": "Hermes Agent v0.21.0 (v2026.8.31)",
+            "kind": "github_release"
+          },
+          {
+            "url": "https://github.com/NousResearch/hermes-agent/releases/tag/v2026.8.31",
+            "quote": "Since v0.20.0: ~5,800 commits · ~2,475 merged PRs · ~5,680 files changed",
+            "kind": "github_release_notes"
+          }
+        ]
+      },
+      {
+        "version": "v0.20.6",
+        "tag": "v2026.8.27",
+        "calver_date": "2026-08-27",
+        "published_displayed": "August 27, 2026 at 12:06 UTC",
+        "published_date": "2026-08-27",
+        "change_volume": null,
+        "status": "BELEGT",
+        "sources": [
+          {
+            "url": "https://github.com/NousResearch/hermes-agent/releases/tag/v2026.8.27",
+            "quote": "Hermes Agent v0.20.6 (v2026.8.27)",
+            "kind": "github_release"
+          },
+          {
+            "url": "https://github.com/NousResearch/hermes-agent/releases/tag/v2026.8.27",
+            "quote": "~1,313 commits across ~1,557 files (+177,113 / −21,682)",
+            "kind": "github_release_notes"
+          }
+        ]
+      },
+      {
+        "version": "v0.20.5",
+        "tag": "v2026.8.19",
+        "calver_date": "2026-08-19",
+        "published_displayed": "August 21 at 12:16 UTC (Tag 2026.8.19)",
+        "published_date": "2026-08-21",
+        "change_volume": "~746 Commits, ~1.250 Dateien seit v0.20.4",
+        "status": "BELEGT",
+        "sources": [
+          {
+            "url": "https://github.com/NousResearch/hermes-agent/releases/tag/v2026.8.19",
+            "quote": "Hermes Agent v0.20.5 (v2026.8.19)",
+            "kind": "github_release"
+          },
+          {
+            "url": "https://github.com/NousResearch/hermes-agent/releases/tag/v2026.8.19",
+            "quote": "~323 merged PRs",
+            "kind": "github_release_notes"
+          }
+        ]
+      },
+      {
+        "version": "v0.20.4",
+        "tag": "v2026.8.18",
+        "calver_date": "2026-08-18",
+        "published_displayed": "August 18, 2026 at 07:26 UTC",
+        "published_date": "2026-08-18",
+        "change_volume": null,
+        "status": "BELEGT",
+        "sources": [
+          {
+            "url": "https://github.com/NousResearch/hermes-agent/releases/tag/v2026.8.18",
+            "quote": "Hermes Agent v0.20.4 (2026.8.18)",
+            "kind": "github_release"
+          },
+          {
+            "url": "https://github.com/NousResearch/hermes-agent/releases/tag/v2026.8.18",
+            "quote": "~146 commits across ~265 files (+21,697 / −2,217)",
+            "kind": "github_release_notes"
+          }
+        ]
+      },
+      {
+        "version": "v0.20.3",
+        "tag": "v2026.8.16.2",
+        "calver_date": "2026-08-16",
+        "published_displayed": "August 17, 2026 at 18:43 UTC",
+        "published_date": "2026-08-17",
+        "change_volume": null,
+        "status": "BELEGT",
+        "sources": [
+          {
+            "url": "https://github.com/NousResearch/hermes-agent/releases/tag/v2026.8.16.2",
+            "quote": "Hermes Agent v0.20.3 (v2026.8.16.2)",
+            "kind": "github_release"
+          },
+          {
+            "url": "https://github.com/NousResearch/hermes-agent/releases/tag/v2026.8.16.2",
+            "quote": "~250 commits across ~461 files (+42,613 / −1,641)",
+            "kind": "github_release_notes"
+          }
+        ]
+      },
+      {
+        "version": "v0.20.2",
+        "tag": "v2026.8.16",
+        "calver_date": "2026-08-16",
+        "published_displayed": "August 16, 2026 at 17:33",
+        "published_date": "2026-08-16",
+        "change_volume": null,
+        "status": "BELEGT",
+        "sources": [
+          {
+            "url": "https://github.com/NousResearch/hermes-agent/releases/tag/v2026.8.16",
+            "quote": "Hermes Agent v0.20.2 (2026.8.16)",
+            "kind": "github_release"
+          },
+          {
+            "url": "https://github.com/NousResearch/hermes-agent/releases/tag/v2026.8.16",
+            "quote": "~967 commits across ~1,279 files (+128,522 / −7,622)",
+            "kind": "github_release_notes"
+          }
+        ]
+      },
+      {
+        "version": "v0.20.1",
+        "tag": "v2026.8.13",
+        "calver_date": "2026-08-13",
+        "published_displayed": "August 13, 2026 at 20:37 UTC",
+        "published_date": "2026-08-13",
+        "change_volume": null,
+        "status": "BELEGT",
+        "sources": [
+          {
+            "url": "https://github.com/NousResearch/hermes-agent/releases/tag/v2026.8.13",
+            "quote": "Hermes Agent v0.20.1 (2026.8.13)",
+            "kind": "github_release"
+          },
+          {
+            "url": "https://github.com/NousResearch/hermes-agent/releases/tag/v2026.8.13",
+            "quote": "1,444 commits across ~656 merged PRs, touching 2,172 files (+233,872 / −75,244), and closed ~481 issues",
+            "kind": "github_release_notes"
+          }
+        ]
+      },
+      {
+        "version": "v0.20.0",
+        "tag": "v2026.8.3",
+        "calver_date": "2026-08-03",
+        "published_displayed": "August 3, 2026",
+        "published_date": "2026-08-03",
+        "change_volume": null,
+        "status": "BELEGT",
+        "sources": [
+          {
+            "url": "https://github.com/NousResearch/hermes-agent/releases/tag/v2026.8.3",
+            "quote": "Hermes Agent v0.20.0 (2026.8.3)",
+            "kind": "github_release"
+          },
+          {
+            "url": "https://github.com/NousResearch/hermes-agent/releases/tag/v2026.8.3",
+            "quote": "~3,650 commits · ~1,400 merged PRs · ~5,200 files changed · ~559,000 insertions · ~405,000 deletions · ~1,200 issues closed",
+            "kind": "github_release_notes"
+          }
+        ]
+      },
+      {
+        "version": "v0.19.1",
+        "tag": "v2026.7.30",
+        "calver_date": "2026-07-30",
+        "published_displayed": "July 30, 2026 at 23:45",
+        "published_date": "2026-07-30",
+        "change_volume": null,
+        "status": "BELEGT",
+        "sources": [
+          {
+            "url": "https://github.com/NousResearch/hermes-agent/releases?page=1",
+            "quote": "Hermes Agent v0.19.1 (v2026.7.30)",
+            "kind": "github_release"
+          },
+          {
+            "url": "https://github.com/NousResearch/hermes-agent/releases?page=1",
+            "quote": "~2,789 commits · ~4,748 files changed · ~442,000 insertions · ~392,300 deletions",
+            "kind": "github_release_notes"
+          }
+        ]
+      },
+      {
+        "version": "v0.19.0",
+        "tag": "v2026.7.20",
+        "calver_date": "2026-07-20",
+        "published_displayed": "July 20, 2026 at 18:35",
+        "published_date": "2026-07-20",
+        "change_volume": null,
+        "status": "BELEGT",
+        "sources": [
+          {
+            "url": "https://github.com/NousResearch/hermes-agent/releases/tag/v2026.7.20",
+            "quote": "Hermes Agent v0.19.0 (2026.7.20) — The Quicksilver Release",
+            "kind": "github_release"
+          },
+          {
+            "url": "https://github.com/NousResearch/hermes-agent/releases/tag/v2026.7.20",
+            "quote": "Since v0.18.0: ~2,245 commits · ~1,065 merged PRs · ~2,465 files changed",
+            "kind": "github_release_notes"
+          }
+        ]
+      },
+      {
+        "version": "v0.18.2",
+        "tag": "v2026.7.7.2",
+        "calver_date": "2026-07-07",
+        "published_displayed": "08 Jul 03:11",
+        "published_date": "2026-07-08",
+        "change_volume": null,
+        "status": "BELEGT",
+        "sources": [
+          {
+            "url": "https://github.com/NousResearch/hermes-agent/releases?page=1",
+            "quote": "Hermes Agent v0.18.2 (2026.7.7.2)",
+            "kind": "github_release"
+          }
+        ]
+      },
+      {
+        "version": "v0.18.1",
+        "tag": "v2026.7.7",
+        "calver_date": "2026-07-07",
+        "published_displayed": "08 Jul 01:15",
+        "published_date": "2026-07-08",
+        "change_volume": null,
+        "status": "BELEGT",
+        "sources": [
+          {
+            "url": "https://github.com/NousResearch/hermes-agent/releases?page=1",
+            "quote": "Hermes Agent v0.18.1 (2026.7.7)",
+            "kind": "github_release"
+          },
+          {
+            "url": "https://github.com/NousResearch/hermes-agent/releases?page=1",
+            "quote": "~667 commits across ~990 files (+89.5k/−10.4k lines)",
+            "kind": "github_release_notes"
+          }
+        ]
+      },
+      {
+        "version": "v0.18.0",
+        "tag": "v2026.7.1",
+        "calver_date": "2026-07-01",
+        "published_displayed": "01 Jul 20:08",
+        "published_date": "2026-07-01",
+        "change_volume": null,
+        "status": "BELEGT",
+        "sources": [
+          {
+            "url": "https://github.com/NousResearch/hermes-agent/releases?page=1",
+            "quote": "Hermes Agent v0.18.0 (2026.7.1) — The Judgment Release",
+            "kind": "github_release"
+          },
+          {
+            "url": "https://github.com/NousResearch/hermes-agent/releases?page=1",
+            "quote": "~1,720 commits · 998 merged PRs · 2,215 files changed · ~251,000 insertions · ~41,000 deletions · 949 issues closed",
+            "kind": "github_release_notes"
+          }
+        ]
+      },
+      {
+        "version": "v0.17.0",
+        "tag": "v2026.6.19",
+        "calver_date": "2026-06-19",
+        "published_displayed": "19 Jun 19:39",
+        "published_date": "2026-06-19",
+        "change_volume": null,
+        "status": "BELEGT",
+        "sources": [
+          {
+            "url": "https://github.com/NousResearch/hermes-agent/releases?page=2",
+            "quote": "Hermes Agent v0.17.0 (v2026.6.19)",
+            "kind": "github_release"
+          },
+          {
+            "url": "https://github.com/NousResearch/hermes-agent/releases?page=2",
+            "quote": "~1,475 commits · ~800 merged PRs · 300+ issues closed",
+            "kind": "github_release_notes"
+          }
+        ]
+      },
+      {
+        "version": "v0.16.0",
+        "tag": "v2026.6.5",
+        "calver_date": "2026-06-05",
+        "published_displayed": "06 Jun 00:55",
+        "published_date": "2026-06-06",
+        "change_volume": null,
+        "status": "BELEGT",
+        "sources": [
+          {
+            "url": "https://github.com/NousResearch/hermes-agent/releases/tag/v2026.6.5",
+            "quote": "Hermes Agent v0.16.0 (2026.6.5) — The Surface Release",
+            "kind": "github_release"
+          },
+          {
+            "url": "https://github.com/NousResearch/hermes-agent/releases/tag/v2026.6.5",
+            "quote": "874 commits · 542 merged PRs · 1,962 files changed · 205,216 insertions · 46,217 deletions",
+            "kind": "github_release_notes"
+          }
+        ]
+      },
+      {
+        "version": "v0.15.2",
+        "tag": "v2026.5.29.2",
+        "calver_date": "2026-05-29",
+        "published_displayed": "29 May 13:37",
+        "published_date": "2026-05-29",
+        "change_volume": null,
+        "status": "BELEGT",
+        "sources": [
+          {
+            "url": "https://github.com/NousResearch/hermes-agent/releases/tag/v2026.5.29.2",
+            "quote": "Hermes Agent v0.15.2 (2026.5.29.2)",
+            "kind": "github_release"
+          },
+          {
+            "url": "https://github.com/NousResearch/hermes-agent/releases/tag/v2026.5.29.2",
+            "quote": "ship bundled plugin.yaml manifests in wheel and sdist",
+            "kind": "github_release_notes"
+          }
+        ]
+      },
+      {
+        "version": "v0.15.1",
+        "tag": "v2026.5.29",
+        "calver_date": "2026-05-29",
+        "published_displayed": "May 29, 2026 at 01:12 UTC",
+        "published_date": "2026-05-29",
+        "change_volume": null,
+        "status": "BELEGT",
+        "sources": [
+          {
+            "url": "https://github.com/NousResearch/hermes-agent/releases/tag/v2026.5.29",
+            "quote": "Hermes Agent v0.15.1 (2026.5.29) — The Patch Release",
+            "kind": "github_release"
+          },
+          {
+            "url": "https://github.com/NousResearch/hermes-agent/releases/tag/v2026.5.29",
+            "quote": "28 commits · 21 merged PRs · hotfix release · 9 contributors",
+            "kind": "github_release_notes"
+          }
+        ]
+      },
+      {
+        "version": "v0.15.0",
+        "tag": "v2026.5.28",
+        "calver_date": "2026-05-28",
+        "published_displayed": "May 28, 2026",
+        "published_date": "2026-05-28",
+        "change_volume": null,
+        "status": "BELEGT",
+        "sources": [
+          {
+            "url": "https://github.com/NousResearch/hermes-agent/releases/tag/v2026.5.28",
+            "quote": "Hermes Agent v0.15.0 (2026.5.28) — The Velocity Release",
+            "kind": "github_release"
+          },
+          {
+            "url": "https://github.com/NousResearch/hermes-agent/releases/tag/v2026.5.28",
+            "quote": "1,302 commits · 747 merged PRs · 1,746 files changed · 282,712 insertions · 36,699 deletions · 560+ issues closed",
+            "kind": "github_release_notes"
+          }
+        ]
+      },
+      {
+        "version": "v0.14.0",
+        "tag": "v2026.5.16",
+        "calver_date": "2026-05-16",
+        "published_displayed": "May 16, 2026, 09:59 UTC",
+        "published_date": "2026-05-16",
+        "change_volume": null,
+        "status": "BELEGT",
+        "sources": [
+          {
+            "url": "https://github.com/NousResearch/hermes-agent/releases/tag/v2026.5.16",
+            "quote": "Hermes Agent v0.14.0 (2026.5.16)",
+            "kind": "github_release"
+          },
+          {
+            "url": "https://github.com/NousResearch/hermes-agent/releases/tag/v2026.5.16",
+            "quote": "808 commits · 633 merged PRs · 1393 files changed · 165,061 insertions · 545 issues closed (12 P0, 50 P1)",
+            "kind": "github_release_notes"
+          }
+        ]
+      },
+      {
+        "version": "v0.13.0",
+        "tag": "v2026.5.7",
+        "calver_date": "2026-05-07",
+        "published_displayed": "May 7, 2026",
+        "published_date": "2026-05-07",
+        "change_volume": null,
+        "status": "BELEGT",
+        "sources": [
+          {
+            "url": "https://github.com/NousResearch/hermes-agent/releases/tag/v2026.5.7",
+            "quote": "Hermes Agent v0.13.0 (2026.5.7) — The Tenacity Release",
+            "kind": "github_release"
+          },
+          {
+            "url": "https://github.com/NousResearch/hermes-agent/releases/tag/v2026.5.7",
+            "quote": "864 commits · 588 merged PRs · 829 files changed · 128,366 insertions · 282 issues closed (13 P0, 36 P1)",
+            "kind": "github_release_notes"
+          }
+        ]
+      },
+      {
+        "version": "v0.12.0",
+        "tag": "v2026.4.30",
+        "calver_date": "2026-04-30",
+        "published_displayed": "30 Apr 18:31",
+        "published_date": "2026-04-30",
+        "change_volume": null,
+        "status": "BELEGT",
+        "sources": [
+          {
+            "url": "https://github.com/NousResearch/hermes-agent/releases?page=3",
+            "quote": "Hermes Agent v0.12.0 (2026.4.30)",
+            "kind": "github_release"
+          },
+          {
+            "url": "https://github.com/NousResearch/hermes-agent/releases?page=3",
+            "quote": "1,096 commits · 550 merged PRs · 1,270 files changed · 217,776 insertions · 213 community contributors",
+            "kind": "github_release_notes"
+          }
+        ]
+      },
+      {
+        "version": "v0.11.0",
+        "tag": "v2026.4.23",
+        "calver_date": "2026-04-23",
+        "published_displayed": "23 Apr 22:32",
+        "published_date": "2026-04-23",
+        "change_volume": null,
+        "status": "BELEGT",
+        "sources": [
+          {
+            "url": "https://github.com/NousResearch/hermes-agent/releases/tag/v2026.4.23",
+            "quote": "Hermes Agent v0.11.0 (2026.4.23)",
+            "kind": "github_release"
+          },
+          {
+            "url": "https://github.com/NousResearch/hermes-agent/releases/tag/v2026.4.23",
+            "quote": "Since v0.9.0: 1,556 commits · 761 merged PRs · 1,314 files changed · 224,174 insertions",
+            "kind": "github_release_notes"
+          }
+        ]
+      },
+      {
+        "version": "v0.10.0",
+        "tag": "v2026.4.16",
+        "calver_date": "2026-04-16",
+        "published_displayed": "16 Apr 19:53",
+        "published_date": "2026-04-16",
+        "change_volume": null,
+        "status": "BELEGT",
+        "sources": [
+          {
+            "url": "https://github.com/NousResearch/hermes-agent/releases?per_page=10&page=3",
+            "quote": "Hermes Agent v0.10.0 (2026.4.16)",
+            "kind": "github_release"
+          }
+        ]
+      },
+      {
+        "version": "v0.9.0",
+        "tag": "v2026.4.13",
+        "calver_date": "2026-04-13",
+        "published_displayed": "April 13, 2026 at 18:52",
+        "published_date": "2026-04-13",
+        "change_volume": null,
+        "status": "BELEGT",
+        "sources": [
+          {
+            "url": "https://github.com/NousResearch/hermes-agent/releases/tag/v2026.4.13",
+            "quote": "Hermes Agent v0.9.0 (v2026.4.13)",
+            "kind": "github_release"
+          },
+          {
+            "url": "https://github.com/NousResearch/hermes-agent/releases/tag/v2026.4.13",
+            "quote": "487 commits · 269 merged PRs · 167 resolved issues · 493 files changed · 63,281 insertions · 24 contributors",
+            "kind": "github_release_notes"
+          }
+        ]
+      },
+      {
+        "version": "v0.8.0",
+        "tag": "v2026.4.8",
+        "calver_date": "2026-04-08",
+        "published_displayed": "April 8, 2026 at 11:56 UTC",
+        "published_date": "2026-04-08",
+        "change_volume": "laut Zusammenfassung 209 PRs/82 Issues (nicht wörtlich zitiert)",
+        "status": "BELEGT",
+        "sources": [
+          {
+            "url": "https://github.com/NousResearch/hermes-agent/releases/tag/v2026.4.8",
+            "quote": "Hermes Agent v0.8.0 (v2026.4.8)",
+            "kind": "github_release"
+          }
+        ]
+      },
+      {
+        "version": "v0.7.0",
+        "tag": "v2026.4.3",
+        "calver_date": "2026-04-03",
+        "published_displayed": "April 3, 2026 at 18:15 UTC",
+        "published_date": "2026-04-03",
+        "change_volume": null,
+        "status": "BELEGT",
+        "sources": [
+          {
+            "url": "https://github.com/NousResearch/hermes-agent/releases/tag/v2026.4.3",
+            "quote": "Hermes Agent v0.7.0 (v2026.4.3)",
+            "kind": "github_release"
+          },
+          {
+            "url": "https://github.com/NousResearch/hermes-agent/releases/tag/v2026.4.3",
+            "quote": "168 PRs and 46 resolved issues",
+            "kind": "github_release_notes"
+          }
+        ]
+      },
+      {
+        "version": "v0.6.0",
+        "tag": "v2026.3.30",
+        "calver_date": "2026-03-30",
+        "published_displayed": "March 30, 2026, 15:30",
+        "published_date": "2026-03-30",
+        "change_volume": null,
+        "status": "BELEGT",
+        "sources": [
+          {
+            "url": "https://github.com/NousResearch/hermes-agent/releases/tag/v2026.3.30",
+            "quote": "Hermes Agent v0.6.0 (v2026.3.30)",
+            "kind": "github_release"
+          },
+          {
+            "url": "https://github.com/NousResearch/hermes-agent/releases/tag/v2026.3.30",
+            "quote": "95 PRs and 16 resolved issues in 2 days",
+            "kind": "github_release_notes"
+          }
+        ]
+      },
+      {
+        "version": "v0.5.0",
+        "tag": "v2026.3.28",
+        "calver_date": "2026-03-28",
+        "published_displayed": "March 28, 2026 at 20:12 UTC",
+        "published_date": "2026-03-28",
+        "change_volume": null,
+        "status": "BELEGT",
+        "sources": [
+          {
+            "url": "https://github.com/NousResearch/hermes-agent/releases/tag/v2026.3.28",
+            "quote": "Hermes Agent v0.5.0 (v2026.3.28)",
+            "kind": "github_release"
+          },
+          {
+            "url": "https://github.com/NousResearch/hermes-agent/releases/tag/v2026.3.28",
+            "quote": "50+ security and reliability fixes",
+            "kind": "github_release_notes"
+          }
+        ]
+      },
+      {
+        "version": "v0.4.0",
+        "tag": "v2026.3.23",
+        "calver_date": "2026-03-23",
+        "published_displayed": "March 23, 2026",
+        "published_date": "2026-03-23",
+        "change_volume": null,
+        "status": "BELEGT",
+        "sources": [
+          {
+            "url": "https://github.com/NousResearch/hermes-agent/releases/tag/v2026.3.23",
+            "quote": "Hermes Agent v0.4.0 (v2026.3.23)",
+            "kind": "github_release"
+          },
+          {
+            "url": "https://github.com/NousResearch/hermes-agent/releases/tag/v2026.3.23",
+            "quote": "a sweeping reliability pass with 200+ bug fixes",
+            "kind": "github_release_notes"
+          }
+        ]
+      },
+      {
+        "version": "v0.3.0",
+        "tag": "v2026.3.17",
+        "calver_date": "2026-03-17",
+        "published_displayed": "March 17, 2026 at 07:56",
+        "published_date": "2026-03-17",
+        "change_volume": null,
+        "status": "BELEGT",
+        "sources": [
+          {
+            "url": "https://github.com/NousResearch/hermes-agent/releases/tag/v2026.3.17",
+            "quote": "Hermes Agent v0.3.0 (v2026.3.17)",
+            "kind": "github_release"
+          },
+          {
+            "url": "https://github.com/NousResearch/hermes-agent/releases/tag/v2026.3.17",
+            "quote": "50+ bug fixes across every platform",
+            "kind": "github_release_notes"
+          }
+        ]
+      },
+      {
+        "version": "v0.2.0",
+        "tag": "v2026.3.12",
+        "calver_date": "2026-03-12",
+        "published_displayed": "March 12, 2026 at 10:07",
+        "published_date": "2026-03-12",
+        "change_volume": "laut Zusammenfassung 216 gemergte PRs von 63 Beitragenden",
+        "status": "BELEGT",
+        "sources": [
+          {
+            "url": "https://github.com/NousResearch/hermes-agent/releases?per_page=12&page=4",
+            "quote": "Hermes Agent v0.2.0 (2026.3.12)",
+            "kind": "github_release"
+          },
+          {
+            "url": "https://github.com/NousResearch/hermes-agent/releases?per_page=12&page=4",
+            "quote": "first tagged release since v0.1.0",
+            "kind": "github_release_notes"
+          }
+        ]
+      }
+    ],
+    "release_list_completeness": {
+      "count": 36,
+      "window": "2025-09-24 bis 2026-09-24",
+      "oldest_github_release": "v0.2.0 (2026-03-12); v0.1.0 erscheint nicht auf der Releases-Seite",
+      "method": "Releases-Seiten 1–4 (je 10 Einträge, Seite 4 mit 6 Einträgen) im aktuellen Snapshot (249k Sterne) abgeglichen; Tag-Seiten einzeln für 26 Releases geprüft",
+      "status": "BELEGT",
+      "sources": [
+        {
+          "url": "https://github.com/NousResearch/hermes-agent/releases?per_page=12&page=1",
+          "quote": "Hermes Agent v0.21.5 (v2026.9.24)",
+          "kind": "github_release_list"
+        },
+        {
+          "url": "https://github.com/NousResearch/hermes-agent/releases?page=2&per_page=10",
+          "quote": "Hermes Agent v0.20.2",
+          "kind": "github_release_list"
+        },
+        {
+          "url": "https://github.com/NousResearch/hermes-agent/releases?per_page=12&page=3",
+          "quote": "Hermes Agent v0.15.2 (2026.5.29.2)",
+          "kind": "github_release_list"
+        },
+        {
+          "url": "https://github.com/NousResearch/hermes-agent/releases?per_page=12&page=4",
+          "quote": "Hermes Agent v0.2.0 (2026.3.12)",
+          "kind": "github_release_list"
+        }
+      ]
+    },
+    "release_frequency": {
+      "releases_in_window": 36,
+      "span_days_first_to_last": 196,
+      "mean_interval_days": 5.6,
+      "median_interval_days": 5,
+      "max_interval_days": 13,
+      "minor_releases_x_y_0": 20,
+      "minor_mean_interval_days": 9.05,
+      "minor_median_interval_days": 7,
+      "recent_minor_intervals_days": {
+        "v0.18.0_to_v0.19.0": 19,
+        "v0.19.0_to_v0.20.0": 14,
+        "v0.20.0_to_v0.21.0": 28
+      },
+      "releases_last_90_days": 18,
+      "releases_last_30_days": 7,
+      "per_month": {
+        "2026-03": 5,
+        "2026-04": 6,
+        "2026-05": 5,
+        "2026-06": 2,
+        "2026-07": 5,
+        "2026-08": 8,
+        "2026-09": 5
+      },
+      "pattern": "Seit v0.20.0 Minor-Release etwa alle 2–4 Wochen plus mehrere 'Roll-up'-Patch-Releases dazwischen.",
+      "status": "BELEGT",
+      "method": "eigene Berechnung aus den Veröffentlichungsdaten der 36 Releases",
+      "sources": [
+        {
+          "url": "https://github.com/NousResearch/hermes-agent/releases?per_page=12&page=1",
+          "quote": "Hermes Agent v0.21.0 (v2026.8.31)",
+          "kind": "github_release_list"
+        }
+      ]
+    },
+    "change_volume": {
+      "summary": "Minor-Releases umfassen laut Release-Notes ca. 800–5.800 Commits; Patch-Releases 28 bis 5.071 Non-Merge-Commits. Die Patch-Nummer ist kein Indikator für kleine Änderungen (v0.21.4 als Patch: 5.071 Commits, 5.169 Dateien).",
+      "repo_commit_count": null,
+      "repo_commit_count_note": "Repository-Seite zeigte 27.517 Commits, aber in einem veralteten Snapshot (240,2k statt 249k Sterne) – nicht belastbar.",
+      "status": "TEILWEISE",
+      "sources": [
+        {
+          "url": "https://github.com/NousResearch/hermes-agent/releases/tag/v2026.9.21",
+          "quote": "the window since v0.21.3 contains 5,071 non-merge commits across 5,169 changed files",
+          "kind": "github_release_notes"
+        },
+        {
+          "url": "https://github.com/NousResearch/hermes-agent/releases/tag/v2026.8.31",
+          "quote": "Since v0.20.0: ~5,800 commits · ~2,475 merged PRs · ~5,680 files changed",
+          "kind": "github_release_notes"
+        },
+        {
+          "url": "https://github.com/NousResearch/hermes-agent/releases/tag/v2026.5.29",
+          "quote": "28 commits · 21 merged PRs · hotfix release · 9 contributors",
+          "kind": "github_release_notes"
+        }
+      ]
+    },
+    "breaking_changes": {
+      "explicit_breaking_changes_section_found": false,
+      "note": "In den geprüften Release-Notes kein Abschnitt 'Breaking Changes' gefunden (Negativbefund; lange Notes wurden vom Abruf-Tool ggf. gekürzt). Es gibt aber Verhaltensänderungen, Deprecations und Migrationen.",
+      "examples": [
+        {
+          "version": "v0.11.0",
+          "item": "config.yaml als einzige CWD-Quelle; .env-CWD-Variablen deprecated"
+        },
+        {
+          "version": "v0.19.0",
+          "item": "max_async_children deprecated; Session-Auto-Reset standardmäßig aus; kimi-k2.x entfernt"
+        },
+        {
+          "version": "v0.20.3",
+          "item": "MCP-2.x-SDK-Migration"
+        },
+        {
+          "version": "v0.21.0",
+          "item": "Codex-GPT-Kontext-Default zurück auf 272K"
+        }
+      ],
+      "status": "TEILWEISE",
+      "sources": [
+        {
+          "url": "https://github.com/NousResearch/hermes-agent/releases/tag/v2026.4.23",
+          "quote": "enforce `config.yaml` as sole CWD source + deprecate `.env` CWD vars",
+          "kind": "github_release_notes"
+        },
+        {
+          "url": "https://github.com/NousResearch/hermes-agent/releases/tag/v2026.7.20",
+          "quote": "Unified delegation concurrency caps (`max_async_children` deprecated)",
+          "kind": "github_release_notes"
+        },
+        {
+          "url": "https://github.com/NousResearch/hermes-agent/releases/tag/v2026.7.20",
+          "quote": "Session auto-reset default off",
+          "kind": "github_release_notes"
+        },
+        {
+          "url": "https://github.com/NousResearch/hermes-agent/releases/tag/v2026.7.20",
+          "quote": "kimi-k2.x retired",
+          "kind": "github_release_notes"
+        },
+        {
+          "url": "https://github.com/NousResearch/hermes-agent/releases/tag/v2026.8.16.2",
+          "quote": "MCP 2.x SDK migration and 2026-07-28 stateless protocol support",
+          "kind": "github_release_notes"
+        },
+        {
+          "url": "https://github.com/NousResearch/hermes-agent/releases/tag/v2026.8.31",
+          "quote": "Codex GPT context defaults back to the verified 272K, with explicit -900k picker variants for the large window",
+          "kind": "github_release_notes"
+        }
+      ]
+    },
+    "status": "BELEGT",
+    "sources": [
+      {
+        "url": "https://github.com/NousResearch/hermes-agent",
+        "quote": "The self-improving AI agent built by Nous Research",
+        "kind": "github_repo"
+      }
+    ]
+  }
+}

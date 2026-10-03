@@ -1,0 +1,107 @@
+{
+ "schema_version": "3.0",
+ "id": "TR-SAFETY-001",
+ "machine": "SM-SAFETY",
+ "description": "Start, Abgleich, Grant → READY; Tagesverlust L2 sperrt Einstiege bis zum nächsten Handelstag mit Quittung",
+ "scenarios": [
+  "OS-RI-02"
+ ],
+ "start": null,
+ "initial_reasons": [
+  "BOOT",
+  "SYNC_REQUIRED",
+  "GRANT_MISSING_OR_EXPIRED"
+ ],
+ "steps": [
+  {
+   "event": "CONFIG_RELEASE_VALID",
+   "context": {},
+   "expect_state": "EXIT_ONLY",
+   "expect_reasons": [
+    "GRANT_MISSING_OR_EXPIRED",
+    "SYNC_REQUIRED"
+   ],
+   "expect_allowed": [
+    "CANCEL_ORDER",
+    "EMERGENCY_PROTECT",
+    "RECONCILE",
+    "ROLL_AS_CLOSE"
+   ]
+  },
+  {
+   "event": "FULL_SNAPSHOT_CONSISTENT",
+   "context": {},
+   "expect_state": "EXIT_ONLY",
+   "expect_reasons": [
+    "GRANT_MISSING_OR_EXPIRED"
+   ],
+   "expect_allowed": [
+    "CANCEL_ORDER",
+    "CLOSE_REDUCE",
+    "EMERGENCY_PROTECT",
+    "RECONCILE",
+    "ROLL_AS_CLOSE",
+    "STOP_AMEND_RECONCILED_ONLY"
+   ]
+  },
+  {
+   "event": "GRANT_ACTIVE",
+   "context": {
+    "grant_signature_valid": true,
+    "grant_hashes_match_active_release": true,
+    "grant_environment_matches_mode": true
+   },
+   "expect_state": "READY",
+   "expect_reasons": [],
+   "expect_allowed": [
+    "CANCEL_ORDER",
+    "CLOSE_REDUCE",
+    "EMERGENCY_PROTECT",
+    "ENTRY",
+    "RECONCILE",
+    "ROLL_AS_CLOSE",
+    "STOP_AMEND",
+    "STOP_AMEND_RECONCILED_ONLY"
+   ]
+  },
+  {
+   "event": "DAILY_LOSS_L2",
+   "context": {},
+   "expect_state": "ENTRY_PAUSED",
+   "expect_reasons": [
+    "DAILY_LOSS_PAUSE"
+   ],
+   "expect_allowed": [
+    "CANCEL_ORDER",
+    "CLOSE_REDUCE",
+    "EMERGENCY_PROTECT",
+    "RECONCILE",
+    "ROLL_AS_CLOSE",
+    "STOP_AMEND",
+    "STOP_AMEND_RECONCILED_ONLY"
+   ]
+  },
+  {
+   "event": "OPERATOR_ACK_SIGNED",
+   "context": {
+    "signed": true,
+    "reason": "DAILY_LOSS_PAUSE",
+    "new_trading_day": false
+   },
+   "expect_state": "ENTRY_PAUSED",
+   "expect_reasons": [
+    "DAILY_LOSS_PAUSE"
+   ]
+  },
+  {
+   "event": "OPERATOR_ACK_SIGNED",
+   "context": {
+    "signed": true,
+    "reason": "DAILY_LOSS_PAUSE",
+    "new_trading_day": true
+   },
+   "expect_state": "READY",
+   "expect_reasons": []
+  }
+ ]
+}

@@ -1,0 +1,38 @@
+{
+ "schema_version": "3.0",
+ "id": "TR-ORDER-003",
+ "machine": "SM-ORDER",
+ "description": "Teilausführung, Stornierung und restliche Ausführung konkurrieren: die Ausführung gewinnt",
+ "scenarios": [
+  "OS-EX-02"
+ ],
+ "start": "SUBMITTING",
+ "initial_reasons": null,
+ "steps": [
+  {
+   "event": "BROKER_ACK",
+   "context": {},
+   "expect_state": "ACKNOWLEDGED"
+  },
+  {
+   "event": "FILL_PARTIAL",
+   "context": {},
+   "expect_state": "PARTIALLY_FILLED"
+  },
+  {
+   "event": "CANCEL_REQUESTED",
+   "context": {},
+   "expect_state": "CANCEL_PENDING"
+  },
+  {
+   "event": "FILL_PARTIAL",
+   "context": {},
+   "expect_state": "CANCEL_PENDING"
+  },
+  {
+   "event": "FILL_COMPLETE",
+   "context": {},
+   "expect_state": "FILLED"
+  }
+ ]
+}

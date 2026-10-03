@@ -1,0 +1,156 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:ki-trading-v3:runbook_register",
+  "title": "Runbook-Register",
+  "x-version": "3.0.0",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "3.0"
+    },
+    "document": {
+      "const": "Runbook-Register"
+    },
+    "as_of": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+    },
+    "rule": {
+      "type": "string",
+      "minLength": 1
+    },
+    "runbooks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^RB-\\d{2}$"
+          },
+          "title": {
+            "type": "string",
+            "minLength": 1
+          },
+          "severity": {
+            "enum": [
+              "NIEDRIG",
+              "MITTEL",
+              "HOCH",
+              "KRITISCH"
+            ]
+          },
+          "triggers": {
+            "type": "string",
+            "minLength": 1
+          },
+          "scenarios": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "minItems": 0
+          },
+          "killer_tests": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "minItems": 0
+          },
+          "ha_events": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "minItems": 0
+          },
+          "safety_reasons": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "minItems": 0
+          },
+          "steps": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "minItems": 1
+          },
+          "exit_criteria": {
+            "type": "string",
+            "minLength": 1
+          },
+          "drills": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "minItems": 0
+          },
+          "owner": {
+            "type": "string",
+            "minLength": 1
+          },
+          "system_first": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "id",
+          "title",
+          "severity",
+          "triggers",
+          "scenarios",
+          "killer_tests",
+          "ha_events",
+          "safety_reasons",
+          "steps",
+          "exit_criteria",
+          "drills",
+          "owner",
+          "system_first"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 1
+    },
+    "coverage": {
+      "type": "object",
+      "properties": {
+        "scenarios": {
+          "type": "object"
+        },
+        "killer_tests": {
+          "type": "object"
+        },
+        "safety_reasons": {
+          "type": "object"
+        }
+      },
+      "required": [
+        "scenarios",
+        "killer_tests",
+        "safety_reasons"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "schema_version",
+    "document",
+    "as_of",
+    "rule",
+    "runbooks",
+    "coverage"
+  ],
+  "additionalProperties": false
+}

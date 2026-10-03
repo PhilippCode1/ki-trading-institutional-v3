@@ -1,0 +1,543 @@
+{
+  "schema_version": "3.0",
+  "document": "Bauprogramm",
+  "as_of": "2026-09-24",
+  "estimation_basis": {
+    "productivity_kloc_per_agent_day": {
+      "low": 1.0,
+      "base": 0.7,
+      "high": 0.5
+    },
+    "review_person_days_per_agent_day": {
+      "low": 0.2,
+      "base": 0.3,
+      "high": 0.45
+    },
+    "status": "ANNAHME",
+    "note": "Konservative Spannen; Messung der tatsächlichen Produktivität ab BS-05 (Soll-Ist je Komponente)."
+  },
+  "critical_path": [
+    "BS-00",
+    "BS-02",
+    "BS-03",
+    "BS-04",
+    "BS-05",
+    "BS-06",
+    "BS-07",
+    "BS-08",
+    "BS-09",
+    "BS-10"
+  ],
+  "parallel": [
+    [
+      "BS-01",
+      "BS-02"
+    ]
+  ],
+  "stages": [
+    {
+      "id": "BS-00",
+      "gate": "GATE-G0",
+      "name": "Betreibereingaben, Wirtschaftlichkeit mit echten Gebühren, Kauf-statt-Bau-Entscheidung",
+      "effort": {
+        "low": {
+          "agent_days": 0.0,
+          "person_days": 2
+        },
+        "base": {
+          "agent_days": 0.0,
+          "person_days": 3
+        },
+        "high": {
+          "agent_days": 0.0,
+          "person_days": 5
+        }
+      },
+      "external": [
+        "X-BRK-FEES",
+        "X-BRK-INTEREST",
+        "X-OP-BUDGET",
+        "X-OP-RATE",
+        "X-V1-PRODUCTS"
+      ],
+      "duration_weeks": [
+        1,
+        2,
+        3
+      ],
+      "depends_on": [],
+      "dod": [
+        "X-BRK-FEES, X-OP-RATE, X-OP-BUDGET, X-BRK-INTEREST und X-V1-PRODUCTS bestätigt",
+        "Rechner mit echten Gebühren neu gerechnet (--check bestanden)",
+        "Kauf-statt-Bau-Befund signiert",
+        "GATE-G0 mit signiertem Ergebnis PASS"
+      ],
+      "cost_items": []
+    },
+    {
+      "id": "BS-01",
+      "gate": "GATE-G1",
+      "name": "Kontozugang (Demo und kleines Echtgeldkonto), frühe Killer-Tests KT-01…KT-16",
+      "effort": {
+        "low": {
+          "agent_days": 2,
+          "person_days": 3
+        },
+        "base": {
+          "agent_days": 4,
+          "person_days": 5
+        },
+        "high": {
+          "agent_days": 6,
+          "person_days": 8
+        }
+      },
+      "external": [
+        "X-BRK-ACCOUNT",
+        "X-BRK-API",
+        "X-BRK-CONTRACTS",
+        "X-BRK-DEMO",
+        "X-BRK-LIQ",
+        "X-BRK-MARGIN",
+        "X-BRK-NACHSCHUSS"
+      ],
+      "duration_weeks": [
+        2,
+        3,
+        6
+      ],
+      "depends_on": [
+        "BS-00"
+      ],
+      "dod": [
+        "Repository mit CI und Secret-Scan (T-SEC-008) eingerichtet, bevor das erste Zugangsdatum existiert",
+        "KT-01 bis KT-16 mit Orakel bestanden oder Rückfallvariante signiert (GATE-G1)",
+        "Kontraktliste, Margins und Liquidationsregel schriftlich",
+        "Echtgeldorders nur vom Betreiber ausgelöst, Verlust höchstens P-EXE-KT-LOSS-CAP-EUR (T-GOV-002)",
+        "T-SEC-007 bestanden"
+      ],
+      "cost_items": [
+        "coding_agent_monthly_eur"
+      ]
+    },
+    {
+      "id": "BS-02",
+      "gate": "GATE-G2",
+      "name": "Datenlizenz, Abgleich zweier Quellen, Leckagetests",
+      "effort": {
+        "low": {
+          "agent_days": 3,
+          "person_days": 3
+        },
+        "base": {
+          "agent_days": 5,
+          "person_days": 4
+        },
+        "high": {
+          "agent_days": 8,
+          "person_days": 6
+        }
+      },
+      "external": [
+        "X-DATA-LIC",
+        "X-DATA-ND"
+      ],
+      "duration_weeks": [
+        2,
+        4,
+        6
+      ],
+      "depends_on": [
+        "BS-00"
+      ],
+      "dod": [
+        "Zwei Quellen je Instrument abgeglichen (T-DAT-001)",
+        "Holdout versiegelt (Hash im Prüfmodul)",
+        "Leckagetests bestanden (T-DAT-LEAK-001)",
+        "Volatilitäten, Spreads, Tagesvolumen, Liquiditätsfenster und Historie gemessen (X-DATA-VOL, X-DATA-LIQ, X-DATA-HIST)",
+        "GATE-G2 PASS"
+      ],
+      "cost_items": [
+        "coding_agent_monthly_eur",
+        "historical_data_once_eur"
+      ]
+    },
+    {
+      "id": "BS-03",
+      "gate": "GATE-G3",
+      "name": "Forschung auf Entwicklungsdaten mit Futility-Regel",
+      "effort": {
+        "low": {
+          "agent_days": 6,
+          "person_days": 5
+        },
+        "base": {
+          "agent_days": 10,
+          "person_days": 8
+        },
+        "high": {
+          "agent_days": 15,
+          "person_days": 12
+        }
+      },
+      "external": [
+        "X-DATA-HIST",
+        "X-DATA-LIQ",
+        "X-DATA-VOL"
+      ],
+      "duration_weeks": [
+        3,
+        5,
+        8
+      ],
+      "depends_on": [
+        "BS-02"
+      ],
+      "dod": [
+        "Vorregistrierung vor Ergebnisansicht (T-RES-PREREG-001)",
+        "DSR, PBO, SPA bzw. Reality Check und Romano-Wolf berechnet",
+        "Futility-Wahrscheinlichkeit berechnet",
+        "GATE-G3 mit signiertem Ergebnis"
+      ],
+      "cost_items": [
+        "coding_agent_monthly_eur"
+      ]
+    },
+    {
+      "id": "BS-04",
+      "gate": "GATE-G4",
+      "name": "Einmalige Holdout-Prüfung",
+      "effort": {
+        "low": {
+          "agent_days": 1,
+          "person_days": 1
+        },
+        "base": {
+          "agent_days": 1,
+          "person_days": 2
+        },
+        "high": {
+          "agent_days": 2,
+          "person_days": 3
+        }
+      },
+      "external": [],
+      "duration_weeks": [
+        1,
+        1,
+        2
+      ],
+      "depends_on": [
+        "BS-03"
+      ],
+      "dod": [
+        "Holdout genau einmal geöffnet (T-RES-HOLDOUT-001)",
+        "GATE-G4 mit signiertem Ergebnis"
+      ],
+      "cost_items": [
+        "coding_agent_monthly_eur"
+      ]
+    },
+    {
+      "id": "BS-05",
+      "gate": "GATE-G5",
+      "name": "Systembau, Abnahmetests, unabhängiges Prüfmodul ohne Abweichung",
+      "effort": {
+        "low": {
+          "agent_days": 42.0,
+          "person_days": 16.4
+        },
+        "base": {
+          "agent_days": 60.0,
+          "person_days": 30.0
+        },
+        "high": {
+          "agent_days": 84.0,
+          "person_days": 55.8
+        }
+      },
+      "external": [
+        "X-INF-VPS",
+        "X-INF-ZONES",
+        "X-OP-BUDGET"
+      ],
+      "duration_weeks": [
+        10,
+        16,
+        26
+      ],
+      "depends_on": [
+        "BS-04",
+        "BS-01"
+      ],
+      "components": [
+        {
+          "id": "C-MT5",
+          "name": "MT5-Adapter (Python-Schnittstelle, Polling, Korrelation magic/comment, Zeitstempel)",
+          "kloc": 4.0
+        },
+        {
+          "id": "C-OMS",
+          "name": "OMS/EMS mit Zustandsautomaten (SM-ORDER, SM-POSITION), Persistenz vor Netzwerk, UNKNOWN, Abgleich",
+          "kloc": 6.0
+        },
+        {
+          "id": "C-RISK",
+          "name": "Risikomotor: Vorhandelsprüfungen, Lückenregel, Tages- und Drawdown-Leiter, Kill-Switch, Margin-Überwachung",
+          "kloc": 6.0
+        },
+        {
+          "id": "C-STRAT",
+          "name": "Strategiemotor: S-TF, S-IM, S-REV, Carry-Filter, Kombination, Pufferung, Zeitstopp",
+          "kloc": 4.0
+        },
+        {
+          "id": "C-DATA",
+          "name": "Markt- und Referenzdatendienst: Balken, Rollkalender, Kontrakt- und Gebührendaten mit Gültigkeit",
+          "kloc": 4.0
+        },
+        {
+          "id": "C-BT",
+          "name": "Backtest mit demselben Kern (Ereignisjournal, deterministische Wiedergabe)",
+          "kloc": 3.0
+        },
+        {
+          "id": "C-EVAL",
+          "name": "Unabhängiger Evaluator, Torregeln, signierte Ergebnisse",
+          "kloc": 2.5
+        },
+        {
+          "id": "C-NAV",
+          "name": "NAV, Abgleich mit Brokerauszug, Berichte, Steuer-/Rechtsübergabe-Export",
+          "kloc": 2.5
+        },
+        {
+          "id": "C-OBS",
+          "name": "Beobachtbarkeit: Metriken, Logs, zwei Alarmwege, Watchdog",
+          "kloc": 2.0
+        },
+        {
+          "id": "C-UI",
+          "name": "Betreibercockpit (Web) und mobile Notfallansicht; Moduswechsel Demo/Echtgeld (SM-MODE)",
+          "kloc": 3.5
+        },
+        {
+          "id": "C-SEC",
+          "name": "Schlüssel, Grants, Hardware-Signaturen, Netztrennung, SBOM/CI",
+          "kloc": 2.5
+        },
+        {
+          "id": "C-AI",
+          "name": "Hermes-Anbindung außerhalb des Geldpfads, Evaluationssuite, Nutzenmessung",
+          "kloc": 2.0
+        }
+      ],
+      "dod": [
+        "Alle Abnahmetests der Stufe BS-05 aus implementation/test_catalog.json bestanden",
+        "Mutationsanteil ≥ P-QA-MUTATION-MIN und Zweigabdeckung ≥ P-QA-COVERAGE-MIN",
+        "Penetrationstest ohne kritische Befunde (T-SEC-014)",
+        "Kein Sprachmodell im Geldpfad nachgewiesen (T-AI-001 bis T-AI-004)",
+        "Prüfmodul ohne Abweichung; GATE-G5 PASS"
+      ],
+      "cost_items": [
+        "coding_agent_monthly_eur",
+        "external_once_eur.pentest",
+        "hardware_keys_once_eur"
+      ]
+    },
+    {
+      "id": "BS-06",
+      "gate": "GATE-G6",
+      "name": "Drills: Restore, Broker- und Datenausfall, Margin, Kill-Switch, Schlüsselverlust",
+      "effort": {
+        "low": {
+          "agent_days": 1,
+          "person_days": 3
+        },
+        "base": {
+          "agent_days": 2,
+          "person_days": 4
+        },
+        "high": {
+          "agent_days": 3,
+          "person_days": 6
+        }
+      },
+      "external": [],
+      "duration_weeks": [
+        2,
+        2,
+        4
+      ],
+      "depends_on": [
+        "BS-05"
+      ],
+      "dod": [
+        "DR-01 bis DR-10 mit Protokoll bestanden",
+        "Dauerlauf P-QA-SOAK-H ohne Incident HOCH (T-QA-SOAK-001)",
+        "Hardware-Schlüssel und Break-glass geprüft (T-SEC-013)",
+        "GATE-G6 PASS"
+      ],
+      "cost_items": [
+        "coding_agent_monthly_eur"
+      ]
+    },
+    {
+      "id": "BS-07",
+      "gate": "GATE-G7",
+      "name": "Paper-Forward (Mindestdauer P-RES-PAPER-MONTHS)",
+      "effort": {
+        "low": {
+          "agent_days": 0.0,
+          "person_days": 4
+        },
+        "base": {
+          "agent_days": 0.0,
+          "person_days": 6
+        },
+        "high": {
+          "agent_days": 0.0,
+          "person_days": 10
+        }
+      },
+      "external": [],
+      "duration_weeks": [
+        26,
+        26,
+        39
+      ],
+      "depends_on": [
+        "BS-06"
+      ],
+      "dod": [
+        "Mindestdauer P-RES-PAPER-MONTHS erreicht",
+        "Harm-Screen, Kostendrift und Limits ohne Auslösung (MON-HARM, MON-COSTDRIFT, MON-LIMITS)",
+        "SLOs gemessen (T-OPS-SLO-001)",
+        "GATE-G7 PASS"
+      ],
+      "cost_items": [
+        "operator_routines"
+      ]
+    },
+    {
+      "id": "BS-08",
+      "gate": "GATE-G8",
+      "name": "Pilot mit Echtgeld im Profil H5 (Pilotgröße P-LEV-PILOT-SIZE, Pilotverlustbudget P-RES-PILOT-LOSS-BUDGET)",
+      "effort": {
+        "low": {
+          "agent_days": 0.0,
+          "person_days": 4
+        },
+        "base": {
+          "agent_days": 0.0,
+          "person_days": 6
+        },
+        "high": {
+          "agent_days": 0.0,
+          "person_days": 10
+        }
+      },
+      "external": [
+        "X-DATA-ND",
+        "X-EXEC-TCA",
+        "X-LEGAL-01",
+        "X-OP-CAPITAL",
+        "X-OP-DLC-MODE",
+        "X-OP-RISK-ACCEPT",
+        "X-ORG-DEPUTY",
+        "X-TAX-01"
+      ],
+      "duration_weeks": [
+        26,
+        26,
+        39
+      ],
+      "depends_on": [
+        "BS-07"
+      ],
+      "dod": [
+        "Pilot ohne Limitverletzung und unter dem Pilotverlustbudget",
+        "Kosten im Modellband (X-EXEC-TCA, MON-COSTDRIFT)",
+        "Endtor: Posterior P(Sharpe > 0) ≥ P-RES-FINAL-P (GATE-G8)"
+      ],
+      "cost_items": [
+        "operator_routines"
+      ]
+    },
+    {
+      "id": "BS-09",
+      "gate": "GATE-G9",
+      "name": "Standardbetrieb mit Hebel-Stufenleiter",
+      "effort": {
+        "low": {
+          "agent_days": 0.0,
+          "person_days": 0
+        },
+        "base": {
+          "agent_days": 0.0,
+          "person_days": 0
+        },
+        "high": {
+          "agent_days": 0.0,
+          "person_days": 0
+        }
+      },
+      "external": [
+        "X-OP-CAPITAL",
+        "X-OP-RISK-ACCEPT",
+        "X-ORG-RISK"
+      ],
+      "duration_weeks": [
+        52,
+        52,
+        52
+      ],
+      "depends_on": [
+        "BS-08"
+      ],
+      "dod": [
+        "Mindestdauer P-RES-STANDARD-MONTHS ohne schwere Incidents",
+        "Stufenleiter regelkonform (keine Aufstiege ohne Evidenz und zweite Freigabe)",
+        "GATE-G9 PASS"
+      ],
+      "cost_items": [
+        "external_risk_function_monthly_eur",
+        "operator_routines"
+      ]
+    },
+    {
+      "id": "BS-10",
+      "gate": "GATE-G10",
+      "name": "Externes Audit (Technik, Risiko, Prozesse)",
+      "effort": {
+        "low": {
+          "agent_days": 0.0,
+          "person_days": 3
+        },
+        "base": {
+          "agent_days": 0.0,
+          "person_days": 5
+        },
+        "high": {
+          "agent_days": 0.0,
+          "person_days": 8
+        }
+      },
+      "external": [],
+      "duration_weeks": [
+        4,
+        6,
+        8
+      ],
+      "depends_on": [
+        "BS-09"
+      ],
+      "dod": [
+        "Unabhängiges Audit ohne wesentliche Feststellung (GATE-G10)"
+      ],
+      "cost_items": [
+        "external_once_eur.audit"
+      ]
+    }
+  ]
+}

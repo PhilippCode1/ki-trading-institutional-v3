@@ -1,0 +1,20 @@
+{
+ "schema_version": "3.0",
+ "message_id": "00000000-0000-4000-8000-000000000016",
+ "correlation_id": "COR-0016",
+ "producer": "EVALUATOR",
+ "created_utc": "2026-09-24T09:00:00Z",
+ "gate": "GATE-G3",
+ "run_id": "RUN-G3-0001",
+ "inputs_sha256": "000000000000000000000000000000000000000000000000000000000000000b",
+ "rules_sha256": "000000000000000000000000000000000000000000000000000000000000000c",
+ "outcome": "FAIL",
+ "rule_id": "G3-R3",
+ "flags": [],
+ "derived": {},
+ "next_step": "Kandidat verworfen; Stopp oder neue Kampagne innerhalb des Budgets",
+ "exit_code": 0,
+ "run_log_ref": "LOG-G3-0001",
+ "evaluator_key_fingerprint": "FP-00000000000000E1",
+ "signature": "SIG-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+}

@@ -1,0 +1,23 @@
+{
+ "schema_version": "3.0",
+ "message_id": "00000000-0000-4000-8000-000000000003",
+ "correlation_id": "COR-0003",
+ "producer": "TRADE_CORE",
+ "created_utc": "2026-09-24T09:00:00Z",
+ "command_id": "CMD-00000000000C",
+ "payload_sha256": "0000000000000000000000000000000000000000000000000000000000000003",
+ "account_ref": "ACC-DEMO0001",
+ "mode": "PAPER",
+ "instrument_id": "INS-COMEX-MGC",
+ "broker_symbol": "MGCZ26",
+ "strategy_id": "S-TF",
+ "order_kind": "PROTECT",
+ "mt5_action": "TRADE_ACTION_SLTP",
+ "position_ticket": 5550001,
+ "sl_price": "4190.3",
+ "magic": 110003,
+ "comment": "C00000000000C",
+ "risk_decision_ref": "RD-0003",
+ "grant_id": "GR-PAPER-0001",
+ "profile": "H5"
+}

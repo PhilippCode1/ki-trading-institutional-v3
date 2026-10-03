@@ -1,0 +1,26 @@
+{
+ "schema_version": "3.0",
+ "id": "TR-POS-008",
+ "machine": "SM-POSITION",
+ "description": "Zeitstopp vor Ablauf der Höchsthaltedauer ist ungültig; Schutzstopp löst aus",
+ "scenarios": [
+  "OS-EX-07"
+ ],
+ "start": "OPEN_PROTECTED",
+ "initial_reasons": null,
+ "steps": [
+  {
+   "event": "TIMESTOP_DUE",
+   "context": {
+    "holding_hours": 100
+   },
+   "expect_state": "OPEN_PROTECTED",
+   "expect_invalid": true
+  },
+  {
+   "event": "SL_TRIGGERED_FILL",
+   "context": {},
+   "expect_state": "FLAT"
+  }
+ ]
+}

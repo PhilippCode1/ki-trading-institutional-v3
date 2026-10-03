@@ -1,0 +1,32 @@
+{
+ "schema_version": "3.0",
+ "id": "TR-POS-002",
+ "machine": "SM-POSITION",
+ "description": "Schutz nicht binnen Frist bestätigt: Notfallschutz; danach bestätigt",
+ "scenarios": [
+  "OS-EX-06"
+ ],
+ "start": null,
+ "initial_reasons": null,
+ "steps": [
+  {
+   "event": "ENTRY_FILL_COMPLETE",
+   "context": {},
+   "expect_state": "OPEN_UNPROTECTED"
+  },
+  {
+   "event": "PROTECT_DEADLINE_EXCEEDED",
+   "context": {
+    "seconds_since_fill": 31
+   },
+   "expect_state": "OPEN_UNPROTECTED"
+  },
+  {
+   "event": "SL_CONFIRMED",
+   "context": {
+    "sl_covers_full_qty": true
+   },
+   "expect_state": "OPEN_PROTECTED"
+  }
+ ]
+}

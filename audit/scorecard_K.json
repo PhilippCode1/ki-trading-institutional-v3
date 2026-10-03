@@ -1,0 +1,749 @@
+{
+  "schema_version": "3.0",
+  "document": "Konzept-Score K – Selbstbewertung nach §20.1",
+  "as_of": "2026-09-24",
+  "self_assessment": true,
+  "grid": "Masterprompt v3.0 §20.1 (verbindlich); Faktoren 0 / 0,25 / 0,5 / 0,75 / 1",
+  "rules": [
+    "Vollpunkte nur, wenn die genannte Bedingung mit Nachweis im Paket erfüllt ist.",
+    "Keine Aufrundung; die Summe rechnet die Paketprüfung (P12).",
+    "Jeder Abzug ist begründet.",
+    "Ohne bestandene unabhängige Gegenprüfung ist J3 = 0 und K höchstens 99 (§20.2)."
+  ],
+  "basis": "Interne Gegenlese in vier Blöcken gegen die Bedingungen aus §20.1; behobene Befunde und verbleibende Abzüge in audit/concept_review.md. Die Gegenlese stammt von derselben Modellfamilie und ersetzt die Gegenprüfung nach §20.4 nicht.",
+  "operator_scope_effect": "A5, H1 und H2 ohne Punkte sowie Abzüge in A2, A3 und H3, weil BQ-02 und BQ-03 Betriebsmodelle, Recht und Steuern aus dem Systemumfang nehmen (DEC-CF-01, DEC-CF-03); die Kriterien werden dafür nicht umgedeutet (R-09).",
+  "subcriteria": [
+    {
+      "id": "A1",
+      "area": "A",
+      "name": "Kostenmodell je Instrument",
+      "max": 5,
+      "condition": "alle Kostenarten, eine Quelle der Wahrheit, semantische Prüfung besteht, Mutation „Spread ohne Kosten“ wird erkannt",
+      "factor": 0.75,
+      "points": 3.75,
+      "evidence": [
+        "financials/cost_model.py",
+        "registers/costs.json",
+        "financials/cost_model_results.json",
+        "validation/semantic_checks.py::check_costs",
+        "T-SEM-COST-001",
+        "T-CALC-COST-001",
+        "MUT-01",
+        "MUT-60"
+      ],
+      "met": "Kommission, halber Spread, Schlupf, Marktwirkung je Ordergröße, Rollen, Marktdaten, Infrastruktur, KI, externe Dienste, Betreiberzeit und Zinslücke in einer Quelle; nur das Kostenmodell liest das Kostenregister (geprüft); semantische Prüfung besteht; MUT-01 und MUT-60 werden erkannt.",
+      "deduction": "Währungsumrechnungskosten (USD-Margin und -Ergebnis auf dem EUR-Konto) fehlen als Kostenart; Börsen- und Clearinggebühren stecken nur in einer pauschalen, teilweise belegten All-in-Kommission und sind nicht je Kontrakt modelliert."
+    },
+    {
+      "id": "A2",
+      "area": "A",
+      "name": "Steuern, Aufbau- und Betriebszeit",
+      "max": 4,
+      "condition": "Steuerszenarien B1/B2 vor und nach Steuern, Aufbau- und Betriebszeit bewertet, Beratungs- und Datenkosten enthalten",
+      "factor": 0.5,
+      "points": 2.0,
+      "evidence": [
+        "financials/tax_scenarios.py",
+        "financials/tax_sensitivity_example.json",
+        "T-CALC-TAX-001",
+        "T-SEM-TAX-001",
+        "financials/stage_costs.py",
+        "implementation/build_stages.json",
+        "DEC-CF-01"
+      ],
+      "met": "Aufbauzeit je Stufe (Mensch und Agent) und Betreiberroutinen in Paper, Pilot und Standardbetrieb bewertet; Datenkosten enthalten; jede Zelle der Entscheidungsrechnung mit pauschaler Steuer-Sensitivität.",
+      "deduction": "Steuerszenarien B1 und B2 fehlen (nach BQ-03 nur pauschale Sensitivität, DEC-CF-01); die Kosten der externen Rechts- und Steuerperson sind nicht eingerechnet."
+    },
+    {
+      "id": "A3",
+      "area": "A",
+      "name": "Monte-Carlo-Entscheidungsrechnung",
+      "max": 5,
+      "condition": "je Kapitalstufe × Hebelprofil × Betriebsmodell: NPV-Verteilung, P(NPV > 0), Wert je Risikoeinheit, Break-even, Sensitivitäten",
+      "factor": 0.75,
+      "points": 3.75,
+      "evidence": [
+        "financials/decision_montecarlo.py",
+        "financials/decision_montecarlo_results.json",
+        "financials/economic_model.md",
+        "T-CALC-DMC-001",
+        "DEC-CF-03"
+      ],
+      "met": "Sechs Kapitalstufen × vier Profile × vier Universen mit NPV-Quantilen, ES, P(NPV > 0), Wert je Risikoeinheit, Break-even-Kapital und zwölf Sensitivitäten; P(NPV > 0) gegen geschlossene Form geprüft.",
+      "deduction": "Die Dimension Betriebsmodell fehlt (nur Eigenkonto, BQ-02, DEC-CF-03); der Break-even ist nur operativ (Fixkosten / Mehrertragsrate) ohne Aufbaukosten definiert."
+    },
+    {
+      "id": "A4",
+      "area": "A",
+      "name": "Kauf-statt-Bau und Varianten",
+      "max": 3,
+      "condition": "V0–V4 mit Entscheidungsregel und Befundklasse DOMINATED_BY_ALTERNATIVE",
+      "factor": 0.75,
+      "points": 2.25,
+      "evidence": [
+        "financials/buy_vs_build.md",
+        "financials/decision_montecarlo_results.json#/variants_V0_V4",
+        "T-CALC-DMC-002",
+        "research/evidence_gates.json",
+        "GC-G0-102"
+      ],
+      "met": "V0 bis V4 je Kapitalstufe; V4 ist die registrierte Familie; Entscheidungsregel in der Prüfreihenfolge von §5.7 (Befundklasse vor Dominanz, G0-R3 vor G0-R4); DOMINATED_BY_ALTERNATIVE als Klasse und Torregel.",
+      "deduction": "V2 ist nur als Näherung ohne Monte-Carlo bewertet, V3 als V4 mit kleinerem Aufbau; ein eigenständiger Risikovergleich für V2 und V3 fehlt."
+    },
+    {
+      "id": "A5",
+      "area": "A",
+      "name": "Geschäftsmodell je Betriebsmodell",
+      "max": 3,
+      "condition": "Kosten der Institution, Mindestkapital bzw. Mindest-AUM, Abbruchkriterien für B1–B4",
+      "factor": 0,
+      "points": 0,
+      "evidence": [
+        "DEC-CF-03",
+        "DEC-OP-02"
+      ],
+      "met": "Nur das Eigenkonto des Betreibers ist gerechnet (Fixkosten, Break-even, Abbruchkriterien nach §5.8).",
+      "deduction": "B1 bis B4 sind nach der Betreiberentscheidung BQ-02 nicht bewertet (DEC-CF-03); Kosten der Institution, Mindest-AUM und Abbruchkriterien je Betriebsmodell fehlen vollständig."
+    },
+    {
+      "id": "B1",
+      "area": "B",
+      "name": "Strategiefamilie",
+      "max": 4,
+      "condition": "vorregistriert, diversifiziert, mit Mechanismus, Widerlegung, Kombination und Pufferung; Referenzimplementierung mit Tests",
+      "factor": 0.75,
+      "points": 3.0,
+      "evidence": [
+        "research/strategy_family.md",
+        "research/reference_strategies/s_tf.py",
+        "research/reference_strategies/s_im.py",
+        "research/reference_strategies/s_rev.py",
+        "research/reference_strategies/s_ca.py",
+        "T-STR-TF-001",
+        "T-STR-IM-001",
+        "T-STR-REV-001",
+        "T-STR-CA-001",
+        "T-STR-BASE-001",
+        "DEC-DS-23"
+      ],
+      "met": "Vier Mechanismen plus Vergleichsbasis, je mit Widerlegungskriterien und Vorregistrierung; Referenzimplementierungen mit Tests an konstruierten Preisreihen.",
+      "deduction": "Kombination und Positionspuffer (P-STR-BUFFER) sind nur spezifiziert, weder implementiert noch getestet; die Tests prüfen Signal und Haltedauer, nicht die Skalierung."
+    },
+    {
+      "id": "B2",
+      "area": "B",
+      "name": "Prior",
+      "max": 4,
+      "condition": "rechnerisch aus einer Literaturtabelle hergeleitet (Abschläge, Unsicherheit, Korrelationen), Rechner mit --check",
+      "factor": 0.75,
+      "points": 3.0,
+      "evidence": [
+        "research/prior_derivation.py",
+        "research/sources/R3_literature_prior.json",
+        "research/prior_results.json",
+        "T-CALC-PRIOR-001",
+        "T-CALC-PRIOR-002"
+      ],
+      "met": "Anker aus der Literaturtabelle, Abschläge und Unsicherheit als Verteilungen, Korrelationen zwischen Strategien; Rechner besteht --check.",
+      "deduction": "Die Korrelationen und der maßgebliche Abschlag für die Trendfolge sind unbelegte Annahmen; der Referenztest prüft den Diversifikationsmultiplikator, nicht die Abschläge."
+    },
+    {
+      "id": "B3",
+      "area": "B",
+      "name": "Universum und Zulassung",
+      "max": 4,
+      "condition": "Instrumenttabelle mit Quelle und Datum, Kosten je Risikoeinheit, Proxy-Regel, Zinsfutures vollständig",
+      "factor": 0.5,
+      "points": 2.0,
+      "evidence": [
+        "registers/instruments.json",
+        "registers/source_register.json",
+        "financials/cost_model_results.json",
+        "data/proxy_rules.md",
+        "validation/semantic_checks.py::check_proxy",
+        "T-SEM-PROXY-001",
+        "MUT-15",
+        "MUT-56"
+      ],
+      "met": "Spezifikationen aller Kontrakte mit Quelle und Abrufdatum; Kosten je Risikoeinheit je Strategie; Proxy-Regel PX-1 bis PX-6 mit maschineller Prüfung von Klasse, Währung und Notierung.",
+      "deduction": "Das Zinsuniversum ist nicht vollständig (unter anderem Fed-Funds-Futures, dreijährige T-Note, kurze BTP-Futures fehlen); Volatilität, Spread, Tagesvolumen und Margin sind unbelegte Planwerte bis zur Messung in G2."
+    },
+    {
+      "id": "B4",
+      "area": "B",
+      "name": "Kapazität und Robustheit",
+      "max": 3,
+      "condition": "Umschlag, Kostenempfindlichkeit, Kapazität je Stufe, Plan für Regime und Subperioden",
+      "factor": 0.75,
+      "points": 2.25,
+      "evidence": [
+        "research/turnover_results.json",
+        "research/reference_strategies/turnover_simulation.py",
+        "validation/semantic_checks.py::check_capacity",
+        "T-SEM-CAP-001",
+        "T-CALC-TURN-001",
+        "research/research_plan.md"
+      ],
+      "met": "Umschlag simuliert; Kosten ×1,5 bis ×3 als Sensitivität; Kapazitätsfaktor je Stufe gegen den Anteil am Tagesvolumen geprüft.",
+      "deduction": "Die Grenze gegenüber dem Open Interest wird mangels Daten nicht gerechnet; der Plan für Regime und Teilperioden ist nur als Torbedingung formuliert, nicht operationalisiert."
+    },
+    {
+      "id": "C1",
+      "area": "C",
+      "name": "Forschungsprotokoll",
+      "max": 3,
+      "condition": "Vorregistrierung, Deflated Sharpe Ratio, PBO/CSCV, SPA oder Romano-Wolf, Purged CV für ML",
+      "factor": 0.75,
+      "points": 2.25,
+      "evidence": [
+        "research/research_plan.md",
+        "research/statistical_calculator.py",
+        "research/statistical_results.json",
+        "T-CALC-STAT-001",
+        "T-CALC-STAT-002",
+        "research/evidence_gates.json"
+      ],
+      "met": "Vorregistrierung als Voraussetzung von G3; DSR gegen das Zahlenbeispiel der Originalquelle geprüft; PBO/CSCV, SPA und Romano-Wolf implementiert.",
+      "deduction": "Purged Cross-Validation für ML ist nur benannt und mit einem Embargo parametrisiert, ohne Spezifikation des Purging, Referenzimplementierung oder Test."
+    },
+    {
+      "id": "C2",
+      "area": "C",
+      "name": "Tore mit Futility",
+      "max": 4,
+      "condition": "Betriebscharakteristik simuliert, frühe Futility-Regel, eingesparte Kosten ausgewiesen",
+      "factor": 0.75,
+      "points": 3.0,
+      "evidence": [
+        "research/operating_characteristics.py",
+        "research/operating_characteristics_results.json",
+        "T-CALC-OC-001",
+        "T-SEM-GATE-001",
+        "MUT-05",
+        "MUT-20",
+        "MUT-21"
+      ],
+      "met": "Betriebscharakteristik mit und ohne Futility je Klasse simuliert; Futility-Regel in G3 und G4; Kosten je Stufe ausgewiesen.",
+      "deduction": "In der registrierten Konfiguration stoppt die Futility-Regel zusätzlich nichts (die DSR-Schwelle stoppt vorher); Einsparungen gibt es nur in Sensitivitäten und dort zum Teil durch verlorene brauchbare Strategien."
+    },
+    {
+      "id": "C3",
+      "area": "C",
+      "name": "Holdout, Posterior, Monitore",
+      "max": 3,
+      "condition": "Monitore mit nachgewiesener Auslösezeit, inklusive Kostendrift",
+      "factor": 0.75,
+      "points": 2.25,
+      "evidence": [
+        "operations/costdrift_monitor.py",
+        "operations/costdrift_results.json",
+        "operations/monitor_simulation.py",
+        "operations/monitor_results.json",
+        "T-CALC-DRIFT-001",
+        "T-CALC-MON-001",
+        "research/research_plan.md"
+      ],
+      "met": "Holdout versiegelt und einmalig; Normal-Normal-Posterior; Auslösezeiten für Kostendrift, Harm-Monitor und Volatilitätsmonitor simuliert.",
+      "deduction": "Futility im Betrieb (MH-R2) und Umschlagsdrift (MD-R2) sind nicht simuliert; der Harm-Monitor erkennt leicht schädliche Strategien praktisch nie – der Schutz hängt an Drawdown-Leiter und Tagesgrenze."
+    },
+    {
+      "id": "D1",
+      "area": "D",
+      "name": "Hebeldefinitionen und Profile",
+      "max": 3,
+      "condition": "H5–H20 kalibriert über L_g = D · σ_p / σ_h, Bandbericht, Hebeldeckel je Klasse",
+      "factor": 0.75,
+      "points": 2.25,
+      "evidence": [
+        "risk/leverage_calculator.py",
+        "risk/leverage_results.json",
+        "risk/leverage_risk_model.md",
+        "T-CALC-LEV-001",
+        "T-SEM-LEV-001"
+      ],
+      "met": "Formel implementiert und am Beispiel des Auftrags geprüft; Kalibrierung über Zinsfutures; Bandbericht; Hebeldeckel je Klasse.",
+      "deduction": "Die Kalibrierung ruht auf Annahmewerten für Volatilität und Margin; der Bandbericht fehlt für die kalibrierten Allokationen mit Wunschhebel."
+    },
+    {
+      "id": "D2",
+      "area": "D",
+      "name": "Kelly, Ruin, Drawdown, ES",
+      "max": 3,
+      "condition": "je Profil unter Parameterunsicherheit, mit fetten Rändern und Korrelationsschocks",
+      "factor": 0.75,
+      "points": 2.25,
+      "evidence": [
+        "risk/kelly_ruin_simulator.py",
+        "risk/kelly_ruin_results.json",
+        "T-CALC-KELLY-001"
+      ],
+      "met": "Je Profil mit Sharpe-Unsicherheit aus dem Prior, t-Verteilung, Sprüngen und Lücken jenseits der Konstruktion; Kelly-Kennzahlen gegen Formeln geprüft.",
+      "deduction": "Der Korrelationsschock ist nur als Volatilitätsregime abgebildet; ES liegt nur jährlich und parametrisch für einen Tag vor (kein Zehn-Tage- und kein historisches ES); eine Zwangsliquidation wird in der Pfadsimulation nicht abgebildet."
+    },
+    {
+      "id": "D3",
+      "area": "D",
+      "name": "Limits und Liquidität",
+      "max": 2,
+      "condition": "Limits-Hierarchie, De-Risking-Leiter vor Brokerliquidation, Intraday-Überwachung, Margin-Management",
+      "factor": 0.75,
+      "points": 1.5,
+      "evidence": [
+        "registers/limits.json",
+        "risk/limits.md",
+        "risk/margin_liquidity.md",
+        "lib/calc.py::margin_loss_to_level",
+        "T-RISK-MRG-001",
+        "T-SEM-LIM-001",
+        "validation/semantic_checks.py::check_stress"
+      ],
+      "met": "Limits auf fünf Ebenen im Register; Tages- und Drawdown-Leiter; Intraday-Überwachung; Margin-Level auf das Guthaben beim Broker bezogen mit nötigem Brokeranteil je Allokation.",
+      "deduction": "Netto-Hebel, VaR und Monatsverlust sind keine eigenen harten Grenzen, und die Clustergrenze ist nur informativ."
+    },
+    {
+      "id": "D4",
+      "area": "D",
+      "name": "Stress und Stufenleiter",
+      "max": 2,
+      "condition": "alle Szenarien aus §7.9 mit Ergebnistabellen je Profil; Hebel-Stufenleiter spezifiziert",
+      "factor": 0.75,
+      "points": 1.5,
+      "evidence": [
+        "risk/stress_scenarios.json",
+        "risk/stress_results.json",
+        "risk/stress_test_engine.py",
+        "T-CALC-STRESS-001",
+        "T-SEM-STRESS-001",
+        "TR-LEV-002",
+        "TR-LEV-003"
+      ],
+      "met": "Alle Pflichtszenarien je Allokation und Profil mit Handelsaussetzung und Brokerausfall; Stufenleiter als Automat mit Evidenzwächtern und automatischem Abstieg bei Limitverletzung.",
+      "deduction": "Für die registrierte Allokation beruhen viele historische Szenarien auf Ersatzwerten, weil belegte Klassenbewegungen fehlen."
+    },
+    {
+      "id": "E1",
+      "area": "E",
+      "name": "OMS/EMS-Zustände",
+      "max": 3,
+      "condition": "Automaten mit Traces: Idempotenz, UNKNOWN, Abgleich, Fencing, Notfalljournal",
+      "factor": 0.75,
+      "points": 2.25,
+      "evidence": [
+        "architecture/state_machines.json",
+        "validation/state_engine.py",
+        "execution/oms_ems.md",
+        "T-SM-001",
+        "TR-ORDER-001",
+        "TR-ORDER-008",
+        "TR-ORDER-015",
+        "TR-WRITER-001",
+        "TR-POS-006"
+      ],
+      "met": "Automaten mit Traces für Wiederholungssicherheit, UNKNOWN mit Negativnachweis, Abgleich und Fencing; alle Traces bestehen.",
+      "deduction": "Notfalljournal und Fail-Stop sind nur Sperrgründe, kein eigener Automat; die Wiederverwendung einer Befehlskennung mit anderem Inhalt steht nur als Invariante; die Traces decken nicht alle Übergänge des Orderautomaten ab."
+    },
+    {
+      "id": "E2",
+      "area": "E",
+      "name": "Brokersemantik",
+      "max": 3,
+      "condition": "frühe Killer-Tests je Börsengruppe mit Orakel und Rückfallvariante",
+      "factor": 0.5,
+      "points": 1.5,
+      "evidence": [
+        "execution/broker_killer_tests.md",
+        "implementation/test_catalog.json",
+        "research/evidence_gates.json",
+        "T-GATE-001"
+      ],
+      "met": "Sechzehn Killer-Tests mit Orakel und Rückfallvariante in G1 vor jedem Systembau; G1 weist unzulässige Ergebniswerte und Rückfälle ohne Variante zurück; die Echtgeld-Sperre aus G1 bindet G8.",
+      "deduction": "Die Killer-Tests sind nicht je Börsengruppe (CME, CBOT, NYMEX, COMEX, Eurex) angelegt, sondern je Test einmal; die Reihenfolge nach Informationswert ist nicht belegt."
+    },
+    {
+      "id": "E3",
+      "area": "E",
+      "name": "Pre-Trade und Kill-Switch",
+      "max": 2,
+      "condition": "spezifiziert und testbar, an RTS 6 ausgerichtet",
+      "factor": 0.5,
+      "points": 1.0,
+      "evidence": [
+        "execution/pretrade_controls.md",
+        "T-RISK-GAP-001",
+        "T-PTC-013",
+        "T-KILL-001",
+        "TR-SAFETY-006"
+      ],
+      "met": "Vierzehn Kontrollen mit Regel, Schwelle, Reaktion und Reihenfolge; Kill-Switch zweistufig; Lückenregel im Paket getestet.",
+      "deduction": "Die Ausrichtung an RTS 6 ist ohne Artikelzuordnung; Selbstbewertung (Art. 9) und Marktmissbrauchsüberwachung (Art. 13) fehlen; außer der Lückenregel ist keine Kontrolle im Paket ausgeführt."
+    },
+    {
+      "id": "E4",
+      "area": "E",
+      "name": "TCA, Rollen, Sonderfälle",
+      "max": 2,
+      "condition": "Slippage-Kalibrierung, Verfall, negative Preise, Limits, Aussetzungen",
+      "factor": 0.75,
+      "points": 1.5,
+      "evidence": [
+        "execution/tca_model.md",
+        "data/reference_data_spec.md",
+        "operations/runbooks.md",
+        "risk/stress_scenarios.json",
+        "TR-DATA-004"
+      ],
+      "met": "Implementation Shortfall mit Kalibrierstufen; Rollen, Verfall und negative Preise spezifiziert; Aussetzungen und Preislimits als Zustände des Datenautomaten mit Trace.",
+      "deduction": "Die Preislimits je Kontrakt sind nicht belegt, und für Schlupf und Marktwirkung fehlt ein Schätzverfahren."
+    },
+    {
+      "id": "F1",
+      "area": "F",
+      "name": "Architektur",
+      "max": 3,
+      "condition": "eine Codebasis, Event Sourcing, Umgebungen, HA/DR mit RPO/RTO, Beobachtbarkeit, begründete Technik- und Make-or-Buy-Wahl",
+      "factor": 0.75,
+      "points": 2.25,
+      "evidence": [
+        "architecture/system_design.md",
+        "architecture/interfaces.md",
+        "implementation/make_or_buy.md",
+        "DEC-CF-04"
+      ],
+      "met": "Eine Codebasis mit anhängendem Journal, Umgebungen, HA/DR mit RPO und RTO, Beobachtbarkeit, Make-or-Buy mit Lizenzprüfung.",
+      "deduction": "Der tragende Zonenschnitt ist offen (X-INF-ZONES); die Ein-VPS-Variante ist nur als Restrisiko beschrieben, nicht ausgearbeitet."
+    },
+    {
+      "id": "F2",
+      "area": "F",
+      "name": "Sicherheit",
+      "max": 3,
+      "condition": "Bedrohungsmodell, Schlüsselverwaltung, Netztrennung, SBOM und Lieferkette, Pentest-Plan",
+      "factor": 0.75,
+      "points": 2.25,
+      "evidence": [
+        "architecture/threat_model.md",
+        "security/security_architecture.md",
+        "security/key_management.md",
+        "RK-31",
+        "RK-32",
+        "T-SEC-014",
+        "T-SEC-006"
+      ],
+      "met": "STRIDE und Angriffsbäume mit Tests; Schlüsselverwaltung mit getrennter Hinterlegung; Netztrennung; SBOM und gepinnte Abhängigkeiten; Penetrationstest vor G5.",
+      "deduction": "Der Pentest-Plan nennt weder Methode noch Nachtest; das SBOM-Format ist offen; die Projektschnittstelle in den Geldpfad-Host bleibt bis zur Entscheidung über das Pull-Modell ein Restrisiko."
+    },
+    {
+      "id": "F3",
+      "area": "F",
+      "name": "KI-Schicht",
+      "max": 2,
+      "condition": "technisch außerhalb des Geldpfads, Evaluation, Nutzenmessung mit Rückbaukriterium, Upstream-Management, Prüfung der KI-Verordnung",
+      "factor": 0.75,
+      "points": 1.5,
+      "evidence": [
+        "ai/ai_layer.md",
+        "ai/eval_suite_spec.md",
+        "ai/hermes_integration.md",
+        "schemas/order_intent.schema.json",
+        "examples/invalid/order_intent_from_hermes.json",
+        "T-CON-001"
+      ],
+      "met": "Geldpfad-Verträge lassen nur Geldpfad-Erzeuger zu (im Paket geprüft); Werkzeug-Allowlist ohne Order- und Grant-Werkzeuge; Evaluationssuite; Nutzenbilanz nach Abo- und Korrekturkosten mit Rückbaukriterium; gepinnte Version.",
+      "deduction": "Die Anwendbarkeit der KI-Verordnung ist nicht geprüft, sondern an die externe Person übergeben (BQ-03)."
+    },
+    {
+      "id": "F4",
+      "area": "F",
+      "name": "Modellrisikomanagement",
+      "max": 2,
+      "condition": "Regeln für ML-Modelle oder begründeter Verzicht",
+      "factor": 1,
+      "points": 2,
+      "evidence": [
+        "ai/mrm_policy.md",
+        "registers/model_inventory.json",
+        "TR-ML-001",
+        "TR-ML-004",
+        "T-ML-001"
+      ],
+      "met": "Hürden (DSR, PBO, Mehrwert nach Kosten, unabhängige Validierung, kein Sprachmodell) für Erstvalidierung und Rückkehr aus dem Rückfall, Mindestdauer im Schattenbetrieb; begründeter Verzicht als erwarteter Fall.",
+      "deduction": ""
+    },
+    {
+      "id": "G1",
+      "area": "G",
+      "name": "Rollen und Kontrolle",
+      "max": 3,
+      "condition": "RACI, Mindestbesetzung je Modell, unabhängige Risikofunktion, menschliches Vier-Augen-Prinzip",
+      "factor": 0.5,
+      "points": 1.5,
+      "evidence": [
+        "governance/organisation_raci.md",
+        "governance/grants_and_risk_acceptance.md",
+        "DEC-CF-06",
+        "X-ORG-RISK",
+        "X-ORG-DEPUTY"
+      ],
+      "met": "RACI über alle Tätigkeiten; Mindestbesetzung mit Sperrwirkung (G8, G9); Rollen in Registern einheitlich.",
+      "deduction": "Risikofunktion und Vertretung sind nicht besetzt; ohne zweite Person gibt es kein menschliches Vier-Augen-Prinzip (Klassen C und D sind gesperrt); Mindestbesetzung nur für das Eigenkonto."
+    },
+    {
+      "id": "G2",
+      "area": "G",
+      "name": "Betriebsprozesse",
+      "max": 3,
+      "condition": "Routinen mit Zeitbedarf, Runbooks für alle Szenarien, Drill-Plan, Incident-Management, SLOs",
+      "factor": 0.75,
+      "points": 2.25,
+      "evidence": [
+        "operations/operations_plan.md",
+        "operations/runbooks.md",
+        "operations/runbook_register.json",
+        "operations/drills.md",
+        "operations/sla_slo.md",
+        "governance/policies/incident_policy.md",
+        "T-SEM-RB-001"
+      ],
+      "met": "Routinen mit Zeitbedarf; Runbook-Abdeckung aller Szenarien, Killer-Tests und Sperrgründe geprüft; Drill-Plan; Incident-Richtlinie; SLOs.",
+      "deduction": "Viele Runbooks sind knappe Skelette; das Quittungs-SLO für kritische Incidents ist ohne Vertretung nicht zusicherbar."
+    },
+    {
+      "id": "G3",
+      "area": "G",
+      "name": "Kontinuität",
+      "max": 2,
+      "condition": "Schlüsselpersonenrisiko, Vertretung, Break-glass-Zugang, Auslagerungssteuerung",
+      "factor": 0.75,
+      "points": 1.5,
+      "evidence": [
+        "security/key_management.md",
+        "governance/policies/outsourcing_policy.md",
+        "RK-16",
+        "RB-35",
+        "DR-06"
+      ],
+      "met": "Schlüsselpersonenrisiko im Register; Vertretung mit rein risikomindernden Rechten und eigenem Runbook; getrennte Hinterlegung mit festem Öffnungsverfahren.",
+      "deduction": "Die Vertretung ist nicht benannt; die Auslagerungssteuerung hat keine Kritikalitätseinstufung, keine laufende Überwachung und keine Prüfrechte."
+    },
+    {
+      "id": "H1",
+      "area": "H",
+      "name": "Anwendbarkeitsmatrix",
+      "max": 2,
+      "condition": "B1–B4 mit Quellen, Datum und Sperren",
+      "factor": 0,
+      "points": 0,
+      "evidence": [
+        "legal/applicability_matrix.md",
+        "DEC-CF-03"
+      ],
+      "met": "Übergabeliste und technische Rechtsgrenzen für das Eigenkonto mit Sperren.",
+      "deduction": "Nach BQ-02 und BQ-03 ist keine Anwendbarkeitsprüfung für B1 bis B4 enthalten (DEC-CF-03, DEC-CF-01); die Matrix stellt Fragen an die externe Person statt Befunde."
+    },
+    {
+      "id": "H2",
+      "area": "H",
+      "name": "Steuern",
+      "max": 2,
+      "condition": "Szenarien privat und Gesellschaft mit Beratersperren",
+      "factor": 0,
+      "points": 0,
+      "evidence": [
+        "legal/tax_matrix.md",
+        "DEC-CF-01"
+      ],
+      "met": "Beratersperre vor G8 gesetzt (X-TAX-01).",
+      "deduction": "Weder ein Privat- noch ein Gesellschaftsszenario ist gerechnet; nach BQ-03 gibt es nur die pauschale Sensitivität (DEC-CF-01)."
+    },
+    {
+      "id": "H3",
+      "area": "H",
+      "name": "Verträge und Marktverhalten",
+      "max": 1,
+      "condition": "Broker, Börse, Marktdaten; Marktmissbrauchskontrollen; Positionslimits",
+      "factor": 0.5,
+      "points": 0.5,
+      "evidence": [
+        "governance/policies/trading_policy.md",
+        "execution/pretrade_controls.md",
+        "legal/applicability_matrix.md"
+      ],
+      "met": "Vertragliche Punkte als externe Eingaben; Duplikat- und Drosselkontrollen; interne Positionsgrenze gegenüber dem Open Interest.",
+      "deduction": "Vertragsinhalte sind unbelegt; Marktmissbrauchskontrollen beschränken sich auf Vorhandelsprüfungen; Positionslimits und Meldeschwellen der Börsen fehlen."
+    },
+    {
+      "id": "I1",
+      "area": "I",
+      "name": "Bauprogramm",
+      "max": 3,
+      "condition": "Aufwand Mensch und Agent, Kosten, kritischer Pfad, Definition of Done, Startanleitung für Coding-Agenten",
+      "factor": 0.75,
+      "points": 2.25,
+      "evidence": [
+        "implementation/build_program.md",
+        "implementation/build_stages.json",
+        "implementation/CODING_AGENT_START.md",
+        "financials/stage_costs.py"
+      ],
+      "met": "Aufwand Mensch und Agent je Stufe in drei Fällen; Kosten je Stufe einschließlich Betreiberroutinen; kritischer Pfad; Definition of Done; Startanleitung.",
+      "deduction": "Die Vertretung hat keine Kostenposition, und die Risikofunktion ist erst ab BS-09 bepreist, obwohl sie ab G8 empfohlen ist."
+    },
+    {
+      "id": "I2",
+      "area": "I",
+      "name": "Tests und Referenzmodelle",
+      "max": 2,
+      "condition": "Testkatalog mit Orakeln, ausführbare Referenzmodelle aller Kernrechnungen, Killer-Tests zuerst",
+      "factor": 0.5,
+      "points": 1.0,
+      "evidence": [
+        "implementation/test_catalog.json",
+        "validation/test_reference_models.py",
+        "validation/run_calculators.py",
+        "execution/broker_killer_tests.md"
+      ],
+      "met": "Testkatalog mit Orakel und Bestehenskriterium; Referenztests für die Kernrechnungen; Killer-Tests als erste kostenpflichtige Stufe.",
+      "deduction": "Viele Orakel sind nur Stichworte; für PBO, SPA, Romano-Wolf und die Baustufenkosten fehlen unabhängige Referenzmodelle; die Datenbeschaffung BS-02 läuft parallel zu den Killer-Tests."
+    },
+    {
+      "id": "I3",
+      "area": "I",
+      "name": "Paketprüfung",
+      "max": 2,
+      "condition": "semantische Phasen, mindestens 40 Mutationen, Mehrversionslauf ohne Warnungen",
+      "factor": 1,
+      "points": 2,
+      "evidence": [
+        "validation/validate_package.py",
+        "validation/semantic_checks.py",
+        "validation/mutation_catalog.json",
+        "validation/mutation_tests.py",
+        "validation/run_multi_python.py",
+        "T-PKG-MUT-001",
+        "T-PKG-MULTI-001",
+        "T-PKG-VAL-001"
+      ],
+      "met": "Vierzehn Phasen mit elf semantischen Prüfungen; Mutationskatalog über der Mindestzahl mit Laufbericht; Mehrversionslauf unter Python 3.11 bis 3.13 mit -W error und gepinnten Abhängigkeiten; Laufbelege an den Paketstand gebunden.",
+      "deduction": ""
+    },
+    {
+      "id": "J1",
+      "area": "J",
+      "name": "Lesbarkeit",
+      "max": 2,
+      "condition": "Betreiberfassungen, Kurzfassung ≤ 2 Seiten, verständlich ohne Vorwissen",
+      "factor": 0.5,
+      "points": 1.0,
+      "evidence": [
+        "Masterkonzept_v3.0.md",
+        "KURZFASSUNG_BETREIBER.md",
+        "validation/validate_package.py::summary_problems"
+      ],
+      "met": "Betreiberfassung je Kapitel und Hauptdokument (geprüft); Kurzfassung mit Go/No-Go; Glossar.",
+      "deduction": "Das Masterkonzept ist ohne Vorwissen kaum lesbar: sehr dicht, mit vielen Kennungen und Fachbegriffen; das Glossar mildert das nur."
+    },
+    {
+      "id": "J2",
+      "area": "J",
+      "name": "Nachvollziehbarkeit",
+      "max": 2,
+      "condition": "Register, Rückverfolgbarkeit, Statuswahrheit, Manifest und Hashes",
+      "factor": 0.75,
+      "points": 1.5,
+      "evidence": [
+        "registers/traceability.json",
+        "requirements.json",
+        "registers/resolution_matrix.json",
+        "lib/pkgstate.py",
+        "validation/validate_package.py::p13_status_truth",
+        "validation/validate_package.py::p14_manifest"
+      ],
+      "met": "Register mit Verweisprüfung; Rückverfolgbarkeit Anforderung → Test → Szenario; Statuswahrheit mit Paketstand; Manifest und Prüfsummen.",
+      "deduction": "Die Statusprüfung ist strukturell: Sie erkannte nicht, dass drei Testeinträge mehr versprachen, als die Tests prüften, und dass ein Befund zu günstig eingestuft war (beides in der Gegenlese gefunden und korrigiert)."
+    },
+    {
+      "id": "J3",
+      "area": "J",
+      "name": "Unabhängige Prüfung",
+      "max": 1,
+      "condition": "Gegenprüfung nach §20.4 durchgeführt, Abweichungen aufgelöst",
+      "factor": 0,
+      "points": 0,
+      "evidence": [
+        "audit/independent_review_request.md",
+        "X-REVIEW"
+      ],
+      "met": "Prüfauftrag für eine andere Modellfamilie oder eine fachkundige Person liegt bei.",
+      "deduction": "Keine unabhängige Gegenprüfung durchgeführt; die interne Gegenlese stammt von derselben Modellfamilie und zählt nicht (EV-11)."
+    }
+  ],
+  "areas": [
+    {
+      "id": "A",
+      "name": "Wirtschaftlichkeit und Business Case",
+      "max": 20,
+      "points": 11.75
+    },
+    {
+      "id": "B",
+      "name": "Strategie und Edge",
+      "max": 15,
+      "points": 10.25
+    },
+    {
+      "id": "C",
+      "name": "Statistik, Tore, Forschungsdesign",
+      "max": 10,
+      "points": 7.5
+    },
+    {
+      "id": "D",
+      "name": "Risiko, Kapital und Hebel",
+      "max": 10,
+      "points": 7.5
+    },
+    {
+      "id": "E",
+      "name": "Geldpfad und Ausführung",
+      "max": 10,
+      "points": 6.25
+    },
+    {
+      "id": "F",
+      "name": "Architektur, Sicherheit, KI",
+      "max": 10,
+      "points": 8.0
+    },
+    {
+      "id": "G",
+      "name": "Betrieb und Organisation",
+      "max": 8,
+      "points": 5.25
+    },
+    {
+      "id": "H",
+      "name": "Recht, Steuern, Compliance",
+      "max": 5,
+      "points": 0.5
+    },
+    {
+      "id": "I",
+      "name": "Umsetzungsprogramm und Verifikation im Paket",
+      "max": 7,
+      "points": 5.25
+    },
+    {
+      "id": "J",
+      "name": "Dokumentation und Integrität",
+      "max": 5,
+      "points": 2.5
+    }
+  ],
+  "total": 64.75,
+  "independent_review": {
+    "status": "AUSSTEHEND",
+    "request": "audit/independent_review_request.md",
+    "external_input": "X-REVIEW",
+    "rule": "Weicht die Gegenprüfung um mehr als fünf Punkte ab, werden die Befunde aufgelöst und erneut geprüft (§20.4)."
+  }
+}

@@ -1,0 +1,53 @@
+{
+ "schema_version": "3.0",
+ "id": "TR-SAFETY-002",
+ "machine": "SM-SAFETY",
+ "description": "Tagesverlust L3: nur Abbau; Wiederaufnahme erst mit Ursachenbericht am nächsten Handelstag",
+ "scenarios": [
+  "OS-RI-03"
+ ],
+ "start": null,
+ "initial_reasons": [],
+ "steps": [
+  {
+   "event": "DAILY_LOSS_L3",
+   "context": {},
+   "expect_state": "EXIT_ONLY",
+   "expect_reasons": [
+    "DAILY_LOSS_EXIT"
+   ],
+   "expect_allowed": [
+    "CANCEL_ORDER",
+    "CLOSE_REDUCE",
+    "EMERGENCY_PROTECT",
+    "RECONCILE",
+    "ROLL_AS_CLOSE",
+    "STOP_AMEND_RECONCILED_ONLY"
+   ]
+  },
+  {
+   "event": "OPERATOR_ACK_SIGNED",
+   "context": {
+    "signed": true,
+    "reason": "DAILY_LOSS_EXIT",
+    "cause_report": false,
+    "new_trading_day": true
+   },
+   "expect_state": "EXIT_ONLY",
+   "expect_reasons": [
+    "DAILY_LOSS_EXIT"
+   ]
+  },
+  {
+   "event": "OPERATOR_ACK_SIGNED",
+   "context": {
+    "signed": true,
+    "reason": "DAILY_LOSS_EXIT",
+    "cause_report": true,
+    "new_trading_day": true
+   },
+   "expect_state": "READY",
+   "expect_reasons": []
+  }
+ ]
+}

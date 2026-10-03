@@ -1,0 +1,132 @@
+{
+ "calculator": "operations/monitor_simulation.py",
+ "model": "MOD-MON",
+ "seed": 1422027,
+ "runs": 1000,
+ "inputs": {
+  "parameters.json": "38f7ce22d3184218e02001b719b137e4f0ad0faaf239b53bff44e8c6ebc576b6",
+  "research/operating_characteristics_results.json": "82d64ff7b63bfff1304ef11eace43658b0b5f462f20812cdfc31fdf734a85ddc"
+ },
+ "harm_prior": {
+  "name": "SKEPTISCH",
+  "mean": 0.0,
+  "sd": 0.25
+ },
+ "harm_max_months": 120,
+ "harm": {
+  "SCHAEDLICH": {
+   "true_sharpe": -0.2,
+   "median_months": 121.0,
+   "p_trigger_within_pilot": 0.0,
+   "p_trigger_within_24m": 0.0,
+   "p_trigger_within_60m": 0.027,
+   "p_never_within_horizon": 0.86
+  },
+  "STARK_SCHAEDLICH": {
+   "true_sharpe": -1.0,
+   "median_months": 68.0,
+   "p_trigger_within_pilot": 0.0,
+   "p_trigger_within_24m": 0.006,
+   "p_trigger_within_60m": 0.41,
+   "p_never_within_horizon": 0.103
+  },
+  "WERTLOS": {
+   "true_sharpe": 0.0,
+   "median_months": 121.0,
+   "p_trigger_within_pilot": 0.0,
+   "p_trigger_within_24m": 0.0,
+   "p_trigger_within_60m": 0.011,
+   "p_never_within_horizon": 0.953
+  },
+  "BRAUCHBAR": {
+   "true_sharpe": 0.3,
+   "median_months": 121.0,
+   "p_trigger_within_pilot": 0.0,
+   "p_trigger_within_24m": 0.0,
+   "p_trigger_within_60m": 0.0,
+   "p_never_within_horizon": 0.995
+  }
+ },
+ "vol_window_days": 126,
+ "vol_band": 0.4,
+ "vol_horizon_days": 252,
+ "vol_drift": {
+  "OHNE_DRIFT": {
+   "true_ratio": 1.0,
+   "window_days": 126,
+   "band": 0.4,
+   "median_days": 253.0,
+   "p_trigger_within_20d": 0.02,
+   "p_trigger_within_63d": 0.026,
+   "p_trigger_within_252d": 0.066
+  },
+  "FAKTOR_1_5": {
+   "true_ratio": 1.5,
+   "window_days": 126,
+   "band": 0.4,
+   "median_days": 104.0,
+   "p_trigger_within_20d": 0.039,
+   "p_trigger_within_63d": 0.19,
+   "p_trigger_within_252d": 0.932
+  },
+  "FAKTOR_2": {
+   "true_ratio": 2.0,
+   "window_days": 126,
+   "band": 0.4,
+   "median_days": 47.0,
+   "p_trigger_within_20d": 0.13,
+   "p_trigger_within_63d": 0.768,
+   "p_trigger_within_252d": 1.0
+  }
+ },
+ "vol_design_grid": [
+  {
+   "window_days": 63,
+   "band": 0.3,
+   "false_alarm_within_252d": 0.56,
+   "doubling_median_days": 17.0,
+   "doubling_within_63d": 0.992
+  },
+  {
+   "window_days": 63,
+   "band": 0.4,
+   "false_alarm_within_252d": 0.236,
+   "doubling_median_days": 25.0,
+   "doubling_within_63d": 0.992
+  },
+  {
+   "window_days": 63,
+   "band": 0.5,
+   "false_alarm_within_252d": 0.098,
+   "doubling_median_days": 30.0,
+   "doubling_within_63d": 0.944
+  },
+  {
+   "window_days": 126,
+   "band": 0.3,
+   "false_alarm_within_252d": 0.128,
+   "doubling_median_days": 35.5,
+   "doubling_within_63d": 0.924
+  },
+  {
+   "window_days": 126,
+   "band": 0.4,
+   "false_alarm_within_252d": 0.056,
+   "doubling_median_days": 48.0,
+   "doubling_within_63d": 0.76
+  },
+  {
+   "window_days": 126,
+   "band": 0.5,
+   "false_alarm_within_252d": 0.026,
+   "doubling_median_days": 60.5,
+   "doubling_within_63d": 0.54
+  }
+ ],
+ "vol_design_runs": 500,
+ "not_simulated": [
+  "MH-R2 (Futility im Betrieb)",
+  "MD-R1 (Höchsthaltedauer: löst sofort aus)",
+  "MD-R2 (Umschlag)"
+ ]
+}

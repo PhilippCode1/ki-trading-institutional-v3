@@ -1,0 +1,27 @@
+{
+ "schema_version": "3.0",
+ "id": "TR-POS-007",
+ "machine": "SM-POSITION",
+ "description": "Nicht vorgesehenes Brokerereignis führt nach UNRECONCILED (Brokerfakt gewinnt, Abgleich erzwungen)",
+ "scenarios": [
+  "OS-EX-05"
+ ],
+ "start": "OPEN_PROTECTED",
+ "initial_reasons": null,
+ "steps": [
+  {
+   "event": "CLOSE_FILL_PARTIAL",
+   "context": {},
+   "expect_state": "UNRECONCILED",
+   "expect_invalid": true
+  },
+  {
+   "event": "RECON_MATCH",
+   "context": {
+    "broker_qty": 1,
+    "sl_covers_full_qty": true
+   },
+   "expect_state": "OPEN_PROTECTED"
+  }
+ ]
+}

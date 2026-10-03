@@ -1,0 +1,39 @@
+{
+ "schema_version": "3.0",
+ "id": "TR-ORDER-014",
+ "machine": "SM-ORDER",
+ "description": "Initialer Schutzstopp nach Ausführung ist auch in der Einstiegssperre erlaubt (EMERGENCY_PROTECT)",
+ "scenarios": [
+  "OS-EX-06"
+ ],
+ "start": "PERSISTED",
+ "initial_reasons": null,
+ "steps": [
+  {
+   "event": "SEND_STARTED",
+   "context": {
+    "writer_state": "ACTIVE_WRITER",
+    "lease_age_s": 2,
+    "permission": "EMERGENCY_PROTECT",
+    "allowed_actions": [
+     "CANCEL_ORDER",
+     "CLOSE_REDUCE",
+     "EMERGENCY_PROTECT",
+     "RECONCILE",
+     "ROLL_AS_CLOSE",
+     "STOP_AMEND",
+     "STOP_AMEND_RECONCILED_ONLY"
+    ],
+    "order_kind": "PROTECT",
+    "has_position_ticket": true,
+    "position_confirmed": true
+   },
+   "expect_state": "SUBMITTING"
+  },
+  {
+   "event": "BROKER_ACK",
+   "context": {},
+   "expect_state": "ACKNOWLEDGED"
+  }
+ ]
+}

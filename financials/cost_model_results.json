@@ -1,0 +1,6501 @@
+{
+ "calculator": "financials/cost_model.py",
+ "model": "MOD-COST",
+ "inputs": {
+  "parameters.json": "38f7ce22d3184218e02001b719b137e4f0ad0faaf239b53bff44e8c6ebc576b6",
+  "registers/costs.json": "b0c68bf2a0a42fd7ba48c6632d5459b64a1690ae1589402df6d422214d9beb00",
+  "registers/instruments.json": "01de3a94950c4c58e27382aa07a755e1177906416e4da87a845c851af579bff6",
+  "research/turnover_results.json": "ff1df5d3d1fddde329125f9c4782cf0e40aa7a7ae8269e5797a2af5086602c28"
+ },
+ "scenario": "BASIS: FXFlat 1,00 € je Seite; halber Spread; 0,25 Tick Schlupf; Marktwirkung separat je Ordergröße",
+ "formulas": {
+  "c_rt": "Round-Turn-Kosten / (Nominal × σ p. a.)",
+  "sr_cost_per_year": "(N_RT + Rollen/Jahr × τ) × c_RT / √τ",
+  "impact": "Y × σ_Tag × √(max(0, q − Anteil·ADV)/ADV) × Nominal je Seite"
+ },
+ "impact_model": {
+  "Y": 0.7,
+  "free_share": 0.0001,
+  "source": [
+   "COST-EXEC-IMPACT-Y",
+   "COST-EXEC-IMPACT-FREE-SHARE"
+  ]
+ },
+ "instruments": [
+  {
+   "id": "INS-CME-SR3",
+   "symbol": "SR3",
+   "risk_class": "STIR",
+   "asset_class": "STIR",
+   "size_class": "STANDARD",
+   "currency": "USD",
+   "access": "PRIMAERBROKER_BOERSE_ANGEBOTEN",
+   "blocked": false,
+   "notional_eur": "211199.72",
+   "vol_eur_per_year": {
+    "base": "1900.80",
+    "low": "844.80",
+    "high": "3379.20"
+   },
+   "commission_side_eur": "1.00",
+   "half_spread_side_eur": "5.48",
+   "slippage_side_eur": "2.74",
+   "cost_side_eur": "9.22",
+   "cost_rt_eur": "18.43",
+   "cost_rt_bp": 0.8727053942,
+   "c_rt_sr": {
+    "base": 0.009696726602,
+    "low": 0.02181763485,
+    "high": 0.005454408714
+   },
+   "c_rt_sr_low_fees": 0.006604776395,
+   "impact_side_eur_by_order_size": {
+    "1": "0.00",
+    "10": "0.00",
+    "100": "0.00",
+    "1000": "2.00"
+   },
+   "rolls_per_year": 4,
+   "strategies": {
+    "S-TF": {
+     "rt_per_year": 83.67508268,
+     "sr_cost_per_year": {
+      "base": 1.033210439,
+      "low": 2.324723488,
+      "high": 0.581180872
+     },
+     "sr_cost_per_year_low_fees": 0.7037554218
+    },
+    "S-IM": {
+     "rt_per_year": 113.7346297,
+     "sr_cost_per_year": {
+      "base": 4.770322152,
+      "low": 10.73322484,
+      "high": 2.68330621
+     },
+     "sr_cost_per_year_low_fees": 3.249231667
+    },
+    "S-REV": {
+     "rt_per_year": 8.368055556,
+     "sr_cost_per_year": {
+      "base": 0.3159142013,
+      "low": 0.7108069529,
+      "high": 0.1777017382
+     },
+     "sr_cost_per_year_low_fees": 0.2151801061
+    },
+    "S-BASE-TFD1": {
+     "rt_per_year": 8.671465273,
+     "sr_cost_per_year": {
+      "base": 0.1233422872,
+      "low": 0.2775201461,
+      "high": 0.06938003652
+     },
+     "sr_cost_per_year_low_fees": 0.0840127045
+    },
+    "S-BASE-TFD1-7T": {
+     "rt_per_year": 14.03390031,
+     "sr_cost_per_year": {
+      "base": 0.2922573727,
+      "low": 0.6575790885,
+      "high": 0.1643947721
+     },
+     "sr_cost_per_year_low_fees": 0.1990666207
+    }
+   }
+  },
+  {
+   "id": "INS-CME-SR1",
+   "symbol": "SR1",
+   "risk_class": "STIR",
+   "asset_class": "STIR",
+   "size_class": "STANDARD",
+   "currency": "USD",
+   "access": "PRIMAERBROKER_BOERSE_ANGEBOTEN",
+   "blocked": false,
+   "notional_eur": "351662.52",
+   "vol_eur_per_year": {
+    "base": "1758.31",
+    "low": "703.33",
+    "high": "3516.63"
+   },
+   "commission_side_eur": "1.00",
+   "half_spread_side_eur": "9.13",
+   "slippage_side_eur": "4.56",
+   "cost_side_eur": "14.69",
+   "cost_rt_eur": "29.39",
+   "cost_rt_bp": 0.8356889081,
+   "c_rt_sr": {
+    "base": 0.01671377816,
+    "low": 0.04178444541,
+    "high": 0.008356889081
+   },
+   "c_rt_sr_low_fees": 0.01129417933,
+   "impact_side_eur_by_order_size": {
+    "1": "0.00",
+    "10": "0.39",
+    "100": "2.63",
+    "1000": "8.63"
+   },
+   "rolls_per_year": 4,
+   "strategies": {
+    "S-TF": {
+     "rt_per_year": 83.67508268,
+     "sr_cost_per_year": {
+      "base": 1.78089481,
+      "low": 4.452237024,
+      "high": 0.8904474048
+     },
+     "sr_cost_per_year_low_fees": 1.203423018
+    },
+    "S-IM": {
+     "rt_per_year": 113.7346297,
+     "sr_cost_per_year": {
+      "base": 8.222373331,
+      "low": 20.55593333,
+      "high": 4.111186665
+     },
+     "sr_cost_per_year_low_fees": 5.556191905
+    },
+    "S-REV": {
+     "rt_per_year": 8.368055556,
+     "sr_cost_per_year": {
+      "base": 0.5445260133,
+      "low": 1.361315033,
+      "high": 0.2722630066
+     },
+     "sr_cost_per_year_low_fees": 0.3679583625
+    },
+    "S-BASE-TFD1": {
+     "rt_per_year": 8.671465273,
+     "sr_cost_per_year": {
+      "base": 0.2125991286,
+      "low": 0.5314978214,
+      "high": 0.1062995643
+     },
+     "sr_cost_per_year_low_fees": 0.1436618735
+    },
+    "S-BASE-TFD1-7T": {
+     "rt_per_year": 14.03390031,
+     "sr_cost_per_year": {
+      "base": 0.5037498832,
+      "low": 1.259374708,
+      "high": 0.2518749416
+     },
+     "sr_cost_per_year_low_fees": 0.3404042739
+    }
+   }
+  },
+  {
+   "id": "INS-ICEEU-I",
+   "symbol": "I",
+   "risk_class": "STIR",
+   "asset_class": "STIR",
+   "size_class": "STANDARD",
+   "currency": "EUR",
+   "access": "KEIN_ZUGANG_PRIMAERBROKER",
+   "blocked": false,
+   "notional_eur": "244500.00",
+   "vol_eur_per_year": {
+    "base": "1711.50",
+    "low": "733.50",
+    "high": "3178.50"
+   },
+   "commission_side_eur": "1.00",
+   "half_spread_side_eur": "6.25",
+   "slippage_side_eur": "3.12",
+   "cost_side_eur": "10.38",
+   "cost_rt_eur": "20.75",
+   "cost_rt_bp": 0.8486707566,
+   "c_rt_sr": {
+    "base": 0.01212386795,
+    "low": 0.02828902522,
+    "high": 0.00652823659
+   },
+   "c_rt_sr_low_fees": 0.008238387379,
+   "impact_side_eur_by_order_size": {
+    "1": "0.00",
+    "10": "0.00",
+    "100": "0.75",
+    "1000": "3.29"
+   },
+   "rolls_per_year": 4,
+   "strategies": {
+    "S-TF": {
+     "rt_per_year": 83.67508268,
+     "sr_cost_per_year": {
+      "base": 1.291828412,
+      "low": 3.014266296,
+      "high": 0.6955999143
+     },
+     "sr_cost_per_year_low_fees": 0.8778207525
+    },
+    "S-IM": {
+     "rt_per_year": 113.7346297,
+     "sr_cost_per_year": {
+      "base": 5.964358719,
+      "low": 13.91683701,
+      "high": 3.211577772
+     },
+     "sr_cost_per_year_low_fees": 4.052889539
+    },
+    "S-REV": {
+     "rt_per_year": 8.368055556,
+     "sr_cost_per_year": {
+      "base": 0.394989177,
+      "low": 0.921641413,
+      "high": 0.2126864799
+     },
+     "sr_cost_per_year_low_fees": 0.2684022841
+    },
+    "S-BASE-TFD1": {
+     "rt_per_year": 8.671465273,
+     "sr_cost_per_year": {
+      "base": 0.1542155063,
+      "low": 0.3598361814,
+      "high": 0.08303911877
+     },
+     "sr_cost_per_year_low_fees": 0.1047922236
+    },
+    "S-BASE-TFD1-7T": {
+     "rt_per_year": 14.03390031,
+     "sr_cost_per_year": {
+      "base": 0.3654109206,
+      "low": 0.8526254814,
+      "high": 0.1967597265
+     },
+     "sr_cost_per_year_low_fees": 0.2483033243
+    }
+   }
+  },
+  {
+   "id": "INS-ICEEU-SO3",
+   "symbol": "SO3",
+   "risk_class": "STIR",
+   "asset_class": "STIR",
+   "size_class": "STANDARD",
+   "currency": "GBP",
+   "access": "KEIN_ZUGANG_PRIMAERBROKER",
+   "blocked": false,
+   "notional_eur": "280686.45",
+   "vol_eur_per_year": {
+    "base": "2526.18",
+    "low": "1122.75",
+    "high": "4490.98"
+   },
+   "commission_side_eur": "1.00",
+   "half_spread_side_eur": "7.27",
+   "slippage_side_eur": "3.64",
+   "cost_side_eur": "11.91",
+   "cost_rt_eur": "23.82",
+   "cost_rt_bp": 0.8484559585,
+   "c_rt_sr": {
+    "base": 0.009427288428,
+    "low": 0.02121139896,
+    "high": 0.005302849741
+   },
+   "c_rt_sr_low_fees": 0.006390420265,
+   "impact_side_eur_by_order_size": {
+    "1": "0.00",
+    "10": "0.00",
+    "100": "1.93",
+    "1000": "6.96"
+   },
+   "rolls_per_year": 4,
+   "strategies": {
+    "S-TF": {
+     "rt_per_year": 83.67508268,
+     "sr_cost_per_year": {
+      "base": 1.004501129,
+      "low": 2.26012754,
+      "high": 0.5650318849
+     },
+     "sr_cost_per_year_low_fees": 0.6809152407
+    },
+    "S-IM": {
+     "rt_per_year": 113.7346297,
+     "sr_cost_per_year": {
+      "base": 4.637771556,
+      "low": 10.434986,
+      "high": 2.6087465
+     },
+     "sr_cost_per_year_low_fees": 3.143778782
+    },
+    "S-REV": {
+     "rt_per_year": 8.368055556,
+     "sr_cost_per_year": {
+      "base": 0.3071360487,
+      "low": 0.6910561096,
+      "high": 0.1727640274
+     },
+     "sr_cost_per_year_low_fees": 0.2081964973
+    },
+    "S-BASE-TFD1": {
+     "rt_per_year": 8.671465273,
+     "sr_cost_per_year": {
+      "base": 0.1199150357,
+      "low": 0.2698088303,
+      "high": 0.06745220757
+     },
+     "sr_cost_per_year_low_fees": 0.08128609619
+    },
+    "S-BASE-TFD1-7T": {
+     "rt_per_year": 14.03390031,
+     "sr_cost_per_year": {
+      "base": 0.2841365608,
+      "low": 0.6393072617,
+      "high": 0.1598268154
+     },
+     "sr_cost_per_year_low_fees": 0.1926059704
+    }
+   }
+  },
+  {
+   "id": "INS-EUREX-FST3",
+   "symbol": "FST3",
+   "risk_class": "STIR",
+   "asset_class": "STIR",
+   "size_class": "STANDARD",
+   "currency": "EUR",
+   "access": "PRIMAERBROKER_BOERSE_ANGEBOTEN",
+   "blocked": false,
+   "notional_eur": "244000.00",
+   "vol_eur_per_year": {
+    "base": "1464.00",
+    "low": "732.00",
+    "high": "2928.00"
+   },
+   "commission_side_eur": "1.00",
+   "half_spread_side_eur": "6.25",
+   "slippage_side_eur": "1.56",
+   "cost_side_eur": "8.81",
+   "cost_rt_eur": "17.62",
+   "cost_rt_bp": 0.7223360656,
+   "c_rt_sr": {
+    "base": 0.01203893443,
+    "low": 0.02407786885,
+    "high": 0.006019467213
+   },
+   "c_rt_sr_low_fees": 0.009631147541,
+   "impact_side_eur_by_order_size": {
+    "1": "0.00",
+    "10": "1.54",
+    "100": "5.23",
+    "1000": "16.66"
+   },
+   "rolls_per_year": 4,
+   "strategies": {
+    "S-TF": {
+     "rt_per_year": 83.67508268,
+     "sr_cost_per_year": {
+      "base": 1.282778533,
+      "low": 2.565557066,
+      "high": 0.6413892665
+     },
+     "sr_cost_per_year_low_fees": 1.026222826
+    },
+    "S-IM": {
+     "rt_per_year": 113.7346297,
+     "sr_cost_per_year": {
+      "base": 5.922575518,
+      "low": 11.84515104,
+      "high": 2.961287759
+     },
+     "sr_cost_per_year_low_fees": 4.738060414
+    },
+    "S-REV": {
+     "rt_per_year": 8.368055556,
+     "sr_cost_per_year": {
+      "base": 0.3922220879,
+      "low": 0.7844441757,
+      "high": 0.1961110439
+     },
+     "sr_cost_per_year_low_fees": 0.3137776703
+    },
+    "S-BASE-TFD1": {
+     "rt_per_year": 8.671465273,
+     "sr_cost_per_year": {
+      "base": 0.1531351525,
+      "low": 0.306270305,
+      "high": 0.07656757625
+     },
+     "sr_cost_per_year_low_fees": 0.122508122
+    },
+    "S-BASE-TFD1-7T": {
+     "rt_per_year": 14.03390031,
+     "sr_cost_per_year": {
+      "base": 0.3628510413,
+      "low": 0.7257020827,
+      "high": 0.1814255207
+     },
+     "sr_cost_per_year_low_fees": 0.2902808331
+    }
+   }
+  },
+  {
+   "id": "INS-CBOT-ZT",
+   "symbol": "ZT",
+   "risk_class": "ANLEIHE_KURZ",
+   "asset_class": "ANLEIHE",
+   "size_class": "STANDARD",
+   "currency": "USD",
+   "access": "PRIMAERBROKER_BOERSE_ANGEBOTEN",
+   "blocked": false,
+   "notional_eur": "182280.26",
+   "vol_eur_per_year": {
+    "base": "2916.48",
+    "low": "1822.80",
+    "high": "4557.01"
+   },
+   "commission_side_eur": "1.00",
+   "half_spread_side_eur": "3.42",
+   "slippage_side_eur": "1.71",
+   "cost_side_eur": "6.13",
+   "cost_rt_eur": "12.27",
+   "cost_rt_bp": 0.6731225962,
+   "c_rt_sr": {
+    "base": 0.004207016226,
+    "low": 0.006731225962,
+    "high": 0.002692490385
+   },
+   "c_rt_sr_low_fees": 0.002896111779,
+   "impact_side_eur_by_order_size": {
+    "1": "0.00",
+    "10": "0.00",
+    "100": "0.84",
+    "1000": "4.69"
+   },
+   "rolls_per_year": 4,
+   "strategies": {
+    "S-TF": {
+     "rt_per_year": 83.67508268,
+     "sr_cost_per_year": {
+      "base": 0.4482680868,
+      "low": 0.7172289389,
+      "high": 0.2868915756
+     },
+     "sr_cost_per_year_low_fees": 0.3085879437
+    },
+    "S-IM": {
+     "rt_per_year": 113.7346297,
+     "sr_cost_per_year": {
+      "base": 2.069649225,
+      "low": 3.31143876,
+      "high": 1.324575504
+     },
+     "sr_cost_per_year_low_fees": 1.424747416
+    },
+    "S-REV": {
+     "rt_per_year": 8.368055556,
+     "sr_cost_per_year": {
+      "base": 0.1370623536,
+      "low": 0.2192997658,
+      "high": 0.08771990633
+     },
+     "sr_cost_per_year_low_fees": 0.09435378318
+    },
+    "S-BASE-TFD1": {
+     "rt_per_year": 8.671465273,
+     "sr_cost_per_year": {
+      "base": 0.05351321376,
+      "low": 0.08562114201,
+      "high": 0.0342484568
+     },
+     "sr_cost_per_year_low_fees": 0.03683851936
+    },
+    "S-BASE-TFD1-7T": {
+     "rt_per_year": 14.03390031,
+     "sr_cost_per_year": {
+      "base": 0.1267986156,
+      "low": 0.202877785,
+      "high": 0.08115111398
+     },
+     "sr_cost_per_year_low_fees": 0.0872882215
+    }
+   }
+  },
+  {
+   "id": "INS-CBOT-ZF",
+   "symbol": "ZF",
+   "risk_class": "ANLEIHE_MITTEL",
+   "asset_class": "ANLEIHE",
+   "size_class": "STANDARD",
+   "currency": "USD",
+   "access": "PRIMAERBROKER_BOERSE_ANGEBOTEN",
+   "blocked": false,
+   "notional_eur": "95083.69",
+   "vol_eur_per_year": {
+    "base": "3613.18",
+    "low": "2377.09",
+    "high": "5229.60"
+   },
+   "commission_side_eur": "1.00",
+   "half_spread_side_eur": "3.42",
+   "slippage_side_eur": "1.71",
+   "cost_side_eur": "6.13",
+   "cost_rt_eur": "12.27",
+   "cost_rt_bp": 1.290410138,
+   "c_rt_sr": {
+    "base": 0.003395816153,
+    "low": 0.005161640553,
+    "high": 0.002346200251
+   },
+   "c_rt_sr_low_fees": 0.0023376813,
+   "impact_side_eur_by_order_size": {
+    "1": "0.00",
+    "10": "0.00",
+    "100": "0.00",
+    "1000": "4.31"
+   },
+   "rolls_per_year": 4,
+   "strategies": {
+    "S-TF": {
+     "rt_per_year": 83.67508268,
+     "sr_cost_per_year": {
+      "base": 0.3618326929,
+      "low": 0.5499856933,
+      "high": 0.2499934969
+     },
+     "sr_cost_per_year_low_fees": 0.2490857814
+    },
+    "S-IM": {
+     "rt_per_year": 113.7346297,
+     "sr_cost_per_year": {
+      "base": 1.670577885,
+      "low": 2.539278385,
+      "high": 1.154217448
+     },
+     "sr_cost_per_year_low_fees": 1.150026534
+    },
+    "S-REV": {
+     "rt_per_year": 8.368055556,
+     "sr_cost_per_year": {
+      "base": 0.1106338862,
+      "low": 0.1681635071,
+      "high": 0.07643795776
+     },
+     "sr_cost_per_year_low_fees": 0.07616041485
+    },
+    "S-BASE-TFD1": {
+     "rt_per_year": 8.671465273,
+     "sr_cost_per_year": {
+      "base": 0.04319475513,
+      "low": 0.06565602779,
+      "high": 0.029843649
+     },
+     "sr_cost_per_year_low_fees": 0.029735288
+    },
+    "S-BASE-TFD1-7T": {
+     "rt_per_year": 14.03390031,
+     "sr_cost_per_year": {
+      "base": 0.10234921,
+      "low": 0.1555707992,
+      "high": 0.07071399962
+     },
+     "sr_cost_per_year_low_fees": 0.07045724015
+    }
+   }
+  },
+  {
+   "id": "INS-CBOT-ZN",
+   "symbol": "ZN",
+   "risk_class": "ANLEIHE_MITTEL",
+   "asset_class": "ANLEIHE",
+   "size_class": "STANDARD",
+   "currency": "USD",
+   "access": "PRIMAERBROKER_BOERSE_ANGEBOTEN",
+   "blocked": false,
+   "notional_eur": "98150.91",
+   "vol_eur_per_year": {
+    "base": "5692.75",
+    "low": "3926.04",
+    "high": "7852.07"
+   },
+   "commission_side_eur": "1.00",
+   "half_spread_side_eur": "6.85",
+   "slippage_side_eur": "3.42",
+   "cost_side_eur": "11.27",
+   "cost_rt_eur": "22.54",
+   "cost_rt_bp": 2.296401786,
+   "c_rt_sr": {
+    "base": 0.003959313424,
+    "low": 0.005741004464,
+    "high": 0.002870502232
+   },
+   "c_rt_sr_low_fees": 0.002686385468,
+   "impact_side_eur_by_order_size": {
+    "1": "0.00",
+    "10": "0.00",
+    "100": "0.00",
+    "1000": "5.36"
+   },
+   "rolls_per_year": 4,
+   "strategies": {
+    "S-TF": {
+     "rt_per_year": 83.67508268,
+     "sr_cost_per_year": {
+      "base": 0.4218747346,
+      "low": 0.6117183651,
+      "high": 0.3058591826
+     },
+     "sr_cost_per_year_low_fees": 0.2862410815
+    },
+    "S-IM": {
+     "rt_per_year": 113.7346297,
+     "sr_cost_per_year": {
+      "base": 1.947791384,
+      "low": 2.824297507,
+      "high": 1.412148754
+     },
+     "sr_cost_per_year_low_fees": 1.321572179
+    },
+    "S-REV": {
+     "rt_per_year": 8.368055556,
+     "sr_cost_per_year": {
+      "base": 0.1289923279,
+      "low": 0.1870388755,
+      "high": 0.09351943776
+     },
+     "sr_cost_per_year_low_fees": 0.08752101139
+    },
+    "S-BASE-TFD1": {
+     "rt_per_year": 8.671465273,
+     "sr_cost_per_year": {
+      "base": 0.05036243603,
+      "low": 0.07302553225,
+      "high": 0.03651276612
+     },
+     "sr_cost_per_year_low_fees": 0.03417080231
+    },
+    "S-BASE-TFD1-7T": {
+     "rt_per_year": 14.03390031,
+     "sr_cost_per_year": {
+      "base": 0.1193329034,
+      "low": 0.1730327099,
+      "high": 0.08651635496
+     },
+     "sr_cost_per_year_low_fees": 0.08096711304
+    }
+   }
+  },
+  {
+   "id": "INS-CBOT-TN",
+   "symbol": "TN",
+   "risk_class": "ANLEIHE_LANG",
+   "asset_class": "ANLEIHE",
+   "size_class": "STANDARD",
+   "currency": "USD",
+   "access": "PRIMAERBROKER_BOERSE_ANGEBOTEN",
+   "blocked": false,
+   "notional_eur": "100779.95",
+   "vol_eur_per_year": {
+    "base": "7558.50",
+    "low": "5039.00",
+    "high": "10077.99"
+   },
+   "commission_side_eur": "1.00",
+   "half_spread_side_eur": "6.85",
+   "slippage_side_eur": "3.42",
+   "cost_side_eur": "11.27",
+   "cost_rt_eur": "22.54",
+   "cost_rt_bp": 2.236495652,
+   "c_rt_sr": {
+    "base": 0.002981994203,
+    "low": 0.004472991304,
+    "high": 0.002236495652
+   },
+   "c_rt_sr_low_fees": 0.002023276522,
+   "impact_side_eur_by_order_size": {
+    "1": "0.00",
+    "10": "0.00",
+    "100": "5.09",
+    "1000": "18.95"
+   },
+   "rolls_per_year": 4,
+   "strategies": {
+    "S-TF": {
+     "rt_per_year": 83.67508268,
+     "sr_cost_per_year": {
+      "base": 0.3177389305,
+      "low": 0.4766083958,
+      "high": 0.2383041979
+     },
+     "sr_cost_per_year_low_fees": 0.215585167
+    },
+    "S-IM": {
+     "rt_per_year": 113.7346297,
+     "sr_cost_per_year": {
+      "base": 1.46699743,
+      "low": 2.200496145,
+      "high": 1.100248072
+     },
+     "sr_cost_per_year_low_fees": 0.9953545363
+    },
+    "S-REV": {
+     "rt_per_year": 8.368055556,
+     "sr_cost_per_year": {
+      "base": 0.09715178693,
+      "low": 0.1457276804,
+      "high": 0.0728638402
+     },
+     "sr_cost_per_year_low_fees": 0.0659172742
+    },
+    "S-BASE-TFD1": {
+     "rt_per_year": 8.671465273,
+     "sr_cost_per_year": {
+      "base": 0.03793094313,
+      "low": 0.05689641469,
+      "high": 0.02844820735
+     },
+     "sr_cost_per_year_low_fees": 0.02573606166
+    },
+    "S-BASE-TFD1-7T": {
+     "rt_per_year": 14.03390031,
+     "sr_cost_per_year": {
+      "base": 0.08987670034,
+      "low": 0.1348150505,
+      "high": 0.06740752525
+     },
+     "sr_cost_per_year_low_fees": 0.06098114392
+    }
+   }
+  },
+  {
+   "id": "INS-CBOT-ZB",
+   "symbol": "ZB",
+   "risk_class": "ANLEIHE_LANG",
+   "asset_class": "ANLEIHE",
+   "size_class": "STANDARD",
+   "currency": "USD",
+   "access": "PRIMAERBROKER_BOERSE_ANGEBOTEN",
+   "blocked": false,
+   "notional_eur": "103408.99",
+   "vol_eur_per_year": {
+    "base": "11374.99",
+    "low": "8272.72",
+    "high": "15511.35"
+   },
+   "commission_side_eur": "1.00",
+   "half_spread_side_eur": "13.69",
+   "slippage_side_eur": "6.85",
+   "cost_side_eur": "21.54",
+   "cost_rt_eur": "43.08",
+   "cost_rt_bp": 4.165864407,
+   "c_rt_sr": {
+    "base": 0.003787149461,
+    "low": 0.005207330508,
+    "high": 0.002777242938
+   },
+   "c_rt_sr_low_fees": 0.002548209553,
+   "impact_side_eur_by_order_size": {
+    "1": "0.00",
+    "10": "0.00",
+    "100": "6.84",
+    "1000": "26.34"
+   },
+   "rolls_per_year": 4,
+   "strategies": {
+    "S-TF": {
+     "rt_per_year": 83.67508268,
+     "sr_cost_per_year": {
+      "base": 0.4035302343,
+      "low": 0.5548540721,
+      "high": 0.2959221718
+     },
+     "sr_cost_per_year_low_fees": 0.2715180926
+    },
+    "S-IM": {
+     "rt_per_year": 113.7346297,
+     "sr_cost_per_year": {
+      "base": 1.863095012,
+      "low": 2.561755641,
+      "high": 1.366269675
+     },
+     "sr_cost_per_year_low_fees": 1.253596288
+    },
+    "S-REV": {
+     "rt_per_year": 8.368055556,
+     "sr_cost_per_year": {
+      "base": 0.1233833175,
+      "low": 0.1696520615,
+      "high": 0.09048109949
+     },
+     "sr_cost_per_year_low_fees": 0.08301931349
+    },
+    "S-BASE-TFD1": {
+     "rt_per_year": 8.671465273,
+     "sr_cost_per_year": {
+      "base": 0.04817251176,
+      "low": 0.06623720367,
+      "high": 0.03532650862
+     },
+     "sr_cost_per_year_low_fees": 0.03241320575
+    },
+    "S-BASE-TFD1-7T": {
+     "rt_per_year": 14.03390031,
+     "sr_cost_per_year": {
+      "base": 0.1141439165,
+      "low": 0.1569478851,
+      "high": 0.08370553875
+     },
+     "sr_cost_per_year_low_fees": 0.07680251899
+    }
+   }
+  },
+  {
+   "id": "INS-CBOT-UB",
+   "symbol": "UB",
+   "risk_class": "ANLEIHE_LANG",
+   "asset_class": "ANLEIHE",
+   "size_class": "STANDARD",
+   "currency": "USD",
+   "access": "PRIMAERBROKER_BOERSE_ANGEBOTEN",
+   "blocked": false,
+   "notional_eur": "106914.38",
+   "vol_eur_per_year": {
+    "base": "14968.01",
+    "low": "10691.44",
+    "high": "20313.73"
+   },
+   "commission_side_eur": "1.00",
+   "half_spread_side_eur": "13.69",
+   "slippage_side_eur": "6.85",
+   "cost_side_eur": "21.54",
+   "cost_rt_eur": "43.08",
+   "cost_rt_bp": 4.029278689,
+   "c_rt_sr": {
+    "base": 0.002878056206,
+    "low": 0.004029278689,
+    "high": 0.002120672994
+   },
+   "c_rt_sr_low_fees": 0.001936519906,
+   "impact_side_eur_by_order_size": {
+    "1": "0.00",
+    "10": "0.00",
+    "100": "11.43",
+    "1000": "41.22"
+   },
+   "rolls_per_year": 4,
+   "strategies": {
+    "S-TF": {
+     "rt_per_year": 83.67508268,
+     "sr_cost_per_year": {
+      "base": 0.3066640773,
+      "low": 0.4293297083,
+      "high": 0.2259630044
+     },
+     "sr_cost_per_year_low_fees": 0.2063410329
+    },
+    "S-IM": {
+     "rt_per_year": 113.7346297,
+     "sr_cost_per_year": {
+      "base": 1.415864945,
+      "low": 1.982210923,
+      "high": 1.043268907
+     },
+     "sr_cost_per_year_low_fees": 0.9526744628
+    },
+    "S-REV": {
+     "rt_per_year": 8.368055556,
+     "sr_cost_per_year": {
+      "base": 0.09376554221,
+      "low": 0.1312717591,
+      "high": 0.06909039953
+     },
+     "sr_cost_per_year_low_fees": 0.06309078976
+    },
+    "S-BASE-TFD1": {
+     "rt_per_year": 8.671465273,
+     "sr_cost_per_year": {
+      "base": 0.03660885261,
+      "low": 0.05125239366,
+      "high": 0.02697494403
+     },
+     "sr_cost_per_year_low_fees": 0.02463251819
+    },
+    "S-BASE-TFD1-7T": {
+     "rt_per_year": 14.03390031,
+     "sr_cost_per_year": {
+      "base": 0.0867440302,
+      "low": 0.1214416423,
+      "high": 0.06391665383
+     },
+     "sr_cost_per_year_low_fees": 0.05836631713
+    }
+   }
+  },
+  {
+   "id": "INS-CBOT-2YY",
+   "symbol": "2YY",
+   "risk_class": "RENDITE",
+   "asset_class": "RENDITE",
+   "size_class": "MICRO",
+   "currency": "USD",
+   "access": "PRIMAERBROKER_BOERSE_ANGEBOTEN",
+   "blocked": false,
+   "notional_eur": "3154.85",
+   "vol_eur_per_year": {
+    "base": "788.71",
+    "low": "473.23",
+    "high": "1261.94"
+   },
+   "commission_side_eur": "1.00",
+   "half_spread_side_eur": "0.88",
+   "slippage_side_eur": "0.22",
+   "cost_side_eur": "2.10",
+   "cost_rt_eur": "4.19",
+   "cost_rt_bp": 13.28388889,
+   "c_rt_sr": {
+    "base": 0.005313555556,
+    "low": 0.008855925926,
+    "high": 0.003320972222
+   },
+   "c_rt_sr_low_fees": 0.004250844444,
+   "impact_side_eur_by_order_size": {
+    "1": "0.35",
+    "10": "1.52",
+    "100": "4.91",
+    "1000": "15.55"
+   },
+   "rolls_per_year": 4,
+   "strategies": {
+    "S-TF": {
+     "rt_per_year": 83.67508268,
+     "sr_cost_per_year": {
+      "base": 0.5661726162,
+      "low": 0.9436210271,
+      "high": 0.3538578851
+     },
+     "sr_cost_per_year_low_fees": 0.452938093
+    },
+    "S-IM": {
+     "rt_per_year": 113.7346297,
+     "sr_cost_per_year": {
+      "base": 2.614013245,
+      "low": 4.356688742,
+      "high": 1.633758278
+     },
+     "sr_cost_per_year_low_fees": 2.091210596
+    },
+    "S-REV": {
+     "rt_per_year": 8.368055556,
+     "sr_cost_per_year": {
+      "base": 0.1731128172,
+      "low": 0.2885213619,
+      "high": 0.1081955107
+     },
+     "sr_cost_per_year_low_fees": 0.1384902537
+    },
+    "S-BASE-TFD1": {
+     "rt_per_year": 8.671465273,
+     "sr_cost_per_year": {
+      "base": 0.06758838544,
+      "low": 0.1126473091,
+      "high": 0.0422427409
+     },
+     "sr_cost_per_year_low_fees": 0.05407070836
+    },
+    "S-BASE-TFD1-7T": {
+     "rt_per_year": 14.03390031,
+     "sr_cost_per_year": {
+      "base": 0.1601494865,
+      "low": 0.2669158109,
+      "high": 0.1000934291
+     },
+     "sr_cost_per_year_low_fees": 0.1281195892
+    }
+   }
+  },
+  {
+   "id": "INS-CBOT-10Y",
+   "symbol": "10Y",
+   "risk_class": "RENDITE",
+   "asset_class": "RENDITE",
+   "size_class": "MICRO",
+   "currency": "USD",
+   "access": "PRIMAERBROKER_BOERSE_ANGEBOTEN",
+   "blocked": false,
+   "notional_eur": "3680.66",
+   "vol_eur_per_year": {
+    "base": "699.33",
+    "low": "441.68",
+    "high": "1104.20"
+   },
+   "commission_side_eur": "1.00",
+   "half_spread_side_eur": "0.88",
+   "slippage_side_eur": "0.22",
+   "cost_side_eur": "2.10",
+   "cost_rt_eur": "4.19",
+   "cost_rt_bp": 11.38619048,
+   "c_rt_sr": {
+    "base": 0.00599273183,
+    "low": 0.009488492063,
+    "high": 0.003795396825
+   },
+   "c_rt_sr_low_fees": 0.004794185464,
+   "impact_side_eur_by_order_size": {
+    "1": "0.31",
+    "10": "1.34",
+    "100": "4.35",
+    "1000": "13.79"
+   },
+   "rolls_per_year": 4,
+   "strategies": {
+    "S-TF": {
+     "rt_per_year": 83.67508268,
+     "sr_cost_per_year": {
+      "base": 0.6385405446,
+      "low": 1.011022529,
+      "high": 0.4044090116
+     },
+     "sr_cost_per_year_low_fees": 0.5108324357
+    },
+    "S-IM": {
+     "rt_per_year": 113.7346297,
+     "sr_cost_per_year": {
+      "base": 2.948135239,
+      "low": 4.667880795,
+      "high": 1.867152318
+     },
+     "sr_cost_per_year_low_fees": 2.358508191
+    },
+    "S-REV": {
+     "rt_per_year": 8.368055556,
+     "sr_cost_per_year": {
+      "base": 0.1952400193,
+      "low": 0.3091300306,
+      "high": 0.1236520123
+     },
+     "sr_cost_per_year_low_fees": 0.1561920155
+    },
+    "S-BASE-TFD1": {
+     "rt_per_year": 8.671465273,
+     "sr_cost_per_year": {
+      "base": 0.07622750238,
+      "low": 0.1206935454,
+      "high": 0.04827741817
+     },
+     "sr_cost_per_year_low_fees": 0.06098200191
+    },
+    "S-BASE-TFD1-7T": {
+     "rt_per_year": 14.03390031,
+     "sr_cost_per_year": {
+      "base": 0.1806197216,
+      "low": 0.2859812259,
+      "high": 0.1143924904
+     },
+     "sr_cost_per_year_low_fees": 0.1444957773
+    }
+   }
+  },
+  {
+   "id": "INS-EUREX-FGBS",
+   "symbol": "FGBS",
+   "risk_class": "ANLEIHE_KURZ",
+   "asset_class": "ANLEIHE",
+   "size_class": "STANDARD",
+   "currency": "EUR",
+   "access": "PRIMAERBROKER_BOERSE_ANGEBOTEN",
+   "blocked": false,
+   "notional_eur": "107000.00",
+   "vol_eur_per_year": {
+    "base": "1712.00",
+    "low": "1070.00",
+    "high": "2675.00"
+   },
+   "commission_side_eur": "1.00",
+   "half_spread_side_eur": "2.50",
+   "slippage_side_eur": "1.25",
+   "cost_side_eur": "4.75",
+   "cost_rt_eur": "9.50",
+   "cost_rt_bp": 0.8878504673,
+   "c_rt_sr": {
+    "base": 0.005549065421,
+    "low": 0.008878504673,
+    "high": 0.003551401869
+   },
+   "c_rt_sr_low_fees": 0.003855140187,
+   "impact_side_eur_by_order_size": {
+    "1": "0.00",
+    "10": "0.00",
+    "100": "1.03",
+    "1000": "3.96"
+   },
+   "rolls_per_year": 4,
+   "strategies": {
+    "S-TF": {
+     "rt_per_year": 83.67508268,
+     "sr_cost_per_year": {
+      "base": 0.5912667806,
+      "low": 0.9460268489,
+      "high": 0.3784107396
+     },
+     "sr_cost_per_year_low_fees": 0.410774816
+    },
+    "S-IM": {
+     "rt_per_year": 113.7346297,
+     "sr_cost_per_year": {
+      "base": 2.729872748,
+      "low": 4.367796397,
+      "high": 1.747118559
+     },
+     "sr_cost_per_year_low_fees": 1.896543172
+    },
+    "S-REV": {
+     "rt_per_year": 8.368055556,
+     "sr_cost_per_year": {
+      "base": 0.1807856034,
+      "low": 0.2892569655,
+      "high": 0.1157027862
+     },
+     "sr_cost_per_year_low_fees": 0.1255984192
+    },
+    "S-BASE-TFD1": {
+     "rt_per_year": 8.671465273,
+     "sr_cost_per_year": {
+      "base": 0.0705840691,
+      "low": 0.1129345106,
+      "high": 0.04517380422
+     },
+     "sr_cost_per_year_low_fees": 0.04903735327
+    },
+    "S-BASE-TFD1-7T": {
+     "rt_per_year": 14.03390031,
+     "sr_cost_per_year": {
+      "base": 0.1672477061,
+      "low": 0.2675963297,
+      "high": 0.1070385319
+     },
+     "sr_cost_per_year_low_fees": 0.1161931432
+    }
+   }
+  },
+  {
+   "id": "INS-EUREX-FGBM",
+   "symbol": "FGBM",
+   "risk_class": "ANLEIHE_MITTEL",
+   "asset_class": "ANLEIHE",
+   "size_class": "STANDARD",
+   "currency": "EUR",
+   "access": "PRIMAERBROKER_BOERSE_ANGEBOTEN",
+   "blocked": false,
+   "notional_eur": "117000.00",
+   "vol_eur_per_year": {
+    "base": "4446.00",
+    "low": "2925.00",
+    "high": "6435.00"
+   },
+   "commission_side_eur": "1.00",
+   "half_spread_side_eur": "5.00",
+   "slippage_side_eur": "2.50",
+   "cost_side_eur": "8.50",
+   "cost_rt_eur": "17.00",
+   "cost_rt_bp": 1.452991453,
+   "c_rt_sr": {
+    "base": 0.003823661718,
+    "low": 0.005811965812,
+    "high": 0.002641802642
+   },
+   "c_rt_sr_low_fees": 0.00260908682,
+   "impact_side_eur_by_order_size": {
+    "1": "0.00",
+    "10": "0.00",
+    "100": "1.77",
+    "1000": "8.13"
+   },
+   "rolls_per_year": 4,
+   "strategies": {
+    "S-TF": {
+     "rt_per_year": 83.67508268,
+     "sr_cost_per_year": {
+      "base": 0.4074207065,
+      "low": 0.6192794739,
+      "high": 0.28149067
+     },
+     "sr_cost_per_year_low_fees": 0.2780047174
+    },
+    "S-IM": {
+     "rt_per_year": 113.7346297,
+     "sr_cost_per_year": {
+      "base": 1.881057283,
+      "low": 2.85920707,
+      "high": 1.299639577
+     },
+     "sr_cost_per_year_low_fees": 1.28354497
+    },
+    "S-REV": {
+     "rt_per_year": 8.368055556,
+     "sr_cost_per_year": {
+      "base": 0.1245728674,
+      "low": 0.1893507585,
+      "high": 0.0860685266
+     },
+     "sr_cost_per_year_low_fees": 0.08500266249
+    },
+    "S-BASE-TFD1": {
+     "rt_per_year": 8.671465273,
+     "sr_cost_per_year": {
+      "base": 0.04863694739,
+      "low": 0.07392816004,
+      "high": 0.03360370911
+     },
+     "sr_cost_per_year_low_fees": 0.0331875641
+    },
+    "S-BASE-TFD1-7T": {
+     "rt_per_year": 14.03390031,
+     "sr_cost_per_year": {
+      "base": 0.1152443885,
+      "low": 0.1751714705,
+      "high": 0.0796233957
+     },
+     "sr_cost_per_year_low_fees": 0.07863734745
+    }
+   }
+  },
+  {
+   "id": "INS-EUREX-FGBL",
+   "symbol": "FGBL",
+   "risk_class": "ANLEIHE_MITTEL",
+   "asset_class": "ANLEIHE",
+   "size_class": "STANDARD",
+   "currency": "EUR",
+   "access": "PRIMAERBROKER_BOERSE_ANGEBOTEN",
+   "blocked": false,
+   "notional_eur": "128000.00",
+   "vol_eur_per_year": {
+    "base": "8320.00",
+    "low": "5760.00",
+    "high": "11520.00"
+   },
+   "commission_side_eur": "1.00",
+   "half_spread_side_eur": "5.00",
+   "slippage_side_eur": "2.50",
+   "cost_side_eur": "8.50",
+   "cost_rt_eur": "17.00",
+   "cost_rt_bp": 1.328125,
+   "c_rt_sr": {
+    "base": 0.002043269231,
+    "low": 0.002951388889,
+    "high": 0.001475694444
+   },
+   "c_rt_sr_low_fees": 0.001394230769,
+   "impact_side_eur_by_order_size": {
+    "1": "0.00",
+    "10": "0.00",
+    "100": "1.83",
+    "1000": "12.44"
+   },
+   "rolls_per_year": 4,
+   "strategies": {
+    "S-TF": {
+     "rt_per_year": 83.67508268,
+     "sr_cost_per_year": {
+      "base": 0.2177154401,
+      "low": 0.3144778579,
+      "high": 0.1572389289
+     },
+     "sr_cost_per_year_low_fees": 0.1485587709
+    },
+    "S-IM": {
+     "rt_per_year": 113.7346297,
+     "sr_cost_per_year": {
+      "base": 1.005189986,
+      "low": 1.45194109,
+      "high": 0.7259705452
+     },
+     "sr_cost_per_year_low_fees": 0.6858943431
+    },
+    "S-REV": {
+     "rt_per_year": 8.368055556,
+     "sr_cost_per_year": {
+      "base": 0.06656862604,
+      "low": 0.09615468206,
+      "high": 0.04807734103
+     },
+     "sr_cost_per_year_low_fees": 0.04542329777
+    },
+    "S-BASE-TFD1": {
+     "rt_per_year": 8.671465273,
+     "sr_cost_per_year": {
+      "base": 0.02599036876,
+      "low": 0.03754164377,
+      "high": 0.01877082189
+     },
+     "sr_cost_per_year_low_fees": 0.01773460457
+    },
+    "S-BASE-TFD1-7T": {
+     "rt_per_year": 14.03390031,
+     "sr_cost_per_year": {
+      "base": 0.06158372011,
+      "low": 0.08895426238,
+      "high": 0.04447713119
+     },
+     "sr_cost_per_year_low_fees": 0.04202183255
+    }
+   }
+  },
+  {
+   "id": "INS-EUREX-FGBX",
+   "symbol": "FGBX",
+   "risk_class": "ANLEIHE_LANG",
+   "asset_class": "ANLEIHE",
+   "size_class": "STANDARD",
+   "currency": "EUR",
+   "access": "PRIMAERBROKER_BOERSE_ANGEBOTEN",
+   "blocked": false,
+   "notional_eur": "115000.00",
+   "vol_eur_per_year": {
+    "base": "16100.00",
+    "low": "11500.00",
+    "high": "21850.00"
+   },
+   "commission_side_eur": "1.00",
+   "half_spread_side_eur": "10.00",
+   "slippage_side_eur": "5.00",
+   "cost_side_eur": "16.00",
+   "cost_rt_eur": "32.00",
+   "cost_rt_bp": 2.782608696,
+   "c_rt_sr": {
+    "base": 0.00198757764,
+    "low": 0.002782608696,
+    "high": 0.001464530892
+   },
+   "c_rt_sr_low_fees": 0.001341614907,
+   "impact_side_eur_by_order_size": {
+    "1": "0.00",
+    "10": "5.80",
+    "100": "28.10",
+    "1000": "91.38"
+   },
+   "rolls_per_year": 4,
+   "strategies": {
+    "S-TF": {
+     "rt_per_year": 83.67508268,
+     "sr_cost_per_year": {
+      "base": 0.2117813619,
+      "low": 0.2964939067,
+      "high": 0.1560494246
+     },
+     "sr_cost_per_year_low_fees": 0.1429524193
+    },
+    "S-IM": {
+     "rt_per_year": 113.7346297,
+     "sr_cost_per_year": {
+      "base": 0.9777924069,
+      "low": 1.36890937,
+      "high": 0.7204786156
+     },
+     "sr_cost_per_year_low_fees": 0.6600098747
+    },
+    "S-REV": {
+     "rt_per_year": 8.368055556,
+     "sr_cost_per_year": {
+      "base": 0.06475422359,
+      "low": 0.09065591303,
+      "high": 0.04771363844
+     },
+     "sr_cost_per_year_low_fees": 0.04370910093
+    },
+    "S-BASE-TFD1": {
+     "rt_per_year": 8.671465273,
+     "sr_cost_per_year": {
+      "base": 0.02528197216,
+      "low": 0.03539476102,
+      "high": 0.01862882159
+     },
+     "sr_cost_per_year_low_fees": 0.01706533121
+    },
+    "S-BASE-TFD1-7T": {
+     "rt_per_year": 14.03390031,
+     "sr_cost_per_year": {
+      "base": 0.05990518686,
+      "low": 0.0838672616,
+      "high": 0.044140664
+     },
+     "sr_cost_per_year_low_fees": 0.04043600113
+    }
+   }
+  },
+  {
+   "id": "INS-EUREX-FBTP",
+   "symbol": "FBTP",
+   "risk_class": "ANLEIHE_MITTEL",
+   "asset_class": "ANLEIHE",
+   "size_class": "STANDARD",
+   "currency": "EUR",
+   "access": "PRIMAERBROKER_BOERSE_ANGEBOTEN",
+   "blocked": false,
+   "notional_eur": "120000.00",
+   "vol_eur_per_year": {
+    "base": "9000.00",
+    "low": "6000.00",
+    "high": "13200.00"
+   },
+   "commission_side_eur": "1.00",
+   "half_spread_side_eur": "5.00",
+   "slippage_side_eur": "2.50",
+   "cost_side_eur": "8.50",
+   "cost_rt_eur": "17.00",
+   "cost_rt_bp": 1.416666667,
+   "c_rt_sr": {
+    "base": 0.001888888889,
+    "low": 0.002833333333,
+    "high": 0.001287878788
+   },
+   "c_rt_sr_low_fees": 0.001288888889,
+   "impact_side_eur_by_order_size": {
+    "1": "0.00",
+    "10": "0.00",
+    "100": "7.94",
+    "1000": "27.78"
+   },
+   "rolls_per_year": 4,
+   "strategies": {
+    "S-TF": {
+     "rt_per_year": 83.67508268,
+     "sr_cost_per_year": {
+      "base": 0.201265829,
+      "low": 0.3018987435,
+      "high": 0.1372267016
+     },
+     "sr_cost_per_year_low_fees": 0.1373343304
+    },
+    "S-IM": {
+     "rt_per_year": 113.7346297,
+     "sr_cost_per_year": {
+      "base": 0.9292422978,
+      "low": 1.393863447,
+      "high": 0.633574294
+     },
+     "sr_cost_per_year_low_fees": 0.634071215
+    },
+    "S-REV": {
+     "rt_per_year": 8.368055556,
+     "sr_cost_per_year": {
+      "base": 0.06153899652,
+      "low": 0.09230849478,
+      "high": 0.04195840672
+     },
+     "sr_cost_per_year_low_fees": 0.04199131527
+    },
+    "S-BASE-TFD1": {
+     "rt_per_year": 8.671465273,
+     "sr_cost_per_year": {
+      "base": 0.02402665201,
+      "low": 0.03603997802,
+      "high": 0.01638180819
+     },
+     "sr_cost_per_year_low_fees": 0.01639465667
+    },
+    "S-BASE-TFD1-7T": {
+     "rt_per_year": 14.03390031,
+     "sr_cost_per_year": {
+      "base": 0.05693072792,
+      "low": 0.08539609189,
+      "high": 0.0388164054
+     },
+     "sr_cost_per_year_low_fees": 0.03884684964
+    }
+   }
+  },
+  {
+   "id": "INS-EUREX-FOAT",
+   "symbol": "FOAT",
+   "risk_class": "ANLEIHE_MITTEL",
+   "asset_class": "ANLEIHE",
+   "size_class": "STANDARD",
+   "currency": "EUR",
+   "access": "PRIMAERBROKER_BOERSE_ANGEBOTEN",
+   "blocked": false,
+   "notional_eur": "122000.00",
+   "vol_eur_per_year": {
+    "base": "8296.00",
+    "low": "5490.00",
+    "high": "11590.00"
+   },
+   "commission_side_eur": "1.00",
+   "half_spread_side_eur": "5.00",
+   "slippage_side_eur": "2.50",
+   "cost_side_eur": "8.50",
+   "cost_rt_eur": "17.00",
+   "cost_rt_bp": 1.393442623,
+   "c_rt_sr": {
+    "base": 0.002049180328,
+    "low": 0.003096539162,
+    "high": 0.001466781708
+   },
+   "c_rt_sr_low_fees": 0.001398264224,
+   "impact_side_eur_by_order_size": {
+    "1": "0.00",
+    "10": "0.00",
+    "100": "8.71",
+    "1000": "29.64"
+   },
+   "rolls_per_year": 4,
+   "strategies": {
+    "S-TF": {
+     "rt_per_year": 83.67508268,
+     "sr_cost_per_year": {
+      "base": 0.2183452822,
+      "low": 0.329943982,
+      "high": 0.1562892546
+     },
+     "sr_cost_per_year_low_fees": 0.1489885455
+    },
+    "S-IM": {
+     "rt_per_year": 113.7346297,
+     "sr_cost_per_year": {
+      "base": 1.008097961,
+      "low": 1.523348029,
+      "high": 0.7215859086
+     },
+     "sr_cost_per_year_low_fees": 0.6878786083
+    },
+    "S-REV": {
+     "rt_per_year": 8.368055556,
+     "sr_cost_per_year": {
+      "base": 0.06676120645,
+      "low": 0.1008836009,
+      "high": 0.04778696882
+     },
+     "sr_cost_per_year_low_fees": 0.04555470557
+    },
+    "S-BASE-TFD1": {
+     "rt_per_year": 8.671465273,
+     "sr_cost_per_year": {
+      "base": 0.02606555787,
+      "low": 0.03938795412,
+      "high": 0.01865745195
+     },
+     "sr_cost_per_year_low_fees": 0.01778591008
+    },
+    "S-BASE-TFD1-7T": {
+     "rt_per_year": 14.03390031,
+     "sr_cost_per_year": {
+      "base": 0.06176187938,
+      "low": 0.09332906217,
+      "high": 0.04420850313
+     },
+     "sr_cost_per_year_low_fees": 0.04214340005
+    }
+   }
+  },
+  {
+   "id": "INS-ICEEU-R",
+   "symbol": "R",
+   "risk_class": "ANLEIHE_LANG",
+   "asset_class": "ANLEIHE",
+   "size_class": "STANDARD",
+   "currency": "GBP",
+   "access": "KEIN_ZUGANG_PRIMAERBROKER",
+   "blocked": false,
+   "notional_eur": "105875.51",
+   "vol_eur_per_year": {
+    "base": "7940.66",
+    "low": "5293.78",
+    "high": "11646.31"
+   },
+   "commission_side_eur": "1.00",
+   "half_spread_side_eur": "5.82",
+   "slippage_side_eur": "2.91",
+   "cost_side_eur": "9.73",
+   "cost_rt_eur": "19.45",
+   "cost_rt_bp": 1.837252747,
+   "c_rt_sr": {
+    "base": 0.00244967033,
+    "low": 0.003674505495,
+    "high": 0.00167022977
+   },
+   "c_rt_sr_low_fees": 0.001666695971,
+   "impact_side_eur_by_order_size": {
+    "1": "0.00",
+    "10": "0.00",
+    "100": "8.34",
+    "1000": "28.37"
+   },
+   "rolls_per_year": 4,
+   "strategies": {
+    "S-TF": {
+     "rt_per_year": 83.67508268,
+     "sr_cost_per_year": {
+      "base": 0.2610184922,
+      "low": 0.3915277383,
+      "high": 0.1779671538
+     },
+     "sr_cost_per_year_low_fees": 0.1775906186
+    },
+    "S-IM": {
+     "rt_per_year": 113.7346297,
+     "sr_cost_per_year": {
+      "base": 1.20511974,
+      "low": 1.807679609,
+      "high": 0.8216725498
+     },
+     "sr_cost_per_year_low_fees": 0.8199340907
+    },
+    "S-REV": {
+     "rt_per_year": 8.368055556,
+     "sr_cost_per_year": {
+      "base": 0.07980895794,
+      "low": 0.1197134369,
+      "high": 0.0544151986
+     },
+     "sr_cost_per_year_low_fees": 0.05430006929
+    },
+    "S-BASE-TFD1": {
+     "rt_per_year": 8.671465273,
+     "sr_cost_per_year": {
+      "base": 0.03115978759,
+      "low": 0.04673968138,
+      "high": 0.02124530972
+     },
+     "sr_cost_per_year_low_fees": 0.02120035982
+    },
+    "S-BASE-TFD1-7T": {
+     "rt_per_year": 14.03390031,
+     "sr_cost_per_year": {
+      "base": 0.07383256679,
+      "low": 0.1107488502,
+      "high": 0.05034038645
+     },
+     "sr_cost_per_year_low_fees": 0.05023387844
+    }
+   }
+  },
+  {
+   "id": "INS-CME-6E",
+   "symbol": "6E",
+   "risk_class": "FX",
+   "asset_class": "FX",
+   "size_class": "STANDARD",
+   "currency": "USD",
+   "access": "PRIMAERBROKER_BOERSE_ANGEBOTEN",
+   "blocked": false,
+   "notional_eur": "125000.00",
+   "vol_eur_per_year": {
+    "base": "9375.00",
+    "low": "6250.00",
+    "high": "13750.00"
+   },
+   "commission_side_eur": "1.00",
+   "half_spread_side_eur": "2.74",
+   "slippage_side_eur": "1.37",
+   "cost_side_eur": "5.11",
+   "cost_rt_eur": "10.22",
+   "cost_rt_bp": 0.8172605381,
+   "c_rt_sr": {
+    "base": 0.001089680717,
+    "low": 0.001634521076,
+    "high": 0.0007429641255
+   },
+   "c_rt_sr_low_fees": 0.0007548982561,
+   "impact_side_eur_by_order_size": {
+    "1": "0.00",
+    "10": "0.00",
+    "100": "8.27",
+    "1000": "28.94"
+   },
+   "rolls_per_year": 4,
+   "strategies": {
+    "S-TF": {
+     "rt_per_year": 83.67508268,
+     "sr_cost_per_year": {
+      "base": 0.1161082022,
+      "low": 0.1741623032,
+      "high": 0.07916468329
+     },
+     "sr_cost_per_year_low_fees": 0.08043629471
+    },
+    "S-IM": {
+     "rt_per_year": 113.7346297,
+     "sr_cost_per_year": {
+      "base": 0.5360703955,
+      "low": 0.8041055933,
+      "high": 0.3655025424
+     },
+     "sr_cost_per_year_low_fees": 0.3713735595
+    },
+    "S-REV": {
+     "rt_per_year": 8.368055556,
+     "sr_cost_per_year": {
+      "base": 0.03550121888,
+      "low": 0.05325182831,
+      "high": 0.02420537651
+     },
+     "sr_cost_per_year_low_fees": 0.02459418414
+    },
+    "S-BASE-TFD1": {
+     "rt_per_year": 8.671465273,
+     "sr_cost_per_year": {
+      "base": 0.01386073027,
+      "low": 0.02079109541,
+      "high": 0.009450497913
+     },
+     "sr_cost_per_year_low_fees": 0.009602299961
+    },
+    "S-BASE-TFD1-7T": {
+     "rt_per_year": 14.03390031,
+     "sr_cost_per_year": {
+      "base": 0.03284275577,
+      "low": 0.04926413365,
+      "high": 0.02239278802
+     },
+     "sr_cost_per_year_low_fees": 0.0227524803
+    }
+   }
+  },
+  {
+   "id": "INS-CME-M6E",
+   "symbol": "M6E",
+   "risk_class": "FX",
+   "asset_class": "FX",
+   "size_class": "MICRO",
+   "currency": "USD",
+   "access": "PRIMAERBROKER_BOERSE_ANGEBOTEN",
+   "blocked": false,
+   "notional_eur": "12500.00",
+   "vol_eur_per_year": {
+    "base": "937.50",
+    "low": "625.00",
+    "high": "1375.00"
+   },
+   "commission_side_eur": "1.00",
+   "half_spread_side_eur": "0.55",
+   "slippage_side_eur": "0.27",
+   "cost_side_eur": "1.82",
+   "cost_rt_eur": "3.64",
+   "cost_rt_bp": 2.914521076,
+   "c_rt_sr": {
+    "base": 0.003886028102,
+    "low": 0.005829042152,
+    "high": 0.002649564615
+   },
+   "c_rt_sr_low_fees": 0.002875129845,
+   "impact_side_eur_by_order_size": {
+    "1": "0.00",
+    "10": "0.83",
+    "100": "2.89",
+    "1000": "9.23"
+   },
+   "rolls_per_year": 4,
+   "strategies": {
+    "S-TF": {
+     "rt_per_year": 83.67508268,
+     "sr_cost_per_year": {
+      "base": 0.4140660004,
+      "low": 0.6210990007,
+      "high": 0.2823177276
+     },
+     "sr_cost_per_year_low_fees": 0.3063522663
+    },
+    "S-IM": {
+     "rt_per_year": 113.7346297,
+     "sr_cost_per_year": {
+      "base": 1.911738538,
+      "low": 2.867607807,
+      "high": 1.303458094
+     },
+     "sr_cost_per_year_low_fees": 1.414425316
+    },
+    "S-REV": {
+     "rt_per_year": 8.368055556,
+     "sr_cost_per_year": {
+      "base": 0.1266047311,
+      "low": 0.1899070966,
+      "high": 0.08632140755
+     },
+     "sr_cost_per_year_low_fees": 0.09367020294
+    },
+    "S-BASE-TFD1": {
+     "rt_per_year": 8.671465273,
+     "sr_cost_per_year": {
+      "base": 0.0494302473,
+      "low": 0.07414537096,
+      "high": 0.03370244134
+     },
+     "sr_cost_per_year_low_fees": 0.03657162933
+    },
+    "S-BASE-TFD1-7T": {
+     "rt_per_year": 14.03390031,
+     "sr_cost_per_year": {
+      "base": 0.1171240986,
+      "low": 0.175686148,
+      "high": 0.07985733999
+     },
+     "sr_cost_per_year_low_fees": 0.08665583028
+    }
+   }
+  },
+  {
+   "id": "INS-CME-6B",
+   "symbol": "6B",
+   "risk_class": "FX",
+   "asset_class": "FX",
+   "size_class": "STANDARD",
+   "currency": "USD",
+   "access": "PRIMAERBROKER_BOERSE_ANGEBOTEN",
+   "blocked": false,
+   "notional_eur": "72716.57",
+   "vol_eur_per_year": {
+    "base": "5817.33",
+    "low": "4362.99",
+    "high": "8725.99"
+   },
+   "commission_side_eur": "1.00",
+   "half_spread_side_eur": "2.74",
+   "slippage_side_eur": "1.37",
+   "cost_side_eur": "5.11",
+   "cost_rt_eur": "10.22",
+   "cost_rt_bp": 1.404873346,
+   "c_rt_sr": {
+    "base": 0.001756091682,
+    "low": 0.002341455576,
+    "high": 0.001170727788
+   },
+   "c_rt_sr_low_fees": 0.001216567869,
+   "impact_side_eur_by_order_size": {
+    "1": "0.00",
+    "10": "0.00",
+    "100": "7.70",
+    "1000": "25.52"
+   },
+   "rolls_per_year": 4,
+   "strategies": {
+    "S-TF": {
+     "rt_per_year": 83.67508268,
+     "sr_cost_per_year": {
+      "base": 0.187115955,
+      "low": 0.24948794,
+      "high": 0.12474397
+     },
+     "sr_cost_per_year_low_fees": 0.1296283451
+    },
+    "S-IM": {
+     "rt_per_year": 113.7346297,
+     "sr_cost_per_year": {
+      "base": 0.8639124723,
+      "low": 1.151883296,
+      "high": 0.5759416482
+     },
+     "sr_cost_per_year_low_fees": 0.5984927588
+    },
+    "S-REV": {
+     "rt_per_year": 8.368055556,
+     "sr_cost_per_year": {
+      "base": 0.05721253407,
+      "low": 0.07628337876,
+      "high": 0.03814168938
+     },
+     "sr_cost_per_year_low_fees": 0.03963513487
+    },
+    "S-BASE-TFD1": {
+     "rt_per_year": 8.671465273,
+     "sr_cost_per_year": {
+      "base": 0.02233747257,
+      "low": 0.02978329676,
+      "high": 0.01489164838
+     },
+     "sr_cost_per_year_low_fees": 0.01547473386
+    },
+    "S-BASE-TFD1-7T": {
+     "rt_per_year": 14.03390031,
+     "sr_cost_per_year": {
+      "base": 0.05292824705,
+      "low": 0.07057099607,
+      "high": 0.03528549804
+     },
+     "sr_cost_per_year_low_fees": 0.03666710878
+    }
+   }
+  },
+  {
+   "id": "INS-CME-M6B",
+   "symbol": "M6B",
+   "risk_class": "FX",
+   "asset_class": "FX",
+   "size_class": "MICRO",
+   "currency": "USD",
+   "access": "PRIMAERBROKER_BOERSE_ANGEBOTEN",
+   "blocked": false,
+   "notional_eur": "7271.66",
+   "vol_eur_per_year": {
+    "base": "581.73",
+    "low": "436.30",
+    "high": "872.60"
+   },
+   "commission_side_eur": "1.00",
+   "half_spread_side_eur": "0.55",
+   "slippage_side_eur": "0.14",
+   "cost_side_eur": "1.68",
+   "cost_rt_eur": "3.37",
+   "cost_rt_bp": 4.633459624,
+   "c_rt_sr": {
+    "base": 0.005791824529,
+    "low": 0.007722432706,
+    "high": 0.003861216353
+   },
+   "c_rt_sr_low_fees": 0.004633459624,
+   "impact_side_eur_by_order_size": {
+    "1": "0.26",
+    "10": "1.12",
+    "100": "3.62",
+    "1000": "11.47"
+   },
+   "rolls_per_year": 4,
+   "strategies": {
+    "S-TF": {
+     "rt_per_year": 83.67508268,
+     "sr_cost_per_year": {
+      "base": 0.61713337,
+      "low": 0.8228444933,
+      "high": 0.4114222467
+     },
+     "sr_cost_per_year_low_fees": 0.493706696
+    },
+    "S-IM": {
+     "rt_per_year": 113.7346297,
+     "sr_cost_per_year": {
+      "base": 2.84929853,
+      "low": 3.799064707,
+      "high": 1.899532353
+     },
+     "sr_cost_per_year_low_fees": 2.279438824
+    },
+    "S-REV": {
+     "rt_per_year": 8.368055556,
+     "sr_cost_per_year": {
+      "base": 0.1886945662,
+      "low": 0.251592755,
+      "high": 0.1257963775
+     },
+     "sr_cost_per_year_low_fees": 0.150955653
+    },
+    "S-BASE-TFD1": {
+     "rt_per_year": 8.671465273,
+     "sr_cost_per_year": {
+      "base": 0.07367196308,
+      "low": 0.09822928411,
+      "high": 0.04911464205
+     },
+     "sr_cost_per_year_low_fees": 0.05893757047
+    },
+    "S-BASE-TFD1-7T": {
+     "rt_per_year": 14.03390031,
+     "sr_cost_per_year": {
+      "base": 0.1745644164,
+      "low": 0.2327525552,
+      "high": 0.1163762776
+     },
+     "sr_cost_per_year_low_fees": 0.1396515331
+    }
+   }
+  },
+  {
+   "id": "INS-CME-6J",
+   "symbol": "6J",
+   "risk_class": "FX",
+   "asset_class": "FX",
+   "size_class": "STANDARD",
+   "currency": "USD",
+   "access": "PRIMAERBROKER_BOERSE_ANGEBOTEN",
+   "blocked": false,
+   "notional_eur": "69367.28",
+   "vol_eur_per_year": {
+    "base": "6936.73",
+    "low": "4855.71",
+    "high": "9711.42"
+   },
+   "commission_side_eur": "1.00",
+   "half_spread_side_eur": "2.74",
+   "slippage_side_eur": "1.37",
+   "cost_side_eur": "5.11",
+   "cost_rt_eur": "10.22",
+   "cost_rt_bp": 1.472705451,
+   "c_rt_sr": {
+    "base": 0.001472705451,
+    "low": 0.00210386493,
+    "high": 0.001051932465
+   },
+   "c_rt_sr_low_fees": 0.001020246352,
+   "impact_side_eur_by_order_size": {
+    "1": "0.00",
+    "10": "0.00",
+    "100": "7.28",
+    "1000": "24.79"
+   },
+   "rolls_per_year": 4,
+   "strategies": {
+    "S-TF": {
+     "rt_per_year": 83.67508268,
+     "sr_cost_per_year": {
+      "base": 0.1569204442,
+      "low": 0.2241720632,
+      "high": 0.1120860316
+     },
+     "sr_cost_per_year_low_fees": 0.1087097971
+    },
+    "S-IM": {
+     "rt_per_year": 113.7346297,
+     "sr_cost_per_year": {
+      "base": 0.7245001046,
+      "low": 1.035000149,
+      "high": 0.5175000747
+     },
+     "sr_cost_per_year_low_fees": 0.5019120342
+    },
+    "S-REV": {
+     "rt_per_year": 8.368055556,
+     "sr_cost_per_year": {
+      "base": 0.04797996122,
+      "low": 0.06854280175,
+      "high": 0.03427140087
+     },
+     "sr_cost_per_year_low_fees": 0.03323908414
+    },
+    "S-BASE-TFD1": {
+     "rt_per_year": 8.671465273,
+     "sr_cost_per_year": {
+      "base": 0.01873280192,
+      "low": 0.02676114559,
+      "high": 0.0133805728
+     },
+     "sr_cost_per_year_low_fees": 0.01297752568
+    },
+    "S-BASE-TFD1-7T": {
+     "rt_per_year": 14.03390031,
+     "sr_cost_per_year": {
+      "base": 0.04438704354,
+      "low": 0.06341006221,
+      "high": 0.0317050311
+     },
+     "sr_cost_per_year_low_fees": 0.03075001808
+    }
+   }
+  },
+  {
+   "id": "INS-CME-MJY",
+   "symbol": "MJY",
+   "risk_class": "FX",
+   "asset_class": "FX",
+   "size_class": "MICRO",
+   "currency": "USD",
+   "access": "PRIMAERBROKER_BOERSE_ANGEBOTEN",
+   "blocked": false,
+   "notional_eur": "6936.73",
+   "vol_eur_per_year": {
+    "base": "693.67",
+    "low": "485.57",
+    "high": "971.14"
+   },
+   "commission_side_eur": "1.00",
+   "half_spread_side_eur": "1.10",
+   "slippage_side_eur": "0.27",
+   "cost_side_eur": "2.37",
+   "cost_rt_eur": "4.74",
+   "cost_rt_bp": 6.831154065,
+   "c_rt_sr": {
+    "base": 0.006831154065,
+    "low": 0.009758791521,
+    "high": 0.004879395761
+   },
+   "c_rt_sr_low_fees": 0.005464923252,
+   "impact_side_eur_by_order_size": {
+    "1": "0.31",
+    "10": "1.33",
+    "100": "4.31",
+    "1000": "13.68"
+   },
+   "rolls_per_year": 4,
+   "strategies": {
+    "S-TF": {
+     "rt_per_year": 83.67508268,
+     "sr_cost_per_year": {
+      "base": 0.7278765279,
+      "low": 1.039823611,
+      "high": 0.5199118057
+     },
+     "sr_cost_per_year_low_fees": 0.5823012223
+    },
+    "S-IM": {
+     "rt_per_year": 113.7346297,
+     "sr_cost_per_year": {
+      "base": 3.360598571,
+      "low": 4.800855101,
+      "high": 2.40042755
+     },
+     "sr_cost_per_year_low_fees": 2.688478856
+    },
+    "S-REV": {
+     "rt_per_year": 8.368055556,
+     "sr_cost_per_year": {
+      "base": 0.2225553704,
+      "low": 0.3179362434,
+      "high": 0.1589681217
+     },
+     "sr_cost_per_year_low_fees": 0.1780442963
+    },
+    "S-BASE-TFD1": {
+     "rt_per_year": 8.671465273,
+     "sr_cost_per_year": {
+      "base": 0.08689222671,
+      "low": 0.1241317524,
+      "high": 0.06206587622
+     },
+     "sr_cost_per_year_low_fees": 0.06951378137
+    },
+    "S-BASE-TFD1-7T": {
+     "rt_per_year": 14.03390031,
+     "sr_cost_per_year": {
+      "base": 0.2058895977,
+      "low": 0.2941279967,
+      "high": 0.1470639984
+     },
+     "sr_cost_per_year_low_fees": 0.1647116782
+    }
+   }
+  },
+  {
+   "id": "INS-CME-6S",
+   "symbol": "6S",
+   "risk_class": "FX",
+   "asset_class": "FX",
+   "size_class": "STANDARD",
+   "currency": "USD",
+   "access": "PRIMAERBROKER_BOERSE_ANGEBOTEN",
+   "blocked": false,
+   "notional_eur": "133120.45",
+   "vol_eur_per_year": {
+    "base": "10649.64",
+    "low": "7987.23",
+    "high": "15974.45"
+   },
+   "commission_side_eur": "1.00",
+   "half_spread_side_eur": "2.74",
+   "slippage_side_eur": "1.37",
+   "cost_side_eur": "5.11",
+   "cost_rt_eur": "10.22",
+   "cost_rt_bp": 0.7674069929,
+   "c_rt_sr": {
+    "base": 0.0009592587411,
+    "low": 0.001279011655,
+    "high": 0.0006395058274
+   },
+   "c_rt_sr_low_fees": 0.0006645458061,
+   "impact_side_eur_by_order_size": {
+    "1": "0.00",
+    "10": "7.17",
+    "100": "26.70",
+    "1000": "85.61"
+   },
+   "rolls_per_year": 4,
+   "strategies": {
+    "S-TF": {
+     "rt_per_year": 83.67508268,
+     "sr_cost_per_year": {
+      "base": 0.1022114148,
+      "low": 0.1362818864,
+      "high": 0.06814094322
+     },
+     "sr_cost_per_year_low_fees": 0.0708090155
+    },
+    "S-IM": {
+     "rt_per_year": 113.7346297,
+     "sr_cost_per_year": {
+      "base": 0.4719090689,
+      "low": 0.6292120919,
+      "high": 0.3146060459
+     },
+     "sr_cost_per_year_low_fees": 0.3269245087
+    },
+    "S-REV": {
+     "rt_per_year": 8.368055556,
+     "sr_cost_per_year": {
+      "base": 0.03125214018,
+      "low": 0.04166952023,
+      "high": 0.02083476012
+     },
+     "sr_cost_per_year_low_fees": 0.02165054932
+    },
+    "S-BASE-TFD1": {
+     "rt_per_year": 8.671465273,
+     "sr_cost_per_year": {
+      "base": 0.01220176375,
+      "low": 0.01626901833,
+      "high": 0.008134509164
+     },
+     "sr_cost_per_year_low_fees": 0.008453017499
+    },
+    "S-BASE-TFD1-7T": {
+     "rt_per_year": 14.03390031,
+     "sr_cost_per_year": {
+      "base": 0.02891186386,
+      "low": 0.03854915181,
+      "high": 0.01927457591
+     },
+     "sr_cost_per_year_low_fees": 0.02002927579
+    }
+   }
+  },
+  {
+   "id": "INS-CME-MSF",
+   "symbol": "MSF",
+   "risk_class": "FX",
+   "asset_class": "FX",
+   "size_class": "MICRO",
+   "currency": "USD",
+   "access": "PRIMAERBROKER_BOERSE_ANGEBOTEN",
+   "blocked": false,
+   "notional_eur": "13312.05",
+   "vol_eur_per_year": {
+    "base": "1064.96",
+    "low": "798.72",
+    "high": "1597.45"
+   },
+   "commission_side_eur": "1.00",
+   "half_spread_side_eur": "1.64",
+   "slippage_side_eur": "0.27",
+   "cost_side_eur": "2.92",
+   "cost_rt_eur": "5.83",
+   "cost_rt_bp": 4.382511952,
+   "c_rt_sr": {
+    "base": 0.005478139941,
+    "low": 0.007304186587,
+    "high": 0.003652093294
+   },
+   "c_rt_sr_low_fees": 0.004588234326,
+   "impact_side_eur_by_order_size": {
+    "1": "1.41",
+    "10": "4.67",
+    "100": "14.84",
+    "1000": "46.96"
+   },
+   "rolls_per_year": 4,
+   "strategies": {
+    "S-TF": {
+     "rt_per_year": 83.67508268,
+     "sr_cost_per_year": {
+      "base": 0.5837094935,
+      "low": 0.7782793247,
+      "high": 0.3891396624
+     },
+     "sr_cost_per_year_low_fees": 0.4888878276
+    },
+    "S-IM": {
+     "rt_per_year": 113.7346297,
+     "sr_cost_per_year": {
+      "base": 2.69498083,
+      "low": 3.593307774,
+      "high": 1.796653887
+     },
+     "sr_cost_per_year_low_fees": 2.257190157
+    },
+    "S-REV": {
+     "rt_per_year": 8.368055556,
+     "sr_cost_per_year": {
+      "base": 0.178474889,
+      "low": 0.2379665186,
+      "high": 0.1189832593
+     },
+     "sr_cost_per_year_low_fees": 0.1494822368
+    },
+    "S-BASE-TFD1": {
+     "rt_per_year": 8.671465273,
+     "sr_cost_per_year": {
+      "base": 0.06968189755,
+      "low": 0.09290919673,
+      "high": 0.04645459836
+     },
+     "sr_cost_per_year_low_fees": 0.05836230503
+    },
+    "S-BASE-TFD1-7T": {
+     "rt_per_year": 14.03390031,
+     "sr_cost_per_year": {
+      "base": 0.1651100265,
+      "low": 0.220146702,
+      "high": 0.110073351
+     },
+     "sr_cost_per_year_low_fees": 0.1382884518
+    }
+   }
+  },
+  {
+   "id": "INS-CME-6C",
+   "symbol": "6C",
+   "risk_class": "FX",
+   "asset_class": "FX",
+   "size_class": "STANDARD",
+   "currency": "USD",
+   "access": "PRIMAERBROKER_BOERSE_ANGEBOTEN",
+   "blocked": false,
+   "notional_eur": "62200.51",
+   "vol_eur_per_year": {
+    "base": "3732.03",
+    "low": "2488.02",
+    "high": "5598.05"
+   },
+   "commission_side_eur": "1.00",
+   "half_spread_side_eur": "2.19",
+   "slippage_side_eur": "1.10",
+   "cost_side_eur": "4.29",
+   "cost_rt_eur": "8.57",
+   "cost_rt_bp": 1.378221114,
+   "c_rt_sr": {
+    "base": 0.00229703519,
+    "low": 0.003445552785,
+    "high": 0.001531356793
+   },
+   "c_rt_sr_low_fees": 0.0016028103,
+   "impact_side_eur_by_order_size": {
+    "1": "0.00",
+    "10": "1.08",
+    "100": "6.00",
+    "1000": "19.60"
+   },
+   "rolls_per_year": 4,
+   "strategies": {
+    "S-TF": {
+     "rt_per_year": 83.67508268,
+     "sr_cost_per_year": {
+      "base": 0.2447548368,
+      "low": 0.3671322552,
+      "high": 0.1631698912
+     },
+     "sr_cost_per_year_low_fees": 0.1707834408
+    },
+    "S-IM": {
+     "rt_per_year": 113.7346297,
+     "sr_cost_per_year": {
+      "base": 1.130030607,
+      "low": 1.695045911,
+      "high": 0.7533537381
+     },
+     "sr_cost_per_year_low_fees": 0.7885054197
+    },
+    "S-REV": {
+     "rt_per_year": 8.368055556,
+     "sr_cost_per_year": {
+      "base": 0.07483618617,
+      "low": 0.1122542793,
+      "high": 0.04989079078
+     },
+     "sr_cost_per_year_low_fees": 0.05221870808
+    },
+    "S-BASE-TFD1": {
+     "rt_per_year": 8.671465273,
+     "sr_cost_per_year": {
+      "base": 0.02921826979,
+      "low": 0.04382740469,
+      "high": 0.01947884653
+     },
+     "sr_cost_per_year_low_fees": 0.02038773458
+    },
+    "S-BASE-TFD1-7T": {
+     "rt_per_year": 14.03390031,
+     "sr_cost_per_year": {
+      "base": 0.06923217464,
+      "low": 0.103848262,
+      "high": 0.04615478309
+     },
+     "sr_cost_per_year_low_fees": 0.04830837729
+    }
+   }
+  },
+  {
+   "id": "INS-CME-MCD",
+   "symbol": "MCD",
+   "risk_class": "FX",
+   "asset_class": "FX",
+   "size_class": "MICRO",
+   "currency": "USD",
+   "access": "PRIMAERBROKER_BOERSE_ANGEBOTEN",
+   "blocked": false,
+   "notional_eur": "6220.05",
+   "vol_eur_per_year": {
+    "base": "373.20",
+    "low": "248.80",
+    "high": "559.80"
+   },
+   "commission_side_eur": "1.00",
+   "half_spread_side_eur": "1.31",
+   "slippage_side_eur": "0.22",
+   "cost_side_eur": "2.53",
+   "cost_rt_eur": "5.07",
+   "cost_rt_bp": 8.146582696,
+   "c_rt_sr": {
+    "base": 0.01357763783,
+    "low": 0.02036645674,
+    "high": 0.009051758551
+   },
+   "c_rt_sr_low_fees": 0.01133174596,
+   "impact_side_eur_by_order_size": {
+    "1": "0.49",
+    "10": "1.64",
+    "100": "5.20",
+    "1000": "16.46"
+   },
+   "rolls_per_year": 4,
+   "strategies": {
+    "S-TF": {
+     "rt_per_year": 83.67508268,
+     "sr_cost_per_year": {
+      "base": 1.446731224,
+      "low": 2.170096835,
+      "high": 0.9644874824
+     },
+     "sr_cost_per_year_low_fees": 1.207425836
+    },
+    "S-IM": {
+     "rt_per_year": 113.7346297,
+     "sr_cost_per_year": {
+      "base": 6.679543433,
+      "low": 10.01931515,
+      "high": 4.453028955
+     },
+     "sr_cost_per_year_low_fees": 5.574672878
+    },
+    "S-REV": {
+     "rt_per_year": 8.368055556,
+     "sr_cost_per_year": {
+      "base": 0.4423522272,
+      "low": 0.6635283408,
+      "high": 0.2949014848
+     },
+     "sr_cost_per_year_low_fees": 0.3691822635
+    },
+    "S-BASE-TFD1": {
+     "rt_per_year": 8.671465273,
+     "sr_cost_per_year": {
+      "base": 0.1727074478,
+      "low": 0.2590611717,
+      "high": 0.1151382985
+     },
+     "sr_cost_per_year_low_fees": 0.1441397208
+    },
+    "S-BASE-TFD1-7T": {
+     "rt_per_year": 14.03390031,
+     "sr_cost_per_year": {
+      "base": 0.4092272497,
+      "low": 0.6138408745,
+      "high": 0.2728181665
+     },
+     "sr_cost_per_year_low_fees": 0.3415365246
+    }
+   }
+  },
+  {
+   "id": "INS-CME-6A",
+   "symbol": "6A",
+   "risk_class": "FX",
+   "asset_class": "FX",
+   "size_class": "STANDARD",
+   "currency": "USD",
+   "access": "PRIMAERBROKER_BOERSE_ANGEBOTEN",
+   "blocked": false,
+   "notional_eur": "61934.98",
+   "vol_eur_per_year": {
+    "base": "6193.50",
+    "low": "4335.45",
+    "high": "8670.90"
+   },
+   "commission_side_eur": "1.00",
+   "half_spread_side_eur": "2.19",
+   "slippage_side_eur": "1.10",
+   "cost_side_eur": "4.29",
+   "cost_rt_eur": "8.57",
+   "cost_rt_bp": 1.384129949,
+   "c_rt_sr": {
+    "base": 0.001384129949,
+    "low": 0.001977328498,
+    "high": 0.0009886642491
+   },
+   "c_rt_sr_low_fees": 0.0009658092085,
+   "impact_side_eur_by_order_size": {
+    "1": "0.00",
+    "10": "0.91",
+    "100": "8.68",
+    "1000": "28.66"
+   },
+   "rolls_per_year": 4,
+   "strategies": {
+    "S-TF": {
+     "rt_per_year": 83.67508268,
+     "sr_cost_per_year": {
+      "base": 0.1474825032,
+      "low": 0.2106892903,
+      "high": 0.1053446452
+     },
+     "sr_cost_per_year_low_fees": 0.1029093835
+    },
+    "S-IM": {
+     "rt_per_year": 113.7346297,
+     "sr_cost_per_year": {
+      "base": 0.6809252263,
+      "low": 0.9727503232,
+      "high": 0.4863751616
+     },
+     "sr_cost_per_year_low_fees": 0.4751315831
+    },
+    "S-REV": {
+     "rt_per_year": 8.368055556,
+     "sr_cost_per_year": {
+      "base": 0.04509421841,
+      "low": 0.06442031201,
+      "high": 0.032210156
+     },
+     "sr_cost_per_year_low_fees": 0.03146555092
+    },
+    "S-BASE-TFD1": {
+     "rt_per_year": 8.671465273,
+     "sr_cost_per_year": {
+      "base": 0.01760612221,
+      "low": 0.02515160316,
+      "high": 0.01257580158
+     },
+     "sr_cost_per_year_low_fees": 0.01228508564
+    },
+    "S-BASE-TFD1-7T": {
+     "rt_per_year": 14.03390031,
+     "sr_cost_per_year": {
+      "base": 0.04171739587,
+      "low": 0.05959627981,
+      "high": 0.0297981399
+     },
+     "sr_cost_per_year_low_fees": 0.02910929362
+    }
+   }
+  },
+  {
+   "id": "INS-CME-M6A",
+   "symbol": "M6A",
+   "risk_class": "FX",
+   "asset_class": "FX",
+   "size_class": "MICRO",
+   "currency": "USD",
+   "access": "PRIMAERBROKER_BOERSE_ANGEBOTEN",
+   "blocked": false,
+   "notional_eur": "6193.50",
+   "vol_eur_per_year": {
+    "base": "619.35",
+    "low": "433.54",
+    "high": "867.09"
+   },
+   "commission_side_eur": "1.00",
+   "half_spread_side_eur": "0.88",
+   "slippage_side_eur": "0.22",
+   "cost_side_eur": "2.10",
+   "cost_rt_eur": "4.19",
+   "cost_rt_bp": 6.766561961,
+   "c_rt_sr": {
+    "base": 0.006766561961,
+    "low": 0.009666517087,
+    "high": 0.004833258543
+   },
+   "c_rt_sr_low_fees": 0.005413249568,
+   "impact_side_eur_by_order_size": {
+    "1": "0.33",
+    "10": "1.34",
+    "100": "4.31",
+    "1000": "13.65"
+   },
+   "rolls_per_year": 4,
+   "strategies": {
+    "S-TF": {
+     "rt_per_year": 83.67508268,
+     "sr_cost_per_year": {
+      "base": 0.7209940779,
+      "low": 1.02999154,
+      "high": 0.5149957699
+     },
+     "sr_cost_per_year_low_fees": 0.5767952623
+    },
+    "S-IM": {
+     "rt_per_year": 113.7346297,
+     "sr_cost_per_year": {
+      "base": 3.328822368,
+      "low": 4.755460526,
+      "high": 2.377730263
+     },
+     "sr_cost_per_year_low_fees": 2.663057895
+    },
+    "S-REV": {
+     "rt_per_year": 8.368055556,
+     "sr_cost_per_year": {
+      "base": 0.2204509939,
+      "low": 0.3149299913,
+      "high": 0.1574649956
+     },
+     "sr_cost_per_year_low_fees": 0.1763607951
+    },
+    "S-BASE-TFD1": {
+     "rt_per_year": 8.671465273,
+     "sr_cost_per_year": {
+      "base": 0.08607061564,
+      "low": 0.1229580223,
+      "high": 0.06147901117
+     },
+     "sr_cost_per_year_low_fees": 0.06885649252
+    },
+    "S-BASE-TFD1-7T": {
+     "rt_per_year": 14.03390031,
+     "sr_cost_per_year": {
+      "base": 0.2039428048,
+      "low": 0.291346864,
+      "high": 0.145673432
+     },
+     "sr_cost_per_year_low_fees": 0.1631542438
+    }
+   }
+  },
+  {
+   "id": "INS-CME-6N",
+   "symbol": "6N",
+   "risk_class": "FX",
+   "asset_class": "FX",
+   "size_class": "STANDARD",
+   "currency": "USD",
+   "access": "PRIMAERBROKER_BOERSE_ANGEBOTEN",
+   "blocked": false,
+   "notional_eur": "49878.19",
+   "vol_eur_per_year": {
+    "base": "4987.82",
+    "low": "3491.47",
+    "high": "6982.95"
+   },
+   "commission_side_eur": "1.00",
+   "half_spread_side_eur": "2.19",
+   "slippage_side_eur": "1.10",
+   "cost_side_eur": "4.29",
+   "cost_rt_eur": "8.57",
+   "cost_rt_bp": 1.718708272,
+   "c_rt_sr": {
+    "base": 0.001718708272,
+    "low": 0.002455297531,
+    "high": 0.001227648766
+   },
+   "c_rt_sr_low_fees": 0.001199269098,
+   "impact_side_eur_by_order_size": {
+    "1": "0.00",
+    "10": "4.40",
+    "100": "15.40",
+    "1000": "49.13"
+   },
+   "rolls_per_year": 4,
+   "strategies": {
+    "S-TF": {
+     "rt_per_year": 83.67508268,
+     "sr_cost_per_year": {
+      "base": 0.1831326592,
+      "low": 0.2616180846,
+      "high": 0.1308090423
+     },
+     "sr_cost_per_year_low_fees": 0.1277851179
+    },
+    "S-IM": {
+     "rt_per_year": 113.7346297,
+     "sr_cost_per_year": {
+      "base": 0.8455216361,
+      "low": 1.207888052,
+      "high": 0.6039440258
+     },
+     "sr_cost_per_year_low_fees": 0.5899825973
+    },
+    "S-REV": {
+     "rt_per_year": 8.368055556,
+     "sr_cost_per_year": {
+      "base": 0.05599460243,
+      "low": 0.07999228918,
+      "high": 0.03999614459
+     },
+     "sr_cost_per_year_low_fees": 0.03907155011
+    },
+    "S-BASE-TFD1": {
+     "rt_per_year": 8.671465273,
+     "sr_cost_per_year": {
+      "base": 0.02186195588,
+      "low": 0.03123136555,
+      "high": 0.01561568277
+     },
+     "sr_cost_per_year_low_fees": 0.01525469363
+    },
+    "S-BASE-TFD1-7T": {
+     "rt_per_year": 14.03390031,
+     "sr_cost_per_year": {
+      "base": 0.05180151865,
+      "low": 0.0740021695,
+      "high": 0.03700108475
+     },
+     "sr_cost_per_year_low_fees": 0.03614572734
+    }
+   }
+  },
+  {
+   "id": "INS-CME-6M",
+   "symbol": "6M",
+   "risk_class": "FX",
+   "asset_class": "FX",
+   "size_class": "STANDARD",
+   "currency": "USD",
+   "access": "PRIMAERBROKER_BOERSE_ANGEBOTEN",
+   "blocked": false,
+   "notional_eur": "23661.38",
+   "vol_eur_per_year": {
+    "base": "3075.98",
+    "low": "2129.52",
+    "high": "4732.28"
+   },
+   "commission_side_eur": "1.00",
+   "half_spread_side_eur": "2.19",
+   "slippage_side_eur": "1.10",
+   "cost_side_eur": "4.29",
+   "cost_rt_eur": "8.57",
+   "cost_rt_bp": 3.623037037,
+   "c_rt_sr": {
+    "base": 0.002786951567,
+    "low": 0.004025596708,
+    "high": 0.001811518519
+   },
+   "c_rt_sr_low_fees": 0.001944660969,
+   "impact_side_eur_by_order_size": {
+    "1": "0.00",
+    "10": "2.07",
+    "100": "7.71",
+    "1000": "24.73"
+   },
+   "rolls_per_year": 4,
+   "strategies": {
+    "S-TF": {
+     "rt_per_year": 83.67508268,
+     "sr_cost_per_year": {
+      "base": 0.2969566505,
+      "low": 0.428937384,
+      "high": 0.1930218228
+     },
+     "sr_cost_per_year_low_fees": 0.2072084834
+    },
+    "S-IM": {
+     "rt_per_year": 113.7346297,
+     "sr_cost_per_year": {
+      "base": 1.371045853,
+      "low": 1.980399566,
+      "high": 0.8911798045
+     },
+     "sr_cost_per_year_low_fees": 0.9566794731
+    },
+    "S-REV": {
+     "rt_per_year": 8.368055556,
+     "sr_cost_per_year": {
+      "base": 0.09079740147,
+      "low": 0.1311518021,
+      "high": 0.05901831096
+     },
+     "sr_cost_per_year_low_fees": 0.06335602125
+    },
+    "S-BASE-TFD1": {
+     "rt_per_year": 8.671465273,
+     "sr_cost_per_year": {
+      "base": 0.03545000231,
+      "low": 0.05120555889,
+      "high": 0.0230425015
+     },
+     "sr_cost_per_year_low_fees": 0.02473607243
+    },
+    "S-BASE-TFD1-7T": {
+     "rt_per_year": 14.03390031,
+     "sr_cost_per_year": {
+      "base": 0.08399815486,
+      "low": 0.1213306681,
+      "high": 0.05459880066
+     },
+     "sr_cost_per_year_low_fees": 0.05861168709
+    }
+   }
+  },
+  {
+   "id": "INS-NYMEX-CL",
+   "symbol": "CL",
+   "risk_class": "ENERGIE",
+   "asset_class": "ENERGIE",
+   "size_class": "STANDARD",
+   "currency": "USD",
+   "access": "PRIMAERBROKER_BOERSE_ANGEBOTEN",
+   "blocked": false,
+   "notional_eur": "71772.85",
+   "vol_eur_per_year": {
+    "base": "25120.50",
+    "low": "17943.21",
+    "high": "43063.71"
+   },
+   "commission_side_eur": "1.00",
+   "half_spread_side_eur": "4.38",
+   "slippage_side_eur": "2.19",
+   "cost_side_eur": "7.57",
+   "cost_rt_eur": "15.15",
+   "cost_rt_bp": 2.11015873,
+   "c_rt_sr": {
+    "base": 0.0006029024943,
+    "low": 0.0008440634921,
+    "high": 0.0003516931217
+   },
+   "c_rt_sr_low_fees": 0.0004125504971,
+   "impact_side_eur_by_order_size": {
+    "1": "0.00",
+    "10": "0.00",
+    "100": "0.00",
+    "1000": "33.23"
+   },
+   "rolls_per_year": 12,
+   "strategies": {
+    "S-TF": {
+     "rt_per_year": 88.60858138,
+     "sr_cost_per_year": {
+      "base": 0.06802841441,
+      "low": 0.09523978017,
+      "high": 0.03968324174
+     },
+     "sr_cost_per_year_low_fees": 0.04655007476
+    },
+    "S-IM": {
+     "rt_per_year": 114.1622224,
+     "sr_cost_per_year": {
+      "base": 0.2977140532,
+      "low": 0.4167996745,
+      "high": 0.1736665311
+     },
+     "sr_cost_per_year_low_fees": 0.203717984
+    },
+    "S-REV": {
+     "rt_per_year": 8.895833334,
+     "sr_cost_per_year": {
+      "base": 0.02088108983,
+      "low": 0.02923352576,
+      "high": 0.01218063573
+     },
+     "sr_cost_per_year_low_fees": 0.01428838671
+    },
+    "S-BASE-TFD1": {
+     "rt_per_year": 12.38939582,
+     "sr_cost_per_year": {
+      "base": 0.01095699759,
+      "low": 0.01533979662,
+      "high": 0.006391581925
+     },
+     "sr_cost_per_year_low_fees": 0.007497588488
+    },
+    "S-BASE-TFD1-7T": {
+     "rt_per_year": 15.76836759,
+     "sr_cost_per_year": {
+      "base": 0.02041717983,
+      "low": 0.02858405176,
+      "high": 0.01191002157
+     },
+     "sr_cost_per_year_low_fees": 0.01397094516
+    }
+   }
+  },
+  {
+   "id": "INS-NYMEX-MCL",
+   "symbol": "MCL",
+   "risk_class": "ENERGIE",
+   "asset_class": "ENERGIE",
+   "size_class": "MICRO",
+   "currency": "USD",
+   "access": "PRIMAERBROKER_BOERSE_ANGEBOTEN",
+   "blocked": false,
+   "notional_eur": "7177.29",
+   "vol_eur_per_year": {
+    "base": "2512.05",
+    "low": "1794.32",
+    "high": "4306.37"
+   },
+   "commission_side_eur": "1.00",
+   "half_spread_side_eur": "0.44",
+   "slippage_side_eur": "0.22",
+   "cost_side_eur": "1.66",
+   "cost_rt_eur": "3.31",
+   "cost_rt_bp": 4.618070818,
+   "c_rt_sr": {
+    "base": 0.001319448805,
+    "low": 0.001847228327,
+    "high": 0.0007696784697
+   },
+   "c_rt_sr_low_fees": 0.0009857875458,
+   "impact_side_eur_by_order_size": {
+    "1": "0.00",
+    "10": "0.00",
+    "100": "2.64",
+    "1000": "8.98"
+   },
+   "rolls_per_year": 12,
+   "strategies": {
+    "S-TF": {
+     "rt_per_year": 88.60858138,
+     "sr_cost_per_year": {
+      "base": 0.1488798122,
+      "low": 0.208431737,
+      "high": 0.08684655709
+     },
+     "sr_cost_per_year_low_fees": 0.111231193
+    },
+    "S-IM": {
+     "rt_per_year": 114.1622224,
+     "sr_cost_per_year": {
+      "base": 0.6515455742,
+      "low": 0.9121638038,
+      "high": 0.3800682516
+     },
+     "sr_cost_per_year_low_fees": 0.4867832007
+    },
+    "S-REV": {
+     "rt_per_year": 8.895833334,
+     "sr_cost_per_year": {
+      "base": 0.04569815067,
+      "low": 0.06397741094,
+      "high": 0.02665725456
+     },
+     "sr_cost_per_year_low_fees": 0.03414203539
+    },
+    "S-BASE-TFD1": {
+     "rt_per_year": 12.38939582,
+     "sr_cost_per_year": {
+      "base": 0.02397932918,
+      "low": 0.03357106085,
+      "high": 0.01398794202
+     },
+     "sr_cost_per_year_low_fees": 0.01791545376
+    },
+    "S-BASE-TFD1-7T": {
+     "rt_per_year": 15.76836759,
+     "sr_cost_per_year": {
+      "base": 0.04468288618,
+      "low": 0.06255604065,
+      "high": 0.02606501694
+     },
+     "sr_cost_per_year_low_fees": 0.03338351024
+    }
+   }
+  },
+  {
+   "id": "INS-ICEEU-B",
+   "symbol": "B",
+   "risk_class": "ENERGIE",
+   "asset_class": "ENERGIE",
+   "size_class": "STANDARD",
+   "currency": "USD",
+   "access": "KEIN_ZUGANG_PRIMAERBROKER",
+   "blocked": false,
+   "notional_eur": "74840.07",
+   "vol_eur_per_year": {
+    "base": "24697.22",
+    "low": "17961.62",
+    "high": "41162.04"
+   },
+   "commission_side_eur": "1.00",
+   "half_spread_side_eur": "4.38",
+   "slippage_side_eur": "2.19",
+   "cost_side_eur": "7.57",
+   "cost_rt_eur": "15.15",
+   "cost_rt_bp": 2.023676815,
+   "c_rt_sr": {
+    "base": 0.0006132353985,
+    "low": 0.0008431986729,
+    "high": 0.0003679412391
+   },
+   "c_rt_sr_low_fees": 0.0004196210347,
+   "impact_side_eur_by_order_size": {
+    "1": "0.00",
+    "10": "0.00",
+    "100": "5.45",
+    "1000": "36.93"
+   },
+   "rolls_per_year": 12,
+   "strategies": {
+    "S-TF": {
+     "rt_per_year": 88.60858138,
+     "sr_cost_per_year": {
+      "base": 0.06919432613,
+      "low": 0.09514219843,
+      "high": 0.04151659568
+     },
+     "sr_cost_per_year_low_fees": 0.04734787783
+    },
+    "S-IM": {
+     "rt_per_year": 114.1622224,
+     "sr_cost_per_year": {
+      "base": 0.302816455,
+      "low": 0.4163726257,
+      "high": 0.181689873
+     },
+     "sr_cost_per_year_low_fees": 0.2072094248
+    },
+    "S-REV": {
+     "rt_per_year": 8.895833334,
+     "sr_cost_per_year": {
+      "base": 0.02123896246,
+      "low": 0.02920357338,
+      "high": 0.01274337747
+     },
+     "sr_cost_per_year_low_fees": 0.01453326965
+    },
+    "S-BASE-TFD1": {
+     "rt_per_year": 12.38939582,
+     "sr_cost_per_year": {
+      "base": 0.01114478517,
+      "low": 0.01532407962,
+      "high": 0.006686871105
+     },
+     "sr_cost_per_year_low_fees": 0.007626086652
+    },
+    "S-BASE-TFD1-7T": {
+     "rt_per_year": 15.76836759,
+     "sr_cost_per_year": {
+      "base": 0.02076710169,
+      "low": 0.02855476482,
+      "high": 0.01246026101
+     },
+     "sr_cost_per_year_low_fees": 0.01421038759
+    }
+   }
+  },
+  {
+   "id": "INS-NYMEX-BZ",
+   "symbol": "BZ",
+   "risk_class": "ENERGIE",
+   "asset_class": "ENERGIE",
+   "size_class": "STANDARD",
+   "currency": "USD",
+   "access": "PRIMAERBROKER_BOERSE_ANGEBOTEN",
+   "blocked": true,
+   "notional_eur": "74840.07",
+   "vol_eur_per_year": {
+    "base": "24697.22",
+    "low": "17961.62",
+    "high": "41162.04"
+   },
+   "commission_side_eur": "1.00",
+   "half_spread_side_eur": "1.31",
+   "slippage_side_eur": "0.22",
+   "cost_side_eur": "2.53",
+   "cost_rt_eur": "5.07",
+   "cost_rt_bp": 0.6770725995,
+   "c_rt_sr": {
+    "base": 0.000205173515,
+    "low": 0.0002821135831,
+    "high": 0.000123104109
+   },
+   "c_rt_sr_low_fees": 0.0001712355404,
+   "impact_side_eur_by_order_size": {
+    "1": "0.00",
+    "10": "32.67",
+    "100": "108.36",
+    "1000": "344.21"
+   },
+   "rolls_per_year": 12,
+   "strategies": {
+    "S-TF": {
+     "rt_per_year": 88.60858138,
+     "sr_cost_per_year": {
+      "base": 0.02315072343,
+      "low": 0.03183224472,
+      "high": 0.01389043406
+     },
+     "sr_cost_per_year_low_fees": 0.01932133706
+    },
+    "S-IM": {
+     "rt_per_year": 114.1622224,
+     "sr_cost_per_year": {
+      "base": 0.1013149545,
+      "low": 0.1393080624,
+      "high": 0.06078897269
+     },
+     "sr_cost_per_year_low_fees": 0.08455633751
+    },
+    "S-REV": {
+     "rt_per_year": 8.895833334,
+     "sr_cost_per_year": {
+      "base": 0.007106035616,
+      "low": 0.009770798972,
+      "high": 0.00426362137
+     },
+     "sr_cost_per_year_low_fees": 0.005930618525
+    },
+    "S-BASE-TFD1": {
+     "rt_per_year": 12.38939582,
+     "sr_cost_per_year": {
+      "base": 0.003728771617,
+      "low": 0.005127060973,
+      "high": 0.00223726297
+     },
+     "sr_cost_per_year_low_fees": 0.003111991442
+    },
+    "S-BASE-TFD1-7T": {
+     "rt_per_year": 15.76836759,
+     "sr_cost_per_year": {
+      "base": 0.006948162582,
+      "low": 0.009553723551,
+      "high": 0.004168897549
+     },
+     "sr_cost_per_year_low_fees": 0.005798859442
+    }
+   }
+  },
+  {
+   "id": "INS-NYMEX-NG",
+   "symbol": "NG",
+   "risk_class": "ENERGIE",
+   "asset_class": "ENERGIE",
+   "size_class": "STANDARD",
+   "currency": "USD",
+   "access": "PRIMAERBROKER_BOERSE_ANGEBOTEN",
+   "blocked": false,
+   "notional_eur": "27604.94",
+   "vol_eur_per_year": {
+    "base": "16562.97",
+    "low": "11041.98",
+    "high": "24844.45"
+   },
+   "commission_side_eur": "1.00",
+   "half_spread_side_eur": "4.38",
+   "slippage_side_eur": "2.19",
+   "cost_side_eur": "7.57",
+   "cost_rt_eur": "15.15",
+   "cost_rt_bp": 5.486412698,
+   "c_rt_sr": {
+    "base": 0.0009144021164,
+    "low": 0.001371603175,
+    "high": 0.0006096014109
+   },
+   "c_rt_sr_low_fees": 0.0006257015873,
+   "impact_side_eur_by_order_size": {
+    "1": "0.00",
+    "10": "0.00",
+    "100": "8.95",
+    "1000": "35.78"
+   },
+   "rolls_per_year": 12,
+   "strategies": {
+    "S-TF": {
+     "rt_per_year": 88.60858138,
+     "sr_cost_per_year": {
+      "base": 0.1031764285,
+      "low": 0.1547646428,
+      "high": 0.06878428568
+     },
+     "sr_cost_per_year_low_fees": 0.07060094671
+    },
+    "S-IM": {
+     "rt_per_year": 114.1622224,
+     "sr_cost_per_year": {
+      "base": 0.4515329808,
+      "low": 0.6772994711,
+      "high": 0.3010219872
+     },
+     "sr_cost_per_year_low_fees": 0.3089722757
+    },
+    "S-REV": {
+     "rt_per_year": 8.895833334,
+     "sr_cost_per_year": {
+      "base": 0.03166965291,
+      "low": 0.04750447936,
+      "high": 0.02111310194
+     },
+     "sr_cost_per_year_low_fees": 0.02167071985
+    },
+    "S-BASE-TFD1": {
+     "rt_per_year": 12.38939582,
+     "sr_cost_per_year": {
+      "base": 0.01661811301,
+      "low": 0.02492716951,
+      "high": 0.011078742
+     },
+     "sr_cost_per_year_low_fees": 0.01137134254
+    },
+    "S-BASE-TFD1-7T": {
+     "rt_per_year": 15.76836759,
+     "sr_cost_per_year": {
+      "base": 0.03096605607,
+      "low": 0.04644908411,
+      "high": 0.02064403738
+     },
+     "sr_cost_per_year_low_fees": 0.02118926683
+    }
+   }
+  },
+  {
+   "id": "INS-NYMEX-QG",
+   "symbol": "QG",
+   "risk_class": "ENERGIE",
+   "asset_class": "ENERGIE",
+   "size_class": "MINI",
+   "currency": "USD",
+   "access": "PRIMAERBROKER_BOERSE_ANGEBOTEN",
+   "blocked": false,
+   "notional_eur": "6901.24",
+   "vol_eur_per_year": {
+    "base": "4140.74",
+    "low": "2760.49",
+    "high": "6211.11"
+   },
+   "commission_side_eur": "1.00",
+   "half_spread_side_eur": "10.95",
+   "slippage_side_eur": "2.74",
+   "cost_side_eur": "14.69",
+   "cost_rt_eur": "29.39",
+   "cost_rt_bp": 42.58057143,
+   "c_rt_sr": {
+    "base": 0.007096761905,
+    "low": 0.01064514286,
+    "high": 0.004731174603
+   },
+   "c_rt_sr_low_fees": 0.005677409524,
+   "impact_side_eur_by_order_size": {
+    "1": "1.83",
+    "10": "7.96",
+    "100": "25.76",
+    "1000": "81.64"
+   },
+   "rolls_per_year": 12,
+   "strategies": {
+    "S-TF": {
+     "rt_per_year": 88.60858138,
+     "sr_cost_per_year": {
+      "base": 0.8007620873,
+      "low": 1.201143131,
+      "high": 0.5338413915
+     },
+     "sr_cost_per_year_low_fees": 0.6406096698
+    },
+    "S-IM": {
+     "rt_per_year": 114.1622224,
+     "sr_cost_per_year": {
+      "base": 3.504390464,
+      "low": 5.256585695,
+      "high": 2.336260309
+     },
+     "sr_cost_per_year_low_fees": 2.803512371
+    },
+    "S-REV": {
+     "rt_per_year": 8.895833334,
+     "sr_cost_per_year": {
+      "base": 0.2457911922,
+      "low": 0.3686867882,
+      "high": 0.1638607948
+     },
+     "sr_cost_per_year_low_fees": 0.1966329537
+    },
+    "S-BASE-TFD1": {
+     "rt_per_year": 12.38939582,
+     "sr_cost_per_year": {
+      "base": 0.1289747576,
+      "low": 0.1934621364,
+      "high": 0.08598317173
+     },
+     "sr_cost_per_year_low_fees": 0.1031798061
+    },
+    "S-BASE-TFD1-7T": {
+     "rt_per_year": 15.76836759,
+     "sr_cost_per_year": {
+      "base": 0.2403305101,
+      "low": 0.3604957652,
+      "high": 0.1602203401
+     },
+     "sr_cost_per_year_low_fees": 0.1922644081
+    }
+   }
+  },
+  {
+   "id": "INS-NYMEX-MNG",
+   "symbol": "MNG",
+   "risk_class": "ENERGIE",
+   "asset_class": "ENERGIE",
+   "size_class": "MICRO",
+   "currency": "USD",
+   "access": "PRIMAERBROKER_BOERSE_ANGEBOTEN",
+   "blocked": false,
+   "notional_eur": "2760.49",
+   "vol_eur_per_year": {
+    "base": "1656.30",
+    "low": "1104.20",
+    "high": "2484.44"
+   },
+   "commission_side_eur": "1.00",
+   "half_spread_side_eur": "1.31",
+   "slippage_side_eur": "0.22",
+   "cost_side_eur": "2.53",
+   "cost_rt_eur": "5.07",
+   "cost_rt_bp": 18.35619048,
+   "c_rt_sr": {
+    "base": 0.003059365079,
+    "low": 0.004589047619,
+    "high": 0.00203957672
+   },
+   "c_rt_sr_low_fees": 0.002553312169,
+   "impact_side_eur_by_order_size": {
+    "1": "0.00",
+    "10": "2.19",
+    "100": "7.27",
+    "1000": "23.08"
+   },
+   "rolls_per_year": 12,
+   "strategies": {
+    "S-TF": {
+     "rt_per_year": 88.60858138,
+     "sr_cost_per_year": {
+      "base": 0.3452030094,
+      "low": 0.5178045142,
+      "high": 0.2301353396
+     },
+     "sr_cost_per_year_low_fees": 0.2881026036
+    },
+    "S-IM": {
+     "rt_per_year": 114.1622224,
+     "sr_cost_per_year": {
+      "base": 1.510718544,
+      "low": 2.266077815,
+      "high": 1.007145696
+     },
+     "sr_cost_per_year_low_fees": 1.260828944
+    },
+    "S-REV": {
+     "rt_per_year": 8.895833334,
+     "sr_cost_per_year": {
+      "base": 0.1059588866,
+      "low": 0.1589383299,
+      "high": 0.07063925775
+     },
+     "sr_cost_per_year_low_fees": 0.08843211178
+    },
+    "S-BASE-TFD1": {
+     "rt_per_year": 12.38939582,
+     "sr_cost_per_year": {
+      "base": 0.05560012789,
+      "low": 0.08340019183,
+      "high": 0.03706675193
+     },
+     "sr_cost_per_year_low_fees": 0.04640325017
+    },
+    "S-BASE-TFD1-7T": {
+     "rt_per_year": 15.76836759,
+     "sr_cost_per_year": {
+      "base": 0.1036048243,
+      "low": 0.1554072364,
+      "high": 0.06906988286
+     },
+     "sr_cost_per_year_low_fees": 0.08646743745
+    }
+   }
+  },
+  {
+   "id": "INS-NYMEX-RB",
+   "symbol": "RB",
+   "risk_class": "ENERGIE",
+   "asset_class": "ENERGIE",
+   "size_class": "STANDARD",
+   "currency": "USD",
+   "access": "PRIMAERBROKER_BOERSE_ANGEBOTEN",
+   "blocked": false,
+   "notional_eur": "88335.82",
+   "vol_eur_per_year": {
+    "base": "30917.54",
+    "low": "22083.95",
+    "high": "48584.70"
+   },
+   "commission_side_eur": "1.00",
+   "half_spread_side_eur": "1.84",
+   "slippage_side_eur": "0.92",
+   "cost_side_eur": "3.76",
+   "cost_rt_eur": "7.52",
+   "cost_rt_bp": 0.8514087302,
+   "c_rt_sr": {
+    "base": 0.0002432596372,
+    "low": 0.0003405634921,
+    "high": 0.0001548015873
+   },
+   "c_rt_sr_low_fees": 0.0001707981859,
+   "impact_side_eur_by_order_size": {
+    "1": "0.00",
+    "10": "0.00",
+    "100": "36.92",
+    "1000": "123.71"
+   },
+   "rolls_per_year": 12,
+   "strategies": {
+    "S-TF": {
+     "rt_per_year": 88.60858138,
+     "sr_cost_per_year": {
+      "base": 0.02744816544,
+      "low": 0.03842743161,
+      "high": 0.01746701437
+     },
+     "sr_cost_per_year_low_fees": 0.01927198823
+    },
+    "S-IM": {
+     "rt_per_year": 114.1622224,
+     "sr_cost_per_year": {
+      "base": 0.1201219323,
+      "low": 0.1681707052,
+      "high": 0.07644122961
+     },
+     "sr_cost_per_year_low_fees": 0.08434037129
+    },
+    "S-REV": {
+     "rt_per_year": 8.895833334,
+     "sr_cost_per_year": {
+      "base": 0.008425120785,
+      "low": 0.0117951691,
+      "high": 0.005361440499
+     },
+     "sr_cost_per_year_low_fees": 0.00591547107
+    },
+    "S-BASE-TFD1": {
+     "rt_per_year": 12.38939582,
+     "sr_cost_per_year": {
+      "base": 0.004420939178,
+      "low": 0.006189314849,
+      "high": 0.002813324931
+     },
+     "sr_cost_per_year_low_fees": 0.003104043073
+    },
+    "S-BASE-TFD1-7T": {
+     "rt_per_year": 15.76836759,
+     "sr_cost_per_year": {
+      "base": 0.008237941963,
+      "low": 0.01153311875,
+      "high": 0.005242326703
+     },
+     "sr_cost_per_year_low_fees": 0.005784048514
+    }
+   }
+  },
+  {
+   "id": "INS-NYMEX-HO",
+   "symbol": "HO",
+   "risk_class": "ENERGIE",
+   "asset_class": "ENERGIE",
+   "size_class": "STANDARD",
+   "currency": "USD",
+   "access": "PRIMAERBROKER_BOERSE_ANGEBOTEN",
+   "blocked": false,
+   "notional_eur": "95697.13",
+   "vol_eur_per_year": {
+    "base": "30623.08",
+    "low": "21053.37",
+    "high": "47848.57"
+   },
+   "commission_side_eur": "1.00",
+   "half_spread_side_eur": "1.84",
+   "slippage_side_eur": "0.92",
+   "cost_side_eur": "3.76",
+   "cost_rt_eur": "7.52",
+   "cost_rt_bp": 0.7859157509,
+   "c_rt_sr": {
+    "base": 0.0002455986722,
+    "low": 0.0003572344322,
+    "high": 0.0001571831502
+   },
+   "c_rt_sr_low_fees": 0.0001724404762,
+   "impact_side_eur_by_order_size": {
+    "1": "0.00",
+    "10": "0.00",
+    "100": "36.57",
+    "1000": "122.53"
+   },
+   "rolls_per_year": 12,
+   "strategies": {
+    "S-TF": {
+     "rt_per_year": 88.60858138,
+     "sr_cost_per_year": {
+      "base": 0.02771209011,
+      "low": 0.0403084947,
+      "high": 0.01773573767
+     },
+     "sr_cost_per_year_low_fees": 0.01945729581
+    },
+    "S-IM": {
+     "rt_per_year": 114.1622224,
+     "sr_cost_per_year": {
+      "base": 0.1212769508,
+      "low": 0.1764028376,
+      "high": 0.07761724853
+     },
+     "sr_cost_per_year_low_fees": 0.0851513364
+    },
+    "S-REV": {
+     "rt_per_year": 8.895833334,
+     "sr_cost_per_year": {
+      "base": 0.008506131562,
+      "low": 0.012372555,
+      "high": 0.005443924199
+     },
+     "sr_cost_per_year_low_fees": 0.0059723506
+    },
+    "S-BASE-TFD1": {
+     "rt_per_year": 12.38939582,
+     "sr_cost_per_year": {
+      "base": 0.004463448208,
+      "low": 0.006492288303,
+      "high": 0.002856606853
+     },
+     "sr_cost_per_year_low_fees": 0.003133889641
+    },
+    "S-BASE-TFD1-7T": {
+     "rt_per_year": 15.76836759,
+     "sr_cost_per_year": {
+      "base": 0.008317152943,
+      "low": 0.01209767701,
+      "high": 0.005322977884
+     },
+     "sr_cost_per_year_low_fees": 0.005839664366
+    }
+   }
+  },
+  {
+   "id": "INS-ICEEU-G",
+   "symbol": "G",
+   "risk_class": "ENERGIE",
+   "asset_class": "ENERGIE",
+   "size_class": "STANDARD",
+   "currency": "USD",
+   "access": "KEIN_ZUGANG_PRIMAERBROKER",
+   "blocked": false,
+   "notional_eur": "66602.40",
+   "vol_eur_per_year": {
+    "base": "21312.77",
+    "low": "14652.53",
+    "high": "33301.20"
+   },
+   "commission_side_eur": "1.00",
+   "half_spread_side_eur": "10.95",
+   "slippage_side_eur": "5.48",
+   "cost_side_eur": "17.43",
+   "cost_rt_eur": "34.86",
+   "cost_rt_bp": 5.2345,
+   "c_rt_sr": {
+    "base": 0.00163578125,
+    "low": 0.002379318182,
+    "high": 0.0010469
+   },
+   "c_rt_sr_low_fees": 0.001103032895,
+   "impact_side_eur_by_order_size": {
+    "1": "0.00",
+    "10": "0.00",
+    "100": "18.80",
+    "1000": "65.79"
+   },
+   "rolls_per_year": 12,
+   "strategies": {
+    "S-TF": {
+     "rt_per_year": 88.60858138,
+     "sr_cost_per_year": {
+      "base": 0.1845731371,
+      "low": 0.2684700176,
+      "high": 0.1181268078
+     },
+     "sr_cost_per_year_low_fees": 0.1244605547
+    },
+    "S-IM": {
+     "rt_per_year": 114.1622224,
+     "sr_cost_per_year": {
+      "base": 0.807750956,
+      "low": 1.174910481,
+      "high": 0.5169606118
+     },
+     "sr_cost_per_year_low_fees": 0.5446791099
+    },
+    "S-REV": {
+     "rt_per_year": 8.895833334,
+     "sr_cost_per_year": {
+      "base": 0.05665409506,
+      "low": 0.08240595645,
+      "high": 0.03625862084
+     },
+     "sr_cost_per_year_low_fees": 0.03820274286
+    },
+    "S-BASE-TFD1": {
+     "rt_per_year": 12.38939582,
+     "sr_cost_per_year": {
+      "base": 0.0297282751,
+      "low": 0.04324112741,
+      "high": 0.01902609606
+     },
+     "sr_cost_per_year_low_fees": 0.02004624111
+    },
+    "S-BASE-TFD1-7T": {
+     "rt_per_year": 15.76836759,
+     "sr_cost_per_year": {
+      "base": 0.05539542506,
+      "low": 0.08057516372,
+      "high": 0.03545307204
+     },
+     "sr_cost_per_year_low_fees": 0.03735400198
+    }
+   }
+  },
+  {
+   "id": "INS-ICEENDEX-TFM",
+   "symbol": "TFM",
+   "risk_class": "ENERGIE",
+   "asset_class": "ENERGIE",
+   "size_class": "STANDARD",
+   "currency": "EUR",
+   "access": "KEIN_ZUGANG_PRIMAERBROKER",
+   "blocked": false,
+   "notional_eur": "25200.00",
+   "vol_eur_per_year": {
+    "base": "13860.00",
+    "low": "8820.00",
+    "high": "22680.00"
+   },
+   "commission_side_eur": "1.00",
+   "half_spread_side_eur": "3.60",
+   "slippage_side_eur": "0.90",
+   "cost_side_eur": "5.50",
+   "cost_rt_eur": "11.00",
+   "cost_rt_bp": 4.365079365,
+   "c_rt_sr": {
+    "base": 0.0007936507937,
+    "low": 0.001247165533,
+    "high": 0.0004850088183
+   },
+   "c_rt_sr_low_fees": 0.0006349206349,
+   "impact_side_eur_by_order_size": {
+    "1": "0.00",
+    "10": "0.00",
+    "100": "18.34",
+    "1000": "60.81"
+   },
+   "rolls_per_year": 12,
+   "strategies": {
+    "S-TF": {
+     "rt_per_year": 88.60858138,
+     "sr_cost_per_year": {
+      "base": 0.08955147075,
+      "low": 0.1407237397,
+      "high": 0.05472589879
+     },
+     "sr_cost_per_year_low_fees": 0.0716411766
+    },
+    "S-IM": {
+     "rt_per_year": 114.1622224,
+     "sr_cost_per_year": {
+      "base": 0.391905817,
+      "low": 0.6158519982,
+      "high": 0.2394979993
+     },
+     "sr_cost_per_year_low_fees": 0.3135246536
+    },
+    "S-REV": {
+     "rt_per_year": 8.895833334,
+     "sr_cost_per_year": {
+      "base": 0.02748751858,
+      "low": 0.04319467206,
+      "high": 0.01679792802
+     },
+     "sr_cost_per_year_low_fees": 0.02199001487
+    },
+    "S-BASE-TFD1": {
+     "rt_per_year": 12.38939582,
+     "sr_cost_per_year": {
+      "base": 0.01442360898,
+      "low": 0.02266567125,
+      "high": 0.008814427709
+     },
+     "sr_cost_per_year_low_fees": 0.01153888718
+    },
+    "S-BASE-TFD1-7T": {
+     "rt_per_year": 15.76836759,
+     "sr_cost_per_year": {
+      "base": 0.02687683519,
+      "low": 0.04223502672,
+      "high": 0.01642473262
+     },
+     "sr_cost_per_year_low_fees": 0.02150146815
+    }
+   }
+  },
+  {
+   "id": "INS-COMEX-GC",
+   "symbol": "GC",
+   "risk_class": "EDELMETALL",
+   "asset_class": "METALL",
+   "size_class": "STANDARD",
+   "currency": "USD",
+   "access": "PRIMAERBROKER_BOERSE_ANGEBOTEN",
+   "blocked": false,
+   "notional_eur": "370519.67",
+   "vol_eur_per_year": {
+    "base": "66693.54",
+    "low": "48167.56",
+    "high": "103745.51"
+   },
+   "commission_side_eur": "1.00",
+   "half_spread_side_eur": "4.38",
+   "slippage_side_eur": "2.19",
+   "cost_side_eur": "7.57",
+   "cost_rt_eur": "15.15",
+   "cost_rt_bp": 0.408755913,
+   "c_rt_sr": {
+    "base": 0.0002270866183,
+    "low": 0.0003144276254,
+    "high": 0.0001459842546
+   },
+   "c_rt_sr_low_fees": 0.000155389467,
+   "impact_side_eur_by_order_size": {
+    "1": "0.00",
+    "10": "0.00",
+    "100": "50.94",
+    "1000": "183.66"
+   },
+   "rolls_per_year": 6,
+   "strategies": {
+    "S-TF": {
+     "rt_per_year": 84.90845736,
+     "sr_cost_per_year": {
+      "base": 0.02455330609,
+      "low": 0.03399688536,
+      "high": 0.0157842682
+     },
+     "sr_cost_per_year_low_fees": 0.0168011888
+    },
+    "S-IM": {
+     "rt_per_year": 113.8415278,
+     "sr_cost_per_year": {
+      "base": 0.1118206723,
+      "low": 0.1548286232,
+      "high": 0.0718847179
+     },
+     "sr_cost_per_year_low_fees": 0.07651597791
+    },
+    "S-REV": {
+     "rt_per_year": 8.5,
+     "sr_cost_per_year": {
+      "base": 0.007515016045,
+      "low": 0.01040540683,
+      "high": 0.004831081743
+     },
+     "sr_cost_per_year_low_fees": 0.005142330036
+    },
+    "S-BASE-TFD1": {
+     "rt_per_year": 9.600947909,
+     "sr_cost_per_year": {
+      "base": 0.003198158722,
+      "low": 0.004428219769,
+      "high": 0.002055959179
+     },
+     "sr_cost_per_year_low_fees": 0.002188416839
+    },
+    "S-BASE-TFD1-7T": {
+     "rt_per_year": 14.46751713,
+     "sr_cost_per_year": {
+      "base": 0.007055819885,
+      "low": 0.009769596763,
+      "high": 0.004535884212
+     },
+     "sr_cost_per_year_low_fees": 0.004828114046
+    }
+   }
+  },
+  {
+   "id": "INS-COMEX-MGC",
+   "symbol": "MGC",
+   "risk_class": "EDELMETALL",
+   "asset_class": "METALL",
+   "size_class": "MICRO",
+   "currency": "USD",
+   "access": "PRIMAERBROKER_BOERSE_ANGEBOTEN",
+   "blocked": false,
+   "notional_eur": "37051.97",
+   "vol_eur_per_year": {
+    "base": "6669.35",
+    "low": "4816.76",
+    "high": "10374.55"
+   },
+   "commission_side_eur": "1.00",
+   "half_spread_side_eur": "0.44",
+   "slippage_side_eur": "0.22",
+   "cost_side_eur": "1.66",
+   "cost_rt_eur": "3.31",
+   "cost_rt_bp": 0.8945600757,
+   "c_rt_sr": {
+    "base": 0.0004969778198,
+    "low": 0.0006881231351,
+    "high": 0.0003194857413
+   },
+   "c_rt_sr_low_fees": 0.0003713024283,
+   "impact_side_eur_by_order_size": {
+    "1": "0.00",
+    "10": "0.00",
+    "100": "5.88",
+    "1000": "20.59"
+   },
+   "rolls_per_year": 6,
+   "strategies": {
+    "S-TF": {
+     "rt_per_year": 84.90845736,
+     "sr_cost_per_year": {
+      "base": 0.05373477584,
+      "low": 0.07440199732,
+      "high": 0.03454378447
+     },
+     "sr_cost_per_year_low_fees": 0.0401463646
+    },
+    "S-IM": {
+     "rt_per_year": 113.8415278,
+     "sr_cost_per_year": {
+      "base": 0.2447189286,
+      "low": 0.3388415934,
+      "high": 0.1573193112
+     },
+     "sr_cost_per_year_low_fees": 0.1828345829
+    },
+    "S-REV": {
+     "rt_per_year": 8.5,
+     "sr_cost_per_year": {
+      "base": 0.01644657143,
+      "low": 0.02277217583,
+      "high": 0.01057279592
+     },
+     "sr_cost_per_year_low_fees": 0.01228757435
+    },
+    "S-BASE-TFD1": {
+     "rt_per_year": 9.600947909,
+     "sr_cost_per_year": {
+      "base": 0.006999152839,
+      "low": 0.0096911347,
+      "high": 0.004499455396
+     },
+     "sr_cost_per_year_low_fees": 0.005229212132
+    },
+    "S-BASE-TFD1-7T": {
+     "rt_per_year": 14.46751713,
+     "sr_cost_per_year": {
+      "base": 0.01544162315,
+      "low": 0.02138070898,
+      "high": 0.009926757742
+     },
+     "sr_cost_per_year_low_fees": 0.01153675666
+    }
+   }
+  },
+  {
+   "id": "INS-COMEX-1OZ",
+   "symbol": "1OZ",
+   "risk_class": "EDELMETALL",
+   "asset_class": "METALL",
+   "size_class": "MICRO",
+   "currency": "USD",
+   "access": "PRIMAERBROKER_BOERSE_ANGEBOTEN",
+   "blocked": false,
+   "notional_eur": "3705.20",
+   "vol_eur_per_year": {
+    "base": "666.94",
+    "low": "481.68",
+    "high": "1037.46"
+   },
+   "commission_side_eur": "1.00",
+   "half_spread_side_eur": "0.22",
+   "slippage_side_eur": "0.05",
+   "cost_side_eur": "1.27",
+   "cost_rt_eur": "2.55",
+   "cost_rt_bp": 6.876064333,
+   "c_rt_sr": {
+    "base": 0.003820035741,
+    "low": 0.005289280256,
+    "high": 0.002455737262
+   },
+   "c_rt_sr_low_fees": 0.003056028592,
+   "impact_side_eur_by_order_size": {
+    "1": "0.00",
+    "10": "0.88",
+    "100": "2.93",
+    "1000": "9.30"
+   },
+   "rolls_per_year": 6,
+   "strategies": {
+    "S-TF": {
+     "rt_per_year": 84.90845736,
+     "sr_cost_per_year": {
+      "base": 0.4130340551,
+      "low": 0.5718933071,
+      "high": 0.2655218926
+     },
+     "sr_cost_per_year_low_fees": 0.3304272441
+    },
+    "S-IM": {
+     "rt_per_year": 113.8415278,
+     "sr_cost_per_year": {
+      "base": 1.881039789,
+      "low": 2.604516631,
+      "high": 1.209239865
+     },
+     "sr_cost_per_year_low_fees": 1.504831831
+    },
+    "S-REV": {
+     "rt_per_year": 8.5,
+     "sr_cost_per_year": {
+      "base": 0.1264170918,
+      "low": 0.1750390502,
+      "high": 0.08126813046
+     },
+     "sr_cost_per_year_low_fees": 0.1011336735
+    },
+    "S-BASE-TFD1": {
+     "rt_per_year": 9.600947909,
+     "sr_cost_per_year": {
+      "base": 0.05379920981,
+      "low": 0.07449121358,
+      "high": 0.0345852063
+     },
+     "sr_cost_per_year_low_fees": 0.04303936785
+    },
+    "S-BASE-TFD1-7T": {
+     "rt_per_year": 14.46751713,
+     "sr_cost_per_year": {
+      "base": 0.1186925251,
+      "low": 0.1643434963,
+      "high": 0.07630233755
+     },
+     "sr_cost_per_year_low_fees": 0.09495402006
+    }
+   }
+  },
+  {
+   "id": "INS-COMEX-SI",
+   "symbol": "SI",
+   "risk_class": "EDELMETALL",
+   "asset_class": "METALL",
+   "size_class": "STANDARD",
+   "currency": "USD",
+   "access": "PRIMAERBROKER_BOERSE_ANGEBOTEN",
+   "blocked": false,
+   "notional_eur": "292261.85",
+   "vol_eur_per_year": {
+    "base": "87678.56",
+    "low": "64297.61",
+    "high": "131517.83"
+   },
+   "commission_side_eur": "1.00",
+   "half_spread_side_eur": "10.95",
+   "slippage_side_eur": "5.48",
+   "cost_side_eur": "17.43",
+   "cost_rt_eur": "34.86",
+   "cost_rt_bp": 1.192869565,
+   "c_rt_sr": {
+    "base": 0.0003976231884,
+    "low": 0.0005422134387,
+    "high": 0.0002650821256
+   },
+   "c_rt_sr_low_fees": 0.0002681235382,
+   "impact_side_eur_by_order_size": {
+    "1": "0.00",
+    "10": "19.33",
+    "100": "131.11",
+    "1000": "430.53"
+   },
+   "rolls_per_year": 6,
+   "strategies": {
+    "S-TF": {
+     "rt_per_year": 84.90845736,
+     "sr_cost_per_year": {
+      "base": 0.04299224643,
+      "low": 0.05862579058,
+      "high": 0.02866149762
+     },
+     "sr_cost_per_year_low_fees": 0.02899034454
+    },
+    "S-IM": {
+     "rt_per_year": 113.8415278,
+     "sr_cost_per_year": {
+      "base": 0.1957952986,
+      "low": 0.266993589,
+      "high": 0.1305301991
+     },
+     "sr_cost_per_year_low_fees": 0.1320278338
+    },
+    "S-REV": {
+     "rt_per_year": 8.5,
+     "sr_cost_per_year": {
+      "base": 0.01315861174,
+      "low": 0.01794356146,
+      "high": 0.008772407823
+     },
+     "sr_cost_per_year_low_fees": 0.008873057808
+    },
+    "S-BASE-TFD1": {
+     "rt_per_year": 9.600947909,
+     "sr_cost_per_year": {
+      "base": 0.005599898742,
+      "low": 0.007636225557,
+      "high": 0.003733265828
+     },
+     "sr_cost_per_year_low_fees": 0.003776099353
+    },
+    "S-BASE-TFD1-7T": {
+     "rt_per_year": 14.46751713,
+     "sr_cost_per_year": {
+      "base": 0.01235457034,
+      "low": 0.01684714137,
+      "high": 0.008236380227
+     },
+     "sr_cost_per_year_low_fees": 0.008330880114
+    }
+   }
+  },
+  {
+   "id": "INS-COMEX-SIL",
+   "symbol": "SIL",
+   "risk_class": "EDELMETALL",
+   "asset_class": "METALL",
+   "size_class": "MICRO",
+   "currency": "USD",
+   "access": "PRIMAERBROKER_BOERSE_ANGEBOTEN",
+   "blocked": false,
+   "notional_eur": "58452.37",
+   "vol_eur_per_year": {
+    "base": "17535.71",
+    "low": "12859.52",
+    "high": "26303.57"
+   },
+   "commission_side_eur": "1.00",
+   "half_spread_side_eur": "4.38",
+   "slippage_side_eur": "1.10",
+   "cost_side_eur": "6.48",
+   "cost_rt_eur": "12.95",
+   "cost_rt_bp": 2.216221889,
+   "c_rt_sr": {
+    "base": 0.0007387406297,
+    "low": 0.001007373586,
+    "high": 0.0004924937531
+   },
+   "c_rt_sr_low_fees": 0.0005909925037,
+   "impact_side_eur_by_order_size": {
+    "1": "7.73",
+    "10": "33.71",
+    "100": "109.08",
+    "1000": "345.72"
+   },
+   "rolls_per_year": 6,
+   "strategies": {
+    "S-TF": {
+     "rt_per_year": 84.90845736,
+     "sr_cost_per_year": {
+      "base": 0.07987491706,
+      "low": 0.1089203414,
+      "high": 0.05324994471
+     },
+     "sr_cost_per_year_low_fees": 0.06389993365
+    },
+    "S-IM": {
+     "rt_per_year": 113.8415278,
+     "sr_cost_per_year": {
+      "base": 0.3637663658,
+      "low": 0.4960450442,
+      "high": 0.2425109105
+     },
+     "sr_cost_per_year_low_fees": 0.2910130926
+    },
+    "S-REV": {
+     "rt_per_year": 8.5,
+     "sr_cost_per_year": {
+      "base": 0.02444726918,
+      "low": 0.03333718524,
+      "high": 0.01629817945
+     },
+     "sr_cost_per_year_low_fees": 0.01955781534
+    },
+    "S-BASE-TFD1": {
+     "rt_per_year": 9.600947909,
+     "sr_cost_per_year": {
+      "base": 0.01040400269,
+      "low": 0.0141872764,
+      "high": 0.006936001795
+     },
+     "sr_cost_per_year_low_fees": 0.008323202154
+    },
+    "S-BASE-TFD1-7T": {
+     "rt_per_year": 14.46751713,
+     "sr_cost_per_year": {
+      "base": 0.02295344773,
+      "low": 0.031300156,
+      "high": 0.01530229849
+     },
+     "sr_cost_per_year_low_fees": 0.01836275819
+    }
+   }
+  },
+  {
+   "id": "INS-COMEX-SIC",
+   "symbol": "SIC",
+   "risk_class": "EDELMETALL",
+   "asset_class": "METALL",
+   "size_class": "MICRO",
+   "currency": "USD",
+   "access": "PRIMAERBROKER_BOERSE_ANGEBOTEN",
+   "blocked": false,
+   "notional_eur": "5845.24",
+   "vol_eur_per_year": {
+    "base": "1753.57",
+    "low": "1285.95",
+    "high": "2630.36"
+   },
+   "commission_side_eur": "1.00",
+   "half_spread_side_eur": "1.31",
+   "slippage_side_eur": "0.22",
+   "cost_side_eur": "2.53",
+   "cost_rt_eur": "5.07",
+   "cost_rt_bp": 8.668965517,
+   "c_rt_sr": {
+    "base": 0.002889655172,
+    "low": 0.003940438871,
+    "high": 0.001926436782
+   },
+   "c_rt_sr_low_fees": 0.002411674163,
+   "impact_side_eur_by_order_size": {
+    "1": "1.18",
+    "10": "4.40",
+    "100": "14.10",
+    "1000": "44.64"
+   },
+   "rolls_per_year": 6,
+   "strategies": {
+    "S-TF": {
+     "rt_per_year": 84.90845736,
+     "sr_cost_per_year": {
+      "base": 0.3124384364,
+      "low": 0.4260524133,
+      "high": 0.2082922909
+     },
+     "sr_cost_per_year_low_fees": 0.2607576543
+    },
+    "S-IM": {
+     "rt_per_year": 113.8415278,
+     "sr_cost_per_year": {
+      "base": 1.422907199,
+      "low": 1.940327999,
+      "high": 0.9486047995
+     },
+     "sr_cost_per_year_low_fees": 1.18754257
+    },
+    "S-REV": {
+     "rt_per_year": 8.5,
+     "sr_cost_per_year": {
+      "base": 0.09562784961,
+      "low": 0.1304016131,
+      "high": 0.06375189974
+     },
+     "sr_cost_per_year_low_fees": 0.07980994285
+    },
+    "S-BASE-TFD1": {
+     "rt_per_year": 9.600947909,
+     "sr_cost_per_year": {
+      "base": 0.04069625926,
+      "low": 0.05549489899,
+      "high": 0.02713083951
+     },
+     "sr_cost_per_year_low_fees": 0.03396464669
+    },
+    "S-BASE-TFD1-7T": {
+     "rt_per_year": 14.46751713,
+     "sr_cost_per_year": {
+      "base": 0.08978462305,
+      "low": 0.1224335769,
+      "high": 0.05985641537
+     },
+     "sr_cost_per_year_low_fees": 0.07493325076
+    }
+   }
+  },
+  {
+   "id": "INS-COMEX-HG",
+   "symbol": "HG",
+   "risk_class": "INDUSTRIEMETALL",
+   "asset_class": "METALL",
+   "size_class": "STANDARD",
+   "currency": "USD",
+   "access": "PRIMAERBROKER_BOERSE_ANGEBOTEN",
+   "blocked": false,
+   "notional_eur": "134674.88",
+   "vol_eur_per_year": {
+    "base": "33668.72",
+    "low": "24241.48",
+    "high": "47136.21"
+   },
+   "commission_side_eur": "1.00",
+   "half_spread_side_eur": "5.48",
+   "slippage_side_eur": "2.74",
+   "cost_side_eur": "9.22",
+   "cost_rt_eur": "18.43",
+   "cost_rt_bp": 1.36859332,
+   "c_rt_sr": {
+    "base": 0.0005474373282,
+    "low": 0.0007603296225,
+    "high": 0.000391026663
+   },
+   "c_rt_sr_low_fees": 0.0003728785281,
+   "impact_side_eur_by_order_size": {
+    "1": "0.00",
+    "10": "0.00",
+    "100": "44.54",
+    "1000": "147.72"
+   },
+   "rolls_per_year": 5,
+   "strategies": {
+    "S-TF": {
+     "rt_per_year": 84.29177002,
+     "sr_cost_per_year": {
+      "base": 0.05876071415,
+      "low": 0.08161210298,
+      "high": 0.04197193868
+     },
+     "sr_cost_per_year_low_fees": 0.04002395795
+    },
+    "S-IM": {
+     "rt_per_year": 113.7880788,
+     "sr_cost_per_year": {
+      "base": 0.2694393439,
+      "low": 0.374221311,
+      "high": 0.1924566742
+     },
+     "sr_cost_per_year_low_fees": 0.1835244708
+    },
+    "S-REV": {
+     "rt_per_year": 8.434027778,
+     "sr_cost_per_year": {
+      "base": 0.01797582692,
+      "low": 0.02496642628,
+      "high": 0.01283987637
+     },
+     "sr_cost_per_year_low_fees": 0.01224395842
+    },
+    "S-BASE-TFD1": {
+     "rt_per_year": 9.136206591,
+     "sr_cost_per_year": {
+      "base": 0.007336597205,
+      "low": 0.01018971834,
+      "high": 0.005240426575
+     },
+     "sr_cost_per_year_low_fees": 0.004997210505
+    },
+    "S-BASE-TFD1-7T": {
+     "rt_per_year": 14.25070872,
+     "sr_cost_per_year": {
+      "base": 0.01675455156,
+      "low": 0.0232702105,
+      "high": 0.01196753683
+     },
+     "sr_cost_per_year_low_fees": 0.01141210547
+    }
+   }
+  },
+  {
+   "id": "INS-COMEX-MHG",
+   "symbol": "MHG",
+   "risk_class": "INDUSTRIEMETALL",
+   "asset_class": "METALL",
+   "size_class": "MICRO",
+   "currency": "USD",
+   "access": "PRIMAERBROKER_BOERSE_ANGEBOTEN",
+   "blocked": false,
+   "notional_eur": "13467.49",
+   "vol_eur_per_year": {
+    "base": "3366.87",
+    "low": "2424.15",
+    "high": "4713.62"
+   },
+   "commission_side_eur": "1.00",
+   "half_spread_side_eur": "1.10",
+   "slippage_side_eur": "0.27",
+   "cost_side_eur": "2.37",
+   "cost_rt_eur": "4.74",
+   "cost_rt_bp": 3.518537196,
+   "c_rt_sr": {
+    "base": 0.001407414879,
+    "low": 0.001954742887,
+    "high": 0.001005296342
+   },
+   "c_rt_sr_low_fees": 0.001125931903,
+   "impact_side_eur_by_order_size": {
+    "1": "2.27",
+    "10": "8.44",
+    "100": "27.07",
+    "1000": "85.70"
+   },
+   "rolls_per_year": 5,
+   "strategies": {
+    "S-TF": {
+     "rt_per_year": 84.29177002,
+     "sr_cost_per_year": {
+      "base": 0.1510688057,
+      "low": 0.2098177857,
+      "high": 0.1079062898
+     },
+     "sr_cost_per_year_low_fees": 0.1208550446
+    },
+    "S-IM": {
+     "rt_per_year": 113.7880788,
+     "sr_cost_per_year": {
+      "base": 0.6927056706,
+      "low": 0.9620912091,
+      "high": 0.4947897647
+     },
+     "sr_cost_per_year_low_fees": 0.5541645365
+    },
+    "S-REV": {
+     "rt_per_year": 8.434027778,
+     "sr_cost_per_year": {
+      "base": 0.04621432438,
+      "low": 0.06418656164,
+      "high": 0.0330102317
+     },
+     "sr_cost_per_year_low_fees": 0.0369714595
+    },
+    "S-BASE-TFD1": {
+     "rt_per_year": 9.136206591,
+     "sr_cost_per_year": {
+      "base": 0.01886176834,
+      "low": 0.02619690047,
+      "high": 0.01347269167
+     },
+     "sr_cost_per_year_low_fees": 0.01508941467
+    },
+    "S-BASE-TFD1-7T": {
+     "rt_per_year": 14.25070872,
+     "sr_cost_per_year": {
+      "base": 0.04307452915,
+      "low": 0.05982573494,
+      "high": 0.03076752082
+     },
+     "sr_cost_per_year_low_fees": 0.03445962332
+    }
+   }
+  },
+  {
+   "id": "INS-NYMEX-PL",
+   "symbol": "PL",
+   "risk_class": "EDELMETALL",
+   "asset_class": "METALL",
+   "size_class": "STANDARD",
+   "currency": "USD",
+   "access": "PRIMAERBROKER_BOERSE_ANGEBOTEN",
+   "blocked": false,
+   "notional_eur": "61344.32",
+   "vol_eur_per_year": {
+    "base": "18403.30",
+    "low": "13495.75",
+    "high": "27604.94"
+   },
+   "commission_side_eur": "1.00",
+   "half_spread_side_eur": "2.19",
+   "slippage_side_eur": "1.10",
+   "cost_side_eur": "4.29",
+   "cost_rt_eur": "8.57",
+   "cost_rt_bp": 1.397457143,
+   "c_rt_sr": {
+    "base": 0.0004658190476,
+    "low": 0.0006352077922,
+    "high": 0.0003105460317
+   },
+   "c_rt_sr_low_fees": 0.0003250361905,
+   "impact_side_eur_by_order_size": {
+    "1": "0.00",
+    "10": "12.40",
+    "100": "46.14",
+    "1000": "147.94"
+   },
+   "rolls_per_year": 6,
+   "strategies": {
+    "S-TF": {
+     "rt_per_year": 84.90845736,
+     "sr_cost_per_year": {
+      "base": 0.05036579322,
+      "low": 0.06868062711,
+      "high": 0.03357719548
+     },
+     "sr_cost_per_year_low_fees": 0.03514391616
+    },
+    "S-IM": {
+     "rt_per_year": 113.8415278,
+     "sr_cost_per_year": {
+      "base": 0.2293759071,
+      "low": 0.3127853279,
+      "high": 0.1529172714
+     },
+     "sr_cost_per_year_low_fees": 0.1600524311
+    },
+    "S-REV": {
+     "rt_per_year": 8.5,
+     "sr_cost_per_year": {
+      "base": 0.01541542889,
+      "low": 0.0210210394,
+      "high": 0.01027695259
+     },
+     "sr_cost_per_year_low_fees": 0.01075647788
+    },
+    "S-BASE-TFD1": {
+     "rt_per_year": 9.600947909,
+     "sr_cost_per_year": {
+      "base": 0.00656033042,
+      "low": 0.008945905118,
+      "high": 0.004373553613
+     },
+     "sr_cost_per_year_low_fees": 0.004577624764
+    },
+    "S-BASE-TFD1-7T": {
+     "rt_per_year": 14.46751713,
+     "sr_cost_per_year": {
+      "base": 0.01447348736,
+      "low": 0.01973657367,
+      "high": 0.009648991571
+     },
+     "sr_cost_per_year_low_fees": 0.01009921603
+    }
+   }
+  },
+  {
+   "id": "INS-NYMEX-PA",
+   "symbol": "PA",
+   "risk_class": "EDELMETALL",
+   "asset_class": "METALL",
+   "size_class": "STANDARD",
+   "currency": "USD",
+   "access": "PRIMAERBROKER_BOERSE_ANGEBOTEN",
+   "blocked": false,
+   "notional_eur": "105161.69",
+   "vol_eur_per_year": {
+    "base": "42064.67",
+    "low": "31548.51",
+    "high": "63097.01"
+   },
+   "commission_side_eur": "1.00",
+   "half_spread_side_eur": "43.82",
+   "slippage_side_eur": "10.95",
+   "cost_side_eur": "55.77",
+   "cost_rt_eur": "111.54",
+   "cost_rt_bp": 10.60685,
+   "c_rt_sr": {
+    "base": 0.0026517125,
+    "low": 0.003535616667,
+    "high": 0.001767808333
+   },
+   "c_rt_sr_low_fees": 0.00212137,
+   "impact_side_eur_by_order_size": {
+    "1": "18.55",
+    "10": "80.85",
+    "100": "261.66",
+    "1000": "829.32"
+   },
+   "rolls_per_year": 6,
+   "strategies": {
+    "S-TF": {
+     "rt_per_year": 84.90845736,
+     "sr_cost_per_year": {
+      "base": 0.2867113402,
+      "low": 0.382281787,
+      "high": 0.1911408935
+     },
+     "sr_cost_per_year_low_fees": 0.2293690722
+    },
+    "S-IM": {
+     "rt_per_year": 113.8415278,
+     "sr_cost_per_year": {
+      "base": 1.305740852,
+      "low": 1.740987803,
+      "high": 0.8704939013
+     },
+     "sr_cost_per_year_low_fees": 1.044592682
+    },
+    "S-REV": {
+     "rt_per_year": 8.5,
+     "sr_cost_per_year": {
+      "base": 0.08775357232,
+      "low": 0.1170047631,
+      "high": 0.05850238155
+     },
+     "sr_cost_per_year_low_fees": 0.07020285786
+    },
+    "S-BASE-TFD1": {
+     "rt_per_year": 9.600947909,
+     "sr_cost_per_year": {
+      "base": 0.03734521005,
+      "low": 0.0497936134,
+      "high": 0.0248968067
+     },
+     "sr_cost_per_year_low_fees": 0.02987616804
+    },
+    "S-BASE-TFD1-7T": {
+     "rt_per_year": 14.46751713,
+     "sr_cost_per_year": {
+      "base": 0.08239149416,
+      "low": 0.1098553255,
+      "high": 0.05492766277
+     },
+     "sr_cost_per_year_low_fees": 0.06591319533
+    }
+   }
+  },
+  {
+   "id": "INS-COMEX-ALI",
+   "symbol": "ALI",
+   "risk_class": "INDUSTRIEMETALL",
+   "asset_class": "METALL",
+   "size_class": "STANDARD",
+   "currency": "USD",
+   "access": "PRIMAERBROKER_BOERSE_ANGEBOTEN",
+   "blocked": false,
+   "notional_eur": "56962.58",
+   "vol_eur_per_year": {
+    "base": "11392.52",
+    "low": "7974.76",
+    "high": "17088.77"
+   },
+   "commission_side_eur": "1.00",
+   "half_spread_side_eur": "10.95",
+   "slippage_side_eur": "1.37",
+   "cost_side_eur": "13.32",
+   "cost_rt_eur": "26.65",
+   "cost_rt_bp": 4.678030769,
+   "c_rt_sr": {
+    "base": 0.002339015385,
+    "low": 0.003341450549,
+    "high": 0.00155934359
+   },
+   "c_rt_sr_low_fees": 0.00206352,
+   "impact_side_eur_by_order_size": {
+    "1": "21.90",
+    "10": "70.87",
+    "100": "224.61",
+    "1000": "710.43"
+   },
+   "rolls_per_year": 5,
+   "strategies": {
+    "S-TF": {
+     "rt_per_year": 84.29177002,
+     "sr_cost_per_year": {
+      "base": 0.2510647472,
+      "low": 0.3586639246,
+      "high": 0.1673764981
+     },
+     "sr_cost_per_year_low_fees": 0.2214936809
+    },
+    "S-IM": {
+     "rt_per_year": 113.7880788,
+     "sr_cost_per_year": {
+      "base": 1.151223598,
+      "low": 1.64460514,
+      "high": 0.7674823987
+     },
+     "sr_cost_per_year_low_fees": 1.015629454
+    },
+    "S-REV": {
+     "rt_per_year": 8.434027778,
+     "sr_cost_per_year": {
+      "base": 0.07680465608,
+      "low": 0.1097209373,
+      "high": 0.05120310406
+     },
+     "sr_cost_per_year_low_fees": 0.06775840166
+    },
+    "S-BASE-TFD1": {
+     "rt_per_year": 9.136206591,
+     "sr_cost_per_year": {
+      "base": 0.03134680967,
+      "low": 0.04478115668,
+      "high": 0.02089787312
+     },
+     "sr_cost_per_year_low_fees": 0.02765469997
+    },
+    "S-BASE-TFD1-7T": {
+     "rt_per_year": 14.25070872,
+     "sr_cost_per_year": {
+      "base": 0.07158655767,
+      "low": 0.102266511,
+      "high": 0.04772437178
+     },
+     "sr_cost_per_year_low_fees": 0.06315490461
+    }
+   }
+  },
+  {
+   "id": "INS-CBOT-ZC",
+   "symbol": "ZC",
+   "risk_class": "AGRAR",
+   "asset_class": "AGRAR",
+   "size_class": "STANDARD",
+   "currency": "USD",
+   "access": "PRIMAERBROKER_BOERSE_ANGEBOTEN",
+   "blocked": false,
+   "notional_eur": "21937.60",
+   "vol_eur_per_year": {
+    "base": "4826.27",
+    "low": "3290.64",
+    "high": "7020.03"
+   },
+   "commission_side_eur": "1.00",
+   "half_spread_side_eur": "5.48",
+   "slippage_side_eur": "2.74",
+   "cost_side_eur": "9.22",
+   "cost_rt_eur": "18.43",
+   "cost_rt_bp": 8.401789638,
+   "c_rt_sr": {
+    "base": 0.00381899529,
+    "low": 0.005601193092,
+    "high": 0.002625559262
+   },
+   "c_rt_sr_low_fees": 0.002601249986,
+   "impact_side_eur_by_order_size": {
+    "1": "0.00",
+    "10": "0.00",
+    "100": "2.90",
+    "1000": "11.17"
+   },
+   "rolls_per_year": 5,
+   "strategies": {
+    "S-TF": {
+     "rt_per_year": 84.29177002,
+     "sr_cost_per_year": {
+      "base": 0.4099225226,
+      "low": 0.6012196999,
+      "high": 0.2818217343
+     },
+     "sr_cost_per_year_low_fees": 0.2792124304
+    },
+    "S-IM": {
+     "rt_per_year": 113.7880788,
+     "sr_cost_per_year": {
+      "base": 1.879644541,
+      "low": 2.756811993,
+      "high": 1.292255622
+     },
+     "sr_cost_per_year_low_fees": 1.28029101
+    },
+    "S-REV": {
+     "rt_per_year": 8.434027778,
+     "sr_cost_per_year": {
+      "base": 0.1254017489,
+      "low": 0.183922565,
+      "high": 0.08621370234
+     },
+     "sr_cost_per_year_low_fees": 0.08541547521
+    },
+    "S-BASE-TFD1": {
+     "rt_per_year": 9.136206591,
+     "sr_cost_per_year": {
+      "base": 0.05118107358,
+      "low": 0.07506557458,
+      "high": 0.03518698808
+     },
+     "sr_cost_per_year_low_fees": 0.03486120218
+    },
+    "S-BASE-TFD1-7T": {
+     "rt_per_year": 14.25070872,
+     "sr_cost_per_year": {
+      "base": 0.1168819702,
+      "low": 0.1714268897,
+      "high": 0.08035635454
+     },
+     "sr_cost_per_year_low_fees": 0.07961235886
+    }
+   }
+  },
+  {
+   "id": "INS-CBOT-MZC",
+   "symbol": "MZC",
+   "risk_class": "AGRAR",
+   "asset_class": "AGRAR",
+   "size_class": "MICRO",
+   "currency": "USD",
+   "access": "PRIMAERBROKER_BOERSE_ANGEBOTEN",
+   "blocked": false,
+   "notional_eur": "2193.76",
+   "vol_eur_per_year": {
+    "base": "482.63",
+    "low": "329.06",
+    "high": "702.00"
+   },
+   "commission_side_eur": "1.00",
+   "half_spread_side_eur": "2.19",
+   "slippage_side_eur": "0.55",
+   "cost_side_eur": "3.74",
+   "cost_rt_eur": "7.48",
+   "cost_rt_bp": 34.08380937,
+   "c_rt_sr": {
+    "base": 0.01549264062,
+    "low": 0.02272253958,
+    "high": 0.01065119043
+   },
+   "c_rt_sr_low_fees": 0.0123941125,
+   "impact_side_eur_by_order_size": {
+    "1": "0.43",
+    "10": "1.49",
+    "100": "4.75",
+    "1000": "15.05"
+   },
+   "rolls_per_year": 5,
+   "strategies": {
+    "S-TF": {
+     "rt_per_year": 84.29177002,
+     "sr_cost_per_year": {
+      "base": 1.662945839,
+      "low": 2.438987231,
+      "high": 1.143275264
+     },
+     "sr_cost_per_year_low_fees": 1.330356671
+    },
+    "S-IM": {
+     "rt_per_year": 113.7880788,
+     "sr_cost_per_year": {
+      "base": 7.625214267,
+      "low": 11.18364759,
+      "high": 5.242334809
+     },
+     "sr_cost_per_year_low_fees": 6.100171414
+    },
+    "S-REV": {
+     "rt_per_year": 8.434027778,
+     "sr_cost_per_year": {
+      "base": 0.5087212948,
+      "low": 0.7461245657,
+      "high": 0.3497458901
+     },
+     "sr_cost_per_year_low_fees": 0.4069770358
+    },
+    "S-BASE-TFD1": {
+     "rt_per_year": 9.136206591,
+     "sr_cost_per_year": {
+      "base": 0.207627902,
+      "low": 0.3045209229,
+      "high": 0.1427441826
+     },
+     "sr_cost_per_year_low_fees": 0.1661023216
+    },
+    "S-BASE-TFD1-7T": {
+     "rt_per_year": 14.25070872,
+     "sr_cost_per_year": {
+      "base": 0.4741588357,
+      "low": 0.6954329591,
+      "high": 0.3259841996
+     },
+     "sr_cost_per_year_low_fees": 0.3793270686
+    }
+   }
+  },
+  {
+   "id": "INS-CBOT-ZS",
+   "symbol": "ZS",
+   "risk_class": "AGRAR",
+   "asset_class": "AGRAR",
+   "size_class": "STANDARD",
+   "currency": "USD",
+   "access": "PRIMAERBROKER_BOERSE_ANGEBOTEN",
+   "blocked": false,
+   "notional_eur": "55332.57",
+   "vol_eur_per_year": {
+    "base": "9959.86",
+    "low": "6639.91",
+    "high": "14386.47"
+   },
+   "commission_side_eur": "1.00",
+   "half_spread_side_eur": "5.48",
+   "slippage_side_eur": "2.74",
+   "cost_side_eur": "9.22",
+   "cost_rt_eur": "18.43",
+   "cost_rt_bp": 3.331042129,
+   "c_rt_sr": {
+    "base": 0.00185057896,
+    "low": 0.002775868441,
+    "high": 0.001281170049
+   },
+   "c_rt_sr_low_fees": 0.001260493436,
+   "impact_side_eur_by_order_size": {
+    "1": "0.00",
+    "10": "0.00",
+    "100": "8.78",
+    "1000": "30.74"
+   },
+   "rolls_per_year": 5,
+   "strategies": {
+    "S-TF": {
+     "rt_per_year": 84.29177002,
+     "sr_cost_per_year": {
+      "base": 0.1986370598,
+      "low": 0.2979555897,
+      "high": 0.1375179645
+     },
+     "sr_cost_per_year_low_fees": 0.1352985825
+    },
+    "S-IM": {
+     "rt_per_year": 113.7880788,
+     "sr_cost_per_year": {
+      "base": 0.9108234958,
+      "low": 1.366235244,
+      "high": 0.6305701125
+     },
+     "sr_cost_per_year_low_fees": 0.620393435
+    },
+    "S-REV": {
+     "rt_per_year": 8.434027778,
+     "sr_cost_per_year": {
+      "base": 0.06076620169,
+      "low": 0.09114930253,
+      "high": 0.04206890886
+     },
+     "sr_cost_per_year_low_fees": 0.04138996498
+    },
+    "S-BASE-TFD1": {
+     "rt_per_year": 9.136206591,
+     "sr_cost_per_year": {
+      "base": 0.02480092557,
+      "low": 0.03720138835,
+      "high": 0.01716987155
+     },
+     "sr_cost_per_year_low_fees": 0.01689276954
+    },
+    "S-BASE-TFD1-7T": {
+     "rt_per_year": 14.25070872,
+     "sr_cost_per_year": {
+      "base": 0.05663775379,
+      "low": 0.08495663069,
+      "high": 0.03921075263
+     },
+     "sr_cost_per_year_low_fees": 0.03857793611
+    }
+   }
+  },
+  {
+   "id": "INS-CBOT-MZS",
+   "symbol": "MZS",
+   "risk_class": "AGRAR",
+   "asset_class": "AGRAR",
+   "size_class": "MICRO",
+   "currency": "USD",
+   "access": "PRIMAERBROKER_BOERSE_ANGEBOTEN",
+   "blocked": false,
+   "notional_eur": "5533.26",
+   "vol_eur_per_year": {
+    "base": "995.99",
+    "low": "663.99",
+    "high": "1438.65"
+   },
+   "commission_side_eur": "1.00",
+   "half_spread_side_eur": "2.19",
+   "slippage_side_eur": "0.55",
+   "cost_side_eur": "3.74",
+   "cost_rt_eur": "7.48",
+   "cost_rt_bp": 13.51314539,
+   "c_rt_sr": {
+    "base": 0.007507302995,
+    "low": 0.01126095449,
+    "high": 0.005197363612
+   },
+   "c_rt_sr_low_fees": 0.006005842396,
+   "impact_side_eur_by_order_size": {
+    "1": "0.88",
+    "10": "3.07",
+    "100": "9.81",
+    "1000": "31.05"
+   },
+   "rolls_per_year": 5,
+   "strategies": {
+    "S-TF": {
+     "rt_per_year": 84.29177002,
+     "sr_cost_per_year": {
+      "base": 0.8058173285,
+      "low": 1.208725993,
+      "high": 0.5578735351
+     },
+     "sr_cost_per_year_low_fees": 0.6446538628
+    },
+    "S-IM": {
+     "rt_per_year": 113.7880788,
+     "sr_cost_per_year": {
+      "base": 3.694966875,
+      "low": 5.542450312,
+      "high": 2.55805399
+     },
+     "sr_cost_per_year_low_fees": 2.9559735
+    },
+    "S-REV": {
+     "rt_per_year": 8.434027778,
+     "sr_cost_per_year": {
+      "base": 0.2465121984,
+      "low": 0.3697682977,
+      "high": 0.1706622912
+     },
+     "sr_cost_per_year_low_fees": 0.1972097588
+    },
+    "S-BASE-TFD1": {
+     "rt_per_year": 9.136206591,
+     "sr_cost_per_year": {
+      "base": 0.1006107098,
+      "low": 0.1509160647,
+      "high": 0.06965356834
+     },
+     "sr_cost_per_year_low_fees": 0.08048856786
+    },
+    "S-BASE-TFD1-7T": {
+     "rt_per_year": 14.25070872,
+     "sr_cost_per_year": {
+      "base": 0.2297641915,
+      "low": 0.3446462873,
+      "high": 0.1590675172
+     },
+     "sr_cost_per_year_low_fees": 0.1838113532
+    }
+   }
+  },
+  {
+   "id": "INS-CBOT-ZW",
+   "symbol": "ZW",
+   "risk_class": "AGRAR",
+   "asset_class": "AGRAR",
+   "size_class": "STANDARD",
+   "currency": "USD",
+   "access": "PRIMAERBROKER_BOERSE_ANGEBOTEN",
+   "blocked": false,
+   "notional_eur": "28322.23",
+   "vol_eur_per_year": {
+    "base": "7930.23",
+    "low": "5664.45",
+    "high": "11328.89"
+   },
+   "commission_side_eur": "1.00",
+   "half_spread_side_eur": "5.48",
+   "slippage_side_eur": "2.74",
+   "cost_side_eur": "9.22",
+   "cost_rt_eur": "18.43",
+   "cost_rt_bp": 6.507789656,
+   "c_rt_sr": {
+    "base": 0.002324210591,
+    "low": 0.003253894828,
+    "high": 0.001626947414
+   },
+   "c_rt_sr_low_fees": 0.001583100347,
+   "impact_side_eur_by_order_size": {
+    "1": "0.00",
+    "10": "0.00",
+    "100": "9.47",
+    "1000": "31.73"
+   },
+   "rolls_per_year": 5,
+   "strategies": {
+    "S-TF": {
+     "rt_per_year": 84.29177002,
+     "sr_cost_per_year": {
+      "base": 0.2494756334,
+      "low": 0.3492658867,
+      "high": 0.1746329434
+     },
+     "sr_cost_per_year_low_fees": 0.169926496
+    },
+    "S-IM": {
+     "rt_per_year": 113.7880788,
+     "sr_cost_per_year": {
+      "base": 1.143936931,
+      "low": 1.601511703,
+      "high": 0.8007558515
+     },
+     "sr_cost_per_year_low_fees": 0.7791750708
+    },
+    "S-REV": {
+     "rt_per_year": 8.434027778,
+     "sr_cost_per_year": {
+      "base": 0.07631852117,
+      "low": 0.1068459296,
+      "high": 0.05342296482
+     },
+     "sr_cost_per_year_low_fees": 0.05198318853
+    },
+    "S-BASE-TFD1": {
+     "rt_per_year": 9.136206591,
+     "sr_cost_per_year": {
+      "base": 0.0311484001,
+      "low": 0.04360776015,
+      "high": 0.02180388007
+     },
+     "sr_cost_per_year_low_fees": 0.02121625433
+    },
+    "S-BASE-TFD1-7T": {
+     "rt_per_year": 14.25070872,
+     "sr_cost_per_year": {
+      "base": 0.0711334507,
+      "low": 0.09958683098,
+      "high": 0.04979341549
+     },
+     "sr_cost_per_year_low_fees": 0.04845145742
+    }
+   }
+  },
+  {
+   "id": "INS-CBOT-MZW",
+   "symbol": "MZW",
+   "risk_class": "AGRAR",
+   "asset_class": "AGRAR",
+   "size_class": "MICRO",
+   "currency": "USD",
+   "access": "PRIMAERBROKER_BOERSE_ANGEBOTEN",
+   "blocked": false,
+   "notional_eur": "2832.22",
+   "vol_eur_per_year": {
+    "base": "793.02",
+    "low": "566.44",
+    "high": "1132.89"
+   },
+   "commission_side_eur": "1.00",
+   "half_spread_side_eur": "2.19",
+   "slippage_side_eur": "0.55",
+   "cost_side_eur": "3.74",
+   "cost_rt_eur": "7.48",
+   "cost_rt_bp": 26.40035893,
+   "c_rt_sr": {
+    "base": 0.009428699617,
+    "low": 0.01320017946,
+    "high": 0.006600089732
+   },
+   "c_rt_sr_low_fees": 0.007542959694,
+   "impact_side_eur_by_order_size": {
+    "1": "1.05",
+    "10": "3.48",
+    "100": "11.05",
+    "1000": "34.97"
+   },
+   "rolls_per_year": 5,
+   "strategies": {
+    "S-TF": {
+     "rt_per_year": 84.29177002,
+     "sr_cost_per_year": {
+      "base": 1.0120558,
+      "low": 1.41687812,
+      "high": 0.7084390598
+     },
+     "sr_cost_per_year_low_fees": 0.8096446398
+    },
+    "S-IM": {
+     "rt_per_year": 113.7880788,
+     "sr_cost_per_year": {
+      "base": 4.640645619,
+      "low": 6.496903867,
+      "high": 3.248451934
+     },
+     "sr_cost_per_year_low_fees": 3.712516496
+    },
+    "S-REV": {
+     "rt_per_year": 8.434027778,
+     "sr_cost_per_year": {
+      "base": 0.3096037915,
+      "low": 0.4334453081,
+      "high": 0.216722654
+     },
+     "sr_cost_per_year_low_fees": 0.2476830332
+    },
+    "S-BASE-TFD1": {
+     "rt_per_year": 9.136206591,
+     "sr_cost_per_year": {
+      "base": 0.1263607133,
+      "low": 0.1769049986,
+      "high": 0.08845249929
+     },
+     "sr_cost_per_year_low_fees": 0.1010885706
+    },
+    "S-BASE-TFD1-7T": {
+     "rt_per_year": 14.25070872,
+     "sr_cost_per_year": {
+      "base": 0.2885693499,
+      "low": 0.4039970898,
+      "high": 0.2019985449
+     },
+     "sr_cost_per_year_low_fees": 0.2308554799
+    }
+   }
+  },
+  {
+   "id": "INS-CBOT-KE",
+   "symbol": "KE",
+   "risk_class": "AGRAR",
+   "asset_class": "AGRAR",
+   "size_class": "STANDARD",
+   "currency": "USD",
+   "access": "PRIMAERBROKER_BOERSE_ANGEBOTEN",
+   "blocked": false,
+   "notional_eur": "27604.94",
+   "vol_eur_per_year": {
+    "base": "7729.38",
+    "low": "5520.99",
+    "high": "11041.98"
+   },
+   "commission_side_eur": "1.00",
+   "half_spread_side_eur": "5.48",
+   "slippage_side_eur": "2.74",
+   "cost_side_eur": "9.22",
+   "cost_rt_eur": "18.43",
+   "cost_rt_bp": 6.676888889,
+   "c_rt_sr": {
+    "base": 0.002384603175,
+    "low": 0.003338444444,
+    "high": 0.001669222222
+   },
+   "c_rt_sr_low_fees": 0.001624235828,
+   "impact_side_eur_by_order_size": {
+    "1": "0.00",
+    "10": "3.41",
+    "100": "14.86",
+    "1000": "48.08"
+   },
+   "rolls_per_year": 5,
+   "strategies": {
+    "S-TF": {
+     "rt_per_year": 84.29177002,
+     "sr_cost_per_year": {
+      "base": 0.2559580399,
+      "low": 0.3583412559,
+      "high": 0.1791706279
+     },
+     "sr_cost_per_year_low_fees": 0.1743418877
+    },
+    "S-IM": {
+     "rt_per_year": 113.7880788,
+     "sr_cost_per_year": {
+      "base": 1.173661133,
+      "low": 1.643125586,
+      "high": 0.8215627932
+     },
+     "sr_cost_per_year_low_fees": 0.7994212548
+    },
+    "S-REV": {
+     "rt_per_year": 8.434027778,
+     "sr_cost_per_year": {
+      "base": 0.07830159131,
+      "low": 0.1096222278,
+      "high": 0.05481111392
+     },
+     "sr_cost_per_year_low_fees": 0.0533339263
+    },
+    "S-BASE-TFD1": {
+     "rt_per_year": 9.136206591,
+     "sr_cost_per_year": {
+      "base": 0.03195776409,
+      "low": 0.04474086972,
+      "high": 0.02237043486
+     },
+     "sr_cost_per_year_low_fees": 0.02176754017
+    },
+    "S-BASE-TFD1-7T": {
+     "rt_per_year": 14.25070872,
+     "sr_cost_per_year": {
+      "base": 0.07298179132,
+      "low": 0.1021745078,
+      "high": 0.05108725392
+     },
+     "sr_cost_per_year_low_fees": 0.04971042624
+    }
+   }
+  },
+  {
+   "id": "INS-CBOT-ZM",
+   "symbol": "ZM",
+   "risk_class": "AGRAR",
+   "asset_class": "AGRAR",
+   "size_class": "STANDARD",
+   "currency": "USD",
+   "access": "PRIMAERBROKER_BOERSE_ANGEBOTEN",
+   "blocked": false,
+   "notional_eur": "26290.42",
+   "vol_eur_per_year": {
+    "base": "5783.89",
+    "low": "3943.56",
+    "high": "8412.93"
+   },
+   "commission_side_eur": "1.00",
+   "half_spread_side_eur": "4.38",
+   "slippage_side_eur": "2.19",
+   "cost_side_eur": "7.57",
+   "cost_rt_eur": "15.15",
+   "cost_rt_bp": 5.760733333,
+   "c_rt_sr": {
+    "base": 0.002618515152,
+    "low": 0.003840488889,
+    "high": 0.001800229167
+   },
+   "c_rt_sr_low_fees": 0.001791781818,
+   "impact_side_eur_by_order_size": {
+    "1": "0.00",
+    "10": "0.00",
+    "100": "7.65",
+    "1000": "25.38"
+   },
+   "rolls_per_year": 5,
+   "strategies": {
+    "S-TF": {
+     "rt_per_year": 84.29177002,
+     "sr_cost_per_year": {
+      "base": 0.2810656351,
+      "low": 0.4122295981,
+      "high": 0.1932326241
+     },
+     "sr_cost_per_year_low_fees": 0.1923259044
+    },
+    "S-IM": {
+     "rt_per_year": 113.7880788,
+     "sr_cost_per_year": {
+      "base": 1.288788631,
+      "low": 1.890223325,
+      "high": 0.8860421835
+     },
+     "sr_cost_per_year_low_fees": 0.8818845422
+    },
+    "S-REV": {
+     "rt_per_year": 8.434027778,
+     "sr_cost_per_year": {
+      "base": 0.08598239968,
+      "low": 0.1261075195,
+      "high": 0.05911289978
+     },
+     "sr_cost_per_year_low_fees": 0.05883551995
+    },
+    "S-BASE-TFD1": {
+     "rt_per_year": 9.136206591,
+     "sr_cost_per_year": {
+      "base": 0.03509258495,
+      "low": 0.05146912459,
+      "high": 0.02412615215
+     },
+     "sr_cost_per_year_low_fees": 0.02401294322
+    },
+    "S-BASE-TFD1-7T": {
+     "rt_per_year": 14.25070872,
+     "sr_cost_per_year": {
+      "base": 0.08014076656,
+      "low": 0.117539791,
+      "high": 0.05509677701
+     },
+     "sr_cost_per_year_low_fees": 0.05483824233
+    }
+   }
+  },
+  {
+   "id": "INS-CBOT-ZL",
+   "symbol": "ZL",
+   "risk_class": "AGRAR",
+   "asset_class": "AGRAR",
+   "size_class": "STANDARD",
+   "currency": "USD",
+   "access": "PRIMAERBROKER_BOERSE_ANGEBOTEN",
+   "blocked": false,
+   "notional_eur": "26290.42",
+   "vol_eur_per_year": {
+    "base": "7361.32",
+    "low": "5258.08",
+    "high": "10516.17"
+   },
+   "commission_side_eur": "1.00",
+   "half_spread_side_eur": "2.63",
+   "slippage_side_eur": "1.31",
+   "cost_side_eur": "4.94",
+   "cost_rt_eur": "9.89",
+   "cost_rt_bp": 3.760733333,
+   "c_rt_sr": {
+    "base": 0.001343119048,
+    "low": 0.001880366667,
+    "high": 0.0009401833333
+   },
+   "c_rt_sr_low_fees": 0.0009316380952,
+   "impact_side_eur_by_order_size": {
+    "1": "0.00",
+    "10": "0.00",
+    "100": "9.74",
+    "1000": "32.30"
+   },
+   "rolls_per_year": 5,
+   "strategies": {
+    "S-TF": {
+     "rt_per_year": 84.29177002,
+     "sr_cost_per_year": {
+      "base": 0.1441674332,
+      "low": 0.2018344064,
+      "high": 0.1009172032
+     },
+     "sr_cost_per_year_low_fees": 0.09999997623
+    },
+    "S-IM": {
+     "rt_per_year": 113.7880788,
+     "sr_cost_per_year": {
+      "base": 0.6610603559,
+      "low": 0.9254844983,
+      "high": 0.4627422491
+     },
+     "sr_cost_per_year_low_fees": 0.4585364283
+    },
+    "S-REV": {
+     "rt_per_year": 8.434027778,
+     "sr_cost_per_year": {
+      "base": 0.04410308594,
+      "low": 0.06174432032,
+      "high": 0.03087216016
+     },
+     "sr_cost_per_year_low_fees": 0.03059156599
+    },
+    "S-BASE-TFD1": {
+     "rt_per_year": 9.136206591,
+     "sr_cost_per_year": {
+      "base": 0.01800009416,
+      "low": 0.02520013182,
+      "high": 0.01260006591
+     },
+     "sr_cost_per_year_low_fees": 0.01248554509
+    },
+    "S-BASE-TFD1-7T": {
+     "rt_per_year": 14.25070872,
+     "sr_cost_per_year": {
+      "base": 0.04110672798,
+      "low": 0.05754941918,
+      "high": 0.02877470959
+     },
+     "sr_cost_per_year_low_fees": 0.02851317895
+    }
+   }
+  },
+  {
+   "id": "INS-CME-LE",
+   "symbol": "LE",
+   "risk_class": "VIEH",
+   "asset_class": "AGRAR",
+   "size_class": "STANDARD",
+   "currency": "USD",
+   "access": "PRIMAERBROKER_BOERSE_ANGEBOTEN",
+   "blocked": false,
+   "notional_eur": "77118.57",
+   "vol_eur_per_year": {
+    "base": "11567.79",
+    "low": "7711.86",
+    "high": "16966.09"
+   },
+   "commission_side_eur": "1.00",
+   "half_spread_side_eur": "4.38",
+   "slippage_side_eur": "2.19",
+   "cost_side_eur": "7.57",
+   "cost_rt_eur": "15.15",
+   "cost_rt_bp": 1.963886364,
+   "c_rt_sr": {
+    "base": 0.001309257576,
+    "low": 0.001963886364,
+    "high": 0.0008926756198
+   },
+   "c_rt_sr_low_fees": 0.0008958909091,
+   "impact_side_eur_by_order_size": {
+    "1": "0.00",
+    "10": "5.10",
+    "100": "22.23",
+    "1000": "71.96"
+   },
+   "rolls_per_year": 6,
+   "strategies": {
+    "S-TF": {
+     "rt_per_year": 84.90845736,
+     "sr_cost_per_year": {
+      "base": 0.1415609702,
+      "low": 0.2123414553,
+      "high": 0.09651884333
+     },
+     "sr_cost_per_year_low_fees": 0.09686649033
+    },
+    "S-IM": {
+     "rt_per_year": 113.8415278,
+     "sr_cost_per_year": {
+      "base": 0.6446970033,
+      "low": 0.967045505,
+      "high": 0.4395661386
+     },
+     "sr_cost_per_year_low_fees": 0.4411493927
+    },
+    "S-REV": {
+     "rt_per_year": 8.5,
+     "sr_cost_per_year": {
+      "base": 0.04332748341,
+      "low": 0.06499122512,
+      "high": 0.02954146596
+     },
+     "sr_cost_per_year_low_fees": 0.02964787008
+    },
+    "S-BASE-TFD1": {
+     "rt_per_year": 9.600947909,
+     "sr_cost_per_year": {
+      "base": 0.01843883874,
+      "low": 0.02765825811,
+      "high": 0.01257193551
+     },
+     "sr_cost_per_year_low_fees": 0.01261721781
+    },
+    "S-BASE-TFD1-7T": {
+     "rt_per_year": 14.46751713,
+     "sr_cost_per_year": {
+      "base": 0.04068000883,
+      "low": 0.06102001324,
+      "high": 0.02773636965
+     },
+     "sr_cost_per_year_low_fees": 0.02783627207
+    }
+   }
+  },
+  {
+   "id": "INS-CME-HE",
+   "symbol": "HE",
+   "risk_class": "VIEH",
+   "asset_class": "AGRAR",
+   "size_class": "STANDARD",
+   "currency": "USD",
+   "access": "PRIMAERBROKER_BOERSE_ANGEBOTEN",
+   "blocked": false,
+   "notional_eur": "33301.20",
+   "vol_eur_per_year": {
+    "base": "8325.30",
+    "low": "5994.22",
+    "high": "11655.42"
+   },
+   "commission_side_eur": "1.00",
+   "half_spread_side_eur": "4.38",
+   "slippage_side_eur": "2.19",
+   "cost_side_eur": "7.57",
+   "cost_rt_eur": "15.15",
+   "cost_rt_bp": 4.547947368,
+   "c_rt_sr": {
+    "base": 0.001819178947,
+    "low": 0.002526637427,
+    "high": 0.001299413534
+   },
+   "c_rt_sr_low_fees": 0.001244816842,
+   "impact_side_eur_by_order_size": {
+    "1": "0.00",
+    "10": "4.50",
+    "100": "17.98",
+    "1000": "57.93"
+   },
+   "rolls_per_year": 6,
+   "strategies": {
+    "S-TF": {
+     "rt_per_year": 84.90845736,
+     "sr_cost_per_year": {
+      "base": 0.1966952428,
+      "low": 0.2731878373,
+      "high": 0.140496602
+     },
+     "sr_cost_per_year_low_fees": 0.1345934392
+    },
+    "S-IM": {
+     "rt_per_year": 113.8415278,
+     "sr_cost_per_year": {
+      "base": 0.8957895204,
+      "low": 1.244152112,
+      "high": 0.6398496574
+     },
+     "sr_cost_per_year_low_fees": 0.6129654719
+    },
+    "S-REV": {
+     "rt_per_year": 8.5,
+     "sr_cost_per_year": {
+      "base": 0.06020239801,
+      "low": 0.08361444168,
+      "high": 0.04300171286
+     },
+     "sr_cost_per_year_low_fees": 0.04119493527
+    },
+    "S-BASE-TFD1": {
+     "rt_per_year": 9.600947909,
+     "sr_cost_per_year": {
+      "base": 0.0256202812,
+      "low": 0.03558372389,
+      "high": 0.01830020086
+     },
+     "sr_cost_per_year_low_fees": 0.01753129212
+    },
+    "S-BASE-TFD1-7T": {
+     "rt_per_year": 14.46751713,
+     "sr_cost_per_year": {
+      "base": 0.05652380174,
+      "low": 0.07850528019,
+      "high": 0.0403741441
+     },
+     "sr_cost_per_year_low_fees": 0.03867776751
+    }
+   }
+  },
+  {
+   "id": "INS-CME-GF",
+   "symbol": "GF",
+   "risk_class": "VIEH",
+   "asset_class": "AGRAR",
+   "size_class": "STANDARD",
+   "currency": "USD",
+   "access": "PRIMAERBROKER_BOERSE_ANGEBOTEN",
+   "blocked": false,
+   "notional_eur": "140215.58",
+   "vol_eur_per_year": {
+    "base": "25238.80",
+    "low": "16825.87",
+    "high": "36456.05"
+   },
+   "commission_side_eur": "1.00",
+   "half_spread_side_eur": "10.95",
+   "slippage_side_eur": "2.74",
+   "cost_side_eur": "14.69",
+   "cost_rt_eur": "29.39",
+   "cost_rt_bp": 2.0957625,
+   "c_rt_sr": {
+    "base": 0.0011643125,
+    "low": 0.00174646875,
+    "high": 0.0008060625
+   },
+   "c_rt_sr_low_fees": 0.00093145,
+   "impact_side_eur_by_order_size": {
+    "1": "0.00",
+    "10": "33.39",
+    "100": "110.73",
+    "1000": "351.76"
+   },
+   "rolls_per_year": 6,
+   "strategies": {
+    "S-TF": {
+     "rt_per_year": 84.90845736,
+     "sr_cost_per_year": {
+      "base": 0.1258890612,
+      "low": 0.1888335919,
+      "high": 0.08715396547
+     },
+     "sr_cost_per_year_low_fees": 0.100711249
+    },
+    "S-IM": {
+     "rt_per_year": 113.8415278,
+     "sr_cost_per_year": {
+      "base": 0.5733239918,
+      "low": 0.8599859877,
+      "high": 0.3969166097
+     },
+     "sr_cost_per_year_low_fees": 0.4586591935
+    },
+    "S-REV": {
+     "rt_per_year": 8.5,
+     "sr_cost_per_year": {
+      "base": 0.03853079139,
+      "low": 0.05779618709,
+      "high": 0.02667516327
+     },
+     "sr_cost_per_year_low_fees": 0.03082463311
+    },
+    "S-BASE-TFD1": {
+     "rt_per_year": 9.600947909,
+     "sr_cost_per_year": {
+      "base": 0.01639751477,
+      "low": 0.02459627215,
+      "high": 0.01135212561
+     },
+     "sr_cost_per_year_low_fees": 0.01311801181
+    },
+    "S-BASE-TFD1-7T": {
+     "rt_per_year": 14.46751713,
+     "sr_cost_per_year": {
+      "base": 0.03617641299,
+      "low": 0.05426461949,
+      "high": 0.025045209
+     },
+     "sr_cost_per_year_low_fees": 0.02894113039
+    }
+   }
+  },
+  {
+   "id": "INS-ICEUS-SB",
+   "symbol": "SB",
+   "risk_class": "SOFTS",
+   "asset_class": "AGRAR",
+   "size_class": "STANDARD",
+   "currency": "USD",
+   "access": "KEIN_ZUGANG_PRIMAERBROKER",
+   "blocked": false,
+   "notional_eur": "14246.60",
+   "vol_eur_per_year": {
+    "base": "4273.98",
+    "low": "3134.25",
+    "high": "6410.97"
+   },
+   "commission_side_eur": "1.00",
+   "half_spread_side_eur": "4.91",
+   "slippage_side_eur": "2.45",
+   "cost_side_eur": "8.36",
+   "cost_rt_eur": "16.72",
+   "cost_rt_bp": 11.73798041,
+   "c_rt_sr": {
+    "base": 0.003912660138,
+    "low": 0.005335445643,
+    "high": 0.002608440092
+   },
+   "c_rt_sr_low_fees": 0.002670833128,
+   "impact_side_eur_by_order_size": {
+    "1": "0.00",
+    "10": "0.00",
+    "100": "5.10",
+    "1000": "17.10"
+   },
+   "rolls_per_year": 5,
+   "strategies": {
+    "S-TF": {
+     "rt_per_year": 84.29177002,
+     "sr_cost_per_year": {
+      "base": 0.4199763007,
+      "low": 0.5726949554,
+      "high": 0.2799842004
+     },
+     "sr_cost_per_year_low_fees": 0.2866813312
+    },
+    "S-IM": {
+     "rt_per_year": 113.7880788,
+     "sr_cost_per_year": {
+      "base": 1.925744786,
+      "low": 2.626015618,
+      "high": 1.283829858
+     },
+     "sr_cost_per_year_low_fees": 1.314538649
+    },
+    "S-REV": {
+     "rt_per_year": 8.434027778,
+     "sr_cost_per_year": {
+      "base": 0.1284773577,
+      "low": 0.1751963969,
+      "high": 0.08565157181
+     },
+     "sr_cost_per_year_low_fees": 0.08770032948
+    },
+    "S-BASE-TFD1": {
+     "rt_per_year": 9.136206591,
+     "sr_cost_per_year": {
+      "base": 0.05243634286,
+      "low": 0.0715041039,
+      "high": 0.03495756191
+     },
+     "sr_cost_per_year_low_fees": 0.03579373539
+    },
+    "S-BASE-TFD1-7T": {
+     "rt_per_year": 14.25070872,
+     "sr_cost_per_year": {
+      "base": 0.1197486226,
+      "low": 0.1632935763,
+      "high": 0.07983241509
+     },
+     "sr_cost_per_year_low_fees": 0.08174198042
+    }
+   }
+  },
+  {
+   "id": "INS-ICEUS-KC",
+   "symbol": "KC",
+   "risk_class": "SOFTS",
+   "asset_class": "AGRAR",
+   "size_class": "STANDARD",
+   "currency": "USD",
+   "access": "KEIN_ZUGANG_PRIMAERBROKER",
+   "blocked": false,
+   "notional_eur": "101214.84",
+   "vol_eur_per_year": {
+    "base": "35425.19",
+    "low": "25303.71",
+    "high": "50607.42"
+   },
+   "commission_side_eur": "1.00",
+   "half_spread_side_eur": "16.43",
+   "slippage_side_eur": "4.11",
+   "cost_side_eur": "21.54",
+   "cost_rt_eur": "43.08",
+   "cost_rt_bp": 4.256172819,
+   "c_rt_sr": {
+    "base": 0.001216049377,
+    "low": 0.001702469128,
+    "high": 0.0008512345639
+   },
+   "c_rt_sr_low_fees": 0.0009728395016,
+   "impact_side_eur_by_order_size": {
+    "1": "0.00",
+    "10": "23.86",
+    "100": "88.83",
+    "1000": "284.77"
+   },
+   "rolls_per_year": 5,
+   "strategies": {
+    "S-TF": {
+     "rt_per_year": 84.29177002,
+     "sr_cost_per_year": {
+      "base": 0.1305280553,
+      "low": 0.1827392774,
+      "high": 0.09136963869
+     },
+     "sr_cost_per_year_low_fees": 0.1044224442
+    },
+    "S-IM": {
+     "rt_per_year": 113.7880788,
+     "sr_cost_per_year": {
+      "base": 0.5985188248,
+      "low": 0.8379263547,
+      "high": 0.4189631774
+     },
+     "sr_cost_per_year_low_fees": 0.4788150599
+    },
+    "S-REV": {
+     "rt_per_year": 8.434027778,
+     "sr_cost_per_year": {
+      "base": 0.03993058566,
+      "low": 0.05590281993,
+      "high": 0.02795140996
+     },
+     "sr_cost_per_year_low_fees": 0.03194446853
+    },
+    "S-BASE-TFD1": {
+     "rt_per_year": 9.136206591,
+     "sr_cost_per_year": {
+      "base": 0.01629714307,
+      "low": 0.0228160003,
+      "high": 0.01140800015
+     },
+     "sr_cost_per_year_low_fees": 0.01303771446
+    },
+    "S-BASE-TFD1-7T": {
+     "rt_per_year": 14.25070872,
+     "sr_cost_per_year": {
+      "base": 0.03721770683,
+      "low": 0.05210478957,
+      "high": 0.02605239478
+     },
+     "sr_cost_per_year_low_fees": 0.02977416547
+    }
+   }
+  },
+  {
+   "id": "INS-ICEUS-CC",
+   "symbol": "CC",
+   "risk_class": "SOFTS",
+   "asset_class": "AGRAR",
+   "size_class": "STANDARD",
+   "currency": "USD",
+   "access": "KEIN_ZUGANG_PRIMAERBROKER",
+   "blocked": false,
+   "notional_eur": "52580.84",
+   "vol_eur_per_year": {
+    "base": "23661.38",
+    "low": "15774.25",
+    "high": "34177.55"
+   },
+   "commission_side_eur": "1.00",
+   "half_spread_side_eur": "8.76",
+   "slippage_side_eur": "2.19",
+   "cost_side_eur": "11.95",
+   "cost_rt_eur": "23.91",
+   "cost_rt_bp": 4.547033333,
+   "c_rt_sr": {
+    "base": 0.001010451852,
+    "low": 0.001515677778,
+    "high": 0.0006995435897
+   },
+   "c_rt_sr_low_fees": 0.0008083614815,
+   "impact_side_eur_by_order_size": {
+    "1": "0.00",
+    "10": "15.94",
+    "100": "59.33",
+    "1000": "190.21"
+   },
+   "rolls_per_year": 5,
+   "strategies": {
+    "S-TF": {
+     "rt_per_year": 84.29177002,
+     "sr_cost_per_year": {
+      "base": 0.1084596709,
+      "low": 0.1626895063,
+      "high": 0.07508746444
+     },
+     "sr_cost_per_year_low_fees": 0.08676773668
+    },
+    "S-IM": {
+     "rt_per_year": 113.7880788,
+     "sr_cost_per_year": {
+      "base": 0.4973272191,
+      "low": 0.7459908286,
+      "high": 0.3443034594
+     },
+     "sr_cost_per_year_low_fees": 0.3978617753
+    },
+    "S-REV": {
+     "rt_per_year": 8.434027778,
+     "sr_cost_per_year": {
+      "base": 0.03317951967,
+      "low": 0.04976927951,
+      "high": 0.0229704367
+     },
+     "sr_cost_per_year_low_fees": 0.02654361574
+    },
+    "S-BASE-TFD1": {
+     "rt_per_year": 9.136206591,
+     "sr_cost_per_year": {
+      "base": 0.01354178433,
+      "low": 0.0203126765,
+      "high": 0.009375081459
+     },
+     "sr_cost_per_year_low_fees": 0.01083342746
+    },
+    "S-BASE-TFD1-7T": {
+     "rt_per_year": 14.25070872,
+     "sr_cost_per_year": {
+      "base": 0.03092530739,
+      "low": 0.04638796109,
+      "high": 0.0214098282
+     },
+     "sr_cost_per_year_low_fees": 0.02474024592
+    }
+   }
+  },
+  {
+   "id": "INS-ICEUS-CT",
+   "symbol": "CT",
+   "risk_class": "SOFTS",
+   "asset_class": "AGRAR",
+   "size_class": "STANDARD",
+   "currency": "USD",
+   "access": "KEIN_ZUGANG_PRIMAERBROKER",
+   "blocked": false,
+   "notional_eur": "28919.46",
+   "vol_eur_per_year": {
+    "base": "5783.89",
+    "low": "4048.72",
+    "high": "8675.84"
+   },
+   "commission_side_eur": "1.00",
+   "half_spread_side_eur": "2.19",
+   "slippage_side_eur": "1.10",
+   "cost_side_eur": "4.29",
+   "cost_rt_eur": "8.57",
+   "cost_rt_bp": 2.96430303,
+   "c_rt_sr": {
+    "base": 0.001482151515,
+    "low": 0.002117359307,
+    "high": 0.0009881010101
+   },
+   "c_rt_sr_low_fees": 0.001034206061,
+   "impact_side_eur_by_order_size": {
+    "1": "0.00",
+    "10": "2.55",
+    "100": "11.12",
+    "1000": "35.98"
+   },
+   "rolls_per_year": 5,
+   "strategies": {
+    "S-TF": {
+     "rt_per_year": 84.29177002,
+     "sr_cost_per_year": {
+      "base": 0.1590908713,
+      "low": 0.2272726732,
+      "high": 0.1060605808
+     },
+     "sr_cost_per_year_low_fees": 0.1110093952
+    },
+    "S-IM": {
+     "rt_per_year": 113.7880788,
+     "sr_cost_per_year": {
+      "base": 0.7294897722,
+      "low": 1.042128246,
+      "high": 0.4863265148
+     },
+     "sr_cost_per_year_low_fees": 0.5090186367
+    },
+    "S-REV": {
+     "rt_per_year": 8.434027778,
+     "sr_cost_per_year": {
+      "base": 0.04866840045,
+      "low": 0.06952628635,
+      "high": 0.0324456003
+     },
+     "sr_cost_per_year_low_fees": 0.03395952046
+    },
+    "S-BASE-TFD1": {
+     "rt_per_year": 9.136206591,
+     "sr_cost_per_year": {
+      "base": 0.01986336719,
+      "low": 0.02837623885,
+      "high": 0.01324224479
+     },
+     "sr_cost_per_year_low_fees": 0.01386013139
+    },
+    "S-BASE-TFD1-7T": {
+     "rt_per_year": 14.25070872,
+     "sr_cost_per_year": {
+      "base": 0.04536187561,
+      "low": 0.06480267944,
+      "high": 0.03024125041
+     },
+     "sr_cost_per_year_low_fees": 0.03165231503
+    }
+   }
+  },
+  {
+   "id": "INS-EURONEXT-EBM",
+   "symbol": "EBM",
+   "risk_class": "AGRAR",
+   "asset_class": "AGRAR",
+   "size_class": "STANDARD",
+   "currency": "EUR",
+   "access": "KEIN_ZUGANG_PRIMAERBROKER",
+   "blocked": false,
+   "notional_eur": "9500.00",
+   "vol_eur_per_year": {
+    "base": "1900.00",
+    "low": "1330.00",
+    "high": "2850.00"
+   },
+   "commission_side_eur": "1.00",
+   "half_spread_side_eur": "6.25",
+   "slippage_side_eur": "3.12",
+   "cost_side_eur": "10.38",
+   "cost_rt_eur": "20.75",
+   "cost_rt_bp": 21.84210526,
+   "c_rt_sr": {
+    "base": 0.01092105263,
+    "low": 0.01560150376,
+    "high": 0.007280701754
+   },
+   "c_rt_sr_low_fees": 0.007421052632,
+   "impact_side_eur_by_order_size": {
+    "1": "0.00",
+    "10": "1.28",
+    "100": "4.76",
+    "1000": "15.27"
+   },
+   "rolls_per_year": 5,
+   "strategies": {
+    "S-TF": {
+     "rt_per_year": 84.29177002,
+     "sr_cost_per_year": {
+      "base": 1.172241677,
+      "low": 1.674630968,
+      "high": 0.7814944516
+     },
+     "sr_cost_per_year_low_fees": 0.7965594049
+    },
+    "S-IM": {
+     "rt_per_year": 113.7880788,
+     "sr_cost_per_year": {
+      "base": 5.375156396,
+      "low": 7.678794852,
+      "high": 3.583437597
+     },
+     "sr_cost_per_year_low_fees": 3.652515913
+    },
+    "S-REV": {
+     "rt_per_year": 8.434027778,
+     "sr_cost_per_year": {
+      "base": 0.3586071716,
+      "low": 0.5122959595,
+      "high": 0.2390714477
+     },
+     "sr_cost_per_year_low_fees": 0.243680054
+    },
+    "S-BASE-TFD1": {
+     "rt_per_year": 9.136206591,
+     "sr_cost_per_year": {
+      "base": 0.146360798,
+      "low": 0.2090868543,
+      "high": 0.09757386535
+     },
+     "sr_cost_per_year_low_fees": 0.09945480733
+    },
+    "S-BASE-TFD1-7T": {
+     "rt_per_year": 14.25070872,
+     "sr_cost_per_year": {
+      "base": 0.3342434467,
+      "low": 0.4774906382,
+      "high": 0.2228289645
+     },
+     "sr_cost_per_year_low_fees": 0.2271244626
+    }
+   }
+  },
+  {
+   "id": "INS-EURONEXT-ECO",
+   "symbol": "ECO",
+   "risk_class": "AGRAR",
+   "asset_class": "AGRAR",
+   "size_class": "STANDARD",
+   "currency": "EUR",
+   "access": "KEIN_ZUGANG_PRIMAERBROKER",
+   "blocked": false,
+   "notional_eur": "24000.00",
+   "vol_eur_per_year": {
+    "base": "4320.00",
+    "low": "2880.00",
+    "high": "6240.00"
+   },
+   "commission_side_eur": "1.00",
+   "half_spread_side_eur": "12.50",
+   "slippage_side_eur": "3.12",
+   "cost_side_eur": "16.62",
+   "cost_rt_eur": "33.25",
+   "cost_rt_bp": 13.85416667,
+   "c_rt_sr": {
+    "base": 0.007696759259,
+    "low": 0.01154513889,
+    "high": 0.005328525641
+   },
+   "c_rt_sr_low_fees": 0.006157407407,
+   "impact_side_eur_by_order_size": {
+    "1": "0.00",
+    "10": "5.71",
+    "100": "18.95",
+    "1000": "60.21"
+   },
+   "rolls_per_year": 5,
+   "strategies": {
+    "S-TF": {
+     "rt_per_year": 84.29177002,
+     "sr_cost_per_year": {
+      "base": 0.8261531456,
+      "low": 1.239229718,
+      "high": 0.5719521777
+     },
+     "sr_cost_per_year_low_fees": 0.6609225165
+    },
+    "S-IM": {
+     "rt_per_year": 113.7880788,
+     "sr_cost_per_year": {
+      "base": 3.788214026,
+      "low": 5.68232104,
+      "high": 2.622609711
+     },
+     "sr_cost_per_year_low_fees": 3.030571221
+    },
+    "S-REV": {
+     "rt_per_year": 8.434027778,
+     "sr_cost_per_year": {
+      "base": 0.2527332448,
+      "low": 0.3790998673,
+      "high": 0.1749691695
+     },
+     "sr_cost_per_year_low_fees": 0.2021865959
+    },
+    "S-BASE-TFD1": {
+     "rt_per_year": 9.136206591,
+     "sr_cost_per_year": {
+      "base": 0.103149748,
+      "low": 0.1547246221,
+      "high": 0.07141136403
+     },
+     "sr_cost_per_year_low_fees": 0.08251979844
+    },
+    "S-BASE-TFD1-7T": {
+     "rt_per_year": 14.25070872,
+     "sr_cost_per_year": {
+      "base": 0.2355625808,
+      "low": 0.3533438713,
+      "high": 0.1630817867
+     },
+     "sr_cost_per_year_low_fees": 0.1884500647
+    }
+   }
+  },
+  {
+   "id": "INS-CME-BTC",
+   "symbol": "BTC",
+   "risk_class": "KRYPTO",
+   "asset_class": "KRYPTO",
+   "size_class": "STANDARD",
+   "currency": "USD",
+   "access": "PRIMAERBROKER_BOERSE_ANGEBOTEN",
+   "blocked": false,
+   "notional_eur": "481991.06",
+   "vol_eur_per_year": {
+    "base": "240995.53",
+    "low": "168696.87",
+    "high": "385592.85"
+   },
+   "commission_side_eur": "1.00",
+   "half_spread_side_eur": "21.91",
+   "slippage_side_eur": "5.48",
+   "cost_side_eur": "28.39",
+   "cost_rt_eur": "56.77",
+   "cost_rt_bp": 1.177858182,
+   "c_rt_sr": {
+    "base": 0.0002355716364,
+    "low": 0.0003365309091,
+    "high": 0.0001472322727
+   },
+   "c_rt_sr_low_fees": 0.0001884573091,
+   "impact_side_eur_by_order_size": {
+    "1": "0.00",
+    "10": "252.97",
+    "100": "861.15",
+    "1000": "2741.80"
+   },
+   "rolls_per_year": 12,
+   "strategies": {
+    "S-TF": {
+     "rt_per_year": 88.60858138,
+     "sr_cost_per_year": {
+      "base": 0.02658069099,
+      "low": 0.0379724157,
+      "high": 0.01661293187
+     },
+     "sr_cost_per_year_low_fees": 0.02126455279
+    },
+    "S-IM": {
+     "rt_per_year": 114.1622224,
+     "sr_cost_per_year": {
+      "base": 0.1163255872,
+      "low": 0.1661794103,
+      "high": 0.07270349201
+     },
+     "sr_cost_per_year_low_fees": 0.09306046978
+    },
+    "S-REV": {
+     "rt_per_year": 8.895833334,
+     "sr_cost_per_year": {
+      "base": 0.008158852462,
+      "low": 0.01165550352,
+      "high": 0.005099282789
+     },
+     "sr_cost_per_year_low_fees": 0.00652708197
+    },
+    "S-BASE-TFD1": {
+     "rt_per_year": 12.38939582,
+     "sr_cost_per_year": {
+      "base": 0.004281219393,
+      "low": 0.006116027705,
+      "high": 0.002675762121
+     },
+     "sr_cost_per_year_low_fees": 0.003424975515
+    },
+    "S-BASE-TFD1-7T": {
+     "rt_per_year": 15.76836759,
+     "sr_cost_per_year": {
+      "base": 0.007977589257,
+      "low": 0.01139655608,
+      "high": 0.004985993286
+     },
+     "sr_cost_per_year_low_fees": 0.006382071406
+    }
+   }
+  },
+  {
+   "id": "INS-CME-MBT",
+   "symbol": "MBT",
+   "risk_class": "KRYPTO",
+   "asset_class": "KRYPTO",
+   "size_class": "MICRO",
+   "currency": "USD",
+   "access": "PRIMAERBROKER_BOERSE_ANGEBOTEN",
+   "blocked": false,
+   "notional_eur": "9639.82",
+   "vol_eur_per_year": {
+    "base": "4819.91",
+    "low": "3373.94",
+    "high": "7711.86"
+   },
+   "commission_side_eur": "1.00",
+   "half_spread_side_eur": "0.44",
+   "slippage_side_eur": "0.11",
+   "cost_side_eur": "1.55",
+   "cost_rt_eur": "3.10",
+   "cost_rt_bp": 3.211090909,
+   "c_rt_sr": {
+    "base": 0.0006422181818,
+    "low": 0.0009174545455,
+    "high": 0.0004013863636
+   },
+   "c_rt_sr_low_fees": 0.0005137745455,
+   "impact_side_eur_by_order_size": {
+    "1": "0.00",
+    "10": "2.13",
+    "100": "9.26",
+    "1000": "29.98"
+   },
+   "rolls_per_year": 12,
+   "strategies": {
+    "S-TF": {
+     "rt_per_year": 88.60858138,
+     "sr_cost_per_year": {
+      "base": 0.07246459423,
+      "low": 0.1035208489,
+      "high": 0.04529037139
+     },
+     "sr_cost_per_year_low_fees": 0.05797167538
+    },
+    "S-IM": {
+     "rt_per_year": 114.1622224,
+     "sr_cost_per_year": {
+      "base": 0.317128192,
+      "low": 0.4530402743,
+      "high": 0.19820512
+     },
+     "sr_cost_per_year_low_fees": 0.2537025536
+    },
+    "S-REV": {
+     "rt_per_year": 8.895833334,
+     "sr_cost_per_year": {
+      "base": 0.0222427601,
+      "low": 0.03177537157,
+      "high": 0.01390172506
+     },
+     "sr_cost_per_year_low_fees": 0.01779420808
+    },
+    "S-BASE-TFD1": {
+     "rt_per_year": 12.38939582,
+     "sr_cost_per_year": {
+      "base": 0.01167151096,
+      "low": 0.01667358708,
+      "high": 0.007294694347
+     },
+     "sr_cost_per_year_low_fees": 0.009337208765
+    },
+    "S-BASE-TFD1-7T": {
+     "rt_per_year": 15.76836759,
+     "sr_cost_per_year": {
+      "base": 0.02174859821,
+      "low": 0.03106942601,
+      "high": 0.01359287388
+     },
+     "sr_cost_per_year_low_fees": 0.01739887857
+    }
+   }
+  },
+  {
+   "id": "INS-CME-ETH",
+   "symbol": "ETH",
+   "risk_class": "KRYPTO",
+   "asset_class": "KRYPTO",
+   "size_class": "STANDARD",
+   "currency": "USD",
+   "access": "PRIMAERBROKER_BOERSE_ANGEBOTEN",
+   "blocked": false,
+   "notional_eur": "175269.48",
+   "vol_eur_per_year": {
+    "base": "122688.63",
+    "low": "87634.74",
+    "high": "175269.48"
+   },
+   "commission_side_eur": "1.00",
+   "half_spread_side_eur": "21.91",
+   "slippage_side_eur": "5.48",
+   "cost_side_eur": "28.39",
+   "cost_rt_eur": "56.77",
+   "cost_rt_bp": 3.23911,
+   "c_rt_sr": {
+    "base": 0.00046273,
+    "low": 0.000647822,
+    "high": 0.000323911
+   },
+   "c_rt_sr_low_fees": 0.000370184,
+   "impact_side_eur_by_order_size": {
+    "1": "0.00",
+    "10": "162.30",
+    "100": "538.29",
+    "1000": "1709.96"
+   },
+   "rolls_per_year": 12,
+   "strategies": {
+    "S-TF": {
+     "rt_per_year": 88.60858138,
+     "sr_cost_per_year": {
+      "base": 0.05221207159,
+      "low": 0.07309690023,
+      "high": 0.03654845012
+     },
+     "sr_cost_per_year_low_fees": 0.04176965728
+    },
+    "S-IM": {
+     "rt_per_year": 114.1622224,
+     "sr_cost_per_year": {
+      "base": 0.2284966892,
+      "low": 0.3198953649,
+      "high": 0.1599476824
+     },
+     "sr_cost_per_year_low_fees": 0.1827973513
+    },
+    "S-REV": {
+     "rt_per_year": 8.895833334,
+     "sr_cost_per_year": {
+      "base": 0.01602631734,
+      "low": 0.02243684427,
+      "high": 0.01121842214
+     },
+     "sr_cost_per_year_low_fees": 0.01282105387
+    },
+    "S-BASE-TFD1": {
+     "rt_per_year": 12.38939582,
+     "sr_cost_per_year": {
+      "base": 0.008409538094,
+      "low": 0.01177335333,
+      "high": 0.005886676666
+     },
+     "sr_cost_per_year_low_fees": 0.006727630475
+    },
+    "S-BASE-TFD1-7T": {
+     "rt_per_year": 15.76836759,
+     "sr_cost_per_year": {
+      "base": 0.01567026461,
+      "low": 0.02193837046,
+      "high": 0.01096918523
+     },
+     "sr_cost_per_year_low_fees": 0.01253621169
+    }
+   }
+  },
+  {
+   "id": "INS-CME-MET",
+   "symbol": "MET",
+   "risk_class": "KRYPTO",
+   "asset_class": "KRYPTO",
+   "size_class": "MICRO",
+   "currency": "USD",
+   "access": "PRIMAERBROKER_BOERSE_ANGEBOTEN",
+   "blocked": false,
+   "notional_eur": "350.54",
+   "vol_eur_per_year": {
+    "base": "245.38",
+    "low": "175.27",
+    "high": "350.54"
+   },
+   "commission_side_eur": "1.00",
+   "half_spread_side_eur": "0.04",
+   "slippage_side_eur": "0.01",
+   "cost_side_eur": "1.05",
+   "cost_rt_eur": "2.11",
+   "cost_rt_bp": 60.18,
+   "c_rt_sr": {
+    "base": 0.008597142857,
+    "low": 0.012036,
+    "high": 0.006018
+   },
+   "c_rt_sr_low_fees": 0.006877714286,
+   "impact_side_eur_by_order_size": {
+    "1": "0.00",
+    "10": "0.17",
+    "100": "0.62",
+    "1000": "1.97"
+   },
+   "rolls_per_year": 12,
+   "strategies": {
+    "S-TF": {
+     "rt_per_year": 88.60858138,
+     "sr_cost_per_year": {
+      "base": 0.9700573517,
+      "low": 1.358080292,
+      "high": 0.6790401462
+     },
+     "sr_cost_per_year_low_fees": 0.7760458814
+    },
+    "S-IM": {
+     "rt_per_year": 114.1622224,
+     "sr_cost_per_year": {
+      "base": 4.245280573,
+      "low": 5.943392802,
+      "high": 2.971696401
+     },
+     "sr_cost_per_year_low_fees": 3.396224458
+    },
+    "S-REV": {
+     "rt_per_year": 8.895833334,
+     "sr_cost_per_year": {
+      "base": 0.2977557963,
+      "low": 0.4168581148,
+      "high": 0.2084290574
+     },
+     "sr_cost_per_year_low_fees": 0.238204637
+    },
+    "S-BASE-TFD1": {
+     "rt_per_year": 12.38939582,
+     "sr_cost_per_year": {
+      "base": 0.1562423019,
+      "low": 0.2187392227,
+      "high": 0.1093696113
+     },
+     "sr_cost_per_year_low_fees": 0.1249938415
+    },
+    "S-BASE-TFD1-7T": {
+     "rt_per_year": 15.76836759,
+     "sr_cost_per_year": {
+      "base": 0.2911406295,
+      "low": 0.4075968813,
+      "high": 0.2037984406
+     },
+     "sr_cost_per_year_low_fees": 0.2329125036
+    }
+   }
+  }
+ ],
+ "fixed_costs": {
+  "market_data_monthly_eur": {
+   "ANZEIGE": {
+    "monthly_eur": "53.00",
+    "per_exchange_monthly_eur": {
+     "CME": "33.00",
+     "EUREX": "20.00"
+    },
+    "waiver_commission_eur_per_exchange": "300.00",
+    "note": "Broker-Kursgebühren; entfallen je Börse ab 300 € Kommission im Monat"
+   },
+   "NON_DISPLAY_MANAGED": {
+    "monthly_eur": "1568.12",
+    "note": "zusätzlich CME Managed User Non-Display ×4 und Eurex Non-Display Entry"
+   },
+   "NON_DISPLAY_USER": {
+    "monthly_eur": "2440.96",
+    "note": "zusätzlich CME User Non-Display ×4 und Eurex Non-Display Entry"
+   }
+  },
+  "historical_data_once_eur": "3477.35",
+  "infrastructure_monthly_eur": "135.00",
+  "hardware_keys_once_eur": "120.00",
+  "ai_subscription_monthly_eur": {
+   "PLUS": "17.53",
+   "SUPER": "87.63",
+   "ULTRA": "175.27"
+  },
+  "ai_tier_base": "SUPER",
+  "coding_agent_monthly_eur": "200.00",
+  "external_once_eur": {
+   "review": "1500.00",
+   "pentest": "5000.00",
+   "audit": "15000.00"
+  },
+  "external_risk_function_monthly_eur": "300.00"
+ },
+ "cfd_comparison": [
+  {
+   "symbol": "6E",
+   "future_rt_bp": 0.8172605381,
+   "cfd_spread_rt_bp": 1.09543423,
+   "cfd_financing_rt_bp_long": 2.725385803,
+   "cfd_financing_rt_bp_short": 0.03310185185,
+   "median_nights": 1.986111111
+  },
+  {
+   "symbol": "GC",
+   "future_rt_bp": 0.408755913,
+   "cfd_spread_rt_bp": 0.5912961211,
+   "cfd_financing_rt_bp_long": 2.725385803,
+   "cfd_financing_rt_bp_short": 0.03310185185,
+   "median_nights": 1.986111111
+  },
+  {
+   "symbol": "CL",
+   "future_rt_bp": 2.11015873,
+   "cfd_spread_rt_bp": 3.052503053,
+   "cfd_financing_rt_bp_long": 2.725385803,
+   "cfd_financing_rt_bp_short": 0.03310185185,
+   "median_nights": 1.986111111
+  },
+  {
+   "symbol": "FGBL",
+   "future_rt_bp": 1.328125,
+   "cfd_spread_rt_bp": 1.953125,
+   "cfd_financing_rt_bp_long": 2.725385803,
+   "cfd_financing_rt_bp_short": 0.03310185185,
+   "median_nights": 1.986111111
+  },
+  {
+   "symbol": "BTC",
+   "future_rt_bp": 1.177858182,
+   "cfd_spread_rt_bp": 2.045454545,
+   "cfd_financing_rt_bp_long": 2.725385803,
+   "cfd_financing_rt_bp_short": 0.03310185185,
+   "median_nights": 1.986111111
+  }
+ ]
+}

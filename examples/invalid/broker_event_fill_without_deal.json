@@ -1,0 +1,23 @@
+{
+ "schema_version": "3.0",
+ "message_id": "00000000-0000-4000-8000-000000000007",
+ "correlation_id": "COR-0007",
+ "producer": "ADAPTER",
+ "created_utc": "2026-09-24T09:00:00Z",
+ "event_id": "BE-0001",
+ "origin": "POLL_DIFF",
+ "kind": "FILL",
+ "system_time_utc": "2026-09-24T09:00:02Z",
+ "broker_time": "2026.09.24 12:00:02",
+ "order_ticket": 7770001,
+ "deal_ticket": null,
+ "position_ticket": 5550001,
+ "broker_symbol": "MGCZ26",
+ "volume": 1,
+ "price": "4228.1",
+ "commission": null,
+ "magic": 110001,
+ "comment": "C00000000000A",
+ "retcode": null,
+ "duplicate": false
+}

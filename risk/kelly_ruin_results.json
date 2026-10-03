@@ -1,0 +1,434 @@
+{
+ "calculator": "risk/kelly_ruin_simulator.py",
+ "model": "MOD-KELLY",
+ "seed": 742026,
+ "paths": 1000,
+ "years": 5,
+ "synthetic": true,
+ "inputs": {
+  "parameters.json": "38f7ce22d3184218e02001b719b137e4f0ad0faaf239b53bff44e8c6ebc576b6",
+  "research/prior_results.json": "bf31b7168f7bc6ec91bcc216b3df369b3ed7f19055d29be3545ef90305e8f713",
+  "risk/leverage_results.json": "3719223b3cc6e3eaa50ad273748ed575be0516ddefc0c859602d0da25a194179"
+ },
+ "model_setup": {
+  "innovations": "t(4), Varianz 1 (P-SIM-T-DF)",
+  "regimes": "P-SIM-REGIME",
+  "jumps": "P-SIM-JUMPS-PER-YEAR, P-SIM-JUMP-SIZE",
+  "beyond_design": "P-SIM-BEYOND-PER-YEAR, P-SIM-BEYOND-SIZE",
+  "compensation": "Drift um erwartete Sprünge erhöht; Diffusionsvolatilität reduziert",
+  "ruin": "Verlust ≥ P-RISK-RUIN oder Zwangsliquidation",
+  "reference_stage": "5000000"
+ },
+ "results": {
+  "H5": {
+   "SYSTEM": {
+    "sigma": 0.0445604208,
+    "sigma_diffusion": 0.04098601376,
+    "sigma_jumps": 0.01748650273,
+    "D": 1.737488971,
+    "mean_cost_sr": 0.04191393638,
+    "sr_prior": {
+     "mean": 0.09641525763,
+     "p05": -0.007685683527,
+     "p50": 0.08495331733,
+     "p95": 0.2388660517,
+     "p_positive": 0.923
+    },
+    "annual_return": {
+     "mean": 0.004205722344,
+     "p05": -0.07180529237,
+     "p50": 0.00512400362,
+     "p95": 0.07985235708,
+     "es_97_5": -0.09820550231
+    },
+    "max_drawdown": {
+     "1": {
+      "p50": 0.04247999457,
+      "p95": 0.09416995469
+     },
+     "3": {
+      "p50": 0.07484931783,
+      "p95": 0.1453401037
+     },
+     "5": {
+      "p50": 0.09931746045,
+      "p95": 0.1745651115
+     }
+    },
+    "p_drawdown_ge": {
+     "10": 0.496,
+     "20": 0.007,
+     "30": 0.0,
+     "50": 0.0
+    },
+    "p_ruin_5y": 0.0,
+    "p_trading_stop_5y": 0.0,
+    "p_day_loss_over_cap_per_year": 0.0066,
+    "recovery_days": {
+     "p50": 238.5,
+     "recovered_share": 0.31
+    },
+    "basis": "S-TF",
+    "kelly": {
+     "sigma_star_full_kelly": 0.09879886719,
+     "kelly_fraction_of_profile": 0.4510215761,
+     "expected_growth": 0.003409703546,
+     "p_growth_negative": 0.1675,
+     "zero_growth_sigma": 0.1975977344
+    }
+   },
+   "WUNSCHHEBEL": {
+    "sigma": 0.06,
+    "sigma_diffusion": 0.05288604015,
+    "sigma_jumps": 0.02833843252,
+    "D": 1.772750679,
+    "mean_cost_sr": 0.3964754436,
+    "sr_prior": {
+     "mean": -0.5273435276,
+     "p05": -0.6374523971,
+     "p50": -0.5403627722,
+     "p95": -0.3697294158,
+     "p_positive": 0.0
+    },
+    "annual_return": {
+     "mean": -0.0345019075,
+     "p05": -0.1234672041,
+     "p50": -0.03453418427,
+     "p95": 0.05237736973,
+     "es_97_5": -0.1742750261
+    },
+    "max_drawdown": {
+     "1": {
+      "p50": 0.07163415195,
+      "p95": 0.1375226105
+     },
+     "3": {
+      "p50": 0.1417247611,
+      "p95": 0.2132081677
+     },
+     "5": {
+      "p50": 0.1834790434,
+      "p95": 0.2385600624
+     }
+    },
+    "p_drawdown_ge": {
+     "10": 0.954,
+     "20": 0.334,
+     "30": 0.001,
+     "50": 0.0
+    },
+    "p_ruin_5y": 0.0,
+    "p_trading_stop_5y": 0.001,
+    "p_day_loss_over_cap_per_year": 0.0144,
+    "recovery_days": {
+     "p50": 283.0,
+     "recovered_share": 0.056
+    },
+    "basis": "S-TF",
+    "kelly": {
+     "sigma_star_full_kelly": 0.0,
+     "kelly_fraction_of_profile": null,
+     "expected_growth": -0.0334647119,
+     "p_growth_negative": 1.0,
+     "zero_growth_sigma": 0.0
+    }
+   },
+   "ALTERNATIVE_TFD1": {
+    "sigma": 0.02547414998,
+    "sigma_diffusion": 0.01852443088,
+    "sigma_jumps": 0.01748650273,
+    "D": 2.695287367,
+    "mean_cost_sr": 0.0206093089,
+    "sr_prior": {
+     "mean": 0.4783278172,
+     "p05": 0.2690134761,
+     "p50": 0.4700901491,
+     "p95": 0.7377686895,
+     "p_positive": 1.0
+    },
+    "annual_return": {
+     "mean": 0.01239729012,
+     "p05": -0.02872777324,
+     "p50": 0.01398567909,
+     "p95": 0.05005374218,
+     "es_97_5": -0.05956094202
+    },
+    "max_drawdown": {
+     "1": {
+      "p50": 0.01883818086,
+      "p95": 0.04397122957
+     },
+     "3": {
+      "p50": 0.03257685447,
+      "p95": 0.07760197997
+     },
+     "5": {
+      "p50": 0.03940821294,
+      "p95": 0.0984491131
+     }
+    },
+    "p_drawdown_ge": {
+     "10": 0.046,
+     "20": 0.0,
+     "30": 0.0,
+     "50": 0.0
+    },
+    "p_ruin_5y": 0.0,
+    "p_trading_stop_5y": 0.0,
+    "p_day_loss_over_cap_per_year": 0.0042,
+    "recovery_days": {
+     "p50": 195.0,
+     "recovered_share": 0.567
+    },
+    "basis": "S-BASE-TFD1",
+    "kelly": {
+     "sigma_star_full_kelly": 0.4819048217,
+     "kelly_fraction_of_profile": 0.05286137186,
+     "expected_growth": 0.01195164955,
+     "p_growth_negative": 0.0,
+     "zero_growth_sigma": 0.9638096434
+    }
+   },
+   "SYSTEM_OHNE_LEITER": {
+    "sigma": 0.0445604208,
+    "sigma_diffusion": 0.04098601376,
+    "sigma_jumps": 0.01748650273,
+    "D": 1.737488971,
+    "mean_cost_sr": 0.04191393638,
+    "sr_prior": {
+     "mean": 0.09561409391,
+     "p05": -0.01257884951,
+     "p50": 0.08823069834,
+     "p95": 0.2360614137,
+     "p_positive": 0.915
+    },
+    "annual_return": {
+     "mean": 0.006133156235,
+     "p05": -0.06628956071,
+     "p50": 0.00679556246,
+     "p95": 0.08456841214,
+     "es_97_5": -0.1114989349
+    },
+    "max_drawdown": {
+     "1": {
+      "p50": 0.04004477282,
+      "p95": 0.09151231987
+     },
+     "3": {
+      "p50": 0.07348859144,
+      "p95": 0.150966555
+     },
+     "5": {
+      "p50": 0.09434481944,
+      "p95": 0.1869800328
+     }
+    },
+    "p_drawdown_ge": {
+     "10": 0.462,
+     "20": 0.033,
+     "30": 0.0,
+     "50": 0.0
+    },
+    "p_ruin_5y": 0.0,
+    "p_trading_stop_5y": 0.0,
+    "p_day_loss_over_cap_per_year": 0.0066,
+    "recovery_days": {
+     "p50": 222.0,
+     "recovered_share": 0.35
+    }
+   }
+  },
+  "H10": {
+   "SYSTEM": {
+    "same_as": "H5/SYSTEM"
+   },
+   "WUNSCHHEBEL": {
+    "sigma": 0.09,
+    "sigma_diffusion": 0.07772613465,
+    "sigma_jumps": 0.04537232628,
+    "D": 1.783866529,
+    "mean_cost_sr": 0.5266422328,
+    "sr_prior": {
+     "mean": -0.7636439654,
+     "p05": -0.875687425,
+     "p50": -0.7766791761,
+     "p95": -0.6064005861,
+     "p_positive": 0.0
+    },
+    "annual_return": {
+     "mean": -0.05994660024,
+     "p05": -0.1663269021,
+     "p50": -0.06710138131,
+     "p95": 0.06880602955,
+     "es_97_5": -0.2333983326
+    },
+    "max_drawdown": {
+     "1": {
+      "p50": 0.10965188,
+      "p95": 0.1819568267
+     },
+     "3": {
+      "p50": 0.2008538091,
+      "p95": 0.2555625666
+     },
+     "5": {
+      "p50": 0.2339191492,
+      "p95": 0.3000242083
+     }
+    },
+    "p_drawdown_ge": {
+     "10": 0.999,
+     "20": 0.843,
+     "30": 0.052,
+     "50": 0.0
+    },
+    "p_ruin_5y": 0.0,
+    "p_trading_stop_5y": 0.052,
+    "p_day_loss_over_cap_per_year": 0.0084,
+    "recovery_days": {
+     "p50": 312.0,
+     "recovered_share": 0.012
+    },
+    "basis": "S-TF",
+    "kelly": {
+     "sigma_star_full_kelly": 0.0,
+     "kelly_fraction_of_profile": null,
+     "expected_growth": -0.07274290937,
+     "p_growth_negative": 1.0,
+     "zero_growth_sigma": 0.0
+    }
+   },
+   "ALTERNATIVE_TFD1": {
+    "same_as": "H5/ALTERNATIVE_TFD1"
+   }
+  },
+  "H15": {
+   "SYSTEM": {
+    "same_as": "H5/SYSTEM"
+   },
+   "WUNSCHHEBEL": {
+    "sigma": 0.12,
+    "sigma_diffusion": 0.1032507575,
+    "sigma_jumps": 0.06114966137,
+    "D": 1.734371997,
+    "mean_cost_sr": 0.6167577023,
+    "sr_prior": {
+     "mean": -0.8975012323,
+     "p05": -1.00465814,
+     "p50": -0.9099992555,
+     "p95": -0.7406240041,
+     "p_positive": 0.0
+    },
+    "annual_return": {
+     "mean": -0.09193390752,
+     "p05": -0.2090659396,
+     "p50": -0.1039535625,
+     "p95": 0.06725178944,
+     "es_97_5": -0.2861449965
+    },
+    "max_drawdown": {
+     "1": {
+      "p50": 0.1487124618,
+      "p95": 0.2220674383
+     },
+     "3": {
+      "p50": 0.2319895568,
+      "p95": 0.2960476386
+     },
+     "5": {
+      "p50": 0.274761078,
+      "p95": 0.3035356867
+     }
+    },
+    "p_drawdown_ge": {
+     "10": 1.0,
+     "20": 0.975,
+     "30": 0.259,
+     "50": 0.0
+    },
+    "p_ruin_5y": 0.0,
+    "p_trading_stop_5y": 0.259,
+    "p_day_loss_over_cap_per_year": 0.0056,
+    "recovery_days": {
+     "p50": 206.0,
+     "recovered_share": 0.007
+    },
+    "basis": "S-TF",
+    "kelly": {
+     "sigma_star_full_kelly": 0.0,
+     "kelly_fraction_of_profile": null,
+     "expected_growth": -0.1150045564,
+     "p_growth_negative": 1.0,
+     "zero_growth_sigma": 0.0
+    }
+   },
+   "ALTERNATIVE_TFD1": {
+    "same_as": "H5/ALTERNATIVE_TFD1"
+   }
+  },
+  "H20": {
+   "SYSTEM": {
+    "same_as": "H5/SYSTEM"
+   },
+   "WUNSCHHEBEL": {
+    "sigma": 0.15,
+    "sigma_diffusion": 0.1293523128,
+    "sigma_jumps": 0.07594721314,
+    "D": 1.6805358,
+    "mean_cost_sr": 0.6768346819,
+    "sr_prior": {
+     "mean": -0.9716103364,
+     "p05": -1.07389953,
+     "p50": -0.979559192,
+     "p95": -0.8323334798,
+     "p_positive": 0.0
+    },
+    "annual_return": {
+     "mean": -0.1047014056,
+     "p05": -0.2198948301,
+     "p50": -0.1241636248,
+     "p95": 0.07272560121,
+     "es_97_5": -0.2869608336
+    },
+    "max_drawdown": {
+     "1": {
+      "p50": 0.1715488007,
+      "p95": 0.2337241109
+     },
+     "3": {
+      "p50": 0.2560192226,
+      "p95": 0.3016299955
+     },
+     "5": {
+      "p50": 0.3001680456,
+      "p95": 0.3083435352
+     }
+    },
+    "p_drawdown_ge": {
+     "10": 1.0,
+     "20": 0.998,
+     "30": 0.581,
+     "50": 0.0
+    },
+    "p_ruin_5y": 0.0,
+    "p_trading_stop_5y": 0.581,
+    "p_day_loss_over_cap_per_year": 0.0034,
+    "recovery_days": {
+     "p50": 485.0,
+     "recovered_share": 0.001
+    },
+    "basis": "S-TF",
+    "kelly": {
+     "sigma_star_full_kelly": 0.0,
+     "kelly_fraction_of_profile": null,
+     "expected_growth": -0.1569670058,
+     "p_growth_negative": 1.0,
+     "zero_growth_sigma": 0.0
+    }
+   },
+   "ALTERNATIVE_TFD1": {
+    "same_as": "H5/ALTERNATIVE_TFD1"
+   }
+  }
+ }
+}

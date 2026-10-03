@@ -1,0 +1,43 @@
+{
+ "schema_version": "3.0",
+ "id": "TR-SAFETY-012",
+ "machine": "SM-SAFETY",
+ "description": "Pause durch die Vertretung; Aufheben nur durch den Betreiber",
+ "scenarios": [
+  "OS-GV-03"
+ ],
+ "start": null,
+ "initial_reasons": [],
+ "steps": [
+  {
+   "event": "OPERATOR_PAUSE_SIGNED",
+   "context": {},
+   "expect_state": "ENTRY_PAUSED",
+   "expect_reasons": [
+    "OPERATOR_PAUSE"
+   ]
+  },
+  {
+   "event": "OPERATOR_RESUME_SIGNED",
+   "context": {
+    "signed": true,
+    "reason": "OPERATOR_PAUSE",
+    "signer_role": "VERTRETUNG"
+   },
+   "expect_state": "ENTRY_PAUSED",
+   "expect_reasons": [
+    "OPERATOR_PAUSE"
+   ]
+  },
+  {
+   "event": "OPERATOR_RESUME_SIGNED",
+   "context": {
+    "signed": true,
+    "reason": "OPERATOR_PAUSE",
+    "signer_role": "BETREIBER"
+   },
+   "expect_state": "READY",
+   "expect_reasons": []
+  }
+ ]
+}

@@ -1,0 +1,43 @@
+{
+ "schema_version": "3.0",
+ "id": "TR-ORDER-007",
+ "machine": "SM-ORDER",
+ "description": "Einstiegssperre: Einstieg ohne Berechtigung wird nicht gesendet, Vorprüfung beendet den Versuch",
+ "scenarios": [
+  "OS-RI-02"
+ ],
+ "start": "PERSISTED",
+ "initial_reasons": null,
+ "steps": [
+  {
+   "event": "SEND_STARTED",
+   "context": {
+    "writer_state": "ACTIVE_WRITER",
+    "lease_age_s": 3,
+    "permission": "ENTRY",
+    "allowed_actions": [
+     "CANCEL_ORDER",
+     "CLOSE_REDUCE",
+     "EMERGENCY_PROTECT",
+     "RECONCILE",
+     "ROLL_AS_CLOSE",
+     "STOP_AMEND",
+     "STOP_AMEND_RECONCILED_ONLY"
+    ],
+    "order_kind": "ENTRY",
+    "snapshot_age_s": 12,
+    "quote_age_s": 1,
+    "pretrade_passed": true,
+    "grant_active": true,
+    "mode_matches_account": true
+   },
+   "expect_state": "PERSISTED",
+   "expect_invalid": true
+  },
+  {
+   "event": "PRECHECK_FAILED",
+   "context": {},
+   "expect_state": "FAILED_BEFORE_SEND"
+  }
+ ]
+}

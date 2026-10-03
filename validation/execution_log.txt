@@ -1,0 +1,31 @@
+# Ausführungsprotokoll – Mehrversionslauf (T-PKG-MULTI-001; §19.2, §19.4)
+# Erzeugt von validation/run_multi_python.py am 2026-09-24 21:21:44 UTC auf Linux x86_64.
+# Paketstand: SHA-256 über alle Inhaltsdateien ohne Laufbelege (lib/pkgstate.py); P13 vergleicht ihn mit dem geprüften Paket.
+# Je Interpreter mit -W error: Pins, Rechner --check, render_blocks --check, Referenztests, semantische Querprüfungen,
+# Paketprüfung P01–P13 (Stufe prepack, strict, P07 im Hash-Modus), Linter (ruff, ruff.toml).
+PAKETSTAND b19110757120fa49cb335bce98dc93ee648014cd0576db547221d8a8fec73a26
+SCHRITT 3.11.15 Pins PASS rc=0 0.1 s
+SCHRITT 3.11.15 Rechner PASS rc=0 70.3 s | ERGEBNIS PASS
+SCHRITT 3.11.15 Bindungen PASS rc=0 0.5 s | render_blocks: PRÜFUNG 0 Dateien abweichend 0 Fehler
+SCHRITT 3.11.15 Referenztests PASS rc=0 8.9 s | REFERENZTESTS PASS 22/22
+SCHRITT 3.11.15 Semantik PASS rc=0 0.1 s | SEMANTIK BESTANDEN
+SCHRITT 3.11.15 Paketprüfung PASS rc=0 12.9 s | ERGEBNIS PASS
+SCHRITT 3.11.15 Linter PASS rc=0 0.1 s | All checks passed!
+SCHRITT 3.12.3 Pins PASS rc=0 0.1 s
+SCHRITT 3.12.3 Rechner PASS rc=0 72.7 s | ERGEBNIS PASS
+SCHRITT 3.12.3 Bindungen PASS rc=0 0.6 s | render_blocks: PRÜFUNG 0 Dateien abweichend 0 Fehler
+SCHRITT 3.12.3 Referenztests PASS rc=0 9.7 s | REFERENZTESTS PASS 22/22
+SCHRITT 3.12.3 Semantik PASS rc=0 0.1 s | SEMANTIK BESTANDEN
+SCHRITT 3.12.3 Paketprüfung PASS rc=0 13.7 s | ERGEBNIS PASS
+SCHRITT 3.12.3 Linter PASS rc=0 0.1 s | All checks passed!
+SCHRITT 3.13.13 Pins PASS rc=0 0.1 s
+SCHRITT 3.13.13 Rechner PASS rc=0 72.0 s | ERGEBNIS PASS
+SCHRITT 3.13.13 Bindungen PASS rc=0 0.6 s | render_blocks: PRÜFUNG 0 Dateien abweichend 0 Fehler
+SCHRITT 3.13.13 Referenztests PASS rc=0 8.9 s | REFERENZTESTS PASS 22/22
+SCHRITT 3.13.13 Semantik PASS rc=0 0.1 s | SEMANTIK BESTANDEN
+SCHRITT 3.13.13 Paketprüfung PASS rc=0 13.4 s | ERGEBNIS PASS
+SCHRITT 3.13.13 Linter PASS rc=0 0.1 s | All checks passed!
+PYTHON 3.11.15 -W error | Pins PASS 7/7 | Rechner PASS | Bindungen PASS | Referenztests PASS 22/22 | Semantik PASS | Paketprüfung PASS | Linter PASS | ERGEBNIS PASS
+PYTHON 3.12.3 -W error | Pins PASS 7/7 | Rechner PASS | Bindungen PASS | Referenztests PASS 22/22 | Semantik PASS | Paketprüfung PASS | Linter PASS | ERGEBNIS PASS
+PYTHON 3.13.13 -W error | Pins PASS 6/6 | Rechner PASS | Bindungen PASS | Referenztests PASS 22/22 | Semantik PASS | Paketprüfung PASS | Linter PASS | ERGEBNIS PASS
+GESAMT PASS

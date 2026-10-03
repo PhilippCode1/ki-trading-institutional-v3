@@ -1,0 +1,49 @@
+{
+ "schema_version": "3.0",
+ "id": "TR-POS-001",
+ "machine": "SM-POSITION",
+ "description": "Einstieg, Schutz bestätigt, Nachführung, Zeitstopp nach Höchsthaltedauer, flach",
+ "scenarios": [
+  "OS-EX-07"
+ ],
+ "start": null,
+ "initial_reasons": null,
+ "steps": [
+  {
+   "event": "ENTRY_FILL_COMPLETE",
+   "context": {},
+   "expect_state": "OPEN_UNPROTECTED"
+  },
+  {
+   "event": "SL_CONFIRMED",
+   "context": {
+    "sl_covers_full_qty": true
+   },
+   "expect_state": "OPEN_PROTECTED"
+  },
+  {
+   "event": "SL_AMEND_REQUESTED",
+   "context": {
+    "sl_tighter": true
+   },
+   "expect_state": "AMEND_PENDING"
+  },
+  {
+   "event": "SL_AMEND_CONFIRMED",
+   "context": {},
+   "expect_state": "OPEN_PROTECTED"
+  },
+  {
+   "event": "TIMESTOP_DUE",
+   "context": {
+    "holding_hours": 168
+   },
+   "expect_state": "CLOSING"
+  },
+  {
+   "event": "CLOSE_FILLED",
+   "context": {},
+   "expect_state": "FLAT"
+  }
+ ]
+}

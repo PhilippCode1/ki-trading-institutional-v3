@@ -1,0 +1,18 @@
+{
+ "schema_version": "3.0",
+ "id": "TR-GRANT-005",
+ "machine": "SM-GRANT",
+ "description": "Verlustbudget erreicht invalidiert; Paper-Grant läuft ab",
+ "scenarios": [
+  "OS-RI-11"
+ ],
+ "start": "ACTIVE",
+ "initial_reasons": null,
+ "steps": [
+  {
+   "event": "LOSS_BUDGET_REACHED",
+   "context": {},
+   "expect_state": "INVALIDATED"
+  }
+ ]
+}

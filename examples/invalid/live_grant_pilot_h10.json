@@ -1,0 +1,43 @@
+{
+ "schema_version": "3.0",
+ "message_id": "00000000-0000-4000-8000-000000000015",
+ "correlation_id": "COR-0015",
+ "producer": "GRANT_REGISTRY",
+ "created_utc": "2026-09-24T09:00:00Z",
+ "grant_id": "GR-PILOT-0001",
+ "kind": "PILOT",
+ "key_fingerprint": "FP-00000000000000B1",
+ "broker": "Primärbroker (Demo)",
+ "account_ref": "ACC-REAL0001",
+ "account_type": "REAL",
+ "instruments": [
+  "INS-COMEX-MGC",
+  "INS-CBOT-ZN"
+ ],
+ "release_sha256": "0000000000000000000000000000000000000000000000000000000000000006",
+ "strategy_sha256": "000000000000000000000000000000000000000000000000000000000000000a",
+ "parameters_sha256": "0000000000000000000000000000000000000000000000000000000000000004",
+ "capital_cap": {
+  "amount": "100000.00",
+  "currency": "EUR"
+ },
+ "loss_budget": {
+  "amount": "15000.00",
+  "currency": "EUR"
+ },
+ "profile": "H10",
+ "valid_from_utc": "2026-10-01T00:00:00Z",
+ "valid_until_utc": "2026-10-30T00:00:00Z",
+ "alert_channels": [
+  "KANAL-A",
+  "KANAL-B"
+ ],
+ "revocation_id": "REV-0001",
+ "gates_passed": [
+  "GATE-G5",
+  "GATE-G6",
+  "GATE-G7"
+ ],
+ "signature": "SIG-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+ "risk_acceptance_ref": "RA-0001"
+}

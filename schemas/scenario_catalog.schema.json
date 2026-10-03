@@ -1,0 +1,189 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:ki-trading-v3:scenario_catalog",
+  "title": "Szenariokatalog",
+  "x-version": "3.0.0",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "3.0"
+    },
+    "document": {
+      "const": "Szenariokatalog"
+    },
+    "as_of": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+    },
+    "leading_source_for": {
+      "type": "string",
+      "minLength": 1
+    },
+    "rules": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 1
+    },
+    "scenarios": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^(OS-[A-Z]{2}-\\d{2}|HA-[A-Z0-9-]+|SC-[HX]-[A-Z0-9]+)$"
+          },
+          "category": {
+            "enum": [
+              "AUSFUEHRUNG",
+              "RISIKO",
+              "GOVERNANCE",
+              "DATEN",
+              "BETRIEB",
+              "STRESS"
+            ]
+          },
+          "title": {
+            "type": "string",
+            "minLength": 1
+          },
+          "origin": {
+            "type": "string",
+            "minLength": 1
+          },
+          "initial_state": {
+            "type": "string",
+            "minLength": 1
+          },
+          "events": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "minItems": 1
+          },
+          "expected_effect": {
+            "type": "string",
+            "minLength": 1
+          },
+          "prohibited_effect": {
+            "type": "string",
+            "minLength": 1
+          },
+          "detection": {
+            "type": "string",
+            "minLength": 1
+          },
+          "recovery": {
+            "type": "string"
+          },
+          "acceptance": {
+            "type": "string",
+            "minLength": 1
+          },
+          "traces": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "minItems": 0
+          },
+          "runbooks": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "minItems": 0
+          },
+          "tests": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "minItems": 1
+          },
+          "requirements": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "minItems": 1
+          },
+          "status": {
+            "enum": [
+              "IM_PAKET_GEPRUEFT",
+              "IM_PAKET_GERECHNET",
+              "SPEZIFIZIERT"
+            ]
+          },
+          "source": {
+            "type": "string",
+            "minLength": 1
+          },
+          "results": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "minItems": 1
+          }
+        },
+        "required": [
+          "id",
+          "category",
+          "title",
+          "origin",
+          "traces",
+          "runbooks",
+          "tests",
+          "requirements",
+          "status"
+        ],
+        "additionalProperties": false,
+        "if": {
+          "properties": {
+            "category": {
+              "const": "STRESS"
+            }
+          }
+        },
+        "then": {
+          "required": [
+            "source",
+            "results"
+          ]
+        },
+        "else": {
+          "required": [
+            "initial_state",
+            "events",
+            "expected_effect",
+            "prohibited_effect",
+            "detection",
+            "recovery",
+            "acceptance"
+          ]
+        }
+      },
+      "minItems": 60
+    }
+  },
+  "required": [
+    "schema_version",
+    "document",
+    "as_of",
+    "leading_source_for",
+    "rules",
+    "scenarios"
+  ],
+  "additionalProperties": false
+}

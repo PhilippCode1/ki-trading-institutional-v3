@@ -1,0 +1,151 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:ki-trading-v3:gate_result",
+  "title": "Signiertes Torergebnis (IF-06, SM-GATERUN)",
+  "description": "Nur der Evaluator signiert; PASS nur mit Exitcode 0 und Laufbeleg.",
+  "x-version": "3.0.0",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "$ref": "urn:ki-trading-v3:common#/$defs/schema_version"
+    },
+    "message_id": {
+      "$ref": "urn:ki-trading-v3:common#/$defs/uuid"
+    },
+    "correlation_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "producer": {
+      "$ref": "urn:ki-trading-v3:common#/$defs/producer"
+    },
+    "created_utc": {
+      "$ref": "urn:ki-trading-v3:common#/$defs/utc"
+    },
+    "gate": {
+      "$ref": "urn:ki-trading-v3:common#/$defs/gate_id"
+    },
+    "run_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "inputs_sha256": {
+      "$ref": "urn:ki-trading-v3:common#/$defs/sha256"
+    },
+    "rules_sha256": {
+      "$ref": "urn:ki-trading-v3:common#/$defs/sha256"
+    },
+    "outcome": {
+      "enum": [
+        "PASS",
+        "FAIL",
+        "INCONCLUSIVE",
+        "INVALID",
+        "ERROR",
+        "BLOCKED_EXTERNAL"
+      ]
+    },
+    "rule_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "flags": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 0,
+      "uniqueItems": true
+    },
+    "derived": {
+      "type": "object"
+    },
+    "next_step": {
+      "type": "string",
+      "minLength": 1
+    },
+    "exit_code": {
+      "type": "integer"
+    },
+    "run_log_ref": {
+      "type": "string",
+      "minLength": 1
+    },
+    "evaluator_key_fingerprint": {
+      "$ref": "urn:ki-trading-v3:common#/$defs/key_fingerprint"
+    },
+    "signature": {
+      "$ref": "urn:ki-trading-v3:common#/$defs/signature"
+    }
+  },
+  "required": [
+    "schema_version",
+    "message_id",
+    "correlation_id",
+    "producer",
+    "created_utc",
+    "gate",
+    "run_id",
+    "inputs_sha256",
+    "rules_sha256",
+    "outcome",
+    "rule_id",
+    "flags",
+    "derived",
+    "next_step",
+    "exit_code",
+    "run_log_ref",
+    "evaluator_key_fingerprint",
+    "signature"
+  ],
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "outcome": {
+            "enum": [
+              "PASS",
+              "FAIL",
+              "INCONCLUSIVE"
+            ]
+          }
+        },
+        "required": [
+          "outcome"
+        ]
+      },
+      "then": {
+        "required": [],
+        "properties": {
+          "exit_code": {
+            "const": 0
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "outcome": {
+            "const": "ERROR"
+          }
+        },
+        "required": [
+          "outcome"
+        ]
+      },
+      "then": {
+        "required": [],
+        "properties": {
+          "exit_code": {
+            "not": {
+              "const": 0
+            }
+          }
+        }
+      }
+    }
+  ]
+}

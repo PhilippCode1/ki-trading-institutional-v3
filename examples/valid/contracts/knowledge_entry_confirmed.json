@@ -1,0 +1,19 @@
+{
+ "schema_version": "3.0",
+ "message_id": "00000000-0000-4000-8000-000000000023",
+ "correlation_id": "COR-0023",
+ "producer": "OPERATOR",
+ "created_utc": "2026-09-24T09:00:00Z",
+ "entry_id": "KE-0002",
+ "status": "BESTAETIGT",
+ "claim": "Spreads in MGC sind abends breiter",
+ "evidence_refs": [
+  "LOG-G2-0001"
+ ],
+ "data_window": {
+  "start": "2026-01-01",
+  "end": "2026-06-30"
+ },
+ "valid_until": "2027-06-30",
+ "author_role": "BETREIBER"
+}

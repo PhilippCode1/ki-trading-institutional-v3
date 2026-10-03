@@ -1,0 +1,61 @@
+{
+ "schema_version": "3.0",
+ "id": "TR-WRITER-001",
+ "machine": "SM-WRITER",
+ "description": "Hostwechsel: erst Passwortwechsel und Ablehnungsnachweis, dann Writer; Lease-Verlust",
+ "scenarios": [
+  "HA-FENCING"
+ ],
+ "start": null,
+ "initial_reasons": null,
+ "steps": [
+  {
+   "event": "HOST_STARTED",
+   "context": {},
+   "expect_state": "STARTING"
+  },
+  {
+   "event": "LEASE_GRANTED",
+   "context": {
+    "host_changed_or_restored": true
+   },
+   "expect_state": "STARTING",
+   "expect_invalid": true
+  },
+  {
+   "event": "CREDENTIAL_ROTATED",
+   "context": {
+    "signed": true,
+    "host_changed_or_restored": true
+   },
+   "expect_state": "FENCING"
+  },
+  {
+   "event": "OLD_LOGIN_REJECT_PROVEN",
+   "context": {
+    "proof_recorded": true
+   },
+   "expect_state": "READ_ONLY"
+  },
+  {
+   "event": "LEASE_GRANTED",
+   "context": {},
+   "expect_state": "ACTIVE_WRITER"
+  },
+  {
+   "event": "LEASE_EXPIRED",
+   "context": {},
+   "expect_state": "READ_ONLY"
+  },
+  {
+   "event": "LEASE_GRANTED",
+   "context": {},
+   "expect_state": "ACTIVE_WRITER"
+  },
+  {
+   "event": "SHUTDOWN",
+   "context": {},
+   "expect_state": "STOPPED"
+  }
+ ]
+}

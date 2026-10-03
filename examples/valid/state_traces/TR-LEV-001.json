@@ -1,0 +1,25 @@
+{
+ "schema_version": "3.0",
+ "id": "TR-LEV-001",
+ "machine": "SM-LEVERAGE",
+ "description": "Stand 24.09.2026: kein Profil zulässig – ein Pilot-Grant kann kein Profil aktivieren",
+ "scenarios": [
+  "OS-RI-09"
+ ],
+ "start": null,
+ "initial_reasons": null,
+ "steps": [
+  {
+   "event": "GRANT_ACTIVATED",
+   "context": {
+    "grant_kind": "PILOT",
+    "grant_profile": "H5",
+    "profile_admissible": {
+     "H5": false
+    }
+   },
+   "expect_state": "NO_PROFILE",
+   "expect_invalid": true
+  }
+ ]
+}

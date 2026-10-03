@@ -1,0 +1,14 @@
+{
+ "schema_version": "3.0",
+ "message_id": "00000000-0000-4000-8000-000000000012",
+ "correlation_id": "COR-0012",
+ "producer": "OPERATOR",
+ "created_utc": "2026-09-24T09:00:00Z",
+ "action_id": "OA-0001",
+ "action": "CLEAR_REASON",
+ "actor_role": "BETREIBER",
+ "key_fingerprint": "FP-00000000000000D1",
+ "signed_payload_sha256": "0000000000000000000000000000000000000000000000000000000000000007",
+ "signature": "SIG-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+ "expires_utc": "2026-09-24T09:10:00Z"
+}

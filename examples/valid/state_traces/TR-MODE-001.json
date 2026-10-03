@@ -1,0 +1,82 @@
+{
+ "schema_version": "3.0",
+ "id": "TR-MODE-001",
+ "machine": "SM-MODE",
+ "description": "Forschung → Paper → Pilot nur durch den Betreiber mit Echtgeldkonto; Pilot scheitert → Abbau → Stopp → Forschung",
+ "scenarios": [
+  "OS-GV-01",
+  "OS-GV-04"
+ ],
+ "start": null,
+ "initial_reasons": null,
+ "steps": [
+  {
+   "event": "MODE_SWITCH_SIGNED",
+   "context": {
+    "signer_role": "BETREIBER",
+    "target": "PAPER",
+    "grant_kind_active": "PAPER",
+    "gate_g6": "PASS",
+    "account_type": "DEMO"
+   },
+   "expect_state": "PAPER"
+  },
+  {
+   "event": "MODE_SWITCH_SIGNED",
+   "context": {
+    "signer_role": "VERTRETUNG",
+    "target": "PILOT"
+   },
+   "expect_state": "PAPER",
+   "expect_invalid": true
+  },
+  {
+   "event": "MODE_SWITCH_SIGNED",
+   "context": {
+    "signer_role": "BETREIBER",
+    "target": "PILOT",
+    "grant_kind_active": "PILOT",
+    "gate_g7": "PASS",
+    "account_type": "DEMO"
+   },
+   "expect_state": "PAPER",
+   "expect_invalid": true
+  },
+  {
+   "event": "MODE_SWITCH_SIGNED",
+   "context": {
+    "signer_role": "BETREIBER",
+    "target": "PILOT",
+    "grant_kind_active": "PILOT",
+    "gate_g7": "PASS",
+    "account_type": "REAL",
+    "positions_flat": true,
+    "open_blockers": 0
+   },
+   "expect_state": "PILOT"
+  },
+  {
+   "event": "GATE_RESULT",
+   "context": {
+    "gate": "GATE-G8",
+    "outcome": "FAIL"
+   },
+   "expect_state": "WIND_DOWN"
+  },
+  {
+   "event": "POSITIONS_FLAT",
+   "context": {
+    "positions_flat": true,
+    "open_orders": 0
+   },
+   "expect_state": "STOPPED"
+  },
+  {
+   "event": "OPERATOR_RESUME_RESEARCH_SIGNED",
+   "context": {
+    "signed": true
+   },
+   "expect_state": "RESEARCH"
+  }
+ ]
+}

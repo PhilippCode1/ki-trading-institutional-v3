@@ -1,0 +1,140 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:ki-trading-v3:contract_spec",
+  "title": "Kontraktdaten mit Gültigkeit (IF-08)",
+  "description": "Tickwert = Multiplikator × Tick (Beispielregel R-EX-09).",
+  "x-version": "3.0.0",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "$ref": "urn:ki-trading-v3:common#/$defs/schema_version"
+    },
+    "message_id": {
+      "$ref": "urn:ki-trading-v3:common#/$defs/uuid"
+    },
+    "correlation_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "producer": {
+      "$ref": "urn:ki-trading-v3:common#/$defs/producer"
+    },
+    "created_utc": {
+      "$ref": "urn:ki-trading-v3:common#/$defs/utc"
+    },
+    "instrument_id": {
+      "$ref": "urn:ki-trading-v3:common#/$defs/instrument_id"
+    },
+    "exchange": {
+      "type": "string",
+      "minLength": 1
+    },
+    "broker_symbol": {
+      "type": "string",
+      "minLength": 1
+    },
+    "contract_month": {
+      "type": "string",
+      "pattern": "^\\d{6}$"
+    },
+    "multiplier": {
+      "$ref": "urn:ki-trading-v3:common#/$defs/decimal"
+    },
+    "tick_size": {
+      "$ref": "urn:ki-trading-v3:common#/$defs/decimal"
+    },
+    "tick_value": {
+      "$ref": "urn:ki-trading-v3:common#/$defs/decimal"
+    },
+    "currency": {
+      "$ref": "urn:ki-trading-v3:common#/$defs/currency"
+    },
+    "first_notice_date": {
+      "anyOf": [
+        {
+          "$ref": "urn:ki-trading-v3:common#/$defs/date"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "last_trade_date": {
+      "$ref": "urn:ki-trading-v3:common#/$defs/date"
+    },
+    "roll_window_start": {
+      "$ref": "urn:ki-trading-v3:common#/$defs/date"
+    },
+    "sessions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "open": {
+            "type": "string",
+            "pattern": "^\\d{2}:\\d{2}$"
+          },
+          "close": {
+            "type": "string",
+            "pattern": "^\\d{2}:\\d{2}$"
+          },
+          "tz": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "open",
+          "close",
+          "tz"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 1
+    },
+    "overnight_initial_margin": {
+      "$ref": "urn:ki-trading-v3:common#/$defs/money"
+    },
+    "valid_from": {
+      "$ref": "urn:ki-trading-v3:common#/$defs/date"
+    },
+    "valid_until": {
+      "$ref": "urn:ki-trading-v3:common#/$defs/date"
+    },
+    "source": {
+      "$ref": "urn:ki-trading-v3:common#/$defs/ref_id"
+    },
+    "status": {
+      "enum": [
+        "BELEGT",
+        "TEILWEISE",
+        "ANNAHME"
+      ]
+    }
+  },
+  "required": [
+    "schema_version",
+    "message_id",
+    "correlation_id",
+    "producer",
+    "created_utc",
+    "instrument_id",
+    "exchange",
+    "broker_symbol",
+    "contract_month",
+    "multiplier",
+    "tick_size",
+    "tick_value",
+    "currency",
+    "first_notice_date",
+    "last_trade_date",
+    "roll_window_start",
+    "sessions",
+    "overnight_initial_margin",
+    "valid_from",
+    "valid_until",
+    "source",
+    "status"
+  ],
+  "additionalProperties": false
+}

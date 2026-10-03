@@ -1,0 +1,62 @@
+{
+ "schema_version": "3.0",
+ "id": "TR-ORDER-001",
+ "machine": "SM-ORDER",
+ "description": "Einstieg ausgeführt, Antwort verloren (Retcode 10012) → UNKNOWN → Abgleich findet den Deal; kein zweiter Sendeversuch",
+ "scenarios": [
+  "OS-EX-01"
+ ],
+ "start": null,
+ "initial_reasons": null,
+ "steps": [
+  {
+   "event": "RISK_APPROVED",
+   "context": {
+    "risk_units_after": 1
+   },
+   "expect_state": "RESERVED"
+  },
+  {
+   "event": "JOURNAL_COMMITTED",
+   "context": {
+    "fsync_ok": true
+   },
+   "expect_state": "PERSISTED"
+  },
+  {
+   "event": "SEND_STARTED",
+   "context": {
+    "writer_state": "ACTIVE_WRITER",
+    "lease_age_s": 3,
+    "permission": "ENTRY",
+    "allowed_actions": [
+     "CANCEL_ORDER",
+     "CLOSE_REDUCE",
+     "EMERGENCY_PROTECT",
+     "ENTRY",
+     "RECONCILE",
+     "ROLL_AS_CLOSE",
+     "STOP_AMEND",
+     "STOP_AMEND_RECONCILED_ONLY"
+    ],
+    "order_kind": "ENTRY",
+    "snapshot_age_s": 12,
+    "quote_age_s": 1,
+    "pretrade_passed": true,
+    "grant_active": true,
+    "mode_matches_account": true
+   },
+   "expect_state": "SUBMITTING"
+  },
+  {
+   "event": "TIMEOUT",
+   "context": {},
+   "expect_state": "UNKNOWN"
+  },
+  {
+   "event": "RECON_FOUND_FILL",
+   "context": {},
+   "expect_state": "FILLED"
+  }
+ ]
+}

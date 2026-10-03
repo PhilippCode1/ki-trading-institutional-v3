@@ -1,0 +1,38 @@
+{
+ "schema_version": "3.0",
+ "id": "TR-MODE-002",
+ "machine": "SM-MODE",
+ "description": "Pilot → Standard mit Risikofunktion; Monitor verlangt Abbau",
+ "scenarios": [
+  "OS-GV-04"
+ ],
+ "start": "PILOT",
+ "initial_reasons": null,
+ "steps": [
+  {
+   "event": "MODE_SWITCH_SIGNED",
+   "context": {
+    "signer_role": "BETREIBER",
+    "target": "STANDARD",
+    "grant_kind_active": "STANDARD",
+    "gate_g8": "PASS",
+    "account_type": "REAL",
+    "risk_function_named": true
+   },
+   "expect_state": "STANDARD"
+  },
+  {
+   "event": "GATE_RESULT",
+   "context": {
+    "gate": "GATE-G10",
+    "outcome": "PASS"
+   },
+   "expect_state": "STANDARD"
+  },
+  {
+   "event": "MONITOR_STOP",
+   "context": {},
+   "expect_state": "WIND_DOWN"
+  }
+ ]
+}

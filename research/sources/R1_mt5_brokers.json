@@ -1,0 +1,886 @@
+{
+  "retrieved": "2026-09-24",
+  "schema_note": "Status: VERIFIZIERT = mit woertlichem Zitat aus Quelle belegt; TEILWEISE = nur teilweise belegt, mit Widerspruch oder nur indirekt; NICHT_GEPRUEFT = nicht belegbar (Wert null). Jede Quelle: url, source_date (falls erkennbar, sonst null), retrieved, quote (woertlich, max. 25 Woerter; Tabellenzeilen vom Abruf-Tool ggf. normalisiert), kind (PRIMAER = Anbieter/Boerse/Aufsicht/MetaQuotes; SEKUNDAER = Presse/Portal/Forum Dritter). Zusatzfelder field_status/notes sind Erweiterungen der vorgegebenen Struktur.",
+  "brokers": [
+    {
+      "name": "FXFlat (FXFlat Bank GmbH)",
+      "country": "Deutschland (Bahnstraße 47, 40878 Ratingen)",
+      "regulator": "BaFin (BaFin-ID 109603; HRB 101710 AG Düsseldorf; lt. Impressum)",
+      "mt5_exchange_futures": true,
+      "exchanges": ["EUREX", "CME (Echtzeitkurse über CQG)"],
+      "contracts": [
+        "Micro-DAX-Future (aktuelle Futures-Seite, Margin-Beispiel)",
+        "E-mini S&P 500 (MetaQuotes-PM 21.05.2019)",
+        "E-mini Nasdaq 100 (PM 2019)",
+        "E-micros (PM 2019, ohne Einzelnennung)",
+        "Mini-DAX-Future (PM 2019)",
+        "FDAX (PM 2019)",
+        "E-mini Dow YM (PM 2019)"
+      ],
+      "contracts_note": "Vollständige aktuelle Kontraktliste NICHT_GEPRUEFT: /en/metatrader/futures, Kontraktspezifikationen und News-Artikel waren wegen robots.txt-Fehler nicht abrufbar.",
+      "account_modes": "Hedging: im selben Kontrakt können Long- und Short-Positionen gleichzeitig gehalten werden (Futures-Seite und PM 2019).",
+      "commission": "All-inclusive-Festpreis je Kontrakt: Beispiel 1,00 € je Kontrakt je Seite (Halfturn); 'ab 0,80 €' je Kontrakt inkl. aller Kosten (für welche Kontrakte, nicht belegt). PM 2019: ab 1,00 EUR je Kontrakt Halfturn.",
+      "exchange_fees": "Im All-inclusive-Preis enthalten ('including all costs').",
+      "market_data_fees": "EUREX-Echtzeitkurse 20,00 €/Monat; CME-Echtzeitkurse (Bundle, via CQG) 33,00 €/Monat; jeweils kostenfrei ab 300,00 € Kommission/Monat je Börse. Unterscheidung Professional/Non-Professional auf der Seite nicht angegeben. Sekundärquelle (2021/2023): CME 30 €/Monat.",
+      "margins_examples": "Intraday: nur kleiner Prozentsatz der EUREX-Margin (ca. 10 %); Micro-DAX-Future 65,00 € je Kontrakt. PM 2019: Mini-DAX 500 €, FDAX 2.500 €, E-mini Dow YM 500 € intraday. Übernacht-Margin: NICHT_GEPRUEFT (News 'Anpassung der Futures Marginanforderung im Februar 2025' nicht abrufbar).",
+      "min_deposit": "Kontoeröffnung ab 200 € (Startseite, Kontext Forex/CFD-Konto, auf dem MT5 läuft); für die Futures-Freischaltung nicht separat belegt.",
+      "automation_allowed": "MT5 laut FXFlat 'perfectly suited for automated trading'; ausdrückliche Zulassung von EAs oder der Python-Schnittstelle speziell für Futures nicht belegt.",
+      "demo_futures": null,
+      "accepts_german_retail": true,
+      "notes": [
+        "Futures laufen im MT5-Konto (CFD-Konto); Bestandskunden registrieren sich für die Futures-Freischaltung, ggf. wird zusätzlich ein MT5-Konto eingerichtet.",
+        "Demokonten für alle Plattformen kostenlos (30 Tage); ob Futures im Demo enthalten sind: NICHT_GEPRUEFT.",
+        "Negativsaldoschutz für Privatkunden auf der CFD-Konto-Seite genannt; ob die Nachschusspflicht bei Futures vertraglich ausgeschlossen ist (BaFin-Allgemeinverfügung Futures vom 30.09.2022), ist nicht belegt.",
+        "Firmierung widersprüchlich: Impressum und mehrere Seitentitel 'FXFlat Bank GmbH', einzelne Seitentitel in Suchergebnissen 'FXFlat Bank AG'.",
+        "Sekundärquelle (brokerdeal.de, 2021, aktualisiert 2023): Plattform ATAS lässt sich mit MT5 verbinden; Futures 'ab 1,90 Euro' für Käufe und Verkäufe."
+      ],
+      "field_status": {
+        "mt5_exchange_futures": "VERIFIZIERT",
+        "exchanges": "VERIFIZIERT",
+        "contracts": "TEILWEISE",
+        "account_modes": "VERIFIZIERT",
+        "commission": "VERIFIZIERT",
+        "exchange_fees": "VERIFIZIERT",
+        "market_data_fees": "VERIFIZIERT",
+        "margins_examples": "TEILWEISE",
+        "min_deposit": "TEILWEISE",
+        "automation_allowed": "TEILWEISE",
+        "demo_futures": "NICHT_GEPRUEFT",
+        "accepts_german_retail": "TEILWEISE"
+      },
+      "status": "TEILWEISE",
+      "sources": [
+        {"url": "https://www.fxflat.com/en/cfd-account/metatrader", "source_date": null, "retrieved": "2026-09-24", "quote": "MetaTrader 5 offers you the opportunity to trade futures on the Eurex and CME exchanges.", "kind": "PRIMAER"},
+        {"url": "https://www.fxflat.com/en/cfd-account/metatrader", "source_date": null, "retrieved": "2026-09-24", "quote": "The platform is also perfectly suited for automated trading.", "kind": "PRIMAER"},
+        {"url": "https://www.fxflat.com/en/cfd-account/metatrader", "source_date": null, "retrieved": "2026-09-24", "quote": "Demo accounts for all trading platforms are available without obligation and free of charge.", "kind": "PRIMAER"},
+        {"url": "https://www.fxflat.com/en/cfd-account/futures", "source_date": null, "retrieved": "2026-09-24", "quote": "direct access to futures trading at the German derivatives exchange EUREX", "kind": "PRIMAER"},
+        {"url": "https://www.fxflat.com/en/cfd-account/futures", "source_date": null, "retrieved": "2026-09-24", "quote": "FXFlat customers have the choice between EUREX real-time prices and/or CME real-time prices via CQG", "kind": "PRIMAER"},
+        {"url": "https://www.fxflat.com/en/cfd-account/futures", "source_date": null, "retrieved": "2026-09-24", "quote": "you only pay a fixed price per contract like €1.00 per contract, per side halfturn", "kind": "PRIMAER"},
+        {"url": "https://www.fxflat.com/en/cfd-account/futures", "source_date": null, "retrieved": "2026-09-24", "quote": "From €0.80 per contract including all costs", "kind": "PRIMAER"},
+        {"url": "https://www.fxflat.com/en/cfd-account/futures", "source_date": null, "retrieved": "2026-09-24", "quote": "The fees for EUREX real-time courses at FXFlat are €20.00 per month", "kind": "PRIMAER"},
+        {"url": "https://www.fxflat.com/en/cfd-account/futures", "source_date": null, "retrieved": "2026-09-24", "quote": "The CME fees for real-time courses (bundle) are €33.00 per month", "kind": "PRIMAER"},
+        {"url": "https://www.fxflat.com/en/cfd-account/futures", "source_date": null, "retrieved": "2026-09-24", "quote": "minimum commission of €300.00 per month with EUREX Futures receive free EUREX prices", "kind": "PRIMAER"},
+        {"url": "https://www.fxflat.com/en/cfd-account/futures", "source_date": null, "retrieved": "2026-09-24", "quote": "margin requirement at FXFlat is intraday only a small percentage of the margin requirement from EUREX", "kind": "PRIMAER"},
+        {"url": "https://www.fxflat.com/en/cfd-account/futures", "source_date": null, "retrieved": "2026-09-24", "quote": "margin requirement for a Micro-DAX Future is only €65.00 per contract", "kind": "PRIMAER"},
+        {"url": "https://www.fxflat.com/en/cfd-account/futures", "source_date": null, "retrieved": "2026-09-24", "quote": "you can hold open positions long and short at the same time", "kind": "PRIMAER"},
+        {"url": "https://www.fxflat.com/en/cfd-account/futures", "source_date": null, "retrieved": "2026-09-24", "quote": "If you only have a MetaTrader 4 account, a MetaTrader 5 account will also be set up", "kind": "PRIMAER"},
+        {"url": "https://www.fxflat.com/en/cfd-account", "source_date": null, "retrieved": "2026-09-24", "quote": "CME & Eurex, low margins, traded from 0.80 €", "kind": "PRIMAER"},
+        {"url": "https://www.fxflat.com/en/cfd-account", "source_date": null, "retrieved": "2026-09-24", "quote": "Negative Balance Protection for Retail Clients", "kind": "PRIMAER"},
+        {"url": "https://www.fxflat.com/en/cfd-account", "source_date": null, "retrieved": "2026-09-24", "quote": "Test without obligation on our demo account for 30 days", "kind": "PRIMAER"},
+        {"url": "https://www.fxflat.com/en/cfd-account", "source_date": null, "retrieved": "2026-09-24", "quote": "76.73% of retail investor accounts lose money when trading CFDs with this provider.", "kind": "PRIMAER"},
+        {"url": "https://www.fxflat.com/en", "source_date": null, "retrieved": "2026-09-24", "quote": "account opening from 200€", "kind": "PRIMAER"},
+        {"url": "https://www.fxflat.com/en/imprint", "source_date": null, "retrieved": "2026-09-24", "quote": "Bahnstraße 47, 40878 Ratingen", "kind": "PRIMAER", "note": "Firma lt. Impressum: FXFlat Bank GmbH; HRB 101710 (AG Düsseldorf)."},
+        {"url": "https://www.fxflat.com/en/imprint", "source_date": null, "retrieved": "2026-09-24", "quote": "Federal Financial Supervisory Authority", "kind": "PRIMAER", "note": "Aufsichtsbehörde lt. Impressum; BaFin-ID 109603 lt. Abruf."},
+        {"url": "https://www.metatrader5.com/en/news/1933", "source_date": "2019-05-21", "retrieved": "2026-09-24", "quote": "MetaTrader 5 traders will now be able to trade popular Eurex and CME futures.", "kind": "PRIMAER"},
+        {"url": "https://www.metatrader5.com/en/news/1933", "source_date": "2019-05-21", "retrieved": "2026-09-24", "quote": "Popular futures, such as E-mini S&P 500, E-mini Nasdaq 100 and E-micros, are currently tradable with FXFlat.", "kind": "PRIMAER"},
+        {"url": "https://www.metatrader5.com/en/news/1933", "source_date": "2019-05-21", "retrieved": "2026-09-24", "quote": "For Mini-DaxFuture, the intraday margin is 500 Euro and for the big FDAX it is 2,500 Euro", "kind": "PRIMAER"},
+        {"url": "https://www.metatrader5.com/en/news/1933", "source_date": "2019-05-21", "retrieved": "2026-09-24", "quote": "MetaTrader 5 enables hedging of futures: clients are able to hold long and short positions simultaneously.", "kind": "PRIMAER"},
+        {"url": "https://www.metatrader5.com/en/news/1933", "source_date": "2019-05-21", "retrieved": "2026-09-24", "quote": "a fixed price per contract, starting at 1.00 EUR per contract halfturn.", "kind": "PRIMAER"},
+        {"url": "https://www.brokerdeal.de/neue-plattform-fuer-futures-bei-fxflat/", "source_date": "2021-04-16 (aktualisiert 2023-11-17)", "retrieved": "2026-09-24", "quote": "Danach lassen sich die MetaTrader5-Plattform und ATAS verbinden.", "kind": "SEKUNDAER"},
+        {"url": "https://www.brokerdeal.de/neue-plattform-fuer-futures-bei-fxflat/", "source_date": "2021-04-16 (aktualisiert 2023-11-17)", "retrieved": "2026-09-24", "quote": "Bei Futures beginnen die Kosten für Käufe und Verkäufe bei 1,90 Euro.", "kind": "SEKUNDAER"},
+        {"url": "https://www.fxflat.com/de/service-hilfe/news/artikel/adjustment-of-the-futures-margin-requirement-in-february-2025", "source_date": "2025-02 (lt. Titel)", "retrieved": "2026-09-24", "quote": "Anpassung der Futures Marginanforderung im Februar 2025 | FXFlat Bank GmbH", "kind": "PRIMAER", "note": "Nur Seitentitel aus Suchergebnis; Seite selbst wegen robots.txt-Fehler nicht abrufbar. Indiz, dass Futures 2025 aktiv angeboten wurden."}
+      ]
+    },
+    {
+      "name": "AMP Futures (AMP Global Clearing, LLC)",
+      "country": "USA (221 N. LaSalle Street, Chicago)",
+      "regulator": "CFTC; NFA (Lizenz-Nr. 0412490); DSRO: CME Group; Clearing Member von CME, CBOT, COMEX, NYMEX",
+      "mt5_exchange_futures": true,
+      "exchanges": ["CME", "CBOT", "NYMEX", "COMEX", "EUREX"],
+      "exchanges_note": "In MT5 nur die Datenpläne 'Bundle – ALL CME markets (Top-of-Book)' und 'EUREX Non-Pro (Level 1)'; andere AMP-Börsen (z. B. ICE) nicht über MT5. Datenanbindung über MT5-Gateway an CQG.",
+      "contracts": [
+        "MES (MT5: MES, CME) Micro E-mini S&P 500", "MNQ (MNQ, CME)", "MYM (MYM, CBOT/CME)", "M2K (M2K, CME)",
+        "FDXS (FDXS, Eurex) Micro-DAX", "FSXE (FSXE, Eurex) Micro-EURO STOXX 50",
+        "ES (EP, CME)", "NQ (ENQ, CME)", "YM (YM, CBOT/CME)", "RTY (RTY, CME)", "EMD (EMD, CME)", "NKD (NKD, CME)",
+        "FDAX (DD, Eurex)", "FDXM (FDXM, Eurex)", "FESX (DSX, Eurex)", "FXXP (FXXP, Eurex)", "FESB (ESB, Eurex)", "FSTX (DTX, Eurex)", "FVS (FVS, Eurex)",
+        "6A (DA6)", "6B (BP6)", "6C (CA6)", "6E (EU6)", "6J (JY6)", "6N (NE6)", "6S (SF6)", "E7 (EEU)", "J7 (EJY)", "M6A", "M6B", "MCD (GMCD)", "M6E", "MJY", "MSF",
+        "CL (CLE, NYMEX)", "QM (NQM)", "MCL (MCLE)", "NG (NGE)", "QG (NQG)", "RB (RBE)", "HO (HOE)",
+        "GC (GCE, COMEX)", "QO (MQO)", "MGC (MGC)", "HG (CPE)", "QC (MQC)", "SI (SIE)", "QI (MQI)", "SIL (SIL)", "PL (PLE, NYMEX)",
+        "UB (ULA, CBOT)", "TN (TNA)", "Z3N", "ZB (USA)", "30YY (Z30Y)", "ZF (FVA)", "5YY (Z5YY)", "ZN (TYA)", "10YY (Z10Y)", "ZQ (ZQE)", "ZT (TUA)", "2YY (Z2YY)", "GE (EDA) Eurodollar",
+        "FGBL (DB, Eurex)", "FGBM (DL)", "FGBS (DG)", "FGBX", "FBTP", "FBTS", "FOAT",
+        "ZC (ZCE, CBOT)", "ZW (ZWA)", "ZS (ZSE)", "ZL (ZLE)", "ZM (ZME)", "ZO (ZOE)", "ZR (ZRE)", "XC", "XW", "XK (XB)",
+        "GF (GF, CME)", "HE (HE)", "LE (GLE)"
+      ],
+      "contracts_note": "Liste aus AMP-Global-Preisliste 'Exchange-Traded Futures Price Quote' (Spalte 'MT5 Symbol'); handelbar sind Symbole mit Monat/Jahr (FAQ-Beispiel 'MESU22'), '@'-Symbole sind kontinuierlich und nicht handelbar. Die Liste enthält noch 'Eurodollar (GE)' – Aktualität der Liste daher prüfen.",
+      "account_modes": "Nur Netting für börsengehandelte Futures ('Exchange-Traded Futures is Netting Mode Only'). MT5 fasst die Position mit VWAP-Einstand zusammen, CQG führt die Einzelfills.",
+      "commission": "All-in-Preis je Kontrakt inkl. Börsen-, NFA-, Plattform- und Routinggebühren (AMP-Global-Preisliste): z. B. MES/MNQ/MYM/M2K 0,60 $; ES/NQ/YM/RTY 1,95 $; CL 2,12 $; MCL 0,75 $; GC 2,17 $; MGC 0,75 $; ZN 1,42 $; FDAX 1,77 €; FDXM 0,86 €; FDXS 0,37 €; FESX 0,97 €; FGBL 0,84 €. Ob je Seite (Halfturn): nicht ausdrücklich belegt. Seit 21.05.2025 zeigt MT5 keine Kommission mehr an, sie erscheint nur im täglichen Kontoauszug.",
+      "exchange_fees": "Im All-in-Preis enthalten (lt. AMP-Global-Preisliste).",
+      "market_data_fees": "MT5: nur 'Bundle – ALL CME markets (Top-of-Book)' (CME, CBOT, COMEX, NYMEX) und 'EUREX Non-Pro (Level 1) – Included NO Fee'. Gebührentabelle Non-Pro: CME-Bundle Level 1 15,00 $/Monat (Spalte CQG), Level 2 45,00 $; EUREX non-pro 24,00 EUR (widerspricht 'NO Fee' der MT5-FAQ). Zum Vergleich CME-Listenpreis ab 01.01.2026: Non-Pro Top of Book Bundle 4,65 $/Gerät.",
+      "margins_examples": {
+        "note": "Day-Trading-Margin setzt AMP; Maintenance (Übernacht) setzt die Börse. Day-Trading-Margins gelten bei geöffnetem Markt außer in den letzten 15 Minuten der Sitzung (Margin-Seite) bzw. den letzten 5 Minuten (FAQ) – Widerspruch. Für Kontostände über 100.000 $ gilt die doppelte Day-Trading-Margin. Eurex-Werte sind auf der Seite mit '$' dargestellt.",
+        "rows": [
+          {"symbol": "ES", "day_trading": "$400.00", "maintenance_overnight": "$28,628.00"},
+          {"symbol": "MES", "day_trading": "$40.00", "maintenance_overnight": "$2,863.00"},
+          {"symbol": "NQ", "day_trading": "$1,000.00", "maintenance_overnight": "$46,877.00"},
+          {"symbol": "MNQ", "day_trading": "$100.00", "maintenance_overnight": "$4,688.00"},
+          {"symbol": "CL", "day_trading": "$2,717.25", "maintenance_overnight": "$10,869.00"},
+          {"symbol": "MCL", "day_trading": "$272.25", "maintenance_overnight": "$1,089.00"},
+          {"symbol": "GC", "day_trading": "$6,062.25", "maintenance_overnight": "$24,249.00"},
+          {"symbol": "MGC", "day_trading": "$606.50", "maintenance_overnight": "$2,426.00"},
+          {"symbol": "FDAX", "day_trading": "$2,500.00 (Symbol lt. Seite)", "maintenance_overnight": "$56,570.00"},
+          {"symbol": "FDXM", "day_trading": "$500.00", "maintenance_overnight": "$11,314.00"},
+          {"symbol": "FDXS", "day_trading": "$100.00", "maintenance_overnight": "$2,263.00"},
+          {"symbol": "FESX", "day_trading": "$250.00", "maintenance_overnight": "$5,368.00"},
+          {"symbol": "FGBL", "day_trading": "$548.00", "maintenance_overnight": "$2,192.00"},
+          {"symbol": "6E", "day_trading": "$577.50", "maintenance_overnight": "$2,310.00"},
+          {"symbol": "ZN", "day_trading": "$515.50", "maintenance_overnight": "$2,062.00"}
+        ]
+      },
+      "min_deposit": "100 $ (oder Gegenwert); für einen Trade ist zusätzlich die Day-Trading-Margin des Kontrakts nötig.",
+      "automation_allowed": "Algo-Trading/Expert Advisors werden beworben; Robots und Trailing Stops laufen clientseitig und erfordern ein verbundenes Terminal. Die Python-Schnittstelle wird nicht erwähnt.",
+      "demo_futures": true,
+      "accepts_german_retail": null,
+      "notes": [
+        "Auslandskunden grundsätzlich zugelassen; Sperrliste 'High Risk' nur als Bild (Restricted-Countries-Sept-2025.png), Deutschland nicht namentlich im Text genannt, daher nicht abschließend prüfbar.",
+        "AMP-Risikohinweis: Haftung für verbleibende Fehlbeträge ('liable for any resulting deficit'), also keine Begrenzung auf die Einlage. Das kollidiert potenziell mit der BaFin-Allgemeinverfügung Futures (30.09.2022) für Kleinanleger mit Sitz in Deutschland; ob und wie sie für eine US-FCM gilt, ist eine Rechtsfrage (NICHT_GEPRUEFT).",
+        "Die frühere EU-Einheit AMP Global (Europe) (CySEC) ist nicht mehr aktiv, siehe eigener Eintrag.",
+        "SL/TP für Börsenkontrakte werden als MIT (Market if Touched) behandelt: Auslösung nach Börsenregeln, meist Last; Ausführung als Market-Order mit mindestens 1 Tick Slippage."
+      ],
+      "field_status": {
+        "mt5_exchange_futures": "VERIFIZIERT",
+        "exchanges": "VERIFIZIERT",
+        "contracts": "VERIFIZIERT",
+        "account_modes": "VERIFIZIERT",
+        "commission": "TEILWEISE",
+        "exchange_fees": "VERIFIZIERT",
+        "market_data_fees": "TEILWEISE",
+        "margins_examples": "TEILWEISE",
+        "min_deposit": "VERIFIZIERT",
+        "automation_allowed": "TEILWEISE",
+        "demo_futures": "VERIFIZIERT",
+        "accepts_german_retail": "NICHT_GEPRUEFT"
+      },
+      "status": "TEILWEISE",
+      "sources": [
+        {"url": "https://www.ampfutures.com/", "source_date": null, "retrieved": "2026-09-24", "quote": "the Commodity Futures Trading Commission (CFTC), and the National Futures Association (NFA) license no. 0412490.", "kind": "PRIMAER"},
+        {"url": "https://www.ampfutures.com/", "source_date": null, "retrieved": "2026-09-24", "quote": "Headquarters: 221 N. LaSalle Street, 25th Floor, Chicago, IL 60601 USA", "kind": "PRIMAER"},
+        {"url": "https://www.ampfutures.com/metatrader/trading-platform", "source_date": null, "retrieved": "2026-09-24", "quote": "AMP Global Clearing, LLC is a Clearing Member of CME, CBOT, COMEX, and NYMEX", "kind": "PRIMAER"},
+        {"url": "https://www.ampfutures.com/metatrader/trading-platform", "source_date": null, "retrieved": "2026-09-24", "quote": "One of the most impressing features of your MetaTrader 5 is Algorithmic Trading.", "kind": "PRIMAER"},
+        {"url": "https://www.ampfutures.com/metatrader/trading-platform", "source_date": null, "retrieved": "2026-09-24", "quote": "The platform supports both order accounting systems: the traditional netting system and the hedging option system.", "kind": "PRIMAER", "note": "Allgemeine MT5-Beschreibung; für Futures gilt die spezifischere Aussage 'Netting Mode Only'."},
+        {"url": "https://www.ampfutures.com/metatrader/trading-platform/trading", "source_date": null, "retrieved": "2026-09-24", "quote": "Exchange-Traded Futures is Netting Mode Only", "kind": "PRIMAER"},
+        {"url": "https://faq.ampfutures.com/hc/en-us/articles/17160615763607-MetaTrader-5-MT5-Available-exchanges", "source_date": "2026-01-12 (zuletzt aktualisiert)", "retrieved": "2026-09-24", "quote": "When using the MetaTrader 5 trading platform, you will only be able to access the following data plans.", "kind": "PRIMAER"},
+        {"url": "https://faq.ampfutures.com/hc/en-us/articles/17160615763607-MetaTrader-5-MT5-Available-exchanges", "source_date": "2026-01-12", "retrieved": "2026-09-24", "quote": "Bundle - ALL CME markets - (Top-of-Book) - This includes CME, CBOT, COMEX, & NYMEX", "kind": "PRIMAER"},
+        {"url": "https://faq.ampfutures.com/hc/en-us/articles/17160615763607-MetaTrader-5-MT5-Available-exchanges", "source_date": "2026-01-12", "retrieved": "2026-09-24", "quote": "EUREX | Non-Pro (Level 1) - Included NO Fee", "kind": "PRIMAER"},
+        {"url": "https://commissions.ampglobal.com/exchange-traded-futures-price-quote", "source_date": null, "retrieved": "2026-09-24", "quote": "AMP has combined all the fees into this Simple, Easy to Use Exact Cost Price Quote.", "kind": "PRIMAER"},
+        {"url": "https://commissions.ampglobal.com/exchange-traded-futures-price-quote", "source_date": null, "retrieved": "2026-09-24", "quote": "This will be the Total All Fees Included Commission you will see on your AMP MetaTrader Platform.", "kind": "PRIMAER"},
+        {"url": "https://commissions.ampglobal.com/exchange-traded-futures-price-quote", "source_date": null, "retrieved": "2026-09-24", "quote": "E-mini S&P 500 | ES | EP | CME | $1.95", "kind": "PRIMAER"},
+        {"url": "https://commissions.ampglobal.com/exchange-traded-futures-price-quote", "source_date": null, "retrieved": "2026-09-24", "quote": "DAX | FDAX | DD | Eurex | €1.77", "kind": "PRIMAER"},
+        {"url": "https://commissions.ampglobal.com/exchange-traded-futures-price-quote", "source_date": null, "retrieved": "2026-09-24", "quote": "Micro E-mini S&P 500 | MES | MES | CME | $0.60", "kind": "PRIMAER"},
+        {"url": "https://faq.ampfutures.com/hc/en-us/articles/19014308412695-MT5-Update-Live-Real-Trading-Commissions-Removed", "source_date": "2025-05-21", "retrieved": "2026-09-24", "quote": "we have removed the Commissions Charge settings from MT5", "kind": "PRIMAER"},
+        {"url": "https://faq.ampfutures.com/hc/en-us/articles/19014308412695-MT5-Update-Live-Real-Trading-Commissions-Removed", "source_date": "2025-05-21", "retrieved": "2026-09-24", "quote": "continue to see all Commissions and Trading Fees charged on your nightly AMP Statement", "kind": "PRIMAER"},
+        {"url": "https://faq.ampfutures.com/hc/en-us/articles/231720527-MetaTrader-5-MT5-CQG-Symbols", "source_date": "2025-05-21 (zuletzt aktualisiert)", "retrieved": "2026-09-24", "quote": "FDXM (MINI Dax)", "kind": "PRIMAER", "note": "Symbolliste nach Gruppen (Index, Währung, Energie, Metalle, Zinsen, Agrar, Fleisch); Formatierung vom Abruf-Tool normalisiert."},
+        {"url": "https://faq.ampfutures.com/hc/en-us/articles/10802106133527-I-can-t-place-any-trades-in-my-Metatader-5", "source_date": "2025-02-20", "retrieved": "2026-09-24", "quote": "You will need to add instead the tradeable symbol, which includes the contract month and year, for instance, MESU22", "kind": "PRIMAER"},
+        {"url": "https://faq.ampfutures.com/hc/en-us/articles/10802106133527-I-can-t-place-any-trades-in-my-Metatader-5", "source_date": "2025-02-20", "retrieved": "2026-09-24", "quote": "AMP Futures only supports Exchange Traded Futures, not Forex", "kind": "PRIMAER"},
+        {"url": "https://www.ampfutures.com/trading-info/exchange-data-fees", "source_date": "2026-06-01 (Preise gültig ab, lt. Seite)", "retrieved": "2026-09-24", "quote": "CME Bundle - ALL CME Markets (Level 1) Top of Book | $15.00", "kind": "PRIMAER"},
+        {"url": "https://www.ampfutures.com/trading-info/exchange-data-fees", "source_date": "2026-06-01", "retrieved": "2026-09-24", "quote": "EUREX | non-pro | 24.00 EUR", "kind": "PRIMAER"},
+        {"url": "https://www.cmegroup.com/market-data/files/january-2026-market-data-fee-list.pdf", "source_date": "2026-01-01 (gültig ab)", "retrieved": "2026-09-24", "quote": "Non-Professional Top of Book4, 11 Bundle – all exchanges Device $4.65", "kind": "PRIMAER"},
+        {"url": "https://www.ampfutures.com/trading-info/margins", "source_date": null, "retrieved": "2026-09-24", "quote": "E-mini S&P 500 | ES | EP | CME | $28,628.00 | $400.00", "kind": "PRIMAER"},
+        {"url": "https://www.ampfutures.com/trading-info/margins", "source_date": null, "retrieved": "2026-09-24", "quote": "DAX | FDAX | DD | Eurex | $56,570.00 | $2,500.00", "kind": "PRIMAER"},
+        {"url": "https://www.ampfutures.com/trading-info/margins", "source_date": null, "retrieved": "2026-09-24", "quote": "except the last 15 minutes of each trading session", "kind": "PRIMAER"},
+        {"url": "https://www.ampfutures.com/trading-info/margins", "source_date": null, "retrieved": "2026-09-24", "quote": "Day Trading margins are twice the displayed amount for account balances exceeding $100K.", "kind": "PRIMAER"},
+        {"url": "https://faq.ampfutures.com/hc/en-us/articles/10799455800727-Margins-Explanation-Maintenance-vs-Day-Trading", "source_date": "2026-09-18 (zuletzt aktualisiert)", "retrieved": "2026-09-24", "quote": "These margins are in effect anytime the market is open, except for the last 5 minutes of each trading session.", "kind": "PRIMAER"},
+        {"url": "https://faq.ampfutures.com/hc/en-us/articles/10799455800727-Margins-Explanation-Maintenance-vs-Day-Trading", "source_date": "2026-09-18", "retrieved": "2026-09-24", "quote": "The Maintenance Margin is set by the exchange. This is the amount required to carry a contract past the daily close.", "kind": "PRIMAER"},
+        {"url": "https://faq.ampfutures.com/hc/en-us/articles/32170595952663-What-is-the-minimum-deposit-required-to-trade", "source_date": "2026-08-24 (zuletzt aktualisiert)", "retrieved": "2026-09-24", "quote": "To start trading with AMP Futures, you need to deposit a minimum of $100 (or equivalent)", "kind": "PRIMAER"},
+        {"url": "https://www.ampfutures.com/metatrader/automated-trading", "source_date": null, "retrieved": "2026-09-24", "quote": "Trading robots can analyze quotes of financial instruments, as well as execute trade operations.", "kind": "PRIMAER"},
+        {"url": "https://faq.ampfutures.com/hc/en-us/articles/360008946513-MetaTrader-5-Order-Types-Order-Execution-Logic", "source_date": "2026-09-08 (zuletzt aktualisiert)", "retrieved": "2026-09-24", "quote": "your desktop terminal must remain connected to the MetaTrader 5 Server in order for those 2 functions to work", "kind": "PRIMAER"},
+        {"url": "https://faq.ampfutures.com/hc/en-us/articles/40287141225495-I-need-credentials-for-my-MetaTrader-5-demo", "source_date": "2026-06-25 (zuletzt aktualisiert)", "retrieved": "2026-09-24", "quote": "Open a new demo account to trade virtual money without risk.", "kind": "PRIMAER"},
+        {"url": "https://www.ampfutures.com/mt5demo", "source_date": null, "retrieved": "2026-09-24", "quote": "AMP Futures - MetaTrader 5 (MT5) Web Terminal - DEMO", "kind": "PRIMAER", "note": "Web-Terminal mit vorkonfigurierten Futures-Symbolen (u. a. ES, NQ, CL) lt. Abruf."},
+        {"url": "https://faq.ampfutures.com/hc/en-us/articles/33480677897623-Can-I-open-an-AMP-account-if-I-live-outside-the-United-States", "source_date": "2026-06-29 (zuletzt aktualisiert)", "retrieved": "2026-09-24", "quote": "Yes, you can open an AMP account even if you live outside the United States, but there are a few important points to know.", "kind": "PRIMAER"},
+        {"url": "https://faq.ampfutures.com/hc/en-us/articles/33480677897623-Can-I-open-an-AMP-account-if-I-live-outside-the-United-States", "source_date": "2026-06-29", "retrieved": "2026-09-24", "quote": "AMP is unable to open accounts for residents or entities in certain high-risk countries.", "kind": "PRIMAER"},
+        {"url": "https://faq.ampfutures.com/hc/en-us/articles/10797726829463-Restricted-Countries-List", "source_date": "2026-09-22 (zuletzt aktualisiert)", "retrieved": "2026-09-24", "quote": "AMP shall not open accounts for clients or entities that are located in the following countries until further notice (High Risk):", "kind": "PRIMAER", "note": "Länderliste nur als Bild eingebettet, textlich nicht auswertbar."},
+        {"url": "https://www.ampfutures.com/risk-disclosure", "source_date": null, "retrieved": "2026-09-24", "quote": "your position may be liquidated at a loss and you will be liable for any resulting deficit.", "kind": "PRIMAER"},
+        {"url": "https://www.metatrader5.com/en/news/1431", "source_date": "2017-05-03", "retrieved": "2026-09-24", "quote": "AMP Futures has officially announced the launch of the MetaTrader 5 platform for trading futures.", "kind": "PRIMAER"}
+      ]
+    },
+    {
+      "name": "AMP Global (Europe) / AMP Global Ltd (ehemalige EU-Einheit von AMP)",
+      "country": "Zypern (Limassol)",
+      "regulator": "CySEC, CIF-Lizenz 360/18 – lt. Sekundärquelle 2024 freiwillig zurückgegeben bzw. entzogen",
+      "mt5_exchange_futures": false,
+      "exchanges": [],
+      "contracts": [],
+      "account_modes": null,
+      "commission": null,
+      "exchange_fees": null,
+      "market_data_fees": null,
+      "margins_examples": null,
+      "min_deposit": null,
+      "automation_allowed": null,
+      "demo_futures": null,
+      "accepts_german_retail": false,
+      "notes": [
+        "Früher: 'Exchange-Traded Futures plus Forex & CFD' in einem MT5-Konto.",
+        "FX/CFD-Handel eingestellt; offene Positionen waren bis 15.12.2023 zu schließen; das Büro in Zypern wurde zum Support-Team für AMP Futures (USA).",
+        "Lizenzrückgabe/-entzug (360/18) im September 2024 nur durch Sekundärquellen belegt; die CySEC-Primärquelle war per SSL-Fehler nicht abrufbar.",
+        "Daraus folgt: keine EU-regulierte AMP-Einheit mehr für MT5-Börsenfutures (TEILWEISE belegt)."
+      ],
+      "field_status": {
+        "mt5_exchange_futures": "TEILWEISE",
+        "accepts_german_retail": "TEILWEISE"
+      },
+      "status": "TEILWEISE",
+      "sources": [
+        {"url": "https://blog.ampglobal.com/amp-global-europe-our-story", "source_date": "2024-10-01 (Blogdatum lt. Abruf)", "retrieved": "2026-09-24", "quote": "authorized as a Cypriot Investment Firm 'CIF' regulated by the Cyprus Securities and Exchange Commission, with license no. 360/18", "kind": "PRIMAER"},
+        {"url": "https://blog.ampglobal.com/amp-global-europe-our-story", "source_date": "2024-10-01", "retrieved": "2026-09-24", "quote": "Trade Exchange-Traded Futures plus Forex & CFD Markets from our All-In-One Metatrader 5 account", "kind": "PRIMAER"},
+        {"url": "https://blog.ampglobal.com/important-client-notice-regarding-changes-to-amp-global-europe-services", "source_date": "2023 (Frist 15.12.2023; Blogdatum lt. Abruf 2024-10-01)", "retrieved": "2026-09-24", "quote": "we have made a voluntary business decision to no longer support FX/CFD trading.", "kind": "PRIMAER"},
+        {"url": "https://blog.ampglobal.com/important-client-notice-regarding-changes-to-amp-global-europe-services", "source_date": "2023", "retrieved": "2026-09-24", "quote": "CLOSE any OPEN positions by December 15, 2023 (3:45pm CST)", "kind": "PRIMAER"},
+        {"url": "https://www.financemagnates.com/forex/regulation/us-fxcfd-broker-relinquishes-cysec-license/", "source_date": "2024-09-05", "retrieved": "2026-09-24", "quote": "AMP Global Ltd hereby notifies you that it is in the process of voluntarily renouncing its CIF License with authorization number 360/18.", "kind": "SEKUNDAER"}
+      ]
+    },
+    {
+      "name": "AvaFutures (AVA Trade EU Ltd, Marke AvaTrade)",
+      "country": "Irland (EU-Einheit; weitere Konzerngesellschaften außerhalb der EU)",
+      "regulator": "Central Bank of Ireland (Nr. C53877), Wertpapierfirma nach MiFID; Ausführung und Clearing über eine nicht genannte Dritt-FCM",
+      "mt5_exchange_futures": true,
+      "exchanges": ["CME", "CBOT", "NYMEX", "COMEX", "EUREX", "Euronext"],
+      "exchanges_note": "Börsen für AvaFutures insgesamt; welche davon in MT5 verfügbar sind, NICHT_GEPRUEFT.",
+      "contracts": ["MGC (Beispiel im MT5-Netting-Artikel)", "One Ounce Gold (Preisbeispiel)"],
+      "contracts_note": "Vollständige Kontraktliste NICHT_GEPRUEFT.",
+      "account_modes": "Netting in MT5 (nur eine offene Position je Instrument); ein Hilfeartikel zu einem Hedging-Modus wird verlinkt, aber nicht geprüft.",
+      "commission": "1,75 $ je Kontrakt je Seite (Standard/E-mini), 0,75 $ (Micro), One-Ounce-Gold 0,45 $; EU-Futures 1,75 € bzw. 0,75 €.",
+      "exchange_fees": "Nicht enthalten: Börsengebühr variabel (CME/Eurex), zzgl. NFA 0,02 $ je Kontrakt (nur US-Kontrakte).",
+      "market_data_fees": "CME Level 2 nach Einzahlung ohne Zusatzkosten; Eurex/Euronext Level 2 nicht verfügbar; MT5 ohne monatliche Plattformgebühr und ohne Ausführungsgebühr je Lot.",
+      "margins_examples": null,
+      "min_deposit": null,
+      "automation_allowed": "EAs beworben; AGB: MT4/5-Anbindung per MetaQuotes Gateway oder Datafeed nur mit schriftlicher Genehmigung. Die Python-Schnittstelle wird nicht erwähnt.",
+      "demo_futures": null,
+      "accepts_german_retail": null,
+      "notes": [
+        "Die EU-AGB verweisen auf 'Additional Terms for German Retail Clients' (Anhang war im Abruf abgeschnitten, Inhalt nicht prüfbar) – ein Indiz, dass deutsche Privatkunden bedient werden.",
+        "AGB: Futures-Verluste können 'Subject to local regulation' die Einlage übersteigen; für Deutschland ist das über die BaFin-Allgemeinverfügung Futures zu prüfen.",
+        "Alle Kunden werden standardmäßig als Kleinanleger eingestuft.",
+        "'Free Demo' wird beworben; ob Futures im MT5-Demo enthalten sind: NICHT_GEPRUEFT."
+      ],
+      "field_status": {
+        "mt5_exchange_futures": "VERIFIZIERT",
+        "exchanges": "TEILWEISE",
+        "contracts": "TEILWEISE",
+        "account_modes": "VERIFIZIERT",
+        "commission": "VERIFIZIERT",
+        "exchange_fees": "VERIFIZIERT",
+        "market_data_fees": "VERIFIZIERT",
+        "margins_examples": "NICHT_GEPRUEFT",
+        "min_deposit": "NICHT_GEPRUEFT",
+        "automation_allowed": "TEILWEISE",
+        "demo_futures": "NICHT_GEPRUEFT",
+        "accepts_german_retail": "TEILWEISE"
+      },
+      "status": "TEILWEISE",
+      "sources": [
+        {"url": "https://futures.avatrade.com/", "source_date": null, "retrieved": "2026-09-24", "quote": "AVA Trade EU Ltd is regulated by the Central Bank of Ireland. (No.C53877)", "kind": "PRIMAER"},
+        {"url": "https://www.avatrade.com/futures-trading", "source_date": null, "retrieved": "2026-09-24", "quote": "Trade on CQG, TradingView and MT5 with the tools, speed and flexibility futures traders need.", "kind": "PRIMAER"},
+        {"url": "https://futures.avatrade.com/trading-platforms", "source_date": null, "retrieved": "2026-09-24", "quote": "Create and run strategies with Expert Advisors (EAs) for 24 hour market coverage.", "kind": "PRIMAER"},
+        {"url": "https://futures.avatrade.com/trading-platforms", "source_date": null, "retrieved": "2026-09-24", "quote": "CME Group, EUREX and Euronext", "kind": "PRIMAER"},
+        {"url": "https://support.avafutures.com/hc/en-us/articles/23823466105873-How-does-the-MetaTrader5-netting-mode-works", "source_date": null, "retrieved": "2026-09-24", "quote": "traders are limited to holding only one open position for a specific financial instrument at any given time.", "kind": "PRIMAER"},
+        {"url": "https://futures.avatrade.com/pricing", "source_date": "2026-06-17 (article-modified lt. Metadaten)", "retrieved": "2026-09-24", "quote": "$1.75 per contract, per side", "kind": "PRIMAER"},
+        {"url": "https://futures.avatrade.com/pricing", "source_date": "2026-06-17", "retrieved": "2026-09-24", "quote": "Level 2 market data for CME Group products is available at no additional cost once you have made a deposit.", "kind": "PRIMAER"},
+        {"url": "https://futures.avatrade.com/pricing", "source_date": "2026-06-17", "retrieved": "2026-09-24", "quote": "No monthly platform fee, No per lot execution fee", "kind": "PRIMAER"},
+        {"url": "https://support.avafutures.com/hc/en-us/articles/25720518534801-What-are-all-the-commissions-charged-in-a-contract", "source_date": null, "retrieved": "2026-09-24", "quote": "EU futures: €0.75 for micro contracts | €1.75 for mini and standard contracts", "kind": "PRIMAER"},
+        {"url": "https://futures.avatrade.com/wp-content/uploads/2025/09/tc-futures-en.pdf", "source_date": "2025-03-05 (gültig ab)", "retrieved": "2026-09-24", "quote": "It is strictly prohibited to connect to our MT4/5 with MetaQuotes Gateway or Datafeed without written approval from AvaTrade.", "kind": "PRIMAER"},
+        {"url": "https://futures.avatrade.com/wp-content/uploads/2025/09/tc-futures-en.pdf", "source_date": "2025-03-05", "retrieved": "2026-09-24", "quote": "Subject to local regulation, trading in Futures may result in a loss greater than the amount of funds Customer has deposited in his/her account.", "kind": "PRIMAER"},
+        {"url": "https://origin.avatrades.net/legal-docs/avafutures/AvaTrade-EU-General-Terms&Conditions.pdf", "source_date": "2024-05-01 (gültig ab)", "retrieved": "2026-09-24", "quote": "Subject to local regulations and without derogating from the Additional Terms for German Retail Clients [Please find appendix at bottom of document]", "kind": "PRIMAER"},
+        {"url": "https://origin.avatrades.net/legal-docs/avafutures/AvaTrade-EU-General-Terms&Conditions.pdf", "source_date": "2024-05-01", "retrieved": "2026-09-24", "quote": "AvaTrade has appointed a 3rd Party Futures Commodities Merchant ('FCM') clearing member as executing broker and clearer.", "kind": "PRIMAER"},
+        {"url": "https://origin.avatrades.net/legal-docs/avafutures/AvaTrade-EU-General-Terms&Conditions.pdf", "source_date": "2024-05-01", "retrieved": "2026-09-24", "quote": "It is our policy to treat all of our clients as retail clients in relation to the MiFID services that we provide", "kind": "PRIMAER"},
+        {"url": "https://www.cmegroup.com/tools-information/find-a-broker/avafutures.html", "source_date": null, "retrieved": "2026-09-24", "quote": "CME Clearing Member Firm: No", "kind": "PRIMAER"},
+        {"url": "https://www.financemagnates.com/forex/avatrade-jumps-into-futures-trading-with-the-launch-of-a-new-platform/", "source_date": "2024-05-08", "retrieved": "2026-09-24", "quote": "AvaTrade can offer the services under any of its licenses, depending on the jurisdiction.", "kind": "SEKUNDAER"}
+      ]
+    },
+    {
+      "name": "Just2Trade (J2T Services Ltd, früher Lime Trading (CY) Ltd)",
+      "country": "Zypern",
+      "regulator": "CySEC, CIF-Lizenz 281/15 (erteilt 25.09.2015)",
+      "mt5_exchange_futures": true,
+      "exchanges": ["CME", "ICE", "CBOE", "MOEX (auf der Instrumentenseite gelistet; Aktualität fraglich)"],
+      "contracts": ["FUTES (E-mini S&P 500)", "FUTNQ (E-mini Nasdaq 100)", "FUTYM (E-mini Dow Jones)", "FUTGC (Gold)", "FUTSI (Silver)", "weitere CME-, ICE- und CBOE-Kategorien (Metalle, Währungen, Energie, Agrar, VIX) ohne Einzelprüfung"],
+      "account_modes": null,
+      "commission": "CME/CBOE: ab 0,5 USD je Kontrakt (Sonderangebot MT5 Global), Standard 1,5 USD, Micro 1 USD; ICE 1,5 USD je Kontrakt; jeweils zzgl. Börsengebühren. Je Seite: nicht ausdrücklich belegt.",
+      "exchange_fees": "Zusätzlich zur Kommission ('plus exchange fees').",
+      "market_data_fees": "Advanced-Paket 1 $/Monat oder kostenfrei bei 1 Trade/Monat; Basic-Paket kostenlos.",
+      "margins_examples": "Keine Zahlen; Margins 'as close as possible to that of exchange', Erhöhung 25 Minuten vor Handelsende.",
+      "min_deposit": null,
+      "automation_allowed": "Trading-Roboter und Berater in MT5 beworben; die Python-Schnittstelle wird nicht erwähnt.",
+      "demo_futures": null,
+      "accepts_german_retail": null,
+      "notes": [
+        "Die Website arbeitet mit Geo-Sperre ('isn't suitable for your country'), eine Länderliste ist nicht veröffentlicht; Annahme deutscher Privatkunden NICHT_GEPRUEFT.",
+        "Rückzug aus dem UK-Markt (Ende 2023).",
+        "Handelszeiten auf der Instrumentenseite in UTC angegeben."
+      ],
+      "field_status": {
+        "mt5_exchange_futures": "VERIFIZIERT",
+        "exchanges": "TEILWEISE",
+        "contracts": "TEILWEISE",
+        "account_modes": "NICHT_GEPRUEFT",
+        "commission": "VERIFIZIERT",
+        "exchange_fees": "VERIFIZIERT",
+        "market_data_fees": "TEILWEISE",
+        "margins_examples": "TEILWEISE",
+        "min_deposit": "NICHT_GEPRUEFT",
+        "automation_allowed": "TEILWEISE",
+        "demo_futures": "NICHT_GEPRUEFT",
+        "accepts_german_retail": "NICHT_GEPRUEFT"
+      },
+      "status": "TEILWEISE",
+      "sources": [
+        {"url": "https://j2t.com/solutions/mt5global/instruments/mt5/futures/", "source_date": null, "retrieved": "2026-09-24", "quote": "Brokerage commission from USD 0.5 per contract as part of the MT5 Global special offer.", "kind": "PRIMAER"},
+        {"url": "https://j2t.com/solutions/mt5global/instruments/mt5/futures/", "source_date": null, "retrieved": "2026-09-24", "quote": "Standard commission USD 1.5 per contract, USD 1 for micro contracts.", "kind": "PRIMAER"},
+        {"url": "https://j2t.com/solutions/mt5global/instruments/mt5/futures/", "source_date": null, "retrieved": "2026-09-24", "quote": "Margin requirements are as close as possible to that of exchange", "kind": "PRIMAER"},
+        {"url": "https://j2t.com/solutions/mt5global/instruments/mt5/futures/", "source_date": null, "retrieved": "2026-09-24", "quote": "FUTES | E-mini S&P 500 | 23:00 Sun - 22:00 Fri (22:00-23:00 break)", "kind": "PRIMAER"},
+        {"url": "https://j2t.com/solutions/mt5global/terms/", "source_date": null, "retrieved": "2026-09-24", "quote": "from 0.5 USD per contract plus exchange fees", "kind": "PRIMAER"},
+        {"url": "https://j2t.com/solutions/mt5global/terms/", "source_date": null, "retrieved": "2026-09-24", "quote": "$1 a month or free of charge if 1 trade a month", "kind": "PRIMAER"},
+        {"url": "https://j2t.com/solutions/mt5global/", "source_date": "© 2026", "retrieved": "2026-09-24", "quote": "J2T Services Ltd is authorised and regulated by the Cyprus Securities and Exchange Commission", "kind": "PRIMAER"},
+        {"url": "https://j2t.com/solutions/mt5global/", "source_date": "© 2026", "retrieved": "2026-09-24", "quote": "trade automation (trading robots and advisers)", "kind": "PRIMAER"},
+        {"url": "https://j2t.com/en/Unavailable/", "source_date": null, "retrieved": "2026-09-24", "quote": "Unfortunately, the product or service you're trying to access isn't suitable for your country.", "kind": "PRIMAER"},
+        {"url": "https://j2t.com/about/documents/", "source_date": null, "retrieved": "2026-09-24", "quote": "License Number: CIF 281/15. License Date: 25 September 2015.", "kind": "PRIMAER"},
+        {"url": "https://www.metatrader5.com/en/news/2104", "source_date": "2019-10-14", "retrieved": "2026-09-24", "quote": "The company will soon present an extended list of exchange symbols including futures instruments (CME, ICE, EUREX), options (CBOE) and ETF.", "kind": "PRIMAER"}
+      ]
+    },
+    {
+      "name": "StoneX Futures (StoneX Financial Inc. – FCM Division)",
+      "country": "USA",
+      "regulator": "US-FCM (Aufsicht auf der MT5-Seite nicht zitiert; Sekundärquelle nennt CFTC)",
+      "mt5_exchange_futures": true,
+      "exchanges": [],
+      "exchanges_note": "Für MT5 keine Börsen genannt (Seite: '40 commodity exchanges globally'); Sekundärquelle nennt CME, ICE US, Eurex.",
+      "contracts": [],
+      "account_modes": "Netting- und Hedging-Positionsführung als Plattformmerkmal genannt (allgemein, nicht futures-spezifisch).",
+      "commission": "Individuell ('vary based on activity, platform, and account structure'); Plattformkosten MT5: monatlich kostenlos, 0,15 $ je Seite.",
+      "exchange_fees": null,
+      "market_data_fees": "Non-Pro: CME-Bundle Top of Book 6,00 $/Monat; Eurex 25,00 $/Monat; ICE US 145,00 $/Monat.",
+      "margins_examples": null,
+      "min_deposit": "Keine Mindesteinlage ('No minimum deposit').",
+      "automation_allowed": "'copy trading and automated trading' genannt; die Python-Schnittstelle wird nicht erwähnt.",
+      "demo_futures": null,
+      "accepts_german_retail": null,
+      "notes": ["'For international and U.S. traders'; die zuständige Einheit für EU-Kunden und die Annahme deutscher Privatkunden sind NICHT_GEPRUEFT."],
+      "field_status": {
+        "mt5_exchange_futures": "VERIFIZIERT",
+        "exchanges": "NICHT_GEPRUEFT",
+        "account_modes": "TEILWEISE",
+        "commission": "TEILWEISE",
+        "market_data_fees": "VERIFIZIERT",
+        "min_deposit": "VERIFIZIERT",
+        "automation_allowed": "TEILWEISE",
+        "demo_futures": "TEILWEISE",
+        "accepts_german_retail": "NICHT_GEPRUEFT"
+      },
+      "status": "TEILWEISE",
+      "sources": [
+        {"url": "https://futures.stonex.com/metatrader-5", "source_date": null, "retrieved": "2026-09-24", "quote": "Futures and Options on Futures trading is provided by StoneX Financial Inc - FCM Division", "kind": "PRIMAER"},
+        {"url": "https://futures.stonex.com/metatrader-5", "source_date": null, "retrieved": "2026-09-24", "quote": "For international and U.S. traders", "kind": "PRIMAER"},
+        {"url": "https://futures.stonex.com/metatrader-5", "source_date": null, "retrieved": "2026-09-24", "quote": "Netting and hedging position accounting systems", "kind": "PRIMAER"},
+        {"url": "https://futures.stonex.com/metatrader-5", "source_date": null, "retrieved": "2026-09-24", "quote": "Demo and real accounts", "kind": "PRIMAER"},
+        {"url": "https://futures.stonex.com/pricing", "source_date": null, "retrieved": "2026-09-24", "quote": "MetaTrader 5 | Free | $0.15", "kind": "PRIMAER"},
+        {"url": "https://futures.stonex.com/pricing", "source_date": null, "retrieved": "2026-09-24", "quote": "No minimum deposit", "kind": "PRIMAER"},
+        {"url": "https://futures.stonex.com/market-data-pricing", "source_date": null, "retrieved": "2026-09-24", "quote": "$6.00", "kind": "PRIMAER", "note": "Wert der Zeile 'CME Bundle (Top of Book)', non-professional, monatlich; Eurex non-pro $25.00; ICE US $145.00."},
+        {"url": "https://wrtrading.com/broker/futures/mt5/", "source_date": "2026-09-12 (zuletzt aktualisiert)", "retrieved": "2026-09-24", "quote": "StoneX Futures is a futures trading broker that is part of the publicly-listed StoneX (originally founded in 1924).", "kind": "SEKUNDAER"}
+      ]
+    },
+    {
+      "name": "TradePro Futures, Inc.",
+      "country": "USA (Austin, Texas)",
+      "regulator": "NFA-Mitglied",
+      "mt5_exchange_futures": true,
+      "exchanges": ["CME Group", "Eurex", "ICE"],
+      "contracts": [],
+      "account_modes": null,
+      "commission": null,
+      "exchange_fees": null,
+      "market_data_fees": null,
+      "margins_examples": null,
+      "min_deposit": null,
+      "automation_allowed": "Expert Advisors genannt; die Python-Schnittstelle wird nicht erwähnt.",
+      "demo_futures": null,
+      "accepts_german_retail": null,
+      "notes": ["Copyright-Vermerk 2006–2021: Seite möglicherweise veraltet. Clearing-FCM nicht genannt."],
+      "field_status": {"mt5_exchange_futures": "TEILWEISE", "exchanges": "TEILWEISE", "automation_allowed": "TEILWEISE", "accepts_german_retail": "NICHT_GEPRUEFT"},
+      "status": "TEILWEISE",
+      "sources": [
+        {"url": "https://tradeprofutures.com/futures/metatrader5/", "source_date": "© 2006-2021", "retrieved": "2026-09-24", "quote": "MetaTrader 5 for futures allows you to trade CME Group, Eurex, and ICE futures", "kind": "PRIMAER"},
+        {"url": "https://tradeprofutures.com/futures/metatrader5/", "source_date": "© 2006-2021", "retrieved": "2026-09-24", "quote": "Copyright © 2006-2021 TradePro Futures, Inc., member NFA.", "kind": "PRIMAER"},
+        {"url": "https://tradeprofutures.com/futures/metatrader5/", "source_date": "© 2006-2021", "retrieved": "2026-09-24", "quote": "Algorithmic trading using specialized applications — trading robots (Expert Advisors)", "kind": "PRIMAER"}
+      ]
+    },
+    {
+      "name": "ITG Futures",
+      "country": "USA (Telefonvorwahl Miami; Adresse nicht angegeben)",
+      "regulator": "Clearing-Firmen bei CFTC registriert und NFA-Mitglied; eigener Status nicht angegeben",
+      "mt5_exchange_futures": true,
+      "exchanges": ["CME", "CBOT", "NYMEX", "COMEX", "ICE", "Eurex", "LIFFE"],
+      "exchanges_note": "Börsenliste lt. Abruf-Zusammenfassung, nicht wörtlich zitiert.",
+      "contracts": [],
+      "account_modes": null,
+      "commission": "Privatkunden: 1,00 $ je Seite (0–20 Kontrakte/Tag) bis 0,10 $ je Seite (1000+); Routinggebühr je Datenfeed 0,00–0,50 $ je Seite.",
+      "exchange_fees": null,
+      "market_data_fees": null,
+      "margins_examples": null,
+      "min_deposit": null,
+      "automation_allowed": "Expert Advisors in MQL5 genannt; die Python-Schnittstelle wird nicht erwähnt.",
+      "demo_futures": null,
+      "accepts_german_retail": null,
+      "notes": ["Tritt für Nicht-US-Kunden als 'FIB' auf; Annahme deutscher Privatkunden NICHT_GEPRUEFT."],
+      "field_status": {"mt5_exchange_futures": "VERIFIZIERT", "exchanges": "TEILWEISE", "commission": "TEILWEISE", "automation_allowed": "TEILWEISE", "accepts_german_retail": "NICHT_GEPRUEFT"},
+      "status": "TEILWEISE",
+      "sources": [
+        {"url": "https://www.itg-futures.com/index.php/platforms/spreads/meta-trader-5", "source_date": null, "retrieved": "2026-09-24", "quote": "$1.00 / side", "kind": "PRIMAER"},
+        {"url": "https://www.itg-futures.com/", "source_date": "© 2025", "retrieved": "2026-09-24", "quote": "All our clearing firms are registered with the Commodity Futures Trading Commission (\"CFTC\") and a member of the National Futures Association (\"NFA\")", "kind": "PRIMAER"},
+        {"url": "https://www.itg-futures.com/", "source_date": "© 2025", "retrieved": "2026-09-24", "quote": "an FIB, providing access to the global electronic futures markets for non-US Individual Traders", "kind": "PRIMAER"}
+      ]
+    },
+    {
+      "name": "Optimus Futures",
+      "country": "USA (Boca Raton, Florida)",
+      "regulator": "NFA und CFTC",
+      "mt5_exchange_futures": false,
+      "exchanges": [],
+      "contracts": [],
+      "account_modes": null,
+      "commission": null,
+      "exchange_fees": null,
+      "market_data_fees": null,
+      "margins_examples": null,
+      "min_deposit": null,
+      "automation_allowed": null,
+      "demo_futures": null,
+      "accepts_german_retail": null,
+      "notes": [
+        "Die Startseite nennt als Plattformen Optimus Flow/Web/Mobile, TradingView, Rithmic, TrendSpider, Sierra Chart, Bookmap, ATAS – MT5 wird nicht genannt (Aussage aus fehlender Nennung, daher TEILWEISE).",
+        "Mitarbeiterbeitrag im Optimus-Forum: in den USA kein Hedging bei Futures."
+      ],
+      "field_status": {"mt5_exchange_futures": "TEILWEISE"},
+      "status": "TEILWEISE",
+      "sources": [
+        {"url": "https://optimusfutures.com/", "source_date": null, "retrieved": "2026-09-24", "quote": "Optimus Futures is regulated by the NFA and CFTC with client funds held in segregation under CFTC rule 1.20 for maximum protection.", "kind": "PRIMAER"},
+        {"url": "https://community.optimusfutures.com/t/hedging-for-futures/2057", "source_date": "2024-02-19 (Beitrag Mod-MattZ)", "retrieved": "2026-09-24", "quote": "In the USA, futures markets do not allow hedging.", "kind": "PRIMAER", "note": "Anbieter-Forum, Beitrag eines Mitarbeiters/Moderators."}
+      ]
+    },
+    {
+      "name": "Admirals (Admiral Markets)",
+      "country": null,
+      "regulator": null,
+      "mt5_exchange_futures": null,
+      "exchanges": [],
+      "contracts": [],
+      "account_modes": null,
+      "commission": null,
+      "exchange_fees": null,
+      "market_data_fees": null,
+      "margins_examples": null,
+      "min_deposit": null,
+      "automation_allowed": null,
+      "demo_futures": null,
+      "accepts_german_retail": null,
+      "notes": ["Abruf admirals.com gescheitert (robots.txt: 'Response too large'); admiralmarkets.com/trading/contract-specifications: HTTP 404. Keine Archive oder Umgehungen genutzt."],
+      "status": "NICHT_GEPRUEFT",
+      "sources": []
+    }
+  ],
+  "mt5_api": {
+    "facts": [
+      {
+        "topic": "Plattformbindung Python-Paket",
+        "statement": "Das PyPI-Paket MetaTrader5 (Autor MetaQuotes Ltd.) ist in Version 5.0.6180 (veröffentlicht 05.09.2026) nur als Windows-x86-64-Wheel verfügbar (cp36 bis cp314, win_amd64); Requires-Python '<4, >=3.6'. Es gibt keine Wheels für Linux oder macOS, daher Betrieb auf Windows bzw. einem Windows-VPS.",
+        "status": "VERIFIZIERT",
+        "sources": [
+          {"url": "https://pypi.org/project/MetaTrader5/#files", "source_date": "2026-09-05", "retrieved": "2026-09-24", "quote": "metatrader5-5.0.6180-cp314-cp314-win_amd64.whl", "kind": "PRIMAER"},
+          {"url": "https://pypi.org/project/MetaTrader5/#files", "source_date": "2026-09-05", "retrieved": "2026-09-24", "quote": "MetaQuotes Ltd.", "kind": "PRIMAER"}
+        ]
+      },
+      {
+        "topic": "Laufendes Terminal erforderlich",
+        "statement": "Das Paket liest Daten per Interprozesskommunikation direkt aus dem MT5-Terminal. initialize() stellt die Verbindung her und startet das Terminal bei Bedarf (Parameter path für terminal64.exe). Ohne lokal installiertes, laufendes Terminal gibt es keinen API-Zugriff.",
+        "status": "VERIFIZIERT",
+        "sources": [
+          {"url": "https://www.mql5.com/en/docs/python_metatrader5", "source_date": null, "retrieved": "2026-09-24", "quote": "MetaTrader package for Python is designed for convenient and fast obtaining of exchange data via interprocessor communication directly from the MetaTrader 5 terminal.", "kind": "PRIMAER"},
+          {"url": "https://www.mql5.com/en/docs/python_metatrader5/mt5initialize_py", "source_date": null, "retrieved": "2026-09-24", "quote": "If required, the MetaTrader 5 terminal is launched to establish connection when executing the initialize() call.", "kind": "PRIMAER"}
+        ]
+      },
+      {
+        "topic": "initialize() und login()",
+        "statement": "initialize(path, login, password, server, timeout, portable): Standard-Timeout 60 000 ms, portable=False. login(login, password, server, timeout): Standard-Timeout 60 000 ms; nach Ablauf wird der Aufruf abgebrochen und eine Exception ausgelöst. Beide liefern True/False.",
+        "status": "VERIFIZIERT",
+        "sources": [
+          {"url": "https://www.mql5.com/en/docs/python_metatrader5/mt5initialize_py", "source_date": null, "retrieved": "2026-09-24", "quote": "Connection timeout in milliseconds. Optional named parameter. If not specified, the value of 60 000 (60 seconds) is applied.", "kind": "PRIMAER"},
+          {"url": "https://www.mql5.com/en/docs/python_metatrader5/mt5login_py", "source_date": null, "retrieved": "2026-09-24", "quote": "If the connection is not established within the specified time, the call is forcibly terminated and the exception is generated.", "kind": "PRIMAER"}
+        ]
+      },
+      {
+        "topic": "Funktionsumfang",
+        "statement": "Funktionen: initialize, login, shutdown, version, last_error, account_info, terminal_info, symbols_total, symbols_get, symbol_info, symbol_info_tick, symbol_select, market_book_add/get/release, copy_rates_from, copy_rates_from_pos, copy_rates_range, copy_ticks_from, copy_ticks_range, orders_total, orders_get, order_calc_margin, order_calc_profit, order_check, order_send, positions_total, positions_get, history_orders_total, history_orders_get, history_deals_total, history_deals_get.",
+        "status": "VERIFIZIERT",
+        "sources": [
+          {"url": "https://www.mql5.com/en/docs/python_metatrader5", "source_date": null, "retrieved": "2026-09-24", "quote": "Send a request to perform a trading operation", "kind": "PRIMAER"},
+          {"url": "https://www.mql5.com/en/docs/python_metatrader5", "source_date": null, "retrieved": "2026-09-24", "quote": "Get deals from trading history with the ability to filter by ticket or position", "kind": "PRIMAER"}
+        ]
+      },
+      {
+        "topic": "Keine Handelsereignisse im Python-API",
+        "statement": "Die Funktionsliste enthält keine Ereignis- oder Callback-Funktion für Handelstransaktionen (kein Gegenstück zu MQL5-OnTradeTransaction; nur market_book_* für Markttiefe). Zustandsänderungen müssen per Polling über orders_get, positions_get und history_*_get erkannt werden. Das ist ein Schluss aus der vollständigen Funktionsliste; die Zuordnung per request_id ist in MQL5 an OnTradeTransaction gebunden.",
+        "status": "TEILWEISE",
+        "sources": [
+          {"url": "https://www.mql5.com/en/docs/python_metatrader5", "source_date": null, "retrieved": "2026-09-24", "quote": "Subscribes the MetaTrader 5 terminal to the Market Depth change events", "kind": "PRIMAER"},
+          {"url": "https://www.mql5.com/en/docs/constants/structures/mqltraderesult", "source_date": null, "retrieved": "2026-09-24", "quote": "Request ID set by the terminal when sending to the trade server", "kind": "PRIMAER"}
+        ]
+      },
+      {
+        "topic": "symbol_info – Felder",
+        "statement": "symbol_info(symbol) liefert ein namedtuple (None bei Fehler) mit u. a. trade_contract_size, trade_tick_size, trade_tick_value, trade_tick_value_profit, trade_tick_value_loss, volume_min, volume_max, volume_step, volume_limit, margin_initial, margin_maintenance, margin_hedged, trade_mode, trade_exemode, filling_mode, expiration_mode, order_mode, order_gtc_mode, start_time, expiration_time, trade_calc_mode, trade_stops_level, trade_freeze_level, session_price_settlement, session_price_limit_min/max, currency_margin/profit, exchange, isin, path. Felder für Handelszeiten oder Sessions gibt es nicht.",
+        "status": "VERIFIZIERT",
+        "sources": [
+          {"url": "https://www.mql5.com/en/docs/python_metatrader5/mt5symbolinfo_py", "source_date": null, "retrieved": "2026-09-24", "quote": "Return info in the form of a named tuple structure (namedtuple). Return None in case of an error.", "kind": "PRIMAER"}
+        ]
+      },
+      {
+        "topic": "symbol_info – Semantik der Kontraktfelder",
+        "statement": "SYMBOL_TRADE_CONTRACT_SIZE = Kontraktgröße; SYMBOL_TRADE_TICK_SIZE = kleinste Preisänderung; SYMBOL_TRADE_TICK_VALUE = Wert von SYMBOL_TRADE_TICK_VALUE_PROFIT; SYMBOL_VOLUME_MIN = Mindestvolumen; SYMBOL_VOLUME_STEP = Volumenschritt; SYMBOL_START_TIME/SYMBOL_EXPIRATION_TIME = Handelsbeginn/-ende des Symbols (typisch für Futures). Futures-Rechenmodus EXCH_FUTURES: Margin = Lots × InitialMargin × Margin_Rate (bzw. MaintenanceMargin); Gewinn = (close − open) × Lots × TickPrice / TickSize.",
+        "status": "VERIFIZIERT",
+        "sources": [
+          {"url": "https://www.mql5.com/en/docs/constants/environment_state/marketinfoconstants", "source_date": null, "retrieved": "2026-09-24", "quote": "Value of SYMBOL_TRADE_TICK_VALUE_PROFIT", "kind": "PRIMAER"},
+          {"url": "https://www.mql5.com/en/docs/constants/environment_state/marketinfoconstants", "source_date": null, "retrieved": "2026-09-24", "quote": "Date of the symbol trade end (usually used for futures)", "kind": "PRIMAER"},
+          {"url": "https://www.mql5.com/en/docs/constants/environment_state/marketinfoconstants", "source_date": null, "retrieved": "2026-09-24", "quote": "Futures mode – calculation of margin and profit for trading futures contracts on a stock exchange", "kind": "PRIMAER"}
+        ]
+      },
+      {
+        "topic": "symbol_info – margin_initial / margin_maintenance",
+        "statement": "margin_initial ist die Margin in Marginwährung für eine Position von 1 Lot (Prüfung beim Markteintritt); margin_maintenance ist die Margin je Lot bei Kontoänderungen. Ist margin_maintenance 0, gilt margin_initial. Richtungsabhängige Sätze liefert in MQL5 SymbolInfoMarginRate().",
+        "status": "VERIFIZIERT",
+        "sources": [
+          {"url": "https://www.mql5.com/en/docs/constants/environment_state/marketinfoconstants", "source_date": null, "retrieved": "2026-09-24", "quote": "Initial margin means the amount in the margin currency required for opening a position with the volume of one lot.", "kind": "PRIMAER"},
+          {"url": "https://www.mql5.com/en/docs/constants/environment_state/marketinfoconstants", "source_date": null, "retrieved": "2026-09-24", "quote": "If the maintenance margin is equal to 0, the initial margin is used.", "kind": "PRIMAER"}
+        ]
+      },
+      {
+        "topic": "symbol_info – trade_mode und trade_exemode",
+        "statement": "trade_mode (ENUM_SYMBOL_TRADE_MODE): DISABLED, LONGONLY, SHORTONLY, CLOSEONLY, FULL. trade_exemode (ENUM_SYMBOL_TRADE_EXECUTION): REQUEST, INSTANT, MARKET, EXCHANGE.",
+        "status": "VERIFIZIERT",
+        "sources": [
+          {"url": "https://www.mql5.com/en/docs/constants/environment_state/marketinfoconstants", "source_date": null, "retrieved": "2026-09-24", "quote": "SYMBOL_TRADE_MODE_CLOSEONLY | Allowed only position close operations", "kind": "PRIMAER"},
+          {"url": "https://www.mql5.com/en/docs/constants/environment_state/marketinfoconstants", "source_date": null, "retrieved": "2026-09-24", "quote": "SYMBOL_TRADE_EXECUTION_EXCHANGE | Exchange execution", "kind": "PRIMAER"}
+        ]
+      },
+      {
+        "topic": "Handelszeiten (Sessions)",
+        "statement": "Handelszeiten liefert nur die MQL5-Funktion SymbolInfoSessionTrade (je Symbol, Wochentag und Session-Index; Sekunden ab 00:00, Datumsteil ignorieren). Im Python-Paket gibt es kein Gegenstück; Handelszeiten sind also aus Börsen- oder Broker-Angaben oder über eine EA-Brücke zu beschaffen.",
+        "status": "TEILWEISE",
+        "sources": [
+          {"url": "https://www.mql5.com/en/docs/marketinformation/symbolinfosessiontrade", "source_date": null, "retrieved": "2026-09-24", "quote": "Allows receiving time of beginning and end of the specified trading sessions for a specified symbol and day of week.", "kind": "PRIMAER"},
+          {"url": "https://www.mql5.com/en/docs/python_metatrader5", "source_date": null, "retrieved": "2026-09-24", "quote": "Get data on the specified financial instrument", "kind": "PRIMAER"}
+        ]
+      },
+      {
+        "topic": "symbol_info_tick",
+        "statement": "symbol_info_tick(symbol) liefert den letzten Tick mit time, bid, ask, last, volume, time_msc, flags und volume_real (None bei Fehler); entspricht MQL5 SymbolInfoTick.",
+        "status": "VERIFIZIERT",
+        "sources": [
+          {"url": "https://www.mql5.com/en/docs/python_metatrader5/mt5symbolinfotick_py", "source_date": null, "retrieved": "2026-09-24", "quote": "Get the last tick for the specified financial instrument.", "kind": "PRIMAER"}
+        ]
+      },
+      {
+        "topic": "copy_rates_* und copy_ticks_*",
+        "statement": "copy_rates_from/_from_pos/_range liefern ein numpy-Array mit time, open, high, low, close, tick_volume, spread, real_volume, begrenzt auf die im Terminal verfügbare Historie ('Max. bars in chart'). copy_ticks_from/_range liefern time, bid, ask, last, volume, time_msc, flags, volume_real; Flags COPY_TICKS_ALL, COPY_TICKS_INFO (Bid/Ask) und COPY_TICKS_TRADE (Last/Volume).",
+        "status": "VERIFIZIERT",
+        "sources": [
+          {"url": "https://www.mql5.com/en/docs/python_metatrader5/mt5copyratesfrom_py", "source_date": null, "retrieved": "2026-09-24", "quote": "MetaTrader 5 terminal provides bars only within history available to users on charts.", "kind": "PRIMAER"},
+          {"url": "https://www.mql5.com/en/docs/python_metatrader5/mt5copyticksfrom_py", "source_date": null, "retrieved": "2026-09-24", "quote": "COPY_TICKS_TRADE – ticks with changes in Last and Volume", "kind": "PRIMAER"}
+        ]
+      },
+      {
+        "topic": "Zeitstempel: Serverzeit oder UTC",
+        "statement": "Widerspruch in den Primärquellen. Die Python-Doku sagt, Tick- und Barzeiten seien UTC 'without the shift' und datetime-Objekte seien in UTC zu erzeugen. Die MT5-Hilfe gibt die Kurszeit dagegen 'according to the time zone of the broker's trading server' an, und TimeCurrent() liefert die letzte bekannte Serverzeit. TimeGMT() wird aus der lokalen PC-Uhr berechnet. Arbeitshypothese: Zeitstempel sind Serverzeit, als Epoch-Sekunden ohne Zeitzonenumrechnung kodiert. Offset je Broker (und Sommerzeit) per Killer-Test gegen echte UTC messen.",
+        "status": "TEILWEISE",
+        "sources": [
+          {"url": "https://www.mql5.com/en/docs/python_metatrader5/mt5copyticksfrom_py", "source_date": null, "retrieved": "2026-09-24", "quote": "MetaTrader 5 stores tick and bar open time in UTC time zone (without the shift).", "kind": "PRIMAER"},
+          {"url": "https://www.mql5.com/en/docs/python_metatrader5/mt5copyratesfrom_py", "source_date": null, "retrieved": "2026-09-24", "quote": "Data received from the MetaTrader 5 terminal has UTC time.", "kind": "PRIMAER"},
+          {"url": "https://www.metatrader5.com/en/terminal/help/trading/market_watch", "source_date": null, "retrieved": "2026-09-24", "quote": "The last quote arrival time. Specified according to the time zone of the broker's trading server.", "kind": "PRIMAER"},
+          {"url": "https://www.mql5.com/en/docs/dateandtime/timecurrent", "source_date": null, "retrieved": "2026-09-24", "quote": "Returns the last known server time, time of the last quote receipt for one of the symbols selected in the 'Market Watch' window.", "kind": "PRIMAER"},
+          {"url": "https://www.mql5.com/en/docs/dateandtime/timegmt", "source_date": null, "retrieved": "2026-09-24", "quote": "Returns the GMT, which is calculated taking into account the DST switch by the local time on the computer where the client terminal is running.", "kind": "PRIMAER"}
+        ]
+      },
+      {
+        "topic": "order_send – Felder des Requests",
+        "statement": "Felder des Requests: action, magic (EA-ID), order (Order-Ticket, bei Änderung von Pending Orders), symbol, volume (Lots), price, stoplimit, sl, tp, deviation (maximale Abweichung in Points), type, type_filling, type_time, expiration (bei ORDER_TIME_SPECIFIED), comment, position (Positions-Ticket zum Ändern/Schließen), position_by (Ticket der Gegenposition). Bei Market-Orders auf Symbolen mit 'Market Execution' wird kein price gesetzt.",
+        "status": "VERIFIZIERT",
+        "sources": [
+          {"url": "https://www.mql5.com/en/docs/python_metatrader5/mt5ordersend_py", "source_date": null, "retrieved": "2026-09-24", "quote": "EA ID. Allows arranging the analytical handling of trading orders. Each EA can set a unique ID when sending a trading request", "kind": "PRIMAER"},
+          {"url": "https://www.mql5.com/en/docs/python_metatrader5/mt5ordersend_py", "source_date": null, "retrieved": "2026-09-24", "quote": "Maximum acceptable deviation from the requested price, specified in points", "kind": "PRIMAER"},
+          {"url": "https://www.mql5.com/en/docs/python_metatrader5/mt5ordersend_py", "source_date": null, "retrieved": "2026-09-24", "quote": "The price is not set in case of market orders for instruments of the \"Market Execution\" type having the TRADE_ACTION_DEAL type", "kind": "PRIMAER"},
+          {"url": "https://www.mql5.com/en/docs/python_metatrader5/mt5ordersend_py", "source_date": null, "retrieved": "2026-09-24", "quote": "Fill it when changing and closing a position for its clear identification.", "kind": "PRIMAER"},
+          {"url": "https://www.mql5.com/en/docs/python_metatrader5/mt5ordersend_py", "source_date": null, "retrieved": "2026-09-24", "quote": "Opposite position ticket. It is used when closing a position by an opposite one (opened at the same symbol but in the opposite direction).", "kind": "PRIMAER"}
+        ]
+      },
+      {
+        "topic": "TRADE_ACTION_*",
+        "statement": "DEAL = Marktorder zur sofortigen Ausführung; PENDING = Pending Order; SLTP = SL/TP einer offenen Position ändern; MODIFY = Parameter einer Order ändern; REMOVE = Pending Order löschen; CLOSE_BY = Position durch Gegenposition schließen.",
+        "status": "VERIFIZIERT",
+        "sources": [
+          {"url": "https://www.mql5.com/en/docs/constants/tradingconstants/enum_trade_request_actions", "source_date": null, "retrieved": "2026-09-24", "quote": "Place a trade order for an immediate execution with the specified parameters (market order)", "kind": "PRIMAER"},
+          {"url": "https://www.mql5.com/en/docs/constants/tradingconstants/enum_trade_request_actions", "source_date": null, "retrieved": "2026-09-24", "quote": "Modify Stop Loss and Take Profit values of an opened position", "kind": "PRIMAER"},
+          {"url": "https://www.mql5.com/en/docs/constants/tradingconstants/enum_trade_request_actions", "source_date": null, "retrieved": "2026-09-24", "quote": "Close a position by an opposite one", "kind": "PRIMAER"}
+        ]
+      },
+      {
+        "topic": "Pflichtfelder je Ausführungsmodus und Aktion",
+        "statement": "Request und Instant Execution: action, symbol, volume, price, sl, tp, deviation, type, type_filling. Market und Exchange Execution: action, symbol, volume, type, type_filling (magic, comment optional). SLTP: action, symbol, sl, tp, position. PENDING: action, symbol, volume, price, stoplimit, sl, tp, type, type_filling, type_time, expiration. MODIFY: action, order, price, sl, tp, type_time, expiration. REMOVE: action, order.",
+        "status": "VERIFIZIERT",
+        "sources": [
+          {"url": "https://www.mql5.com/en/docs/constants/structures/mqltraderequest", "source_date": null, "retrieved": "2026-09-24", "quote": "The trade request is represented by the special predefined structure of MqlTradeRequest type, which contain all the fields necessary to perform trade deals.", "kind": "PRIMAER", "note": "Feldlisten je Modus aus derselben Seite (vom Abruf-Tool als Liste wiedergegeben)."}
+        ]
+      },
+      {
+        "topic": "Ausführungsmodi und 'Exchange Execution'",
+        "statement": "Instant Execution: Ausführung zum an den Broker gesendeten Preis. Request Execution: Preis wird vorab beim Broker angefragt. Market Execution: Broker bestimmt den Preis ohne Rückfrage. Exchange Execution: Handelsoperationen gehen an ein externes Handelssystem (die Börse) und werden zu den aktuellen Marktangeboten ausgeführt, es gibt also keinen Broker-Preis und keinen Requote-Mechanismus des Brokers.",
+        "status": "VERIFIZIERT",
+        "sources": [
+          {"url": "https://www.metatrader5.com/en/terminal/help/trading/general_concept", "source_date": null, "retrieved": "2026-09-24", "quote": "trade operations conducted in the trading platform are sent to an external trading system (exchange).", "kind": "PRIMAER"},
+          {"url": "https://www.metatrader5.com/en/terminal/help/trading/general_concept", "source_date": null, "retrieved": "2026-09-24", "quote": "Trade operations are executed at the prices of current market offers.", "kind": "PRIMAER"},
+          {"url": "https://www.metatrader5.com/en/terminal/help/trading/general_concept", "source_date": null, "retrieved": "2026-09-24", "quote": "a broker makes a decision about the order execution price without any additional discussion with a trader.", "kind": "PRIMAER"}
+        ]
+      },
+      {
+        "topic": "Füllarten (type_filling)",
+        "statement": "FOK: nur vollständige Ausführung. IOC: verfügbares Volumen ausführen, Rest stornieren. BOC: nur ins Orderbuch, keine sofortige Ausführung (Limit/Stop-Limit). RETURN: Rest bleibt aktiv. Kompatibilität: Bei Exchange Execution sind FOK und IOC erlaubt, soweit in den Symboleinstellungen gesetzt (filling_mode), RETURN immer. Bei Market Execution ist RETURN nie erlaubt. Pending Orders sind unabhängig vom Modus mit RETURN zu senden.",
+        "status": "VERIFIZIERT",
+        "sources": [
+          {"url": "https://www.mql5.com/en/docs/constants/tradingconstants/orderproperties", "source_date": null, "retrieved": "2026-09-24", "quote": "Exchange Execution (SYMBOL_TRADE_EXECUTION_EXCHANGE) | + (set in the symbol settings) | + (set in the symbol settings) | + (always)", "kind": "PRIMAER"},
+          {"url": "https://www.mql5.com/en/docs/constants/tradingconstants/orderproperties", "source_date": null, "retrieved": "2026-09-24", "quote": "Return orders are not allowed in the Market Execution mode (market execution — SYMBOL_TRADE_EXECUTION_MARKET).", "kind": "PRIMAER"},
+          {"url": "https://www.mql5.com/en/docs/constants/tradingconstants/orderproperties", "source_date": null, "retrieved": "2026-09-24", "quote": "In case of pending orders, the ORDER_FILLING_RETURN filling type should be used regardless of an execution type", "kind": "PRIMAER"},
+          {"url": "https://www.mql5.com/en/docs/constants/tradingconstants/orderproperties", "source_date": null, "retrieved": "2026-09-24", "quote": "The BoC order assumes that the order can only be placed in the Depth of Market and cannot be immediately executed.", "kind": "PRIMAER"}
+        ]
+      },
+      {
+        "topic": "Gültigkeit (type_time) und Ordertypen",
+        "statement": "type_time: ORDER_TIME_GTC, ORDER_TIME_DAY (bis Ende des Handelstags), ORDER_TIME_SPECIFIED (bis expiration), ORDER_TIME_SPECIFIED_DAY (bis 23:59:59 des angegebenen Tags). Ordertypen: BUY, SELL, BUY/SELL_LIMIT, BUY/SELL_STOP, BUY/SELL_STOP_LIMIT, CLOSE_BY. Orderzustände: STARTED, PLACED, CANCELED, PARTIAL, FILLED, REJECTED, EXPIRED, REQUEST_ADD/MODIFY/CANCEL.",
+        "status": "VERIFIZIERT",
+        "sources": [
+          {"url": "https://www.mql5.com/en/docs/constants/tradingconstants/orderproperties", "source_date": null, "retrieved": "2026-09-24", "quote": "Good till current trade day order", "kind": "PRIMAER"},
+          {"url": "https://www.mql5.com/en/docs/constants/tradingconstants/orderproperties", "source_date": null, "retrieved": "2026-09-24", "quote": "ORDER_STATE_STARTED | Order checked, but not yet accepted by broker", "kind": "PRIMAER"}
+        ]
+      },
+      {
+        "topic": "SL/TP bei Börseninstrumenten (MetaTrader-5-Hilfe)",
+        "statement": "Für Symbole mit den Rechenmodi Exchange Stocks, Exchange Futures und Futures Forts werden SL/TP nach den Regeln der Börse ausgelöst, in der Regel über den Last-Preis. Kauf oder Verkauf nach der Auslösung erfolgt immer zu Bid/Ask. SL/TP werden serverseitig verwaltet, Trailing Stops dagegen im Terminal. Ob der Server SL/TP als native Börsenorder weiterreicht oder selbst überwacht, legt die Hilfe nicht allgemein fest; das ist broker- bzw. gatewayabhängig (für AMP siehe nächster Eintrag).",
+        "status": "TEILWEISE",
+        "sources": [
+          {"url": "https://www.metatrader5.com/en/terminal/help/trading/general_concept", "source_date": null, "retrieved": "2026-09-24", "quote": "For symbols with Exchange Stocks, Exchange Futures and Futures Forts calculation modes, Stop Loss and Take Profit orders are triggered", "kind": "PRIMAER"},
+          {"url": "https://www.metatrader5.com/en/terminal/help/trading/general_concept", "source_date": null, "retrieved": "2026-09-24", "quote": "Usually, Last price (price of the last performed transaction) is applied.", "kind": "PRIMAER"},
+          {"url": "https://www.metatrader5.com/en/terminal/help/trading/general_concept", "source_date": null, "retrieved": "2026-09-24", "quote": "buying or selling as a result of activation of a stop-order is always performed by the Bid and Ask prices.", "kind": "PRIMAER"},
+          {"url": "https://www.metatrader5.com/en/terminal/help/trading/general_concept", "source_date": null, "retrieved": "2026-09-24", "quote": "The Trailing Stop is executed in the trading platform rather than on the server (like Stop Loss or Take Profit).", "kind": "PRIMAER"}
+        ]
+      },
+      {
+        "topic": "SL/TP bei AMP (Broker-Beispiel)",
+        "statement": "Bei AMP speichert und verarbeitet der eigene MT5-Server die Orders und verknüpft sie per ID mit der Börsenorder. SL und TP sind MIT-Orders (Market if Touched): Sie lösen nach Börsenregeln aus (meist Last) und werden als Market-Order ausgeführt, mit mindestens 1 Tick Slippage. Einfache Orders funktionieren ohne verbundenes Terminal; Robots und Trailing Stops arbeiten nur clientseitig.",
+        "status": "VERIFIZIERT",
+        "sources": [
+          {"url": "https://faq.ampfutures.com/hc/en-us/articles/360008946513-MetaTrader-5-Order-Types-Order-Execution-Logic", "source_date": "2026-09-08", "retrieved": "2026-09-24", "quote": "Because MetaTrader 5 has its own Server where it stores and processes orders", "kind": "PRIMAER"},
+          {"url": "https://faq.ampfutures.com/hc/en-us/articles/360008946513-MetaTrader-5-Order-Types-Order-Execution-Logic", "source_date": "2026-09-08", "retrieved": "2026-09-24", "quote": "the take profit order is a MIT (Market Order if Touched) just like the Stop Loss order.", "kind": "PRIMAER"},
+          {"url": "https://faq.ampfutures.com/hc/en-us/articles/360008946513-MetaTrader-5-Order-Types-Order-Execution-Logic", "source_date": "2026-09-08", "retrieved": "2026-09-24", "quote": "At least 1 tick 'slippage' due to the market order fill price of the next available Bid/Offer price.", "kind": "PRIMAER"},
+          {"url": "https://faq.ampfutures.com/hc/en-us/articles/360008946513-MetaTrader-5-Order-Types-Order-Execution-Logic", "source_date": "2026-09-08", "retrieved": "2026-09-24", "quote": "as they are operating only on the client side and NOT Server side.", "kind": "PRIMAER"}
+        ]
+      },
+      {
+        "topic": "Netting- und Hedging-Konto",
+        "statement": "Netting: je Symbol nur eine gemeinsame Position; Deals in Gegenrichtung reduzieren oder drehen sie. Hedging: mehrere Positionen je Symbol, auch gegenläufig; jeder Deal eröffnet eine neue Position. Der Kontomodus steht in account_info().margin_mode (ENUM_ACCOUNT_MARGIN_MODE: RETAIL_NETTING, EXCHANGE, RETAIL_HEDGING); weitere Kontoflags: fifo_close und ACCOUNT_HEDGE_ALLOWED.",
+        "status": "VERIFIZIERT",
+        "sources": [
+          {"url": "https://www.metatrader5.com/en/terminal/help/trading/general_concept", "source_date": null, "retrieved": "2026-09-24", "quote": "With this system, you can have only one common position for a symbol at the same time", "kind": "PRIMAER"},
+          {"url": "https://www.metatrader5.com/en/terminal/help/trading/general_concept", "source_date": null, "retrieved": "2026-09-24", "quote": "With this system, you can have multiple open positions of one and the same symbol, including opposite positions.", "kind": "PRIMAER"},
+          {"url": "https://www.mql5.com/en/docs/constants/environment_state/accountinformation", "source_date": null, "retrieved": "2026-09-24", "quote": "Used for the exchange markets. Margin is calculated based on the discounts specified in symbol settings", "kind": "PRIMAER"}
+        ]
+      },
+      {
+        "topic": "Bestimmte Position per Ticket schließen",
+        "statement": "Im Hedging-Konto ist beim Ändern oder Schließen das Positions-Ticket (request.position) zwingend anzugeben. Im Netting-Konto ist es möglich, die Position wird aber über das Symbol identifiziert. Geschlossen wird mit TRADE_ACTION_DEAL in Gegenrichtung und position=Ticket. Das Positions-Ticket entspricht in der Regel dem Ticket der eröffnenden Order.",
+        "status": "VERIFIZIERT",
+        "sources": [
+          {"url": "https://www.mql5.com/en/docs/constants/structures/mqltraderequest", "source_date": null, "retrieved": "2026-09-24", "quote": "When modifying or closing a position in the hedging system, make sure to specify its position ticket (MqlTradeRequest::position).", "kind": "PRIMAER"},
+          {"url": "https://www.mql5.com/en/docs/constants/structures/mqltraderequest", "source_date": null, "retrieved": "2026-09-24", "quote": "The ticket can also be specified in the netting system, though a position is identified by the symbol name.", "kind": "PRIMAER"},
+          {"url": "https://www.mql5.com/en/docs/python_metatrader5/mt5ordersend_py", "source_date": null, "retrieved": "2026-09-24", "quote": "Usually, it is the same as the ticket of the order that opened the position.", "kind": "PRIMAER"}
+        ]
+      },
+      {
+        "topic": "CLOSE_BY",
+        "statement": "Close By gibt es nur im Hedging-System. Request: action=TRADE_ACTION_CLOSE_BY, position=Ticket, position_by=Ticket der Gegenposition (gleiches Symbol, Gegenrichtung). Bei unterschiedlichen Volumina bleibt die Differenz offen. Deal-Eintrag: DEAL_ENTRY_OUT_BY. Für Netting-Futures-Konten (z. B. AMP) nicht anwendbar.",
+        "status": "VERIFIZIERT",
+        "sources": [
+          {"url": "https://www.metatrader5.com/en/terminal/help/trading/performing_deals", "source_date": null, "retrieved": "2026-09-24", "quote": "This type of operation is only available in the hedging position accounting system.", "kind": "PRIMAER"},
+          {"url": "https://www.mql5.com/en/docs/constants/tradingconstants/enum_trade_request_actions", "source_date": null, "retrieved": "2026-09-24", "quote": "request.position_by=PositionGetInteger(POSITION_TICKET); // ticket of the opposite position", "kind": "PRIMAER"}
+        ]
+      },
+      {
+        "topic": "Ergebnis von order_send",
+        "statement": "Ein erfolgreicher order_send-Aufruf bei TRADE_ACTION_DEAL heißt nur, dass die Order im Handelssystem platziert wurde, nicht dass sie ausgeführt ist. Der Server füllt deal und order im Ergebnis nur, wenn er sie zum Antwortzeitpunkt kennt. Ergebnisfelder: retcode, deal, order, volume, price, bid, ask, comment, request_id, retcode_external, request. Auch ein erfolgreicher order_check garantiert keine Ausführung.",
+        "status": "VERIFIZIERT",
+        "sources": [
+          {"url": "https://www.mql5.com/en/docs/trading/ordersend", "source_date": null, "retrieved": "2026-09-24", "quote": "When sending a market order (MqlTradeRequest.action=TRADE_ACTION_DEAL), the successful result of the OrderSend() function does not mean that the order has been executed", "kind": "PRIMAER"},
+          {"url": "https://www.mql5.com/en/docs/trading/ordersend", "source_date": null, "retrieved": "2026-09-24", "quote": "The trade server can fill in the deal or order field values in the returned result structure, if it is aware of these data", "kind": "PRIMAER"},
+          {"url": "https://www.mql5.com/en/docs/constants/structures/mqltraderesult", "source_date": null, "retrieved": "2026-09-24", "quote": "The code of the error returned by an external trading system.", "kind": "PRIMAER"},
+          {"url": "https://www.mql5.com/en/docs/python_metatrader5/mt5ordercheck_py", "source_date": null, "retrieved": "2026-09-24", "quote": "Successful sending of a request does not entail that the requested trading operation will be executed successfully.", "kind": "PRIMAER"}
+        ]
+      },
+      {
+        "topic": "Rückgabecodes (retcode) des Handelsservers",
+        "statement": "10004 REQUOTE; 10006 REJECT (abgelehnt); 10007 CANCEL (durch Trader); 10008 PLACED; 10009 DONE; 10010 DONE_PARTIAL; 10011 ERROR; 10012 TIMEOUT ('Request canceled by timeout'); 10013 INVALID; 10014 INVALID_VOLUME; 10015 INVALID_PRICE; 10016 INVALID_STOPS; 10018 MARKET_CLOSED; 10019 NO_MONEY; 10020 PRICE_CHANGED; 10021 PRICE_OFF; 10022 INVALID_EXPIRATION; 10024 TOO_MANY_REQUESTS; 10030 INVALID_FILL; 10031 CONNECTION; 10032 ONLY_REAL; 10033 LIMIT_ORDERS; 10034 LIMIT_VOLUME; 10036 POSITION_CLOSED; 10039 CLOSE_ORDER_EXIST; 10040 LIMIT_POSITIONS; 10041 REJECT_CANCEL; 10042 LONG_ONLY; 10043 SHORT_ONLY; 10044 CLOSE_ONLY; 10045 FIFO_CLOSE; 10046 HEDGE_PROHIBITED.",
+        "status": "VERIFIZIERT",
+        "sources": [
+          {"url": "https://www.mql5.com/en/docs/constants/errorswarnings/enum_trade_return_codes", "source_date": null, "retrieved": "2026-09-24", "quote": "10012 | TRADE_RETCODE_TIMEOUT | Request canceled by timeout", "kind": "PRIMAER"},
+          {"url": "https://www.mql5.com/en/docs/constants/errorswarnings/enum_trade_return_codes", "source_date": null, "retrieved": "2026-09-24", "quote": "10004 | TRADE_RETCODE_REQUOTE | Requote", "kind": "PRIMAER"},
+          {"url": "https://www.mql5.com/en/docs/constants/errorswarnings/enum_trade_return_codes", "source_date": null, "retrieved": "2026-09-24", "quote": "10006 | TRADE_RETCODE_REJECT | Request rejected", "kind": "PRIMAER"}
+        ]
+      },
+      {
+        "topic": "Python-Fehlercodes (last_error)",
+        "statement": "last_error() liefert (Code, Beschreibung): 1 RES_S_OK; -1 RES_E_FAIL; -2 INVALID_PARAMS; -3 NO_MEMORY; -4 NOT_FOUND; -5 INVALID_VERSION; -6 AUTH_FAILED; -7 UNSUPPORTED; -8 AUTO_TRADING_DISABLED; -10000 INTERNAL_FAIL (IPC); -10001 _SEND; -10002 _RECEIVE; -10003 _INIT; -10005 _TIMEOUT. Die Doku führt RES_E_INTERNAL_FAIL_CONNECT ebenfalls mit -10003 (Doku-Inkonsistenz).",
+        "status": "VERIFIZIERT",
+        "sources": [
+          {"url": "https://www.mql5.com/en/docs/python_metatrader5/mt5lasterror_py", "source_date": null, "retrieved": "2026-09-24", "quote": "RES_E_AUTO_TRADING_DISABLED | -8 | auto-trading disabled", "kind": "PRIMAER"},
+          {"url": "https://www.mql5.com/en/docs/python_metatrader5/mt5lasterror_py", "source_date": null, "retrieved": "2026-09-24", "quote": "RES_E_INTERNAL_FAIL_TIMEOUT | -10005 | internal timeout", "kind": "PRIMAER"}
+        ]
+      },
+      {
+        "topic": "Keine eindeutige Client-Order-ID",
+        "statement": "Der Request hat kein Feld für eine vom Client vergebene, eindeutige Order-ID. Es gibt nur magic (EA-ID) und comment; request_id vergibt das Terminal, Order- und Deal-Tickets vergibt der Server. Nach einem Timeout oder einer unklaren Antwort ist daher kein idempotentes Wiederholen per Client-ID möglich. Abgleich über magic, comment, Symbol, Volumen und Zeit mit orders_get, history_orders_get und history_deals_get. Die Folgerung stützt sich auf die vollständige Feldliste; die Längenbegrenzung von comment und ob der Broker comment ändert, wurden nicht geprüft.",
+        "status": "TEILWEISE",
+        "sources": [
+          {"url": "https://www.mql5.com/en/docs/python_metatrader5/mt5ordersend_py", "source_date": null, "retrieved": "2026-09-24", "quote": "Comment to an order", "kind": "PRIMAER"},
+          {"url": "https://www.mql5.com/en/docs/constants/structures/mqltraderesult", "source_date": null, "retrieved": "2026-09-24", "quote": "Request ID set by the terminal when sending to the trade server", "kind": "PRIMAER"}
+        ]
+      },
+      {
+        "topic": "Zuordnung Order – Deal – Position",
+        "statement": "ORDER_POSITION_ID wird bei Ausführung gesetzt; jeder Deal verweist über DEAL_ORDER auf die Order und über DEAL_POSITION_ID auf die Position. DEAL_ENTRY: IN, OUT, INOUT (Reverse), OUT_BY. Die Börsen-IDs stehen in ORDER_EXTERNAL_ID und DEAL_EXTERNAL_ID (in Python: external_id). history_orders_get und history_deals_get filtern nach ticket (Order) oder position; positions_get nach ticket oder symbol. Deals enthalten commission, fee und swap.",
+        "status": "VERIFIZIERT",
+        "sources": [
+          {"url": "https://www.mql5.com/en/docs/constants/tradingconstants/orderproperties", "source_date": null, "retrieved": "2026-09-24", "quote": "Position identifier that is set to an order as soon as it is executed.", "kind": "PRIMAER"},
+          {"url": "https://www.mql5.com/en/docs/constants/tradingconstants/dealproperties", "source_date": null, "retrieved": "2026-09-24", "quote": "Identifier of a position, in the opening, modification or closing of which this deal took part.", "kind": "PRIMAER"},
+          {"url": "https://www.mql5.com/en/docs/constants/tradingconstants/dealproperties", "source_date": null, "retrieved": "2026-09-24", "quote": "Deal identifier in an external trading system (on the Exchange)", "kind": "PRIMAER"},
+          {"url": "https://www.mql5.com/en/docs/python_metatrader5/mt5historydealsget_py", "source_date": null, "retrieved": "2026-09-24", "quote": "Get deals from trading history within the specified interval with the ability to filter by ticket or position.", "kind": "PRIMAER"}
+        ]
+      },
+      {
+        "topic": "positions_get / orders_get / account_info / terminal_info",
+        "statement": "positions_get(symbol|group|ticket) liefert ticket, time(_msc), time_update(_msc), type, magic, identifier, reason, volume, price_open, sl, tp, price_current, swap, profit, symbol, comment, external_id. orders_get liefert u. a. type_time, type_filling, state, volume_current und external_id. account_info liefert u. a. margin_mode, trade_allowed, trade_expert, fifo_close, balance, equity, margin, margin_free, margin_level, margin_so_call, margin_so_so, margin_initial, margin_maintenance. terminal_info liefert u. a. connected, trade_allowed und tradeapi_disabled.",
+        "status": "VERIFIZIERT",
+        "sources": [
+          {"url": "https://www.mql5.com/en/docs/python_metatrader5/mt5positionsget_py", "source_date": null, "retrieved": "2026-09-24", "quote": "Get open positions with the ability to filter by symbol or ticket. There are three call options.", "kind": "PRIMAER"},
+          {"url": "https://www.mql5.com/en/docs/python_metatrader5/mt5accountinfo_py", "source_date": null, "retrieved": "2026-09-24", "quote": "Get info on the current trading account.", "kind": "PRIMAER"},
+          {"url": "https://www.mql5.com/en/docs/python_metatrader5/mt5terminalinfo_py", "source_date": null, "retrieved": "2026-09-24", "quote": "Get the connected MetaTrader 5 client terminal status and settings.", "kind": "PRIMAER"},
+          {"url": "https://www.mql5.com/en/docs/constants/environment_state/accountinformation", "source_date": null, "retrieved": "2026-09-24", "quote": "Margin stop out level. Depending on the set ACCOUNT_MARGIN_SO_MODE is expressed in percents or in the deposit currency", "kind": "PRIMAER"}
+        ]
+      },
+      {
+        "topic": "Broker-Brücke MT5–CQG (AMP): Abgleich und Kosten",
+        "statement": "Bei AMP führt MT5 die Position aggregiert mit VWAP-Einstand, CQG führt die Einzelfills. Mehrmals täglich erscheinen Saldo-Synchronisationen als 'Correction [synchronization]'. Kommissionen werden seit 21.05.2025 nicht mehr in MT5 berechnet, nur im Tagesauszug. Folge: P&L und Kosten aus der MT5-API stimmen nicht 1:1 mit dem Clearing-Auszug überein; der Abgleich muss gegen den Auszug laufen.",
+        "status": "VERIFIZIERT",
+        "sources": [
+          {"url": "https://faq.ampfutures.com/hc/en-us/articles/360000579848-Explanation-of-Synchronization-in-MetaTrader-5", "source_date": "2026-08-21", "retrieved": "2026-09-24", "quote": "MetaTrader 5 aggregates position into one and calculates the VWAP rate", "kind": "PRIMAER"},
+          {"url": "https://faq.ampfutures.com/hc/en-us/articles/19014308412695-MT5-Update-Live-Real-Trading-Commissions-Removed", "source_date": "2025-05-21", "retrieved": "2026-09-24", "quote": "we have removed the Commissions Charge settings from MT5", "kind": "PRIMAER"}
+        ]
+      },
+      {
+        "topic": "CME-Zertifizierung von MT5 (Kontext)",
+        "statement": "MetaQuotes meldete 2013 die CME-Zertifizierung von MT5 über ein eigenes Gateway. Die Meldung ist alt und nur ein Indiz für den heutigen Stand.",
+        "status": "VERIFIZIERT",
+        "sources": [
+          {"url": "https://www.metatrader5.com/en/news/498", "source_date": "2013-04-02", "retrieved": "2026-09-24", "quote": "MetaTrader 5 meets all the technical requirements set by CME in relation to futures trading.", "kind": "PRIMAER"}
+        ]
+      }
+    ]
+  },
+  "esma_cfd": {
+    "caps": {
+      "waehrungspaare_haupt": {"hebel": "30:1", "initial_margin": "3,33 %", "definition": "zwei aus USD, EUR, JPY, GBP, CAD, CHF"},
+      "waehrungspaare_andere": {"hebel": "20:1", "initial_margin": "5 %"},
+      "indizes_haupt": {"hebel": "20:1", "initial_margin": "5 %", "definition": "FTSE 100, CAC 40, DAX 30, Dow Jones, S&P 500, NASDAQ, Nikkei 225, ASX 200, EURO STOXX 50 (Aufzählung lt. BaFin-Allgemeinverfügung, vom Abruf-Tool wiedergegeben)"},
+      "gold": {"hebel": "20:1", "initial_margin": "5 %"},
+      "indizes_andere": {"hebel": "10:1", "initial_margin": "10 %"},
+      "rohstoffe_ausser_gold": {"hebel": "10:1", "initial_margin": "10 %"},
+      "einzelaktien_und_sonstige": {"hebel": "5:1", "initial_margin": "20 %"},
+      "kryptowerte": {"hebel": "2:1", "initial_margin": "50 %"}
+    },
+    "margin_closeout": "Pflicht zur Glattstellung je Konto, wenn Kontoguthaben plus unrealisierte Nettogewinne aller offenen CFDs unter 50 % der gesamten Initial-Margin dieser CFDs fallen.",
+    "negative_balance_protection": "Je CFD-Handelskonto: Die Gesamthaftung des Kleinanlegers für alle CFDs ist auf die Gelder auf diesem Konto begrenzt.",
+    "legal_basis": "ESMA-Beschluss (EU) 2018/796 vom 22.05.2018 (befristet); ESMA stellte die Verlängerung zum 31.07.2019 ein, weil nationale Dauermaßnahmen bestehen. Für Deutschland gilt die BaFin-Allgemeinverfügung vom 23.07.2019, wirksam mit Ablauf des ESMA-Beschlusses.",
+    "status": "VERIFIZIERT",
+    "sources": [
+      {"url": "https://www.esma.europa.eu/press-news/esma-news/esma-agrees-prohibit-binary-options-and-restrict-cfds-protect-retail-investors", "source_date": "2018-03-27", "retrieved": "2026-09-24", "quote": "30:1 for major currency pairs; 20:1 for non-major currency pairs, gold and major indices; 10:1 for commodities other than gold and non-major equity indices;", "kind": "PRIMAER"},
+      {"url": "https://www.esma.europa.eu/press-news/esma-news/esma-agrees-prohibit-binary-options-and-restrict-cfds-protect-retail-investors", "source_date": "2018-03-27", "retrieved": "2026-09-24", "quote": "5:1 for individual equities and other reference values; 2:1 for cryptocurrencies", "kind": "PRIMAER"},
+      {"url": "https://www.esma.europa.eu/press-news/esma-news/esma-agrees-prohibit-binary-options-and-restrict-cfds-protect-retail-investors", "source_date": "2018-03-27", "retrieved": "2026-09-24", "quote": "A margin close out rule on a per account basis. This will standardise the percentage of margin (at 50% of minimum required margin)", "kind": "PRIMAER"},
+      {"url": "https://www.esma.europa.eu/press-news/esma-news/esma-agrees-prohibit-binary-options-and-restrict-cfds-protect-retail-investors", "source_date": "2018-03-27", "retrieved": "2026-09-24", "quote": "Negative balance protection on a per account basis. This will provide an overall guaranteed limit on retail client losses", "kind": "PRIMAER"},
+      {"url": "https://www.esma.europa.eu/press-news/esma-news/esma-ceases-renewal-product-intervention-measures-relating-contracts", "source_date": "2019-07-31", "retrieved": "2026-09-24", "quote": "ESMA will not renew the temporary restriction on the marketing, distribution or sale of contracts for differences to retail clients in the European Union (EU).", "kind": "PRIMAER"},
+      {"url": "https://www.bafin.de/SharedDocs/Veroeffentlichungen/DE/Aufsichtsrecht/Verfuegung/vf_190801_allgvfg_Differenzgeschaefte.html", "source_date": "2019-07-23", "retrieved": "2026-09-24", "quote": "3,33 % des Nominalwerts des CFD, wenn der Währungspaar-Basiswert aus zwei der folgenden Währungen besteht", "kind": "PRIMAER"},
+      {"url": "https://www.bafin.de/SharedDocs/Veroeffentlichungen/DE/Aufsichtsrecht/Verfuegung/vf_190801_allgvfg_Differenzgeschaefte.html", "source_date": "2019-07-23", "retrieved": "2026-09-24", "quote": "5 % des Nominalwerts des CFD, wenn der Index, das Währungspaar oder der Rohstoff des Basiswerts besteht aus", "kind": "PRIMAER"},
+      {"url": "https://www.bafin.de/SharedDocs/Veroeffentlichungen/DE/Aufsichtsrecht/Verfuegung/vf_190801_allgvfg_Differenzgeschaefte.html", "source_date": "2019-07-23", "retrieved": "2026-09-24", "quote": "10 % des Nominalwerts des CFD, wenn der Rohstoff oder der Aktienindex des Basiswerts ein anderer Rohstoff oder ein anderer Aktienindex", "kind": "PRIMAER"},
+      {"url": "https://www.bafin.de/SharedDocs/Veroeffentlichungen/DE/Aufsichtsrecht/Verfuegung/vf_190801_allgvfg_Differenzgeschaefte.html", "source_date": "2019-07-23", "retrieved": "2026-09-24", "quote": "20 % des Nominalwerts des CFD, wenn der Basiswert: (1) eine Aktie ist oder (2) nicht an anderer Stelle", "kind": "PRIMAER"},
+      {"url": "https://www.bafin.de/SharedDocs/Veroeffentlichungen/DE/Aufsichtsrecht/Verfuegung/vf_190801_allgvfg_Differenzgeschaefte.html", "source_date": "2019-07-23", "retrieved": "2026-09-24", "quote": "50 % des Nominalwerts des CFD, wenn der Basiswert eine Kryptowährung ist", "kind": "PRIMAER"},
+      {"url": "https://www.bafin.de/SharedDocs/Veroeffentlichungen/DE/Aufsichtsrecht/Verfuegung/vf_190801_allgvfg_Differenzgeschaefte.html", "source_date": "2019-07-23", "retrieved": "2026-09-24", "quote": "unter die Hälfte des Gesamtbetrags des Initial-Margin-Schutzes für alle diese offenen CFD fällt", "kind": "PRIMAER"},
+      {"url": "https://www.bafin.de/SharedDocs/Veroeffentlichungen/DE/Aufsichtsrecht/Verfuegung/vf_190801_allgvfg_Differenzgeschaefte.html", "source_date": "2019-07-23", "retrieved": "2026-09-24", "quote": "Obergrenze der Gesamthaftung eines Kleinanlegers für alle CFD in Verbindung mit einem CFD-Handelskonto bei einem CFD-Anbieter", "kind": "PRIMAER"},
+      {"url": "https://www.bafin.de/SharedDocs/Veroeffentlichungen/DE/Aufsichtsrecht/Verfuegung/vf_190801_allgvfg_Differenzgeschaefte.html", "source_date": "2019-07-23", "retrieved": "2026-09-24", "quote": "Das Verbot wird mit dem Zeitpunkt des Ablaufs der Wirkung des Beschlusses (EU) 2018/796 vom 22.05.2018", "kind": "PRIMAER"}
+    ]
+  },
+  "bafin_futures_retail": {
+    "act": "BaFin-Allgemeinverfügung – Produktintervention bezüglich Futures vom 30.09.2022",
+    "effective": "2023-01-01",
+    "restriction": "Wertpapierfirmen dürfen Futures an Kleinanleger mit Sitz in Deutschland nicht vermarkten, vertreiben oder verkaufen. Das gilt auch bei grenzüberschreitender Tätigkeit in Deutschland.",
+    "exceptions": [
+      "Die Wertpapierfirma schließt die Nachschusspflicht für Kleinanleger vertraglich aus; der Verlust ist auf die eingezahlten Mittel begrenzt.",
+      "Der Kleinanleger bestätigt für jedes Geschäft, dass es ausschließlich der Absicherung dient.",
+      "Abwicklung oder Schließung von Positionen, die vor Wirksamwerden eröffnet wurden."
+    ],
+    "relevance": "Für den Kunden (Privatperson in Deutschland) kommen damit praktisch nur Futures-Angebote mit vertraglich ausgeschlossener Nachschusspflicht in Frage. Daraus folgen Zwangsglattstellungen durch den Broker, bevor ein negativer Saldo entsteht. Die De-Risking-Leiter des Systems muss vor dieser Liquidation greifen.",
+    "status": "VERIFIZIERT",
+    "current_validity_status": "TEILWEISE",
+    "current_validity_note": "Die Seite nennt einen Widerrufsvorbehalt (Nr. 6), aber keinen Aufhebungs- oder Änderungshinweis. Eine gesonderte Prüfung auf spätere Änderungen war nicht möglich (Suchbudget erschöpft).",
+    "sources": [
+      {"url": "https://www.bafin.de/SharedDocs/Veroeffentlichungen/EN/Aufsichtsrecht/Verfuegung/vf_20220930_Allgemeinverfuegung_Produktintervention_bezueglich_Futures_en.html", "source_date": "2022-09-30", "retrieved": "2026-09-24", "quote": "Investment firms are prohibited from marketing, distributing and selling futures to retail clients within the meaning of Article 4(1)(11) of MiFID II domiciled in Germany", "kind": "PRIMAER"},
+      {"url": "https://www.bafin.de/SharedDocs/Veroeffentlichungen/EN/Aufsichtsrecht/Verfuegung/vf_20220930_Allgemeinverfuegung_Produktintervention_bezueglich_Futures_en.html", "source_date": "2022-09-30", "retrieved": "2026-09-24", "quote": "investment firms contractually exclude an additional payment obligation for retail clients and the loss of retail clients is therefore limited to the funds they deposit", "kind": "PRIMAER"},
+      {"url": "https://www.bafin.de/SharedDocs/Veroeffentlichungen/DE/Aufsichtsrecht/Verfuegung/vf_20220930_Allgemeinverfuegung_Produktintervention_bezueglich_Futures.html", "source_date": "2022-09-30", "retrieved": "2026-09-24", "quote": "Die Beschränkung wird mit Wirkung zum 01.01.2023 wirksam.", "kind": "PRIMAER"},
+      {"url": "https://www.bafin.de/SharedDocs/Veroeffentlichungen/DE/Aufsichtsrecht/Verfuegung/vf_20220930_Allgemeinverfuegung_Produktintervention_bezueglich_Futures.html", "source_date": "2022-09-30", "retrieved": "2026-09-24", "quote": "Wertpapierfirmen für Kleinanleger eine Nachschusspflicht vertraglich ausschließen", "kind": "PRIMAER"}
+    ]
+  },
+  "cfd_financing_example": {
+    "broker": "Pepperstone GmbH (Düsseldorf, HRB 91279; BaFin-Registernummer 151148) bietet MT5 an. Englische EU-Seite: Pepperstone EU Ltd (CySEC 388/20).",
+    "platform_mt5": true,
+    "index_cfd": {
+      "formula": "Tägliche Swap-Gebühr / Kredit = (Marktschlusskurs × Handelsvolumen × (Gebühr ± FER/IBOR bzw. ARR)) / 360",
+      "markup": "2,5 % p. a.",
+      "direction": "Long zahlt ARR/IBOR plus Gebühr; Short erhält ARR/IBOR abzüglich Gebühr.",
+      "charge_time": "Positionen, die über 17:00 New Yorker Zeit gehalten werden (englische EU-Seite).",
+      "triple_swap": "Englische EU-Seite: Rollover am Mittwochabend dreifach (Geltung je Anlageklasse nicht geprüft)."
+    },
+    "commodity_cfd": {
+      "formula": "Tägliche Swap-Gebühr / Kredit = Handelsvolumen × (Basis ± Gebühr)",
+      "basis": "(P3 – P2) / (T2 – T1); P2 = Kurs des Front-Month-Futures, P3 = Kurs des Next-Month-Futures, T1/T2 = Verfallstermine",
+      "fee": "CFD-Mittelkurs × 2,5 % / 365"
+    },
+    "illustration": {
+      "label": "RECHENBEISPIEL MIT ANNAHMEN – keine Quellenwerte",
+      "assumptions": "Index-CFD: Marktschlusskurs 24.000, Handelsvolumen 1 (Positionswert 24.000 €), angenommener ARR 2,0 % p. a.",
+      "long_per_night": "24.000 × (2,5 % + 2,0 %) / 360 = 3,00 € Belastung",
+      "short_per_night": "24.000 × (2,0 % − 2,5 %) / 360 = −0,33 € (Belastung, weil die Gebühr den ARR übersteigt)"
+    },
+    "discrepancy": "Die englische EU-Seite zeigt im Abruf den Nenner '3600', die deutsche Seite '360'. Vermutlich ein Darstellungs- oder Tippfehler; vor Nutzung beim Broker bestätigen.",
+    "status": "TEILWEISE",
+    "status_note": "Formel und Parameter sind belegt, ein Zahlenbeispiel der Quelle gibt es nicht. Konkrete Swap-Werte je Symbol (MT5-Symbolspezifikation) wurden nicht abgerufen.",
+    "sources": [
+      {"url": "https://pepperstone.com/de-de/ways-to-trade/pricing/", "source_date": null, "retrieved": "2026-09-24", "quote": "Tägliche Swap-Gebühr / Kredit = (Marktschlusskurs x Handelsvolumen x (unsere Gebühr* +/- FER oder IBOR)) / 360", "kind": "PRIMAER"},
+      {"url": "https://pepperstone.com/de-de/ways-to-trade/pricing/", "source_date": null, "retrieved": "2026-09-24", "quote": "Unsere Gebühr beträgt 2,5%", "kind": "PRIMAER"},
+      {"url": "https://pepperstone.com/de-de/ways-to-trade/pricing/", "source_date": null, "retrieved": "2026-09-24", "quote": "Wenn Sie long sind, zahlen Sie ARR/IBOR. Wenn Sie short sind, erhalten Sie sie", "kind": "PRIMAER"},
+      {"url": "https://pepperstone.com/de-de/ways-to-trade/pricing/", "source_date": null, "retrieved": "2026-09-24", "quote": "Tägliche Swap-Gebühr / Kredit = (Handelsvolumen x (Basis* +/- unsere Gebühr**))", "kind": "PRIMAER"},
+      {"url": "https://pepperstone.com/de-de/ways-to-trade/pricing/", "source_date": null, "retrieved": "2026-09-24", "quote": "CFD-Mittelkurs x 2,5% / 365", "kind": "PRIMAER"},
+      {"url": "https://pepperstone.com/de-de/ways-to-trade/pricing/", "source_date": null, "retrieved": "2026-09-24", "quote": "Bundesanstalt für Finanzdienstleistungsaufsicht (Registernummer 151148)", "kind": "PRIMAER"},
+      {"url": "https://pepperstone.com/de-de/", "source_date": null, "retrieved": "2026-09-24", "quote": "MetaTrader 5 Erleben Sie die Spitze des automatisierten Tradings mit unserer Ausführungstechnologie", "kind": "PRIMAER"},
+      {"url": "https://pepperstone.com/en-eu/ways-to-trade/pricing/", "source_date": null, "retrieved": "2026-09-24", "quote": "If you hold a position past 5pm New York time, an interest adjustment will be applied to reflect the cost of funding your position(s).", "kind": "PRIMAER"},
+      {"url": "https://pepperstone.com/en-eu/ways-to-trade/pricing/", "source_date": null, "retrieved": "2026-09-24", "quote": "Daily swap charge / credit = (market closing price x trade size x (our charge* +/- ARR) / 3600", "kind": "PRIMAER"},
+      {"url": "https://pepperstone.com/en-eu/ways-to-trade/pricing/", "source_date": null, "retrieved": "2026-09-24", "quote": "the swap/rollover applied on Wednesday evening will be three times the amount shown", "kind": "PRIMAER"},
+      {"url": "https://pepperstone.com/en-eu/", "source_date": null, "retrieved": "2026-09-24", "quote": "authorised and regulated by the Cyprus Securities and Exchange Commission (Licence Number 388/20)", "kind": "PRIMAER"}
+    ]
+  },
+  "method_limits": [
+    "WebSearch-Budget der Sitzung (200 Aufrufe) während der Recherche erschöpft; danach nur noch gezielte WebFetch-Abrufe bekannter Anbieter-URLs.",
+    "fxflat.com: mehrere Unterseiten (u. a. /en/metatrader/futures, /de/cfd-konto/futures, Kontraktspezifikationen, News Februar 2025, /de/impressum) wegen robots.txt-Fehler nicht abrufbar; abrufbar waren /en/cfd-account/futures, /en/cfd-account/metatrader, /en/cfd-account, /en und /en/imprint.",
+    "admirals.com: robots.txt-Fehler; admiralmarkets.com: HTTP 404. cysec.gov.cy: SSL-Fehler. darwinex.com: zu viele Weiterleitungen. pypi.org/pypi/MetaTrader5/json: per robots.txt gesperrt (stattdessen die Projektseite genutzt).",
+    "Gemäß Vorgabe keine Archive, Caches, Spiegel, curl oder Python für Abrufe genutzt.",
+    "Zitate stammen aus einem Abruf-Tool, das Seiten in Markdown umwandelt; Tabellenzeilen können in der Formatierung normalisiert sein."
+  ]
+}

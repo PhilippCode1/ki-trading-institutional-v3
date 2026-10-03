@@ -1,0 +1,227 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:ki-trading-v3:order_attempt",
+  "title": "Sendeversuch (SM-ORDER)",
+  "description": "",
+  "x-version": "3.0.0",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "$ref": "urn:ki-trading-v3:common#/$defs/schema_version"
+    },
+    "message_id": {
+      "$ref": "urn:ki-trading-v3:common#/$defs/uuid"
+    },
+    "correlation_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "producer": {
+      "enum": [
+        "ADAPTER",
+        "RECONCILER"
+      ],
+      "description": "Geldpfad: nur Geldpfad-Komponenten als Erzeuger (R-05)"
+    },
+    "created_utc": {
+      "$ref": "urn:ki-trading-v3:common#/$defs/utc"
+    },
+    "attempt_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "command_id": {
+      "$ref": "urn:ki-trading-v3:common#/$defs/command_id"
+    },
+    "state": {
+      "enum": [
+        "INTENT",
+        "RESERVED",
+        "PERSISTED",
+        "SUBMITTING",
+        "ACKNOWLEDGED",
+        "PARTIALLY_FILLED",
+        "CANCEL_PENDING",
+        "UNKNOWN",
+        "FILLED",
+        "CANCELLED",
+        "PARTIAL_CANCELLED",
+        "EXPIRED",
+        "REJECTED",
+        "REJECTED_BY_RISK",
+        "FAILED_BEFORE_SEND",
+        "NOT_EXECUTED_PROVEN"
+      ]
+    },
+    "sent_at_utc": {
+      "anyOf": [
+        {
+          "$ref": "urn:ki-trading-v3:common#/$defs/utc"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "retcode": {
+      "anyOf": [
+        {
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "order_ticket": {
+      "anyOf": [
+        {
+          "$ref": "urn:ki-trading-v3:common#/$defs/ticket"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "deal_tickets": {
+      "type": "array",
+      "items": {
+        "$ref": "urn:ki-trading-v3:common#/$defs/ticket"
+      },
+      "minItems": 0,
+      "uniqueItems": true
+    },
+    "filled_qty": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "fill_price_avg": {
+      "anyOf": [
+        {
+          "$ref": "urn:ki-trading-v3:common#/$defs/decimal"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "negative_proof": {
+      "type": "object",
+      "properties": {
+        "expiry_passed": {
+          "const": true
+        },
+        "cycles": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "queries": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1
+        },
+        "cursor": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "expiry_passed",
+        "cycles",
+        "queries",
+        "cursor"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "schema_version",
+    "message_id",
+    "correlation_id",
+    "producer",
+    "created_utc",
+    "attempt_id",
+    "command_id",
+    "state",
+    "sent_at_utc",
+    "retcode",
+    "order_ticket",
+    "deal_tickets",
+    "filled_qty"
+  ],
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "state": {
+            "const": "FILLED"
+          }
+        },
+        "required": [
+          "state"
+        ]
+      },
+      "then": {
+        "required": [
+          "fill_price_avg"
+        ],
+        "properties": {
+          "deal_tickets": {
+            "minItems": 1
+          },
+          "filled_qty": {
+            "minimum": 1
+          },
+          "fill_price_avg": {
+            "$ref": "urn:ki-trading-v3:common#/$defs/decimal"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "state": {
+            "const": "NOT_EXECUTED_PROVEN"
+          }
+        },
+        "required": [
+          "state"
+        ]
+      },
+      "then": {
+        "required": [
+          "negative_proof"
+        ],
+        "properties": {
+          "filled_qty": {
+            "const": 0
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "state": {
+            "const": "UNKNOWN"
+          }
+        },
+        "required": [
+          "state"
+        ]
+      },
+      "then": {
+        "required": [],
+        "properties": {
+          "sent_at_utc": {
+            "$ref": "urn:ki-trading-v3:common#/$defs/utc"
+          }
+        }
+      }
+    }
+  ]
+}

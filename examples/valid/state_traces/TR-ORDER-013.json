@@ -1,0 +1,24 @@
+{
+ "schema_version": "3.0",
+ "id": "TR-ORDER-013",
+ "machine": "SM-ORDER",
+ "description": "Risikoablehnung; ein danach gemeldetes Brokerereignis ist ungültig (Fremdaktivität)",
+ "scenarios": [
+  "OS-GV-07"
+ ],
+ "start": null,
+ "initial_reasons": null,
+ "steps": [
+  {
+   "event": "RISK_REJECTED",
+   "context": {},
+   "expect_state": "REJECTED_BY_RISK"
+  },
+  {
+   "event": "BROKER_ACK",
+   "context": {},
+   "expect_state": "REJECTED_BY_RISK",
+   "expect_invalid": true
+  }
+ ]
+}

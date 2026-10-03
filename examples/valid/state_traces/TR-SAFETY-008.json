@@ -1,0 +1,51 @@
+{
+ "schema_version": "3.0",
+ "id": "TR-SAFETY-008",
+ "machine": "SM-SAFETY",
+ "description": "Grant läuft bei offenen Positionen ab: nur Abbau; falsche Umgebung heilt nicht",
+ "scenarios": [
+  "OS-GV-02"
+ ],
+ "start": null,
+ "initial_reasons": [],
+ "steps": [
+  {
+   "event": "GRANT_EXPIRED",
+   "context": {},
+   "expect_state": "EXIT_ONLY",
+   "expect_reasons": [
+    "GRANT_MISSING_OR_EXPIRED"
+   ],
+   "expect_allowed": [
+    "CANCEL_ORDER",
+    "CLOSE_REDUCE",
+    "EMERGENCY_PROTECT",
+    "RECONCILE",
+    "ROLL_AS_CLOSE",
+    "STOP_AMEND_RECONCILED_ONLY"
+   ]
+  },
+  {
+   "event": "GRANT_ACTIVE",
+   "context": {
+    "grant_signature_valid": true,
+    "grant_hashes_match_active_release": true,
+    "grant_environment_matches_mode": false
+   },
+   "expect_state": "EXIT_ONLY",
+   "expect_reasons": [
+    "GRANT_MISSING_OR_EXPIRED"
+   ]
+  },
+  {
+   "event": "GRANT_ACTIVE",
+   "context": {
+    "grant_signature_valid": true,
+    "grant_hashes_match_active_release": true,
+    "grant_environment_matches_mode": true
+   },
+   "expect_state": "READY",
+   "expect_reasons": []
+  }
+ ]
+}

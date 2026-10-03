@@ -1,0 +1,23 @@
+{
+ "schema_version": "3.0",
+ "id": "TR-ORDER-006",
+ "machine": "SM-ORDER",
+ "description": "Absturz während order_send: UNKNOWN; verspätete Ablehnung klärt",
+ "scenarios": [
+  "OS-EX-03"
+ ],
+ "start": "SUBMITTING",
+ "initial_reasons": null,
+ "steps": [
+  {
+   "event": "PROCESS_RESTARTED",
+   "context": {},
+   "expect_state": "UNKNOWN"
+  },
+  {
+   "event": "BROKER_REJECT",
+   "context": {},
+   "expect_state": "REJECTED"
+  }
+ ]
+}

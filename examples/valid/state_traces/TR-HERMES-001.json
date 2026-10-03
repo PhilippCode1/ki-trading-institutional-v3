@@ -1,0 +1,66 @@
+{
+ "schema_version": "3.0",
+ "id": "TR-HERMES-001",
+ "machine": "SM-HERMES",
+ "description": "Budget erschöpft, Kompromittierungsverdacht, saubere Neuinstallation, Rückbau nach negativer Nutzenbilanz",
+ "scenarios": [
+  "HA-AI-COMPROMISE",
+  "OS-GV-09"
+ ],
+ "start": null,
+ "initial_reasons": null,
+ "steps": [
+  {
+   "event": "BUDGET_EXHAUSTED",
+   "context": {
+    "spend_month_eur": 350
+   },
+   "expect_state": "PAUSED_BUDGET"
+  },
+  {
+   "event": "BUDGET_RENEWED",
+   "context": {
+    "signed": true
+   },
+   "expect_state": "ACTIVE"
+  },
+  {
+   "event": "COMPROMISE_SUSPECTED",
+   "context": {},
+   "expect_state": "ISOLATED"
+  },
+  {
+   "event": "CLEAN_REDEPLOY_SIGNED",
+   "context": {
+    "signed": true,
+    "image_digest_verified": true,
+    "incident_closed": false
+   },
+   "expect_state": "ISOLATED",
+   "expect_invalid": true
+  },
+  {
+   "event": "CLEAN_REDEPLOY_SIGNED",
+   "context": {
+    "signed": true,
+    "image_digest_verified": true,
+    "incident_closed": true
+   },
+   "expect_state": "ACTIVE"
+  },
+  {
+   "event": "BENEFIT_REVIEW",
+   "context": {
+    "negative_benefit_quarters": 1
+   },
+   "expect_state": "ACTIVE"
+  },
+  {
+   "event": "BENEFIT_REVIEW",
+   "context": {
+    "negative_benefit_quarters": 2
+   },
+   "expect_state": "RETIRED"
+  }
+ ]
+}

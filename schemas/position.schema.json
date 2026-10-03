@@ -1,0 +1,146 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:ki-trading-v3:position",
+  "title": "Brokerposition mit Teilpositionen (SM-POSITION)",
+  "description": "Die Summe der Teilpositionen ist die Brokerposition (Beispielregel R-EX-10).",
+  "x-version": "3.0.0",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "$ref": "urn:ki-trading-v3:common#/$defs/schema_version"
+    },
+    "message_id": {
+      "$ref": "urn:ki-trading-v3:common#/$defs/uuid"
+    },
+    "correlation_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "producer": {
+      "enum": [
+        "TRADE_CORE",
+        "RECONCILER"
+      ],
+      "description": "Geldpfad: nur Geldpfad-Komponenten als Erzeuger (R-05)"
+    },
+    "created_utc": {
+      "$ref": "urn:ki-trading-v3:common#/$defs/utc"
+    },
+    "position_ticket": {
+      "$ref": "urn:ki-trading-v3:common#/$defs/ticket"
+    },
+    "instrument_id": {
+      "$ref": "urn:ki-trading-v3:common#/$defs/instrument_id"
+    },
+    "broker_symbol": {
+      "type": "string",
+      "minLength": 1
+    },
+    "side": {
+      "$ref": "urn:ki-trading-v3:common#/$defs/side"
+    },
+    "qty": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "open_price": {
+      "$ref": "urn:ki-trading-v3:common#/$defs/decimal"
+    },
+    "opened_at_utc": {
+      "$ref": "urn:ki-trading-v3:common#/$defs/utc"
+    },
+    "time_stop_utc": {
+      "$ref": "urn:ki-trading-v3:common#/$defs/utc"
+    },
+    "state": {
+      "enum": [
+        "FLAT",
+        "OPENING",
+        "OPEN_UNPROTECTED",
+        "OPEN_PROTECTED",
+        "AMEND_PENDING",
+        "CLOSING",
+        "UNRECONCILED",
+        "FOREIGN"
+      ]
+    },
+    "sl_price": {
+      "anyOf": [
+        {
+          "$ref": "urn:ki-trading-v3:common#/$defs/decimal"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "sl_confirmed": {
+      "type": "boolean"
+    },
+    "strategy_allocations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "strategy_id": {
+            "$ref": "urn:ki-trading-v3:common#/$defs/strategy_id"
+          },
+          "qty": {
+            "type": "integer"
+          }
+        },
+        "required": [
+          "strategy_id",
+          "qty"
+        ],
+        "additionalProperties": false
+      },
+      "minItems": 1
+    }
+  },
+  "required": [
+    "schema_version",
+    "message_id",
+    "correlation_id",
+    "producer",
+    "created_utc",
+    "position_ticket",
+    "instrument_id",
+    "broker_symbol",
+    "side",
+    "qty",
+    "open_price",
+    "opened_at_utc",
+    "time_stop_utc",
+    "state",
+    "sl_price",
+    "sl_confirmed",
+    "strategy_allocations"
+  ],
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "state": {
+            "const": "OPEN_PROTECTED"
+          }
+        },
+        "required": [
+          "state"
+        ]
+      },
+      "then": {
+        "required": [],
+        "properties": {
+          "sl_price": {
+            "$ref": "urn:ki-trading-v3:common#/$defs/decimal"
+          },
+          "sl_confirmed": {
+            "const": true
+          }
+        }
+      }
+    }
+  ]
+}

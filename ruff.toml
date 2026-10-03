@@ -1,0 +1,10 @@
+# Linter-Konfiguration des Pakets (§19.2). Aufruf: ruff check .
+# Regeln: pycodestyle (E, W), pyflakes (F), Importreihenfolge (I), bugbear (B), pyupgrade (UP), pylint-Fehler (PLE).
+target-version = "py311"
+line-length = 180
+# Ausgenommen: research/reference_strategies/tf_d1_baseline.py ist bytegleich aus v2.0 übernommen (Vergleichsbasis S-BASE, DEC-DS-08);
+# eine Stiländerung würde den Abgleich mit v2.0 brechen. Die Datei läuft trotzdem in den Referenztests unter -W error.
+extend-exclude = ["research/reference_strategies/tf_d1_baseline.py"]
+
+[lint]
+select = ["E", "W", "F", "I", "B", "UP", "PLE"]

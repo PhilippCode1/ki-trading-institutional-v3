@@ -1,0 +1,42 @@
+{
+ "schema_version": "3.0",
+ "id": "TR-GRANT-002",
+ "machine": "SM-GRANT",
+ "description": "Hypothetischer gültiger Pilot-Grant; Releasewechsel invalidiert",
+ "scenarios": [
+  "OS-GV-02",
+  "OS-GV-05"
+ ],
+ "start": null,
+ "initial_reasons": null,
+ "steps": [
+  {
+   "event": "SIGNATURE_VERIFIED",
+   "context": {
+    "signature_valid": true,
+    "signer_role": "BETREIBER",
+    "kind": "PILOT",
+    "duration_days": 30,
+    "gate_g7": "PASS",
+    "account_type": "REAL",
+    "profile": "H5",
+    "profile_admissible": true,
+    "external_blockers_open": 0,
+    "risk_acceptance_signed": true
+   },
+   "expect_state": "SIGNED"
+  },
+  {
+   "event": "ACTIVATION",
+   "context": {
+    "hashes_match_active_release": true
+   },
+   "expect_state": "ACTIVE"
+  },
+  {
+   "event": "RELEASE_CHANGED",
+   "context": {},
+   "expect_state": "INVALIDATED"
+  }
+ ]
+}

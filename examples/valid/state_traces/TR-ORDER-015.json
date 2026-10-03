@@ -1,0 +1,39 @@
+{
+ "schema_version": "3.0",
+ "id": "TR-ORDER-015",
+ "machine": "SM-ORDER",
+ "description": "Ohne gültige Lease wird kein Einstieg gesendet",
+ "scenarios": [
+  "HA-FENCING"
+ ],
+ "start": "PERSISTED",
+ "initial_reasons": null,
+ "steps": [
+  {
+   "event": "SEND_STARTED",
+   "context": {
+    "writer_state": "ACTIVE_WRITER",
+    "lease_age_s": 16,
+    "permission": "ENTRY",
+    "allowed_actions": [
+     "CANCEL_ORDER",
+     "CLOSE_REDUCE",
+     "EMERGENCY_PROTECT",
+     "ENTRY",
+     "RECONCILE",
+     "ROLL_AS_CLOSE",
+     "STOP_AMEND",
+     "STOP_AMEND_RECONCILED_ONLY"
+    ],
+    "order_kind": "ENTRY",
+    "snapshot_age_s": 12,
+    "quote_age_s": 1,
+    "pretrade_passed": true,
+    "grant_active": true,
+    "mode_matches_account": true
+   },
+   "expect_state": "PERSISTED",
+   "expect_invalid": true
+  }
+ ]
+}

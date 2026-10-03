@@ -1,0 +1,1855 @@
+{
+  "schema_version": "3.0",
+  "document": "Anforderungen",
+  "as_of": "2026-09-24",
+  "rule": "Jede Anforderung hat mindestens einen Test; der Status folgt aus dem Ausführungsort der Tests.",
+  "status_values": {
+    "IM_PAKET_NACHGEWIESEN": "alle Tests laufen im Paket",
+    "TEILWEISE_NACHGEWIESEN": "Paket- und Bautests",
+    "SPEZIFIZIERT": "nur Bau-, Broker- oder Betriebstests"
+  },
+  "requirements": [
+    {
+      "id": "REQ-ECO-001",
+      "title": "Kostenmodell als eine Quelle der Wahrheit",
+      "text": "Alle Handelskosten je Instrument kommen aus registers/costs.json und financials/cost_model.py; jede Kostenzahl im Text ist daran gebunden.",
+      "basis": "§5.1, R-04, EV-01",
+      "stage": "BS-00",
+      "component": "PKG",
+      "priority": "MUSS",
+      "tests": [
+        "T-CALC-COST-001",
+        "T-SEM-COST-001",
+        "T-PKG-RENDER-001"
+      ],
+      "status": "IM_PAKET_NACHGEWIESEN",
+      "scenarios": []
+    },
+    {
+      "id": "REQ-ECO-002",
+      "title": "Entscheidungsrechnung je Stufe, Profil und Betriebsmodell",
+      "text": "Die Monte-Carlo-Rechnung liefert NPV-Verteilung, P(NPV > 0), Wert je Risikoeinheit, Break-even und Sensitivitäten.",
+      "basis": "§5.6, EV-03",
+      "stage": "BS-00",
+      "component": "PKG",
+      "priority": "MUSS",
+      "tests": [
+        "T-CALC-DMC-001"
+      ],
+      "status": "IM_PAKET_NACHGEWIESEN",
+      "scenarios": []
+    },
+    {
+      "id": "REQ-ECO-003",
+      "title": "Kauf-statt-Bau mit Dominanzregel",
+      "text": "V0 bis V4 werden verglichen; dominiert eine Alternative, besteht G0 nicht.",
+      "basis": "§5.5, EV-04",
+      "stage": "BS-00",
+      "component": "PKG",
+      "priority": "MUSS",
+      "tests": [
+        "T-CALC-DMC-002",
+        "T-GATE-001"
+      ],
+      "status": "IM_PAKET_NACHGEWIESEN",
+      "scenarios": []
+    },
+    {
+      "id": "REQ-ECO-004",
+      "title": "Ausgabendeckel und Höchstdauer als Abbruch",
+      "text": "Überschreitung von P-ECO-SPEND-CAP oder P-ECO-MAX-MONTHS-G5 beendet den Aufbau vor G5.",
+      "basis": "§5.8",
+      "stage": "BS-05",
+      "component": "PKG",
+      "priority": "MUSS",
+      "tests": [
+        "T-GATE-001"
+      ],
+      "status": "IM_PAKET_NACHGEWIESEN",
+      "scenarios": []
+    },
+    {
+      "id": "REQ-ECO-005",
+      "title": "Steuer-Sensitivität",
+      "text": "Positive Jahreswerte werden pauschal um P-ECO-TAX-SENS gekürzt; Steuerberatung liegt extern (BQ-03).",
+      "basis": "§5.3, BQ-03, EV-02",
+      "stage": "BS-00",
+      "component": "PKG",
+      "priority": "MUSS",
+      "tests": [
+        "T-CALC-TAX-001",
+        "T-SEM-TAX-001"
+      ],
+      "status": "IM_PAKET_NACHGEWIESEN",
+      "scenarios": []
+    },
+    {
+      "id": "REQ-ECO-006",
+      "title": "Betreiberzeit bewertet",
+      "text": "Routinen, Incidents, Modellprüfung und Pflege des Agenten gehen mit P-ECO-HOURLY-RATE in die Rechnung ein.",
+      "basis": "§5.4, EV-02",
+      "stage": "BS-00",
+      "component": "PKG",
+      "priority": "MUSS",
+      "tests": [
+        "T-CALC-DMC-001"
+      ],
+      "status": "IM_PAKET_NACHGEWIESEN",
+      "scenarios": []
+    },
+    {
+      "id": "REQ-RES-001",
+      "title": "Vorregistrierung vor Ergebnisansicht",
+      "text": "Jedes Experiment hat ein Manifest vor der ersten Ergebnisansicht; der Evaluator weist andere ab.",
+      "basis": "§6.4",
+      "stage": "BS-03",
+      "component": "C-EVAL",
+      "priority": "MUSS",
+      "tests": [
+        "T-GATE-001",
+        "T-CON-001",
+        "T-RES-PREREG-001"
+      ],
+      "status": "TEILWEISE_NACHGEWIESEN",
+      "scenarios": []
+    },
+    {
+      "id": "REQ-RES-002",
+      "title": "Deflationierte Statistik im Tor G3",
+      "text": "G3 verlangt DSR ≥ P-RES-DSR-MIN, PBO ≤ P-RES-PBO-MAX und SPA bzw. Reality Check auf P-RES-ALPHA.",
+      "basis": "§6.4",
+      "stage": "BS-03",
+      "component": "C-EVAL",
+      "priority": "MUSS",
+      "tests": [
+        "T-CALC-STAT-001",
+        "T-CALC-STAT-002",
+        "T-GATE-001"
+      ],
+      "status": "IM_PAKET_NACHGEWIESEN",
+      "scenarios": []
+    },
+    {
+      "id": "REQ-RES-003",
+      "title": "Futility-Regel mit simulierter Betriebscharakteristik",
+      "text": "Nach G3 und G4 stoppt eine prädiktive Wahrscheinlichkeit unter P-RES-FUTILITY das Projekt vor dem Bau.",
+      "basis": "§6.6, EV-05, DEC-DS-21",
+      "stage": "BS-03",
+      "component": "C-EVAL",
+      "priority": "MUSS",
+      "tests": [
+        "T-CALC-OC-001",
+        "T-GATE-001",
+        "T-SEM-GATE-001"
+      ],
+      "status": "IM_PAKET_NACHGEWIESEN",
+      "scenarios": []
+    },
+    {
+      "id": "REQ-RES-004",
+      "title": "Holdout einmalig und versiegelt",
+      "text": "Der Holdout liegt versiegelt im Prüfmodul und wird in G4 genau einmal geöffnet.",
+      "basis": "§6.4, v2.0",
+      "stage": "BS-04",
+      "component": "C-EVAL",
+      "priority": "MUSS",
+      "tests": [
+        "T-SM-001",
+        "T-RES-HOLDOUT-001"
+      ],
+      "status": "TEILWEISE_NACHGEWIESEN",
+      "scenarios": [
+        "OS-GV-06"
+      ]
+    },
+    {
+      "id": "REQ-RES-005",
+      "title": "Prior aus Literaturtabelle",
+      "text": "Der Prior wird mit Abschlägen, Unsicherheit und Korrelationen gerechnet, nicht erzählt.",
+      "basis": "§6.3",
+      "stage": "BS-00",
+      "component": "PKG",
+      "priority": "MUSS",
+      "tests": [
+        "T-CALC-PRIOR-001"
+      ],
+      "status": "IM_PAKET_NACHGEWIESEN",
+      "scenarios": []
+    },
+    {
+      "id": "REQ-RES-006",
+      "title": "Datenhistorie als Zulassungskriterium",
+      "text": "Zugelassen wird nur mit P-RES-DEV-YEARS + P-RES-HOLDOUT-YEARS Jahren eigener oder Proxy-Historie.",
+      "basis": "§6.5, EV-08, DEC-DS-24",
+      "stage": "BS-02",
+      "component": "PKG",
+      "priority": "MUSS",
+      "tests": [
+        "T-CALC-PRIOR-002",
+        "T-GATE-001",
+        "T-SEM-PROXY-001"
+      ],
+      "status": "IM_PAKET_NACHGEWIESEN",
+      "scenarios": []
+    },
+    {
+      "id": "REQ-RES-007",
+      "title": "Referenzstrategien als Orakel",
+      "text": "Der Fachkern erzeugt dieselben Signale wie die Referenzimplementierungen.",
+      "basis": "§6.1",
+      "stage": "BS-05",
+      "component": "C-STRAT",
+      "priority": "MUSS",
+      "tests": [
+        "T-STR-TF-001",
+        "T-STR-IM-001",
+        "T-STR-REV-001",
+        "T-STR-CA-001",
+        "T-STR-BASE-001",
+        "T-STR-EQ-001"
+      ],
+      "status": "TEILWEISE_NACHGEWIESEN",
+      "scenarios": []
+    },
+    {
+      "id": "REQ-RES-008",
+      "title": "Umschlag und Haltedauer simuliert",
+      "text": "Umschlag und Haltedauer der Familie werden gegen die Betreibervorgabe simuliert; Abweichung über P-RES-TURNOVER-TOL widerlegt.",
+      "basis": "§6.1, BQ-04",
+      "stage": "BS-03",
+      "component": "PKG",
+      "priority": "MUSS",
+      "tests": [
+        "T-CALC-TURN-001",
+        "T-GATE-001"
+      ],
+      "status": "IM_PAKET_NACHGEWIESEN",
+      "scenarios": []
+    },
+    {
+      "id": "REQ-RES-009",
+      "title": "Mehrfachtest-Budget",
+      "text": "Versuche je Kampagne höchstens P-OC-TRIALS; angesehene Varianten zählen mit.",
+      "basis": "§6.4",
+      "stage": "BS-03",
+      "component": "C-EVAL",
+      "priority": "MUSS",
+      "tests": [
+        "T-GATE-001",
+        "T-CON-001"
+      ],
+      "status": "IM_PAKET_NACHGEWIESEN",
+      "scenarios": []
+    },
+    {
+      "id": "REQ-RES-010",
+      "title": "Leckagetests vor der Forschung",
+      "text": "Leckagetests sind Voraussetzung für G2 und G3.",
+      "basis": "§6.4, v2.0",
+      "stage": "BS-02",
+      "component": "C-BT",
+      "priority": "MUSS",
+      "tests": [
+        "T-DAT-LEAK-001",
+        "T-GATE-001"
+      ],
+      "status": "TEILWEISE_NACHGEWIESEN",
+      "scenarios": []
+    },
+    {
+      "id": "REQ-RSK-001",
+      "title": "Lückenregel vor jeder risikoerhöhenden Order",
+      "text": "Lückenstress aller Positionen nach Order plus Tagesverlust ≤ P-OP-DAILY-LOSS-CAP − P-RISK-GAP-RESERVE (PTC-13).",
+      "basis": "§7.4, BQ-04, DEC-DS-10",
+      "stage": "BS-05",
+      "component": "C-RISK",
+      "priority": "MUSS",
+      "tests": [
+        "T-CALC-LEV-001",
+        "T-RISK-GAP-001",
+        "T-PTC-013"
+      ],
+      "status": "TEILWEISE_NACHGEWIESEN",
+      "scenarios": [
+        "OS-EX-12",
+        "OS-RI-14"
+      ]
+    },
+    {
+      "id": "REQ-RSK-002",
+      "title": "Tagesverlust-Leiter",
+      "text": "L1 halbiert, L2 sperrt bis zum nächsten Handelstag mit Quittung, L3 baut ab; die Betreibergrenze wird nie erreicht.",
+      "basis": "§7.5, DEC-DS-01",
+      "stage": "BS-05",
+      "component": "C-RISK",
+      "priority": "MUSS",
+      "tests": [
+        "T-SM-001",
+        "T-RISK-LADDER-001",
+        "T-DRL-005"
+      ],
+      "status": "TEILWEISE_NACHGEWIESEN",
+      "scenarios": [
+        "OS-RI-02",
+        "OS-RI-03"
+      ]
+    },
+    {
+      "id": "REQ-RSK-003",
+      "title": "Drawdown-Leiter und Wochenverlust",
+      "text": "Stufen nach P-RISK-DD-* und P-RISK-WEEK-LOSS mit den Wirkungen aus risk/limits.md.",
+      "basis": "§7.5",
+      "stage": "BS-05",
+      "component": "C-RISK",
+      "priority": "MUSS",
+      "tests": [
+        "T-SM-001",
+        "T-RISK-LADDER-002"
+      ],
+      "status": "TEILWEISE_NACHGEWIESEN",
+      "scenarios": [
+        "OS-RI-04",
+        "OS-RI-08"
+      ]
+    },
+    {
+      "id": "REQ-RSK-004",
+      "title": "Hebelprofile kalibriert mit Zulässigkeitsbefund",
+      "text": "H5–H20 über L_g = D·σ_p/σ_h kalibriert; ein Profil ist nur zulässig, wenn der Rechner es ausweist.",
+      "basis": "§7.3, D3-02",
+      "stage": "BS-00",
+      "component": "PKG",
+      "priority": "MUSS",
+      "tests": [
+        "T-CALC-LEV-001",
+        "T-SEM-LEV-001"
+      ],
+      "status": "IM_PAKET_NACHGEWIESEN",
+      "scenarios": [
+        "OS-RI-09"
+      ]
+    },
+    {
+      "id": "REQ-RSK-005",
+      "title": "Kelly, Ruin, Drawdown und ES je Profil",
+      "text": "Unter Parameterunsicherheit, fetten Rändern und Korrelationsschocks.",
+      "basis": "§7.4",
+      "stage": "BS-00",
+      "component": "PKG",
+      "priority": "MUSS",
+      "tests": [
+        "T-CALC-KELLY-001"
+      ],
+      "status": "IM_PAKET_NACHGEWIESEN",
+      "scenarios": []
+    },
+    {
+      "id": "REQ-RSK-006",
+      "title": "Stresstests je Profil vollständig",
+      "text": "Alle Szenarien aus §7.9 mit Ergebnis je Profil und Leiterwirkung.",
+      "basis": "§7.9",
+      "stage": "BS-00",
+      "component": "PKG",
+      "priority": "MUSS",
+      "tests": [
+        "T-CALC-STRESS-001",
+        "T-SEM-STRESS-001"
+      ],
+      "status": "IM_PAKET_NACHGEWIESEN",
+      "scenarios": [
+        "SC-H-1987",
+        "SC-H-1994",
+        "SC-H-1998",
+        "SC-H-2008",
+        "SC-H-2010",
+        "SC-H-2015",
+        "SC-H-2018",
+        "SC-H-2020",
+        "SC-H-2020WTI",
+        "SC-H-2022GILT",
+        "SC-H-2022NI",
+        "SC-H-2023",
+        "SC-H-2025",
+        "SC-X-BROKER",
+        "SC-X-CORR1",
+        "SC-X-DATA",
+        "SC-X-EXCH",
+        "SC-X-GAP10",
+        "SC-X-GAP5",
+        "SC-X-LIQ",
+        "SC-X-RATESHOCK"
+      ]
+    },
+    {
+      "id": "REQ-RSK-007",
+      "title": "Margin mit Übernacht-Margin und De-Risking vor Stop-out",
+      "text": "Größen immer mit Übernacht-Margin; Abbau ab Margin-Level P-MRG-DERISK-TRIGGER.",
+      "basis": "§7.7, EV-09",
+      "stage": "BS-05",
+      "component": "C-RISK",
+      "priority": "MUSS",
+      "tests": [
+        "T-RISK-MRG-001",
+        "T-SM-001",
+        "T-DRL-005"
+      ],
+      "status": "TEILWEISE_NACHGEWIESEN",
+      "scenarios": [
+        "OS-RI-05",
+        "OS-RI-06"
+      ]
+    },
+    {
+      "id": "REQ-RSK-008",
+      "title": "Hebel-Stufenleiter",
+      "text": "Aufstieg nur signiert mit zweiter Freigabe der Risikofunktion nach Evidenz; Abstieg automatisch.",
+      "basis": "§7.8, RK-06",
+      "stage": "BS-05",
+      "component": "C-RISK",
+      "priority": "MUSS",
+      "tests": [
+        "T-SM-001",
+        "T-RISK-STEP-001"
+      ],
+      "status": "TEILWEISE_NACHGEWIESEN",
+      "scenarios": [
+        "OS-RI-10"
+      ]
+    },
+    {
+      "id": "REQ-RSK-009",
+      "title": "Kill-Switch",
+      "text": "Stufe 1 storniert alle nicht schützenden Orders binnen P-RISK-KILL-CANCEL-S; Stufe 2 stellt geordnet glatt.",
+      "basis": "§7.5, §8.5",
+      "stage": "BS-05",
+      "component": "C-RISK",
+      "priority": "MUSS",
+      "tests": [
+        "T-KILL-001",
+        "T-DRL-010",
+        "T-SM-001"
+      ],
+      "status": "TEILWEISE_NACHGEWIESEN",
+      "scenarios": [
+        "HA-KILL",
+        "OS-RI-07"
+      ]
+    },
+    {
+      "id": "REQ-RSK-010",
+      "title": "Limits als Register mit Parameterverweis",
+      "text": "Jede Grenze steht in registers/limits.json mit Verweis auf parameters.json.",
+      "basis": "§7.5, R-04",
+      "stage": "BS-00",
+      "component": "PKG",
+      "priority": "MUSS",
+      "tests": [
+        "T-PKG-VAL-001",
+        "T-SEM-LIM-001"
+      ],
+      "status": "IM_PAKET_NACHGEWIESEN",
+      "scenarios": []
+    },
+    {
+      "id": "REQ-RSK-011",
+      "title": "Unitisierter NAV",
+      "text": "Ein- und Auszahlungen verändern Drawdown und Leitern nicht (übernommen aus v2.0).",
+      "basis": "§3.2",
+      "stage": "BS-05",
+      "component": "C-NAV",
+      "priority": "MUSS",
+      "tests": [
+        "T-RISK-NAV-001"
+      ],
+      "status": "SPEZIFIZIERT",
+      "scenarios": [
+        "OS-RI-12"
+      ]
+    },
+    {
+      "id": "REQ-RSK-012",
+      "title": "Kapazitätsgrenzen",
+      "text": "Order ≤ P-RISK-MAX-ADV-SHARE des Tagesvolumens, Position ≤ P-RISK-MAX-OI-SHARE des Open Interest.",
+      "basis": "§7.5, DEC-DS-18",
+      "stage": "BS-05",
+      "component": "C-RISK",
+      "priority": "MUSS",
+      "tests": [
+        "T-PTC-007",
+        "T-SEM-CAP-001"
+      ],
+      "status": "TEILWEISE_NACHGEWIESEN",
+      "scenarios": []
+    },
+    {
+      "id": "REQ-RSK-013",
+      "title": "Kovarianz mit Schockregime",
+      "text": "Die Risikorechnung nutzt eine Schockregime-Kovarianz; die Lückenregel hängt nicht von ihr ab.",
+      "basis": "§7.1, RK-07",
+      "stage": "BS-05",
+      "component": "C-RISK",
+      "priority": "MUSS",
+      "tests": [
+        "T-RISK-COV-001"
+      ],
+      "status": "SPEZIFIZIERT",
+      "scenarios": []
+    },
+    {
+      "id": "REQ-RSK-014",
+      "title": "Kleinste Menge nie aufrunden",
+      "text": "Überschreitet ein Kontrakt das Risikobudget, wird abgelehnt.",
+      "basis": "§7.4, v2.0",
+      "stage": "BS-05",
+      "component": "C-RISK",
+      "priority": "MUSS",
+      "tests": [
+        "T-RISK-SIZE-001",
+        "T-CON-001"
+      ],
+      "status": "TEILWEISE_NACHGEWIESEN",
+      "scenarios": [
+        "OS-RI-01"
+      ]
+    },
+    {
+      "id": "REQ-EXE-001",
+      "title": "Persistenz vor Netzwerk",
+      "text": "Absicht, Versuch und Reservierung sind mit fsync im Journal, bevor order_send läuft.",
+      "basis": "§8.1, v2.0",
+      "stage": "BS-05",
+      "component": "C-OMS",
+      "priority": "MUSS",
+      "tests": [
+        "T-EXE-001",
+        "T-EXE-002",
+        "T-SM-001"
+      ],
+      "status": "TEILWEISE_NACHGEWIESEN",
+      "scenarios": [
+        "HA-RESTART-LIMIT",
+        "OS-EX-03"
+      ]
+    },
+    {
+      "id": "REQ-EXE-002",
+      "title": "Einstiege höchstens einmal",
+      "text": "Nach Zeitüberschreitung gilt UNKNOWN; ein Einstieg wird nie wiederholt.",
+      "basis": "§8.1, v2.0, RK-10",
+      "stage": "BS-05",
+      "component": "C-OMS",
+      "priority": "MUSS",
+      "tests": [
+        "T-EXE-003",
+        "T-SM-001",
+        "KT-05"
+      ],
+      "status": "TEILWEISE_NACHGEWIESEN",
+      "scenarios": [
+        "OS-EX-01"
+      ]
+    },
+    {
+      "id": "REQ-EXE-003",
+      "title": "Negativnachweis",
+      "text": "NOT_EXECUTED_PROVEN nur nach Ablauf der Gültigkeit und P-EXE-NEGPROOF-CYCLES sauberen Zyklen.",
+      "basis": "§8.1, v2.0",
+      "stage": "BS-05",
+      "component": "C-OMS",
+      "priority": "MUSS",
+      "tests": [
+        "T-SM-001",
+        "T-CON-001",
+        "T-EXE-004"
+      ],
+      "status": "TEILWEISE_NACHGEWIESEN",
+      "scenarios": [
+        "OS-EX-04"
+      ]
+    },
+    {
+      "id": "REQ-EXE-004",
+      "title": "Deduplizierung über Deal-Tickets",
+      "text": "Deals werden über ihr Ticket dedupliziert; Korrekturen sind eigene Ereignisse.",
+      "basis": "§8.1",
+      "stage": "BS-05",
+      "component": "C-MT5",
+      "priority": "MUSS",
+      "tests": [
+        "T-SM-001",
+        "T-EXE-005",
+        "KT-12"
+      ],
+      "status": "TEILWEISE_NACHGEWIESEN",
+      "scenarios": [
+        "OS-EX-02",
+        "OS-EX-05",
+        "OS-EX-10",
+        "OS-GV-07"
+      ]
+    },
+    {
+      "id": "REQ-EXE-005",
+      "title": "Schließen nur mit Positions-Ticket",
+      "text": "Keine freie Gegenorder im Hedging-Konto; Menge aus frischem Snapshot.",
+      "basis": "DEC-DS-11",
+      "stage": "BS-05",
+      "component": "C-OMS",
+      "priority": "MUSS",
+      "tests": [
+        "T-SM-001",
+        "T-CON-001",
+        "T-EXE-006",
+        "KT-04"
+      ],
+      "status": "TEILWEISE_NACHGEWIESEN",
+      "scenarios": [
+        "OS-EX-08",
+        "OS-EX-09"
+      ]
+    },
+    {
+      "id": "REQ-EXE-006",
+      "title": "Schutzstopp beim Broker binnen Frist",
+      "text": "Jede Position hat binnen P-EXE-STOP-CONFIRM-S einen bestätigten Schutzstopp, sonst Notfallschutz oder Schließen.",
+      "basis": "DEC-DS-20, CR-5",
+      "stage": "BS-05",
+      "component": "C-OMS",
+      "priority": "MUSS",
+      "tests": [
+        "T-SM-001",
+        "KT-06",
+        "T-EXE-007"
+      ],
+      "status": "TEILWEISE_NACHGEWIESEN",
+      "scenarios": [
+        "OS-EX-06"
+      ]
+    },
+    {
+      "id": "REQ-EXE-007",
+      "title": "Nachführung nur enger",
+      "text": "Stopps nur absolut und enger; unbestätigte Änderungen lassen den alten Stopp aktiv.",
+      "basis": "§8.1, v2.0",
+      "stage": "BS-05",
+      "component": "C-RISK",
+      "priority": "MUSS",
+      "tests": [
+        "T-SM-001",
+        "KT-07",
+        "T-EXE-008"
+      ],
+      "status": "TEILWEISE_NACHGEWIESEN",
+      "scenarios": []
+    },
+    {
+      "id": "REQ-EXE-008",
+      "title": "Genau ein Writer mit Fencing",
+      "text": "Lease P-EXE-LEASE-S; nach Hostwechsel Writer erst nach nachgewiesener Abweisung der alten Anmeldung.",
+      "basis": "§10.5, v2.0",
+      "stage": "BS-05",
+      "component": "C-OMS",
+      "priority": "MUSS",
+      "tests": [
+        "T-SM-001",
+        "KT-16",
+        "T-DRL-009"
+      ],
+      "status": "TEILWEISE_NACHGEWIESEN",
+      "scenarios": [
+        "HA-FENCING",
+        "HA-SESSION-LOST"
+      ]
+    },
+    {
+      "id": "REQ-EXE-009",
+      "title": "Polling mit Differenzbildung",
+      "text": "Zustand per Abfrage alle P-EXE-POLL-MS; Ereignisse aus Differenzen.",
+      "basis": "§8.1",
+      "stage": "BS-05",
+      "component": "C-MT5",
+      "priority": "MUSS",
+      "tests": [
+        "T-ADP-001",
+        "KT-15"
+      ],
+      "status": "SPEZIFIZIERT",
+      "scenarios": []
+    },
+    {
+      "id": "REQ-EXE-010",
+      "title": "Korrelation über magic und comment",
+      "text": "magic kodiert Strategie und Absicht, comment die gekürzte Command-ID.",
+      "basis": "§8.1, RK-10",
+      "stage": "BS-05",
+      "component": "C-MT5",
+      "priority": "MUSS",
+      "tests": [
+        "T-ADP-002",
+        "KT-05"
+      ],
+      "status": "SPEZIFIZIERT",
+      "scenarios": []
+    },
+    {
+      "id": "REQ-EXE-011",
+      "title": "Zeitstempel getrennt",
+      "text": "Systemzeit in UTC und Brokerzeit getrennt geführt; Versatz gemessen.",
+      "basis": "§8.1, RK-11",
+      "stage": "BS-05",
+      "component": "C-MT5",
+      "priority": "MUSS",
+      "tests": [
+        "T-ADP-003",
+        "KT-03",
+        "T-CON-001"
+      ],
+      "status": "TEILWEISE_NACHGEWIESEN",
+      "scenarios": []
+    },
+    {
+      "id": "REQ-EXE-012",
+      "title": "Zeitstopp nach Höchsthaltedauer",
+      "text": "Keine Position länger als P-OP-HOLD-MAX-H.",
+      "basis": "BQ-04",
+      "stage": "BS-05",
+      "component": "C-OMS",
+      "priority": "MUSS",
+      "tests": [
+        "T-SM-001",
+        "T-EXE-009",
+        "T-GATE-001"
+      ],
+      "status": "TEILWEISE_NACHGEWIESEN",
+      "scenarios": [
+        "OS-EX-07"
+      ]
+    },
+    {
+      "id": "REQ-EXE-013",
+      "title": "Rollfenster und Liefervermeidung",
+      "text": "Keine Position im Rollfenster P-UNI-ROLL-DAYS; kein Kalenderspread.",
+      "basis": "§8.6, DEC-DS-12",
+      "stage": "BS-05",
+      "component": "C-DATA",
+      "priority": "MUSS",
+      "tests": [
+        "T-SM-001",
+        "KT-11",
+        "T-EXE-010"
+      ],
+      "status": "TEILWEISE_NACHGEWIESEN",
+      "scenarios": [
+        "OS-EX-11"
+      ]
+    },
+    {
+      "id": "REQ-EXE-014",
+      "title": "Interne Nettung mehrerer Strategien",
+      "text": "Summe der Teilpositionen = Brokerposition; Fills anteilig zugeordnet.",
+      "basis": "§8.1, DEC-DS-11",
+      "stage": "BS-05",
+      "component": "C-OMS",
+      "priority": "MUSS",
+      "tests": [
+        "T-CON-001",
+        "T-OMS-NET-001"
+      ],
+      "status": "TEILWEISE_NACHGEWIESEN",
+      "scenarios": [
+        "OS-RI-13"
+      ]
+    },
+    {
+      "id": "REQ-EXE-015",
+      "title": "Retcode-Abbildung",
+      "text": "Jeder Retcode führt in das Ereignis laut broker_mapping.",
+      "basis": "§8.2",
+      "stage": "BS-05",
+      "component": "C-MT5",
+      "priority": "MUSS",
+      "tests": [
+        "T-ADP-004",
+        "KT-04"
+      ],
+      "status": "SPEZIFIZIERT",
+      "scenarios": []
+    },
+    {
+      "id": "REQ-EXE-016",
+      "title": "Notfalljournal und Fail-Stop",
+      "text": "Bei Journalfehler nur Schutzaktionen mit Notfalljournal, sonst Fail-Stop.",
+      "basis": "§8.1, v2.0",
+      "stage": "BS-05",
+      "component": "C-OMS",
+      "priority": "MUSS",
+      "tests": [
+        "T-EXE-011",
+        "T-DRL-002",
+        "T-SM-001"
+      ],
+      "status": "TEILWEISE_NACHGEWIESEN",
+      "scenarios": [
+        "HA-JOURNAL"
+      ]
+    },
+    {
+      "id": "REQ-EXE-017",
+      "title": "Zerlegung großer Orders",
+      "text": "Parent-Orders ab P-EXE-ALGO-THRESHOLD Kontrakten in Child-Orders mit Abstand P-EXE-ALGO-INTERVAL-S.",
+      "basis": "§8.4",
+      "stage": "BS-05",
+      "component": "C-OMS",
+      "priority": "MUSS",
+      "tests": [
+        "T-EMS-001"
+      ],
+      "status": "SPEZIFIZIERT",
+      "scenarios": []
+    },
+    {
+      "id": "REQ-EXE-018",
+      "title": "Negative Preise",
+      "text": "Preisprüfung akzeptiert negative Preise; Energie-Frontmonate nicht bis LTD halten.",
+      "basis": "§8.6, RK-20",
+      "stage": "BS-05",
+      "component": "C-DATA",
+      "priority": "MUSS",
+      "tests": [
+        "T-EXE-NEGPRICE-001"
+      ],
+      "status": "SPEZIFIZIERT",
+      "scenarios": [
+        "OS-EX-13"
+      ]
+    },
+    {
+      "id": "REQ-EXE-019",
+      "title": "Schlupf-Kalibrierung",
+      "text": "Kostenmodell wird mit gemessenen Fills kalibriert (X-EXEC-TCA).",
+      "basis": "§8.4",
+      "stage": "BS-07",
+      "component": "C-NAV",
+      "priority": "MUSS",
+      "tests": [
+        "T-TCA-001",
+        "KT-14"
+      ],
+      "status": "SPEZIFIZIERT",
+      "scenarios": []
+    },
+    {
+      "id": "REQ-PTC-001",
+      "title": "Vierzehn Kontrollen in fester Reihenfolge",
+      "text": "Schutz- und Abbauorders durchlaufen nur PTC-14, PTC-10, PTC-01 und PTC-06.",
+      "basis": "§8.5",
+      "stage": "BS-05",
+      "component": "C-RISK",
+      "priority": "MUSS",
+      "tests": [
+        "T-PTC-001",
+        "T-SM-001"
+      ],
+      "status": "TEILWEISE_NACHGEWIESEN",
+      "scenarios": []
+    },
+    {
+      "id": "REQ-PTC-002",
+      "title": "Moduskontrolle",
+      "text": "Kontotyp laut Broker = signierter Modus; sonst Ablehnung und MODE_MISMATCH.",
+      "basis": "BQ-09, RK-21",
+      "stage": "BS-05",
+      "component": "C-RISK",
+      "priority": "MUSS",
+      "tests": [
+        "T-PTC-010",
+        "T-SM-001",
+        "T-DRL-008"
+      ],
+      "status": "TEILWEISE_NACHGEWIESEN",
+      "scenarios": [
+        "OS-GV-01"
+      ]
+    },
+    {
+      "id": "REQ-PTC-003",
+      "title": "Marktverhalten",
+      "text": "Nachrichtendrosselung und Duplikaterkennung; Orders nur mit Ausführungsabsicht.",
+      "basis": "§15, SRC-REG-MAR",
+      "stage": "BS-05",
+      "component": "C-RISK",
+      "priority": "MUSS",
+      "tests": [
+        "T-PTC-005",
+        "T-PTC-006"
+      ],
+      "status": "SPEZIFIZIERT",
+      "scenarios": []
+    },
+    {
+      "id": "REQ-PTC-004",
+      "title": "Unabhängige Nachrechnung",
+      "text": "Das Prüfmodul rechnet PTC-07, PTC-08 und PTC-13 aus Brokerdaten nach.",
+      "basis": "§8.5",
+      "stage": "BS-05",
+      "component": "C-EVAL",
+      "priority": "MUSS",
+      "tests": [
+        "T-EVAL-001",
+        "T-SM-001"
+      ],
+      "status": "TEILWEISE_NACHGEWIESEN",
+      "scenarios": [
+        "HA-EVALUATOR-DOWN"
+      ]
+    },
+    {
+      "id": "REQ-DAT-001",
+      "title": "Abgleich zweier Quellen",
+      "text": "Anteil übereinstimmender Kerzen ≥ P-DATA-XCHECK-SHARE-MIN.",
+      "basis": "§9",
+      "stage": "BS-02",
+      "component": "C-DATA",
+      "priority": "MUSS",
+      "tests": [
+        "T-DAT-001",
+        "T-GATE-001",
+        "T-SM-001"
+      ],
+      "status": "TEILWEISE_NACHGEWIESEN",
+      "scenarios": [
+        "OS-DA-01"
+      ]
+    },
+    {
+      "id": "REQ-DAT-002",
+      "title": "Einstiege nur mit gesunden Daten",
+      "text": "Datenzustand HEALTHY je Instrument (PTC-09).",
+      "basis": "§9",
+      "stage": "BS-05",
+      "component": "C-DATA",
+      "priority": "MUSS",
+      "tests": [
+        "T-SM-001",
+        "T-DRL-004"
+      ],
+      "status": "TEILWEISE_NACHGEWIESEN",
+      "scenarios": [
+        "OS-DA-01",
+        "OS-DA-02"
+      ]
+    },
+    {
+      "id": "REQ-DAT-003",
+      "title": "Referenzdaten mit Gültigkeit",
+      "text": "Kontraktdaten tragen Gültigkeit und Quelle; abgelaufene sperren Einstiege.",
+      "basis": "§9",
+      "stage": "BS-05",
+      "component": "C-DATA",
+      "priority": "MUSS",
+      "tests": [
+        "T-CON-001",
+        "T-DAT-002"
+      ],
+      "status": "TEILWEISE_NACHGEWIESEN",
+      "scenarios": []
+    },
+    {
+      "id": "REQ-DAT-004",
+      "title": "Revisionen",
+      "text": "Korrekturen des Anbieters innerhalb P-DATA-REVISION-DAYS werden nachgezogen.",
+      "basis": "§9",
+      "stage": "BS-05",
+      "component": "C-DATA",
+      "priority": "MUSS",
+      "tests": [
+        "T-DAT-003"
+      ],
+      "status": "SPEZIFIZIERT",
+      "scenarios": [
+        "OS-DA-03"
+      ]
+    },
+    {
+      "id": "REQ-DAT-005",
+      "title": "Keine Rohdaten an Modellanbieter",
+      "text": "Hermes erhält nur abgeleitete Kennzahlen (DEC-CF-07).",
+      "basis": "§9, §11",
+      "stage": "BS-05",
+      "component": "C-AI",
+      "priority": "MUSS",
+      "tests": [
+        "T-SEC-012"
+      ],
+      "status": "SPEZIFIZIERT",
+      "scenarios": [
+        "OS-GV-14"
+      ]
+    },
+    {
+      "id": "REQ-DAT-006",
+      "title": "Rollkalender mit unabhängiger Referenz",
+      "text": "Rolltermine und rückwärts angepasste Reihen stimmen mit einer unabhängigen Referenz überein (Differenz ≤ P-DATA-XCHECK-TOL-TICKS).",
+      "basis": "§9, §17.3",
+      "stage": "BS-02",
+      "component": "C-DATA",
+      "priority": "MUSS",
+      "tests": [
+        "T-DAT-004"
+      ],
+      "status": "SPEZIFIZIERT",
+      "scenarios": []
+    },
+    {
+      "id": "REQ-ARC-001",
+      "title": "Eine Codebasis",
+      "text": "Backtest, Paper und Echtgeld unterscheiden sich nur in Adapter und Grant.",
+      "basis": "§10.1",
+      "stage": "BS-05",
+      "component": "C-BT",
+      "priority": "MUSS",
+      "tests": [
+        "T-ARC-001",
+        "T-REL-002"
+      ],
+      "status": "SPEZIFIZIERT",
+      "scenarios": []
+    },
+    {
+      "id": "REQ-ARC-002",
+      "title": "Event Sourcing",
+      "text": "Jeder Zustand ist aus dem Journal reproduzierbar.",
+      "basis": "§10.1",
+      "stage": "BS-05",
+      "component": "C-OMS",
+      "priority": "MUSS",
+      "tests": [
+        "T-ARC-002"
+      ],
+      "status": "SPEZIFIZIERT",
+      "scenarios": []
+    },
+    {
+      "id": "REQ-ARC-003",
+      "title": "Verträge als JSON Schema mit Beispielen",
+      "text": "Jede Schnittstelle hat ein Schema mit gültigen und ungültigen Beispielen.",
+      "basis": "§10.1",
+      "stage": "BS-05",
+      "component": "PKG",
+      "priority": "MUSS",
+      "tests": [
+        "T-CON-001"
+      ],
+      "status": "IM_PAKET_NACHGEWIESEN",
+      "scenarios": []
+    },
+    {
+      "id": "REQ-ARC-004",
+      "title": "Drei Vertrauensbereiche",
+      "text": "KI-Zone ohne Weg zum Broker; Prüfmodul kann nur stoppen.",
+      "basis": "§10, §12, DEC-DS-13",
+      "stage": "BS-05",
+      "component": "C-SEC",
+      "priority": "MUSS",
+      "tests": [
+        "T-SEC-001",
+        "T-SEC-003",
+        "T-SEC-010"
+      ],
+      "status": "SPEZIFIZIERT",
+      "scenarios": []
+    },
+    {
+      "id": "REQ-ARC-005",
+      "title": "Sicherung und Wiederherstellung",
+      "text": "RPO P-OPS-RPO-JOURNAL-MIN, RTO P-OPS-RTO-CORE-H, Restoreprobe alle P-OPS-RESTORE-DRILL-D Tage.",
+      "basis": "§10.5",
+      "stage": "BS-05",
+      "component": "C-OBS",
+      "priority": "MUSS",
+      "tests": [
+        "T-DRL-001",
+        "T-OPS-BACKUP-001"
+      ],
+      "status": "SPEZIFIZIERT",
+      "scenarios": [
+        "HA-RESTORE",
+        "HA-VPS-DOWN"
+      ]
+    },
+    {
+      "id": "REQ-ARC-006",
+      "title": "Zwei Alarmwege",
+      "text": "Externer Monitor mit zwei Kanälen; der Agent ist nie Alarmweg.",
+      "basis": "§10.6",
+      "stage": "BS-05",
+      "component": "C-OBS",
+      "priority": "MUSS",
+      "tests": [
+        "T-DRL-008",
+        "T-OPS-ALERT-001"
+      ],
+      "status": "SPEZIFIZIERT",
+      "scenarios": [
+        "HA-ALERT"
+      ]
+    },
+    {
+      "id": "REQ-ARC-007",
+      "title": "Cockpit mit eindeutiger Trennung",
+      "text": "Paper und Echtgeld in jeder Ansicht getrennt; mobile Notfallansicht nur risikomindernd.",
+      "basis": "§10.7",
+      "stage": "BS-05",
+      "component": "C-UI",
+      "priority": "MUSS",
+      "tests": [
+        "T-UI-001",
+        "T-UI-002"
+      ],
+      "status": "SPEZIFIZIERT",
+      "scenarios": []
+    },
+    {
+      "id": "REQ-ARC-008",
+      "title": "Ausführbare Zustandsautomaten",
+      "text": "Automaten mit Traces sind die Referenzsemantik des Geldpfads.",
+      "basis": "§10, E1",
+      "stage": "BS-05",
+      "component": "PKG",
+      "priority": "MUSS",
+      "tests": [
+        "T-SM-001"
+      ],
+      "status": "IM_PAKET_NACHGEWIESEN",
+      "scenarios": []
+    },
+    {
+      "id": "REQ-ARC-009",
+      "title": "Evidenztore als Regeltabellen",
+      "text": "Tore mit genau einem Folgeschritt je Ergebnis und signierten Ergebnissen.",
+      "basis": "§16",
+      "stage": "BS-00",
+      "component": "PKG",
+      "priority": "MUSS",
+      "tests": [
+        "T-GATE-001",
+        "T-SEC-011"
+      ],
+      "status": "TEILWEISE_NACHGEWIESEN",
+      "scenarios": [
+        "OS-GV-13"
+      ]
+    },
+    {
+      "id": "REQ-ARC-010",
+      "title": "CI über mehrere Python-Versionen",
+      "text": "Python 3.11–3.13, Warnungen als Fehler, Linter ohne Befund.",
+      "basis": "§10.4, EV-12",
+      "stage": "BS-05",
+      "component": "C-SEC",
+      "priority": "MUSS",
+      "tests": [
+        "T-PKG-MULTI-001",
+        "T-QA-CI-001"
+      ],
+      "status": "TEILWEISE_NACHGEWIESEN",
+      "scenarios": []
+    },
+    {
+      "id": "REQ-ARC-011",
+      "title": "Make-or-Buy: kein Framework-Code im Geldpfad",
+      "text": "Geldpfad-Releases enthalten keinen Code aus NautilusTrader, LEAN oder pysystemtrade; die SBOM nennt die Lizenz jeder Abhängigkeit.",
+      "basis": "§17.3, DEC-DS-22",
+      "stage": "BS-05",
+      "component": "C-SEC",
+      "priority": "MUSS",
+      "tests": [
+        "T-REL-003"
+      ],
+      "status": "SPEZIFIZIERT",
+      "scenarios": []
+    },
+    {
+      "id": "REQ-SEC-001",
+      "title": "Signierte Betreiberaktionen mit Ablauf",
+      "text": "Gültigkeit höchstens P-SEC-SIG-EXPIRY-MIN; idempotent über die Aktionskennung.",
+      "basis": "§12",
+      "stage": "BS-05",
+      "component": "C-SEC",
+      "priority": "MUSS",
+      "tests": [
+        "T-SEC-009",
+        "T-CON-001"
+      ],
+      "status": "TEILWEISE_NACHGEWIESEN",
+      "scenarios": []
+    },
+    {
+      "id": "REQ-SEC-002",
+      "title": "Hardware-Schlüssel und Break-glass",
+      "text": "Freigaben nur mit Hardware-Schlüssel; Break-glass protokolliert.",
+      "basis": "§12",
+      "stage": "BS-06",
+      "component": "C-SEC",
+      "priority": "MUSS",
+      "tests": [
+        "T-SEC-013",
+        "T-DRL-006"
+      ],
+      "status": "SPEZIFIZIERT",
+      "scenarios": [
+        "HA-COMPROMISE"
+      ]
+    },
+    {
+      "id": "REQ-SEC-003",
+      "title": "Kein Auszahlungsrecht",
+      "text": "Die Systemanmeldung kann nicht auszahlen.",
+      "basis": "§12",
+      "stage": "BS-01",
+      "component": "C-SEC",
+      "priority": "MUSS",
+      "tests": [
+        "T-SEC-007"
+      ],
+      "status": "SPEZIFIZIERT",
+      "scenarios": []
+    },
+    {
+      "id": "REQ-SEC-004",
+      "title": "Keine Secrets in Repository, Logs und KI-Zone",
+      "text": "Secret-Scan bei jedem Commit und Release, eingerichtet vor dem ersten Zugangsdatum.",
+      "basis": "§12",
+      "stage": "BS-01",
+      "component": "C-SEC",
+      "priority": "MUSS",
+      "tests": [
+        "T-SEC-008",
+        "T-SEC-001"
+      ],
+      "status": "SPEZIFIZIERT",
+      "scenarios": []
+    },
+    {
+      "id": "REQ-SEC-005",
+      "title": "Lieferkette",
+      "text": "Gepinnte Abhängigkeiten mit Hashes, SBOM, Importer mit eigenem Digest.",
+      "basis": "§10.3, §12",
+      "stage": "BS-05",
+      "component": "C-SEC",
+      "priority": "MUSS",
+      "tests": [
+        "T-SEC-006",
+        "T-GATE-001"
+      ],
+      "status": "TEILWEISE_NACHGEWIESEN",
+      "scenarios": [
+        "OS-GV-10"
+      ]
+    },
+    {
+      "id": "REQ-SEC-006",
+      "title": "Penetrationstest",
+      "text": "Kein offener kritischer Befund vor G5 (spätestens vor G8).",
+      "basis": "§12",
+      "stage": "BS-05",
+      "component": "C-SEC",
+      "priority": "MUSS",
+      "tests": [
+        "T-SEC-014"
+      ],
+      "status": "SPEZIFIZIERT",
+      "scenarios": []
+    },
+    {
+      "id": "REQ-SEC-007",
+      "title": "Härtung des VPS",
+      "text": "Anwendungs-Allowlist, Verschlüsselung, Updates binnen P-SEC-PATCH-CRIT-D.",
+      "basis": "§12",
+      "stage": "BS-05",
+      "component": "C-SEC",
+      "priority": "MUSS",
+      "tests": [
+        "T-SEC-015"
+      ],
+      "status": "SPEZIFIZIERT",
+      "scenarios": []
+    },
+    {
+      "id": "REQ-SEC-008",
+      "title": "Egress-Allowlist",
+      "text": "Die KI-Zone erreicht nur freigegebene Ziele.",
+      "basis": "§11, §12",
+      "stage": "BS-05",
+      "component": "C-AI",
+      "priority": "MUSS",
+      "tests": [
+        "T-SEC-003"
+      ],
+      "status": "SPEZIFIZIERT",
+      "scenarios": []
+    },
+    {
+      "id": "REQ-AI-001",
+      "title": "Kein Sprachmodell im Geldpfad",
+      "text": "Technisch nachgewiesen durch Importanalyse, Netzsperre, Orderwirkungstest und Ausfalltest.",
+      "basis": "D3-05, §23",
+      "stage": "BS-05",
+      "component": "C-AI",
+      "priority": "MUSS",
+      "tests": [
+        "T-AI-001",
+        "T-AI-002",
+        "T-AI-003",
+        "T-AI-004"
+      ],
+      "status": "SPEZIFIZIERT",
+      "scenarios": [
+        "HA-AI-DOWN"
+      ]
+    },
+    {
+      "id": "REQ-AI-002",
+      "title": "Projektschnittstelle mit Allowlist",
+      "text": "Nur gelistete Werkzeuge; jede Order wird abgewiesen.",
+      "basis": "§11, IF-07",
+      "stage": "BS-05",
+      "component": "C-AI",
+      "priority": "MUSS",
+      "tests": [
+        "T-SEC-005",
+        "T-CON-001"
+      ],
+      "status": "TEILWEISE_NACHGEWIESEN",
+      "scenarios": []
+    },
+    {
+      "id": "REQ-AI-003",
+      "title": "Schreibschutz des Agenten",
+      "text": "Konfiguration, Skills, Hooks und Gedächtnis schreibgeschützt.",
+      "basis": "§11",
+      "stage": "BS-05",
+      "component": "C-AI",
+      "priority": "MUSS",
+      "tests": [
+        "T-SEC-004"
+      ],
+      "status": "SPEZIFIZIERT",
+      "scenarios": []
+    },
+    {
+      "id": "REQ-AI-004",
+      "title": "Updates nur geprüft",
+      "text": "Evaluationssuite ≥ P-AI-EVAL-PASS; höchstens alle P-AI-UPDATE-MIN-DAYS Tage.",
+      "basis": "§11.3, EV-10",
+      "stage": "BS-05",
+      "component": "C-AI",
+      "priority": "MUSS",
+      "tests": [
+        "T-AI-005",
+        "T-SM-001"
+      ],
+      "status": "TEILWEISE_NACHGEWIESEN",
+      "scenarios": [
+        "OS-GV-09"
+      ]
+    },
+    {
+      "id": "REQ-AI-005",
+      "title": "Nutzenmessung mit Rückbaukriterium",
+      "text": "Rückbau nach P-AI-ROLLBACK-QUARTERS negativen Quartalen.",
+      "basis": "§11.4, EV-10",
+      "stage": "BS-05",
+      "component": "C-AI",
+      "priority": "MUSS",
+      "tests": [
+        "T-GATE-001",
+        "T-SM-001"
+      ],
+      "status": "IM_PAKET_NACHGEWIESEN",
+      "scenarios": [
+        "OS-GV-09"
+      ]
+    },
+    {
+      "id": "REQ-AI-006",
+      "title": "Prompt-Injection ohne Wirkung",
+      "text": "Inhalte sind Daten, nie Anweisungen.",
+      "basis": "§12",
+      "stage": "BS-05",
+      "component": "C-AI",
+      "priority": "MUSS",
+      "tests": [
+        "T-SEC-002"
+      ],
+      "status": "SPEZIFIZIERT",
+      "scenarios": [
+        "OS-GV-12"
+      ]
+    },
+    {
+      "id": "REQ-AI-007",
+      "title": "Agent markiert nichts als Tatsache",
+      "text": "Wissenseinträge des Agenten bleiben Hypothesen.",
+      "basis": "§6, §11",
+      "stage": "BS-05",
+      "component": "C-AI",
+      "priority": "MUSS",
+      "tests": [
+        "T-CON-001"
+      ],
+      "status": "IM_PAKET_NACHGEWIESEN",
+      "scenarios": []
+    },
+    {
+      "id": "REQ-AI-008",
+      "title": "Budgetgrenze",
+      "text": "Ab P-AI-MONTHLY-BUDGET-EUR pausiert der Agent; der Kern handelt weiter.",
+      "basis": "§11, DEC-DS-14",
+      "stage": "BS-05",
+      "component": "C-AI",
+      "priority": "MUSS",
+      "tests": [
+        "T-AI-006",
+        "T-SM-001"
+      ],
+      "status": "TEILWEISE_NACHGEWIESEN",
+      "scenarios": []
+    },
+    {
+      "id": "REQ-AI-009",
+      "title": "Isolation bei Kompromittierungsverdacht",
+      "text": "Isolation binnen P-OPS-ISOLATE-MIN; Rückkehr nur über saubere Neuinstallation.",
+      "basis": "§11, §12",
+      "stage": "BS-06",
+      "component": "C-AI",
+      "priority": "MUSS",
+      "tests": [
+        "T-DRL-007",
+        "T-SM-001"
+      ],
+      "status": "TEILWEISE_NACHGEWIESEN",
+      "scenarios": [
+        "HA-AI-COMPROMISE"
+      ]
+    },
+    {
+      "id": "REQ-ML-001",
+      "title": "ML nur nach Hürden",
+      "text": "DSR, PBO, Mehrwert, Embargo und unabhängige Validierung; Sprachmodelle ausgeschlossen.",
+      "basis": "§11.5",
+      "stage": "BS-03",
+      "component": "C-STRAT",
+      "priority": "MUSS",
+      "tests": [
+        "T-SM-001",
+        "T-ML-001",
+        "T-ML-002"
+      ],
+      "status": "TEILWEISE_NACHGEWIESEN",
+      "scenarios": [
+        "OS-GV-11"
+      ]
+    },
+    {
+      "id": "REQ-ML-002",
+      "title": "Rückfall auf Regelbasis",
+      "text": "Jede ML-Komponente hat einen Rückfall ohne Umbau.",
+      "basis": "§11.5",
+      "stage": "BS-05",
+      "component": "C-STRAT",
+      "priority": "MUSS",
+      "tests": [
+        "T-SM-001",
+        "T-ML-003"
+      ],
+      "status": "TEILWEISE_NACHGEWIESEN",
+      "scenarios": []
+    },
+    {
+      "id": "REQ-GOV-001",
+      "title": "Moduswechsel nur durch den Betreiber",
+      "text": "Nur der Betreiber schaltet zwischen Demo und Echtgeld (BQ-09).",
+      "basis": "BQ-09",
+      "stage": "BS-05",
+      "component": "C-UI",
+      "priority": "MUSS",
+      "tests": [
+        "T-SM-001",
+        "T-CON-001",
+        "T-DRL-008"
+      ],
+      "status": "TEILWEISE_NACHGEWIESEN",
+      "scenarios": [
+        "OS-GV-01",
+        "OS-GV-04"
+      ]
+    },
+    {
+      "id": "REQ-GOV-002",
+      "title": "Vier-Augen-Prinzip",
+      "text": "Klassen C und D mit zweiter menschlicher Freigabe und Karenzzeit P-OPS-CHANGE-COOLDOWN-H; Autor ≠ Prüfer.",
+      "basis": "§13, EV-13",
+      "stage": "BS-05",
+      "component": "C-SEC",
+      "priority": "MUSS",
+      "tests": [
+        "T-SM-001",
+        "T-CON-001",
+        "T-REL-001"
+      ],
+      "status": "TEILWEISE_NACHGEWIESEN",
+      "scenarios": [
+        "OS-GV-05"
+      ]
+    },
+    {
+      "id": "REQ-GOV-003",
+      "title": "Grants",
+      "text": "Grant je Art mit Laufzeit höchstens P-SEC-GRANT-DAYS, Voraussetzungen und Widerruf.",
+      "basis": "§7.10, §13",
+      "stage": "BS-05",
+      "component": "C-SEC",
+      "priority": "MUSS",
+      "tests": [
+        "T-SM-001",
+        "T-CON-001"
+      ],
+      "status": "IM_PAKET_NACHGEWIESEN",
+      "scenarios": [
+        "OS-GV-02",
+        "OS-RI-11"
+      ]
+    },
+    {
+      "id": "REQ-GOV-004",
+      "title": "Risikoakzeptanz aus Rechnerwerten",
+      "text": "Klartextzahlen aus den Rechnern, nie geschätzt.",
+      "basis": "§7.10",
+      "stage": "BS-07",
+      "component": "C-NAV",
+      "priority": "MUSS",
+      "tests": [
+        "T-CALC-KELLY-001",
+        "T-GOV-001"
+      ],
+      "status": "TEILWEISE_NACHGEWIESEN",
+      "scenarios": []
+    },
+    {
+      "id": "REQ-GOV-005",
+      "title": "Vertretung nur risikomindernd",
+      "text": "Die Vertretung kann pausieren, den Kill-Switch auslösen und abbauen, nie fortsetzen.",
+      "basis": "§13",
+      "stage": "BS-05",
+      "component": "C-UI",
+      "priority": "MUSS",
+      "tests": [
+        "T-SM-001",
+        "T-CON-001"
+      ],
+      "status": "IM_PAKET_NACHGEWIESEN",
+      "scenarios": [
+        "HA-OPERATOR-ABSENT",
+        "OS-GV-03"
+      ]
+    },
+    {
+      "id": "REQ-GOV-006",
+      "title": "Externe Risikofunktion mit Veto",
+      "text": "Pflicht ab G9; zweite Freigabe für Profilaufstiege.",
+      "basis": "§13, EV-13",
+      "stage": "BS-09",
+      "component": "C-RISK",
+      "priority": "MUSS",
+      "tests": [
+        "T-SM-001",
+        "T-GATE-001"
+      ],
+      "status": "IM_PAKET_NACHGEWIESEN",
+      "scenarios": []
+    },
+    {
+      "id": "REQ-GOV-007",
+      "title": "Echtgeld-Killer-Tests nur durch den Betreiber",
+      "text": "Jede Echtgeldorder in BS-01 löst der Betreiber aus; Verlustdeckel P-EXE-KT-LOSS-CAP-EUR.",
+      "basis": "§8.3, §13",
+      "stage": "BS-01",
+      "component": "C-MT5",
+      "priority": "MUSS",
+      "tests": [
+        "T-GOV-002"
+      ],
+      "status": "SPEZIFIZIERT",
+      "scenarios": []
+    },
+    {
+      "id": "REQ-OPS-001",
+      "title": "Runbooks vollständig",
+      "text": "Runbook für jedes Stressszenario, jeden Killer-Test, jedes HA-Ereignis und jeden Sperrgrund.",
+      "basis": "§14.1",
+      "stage": "BS-06",
+      "component": "PKG",
+      "priority": "MUSS",
+      "tests": [
+        "T-SEM-RB-001"
+      ],
+      "status": "IM_PAKET_NACHGEWIESEN",
+      "scenarios": []
+    },
+    {
+      "id": "REQ-OPS-002",
+      "title": "Drills mit Protokoll",
+      "text": "DR-01 bis DR-10 vor G7 bestanden und danach im Rhythmus wiederholt.",
+      "basis": "§14.1, §16",
+      "stage": "BS-06",
+      "component": "C-OBS",
+      "priority": "MUSS",
+      "tests": [
+        "T-DRL-001",
+        "T-DRL-002",
+        "T-DRL-003",
+        "T-DRL-004",
+        "T-DRL-005",
+        "T-DRL-006",
+        "T-DRL-007",
+        "T-DRL-008",
+        "T-DRL-009",
+        "T-DRL-010"
+      ],
+      "status": "SPEZIFIZIERT",
+      "scenarios": [
+        "HA-COMBINED"
+      ]
+    },
+    {
+      "id": "REQ-OPS-003",
+      "title": "Kostendrift-Monitor mit Trennschärfe",
+      "text": "Gepoolte Schätzung, Auslösung bei P-MON-COSTDRIFT-PROB.",
+      "basis": "§14.2, EV-07",
+      "stage": "BS-07",
+      "component": "C-NAV",
+      "priority": "MUSS",
+      "tests": [
+        "T-CALC-DRIFT-001",
+        "T-GATE-001"
+      ],
+      "status": "IM_PAKET_NACHGEWIESEN",
+      "scenarios": []
+    },
+    {
+      "id": "REQ-OPS-005",
+      "title": "Auslösezeiten aller Monitore belegt",
+      "text": "Für MON-HARM und MON-DRIFT ist simuliert, wie schnell sie auslösen und wie oft sie ohne Anlass auslösen; Grenzen der Erkennbarkeit stehen im Masterkonzept (§16).",
+      "basis": "§16, §20 C3",
+      "stage": "BS-07",
+      "component": "C-NAV",
+      "priority": "MUSS",
+      "tests": [
+        "T-CALC-MON-001"
+      ],
+      "status": "IM_PAKET_NACHGEWIESEN",
+      "scenarios": [
+        "OS-GV-08"
+      ]
+    },
+    {
+      "id": "REQ-OPS-004",
+      "title": "SLOs gemessen",
+      "text": "Verfügbarkeit, Alarmlatenz, Quittung, Wiederanlauf, Berichte.",
+      "basis": "§14",
+      "stage": "BS-07",
+      "component": "C-OBS",
+      "priority": "MUSS",
+      "tests": [
+        "T-OPS-SLO-001"
+      ],
+      "status": "SPEZIFIZIERT",
+      "scenarios": []
+    },
+    {
+      "id": "REQ-OPS-005",
+      "title": "Incident-Management",
+      "text": "Post-Mortem ab Schwere HOCH; Quittungsfrist P-SLO-INCIDENT-ACK-MIN.",
+      "basis": "§14",
+      "stage": "BS-05",
+      "component": "C-OBS",
+      "priority": "MUSS",
+      "tests": [
+        "T-SM-001",
+        "T-CON-001"
+      ],
+      "status": "IM_PAKET_NACHGEWIESEN",
+      "scenarios": [
+        "OS-GV-08"
+      ]
+    },
+    {
+      "id": "REQ-OPS-006",
+      "title": "Täglicher Abgleich",
+      "text": "NAV und Positionen gegen den Brokerauszug.",
+      "basis": "§14",
+      "stage": "BS-07",
+      "component": "C-NAV",
+      "priority": "MUSS",
+      "tests": [
+        "T-OPS-RECON-001"
+      ],
+      "status": "SPEZIFIZIERT",
+      "scenarios": []
+    },
+    {
+      "id": "REQ-OPS-007",
+      "title": "Dauer-, Last- und Chaostests",
+      "text": "Dauerlauf P-QA-SOAK-H, Last P-QA-LOAD-FACTOR, Chaos im Demokonto.",
+      "basis": "§10.4",
+      "stage": "BS-06",
+      "component": "C-OMS",
+      "priority": "MUSS",
+      "tests": [
+        "T-QA-SOAK-001",
+        "T-QA-LOAD-001",
+        "T-QA-CHAOS-001"
+      ],
+      "status": "SPEZIFIZIERT",
+      "scenarios": [
+        "HA-CLOCK",
+        "HA-DISK"
+      ]
+    },
+    {
+      "id": "REQ-LEG-001",
+      "title": "Externe Sperren bis zur Antwort",
+      "text": "X-LEGAL-01 und X-TAX-01 sperren G8.",
+      "basis": "§15, BQ-03",
+      "stage": "BS-08",
+      "component": "PKG",
+      "priority": "MUSS",
+      "tests": [
+        "T-GATE-001"
+      ],
+      "status": "IM_PAKET_NACHGEWIESEN",
+      "scenarios": []
+    },
+    {
+      "id": "REQ-LEG-002",
+      "title": "Steuerexport",
+      "text": "Jahresexport für die externe Person (legal/tax_matrix.md).",
+      "basis": "§15",
+      "stage": "BS-07",
+      "component": "C-NAV",
+      "priority": "MUSS",
+      "tests": [
+        "T-LEG-001"
+      ],
+      "status": "SPEZIFIZIERT",
+      "scenarios": []
+    },
+    {
+      "id": "REQ-QA-001",
+      "title": "Mutation und Abdeckung im Geldpfad",
+      "text": "Anteil erkannter Mutanten ≥ P-QA-MUTATION-MIN, Zweigabdeckung ≥ P-QA-COVERAGE-MIN.",
+      "basis": "§10.4",
+      "stage": "BS-05",
+      "component": "C-OMS",
+      "priority": "MUSS",
+      "tests": [
+        "T-QA-MUT-001",
+        "T-QA-COV-001",
+        "T-GATE-001"
+      ],
+      "status": "TEILWEISE_NACHGEWIESEN",
+      "scenarios": []
+    },
+    {
+      "id": "REQ-QA-002",
+      "title": "Fehlerinjektion",
+      "text": "Je Fall P-QA-FAULT-REPEATS Wiederholungen.",
+      "basis": "§10.4",
+      "stage": "BS-05",
+      "component": "C-OMS",
+      "priority": "MUSS",
+      "tests": [
+        "T-EXE-001",
+        "T-EXE-003"
+      ],
+      "status": "SPEZIFIZIERT",
+      "scenarios": []
+    },
+    {
+      "id": "REQ-QA-003",
+      "title": "Eigenschaftstests der Risikoregeln",
+      "text": "P-QA-PROPERTY-CASES Zufallsbeispiele je Regel.",
+      "basis": "§10.4",
+      "stage": "BS-05",
+      "component": "C-RISK",
+      "priority": "MUSS",
+      "tests": [
+        "T-PTC-013",
+        "T-RISK-LADDER-001",
+        "T-EXE-008"
+      ],
+      "status": "SPEZIFIZIERT",
+      "scenarios": []
+    },
+    {
+      "id": "REQ-PKG-001",
+      "title": "Jede Zahl gebunden",
+      "text": "render_blocks --check ohne Abweichung.",
+      "basis": "R-03",
+      "stage": "BS-00",
+      "component": "PKG",
+      "priority": "MUSS",
+      "tests": [
+        "T-PKG-RENDER-001"
+      ],
+      "status": "IM_PAKET_NACHGEWIESEN",
+      "scenarios": []
+    },
+    {
+      "id": "REQ-PKG-002",
+      "title": "Paketprüfung und Mutationen",
+      "text": "P01–P14 strikt, mindestens 40 Mutationen erkannt, Mehrversionslauf.",
+      "basis": "§19",
+      "stage": "BS-00",
+      "component": "PKG",
+      "priority": "MUSS",
+      "tests": [
+        "T-PKG-VAL-001",
+        "T-PKG-MUT-001",
+        "T-PKG-MULTI-001"
+      ],
+      "status": "IM_PAKET_NACHGEWIESEN",
+      "scenarios": []
+    },
+    {
+      "id": "REQ-PKG-003",
+      "title": "Keine erfundenen Betreiberangaben",
+      "text": "Betreiberwerte stimmen mit dem Wortlaut der Antworten und dem Siegel überein; eine externe Eingabe gilt nur mit Nachweis als bestätigt; Standardwerte bleiben markiert (DEC-CF-08).",
+      "basis": "R-07, §21",
+      "stage": "BS-00",
+      "component": "PKG",
+      "priority": "MUSS",
+      "tests": [
+        "T-SEM-OP-001"
+      ],
+      "status": "IM_PAKET_NACHGEWIESEN",
+      "scenarios": []
+    },
+    {
+      "id": "REQ-PKG-004",
+      "title": "Ehrliche Selbstbewertung",
+      "text": "K bleibt ohne bestandene unabhängige Gegenprüfung höchstens 99; E-Punkte nur mit signiertem Torergebnis; beide Scorecards sind als Selbstbewertung gekennzeichnet.",
+      "basis": "§20, R-08",
+      "stage": "BS-00",
+      "component": "PKG",
+      "priority": "MUSS",
+      "tests": [
+        "T-SEM-SCORE-001",
+        "T-PKG-VAL-001"
+      ],
+      "status": "IM_PAKET_NACHGEWIESEN",
+      "scenarios": []
+    }
+  ]
+}

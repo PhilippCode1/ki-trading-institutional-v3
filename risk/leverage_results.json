@@ -1,0 +1,6128 @@
+{
+ "calculator": "risk/leverage_calculator.py",
+ "model": "MOD-LEV",
+ "seed": 722026,
+ "inputs": {
+  "financials/cost_model_results.json": "9e0fad44f653da712f77878cca0778637d6cd753f575b58eb8b587e3b8489946",
+  "parameters.json": "38f7ce22d3184218e02001b719b137e4f0ad0faaf239b53bff44e8c6ebc576b6",
+  "registers/instruments.json": "01de3a94950c4c58e27382aa07a755e1177906416e4da87a845c851af579bff6",
+  "research/prior_results.json": "bf31b7168f7bc6ec91bcc216b3df369b3ed7f19055d29be3545ef90305e8f713",
+  "research/turnover_results.json": "ff1df5d3d1fddde329125f9c4782cf0e40aa7a7ae8269e5797a2af5086602c28"
+ },
+ "definitions": {
+  "L_g": "Σ|q·M·P·FX|/NAV",
+  "formula": "L_g = D·σ_p/σ_h",
+  "gap_rule": "P-RISK-WEEKEND-FACTOR · Σ|w_i|·max(Klassenlücke_i, k·σ_Tag,i) + Tagesverlust ≤ P-OP-DAILY-LOSS-CAP − P-RISK-GAP-RESERVE; k = P-GAP-K-HYP-HIGH; Wochenendfaktor in der Planung dauerhaft (Positionen halten über Wochenenden)",
+  "correlation_in_gap": "ungünstigste Richtung aller Positionen (P-LEV-CLUSTER-MODE)"
+ },
+ "gap_budget": 0.08,
+ "weekend_factor": 1.5,
+ "cells": {
+  "U-KOSTEN": {
+   "250000": {
+    "H5": {
+     "n": 0,
+     "admissible": false,
+     "reasons": [
+      "Leeres Universum: kein Instrument erfüllt die Zulassung"
+     ]
+    },
+    "H10": {
+     "n": 0,
+     "admissible": false,
+     "reasons": [
+      "Leeres Universum: kein Instrument erfüllt die Zulassung"
+     ]
+    },
+    "H15": {
+     "n": 0,
+     "admissible": false,
+     "reasons": [
+      "Leeres Universum: kein Instrument erfüllt die Zulassung"
+     ]
+    },
+    "H20": {
+     "n": 0,
+     "admissible": false,
+     "reasons": [
+      "Leeres Universum: kein Instrument erfüllt die Zulassung"
+     ]
+    }
+   },
+   "500000": {
+    "H5": {
+     "n": 0,
+     "admissible": false,
+     "reasons": [
+      "Leeres Universum: kein Instrument erfüllt die Zulassung"
+     ]
+    },
+    "H10": {
+     "n": 0,
+     "admissible": false,
+     "reasons": [
+      "Leeres Universum: kein Instrument erfüllt die Zulassung"
+     ]
+    },
+    "H15": {
+     "n": 0,
+     "admissible": false,
+     "reasons": [
+      "Leeres Universum: kein Instrument erfüllt die Zulassung"
+     ]
+    },
+    "H20": {
+     "n": 0,
+     "admissible": false,
+     "reasons": [
+      "Leeres Universum: kein Instrument erfüllt die Zulassung"
+     ]
+    }
+   },
+   "1000000": {
+    "H5": {
+     "n": 0,
+     "admissible": false,
+     "reasons": [
+      "Leeres Universum: kein Instrument erfüllt die Zulassung"
+     ]
+    },
+    "H10": {
+     "n": 0,
+     "admissible": false,
+     "reasons": [
+      "Leeres Universum: kein Instrument erfüllt die Zulassung"
+     ]
+    },
+    "H15": {
+     "n": 0,
+     "admissible": false,
+     "reasons": [
+      "Leeres Universum: kein Instrument erfüllt die Zulassung"
+     ]
+    },
+    "H20": {
+     "n": 0,
+     "admissible": false,
+     "reasons": [
+      "Leeres Universum: kein Instrument erfüllt die Zulassung"
+     ]
+    }
+   },
+   "5000000": {
+    "H5": {
+     "n": 2,
+     "effective_n": 2.0,
+     "D": 1.380131119,
+     "sigma_h": 0.2377358491,
+     "sigma_target": 0.06,
+     "L_g_at_target": 0.3483188061,
+     "scale_gap": 0.9582628931,
+     "scale_cap": 1.0,
+     "scale": 0.9582628931,
+     "sigma_achieved": 0.05749577359,
+     "L_g_achieved": 0.3337809869,
+     "gap_loss_at_target": {
+      "HIST": 0.05257642357,
+      "K5": 0.02608202655,
+      "K10": 0.0521640531,
+      "DESIGN": 0.05565626481
+     },
+     "gap_loss_achieved": {
+      "HIST": 0.05038203576,
+      "K5": 0.02499343822,
+      "K10": 0.04998687644,
+      "DESIGN": 0.05333333333
+     },
+     "margin_to_equity": {
+      "basis": 0.02456124243,
+      "plus50": 0.03684186365,
+      "plus100": 0.04912248487
+     },
+     "es_1d_parametric": 0.01022775395,
+     "class_gross_leverage": {
+      "EDELMETALL": 0.2204214064,
+      "ENERGIE": 0.1133595805
+     },
+     "basis": "S-TF",
+     "mean_cost_sr": 0.02600073576,
+     "admissible": false,
+     "reasons": [
+      "Mindestdiversifikation: 2.0 < 8 effektive Instrumente"
+     ],
+     "notes": [
+      "H5 läuft mit σ_p 5.7% statt 6%; die Lückenregel skaliert automatisch"
+     ],
+     "band": {
+      "share_below_band": 1.0,
+      "share_in_band": 0.0,
+      "share_at_cap": 0.0,
+      "share_zero": 0.141
+     }
+    },
+    "H10": {
+     "n": 2,
+     "effective_n": 2.0,
+     "D": 1.380131119,
+     "sigma_h": 0.2377358491,
+     "sigma_target": 0.09,
+     "L_g_at_target": 0.5224782092,
+     "scale_gap": 0.6388419288,
+     "scale_cap": 1.0,
+     "scale": 0.6388419288,
+     "sigma_achieved": 0.05749577359,
+     "L_g_achieved": 0.3337809869,
+     "gap_loss_at_target": {
+      "HIST": 0.07886463535,
+      "K5": 0.03912303982,
+      "K10": 0.07824607964,
+      "DESIGN": 0.08348439721
+     },
+     "gap_loss_achieved": {
+      "HIST": 0.05038203576,
+      "K5": 0.02499343822,
+      "K10": 0.04998687644,
+      "DESIGN": 0.05333333333
+     },
+     "margin_to_equity": {
+      "basis": 0.02456124243,
+      "plus50": 0.03684186365,
+      "plus100": 0.04912248487
+     },
+     "es_1d_parametric": 0.01022775395,
+     "class_gross_leverage": {
+      "EDELMETALL": 0.2204214064,
+      "ENERGIE": 0.1133595805
+     },
+     "basis": "S-TF",
+     "mean_cost_sr": 0.02600073576,
+     "admissible": false,
+     "reasons": [
+      "Verlustbudget: Ziel-σ_p 9% nur zu 64% erreichbar (Lückenstress × Wochenendfaktor 12.5% > 8%); vom Grundprofil nicht unterscheidbar",
+      "Mindestdiversifikation: 2.0 < 8 effektive Instrumente"
+     ],
+     "notes": [],
+     "band": {
+      "share_below_band": 1.0,
+      "share_in_band": 0.0,
+      "share_at_cap": 0.0,
+      "share_zero": 0.14275
+     }
+    },
+    "H15": {
+     "n": 2,
+     "effective_n": 2.0,
+     "D": 1.380131119,
+     "sigma_h": 0.2377358491,
+     "sigma_target": 0.12,
+     "L_g_at_target": 0.6966376123,
+     "scale_gap": 0.4791314466,
+     "scale_cap": 1.0,
+     "scale": 0.4791314466,
+     "sigma_achieved": 0.05749577359,
+     "L_g_achieved": 0.3337809869,
+     "gap_loss_at_target": {
+      "HIST": 0.1051528471,
+      "K5": 0.0521640531,
+      "K10": 0.1043281062,
+      "DESIGN": 0.1113125296
+     },
+     "gap_loss_achieved": {
+      "HIST": 0.05038203576,
+      "K5": 0.02499343822,
+      "K10": 0.04998687644,
+      "DESIGN": 0.05333333333
+     },
+     "margin_to_equity": {
+      "basis": 0.02456124243,
+      "plus50": 0.03684186365,
+      "plus100": 0.04912248487
+     },
+     "es_1d_parametric": 0.01022775395,
+     "class_gross_leverage": {
+      "EDELMETALL": 0.2204214064,
+      "ENERGIE": 0.1133595805
+     },
+     "basis": "S-TF",
+     "mean_cost_sr": 0.02600073576,
+     "admissible": false,
+     "reasons": [
+      "Verlustbudget: Ziel-σ_p 12% nur zu 48% erreichbar (Lückenstress × Wochenendfaktor 16.7% > 8%); vom Grundprofil nicht unterscheidbar",
+      "Mindestdiversifikation: 2.0 < 10 effektive Instrumente"
+     ],
+     "notes": [],
+     "band": {
+      "share_below_band": 1.0,
+      "share_in_band": 0.0,
+      "share_at_cap": 0.0,
+      "share_zero": 0.1505
+     }
+    },
+    "H20": {
+     "n": 2,
+     "effective_n": 2.0,
+     "D": 1.380131119,
+     "sigma_h": 0.2377358491,
+     "sigma_target": 0.15,
+     "L_g_at_target": 0.8707970154,
+     "scale_gap": 0.3833051573,
+     "scale_cap": 1.0,
+     "scale": 0.3833051573,
+     "sigma_achieved": 0.05749577359,
+     "L_g_achieved": 0.3337809869,
+     "gap_loss_at_target": {
+      "HIST": 0.1314410589,
+      "K5": 0.06520506637,
+      "K10": 0.1304101327,
+      "DESIGN": 0.139140662
+     },
+     "gap_loss_achieved": {
+      "HIST": 0.05038203576,
+      "K5": 0.02499343822,
+      "K10": 0.04998687644,
+      "DESIGN": 0.05333333333
+     },
+     "margin_to_equity": {
+      "basis": 0.02456124243,
+      "plus50": 0.03684186365,
+      "plus100": 0.04912248487
+     },
+     "es_1d_parametric": 0.01022775395,
+     "class_gross_leverage": {
+      "EDELMETALL": 0.2204214064,
+      "ENERGIE": 0.1133595805
+     },
+     "basis": "S-TF",
+     "mean_cost_sr": 0.02600073576,
+     "admissible": false,
+     "reasons": [
+      "Verlustbudget: Ziel-σ_p 15% nur zu 38% erreichbar (Lückenstress × Wochenendfaktor 20.9% > 8%); vom Grundprofil nicht unterscheidbar",
+      "Mindestdiversifikation: 2.0 < 10 effektive Instrumente"
+     ],
+     "notes": [],
+     "band": {
+      "share_below_band": 1.0,
+      "share_in_band": 0.0,
+      "share_at_cap": 0.0,
+      "share_zero": 0.1575
+     }
+    }
+   },
+   "25000000": {
+    "H5": {
+     "n": 1,
+     "effective_n": 1.0,
+     "D": 1.0,
+     "sigma_h": 0.18,
+     "sigma_target": 0.06,
+     "L_g_at_target": 0.3333333333,
+     "scale_gap": 1.0,
+     "scale_cap": 1.0,
+     "scale": 1.0,
+     "sigma_achieved": 0.06,
+     "L_g_achieved": 0.3333333333,
+     "gap_loss_at_target": {
+      "HIST": 0.03333333333,
+      "K5": 0.01889822365,
+      "K10": 0.0377964473,
+      "DESIGN": 0.0377964473
+     },
+     "gap_loss_achieved": {
+      "HIST": 0.03333333333,
+      "K5": 0.01889822365,
+      "K10": 0.0377964473,
+      "DESIGN": 0.0377964473
+     },
+     "margin_to_equity": {
+      "basis": 0.02,
+      "plus50": 0.03,
+      "plus100": 0.04
+     },
+     "es_1d_parametric": 0.01067322342,
+     "class_gross_leverage": {
+      "EDELMETALL": 0.3333333333
+     },
+     "basis": "S-TF",
+     "mean_cost_sr": 0.02455330609,
+     "admissible": false,
+     "reasons": [
+      "Mindestdiversifikation: 1.0 < 8 effektive Instrumente"
+     ],
+     "notes": [],
+     "band": {
+      "share_below_band": 1.0,
+      "share_in_band": 0.0,
+      "share_at_cap": 0.0,
+      "share_zero": 0.379
+     }
+    },
+    "H10": {
+     "n": 1,
+     "effective_n": 1.0,
+     "D": 1.0,
+     "sigma_h": 0.18,
+     "sigma_target": 0.09,
+     "L_g_at_target": 0.5,
+     "scale_gap": 0.9407115773,
+     "scale_cap": 1.0,
+     "scale": 0.9407115773,
+     "sigma_achieved": 0.08466404195,
+     "L_g_achieved": 0.4703557886,
+     "gap_loss_at_target": {
+      "HIST": 0.05,
+      "K5": 0.02834733548,
+      "K10": 0.05669467095,
+      "DESIGN": 0.05669467095
+     },
+     "gap_loss_achieved": {
+      "HIST": 0.04703557886,
+      "K5": 0.02666666667,
+      "K10": 0.05333333333,
+      "DESIGN": 0.05333333333
+     },
+     "margin_to_equity": {
+      "basis": 0.02822134732,
+      "plus50": 0.04233202098,
+      "plus100": 0.05644269464
+     },
+     "es_1d_parametric": 0.01506063725,
+     "class_gross_leverage": {
+      "EDELMETALL": 0.4703557886
+     },
+     "basis": "S-TF",
+     "mean_cost_sr": 0.02455330609,
+     "admissible": false,
+     "reasons": [
+      "Mindestdiversifikation: 1.0 < 8 effektive Instrumente"
+     ],
+     "notes": [
+      "σ-Ziel zu 94% erreichbar; die Lückenregel skaliert automatisch"
+     ],
+     "band": {
+      "share_below_band": 1.0,
+      "share_in_band": 0.0,
+      "share_at_cap": 0.0,
+      "share_zero": 0.39125
+     }
+    },
+    "H15": {
+     "n": 1,
+     "effective_n": 1.0,
+     "D": 1.0,
+     "sigma_h": 0.18,
+     "sigma_target": 0.12,
+     "L_g_at_target": 0.6666666667,
+     "scale_gap": 0.705533683,
+     "scale_cap": 1.0,
+     "scale": 0.705533683,
+     "sigma_achieved": 0.08466404195,
+     "L_g_achieved": 0.4703557886,
+     "gap_loss_at_target": {
+      "HIST": 0.06666666667,
+      "K5": 0.0377964473,
+      "K10": 0.0755928946,
+      "DESIGN": 0.0755928946
+     },
+     "gap_loss_achieved": {
+      "HIST": 0.04703557886,
+      "K5": 0.02666666667,
+      "K10": 0.05333333333,
+      "DESIGN": 0.05333333333
+     },
+     "margin_to_equity": {
+      "basis": 0.02822134732,
+      "plus50": 0.04233202098,
+      "plus100": 0.05644269464
+     },
+     "es_1d_parametric": 0.01506063725,
+     "class_gross_leverage": {
+      "EDELMETALL": 0.4703557886
+     },
+     "basis": "S-TF",
+     "mean_cost_sr": 0.02455330609,
+     "admissible": false,
+     "reasons": [
+      "Verlustbudget: Ziel-σ_p 12% nur zu 71% erreichbar (Lückenstress × Wochenendfaktor 11.3% > 8%); vom Grundprofil nicht unterscheidbar",
+      "Mindestdiversifikation: 1.0 < 10 effektive Instrumente"
+     ],
+     "notes": [],
+     "band": {
+      "share_below_band": 1.0,
+      "share_in_band": 0.0,
+      "share_at_cap": 0.0,
+      "share_zero": 0.382
+     }
+    },
+    "H20": {
+     "n": 1,
+     "effective_n": 1.0,
+     "D": 1.0,
+     "sigma_h": 0.18,
+     "sigma_target": 0.15,
+     "L_g_at_target": 0.8333333333,
+     "scale_gap": 0.5644269464,
+     "scale_cap": 1.0,
+     "scale": 0.5644269464,
+     "sigma_achieved": 0.08466404195,
+     "L_g_achieved": 0.4703557886,
+     "gap_loss_at_target": {
+      "HIST": 0.08333333333,
+      "K5": 0.04724555913,
+      "K10": 0.09449111825,
+      "DESIGN": 0.09449111825
+     },
+     "gap_loss_achieved": {
+      "HIST": 0.04703557886,
+      "K5": 0.02666666667,
+      "K10": 0.05333333333,
+      "DESIGN": 0.05333333333
+     },
+     "margin_to_equity": {
+      "basis": 0.02822134732,
+      "plus50": 0.04233202098,
+      "plus100": 0.05644269464
+     },
+     "es_1d_parametric": 0.01506063725,
+     "class_gross_leverage": {
+      "EDELMETALL": 0.4703557886
+     },
+     "basis": "S-TF",
+     "mean_cost_sr": 0.02455330609,
+     "admissible": false,
+     "reasons": [
+      "Verlustbudget: Ziel-σ_p 15% nur zu 56% erreichbar (Lückenstress × Wochenendfaktor 14.2% > 8%); vom Grundprofil nicht unterscheidbar",
+      "Mindestdiversifikation: 1.0 < 10 effektive Instrumente"
+     ],
+     "notes": [],
+     "band": {
+      "share_below_band": 1.0,
+      "share_in_band": 0.0,
+      "share_at_cap": 0.0,
+      "share_zero": 0.3905
+     }
+    }
+   },
+   "100000000": {
+    "H5": {
+     "n": 0,
+     "admissible": false,
+     "reasons": [
+      "Leeres Universum: kein Instrument erfüllt die Zulassung"
+     ]
+    },
+    "H10": {
+     "n": 0,
+     "admissible": false,
+     "reasons": [
+      "Leeres Universum: kein Instrument erfüllt die Zulassung"
+     ]
+    },
+    "H15": {
+     "n": 0,
+     "admissible": false,
+     "reasons": [
+      "Leeres Universum: kein Instrument erfüllt die Zulassung"
+     ]
+    },
+    "H20": {
+     "n": 0,
+     "admissible": false,
+     "reasons": [
+      "Leeres Universum: kein Instrument erfüllt die Zulassung"
+     ]
+    }
+   }
+  },
+  "U-BREAKEVEN": {
+   "250000": {
+    "H5": {
+     "n": 1,
+     "effective_n": 1.0,
+     "D": 1.0,
+     "sigma_h": 0.18,
+     "sigma_target": 0.06,
+     "L_g_at_target": 0.3333333333,
+     "scale_gap": 1.0,
+     "scale_cap": 1.0,
+     "scale": 1.0,
+     "sigma_achieved": 0.06,
+     "L_g_achieved": 0.3333333333,
+     "gap_loss_at_target": {
+      "HIST": 0.03333333333,
+      "K5": 0.01889822365,
+      "K10": 0.0377964473,
+      "DESIGN": 0.0377964473
+     },
+     "gap_loss_achieved": {
+      "HIST": 0.03333333333,
+      "K5": 0.01889822365,
+      "K10": 0.0377964473,
+      "DESIGN": 0.0377964473
+     },
+     "margin_to_equity": {
+      "basis": 0.02,
+      "plus50": 0.03,
+      "plus100": 0.04
+     },
+     "es_1d_parametric": 0.01067322342,
+     "class_gross_leverage": {
+      "EDELMETALL": 0.3333333333
+     },
+     "basis": "S-TF",
+     "mean_cost_sr": 0.05373477584,
+     "admissible": false,
+     "reasons": [
+      "Mindestdiversifikation: 1.0 < 8 effektive Instrumente"
+     ],
+     "notes": [],
+     "band": {
+      "share_below_band": 1.0,
+      "share_in_band": 0.0,
+      "share_at_cap": 0.0,
+      "share_zero": 0.39025
+     }
+    },
+    "H10": {
+     "n": 1,
+     "effective_n": 1.0,
+     "D": 1.0,
+     "sigma_h": 0.18,
+     "sigma_target": 0.09,
+     "L_g_at_target": 0.5,
+     "scale_gap": 0.9407115773,
+     "scale_cap": 1.0,
+     "scale": 0.9407115773,
+     "sigma_achieved": 0.08466404195,
+     "L_g_achieved": 0.4703557886,
+     "gap_loss_at_target": {
+      "HIST": 0.05,
+      "K5": 0.02834733548,
+      "K10": 0.05669467095,
+      "DESIGN": 0.05669467095
+     },
+     "gap_loss_achieved": {
+      "HIST": 0.04703557886,
+      "K5": 0.02666666667,
+      "K10": 0.05333333333,
+      "DESIGN": 0.05333333333
+     },
+     "margin_to_equity": {
+      "basis": 0.02822134732,
+      "plus50": 0.04233202098,
+      "plus100": 0.05644269464
+     },
+     "es_1d_parametric": 0.01506063725,
+     "class_gross_leverage": {
+      "EDELMETALL": 0.4703557886
+     },
+     "basis": "S-TF",
+     "mean_cost_sr": 0.05373477584,
+     "admissible": false,
+     "reasons": [
+      "Mindestdiversifikation: 1.0 < 8 effektive Instrumente"
+     ],
+     "notes": [
+      "σ-Ziel zu 94% erreichbar; die Lückenregel skaliert automatisch"
+     ],
+     "band": {
+      "share_below_band": 1.0,
+      "share_in_band": 0.0,
+      "share_at_cap": 0.0,
+      "share_zero": 0.4055
+     }
+    },
+    "H15": {
+     "n": 1,
+     "effective_n": 1.0,
+     "D": 1.0,
+     "sigma_h": 0.18,
+     "sigma_target": 0.12,
+     "L_g_at_target": 0.6666666667,
+     "scale_gap": 0.705533683,
+     "scale_cap": 1.0,
+     "scale": 0.705533683,
+     "sigma_achieved": 0.08466404195,
+     "L_g_achieved": 0.4703557886,
+     "gap_loss_at_target": {
+      "HIST": 0.06666666667,
+      "K5": 0.0377964473,
+      "K10": 0.0755928946,
+      "DESIGN": 0.0755928946
+     },
+     "gap_loss_achieved": {
+      "HIST": 0.04703557886,
+      "K5": 0.02666666667,
+      "K10": 0.05333333333,
+      "DESIGN": 0.05333333333
+     },
+     "margin_to_equity": {
+      "basis": 0.02822134732,
+      "plus50": 0.04233202098,
+      "plus100": 0.05644269464
+     },
+     "es_1d_parametric": 0.01506063725,
+     "class_gross_leverage": {
+      "EDELMETALL": 0.4703557886
+     },
+     "basis": "S-TF",
+     "mean_cost_sr": 0.05373477584,
+     "admissible": false,
+     "reasons": [
+      "Verlustbudget: Ziel-σ_p 12% nur zu 71% erreichbar (Lückenstress × Wochenendfaktor 11.3% > 8%); vom Grundprofil nicht unterscheidbar",
+      "Mindestdiversifikation: 1.0 < 10 effektive Instrumente"
+     ],
+     "notes": [],
+     "band": {
+      "share_below_band": 1.0,
+      "share_in_band": 0.0,
+      "share_at_cap": 0.0,
+      "share_zero": 0.3955
+     }
+    },
+    "H20": {
+     "n": 1,
+     "effective_n": 1.0,
+     "D": 1.0,
+     "sigma_h": 0.18,
+     "sigma_target": 0.15,
+     "L_g_at_target": 0.8333333333,
+     "scale_gap": 0.5644269464,
+     "scale_cap": 1.0,
+     "scale": 0.5644269464,
+     "sigma_achieved": 0.08466404195,
+     "L_g_achieved": 0.4703557886,
+     "gap_loss_at_target": {
+      "HIST": 0.08333333333,
+      "K5": 0.04724555913,
+      "K10": 0.09449111825,
+      "DESIGN": 0.09449111825
+     },
+     "gap_loss_achieved": {
+      "HIST": 0.04703557886,
+      "K5": 0.02666666667,
+      "K10": 0.05333333333,
+      "DESIGN": 0.05333333333
+     },
+     "margin_to_equity": {
+      "basis": 0.02822134732,
+      "plus50": 0.04233202098,
+      "plus100": 0.05644269464
+     },
+     "es_1d_parametric": 0.01506063725,
+     "class_gross_leverage": {
+      "EDELMETALL": 0.4703557886
+     },
+     "basis": "S-TF",
+     "mean_cost_sr": 0.05373477584,
+     "admissible": false,
+     "reasons": [
+      "Verlustbudget: Ziel-σ_p 15% nur zu 56% erreichbar (Lückenstress × Wochenendfaktor 14.2% > 8%); vom Grundprofil nicht unterscheidbar",
+      "Mindestdiversifikation: 1.0 < 10 effektive Instrumente"
+     ],
+     "notes": [],
+     "band": {
+      "share_below_band": 1.0,
+      "share_in_band": 0.0,
+      "share_at_cap": 0.0,
+      "share_zero": 0.371
+     }
+    }
+   },
+   "500000": {
+    "H5": {
+     "n": 1,
+     "effective_n": 1.0,
+     "D": 1.0,
+     "sigma_h": 0.18,
+     "sigma_target": 0.06,
+     "L_g_at_target": 0.3333333333,
+     "scale_gap": 1.0,
+     "scale_cap": 1.0,
+     "scale": 1.0,
+     "sigma_achieved": 0.06,
+     "L_g_achieved": 0.3333333333,
+     "gap_loss_at_target": {
+      "HIST": 0.03333333333,
+      "K5": 0.01889822365,
+      "K10": 0.0377964473,
+      "DESIGN": 0.0377964473
+     },
+     "gap_loss_achieved": {
+      "HIST": 0.03333333333,
+      "K5": 0.01889822365,
+      "K10": 0.0377964473,
+      "DESIGN": 0.0377964473
+     },
+     "margin_to_equity": {
+      "basis": 0.02,
+      "plus50": 0.03,
+      "plus100": 0.04
+     },
+     "es_1d_parametric": 0.01067322342,
+     "class_gross_leverage": {
+      "EDELMETALL": 0.3333333333
+     },
+     "basis": "S-TF",
+     "mean_cost_sr": 0.05373477584,
+     "admissible": false,
+     "reasons": [
+      "Mindestdiversifikation: 1.0 < 8 effektive Instrumente"
+     ],
+     "notes": [],
+     "band": {
+      "share_below_band": 1.0,
+      "share_in_band": 0.0,
+      "share_at_cap": 0.0,
+      "share_zero": 0.398
+     }
+    },
+    "H10": {
+     "n": 1,
+     "effective_n": 1.0,
+     "D": 1.0,
+     "sigma_h": 0.18,
+     "sigma_target": 0.09,
+     "L_g_at_target": 0.5,
+     "scale_gap": 0.9407115773,
+     "scale_cap": 1.0,
+     "scale": 0.9407115773,
+     "sigma_achieved": 0.08466404195,
+     "L_g_achieved": 0.4703557886,
+     "gap_loss_at_target": {
+      "HIST": 0.05,
+      "K5": 0.02834733548,
+      "K10": 0.05669467095,
+      "DESIGN": 0.05669467095
+     },
+     "gap_loss_achieved": {
+      "HIST": 0.04703557886,
+      "K5": 0.02666666667,
+      "K10": 0.05333333333,
+      "DESIGN": 0.05333333333
+     },
+     "margin_to_equity": {
+      "basis": 0.02822134732,
+      "plus50": 0.04233202098,
+      "plus100": 0.05644269464
+     },
+     "es_1d_parametric": 0.01506063725,
+     "class_gross_leverage": {
+      "EDELMETALL": 0.4703557886
+     },
+     "basis": "S-TF",
+     "mean_cost_sr": 0.05373477584,
+     "admissible": false,
+     "reasons": [
+      "Mindestdiversifikation: 1.0 < 8 effektive Instrumente"
+     ],
+     "notes": [
+      "σ-Ziel zu 94% erreichbar; die Lückenregel skaliert automatisch"
+     ],
+     "band": {
+      "share_below_band": 1.0,
+      "share_in_band": 0.0,
+      "share_at_cap": 0.0,
+      "share_zero": 0.371
+     }
+    },
+    "H15": {
+     "n": 1,
+     "effective_n": 1.0,
+     "D": 1.0,
+     "sigma_h": 0.18,
+     "sigma_target": 0.12,
+     "L_g_at_target": 0.6666666667,
+     "scale_gap": 0.705533683,
+     "scale_cap": 1.0,
+     "scale": 0.705533683,
+     "sigma_achieved": 0.08466404195,
+     "L_g_achieved": 0.4703557886,
+     "gap_loss_at_target": {
+      "HIST": 0.06666666667,
+      "K5": 0.0377964473,
+      "K10": 0.0755928946,
+      "DESIGN": 0.0755928946
+     },
+     "gap_loss_achieved": {
+      "HIST": 0.04703557886,
+      "K5": 0.02666666667,
+      "K10": 0.05333333333,
+      "DESIGN": 0.05333333333
+     },
+     "margin_to_equity": {
+      "basis": 0.02822134732,
+      "plus50": 0.04233202098,
+      "plus100": 0.05644269464
+     },
+     "es_1d_parametric": 0.01506063725,
+     "class_gross_leverage": {
+      "EDELMETALL": 0.4703557886
+     },
+     "basis": "S-TF",
+     "mean_cost_sr": 0.05373477584,
+     "admissible": false,
+     "reasons": [
+      "Verlustbudget: Ziel-σ_p 12% nur zu 71% erreichbar (Lückenstress × Wochenendfaktor 11.3% > 8%); vom Grundprofil nicht unterscheidbar",
+      "Mindestdiversifikation: 1.0 < 10 effektive Instrumente"
+     ],
+     "notes": [],
+     "band": {
+      "share_below_band": 1.0,
+      "share_in_band": 0.0,
+      "share_at_cap": 0.0,
+      "share_zero": 0.382
+     }
+    },
+    "H20": {
+     "n": 1,
+     "effective_n": 1.0,
+     "D": 1.0,
+     "sigma_h": 0.18,
+     "sigma_target": 0.15,
+     "L_g_at_target": 0.8333333333,
+     "scale_gap": 0.5644269464,
+     "scale_cap": 1.0,
+     "scale": 0.5644269464,
+     "sigma_achieved": 0.08466404195,
+     "L_g_achieved": 0.4703557886,
+     "gap_loss_at_target": {
+      "HIST": 0.08333333333,
+      "K5": 0.04724555913,
+      "K10": 0.09449111825,
+      "DESIGN": 0.09449111825
+     },
+     "gap_loss_achieved": {
+      "HIST": 0.04703557886,
+      "K5": 0.02666666667,
+      "K10": 0.05333333333,
+      "DESIGN": 0.05333333333
+     },
+     "margin_to_equity": {
+      "basis": 0.02822134732,
+      "plus50": 0.04233202098,
+      "plus100": 0.05644269464
+     },
+     "es_1d_parametric": 0.01506063725,
+     "class_gross_leverage": {
+      "EDELMETALL": 0.4703557886
+     },
+     "basis": "S-TF",
+     "mean_cost_sr": 0.05373477584,
+     "admissible": false,
+     "reasons": [
+      "Verlustbudget: Ziel-σ_p 15% nur zu 56% erreichbar (Lückenstress × Wochenendfaktor 14.2% > 8%); vom Grundprofil nicht unterscheidbar",
+      "Mindestdiversifikation: 1.0 < 10 effektive Instrumente"
+     ],
+     "notes": [],
+     "band": {
+      "share_below_band": 1.0,
+      "share_in_band": 0.0,
+      "share_at_cap": 0.0,
+      "share_zero": 0.38575
+     }
+    }
+   },
+   "1000000": {
+    "H5": {
+     "n": 1,
+     "effective_n": 1.0,
+     "D": 1.0,
+     "sigma_h": 0.18,
+     "sigma_target": 0.06,
+     "L_g_at_target": 0.3333333333,
+     "scale_gap": 1.0,
+     "scale_cap": 1.0,
+     "scale": 1.0,
+     "sigma_achieved": 0.06,
+     "L_g_achieved": 0.3333333333,
+     "gap_loss_at_target": {
+      "HIST": 0.03333333333,
+      "K5": 0.01889822365,
+      "K10": 0.0377964473,
+      "DESIGN": 0.0377964473
+     },
+     "gap_loss_achieved": {
+      "HIST": 0.03333333333,
+      "K5": 0.01889822365,
+      "K10": 0.0377964473,
+      "DESIGN": 0.0377964473
+     },
+     "margin_to_equity": {
+      "basis": 0.02,
+      "plus50": 0.03,
+      "plus100": 0.04
+     },
+     "es_1d_parametric": 0.01067322342,
+     "class_gross_leverage": {
+      "EDELMETALL": 0.3333333333
+     },
+     "basis": "S-TF",
+     "mean_cost_sr": 0.05373477584,
+     "admissible": false,
+     "reasons": [
+      "Mindestdiversifikation: 1.0 < 8 effektive Instrumente"
+     ],
+     "notes": [],
+     "band": {
+      "share_below_band": 1.0,
+      "share_in_band": 0.0,
+      "share_at_cap": 0.0,
+      "share_zero": 0.38175
+     }
+    },
+    "H10": {
+     "n": 1,
+     "effective_n": 1.0,
+     "D": 1.0,
+     "sigma_h": 0.18,
+     "sigma_target": 0.09,
+     "L_g_at_target": 0.5,
+     "scale_gap": 0.9407115773,
+     "scale_cap": 1.0,
+     "scale": 0.9407115773,
+     "sigma_achieved": 0.08466404195,
+     "L_g_achieved": 0.4703557886,
+     "gap_loss_at_target": {
+      "HIST": 0.05,
+      "K5": 0.02834733548,
+      "K10": 0.05669467095,
+      "DESIGN": 0.05669467095
+     },
+     "gap_loss_achieved": {
+      "HIST": 0.04703557886,
+      "K5": 0.02666666667,
+      "K10": 0.05333333333,
+      "DESIGN": 0.05333333333
+     },
+     "margin_to_equity": {
+      "basis": 0.02822134732,
+      "plus50": 0.04233202098,
+      "plus100": 0.05644269464
+     },
+     "es_1d_parametric": 0.01506063725,
+     "class_gross_leverage": {
+      "EDELMETALL": 0.4703557886
+     },
+     "basis": "S-TF",
+     "mean_cost_sr": 0.05373477584,
+     "admissible": false,
+     "reasons": [
+      "Mindestdiversifikation: 1.0 < 8 effektive Instrumente"
+     ],
+     "notes": [
+      "σ-Ziel zu 94% erreichbar; die Lückenregel skaliert automatisch"
+     ],
+     "band": {
+      "share_below_band": 1.0,
+      "share_in_band": 0.0,
+      "share_at_cap": 0.0,
+      "share_zero": 0.38775
+     }
+    },
+    "H15": {
+     "n": 1,
+     "effective_n": 1.0,
+     "D": 1.0,
+     "sigma_h": 0.18,
+     "sigma_target": 0.12,
+     "L_g_at_target": 0.6666666667,
+     "scale_gap": 0.705533683,
+     "scale_cap": 1.0,
+     "scale": 0.705533683,
+     "sigma_achieved": 0.08466404195,
+     "L_g_achieved": 0.4703557886,
+     "gap_loss_at_target": {
+      "HIST": 0.06666666667,
+      "K5": 0.0377964473,
+      "K10": 0.0755928946,
+      "DESIGN": 0.0755928946
+     },
+     "gap_loss_achieved": {
+      "HIST": 0.04703557886,
+      "K5": 0.02666666667,
+      "K10": 0.05333333333,
+      "DESIGN": 0.05333333333
+     },
+     "margin_to_equity": {
+      "basis": 0.02822134732,
+      "plus50": 0.04233202098,
+      "plus100": 0.05644269464
+     },
+     "es_1d_parametric": 0.01506063725,
+     "class_gross_leverage": {
+      "EDELMETALL": 0.4703557886
+     },
+     "basis": "S-TF",
+     "mean_cost_sr": 0.05373477584,
+     "admissible": false,
+     "reasons": [
+      "Verlustbudget: Ziel-σ_p 12% nur zu 71% erreichbar (Lückenstress × Wochenendfaktor 11.3% > 8%); vom Grundprofil nicht unterscheidbar",
+      "Mindestdiversifikation: 1.0 < 10 effektive Instrumente"
+     ],
+     "notes": [],
+     "band": {
+      "share_below_band": 1.0,
+      "share_in_band": 0.0,
+      "share_at_cap": 0.0,
+      "share_zero": 0.38525
+     }
+    },
+    "H20": {
+     "n": 1,
+     "effective_n": 1.0,
+     "D": 1.0,
+     "sigma_h": 0.18,
+     "sigma_target": 0.15,
+     "L_g_at_target": 0.8333333333,
+     "scale_gap": 0.5644269464,
+     "scale_cap": 1.0,
+     "scale": 0.5644269464,
+     "sigma_achieved": 0.08466404195,
+     "L_g_achieved": 0.4703557886,
+     "gap_loss_at_target": {
+      "HIST": 0.08333333333,
+      "K5": 0.04724555913,
+      "K10": 0.09449111825,
+      "DESIGN": 0.09449111825
+     },
+     "gap_loss_achieved": {
+      "HIST": 0.04703557886,
+      "K5": 0.02666666667,
+      "K10": 0.05333333333,
+      "DESIGN": 0.05333333333
+     },
+     "margin_to_equity": {
+      "basis": 0.02822134732,
+      "plus50": 0.04233202098,
+      "plus100": 0.05644269464
+     },
+     "es_1d_parametric": 0.01506063725,
+     "class_gross_leverage": {
+      "EDELMETALL": 0.4703557886
+     },
+     "basis": "S-TF",
+     "mean_cost_sr": 0.05373477584,
+     "admissible": false,
+     "reasons": [
+      "Verlustbudget: Ziel-σ_p 15% nur zu 56% erreichbar (Lückenstress × Wochenendfaktor 14.2% > 8%); vom Grundprofil nicht unterscheidbar",
+      "Mindestdiversifikation: 1.0 < 10 effektive Instrumente"
+     ],
+     "notes": [],
+     "band": {
+      "share_below_band": 1.0,
+      "share_in_band": 0.0,
+      "share_at_cap": 0.0,
+      "share_zero": 0.392
+     }
+    }
+   },
+   "5000000": {
+    "H5": {
+     "n": 4,
+     "effective_n": 4.0,
+     "D": 1.737488971,
+     "sigma_h": 0.2574383859,
+     "sigma_target": 0.06,
+     "L_g_at_target": 0.4049486944,
+     "scale_gap": 0.7426736799,
+     "scale_cap": 1.0,
+     "scale": 0.7426736799,
+     "sigma_achieved": 0.0445604208,
+     "L_g_achieved": 0.3007447371,
+     "gap_loss_at_target": {
+      "HIST": 0.06909362764,
+      "K5": 0.03283545517,
+      "K10": 0.06567091033,
+      "DESIGN": 0.07181260731
+     },
+     "gap_loss_achieved": {
+      "HIST": 0.0513140187,
+      "K5": 0.02438602832,
+      "K10": 0.04877205664,
+      "DESIGN": 0.05333333333
+     },
+     "margin_to_equity": {
+      "basis": 0.02267625303,
+      "plus50": 0.03401437954,
+      "plus100": 0.04535250605
+     },
+     "es_1d_parametric": 0.007926722112,
+     "class_gross_leverage": {
+      "EDELMETALL": 0.1075322773,
+      "ENERGIE": 0.1157892201,
+      "INDUSTRIEMETALL": 0.07742323968
+     },
+     "basis": "S-TF",
+     "mean_cost_sr": 0.04191393638,
+     "admissible": false,
+     "reasons": [
+      "Mindestdiversifikation: 4.0 < 8 effektive Instrumente"
+     ],
+     "notes": [
+      "H5 läuft mit σ_p 4.5% statt 6%; die Lückenregel skaliert automatisch"
+     ],
+     "band": {
+      "share_below_band": 1.0,
+      "share_in_band": 0.0,
+      "share_at_cap": 0.0,
+      "share_zero": 0.02025
+     }
+    },
+    "H10": {
+     "n": 4,
+     "effective_n": 4.0,
+     "D": 1.737488971,
+     "sigma_h": 0.2574383859,
+     "sigma_target": 0.09,
+     "L_g_at_target": 0.6074230416,
+     "scale_gap": 0.4951157866,
+     "scale_cap": 1.0,
+     "scale": 0.4951157866,
+     "sigma_achieved": 0.0445604208,
+     "L_g_achieved": 0.3007447371,
+     "gap_loss_at_target": {
+      "HIST": 0.1036404415,
+      "K5": 0.04925318275,
+      "K10": 0.0985063655,
+      "DESIGN": 0.107718911
+     },
+     "gap_loss_achieved": {
+      "HIST": 0.0513140187,
+      "K5": 0.02438602832,
+      "K10": 0.04877205664,
+      "DESIGN": 0.05333333333
+     },
+     "margin_to_equity": {
+      "basis": 0.02267625303,
+      "plus50": 0.03401437954,
+      "plus100": 0.04535250605
+     },
+     "es_1d_parametric": 0.007926722112,
+     "class_gross_leverage": {
+      "EDELMETALL": 0.1075322773,
+      "ENERGIE": 0.1157892201,
+      "INDUSTRIEMETALL": 0.07742323968
+     },
+     "basis": "S-TF",
+     "mean_cost_sr": 0.04191393638,
+     "admissible": false,
+     "reasons": [
+      "Verlustbudget: Ziel-σ_p 9% nur zu 50% erreichbar (Lückenstress × Wochenendfaktor 16.2% > 8%); vom Grundprofil nicht unterscheidbar",
+      "Mindestdiversifikation: 4.0 < 8 effektive Instrumente"
+     ],
+     "notes": [],
+     "band": {
+      "share_below_band": 1.0,
+      "share_in_band": 0.0,
+      "share_at_cap": 0.0,
+      "share_zero": 0.02025
+     }
+    },
+    "H15": {
+     "n": 4,
+     "effective_n": 4.0,
+     "D": 1.737488971,
+     "sigma_h": 0.2574383859,
+     "sigma_target": 0.12,
+     "L_g_at_target": 0.8098973888,
+     "scale_gap": 0.37133684,
+     "scale_cap": 1.0,
+     "scale": 0.37133684,
+     "sigma_achieved": 0.0445604208,
+     "L_g_achieved": 0.3007447371,
+     "gap_loss_at_target": {
+      "HIST": 0.1381872553,
+      "K5": 0.06567091033,
+      "K10": 0.1313418207,
+      "DESIGN": 0.1436252146
+     },
+     "gap_loss_achieved": {
+      "HIST": 0.0513140187,
+      "K5": 0.02438602832,
+      "K10": 0.04877205664,
+      "DESIGN": 0.05333333333
+     },
+     "margin_to_equity": {
+      "basis": 0.02267625303,
+      "plus50": 0.03401437954,
+      "plus100": 0.04535250605
+     },
+     "es_1d_parametric": 0.007926722112,
+     "class_gross_leverage": {
+      "EDELMETALL": 0.1075322773,
+      "ENERGIE": 0.1157892201,
+      "INDUSTRIEMETALL": 0.07742323968
+     },
+     "basis": "S-TF",
+     "mean_cost_sr": 0.04191393638,
+     "admissible": false,
+     "reasons": [
+      "Verlustbudget: Ziel-σ_p 12% nur zu 37% erreichbar (Lückenstress × Wochenendfaktor 21.5% > 8%); vom Grundprofil nicht unterscheidbar",
+      "Mindestdiversifikation: 4.0 < 10 effektive Instrumente"
+     ],
+     "notes": [],
+     "band": {
+      "share_below_band": 1.0,
+      "share_in_band": 0.0,
+      "share_at_cap": 0.0,
+      "share_zero": 0.0175
+     }
+    },
+    "H20": {
+     "n": 4,
+     "effective_n": 4.0,
+     "D": 1.737488971,
+     "sigma_h": 0.2574383859,
+     "sigma_target": 0.15,
+     "L_g_at_target": 1.012371736,
+     "scale_gap": 0.297069472,
+     "scale_cap": 1.0,
+     "scale": 0.297069472,
+     "sigma_achieved": 0.0445604208,
+     "L_g_achieved": 0.3007447371,
+     "gap_loss_at_target": {
+      "HIST": 0.1727340691,
+      "K5": 0.08208863791,
+      "K10": 0.1641772758,
+      "DESIGN": 0.1795315183
+     },
+     "gap_loss_achieved": {
+      "HIST": 0.0513140187,
+      "K5": 0.02438602832,
+      "K10": 0.04877205664,
+      "DESIGN": 0.05333333333
+     },
+     "margin_to_equity": {
+      "basis": 0.02267625303,
+      "plus50": 0.03401437954,
+      "plus100": 0.04535250605
+     },
+     "es_1d_parametric": 0.007926722112,
+     "class_gross_leverage": {
+      "EDELMETALL": 0.1075322773,
+      "ENERGIE": 0.1157892201,
+      "INDUSTRIEMETALL": 0.07742323968
+     },
+     "basis": "S-TF",
+     "mean_cost_sr": 0.04191393638,
+     "admissible": false,
+     "reasons": [
+      "Verlustbudget: Ziel-σ_p 15% nur zu 30% erreichbar (Lückenstress × Wochenendfaktor 26.9% > 8%); vom Grundprofil nicht unterscheidbar",
+      "Mindestdiversifikation: 4.0 < 10 effektive Instrumente"
+     ],
+     "notes": [],
+     "band": {
+      "share_below_band": 1.0,
+      "share_in_band": 0.0,
+      "share_at_cap": 0.0,
+      "share_zero": 0.02675
+     }
+    }
+   },
+   "25000000": {
+    "H5": {
+     "n": 3,
+     "effective_n": 3.0,
+     "D": 1.5,
+     "sigma_h": 0.2554054054,
+     "sigma_target": 0.06,
+     "L_g_at_target": 0.3523809524,
+     "scale_gap": 0.9005203287,
+     "scale_cap": 1.0,
+     "scale": 0.9005203287,
+     "sigma_achieved": 0.05403121972,
+     "L_g_achieved": 0.3173262111,
+     "gap_loss_at_target": {
+      "HIST": 0.0480952381,
+      "K5": 0.02834733548,
+      "K10": 0.05669467095,
+      "DESIGN": 0.05922501873
+     },
+     "gap_loss_achieved": {
+      "HIST": 0.04331073962,
+      "K5": 0.02552735186,
+      "K10": 0.05105470372,
+      "DESIGN": 0.05333333333
+     },
+     "margin_to_equity": {
+      "basis": 0.02212707093,
+      "plus50": 0.0331906064,
+      "plus100": 0.04425414187
+     },
+     "es_1d_parametric": 0.00961145466,
+     "class_gross_leverage": {
+      "EDELMETALL": 0.2401387543,
+      "ENERGIE": 0.07718745675
+     },
+     "basis": "S-TF",
+     "mean_cost_sr": 0.04519132231,
+     "admissible": false,
+     "reasons": [
+      "Mindestdiversifikation: 3.0 < 8 effektive Instrumente"
+     ],
+     "notes": [
+      "H5 läuft mit σ_p 5.4% statt 6%; die Lückenregel skaliert automatisch"
+     ],
+     "band": {
+      "share_below_band": 1.0,
+      "share_in_band": 0.0,
+      "share_at_cap": 0.0,
+      "share_zero": 0.05775
+     }
+    },
+    "H10": {
+     "n": 3,
+     "effective_n": 3.0,
+     "D": 1.5,
+     "sigma_h": 0.2554054054,
+     "sigma_target": 0.09,
+     "L_g_at_target": 0.5285714286,
+     "scale_gap": 0.6003468858,
+     "scale_cap": 1.0,
+     "scale": 0.6003468858,
+     "sigma_achieved": 0.05403121972,
+     "L_g_achieved": 0.3173262111,
+     "gap_loss_at_target": {
+      "HIST": 0.07214285714,
+      "K5": 0.04252100321,
+      "K10": 0.08504200643,
+      "DESIGN": 0.08883752809
+     },
+     "gap_loss_achieved": {
+      "HIST": 0.04331073962,
+      "K5": 0.02552735186,
+      "K10": 0.05105470372,
+      "DESIGN": 0.05333333333
+     },
+     "margin_to_equity": {
+      "basis": 0.02212707093,
+      "plus50": 0.0331906064,
+      "plus100": 0.04425414187
+     },
+     "es_1d_parametric": 0.00961145466,
+     "class_gross_leverage": {
+      "EDELMETALL": 0.2401387543,
+      "ENERGIE": 0.07718745675
+     },
+     "basis": "S-TF",
+     "mean_cost_sr": 0.04519132231,
+     "admissible": false,
+     "reasons": [
+      "Verlustbudget: Ziel-σ_p 9% nur zu 60% erreichbar (Lückenstress × Wochenendfaktor 13.3% > 8%); vom Grundprofil nicht unterscheidbar",
+      "Mindestdiversifikation: 3.0 < 8 effektive Instrumente"
+     ],
+     "notes": [],
+     "band": {
+      "share_below_band": 1.0,
+      "share_in_band": 0.0,
+      "share_at_cap": 0.0,
+      "share_zero": 0.05475
+     }
+    },
+    "H15": {
+     "n": 3,
+     "effective_n": 3.0,
+     "D": 1.5,
+     "sigma_h": 0.2554054054,
+     "sigma_target": 0.12,
+     "L_g_at_target": 0.7047619048,
+     "scale_gap": 0.4502601643,
+     "scale_cap": 1.0,
+     "scale": 0.4502601643,
+     "sigma_achieved": 0.05403121972,
+     "L_g_achieved": 0.3173262111,
+     "gap_loss_at_target": {
+      "HIST": 0.09619047619,
+      "K5": 0.05669467095,
+      "K10": 0.1133893419,
+      "DESIGN": 0.1184500375
+     },
+     "gap_loss_achieved": {
+      "HIST": 0.04331073962,
+      "K5": 0.02552735186,
+      "K10": 0.05105470372,
+      "DESIGN": 0.05333333333
+     },
+     "margin_to_equity": {
+      "basis": 0.02212707093,
+      "plus50": 0.0331906064,
+      "plus100": 0.04425414187
+     },
+     "es_1d_parametric": 0.00961145466,
+     "class_gross_leverage": {
+      "EDELMETALL": 0.2401387543,
+      "ENERGIE": 0.07718745675
+     },
+     "basis": "S-TF",
+     "mean_cost_sr": 0.04519132231,
+     "admissible": false,
+     "reasons": [
+      "Verlustbudget: Ziel-σ_p 12% nur zu 45% erreichbar (Lückenstress × Wochenendfaktor 17.8% > 8%); vom Grundprofil nicht unterscheidbar",
+      "Mindestdiversifikation: 3.0 < 10 effektive Instrumente"
+     ],
+     "notes": [],
+     "band": {
+      "share_below_band": 1.0,
+      "share_in_band": 0.0,
+      "share_at_cap": 0.0,
+      "share_zero": 0.054
+     }
+    },
+    "H20": {
+     "n": 3,
+     "effective_n": 3.0,
+     "D": 1.5,
+     "sigma_h": 0.2554054054,
+     "sigma_target": 0.15,
+     "L_g_at_target": 0.880952381,
+     "scale_gap": 0.3602081315,
+     "scale_cap": 1.0,
+     "scale": 0.3602081315,
+     "sigma_achieved": 0.05403121972,
+     "L_g_achieved": 0.3173262111,
+     "gap_loss_at_target": {
+      "HIST": 0.1202380952,
+      "K5": 0.07086833869,
+      "K10": 0.1417366774,
+      "DESIGN": 0.1480625468
+     },
+     "gap_loss_achieved": {
+      "HIST": 0.04331073962,
+      "K5": 0.02552735186,
+      "K10": 0.05105470372,
+      "DESIGN": 0.05333333333
+     },
+     "margin_to_equity": {
+      "basis": 0.02212707093,
+      "plus50": 0.0331906064,
+      "plus100": 0.04425414187
+     },
+     "es_1d_parametric": 0.00961145466,
+     "class_gross_leverage": {
+      "EDELMETALL": 0.2401387543,
+      "ENERGIE": 0.07718745675
+     },
+     "basis": "S-TF",
+     "mean_cost_sr": 0.04519132231,
+     "admissible": false,
+     "reasons": [
+      "Verlustbudget: Ziel-σ_p 15% nur zu 36% erreichbar (Lückenstress × Wochenendfaktor 22.2% > 8%); vom Grundprofil nicht unterscheidbar",
+      "Mindestdiversifikation: 3.0 < 10 effektive Instrumente"
+     ],
+     "notes": [],
+     "band": {
+      "share_below_band": 1.0,
+      "share_in_band": 0.0,
+      "share_at_cap": 0.0,
+      "share_zero": 0.059
+     }
+    }
+   },
+   "100000000": {
+    "H5": {
+     "n": 0,
+     "admissible": false,
+     "reasons": [
+      "Leeres Universum: kein Instrument erfüllt die Zulassung"
+     ]
+    },
+    "H10": {
+     "n": 0,
+     "admissible": false,
+     "reasons": [
+      "Leeres Universum: kein Instrument erfüllt die Zulassung"
+     ]
+    },
+    "H15": {
+     "n": 0,
+     "admissible": false,
+     "reasons": [
+      "Leeres Universum: kein Instrument erfüllt die Zulassung"
+     ]
+    },
+    "H20": {
+     "n": 0,
+     "admissible": false,
+     "reasons": [
+      "Leeres Universum: kein Instrument erfüllt die Zulassung"
+     ]
+    }
+   }
+  },
+  "U-ALLE": {
+   "250000": {
+    "H5": {
+     "n": 6,
+     "effective_n": 6.0,
+     "D": 1.926483897,
+     "sigma_h": 0.1306828003,
+     "sigma_target": 0.06,
+     "L_g_at_target": 0.8845007417,
+     "scale_gap": 0.6176081039,
+     "scale_cap": 1.0,
+     "scale": 0.6176081039,
+     "sigma_achieved": 0.03705648624,
+     "L_g_achieved": 0.546274826,
+     "gap_loss_at_target": {
+      "HIST": 0.08081294158,
+      "K5": 0.03640712355,
+      "K10": 0.0728142471,
+      "DESIGN": 0.08635465272
+     },
+     "gap_loss_achieved": {
+      "HIST": 0.04991072762,
+      "K5": 0.02248533454,
+      "K10": 0.04497066909,
+      "DESIGN": 0.05333333333
+     },
+     "margin_to_equity": {
+      "basis": 0.0221390031,
+      "plus50": 0.03320850466,
+      "plus100": 0.04427800621
+     },
+     "es_1d_parametric": 0.006591869277,
+     "class_gross_leverage": {
+      "EDELMETALL": 0.06610067039,
+      "ENERGIE": 0.0538248316,
+      "FX": 0.426349324
+     },
+     "basis": "S-TF",
+     "mean_cost_sr": 0.4443654625,
+     "admissible": false,
+     "reasons": [
+      "Mindestdiversifikation: 6.0 < 8 effektive Instrumente"
+     ],
+     "notes": [
+      "H5 läuft mit σ_p 3.7% statt 6%; die Lückenregel skaliert automatisch"
+     ],
+     "band": {
+      "share_below_band": 1.0,
+      "share_in_band": 0.0,
+      "share_at_cap": 0.0,
+      "share_zero": 0.00375
+     }
+    },
+    "H10": {
+     "n": 6,
+     "effective_n": 6.0,
+     "D": 1.926483897,
+     "sigma_h": 0.1306828003,
+     "sigma_target": 0.09,
+     "L_g_at_target": 1.326751113,
+     "scale_gap": 0.411738736,
+     "scale_cap": 1.0,
+     "scale": 0.411738736,
+     "sigma_achieved": 0.03705648624,
+     "L_g_achieved": 0.546274826,
+     "gap_loss_at_target": {
+      "HIST": 0.1212194124,
+      "K5": 0.05461068532,
+      "K10": 0.1092213706,
+      "DESIGN": 0.1295319791
+     },
+     "gap_loss_achieved": {
+      "HIST": 0.04991072762,
+      "K5": 0.02248533454,
+      "K10": 0.04497066909,
+      "DESIGN": 0.05333333333
+     },
+     "margin_to_equity": {
+      "basis": 0.0221390031,
+      "plus50": 0.03320850466,
+      "plus100": 0.04427800621
+     },
+     "es_1d_parametric": 0.006591869277,
+     "class_gross_leverage": {
+      "EDELMETALL": 0.06610067039,
+      "ENERGIE": 0.0538248316,
+      "FX": 0.426349324
+     },
+     "basis": "S-TF",
+     "mean_cost_sr": 0.4443654625,
+     "admissible": false,
+     "reasons": [
+      "Verlustbudget: Ziel-σ_p 9% nur zu 41% erreichbar (Lückenstress × Wochenendfaktor 19.4% > 8%); vom Grundprofil nicht unterscheidbar",
+      "Mindestdiversifikation: 6.0 < 8 effektive Instrumente"
+     ],
+     "notes": [],
+     "band": {
+      "share_below_band": 1.0,
+      "share_in_band": 0.0,
+      "share_at_cap": 0.0,
+      "share_zero": 0.00225
+     }
+    },
+    "H15": {
+     "n": 6,
+     "effective_n": 6.0,
+     "D": 1.926483897,
+     "sigma_h": 0.1306828003,
+     "sigma_target": 0.12,
+     "L_g_at_target": 1.769001483,
+     "scale_gap": 0.308804052,
+     "scale_cap": 1.0,
+     "scale": 0.308804052,
+     "sigma_achieved": 0.03705648624,
+     "L_g_achieved": 0.546274826,
+     "gap_loss_at_target": {
+      "HIST": 0.1616258832,
+      "K5": 0.0728142471,
+      "K10": 0.1456284942,
+      "DESIGN": 0.1727093054
+     },
+     "gap_loss_achieved": {
+      "HIST": 0.04991072762,
+      "K5": 0.02248533454,
+      "K10": 0.04497066909,
+      "DESIGN": 0.05333333333
+     },
+     "margin_to_equity": {
+      "basis": 0.0221390031,
+      "plus50": 0.03320850466,
+      "plus100": 0.04427800621
+     },
+     "es_1d_parametric": 0.006591869277,
+     "class_gross_leverage": {
+      "EDELMETALL": 0.06610067039,
+      "ENERGIE": 0.0538248316,
+      "FX": 0.426349324
+     },
+     "basis": "S-TF",
+     "mean_cost_sr": 0.4443654625,
+     "admissible": false,
+     "reasons": [
+      "Verlustbudget: Ziel-σ_p 12% nur zu 31% erreichbar (Lückenstress × Wochenendfaktor 25.9% > 8%); vom Grundprofil nicht unterscheidbar",
+      "Mindestdiversifikation: 6.0 < 10 effektive Instrumente"
+     ],
+     "notes": [],
+     "band": {
+      "share_below_band": 1.0,
+      "share_in_band": 0.0,
+      "share_at_cap": 0.0,
+      "share_zero": 0.00325
+     }
+    },
+    "H20": {
+     "n": 6,
+     "effective_n": 6.0,
+     "D": 1.926483897,
+     "sigma_h": 0.1306828003,
+     "sigma_target": 0.15,
+     "L_g_at_target": 2.211251854,
+     "scale_gap": 0.2470432416,
+     "scale_cap": 1.0,
+     "scale": 0.2470432416,
+     "sigma_achieved": 0.03705648624,
+     "L_g_achieved": 0.546274826,
+     "gap_loss_at_target": {
+      "HIST": 0.2020323539,
+      "K5": 0.09101780887,
+      "K10": 0.1820356177,
+      "DESIGN": 0.2158866318
+     },
+     "gap_loss_achieved": {
+      "HIST": 0.04991072762,
+      "K5": 0.02248533454,
+      "K10": 0.04497066909,
+      "DESIGN": 0.05333333333
+     },
+     "margin_to_equity": {
+      "basis": 0.0221390031,
+      "plus50": 0.03320850466,
+      "plus100": 0.04427800621
+     },
+     "es_1d_parametric": 0.006591869277,
+     "class_gross_leverage": {
+      "EDELMETALL": 0.06610067039,
+      "ENERGIE": 0.0538248316,
+      "FX": 0.426349324
+     },
+     "basis": "S-TF",
+     "mean_cost_sr": 0.4443654625,
+     "admissible": false,
+     "reasons": [
+      "Verlustbudget: Ziel-σ_p 15% nur zu 25% erreichbar (Lückenstress × Wochenendfaktor 32.4% > 8%); vom Grundprofil nicht unterscheidbar",
+      "Mindestdiversifikation: 6.0 < 10 effektive Instrumente"
+     ],
+     "notes": [],
+     "band": {
+      "share_below_band": 1.0,
+      "share_in_band": 0.0,
+      "share_at_cap": 0.0,
+      "share_zero": 0.00325
+     }
+    }
+   },
+   "500000": {
+    "H5": {
+     "n": 10,
+     "effective_n": 10.0,
+     "D": 2.177001721,
+     "sigma_h": 0.06285850474,
+     "sigma_target": 0.06,
+     "L_g_at_target": 2.078002075,
+     "scale_gap": 0.5415961367,
+     "scale_cap": 1.0,
+     "scale": 0.5415961367,
+     "sigma_achieved": 0.0324957682,
+     "L_g_achieved": 1.125437896,
+     "gap_loss_at_target": {
+      "HIST": 0.0904583195,
+      "K5": 0.04114146541,
+      "K10": 0.08228293082,
+      "DESIGN": 0.09847436073
+     },
+     "gap_loss_achieved": {
+      "HIST": 0.04899187637,
+      "K5": 0.02228205872,
+      "K10": 0.04456411745,
+      "DESIGN": 0.05333333333
+     },
+     "margin_to_equity": {
+      "basis": 0.02433689665,
+      "plus50": 0.03650534498,
+      "plus100": 0.0486737933
+     },
+     "es_1d_parametric": 0.005780576568,
+     "class_gross_leverage": {
+      "ANLEIHE_KURZ": 0.4421458956,
+      "ANLEIHE_MITTEL": 0.1861666929,
+      "EDELMETALL": 0.03930185739,
+      "ENERGIE": 0.03200294101,
+      "FX": 0.4258205087
+     },
+     "basis": "S-TF",
+     "mean_cost_sr": 0.4018005042,
+     "admissible": true,
+     "reasons": [],
+     "notes": [
+      "H5 läuft mit σ_p 3.2% statt 6%; die Lückenregel skaliert automatisch"
+     ],
+     "band": {
+      "share_below_band": 1.0,
+      "share_in_band": 0.0,
+      "share_at_cap": 0.0,
+      "share_zero": 0.0
+     }
+    },
+    "H10": {
+     "n": 10,
+     "effective_n": 10.0,
+     "D": 2.177001721,
+     "sigma_h": 0.06285850474,
+     "sigma_target": 0.09,
+     "L_g_at_target": 3.117003112,
+     "scale_gap": 0.3610640911,
+     "scale_cap": 1.0,
+     "scale": 0.3610640911,
+     "sigma_achieved": 0.0324957682,
+     "L_g_achieved": 1.125437896,
+     "gap_loss_at_target": {
+      "HIST": 0.1356874792,
+      "K5": 0.06171219811,
+      "K10": 0.1234243962,
+      "DESIGN": 0.1477115411
+     },
+     "gap_loss_achieved": {
+      "HIST": 0.04899187637,
+      "K5": 0.02228205872,
+      "K10": 0.04456411745,
+      "DESIGN": 0.05333333333
+     },
+     "margin_to_equity": {
+      "basis": 0.02433689665,
+      "plus50": 0.03650534498,
+      "plus100": 0.0486737933
+     },
+     "es_1d_parametric": 0.005780576568,
+     "class_gross_leverage": {
+      "ANLEIHE_KURZ": 0.4421458956,
+      "ANLEIHE_MITTEL": 0.1861666929,
+      "EDELMETALL": 0.03930185739,
+      "ENERGIE": 0.03200294101,
+      "FX": 0.4258205087
+     },
+     "basis": "S-TF",
+     "mean_cost_sr": 0.4018005042,
+     "admissible": false,
+     "reasons": [
+      "Verlustbudget: Ziel-σ_p 9% nur zu 36% erreichbar (Lückenstress × Wochenendfaktor 22.2% > 8%); vom Grundprofil nicht unterscheidbar"
+     ],
+     "notes": [],
+     "band": {
+      "share_below_band": 1.0,
+      "share_in_band": 0.0,
+      "share_at_cap": 0.0,
+      "share_zero": 0.0
+     }
+    },
+    "H15": {
+     "n": 10,
+     "effective_n": 10.0,
+     "D": 2.177001721,
+     "sigma_h": 0.06285850474,
+     "sigma_target": 0.12,
+     "L_g_at_target": 4.156004149,
+     "scale_gap": 0.2707980683,
+     "scale_cap": 1.0,
+     "scale": 0.2707980683,
+     "sigma_achieved": 0.0324957682,
+     "L_g_achieved": 1.125437896,
+     "gap_loss_at_target": {
+      "HIST": 0.180916639,
+      "K5": 0.08228293082,
+      "K10": 0.1645658616,
+      "DESIGN": 0.1969487215
+     },
+     "gap_loss_achieved": {
+      "HIST": 0.04899187637,
+      "K5": 0.02228205872,
+      "K10": 0.04456411745,
+      "DESIGN": 0.05333333333
+     },
+     "margin_to_equity": {
+      "basis": 0.02433689665,
+      "plus50": 0.03650534498,
+      "plus100": 0.0486737933
+     },
+     "es_1d_parametric": 0.005780576568,
+     "class_gross_leverage": {
+      "ANLEIHE_KURZ": 0.4421458956,
+      "ANLEIHE_MITTEL": 0.1861666929,
+      "EDELMETALL": 0.03930185739,
+      "ENERGIE": 0.03200294101,
+      "FX": 0.4258205087
+     },
+     "basis": "S-TF",
+     "mean_cost_sr": 0.4018005042,
+     "admissible": false,
+     "reasons": [
+      "Verlustbudget: Ziel-σ_p 12% nur zu 27% erreichbar (Lückenstress × Wochenendfaktor 29.5% > 8%); vom Grundprofil nicht unterscheidbar"
+     ],
+     "notes": [],
+     "band": {
+      "share_below_band": 1.0,
+      "share_in_band": 0.0,
+      "share_at_cap": 0.0,
+      "share_zero": 0.0
+     }
+    },
+    "H20": {
+     "n": 10,
+     "effective_n": 10.0,
+     "D": 2.177001721,
+     "sigma_h": 0.06285850474,
+     "sigma_target": 0.15,
+     "L_g_at_target": 5.195005186,
+     "scale_gap": 0.2166384547,
+     "scale_cap": 1.0,
+     "scale": 0.2166384547,
+     "sigma_achieved": 0.0324957682,
+     "L_g_achieved": 1.125437896,
+     "gap_loss_at_target": {
+      "HIST": 0.2261457987,
+      "K5": 0.1028536635,
+      "K10": 0.205707327,
+      "DESIGN": 0.2461859018
+     },
+     "gap_loss_achieved": {
+      "HIST": 0.04899187637,
+      "K5": 0.02228205872,
+      "K10": 0.04456411745,
+      "DESIGN": 0.05333333333
+     },
+     "margin_to_equity": {
+      "basis": 0.02433689665,
+      "plus50": 0.03650534498,
+      "plus100": 0.0486737933
+     },
+     "es_1d_parametric": 0.005780576568,
+     "class_gross_leverage": {
+      "ANLEIHE_KURZ": 0.4421458956,
+      "ANLEIHE_MITTEL": 0.1861666929,
+      "EDELMETALL": 0.03930185739,
+      "ENERGIE": 0.03200294101,
+      "FX": 0.4258205087
+     },
+     "basis": "S-TF",
+     "mean_cost_sr": 0.4018005042,
+     "admissible": false,
+     "reasons": [
+      "Verlustbudget: Ziel-σ_p 15% nur zu 22% erreichbar (Lückenstress × Wochenendfaktor 36.9% > 8%); vom Grundprofil nicht unterscheidbar"
+     ],
+     "notes": [],
+     "band": {
+      "share_below_band": 1.0,
+      "share_in_band": 0.0,
+      "share_at_cap": 0.0,
+      "share_zero": 0.0
+     }
+    }
+   },
+   "1000000": {
+    "H5": {
+     "n": 15,
+     "effective_n": 15.0,
+     "D": 2.374678451,
+     "sigma_h": 0.07302121608,
+     "sigma_target": 0.06,
+     "L_g_at_target": 1.951223421,
+     "scale_gap": 0.5185051933,
+     "scale_cap": 1.0,
+     "scale": 0.5185051933,
+     "sigma_achieved": 0.0311103116,
+     "L_g_achieved": 1.011719477,
+     "gap_loss_at_target": {
+      "HIST": 0.09097832934,
+      "K5": 0.04487720446,
+      "K10": 0.08975440892,
+      "DESIGN": 0.1028597862
+     },
+     "gap_loss_achieved": {
+      "HIST": 0.04717273624,
+      "K5": 0.02326906357,
+      "K10": 0.04653812715,
+      "DESIGN": 0.05333333333
+     },
+     "margin_to_equity": {
+      "basis": 0.02388941672,
+      "plus50": 0.03583412507,
+      "plus100": 0.04777883343
+     },
+     "es_1d_parametric": 0.005534121771,
+     "class_gross_leverage": {
+      "AGRAR": 0.04477393124,
+      "ANLEIHE_KURZ": 0.3078207773,
+      "ANLEIHE_MITTEL": 0.2145248248,
+      "EDELMETALL": 0.02736184687,
+      "ENERGIE": 0.02228036102,
+      "FX": 0.3949577358
+     },
+     "basis": "S-TF",
+     "mean_cost_sr": 0.3354310454,
+     "admissible": true,
+     "reasons": [],
+     "notes": [
+      "H5 läuft mit σ_p 3.1% statt 6%; die Lückenregel skaliert automatisch"
+     ],
+     "band": {
+      "share_below_band": 1.0,
+      "share_in_band": 0.0,
+      "share_at_cap": 0.0,
+      "share_zero": 0.0
+     }
+    },
+    "H10": {
+     "n": 15,
+     "effective_n": 15.0,
+     "D": 2.374678451,
+     "sigma_h": 0.07302121608,
+     "sigma_target": 0.09,
+     "L_g_at_target": 2.926835131,
+     "scale_gap": 0.3456701289,
+     "scale_cap": 1.0,
+     "scale": 0.3456701289,
+     "sigma_achieved": 0.0311103116,
+     "L_g_achieved": 1.011719477,
+     "gap_loss_at_target": {
+      "HIST": 0.136467494,
+      "K5": 0.06731580669,
+      "K10": 0.1346316134,
+      "DESIGN": 0.1542896793
+     },
+     "gap_loss_achieved": {
+      "HIST": 0.04717273624,
+      "K5": 0.02326906357,
+      "K10": 0.04653812715,
+      "DESIGN": 0.05333333333
+     },
+     "margin_to_equity": {
+      "basis": 0.02388941672,
+      "plus50": 0.03583412507,
+      "plus100": 0.04777883343
+     },
+     "es_1d_parametric": 0.005534121771,
+     "class_gross_leverage": {
+      "AGRAR": 0.04477393124,
+      "ANLEIHE_KURZ": 0.3078207773,
+      "ANLEIHE_MITTEL": 0.2145248248,
+      "EDELMETALL": 0.02736184687,
+      "ENERGIE": 0.02228036102,
+      "FX": 0.3949577358
+     },
+     "basis": "S-TF",
+     "mean_cost_sr": 0.3354310454,
+     "admissible": false,
+     "reasons": [
+      "Verlustbudget: Ziel-σ_p 9% nur zu 35% erreichbar (Lückenstress × Wochenendfaktor 23.1% > 8%); vom Grundprofil nicht unterscheidbar"
+     ],
+     "notes": [],
+     "band": {
+      "share_below_band": 1.0,
+      "share_in_band": 0.0,
+      "share_at_cap": 0.0,
+      "share_zero": 0.0
+     }
+    },
+    "H15": {
+     "n": 15,
+     "effective_n": 15.0,
+     "D": 2.374678451,
+     "sigma_h": 0.07302121608,
+     "sigma_target": 0.12,
+     "L_g_at_target": 3.902446842,
+     "scale_gap": 0.2592525966,
+     "scale_cap": 1.0,
+     "scale": 0.2592525966,
+     "sigma_achieved": 0.0311103116,
+     "L_g_achieved": 1.011719477,
+     "gap_loss_at_target": {
+      "HIST": 0.1819566587,
+      "K5": 0.08975440892,
+      "K10": 0.1795088178,
+      "DESIGN": 0.2057195724
+     },
+     "gap_loss_achieved": {
+      "HIST": 0.04717273624,
+      "K5": 0.02326906357,
+      "K10": 0.04653812715,
+      "DESIGN": 0.05333333333
+     },
+     "margin_to_equity": {
+      "basis": 0.02388941672,
+      "plus50": 0.03583412507,
+      "plus100": 0.04777883343
+     },
+     "es_1d_parametric": 0.005534121771,
+     "class_gross_leverage": {
+      "AGRAR": 0.04477393124,
+      "ANLEIHE_KURZ": 0.3078207773,
+      "ANLEIHE_MITTEL": 0.2145248248,
+      "EDELMETALL": 0.02736184687,
+      "ENERGIE": 0.02228036102,
+      "FX": 0.3949577358
+     },
+     "basis": "S-TF",
+     "mean_cost_sr": 0.3354310454,
+     "admissible": false,
+     "reasons": [
+      "Verlustbudget: Ziel-σ_p 12% nur zu 26% erreichbar (Lückenstress × Wochenendfaktor 30.9% > 8%); vom Grundprofil nicht unterscheidbar"
+     ],
+     "notes": [],
+     "band": {
+      "share_below_band": 1.0,
+      "share_in_band": 0.0,
+      "share_at_cap": 0.0,
+      "share_zero": 0.0
+     }
+    },
+    "H20": {
+     "n": 15,
+     "effective_n": 15.0,
+     "D": 2.374678451,
+     "sigma_h": 0.07302121608,
+     "sigma_target": 0.15,
+     "L_g_at_target": 4.878058552,
+     "scale_gap": 0.2074020773,
+     "scale_cap": 1.0,
+     "scale": 0.2074020773,
+     "sigma_achieved": 0.0311103116,
+     "L_g_achieved": 1.011719477,
+     "gap_loss_at_target": {
+      "HIST": 0.2274458234,
+      "K5": 0.1121930111,
+      "K10": 0.2243860223,
+      "DESIGN": 0.2571494655
+     },
+     "gap_loss_achieved": {
+      "HIST": 0.04717273624,
+      "K5": 0.02326906357,
+      "K10": 0.04653812715,
+      "DESIGN": 0.05333333333
+     },
+     "margin_to_equity": {
+      "basis": 0.02388941672,
+      "plus50": 0.03583412507,
+      "plus100": 0.04777883343
+     },
+     "es_1d_parametric": 0.005534121771,
+     "class_gross_leverage": {
+      "AGRAR": 0.04477393124,
+      "ANLEIHE_KURZ": 0.3078207773,
+      "ANLEIHE_MITTEL": 0.2145248248,
+      "EDELMETALL": 0.02736184687,
+      "ENERGIE": 0.02228036102,
+      "FX": 0.3949577358
+     },
+     "basis": "S-TF",
+     "mean_cost_sr": 0.3354310454,
+     "admissible": false,
+     "reasons": [
+      "Verlustbudget: Ziel-σ_p 15% nur zu 21% erreichbar (Lückenstress × Wochenendfaktor 38.6% > 8%); vom Grundprofil nicht unterscheidbar"
+     ],
+     "notes": [],
+     "band": {
+      "share_below_band": 1.0,
+      "share_in_band": 0.0,
+      "share_at_cap": 0.0,
+      "share_zero": 0.0
+     }
+    }
+   },
+   "5000000": {
+    "H5": {
+     "n": 25,
+     "effective_n": 25.0,
+     "D": 2.6499947,
+     "sigma_h": 0.09110011687,
+     "sigma_target": 0.06,
+     "L_g_at_target": 1.745329067,
+     "scale_gap": 0.4413958209,
+     "scale_cap": 1.0,
+     "scale": 0.4413958209,
+     "sigma_achieved": 0.02648374925,
+     "L_g_achieved": 0.7703809564,
+     "gap_loss_at_target": {
+      "HIST": 0.09983355877,
+      "K5": 0.05008019251,
+      "K10": 0.100160385,
+      "DESIGN": 0.1208288135
+     },
+     "gap_loss_achieved": {
+      "HIST": 0.04406611563,
+      "K5": 0.02210518769,
+      "K10": 0.04421037537,
+      "DESIGN": 0.05333333333
+     },
+     "margin_to_equity": {
+      "basis": 0.0218491026,
+      "plus50": 0.03277365391,
+      "plus100": 0.04369820521
+     },
+     "es_1d_parametric": 0.004711116212,
+     "class_gross_leverage": {
+      "AGRAR": 0.07119451948,
+      "ANLEIHE_KURZ": 0.1754544879,
+      "ANLEIHE_LANG": 0.08300288501,
+      "ANLEIHE_MITTEL": 0.1222768119,
+      "EDELMETALL": 0.01559595448,
+      "ENERGIE": 0.01269956293,
+      "FX": 0.2602125021,
+      "VIEH": 0.0299442326
+     },
+     "basis": "S-TF",
+     "mean_cost_sr": 0.2447956623,
+     "admissible": false,
+     "reasons": [
+      "Verlustbudget: nach der Lückenregel nur σ_p 2.6% < Mindest-σ 3%"
+     ],
+     "notes": [],
+     "band": {
+      "share_below_band": 1.0,
+      "share_in_band": 0.0,
+      "share_at_cap": 0.0,
+      "share_zero": 0.0
+     }
+    },
+    "H10": {
+     "n": 25,
+     "effective_n": 25.0,
+     "D": 2.6499947,
+     "sigma_h": 0.09110011687,
+     "sigma_target": 0.09,
+     "L_g_at_target": 2.617993601,
+     "scale_gap": 0.2942638806,
+     "scale_cap": 1.0,
+     "scale": 0.2942638806,
+     "sigma_achieved": 0.02648374925,
+     "L_g_achieved": 0.7703809564,
+     "gap_loss_at_target": {
+      "HIST": 0.1497503382,
+      "K5": 0.07512028877,
+      "K10": 0.1502405775,
+      "DESIGN": 0.1812432203
+     },
+     "gap_loss_achieved": {
+      "HIST": 0.04406611563,
+      "K5": 0.02210518769,
+      "K10": 0.04421037537,
+      "DESIGN": 0.05333333333
+     },
+     "margin_to_equity": {
+      "basis": 0.0218491026,
+      "plus50": 0.03277365391,
+      "plus100": 0.04369820521
+     },
+     "es_1d_parametric": 0.004711116212,
+     "class_gross_leverage": {
+      "AGRAR": 0.07119451948,
+      "ANLEIHE_KURZ": 0.1754544879,
+      "ANLEIHE_LANG": 0.08300288501,
+      "ANLEIHE_MITTEL": 0.1222768119,
+      "EDELMETALL": 0.01559595448,
+      "ENERGIE": 0.01269956293,
+      "FX": 0.2602125021,
+      "VIEH": 0.0299442326
+     },
+     "basis": "S-TF",
+     "mean_cost_sr": 0.2447956623,
+     "admissible": false,
+     "reasons": [
+      "Verlustbudget: Ziel-σ_p 9% nur zu 29% erreichbar (Lückenstress × Wochenendfaktor 27.2% > 8%); vom Grundprofil nicht unterscheidbar"
+     ],
+     "notes": [],
+     "band": {
+      "share_below_band": 1.0,
+      "share_in_band": 0.0,
+      "share_at_cap": 0.0,
+      "share_zero": 0.0
+     }
+    },
+    "H15": {
+     "n": 25,
+     "effective_n": 25.0,
+     "D": 2.6499947,
+     "sigma_h": 0.09110011687,
+     "sigma_target": 0.12,
+     "L_g_at_target": 3.490658134,
+     "scale_gap": 0.2206979105,
+     "scale_cap": 1.0,
+     "scale": 0.2206979105,
+     "sigma_achieved": 0.02648374925,
+     "L_g_achieved": 0.7703809564,
+     "gap_loss_at_target": {
+      "HIST": 0.1996671175,
+      "K5": 0.100160385,
+      "K10": 0.2003207701,
+      "DESIGN": 0.241657627
+     },
+     "gap_loss_achieved": {
+      "HIST": 0.04406611563,
+      "K5": 0.02210518769,
+      "K10": 0.04421037537,
+      "DESIGN": 0.05333333333
+     },
+     "margin_to_equity": {
+      "basis": 0.0218491026,
+      "plus50": 0.03277365391,
+      "plus100": 0.04369820521
+     },
+     "es_1d_parametric": 0.004711116212,
+     "class_gross_leverage": {
+      "AGRAR": 0.07119451948,
+      "ANLEIHE_KURZ": 0.1754544879,
+      "ANLEIHE_LANG": 0.08300288501,
+      "ANLEIHE_MITTEL": 0.1222768119,
+      "EDELMETALL": 0.01559595448,
+      "ENERGIE": 0.01269956293,
+      "FX": 0.2602125021,
+      "VIEH": 0.0299442326
+     },
+     "basis": "S-TF",
+     "mean_cost_sr": 0.2447956623,
+     "admissible": false,
+     "reasons": [
+      "Verlustbudget: Ziel-σ_p 12% nur zu 22% erreichbar (Lückenstress × Wochenendfaktor 36.2% > 8%); vom Grundprofil nicht unterscheidbar"
+     ],
+     "notes": [],
+     "band": {
+      "share_below_band": 1.0,
+      "share_in_band": 0.0,
+      "share_at_cap": 0.0,
+      "share_zero": 0.0
+     }
+    },
+    "H20": {
+     "n": 25,
+     "effective_n": 25.0,
+     "D": 2.6499947,
+     "sigma_h": 0.09110011687,
+     "sigma_target": 0.15,
+     "L_g_at_target": 4.363322668,
+     "scale_gap": 0.1765583284,
+     "scale_cap": 1.0,
+     "scale": 0.1765583284,
+     "sigma_achieved": 0.02648374925,
+     "L_g_achieved": 0.7703809564,
+     "gap_loss_at_target": {
+      "HIST": 0.2495838969,
+      "K5": 0.1252004813,
+      "K10": 0.2504009626,
+      "DESIGN": 0.3020720338
+     },
+     "gap_loss_achieved": {
+      "HIST": 0.04406611563,
+      "K5": 0.02210518769,
+      "K10": 0.04421037537,
+      "DESIGN": 0.05333333333
+     },
+     "margin_to_equity": {
+      "basis": 0.0218491026,
+      "plus50": 0.03277365391,
+      "plus100": 0.04369820521
+     },
+     "es_1d_parametric": 0.004711116212,
+     "class_gross_leverage": {
+      "AGRAR": 0.07119451948,
+      "ANLEIHE_KURZ": 0.1754544879,
+      "ANLEIHE_LANG": 0.08300288501,
+      "ANLEIHE_MITTEL": 0.1222768119,
+      "EDELMETALL": 0.01559595448,
+      "ENERGIE": 0.01269956293,
+      "FX": 0.2602125021,
+      "VIEH": 0.0299442326
+     },
+     "basis": "S-TF",
+     "mean_cost_sr": 0.2447956623,
+     "admissible": false,
+     "reasons": [
+      "Verlustbudget: Ziel-σ_p 15% nur zu 18% erreichbar (Lückenstress × Wochenendfaktor 45.3% > 8%); vom Grundprofil nicht unterscheidbar"
+     ],
+     "notes": [],
+     "band": {
+      "share_below_band": 1.0,
+      "share_in_band": 0.0,
+      "share_at_cap": 0.0,
+      "share_zero": 0.0
+     }
+    }
+   },
+   "25000000": {
+    "H5": {
+     "n": 32,
+     "effective_n": 32.0,
+     "D": 2.870214896,
+     "sigma_h": 0.1069777139,
+     "sigma_target": 0.06,
+     "L_g_at_target": 1.609801588,
+     "scale_gap": 0.4191514091,
+     "scale_cap": 1.0,
+     "scale": 0.4191514091,
+     "sigma_achieved": 0.02514908455,
+     "L_g_achieved": 0.674750604,
+     "gap_loss_at_target": {
+      "HIST": 0.1024810276,
+      "K5": 0.05424196303,
+      "K10": 0.1084839261,
+      "DESIGN": 0.1272412121
+     },
+     "gap_loss_achieved": {
+      "HIST": 0.04295506712,
+      "K5": 0.02273559523,
+      "K10": 0.04547119047,
+      "DESIGN": 0.05333333333
+     },
+     "margin_to_equity": {
+      "basis": 0.02125177657,
+      "plus50": 0.03187766486,
+      "plus100": 0.04250355314
+     },
+     "es_1d_parametric": 0.004473696635,
+     "class_gross_leverage": {
+      "AGRAR": 0.05720693969,
+      "ANLEIHE_KURZ": 0.140982963,
+      "ANLEIHE_LANG": 0.06669531689,
+      "ANLEIHE_MITTEL": 0.09825309947,
+      "EDELMETALL": 0.03320932018,
+      "ENERGIE": 0.02369856474,
+      "FX": 0.209088579,
+      "INDUSTRIEMETALL": 0.009022909635,
+      "VIEH": 0.0365929113
+     },
+     "basis": "S-TF",
+     "mean_cost_sr": 0.2016804894,
+     "admissible": false,
+     "reasons": [
+      "Verlustbudget: nach der Lückenregel nur σ_p 2.5% < Mindest-σ 3%"
+     ],
+     "notes": [],
+     "band": {
+      "share_below_band": 1.0,
+      "share_in_band": 0.0,
+      "share_at_cap": 0.0,
+      "share_zero": 0.0
+     }
+    },
+    "H10": {
+     "n": 32,
+     "effective_n": 32.0,
+     "D": 2.870214896,
+     "sigma_h": 0.1069777139,
+     "sigma_target": 0.09,
+     "L_g_at_target": 2.414702382,
+     "scale_gap": 0.2794342727,
+     "scale_cap": 1.0,
+     "scale": 0.2794342727,
+     "sigma_achieved": 0.02514908455,
+     "L_g_achieved": 0.674750604,
+     "gap_loss_at_target": {
+      "HIST": 0.1537215414,
+      "K5": 0.08136294454,
+      "K10": 0.1627258891,
+      "DESIGN": 0.1908618181
+     },
+     "gap_loss_achieved": {
+      "HIST": 0.04295506712,
+      "K5": 0.02273559523,
+      "K10": 0.04547119047,
+      "DESIGN": 0.05333333333
+     },
+     "margin_to_equity": {
+      "basis": 0.02125177657,
+      "plus50": 0.03187766486,
+      "plus100": 0.04250355314
+     },
+     "es_1d_parametric": 0.004473696635,
+     "class_gross_leverage": {
+      "AGRAR": 0.05720693969,
+      "ANLEIHE_KURZ": 0.140982963,
+      "ANLEIHE_LANG": 0.06669531689,
+      "ANLEIHE_MITTEL": 0.09825309947,
+      "EDELMETALL": 0.03320932018,
+      "ENERGIE": 0.02369856474,
+      "FX": 0.209088579,
+      "INDUSTRIEMETALL": 0.009022909635,
+      "VIEH": 0.0365929113
+     },
+     "basis": "S-TF",
+     "mean_cost_sr": 0.2016804894,
+     "admissible": false,
+     "reasons": [
+      "Verlustbudget: Ziel-σ_p 9% nur zu 28% erreichbar (Lückenstress × Wochenendfaktor 28.6% > 8%); vom Grundprofil nicht unterscheidbar"
+     ],
+     "notes": [],
+     "band": {
+      "share_below_band": 1.0,
+      "share_in_band": 0.0,
+      "share_at_cap": 0.0,
+      "share_zero": 0.0
+     }
+    },
+    "H15": {
+     "n": 32,
+     "effective_n": 32.0,
+     "D": 2.870214896,
+     "sigma_h": 0.1069777139,
+     "sigma_target": 0.12,
+     "L_g_at_target": 3.219603176,
+     "scale_gap": 0.2095757046,
+     "scale_cap": 1.0,
+     "scale": 0.2095757046,
+     "sigma_achieved": 0.02514908455,
+     "L_g_achieved": 0.674750604,
+     "gap_loss_at_target": {
+      "HIST": 0.2049620552,
+      "K5": 0.1084839261,
+      "K10": 0.2169678521,
+      "DESIGN": 0.2544824241
+     },
+     "gap_loss_achieved": {
+      "HIST": 0.04295506712,
+      "K5": 0.02273559523,
+      "K10": 0.04547119047,
+      "DESIGN": 0.05333333333
+     },
+     "margin_to_equity": {
+      "basis": 0.02125177657,
+      "plus50": 0.03187766486,
+      "plus100": 0.04250355314
+     },
+     "es_1d_parametric": 0.004473696635,
+     "class_gross_leverage": {
+      "AGRAR": 0.05720693969,
+      "ANLEIHE_KURZ": 0.140982963,
+      "ANLEIHE_LANG": 0.06669531689,
+      "ANLEIHE_MITTEL": 0.09825309947,
+      "EDELMETALL": 0.03320932018,
+      "ENERGIE": 0.02369856474,
+      "FX": 0.209088579,
+      "INDUSTRIEMETALL": 0.009022909635,
+      "VIEH": 0.0365929113
+     },
+     "basis": "S-TF",
+     "mean_cost_sr": 0.2016804894,
+     "admissible": false,
+     "reasons": [
+      "Verlustbudget: Ziel-σ_p 12% nur zu 21% erreichbar (Lückenstress × Wochenendfaktor 38.2% > 8%); vom Grundprofil nicht unterscheidbar"
+     ],
+     "notes": [],
+     "band": {
+      "share_below_band": 1.0,
+      "share_in_band": 0.0,
+      "share_at_cap": 0.0,
+      "share_zero": 0.0
+     }
+    },
+    "H20": {
+     "n": 32,
+     "effective_n": 32.0,
+     "D": 2.870214896,
+     "sigma_h": 0.1069777139,
+     "sigma_target": 0.15,
+     "L_g_at_target": 4.02450397,
+     "scale_gap": 0.1676605636,
+     "scale_cap": 1.0,
+     "scale": 0.1676605636,
+     "sigma_achieved": 0.02514908455,
+     "L_g_achieved": 0.674750604,
+     "gap_loss_at_target": {
+      "HIST": 0.2562025689,
+      "K5": 0.1356049076,
+      "K10": 0.2712098151,
+      "DESIGN": 0.3181030302
+     },
+     "gap_loss_achieved": {
+      "HIST": 0.04295506712,
+      "K5": 0.02273559523,
+      "K10": 0.04547119047,
+      "DESIGN": 0.05333333333
+     },
+     "margin_to_equity": {
+      "basis": 0.02125177657,
+      "plus50": 0.03187766486,
+      "plus100": 0.04250355314
+     },
+     "es_1d_parametric": 0.004473696635,
+     "class_gross_leverage": {
+      "AGRAR": 0.05720693969,
+      "ANLEIHE_KURZ": 0.140982963,
+      "ANLEIHE_LANG": 0.06669531689,
+      "ANLEIHE_MITTEL": 0.09825309947,
+      "EDELMETALL": 0.03320932018,
+      "ENERGIE": 0.02369856474,
+      "FX": 0.209088579,
+      "INDUSTRIEMETALL": 0.009022909635,
+      "VIEH": 0.0365929113
+     },
+     "basis": "S-TF",
+     "mean_cost_sr": 0.2016804894,
+     "admissible": false,
+     "reasons": [
+      "Verlustbudget: Ziel-σ_p 15% nur zu 17% erreichbar (Lückenstress × Wochenendfaktor 47.7% > 8%); vom Grundprofil nicht unterscheidbar"
+     ],
+     "notes": [],
+     "band": {
+      "share_below_band": 1.0,
+      "share_in_band": 0.0,
+      "share_at_cap": 0.0,
+      "share_zero": 0.0
+     }
+    }
+   },
+   "100000000": {
+    "H5": {
+     "n": 32,
+     "effective_n": 32.0,
+     "D": 2.870214896,
+     "sigma_h": 0.1069777139,
+     "sigma_target": 0.06,
+     "L_g_at_target": 1.609801588,
+     "scale_gap": 0.4191514091,
+     "scale_cap": 1.0,
+     "scale": 0.4191514091,
+     "sigma_achieved": 0.02514908455,
+     "L_g_achieved": 0.674750604,
+     "gap_loss_at_target": {
+      "HIST": 0.1024810276,
+      "K5": 0.05424196303,
+      "K10": 0.1084839261,
+      "DESIGN": 0.1272412121
+     },
+     "gap_loss_achieved": {
+      "HIST": 0.04295506712,
+      "K5": 0.02273559523,
+      "K10": 0.04547119047,
+      "DESIGN": 0.05333333333
+     },
+     "margin_to_equity": {
+      "basis": 0.02125177657,
+      "plus50": 0.03187766486,
+      "plus100": 0.04250355314
+     },
+     "es_1d_parametric": 0.004473696635,
+     "class_gross_leverage": {
+      "AGRAR": 0.05720693969,
+      "ANLEIHE_KURZ": 0.140982963,
+      "ANLEIHE_LANG": 0.06669531689,
+      "ANLEIHE_MITTEL": 0.09825309947,
+      "EDELMETALL": 0.03320932018,
+      "ENERGIE": 0.02369856474,
+      "FX": 0.209088579,
+      "INDUSTRIEMETALL": 0.009022909635,
+      "VIEH": 0.0365929113
+     },
+     "basis": "S-TF",
+     "mean_cost_sr": 0.199615985,
+     "admissible": false,
+     "reasons": [
+      "Verlustbudget: nach der Lückenregel nur σ_p 2.5% < Mindest-σ 3%"
+     ],
+     "notes": [],
+     "band": {
+      "share_below_band": 1.0,
+      "share_in_band": 0.0,
+      "share_at_cap": 0.0,
+      "share_zero": 0.0
+     }
+    },
+    "H10": {
+     "n": 32,
+     "effective_n": 32.0,
+     "D": 2.870214896,
+     "sigma_h": 0.1069777139,
+     "sigma_target": 0.09,
+     "L_g_at_target": 2.414702382,
+     "scale_gap": 0.2794342727,
+     "scale_cap": 1.0,
+     "scale": 0.2794342727,
+     "sigma_achieved": 0.02514908455,
+     "L_g_achieved": 0.674750604,
+     "gap_loss_at_target": {
+      "HIST": 0.1537215414,
+      "K5": 0.08136294454,
+      "K10": 0.1627258891,
+      "DESIGN": 0.1908618181
+     },
+     "gap_loss_achieved": {
+      "HIST": 0.04295506712,
+      "K5": 0.02273559523,
+      "K10": 0.04547119047,
+      "DESIGN": 0.05333333333
+     },
+     "margin_to_equity": {
+      "basis": 0.02125177657,
+      "plus50": 0.03187766486,
+      "plus100": 0.04250355314
+     },
+     "es_1d_parametric": 0.004473696635,
+     "class_gross_leverage": {
+      "AGRAR": 0.05720693969,
+      "ANLEIHE_KURZ": 0.140982963,
+      "ANLEIHE_LANG": 0.06669531689,
+      "ANLEIHE_MITTEL": 0.09825309947,
+      "EDELMETALL": 0.03320932018,
+      "ENERGIE": 0.02369856474,
+      "FX": 0.209088579,
+      "INDUSTRIEMETALL": 0.009022909635,
+      "VIEH": 0.0365929113
+     },
+     "basis": "S-TF",
+     "mean_cost_sr": 0.199615985,
+     "admissible": false,
+     "reasons": [
+      "Verlustbudget: Ziel-σ_p 9% nur zu 28% erreichbar (Lückenstress × Wochenendfaktor 28.6% > 8%); vom Grundprofil nicht unterscheidbar"
+     ],
+     "notes": [],
+     "band": {
+      "share_below_band": 1.0,
+      "share_in_band": 0.0,
+      "share_at_cap": 0.0,
+      "share_zero": 0.0
+     }
+    },
+    "H15": {
+     "n": 32,
+     "effective_n": 32.0,
+     "D": 2.870214896,
+     "sigma_h": 0.1069777139,
+     "sigma_target": 0.12,
+     "L_g_at_target": 3.219603176,
+     "scale_gap": 0.2095757046,
+     "scale_cap": 1.0,
+     "scale": 0.2095757046,
+     "sigma_achieved": 0.02514908455,
+     "L_g_achieved": 0.674750604,
+     "gap_loss_at_target": {
+      "HIST": 0.2049620552,
+      "K5": 0.1084839261,
+      "K10": 0.2169678521,
+      "DESIGN": 0.2544824241
+     },
+     "gap_loss_achieved": {
+      "HIST": 0.04295506712,
+      "K5": 0.02273559523,
+      "K10": 0.04547119047,
+      "DESIGN": 0.05333333333
+     },
+     "margin_to_equity": {
+      "basis": 0.02125177657,
+      "plus50": 0.03187766486,
+      "plus100": 0.04250355314
+     },
+     "es_1d_parametric": 0.004473696635,
+     "class_gross_leverage": {
+      "AGRAR": 0.05720693969,
+      "ANLEIHE_KURZ": 0.140982963,
+      "ANLEIHE_LANG": 0.06669531689,
+      "ANLEIHE_MITTEL": 0.09825309947,
+      "EDELMETALL": 0.03320932018,
+      "ENERGIE": 0.02369856474,
+      "FX": 0.209088579,
+      "INDUSTRIEMETALL": 0.009022909635,
+      "VIEH": 0.0365929113
+     },
+     "basis": "S-TF",
+     "mean_cost_sr": 0.199615985,
+     "admissible": false,
+     "reasons": [
+      "Verlustbudget: Ziel-σ_p 12% nur zu 21% erreichbar (Lückenstress × Wochenendfaktor 38.2% > 8%); vom Grundprofil nicht unterscheidbar"
+     ],
+     "notes": [],
+     "band": {
+      "share_below_band": 1.0,
+      "share_in_band": 0.0,
+      "share_at_cap": 0.0,
+      "share_zero": 0.0
+     }
+    },
+    "H20": {
+     "n": 32,
+     "effective_n": 32.0,
+     "D": 2.870214896,
+     "sigma_h": 0.1069777139,
+     "sigma_target": 0.15,
+     "L_g_at_target": 4.02450397,
+     "scale_gap": 0.1676605636,
+     "scale_cap": 1.0,
+     "scale": 0.1676605636,
+     "sigma_achieved": 0.02514908455,
+     "L_g_achieved": 0.674750604,
+     "gap_loss_at_target": {
+      "HIST": 0.2562025689,
+      "K5": 0.1356049076,
+      "K10": 0.2712098151,
+      "DESIGN": 0.3181030302
+     },
+     "gap_loss_achieved": {
+      "HIST": 0.04295506712,
+      "K5": 0.02273559523,
+      "K10": 0.04547119047,
+      "DESIGN": 0.05333333333
+     },
+     "margin_to_equity": {
+      "basis": 0.02125177657,
+      "plus50": 0.03187766486,
+      "plus100": 0.04250355314
+     },
+     "es_1d_parametric": 0.004473696635,
+     "class_gross_leverage": {
+      "AGRAR": 0.05720693969,
+      "ANLEIHE_KURZ": 0.140982963,
+      "ANLEIHE_LANG": 0.06669531689,
+      "ANLEIHE_MITTEL": 0.09825309947,
+      "EDELMETALL": 0.03320932018,
+      "ENERGIE": 0.02369856474,
+      "FX": 0.209088579,
+      "INDUSTRIEMETALL": 0.009022909635,
+      "VIEH": 0.0365929113
+     },
+     "basis": "S-TF",
+     "mean_cost_sr": 0.199615985,
+     "admissible": false,
+     "reasons": [
+      "Verlustbudget: Ziel-σ_p 15% nur zu 17% erreichbar (Lückenstress × Wochenendfaktor 47.7% > 8%); vom Grundprofil nicht unterscheidbar"
+     ],
+     "notes": [],
+     "band": {
+      "share_below_band": 1.0,
+      "share_in_band": 0.0,
+      "share_at_cap": 0.0,
+      "share_zero": 0.0
+     }
+    }
+   }
+  },
+  "U-KOSTEN-TFD1-7T": {
+   "250000": {
+    "H5": {
+     "n": 1,
+     "effective_n": 1.0,
+     "D": 1.0,
+     "sigma_h": 0.18,
+     "sigma_target": 0.06,
+     "L_g_at_target": 0.3333333333,
+     "scale_gap": 1.0,
+     "scale_cap": 1.0,
+     "scale": 1.0,
+     "sigma_achieved": 0.06,
+     "L_g_achieved": 0.3333333333,
+     "gap_loss_at_target": {
+      "HIST": 0.03333333333,
+      "K5": 0.01889822365,
+      "K10": 0.0377964473,
+      "DESIGN": 0.0377964473
+     },
+     "gap_loss_achieved": {
+      "HIST": 0.03333333333,
+      "K5": 0.01889822365,
+      "K10": 0.0377964473,
+      "DESIGN": 0.0377964473
+     },
+     "margin_to_equity": {
+      "basis": 0.02,
+      "plus50": 0.03,
+      "plus100": 0.04
+     },
+     "es_1d_parametric": 0.01067322342,
+     "class_gross_leverage": {
+      "EDELMETALL": 0.3333333333
+     },
+     "basis": "S-BASE-TFD1-7T",
+     "mean_cost_sr": 0.01544162315,
+     "admissible": false,
+     "reasons": [
+      "Mindestdiversifikation: 1.0 < 8 effektive Instrumente"
+     ],
+     "notes": [],
+     "band": {
+      "share_below_band": 1.0,
+      "share_in_band": 0.0,
+      "share_at_cap": 0.0,
+      "share_zero": 0.37775
+     }
+    },
+    "H10": {
+     "n": 1,
+     "effective_n": 1.0,
+     "D": 1.0,
+     "sigma_h": 0.18,
+     "sigma_target": 0.09,
+     "L_g_at_target": 0.5,
+     "scale_gap": 0.9407115773,
+     "scale_cap": 1.0,
+     "scale": 0.9407115773,
+     "sigma_achieved": 0.08466404195,
+     "L_g_achieved": 0.4703557886,
+     "gap_loss_at_target": {
+      "HIST": 0.05,
+      "K5": 0.02834733548,
+      "K10": 0.05669467095,
+      "DESIGN": 0.05669467095
+     },
+     "gap_loss_achieved": {
+      "HIST": 0.04703557886,
+      "K5": 0.02666666667,
+      "K10": 0.05333333333,
+      "DESIGN": 0.05333333333
+     },
+     "margin_to_equity": {
+      "basis": 0.02822134732,
+      "plus50": 0.04233202098,
+      "plus100": 0.05644269464
+     },
+     "es_1d_parametric": 0.01506063725,
+     "class_gross_leverage": {
+      "EDELMETALL": 0.4703557886
+     },
+     "basis": "S-BASE-TFD1-7T",
+     "mean_cost_sr": 0.01544162315,
+     "admissible": false,
+     "reasons": [
+      "Mindestdiversifikation: 1.0 < 8 effektive Instrumente"
+     ],
+     "notes": [
+      "σ-Ziel zu 94% erreichbar; die Lückenregel skaliert automatisch"
+     ],
+     "band": {
+      "share_below_band": 1.0,
+      "share_in_band": 0.0,
+      "share_at_cap": 0.0,
+      "share_zero": 0.387
+     }
+    },
+    "H15": {
+     "n": 1,
+     "effective_n": 1.0,
+     "D": 1.0,
+     "sigma_h": 0.18,
+     "sigma_target": 0.12,
+     "L_g_at_target": 0.6666666667,
+     "scale_gap": 0.705533683,
+     "scale_cap": 1.0,
+     "scale": 0.705533683,
+     "sigma_achieved": 0.08466404195,
+     "L_g_achieved": 0.4703557886,
+     "gap_loss_at_target": {
+      "HIST": 0.06666666667,
+      "K5": 0.0377964473,
+      "K10": 0.0755928946,
+      "DESIGN": 0.0755928946
+     },
+     "gap_loss_achieved": {
+      "HIST": 0.04703557886,
+      "K5": 0.02666666667,
+      "K10": 0.05333333333,
+      "DESIGN": 0.05333333333
+     },
+     "margin_to_equity": {
+      "basis": 0.02822134732,
+      "plus50": 0.04233202098,
+      "plus100": 0.05644269464
+     },
+     "es_1d_parametric": 0.01506063725,
+     "class_gross_leverage": {
+      "EDELMETALL": 0.4703557886
+     },
+     "basis": "S-BASE-TFD1-7T",
+     "mean_cost_sr": 0.01544162315,
+     "admissible": false,
+     "reasons": [
+      "Verlustbudget: Ziel-σ_p 12% nur zu 71% erreichbar (Lückenstress × Wochenendfaktor 11.3% > 8%); vom Grundprofil nicht unterscheidbar",
+      "Mindestdiversifikation: 1.0 < 10 effektive Instrumente"
+     ],
+     "notes": [],
+     "band": {
+      "share_below_band": 1.0,
+      "share_in_band": 0.0,
+      "share_at_cap": 0.0,
+      "share_zero": 0.39125
+     }
+    },
+    "H20": {
+     "n": 1,
+     "effective_n": 1.0,
+     "D": 1.0,
+     "sigma_h": 0.18,
+     "sigma_target": 0.15,
+     "L_g_at_target": 0.8333333333,
+     "scale_gap": 0.5644269464,
+     "scale_cap": 1.0,
+     "scale": 0.5644269464,
+     "sigma_achieved": 0.08466404195,
+     "L_g_achieved": 0.4703557886,
+     "gap_loss_at_target": {
+      "HIST": 0.08333333333,
+      "K5": 0.04724555913,
+      "K10": 0.09449111825,
+      "DESIGN": 0.09449111825
+     },
+     "gap_loss_achieved": {
+      "HIST": 0.04703557886,
+      "K5": 0.02666666667,
+      "K10": 0.05333333333,
+      "DESIGN": 0.05333333333
+     },
+     "margin_to_equity": {
+      "basis": 0.02822134732,
+      "plus50": 0.04233202098,
+      "plus100": 0.05644269464
+     },
+     "es_1d_parametric": 0.01506063725,
+     "class_gross_leverage": {
+      "EDELMETALL": 0.4703557886
+     },
+     "basis": "S-BASE-TFD1-7T",
+     "mean_cost_sr": 0.01544162315,
+     "admissible": false,
+     "reasons": [
+      "Verlustbudget: Ziel-σ_p 15% nur zu 56% erreichbar (Lückenstress × Wochenendfaktor 14.2% > 8%); vom Grundprofil nicht unterscheidbar",
+      "Mindestdiversifikation: 1.0 < 10 effektive Instrumente"
+     ],
+     "notes": [],
+     "band": {
+      "share_below_band": 1.0,
+      "share_in_band": 0.0,
+      "share_at_cap": 0.0,
+      "share_zero": 0.37175
+     }
+    }
+   },
+   "500000": {
+    "H5": {
+     "n": 1,
+     "effective_n": 1.0,
+     "D": 1.0,
+     "sigma_h": 0.18,
+     "sigma_target": 0.06,
+     "L_g_at_target": 0.3333333333,
+     "scale_gap": 1.0,
+     "scale_cap": 1.0,
+     "scale": 1.0,
+     "sigma_achieved": 0.06,
+     "L_g_achieved": 0.3333333333,
+     "gap_loss_at_target": {
+      "HIST": 0.03333333333,
+      "K5": 0.01889822365,
+      "K10": 0.0377964473,
+      "DESIGN": 0.0377964473
+     },
+     "gap_loss_achieved": {
+      "HIST": 0.03333333333,
+      "K5": 0.01889822365,
+      "K10": 0.0377964473,
+      "DESIGN": 0.0377964473
+     },
+     "margin_to_equity": {
+      "basis": 0.02,
+      "plus50": 0.03,
+      "plus100": 0.04
+     },
+     "es_1d_parametric": 0.01067322342,
+     "class_gross_leverage": {
+      "EDELMETALL": 0.3333333333
+     },
+     "basis": "S-BASE-TFD1-7T",
+     "mean_cost_sr": 0.01544162315,
+     "admissible": false,
+     "reasons": [
+      "Mindestdiversifikation: 1.0 < 8 effektive Instrumente"
+     ],
+     "notes": [],
+     "band": {
+      "share_below_band": 1.0,
+      "share_in_band": 0.0,
+      "share_at_cap": 0.0,
+      "share_zero": 0.3865
+     }
+    },
+    "H10": {
+     "n": 1,
+     "effective_n": 1.0,
+     "D": 1.0,
+     "sigma_h": 0.18,
+     "sigma_target": 0.09,
+     "L_g_at_target": 0.5,
+     "scale_gap": 0.9407115773,
+     "scale_cap": 1.0,
+     "scale": 0.9407115773,
+     "sigma_achieved": 0.08466404195,
+     "L_g_achieved": 0.4703557886,
+     "gap_loss_at_target": {
+      "HIST": 0.05,
+      "K5": 0.02834733548,
+      "K10": 0.05669467095,
+      "DESIGN": 0.05669467095
+     },
+     "gap_loss_achieved": {
+      "HIST": 0.04703557886,
+      "K5": 0.02666666667,
+      "K10": 0.05333333333,
+      "DESIGN": 0.05333333333
+     },
+     "margin_to_equity": {
+      "basis": 0.02822134732,
+      "plus50": 0.04233202098,
+      "plus100": 0.05644269464
+     },
+     "es_1d_parametric": 0.01506063725,
+     "class_gross_leverage": {
+      "EDELMETALL": 0.4703557886
+     },
+     "basis": "S-BASE-TFD1-7T",
+     "mean_cost_sr": 0.01544162315,
+     "admissible": false,
+     "reasons": [
+      "Mindestdiversifikation: 1.0 < 8 effektive Instrumente"
+     ],
+     "notes": [
+      "σ-Ziel zu 94% erreichbar; die Lückenregel skaliert automatisch"
+     ],
+     "band": {
+      "share_below_band": 1.0,
+      "share_in_band": 0.0,
+      "share_at_cap": 0.0,
+      "share_zero": 0.401
+     }
+    },
+    "H15": {
+     "n": 1,
+     "effective_n": 1.0,
+     "D": 1.0,
+     "sigma_h": 0.18,
+     "sigma_target": 0.12,
+     "L_g_at_target": 0.6666666667,
+     "scale_gap": 0.705533683,
+     "scale_cap": 1.0,
+     "scale": 0.705533683,
+     "sigma_achieved": 0.08466404195,
+     "L_g_achieved": 0.4703557886,
+     "gap_loss_at_target": {
+      "HIST": 0.06666666667,
+      "K5": 0.0377964473,
+      "K10": 0.0755928946,
+      "DESIGN": 0.0755928946
+     },
+     "gap_loss_achieved": {
+      "HIST": 0.04703557886,
+      "K5": 0.02666666667,
+      "K10": 0.05333333333,
+      "DESIGN": 0.05333333333
+     },
+     "margin_to_equity": {
+      "basis": 0.02822134732,
+      "plus50": 0.04233202098,
+      "plus100": 0.05644269464
+     },
+     "es_1d_parametric": 0.01506063725,
+     "class_gross_leverage": {
+      "EDELMETALL": 0.4703557886
+     },
+     "basis": "S-BASE-TFD1-7T",
+     "mean_cost_sr": 0.01544162315,
+     "admissible": false,
+     "reasons": [
+      "Verlustbudget: Ziel-σ_p 12% nur zu 71% erreichbar (Lückenstress × Wochenendfaktor 11.3% > 8%); vom Grundprofil nicht unterscheidbar",
+      "Mindestdiversifikation: 1.0 < 10 effektive Instrumente"
+     ],
+     "notes": [],
+     "band": {
+      "share_below_band": 1.0,
+      "share_in_band": 0.0,
+      "share_at_cap": 0.0,
+      "share_zero": 0.3775
+     }
+    },
+    "H20": {
+     "n": 1,
+     "effective_n": 1.0,
+     "D": 1.0,
+     "sigma_h": 0.18,
+     "sigma_target": 0.15,
+     "L_g_at_target": 0.8333333333,
+     "scale_gap": 0.5644269464,
+     "scale_cap": 1.0,
+     "scale": 0.5644269464,
+     "sigma_achieved": 0.08466404195,
+     "L_g_achieved": 0.4703557886,
+     "gap_loss_at_target": {
+      "HIST": 0.08333333333,
+      "K5": 0.04724555913,
+      "K10": 0.09449111825,
+      "DESIGN": 0.09449111825
+     },
+     "gap_loss_achieved": {
+      "HIST": 0.04703557886,
+      "K5": 0.02666666667,
+      "K10": 0.05333333333,
+      "DESIGN": 0.05333333333
+     },
+     "margin_to_equity": {
+      "basis": 0.02822134732,
+      "plus50": 0.04233202098,
+      "plus100": 0.05644269464
+     },
+     "es_1d_parametric": 0.01506063725,
+     "class_gross_leverage": {
+      "EDELMETALL": 0.4703557886
+     },
+     "basis": "S-BASE-TFD1-7T",
+     "mean_cost_sr": 0.01544162315,
+     "admissible": false,
+     "reasons": [
+      "Verlustbudget: Ziel-σ_p 15% nur zu 56% erreichbar (Lückenstress × Wochenendfaktor 14.2% > 8%); vom Grundprofil nicht unterscheidbar",
+      "Mindestdiversifikation: 1.0 < 10 effektive Instrumente"
+     ],
+     "notes": [],
+     "band": {
+      "share_below_band": 1.0,
+      "share_in_band": 0.0,
+      "share_at_cap": 0.0,
+      "share_zero": 0.36725
+     }
+    }
+   },
+   "1000000": {
+    "H5": {
+     "n": 2,
+     "effective_n": 2.0,
+     "D": 1.380131119,
+     "sigma_h": 0.2769230769,
+     "sigma_target": 0.06,
+     "L_g_at_target": 0.299028409,
+     "scale_gap": 1.0,
+     "scale_cap": 1.0,
+     "scale": 1.0,
+     "sigma_achieved": 0.06,
+     "L_g_achieved": 0.299028409,
+     "gap_loss_at_target": {
+      "HIST": 0.04025382429,
+      "K5": 0.02608202655,
+      "K10": 0.0521640531,
+      "DESIGN": 0.0521640531
+     },
+     "gap_loss_achieved": {
+      "HIST": 0.04025382429,
+      "K5": 0.02608202655,
+      "K10": 0.0521640531,
+      "DESIGN": 0.0521640531
+     },
+     "margin_to_equity": {
+      "basis": 0.02070196678,
+      "plus50": 0.03105295017,
+      "plus100": 0.04140393356
+     },
+     "es_1d_parametric": 0.01067322342,
+     "class_gross_leverage": {
+      "EDELMETALL": 0.2300218531,
+      "ENERGIE": 0.06900655593
+     },
+     "basis": "S-BASE-TFD1-7T",
+     "mean_cost_sr": 0.02320383961,
+     "admissible": false,
+     "reasons": [
+      "Mindestdiversifikation: 2.0 < 8 effektive Instrumente"
+     ],
+     "notes": [],
+     "band": {
+      "share_below_band": 1.0,
+      "share_in_band": 0.0,
+      "share_at_cap": 0.0,
+      "share_zero": 0.136
+     }
+    },
+    "H10": {
+     "n": 2,
+     "effective_n": 2.0,
+     "D": 1.380131119,
+     "sigma_h": 0.2769230769,
+     "sigma_target": 0.09,
+     "L_g_at_target": 0.4485426136,
+     "scale_gap": 0.6816102938,
+     "scale_cap": 1.0,
+     "scale": 0.6816102938,
+     "sigma_achieved": 0.06134492644,
+     "L_g_achieved": 0.3057312626,
+     "gap_loss_at_target": {
+      "HIST": 0.06038073644,
+      "K5": 0.03912303982,
+      "K10": 0.07824607964,
+      "DESIGN": 0.07824607964
+     },
+     "gap_loss_achieved": {
+      "HIST": 0.04115613151,
+      "K5": 0.02666666667,
+      "K10": 0.05333333333,
+      "DESIGN": 0.05333333333
+     },
+     "margin_to_equity": {
+      "basis": 0.02116601049,
+      "plus50": 0.03174901573,
+      "plus100": 0.04233202098
+     },
+     "es_1d_parametric": 0.01091246842,
+     "class_gross_leverage": {
+      "EDELMETALL": 0.2351778943,
+      "ENERGIE": 0.0705533683
+     },
+     "basis": "S-BASE-TFD1-7T",
+     "mean_cost_sr": 0.02320383961,
+     "admissible": false,
+     "reasons": [
+      "Verlustbudget: Ziel-σ_p 9% nur zu 68% erreichbar (Lückenstress × Wochenendfaktor 11.7% > 8%); vom Grundprofil nicht unterscheidbar",
+      "Mindestdiversifikation: 2.0 < 8 effektive Instrumente"
+     ],
+     "notes": [],
+     "band": {
+      "share_below_band": 1.0,
+      "share_in_band": 0.0,
+      "share_at_cap": 0.0,
+      "share_zero": 0.14875
+     }
+    },
+    "H15": {
+     "n": 2,
+     "effective_n": 2.0,
+     "D": 1.380131119,
+     "sigma_h": 0.2769230769,
+     "sigma_target": 0.12,
+     "L_g_at_target": 0.5980568181,
+     "scale_gap": 0.5112077203,
+     "scale_cap": 1.0,
+     "scale": 0.5112077203,
+     "sigma_achieved": 0.06134492644,
+     "L_g_achieved": 0.3057312626,
+     "gap_loss_at_target": {
+      "HIST": 0.08050764859,
+      "K5": 0.0521640531,
+      "K10": 0.1043281062,
+      "DESIGN": 0.1043281062
+     },
+     "gap_loss_achieved": {
+      "HIST": 0.04115613151,
+      "K5": 0.02666666667,
+      "K10": 0.05333333333,
+      "DESIGN": 0.05333333333
+     },
+     "margin_to_equity": {
+      "basis": 0.02116601049,
+      "plus50": 0.03174901573,
+      "plus100": 0.04233202098
+     },
+     "es_1d_parametric": 0.01091246842,
+     "class_gross_leverage": {
+      "EDELMETALL": 0.2351778943,
+      "ENERGIE": 0.0705533683
+     },
+     "basis": "S-BASE-TFD1-7T",
+     "mean_cost_sr": 0.02320383961,
+     "admissible": false,
+     "reasons": [
+      "Verlustbudget: Ziel-σ_p 12% nur zu 51% erreichbar (Lückenstress × Wochenendfaktor 15.6% > 8%); vom Grundprofil nicht unterscheidbar",
+      "Mindestdiversifikation: 2.0 < 10 effektive Instrumente"
+     ],
+     "notes": [],
+     "band": {
+      "share_below_band": 1.0,
+      "share_in_band": 0.0,
+      "share_at_cap": 0.0,
+      "share_zero": 0.1515
+     }
+    },
+    "H20": {
+     "n": 2,
+     "effective_n": 2.0,
+     "D": 1.380131119,
+     "sigma_h": 0.2769230769,
+     "sigma_target": 0.15,
+     "L_g_at_target": 0.7475710226,
+     "scale_gap": 0.4089661763,
+     "scale_cap": 1.0,
+     "scale": 0.4089661763,
+     "sigma_achieved": 0.06134492644,
+     "L_g_achieved": 0.3057312626,
+     "gap_loss_at_target": {
+      "HIST": 0.1006345607,
+      "K5": 0.06520506637,
+      "K10": 0.1304101327,
+      "DESIGN": 0.1304101327
+     },
+     "gap_loss_achieved": {
+      "HIST": 0.04115613151,
+      "K5": 0.02666666667,
+      "K10": 0.05333333333,
+      "DESIGN": 0.05333333333
+     },
+     "margin_to_equity": {
+      "basis": 0.02116601049,
+      "plus50": 0.03174901573,
+      "plus100": 0.04233202098
+     },
+     "es_1d_parametric": 0.01091246842,
+     "class_gross_leverage": {
+      "EDELMETALL": 0.2351778943,
+      "ENERGIE": 0.0705533683
+     },
+     "basis": "S-BASE-TFD1-7T",
+     "mean_cost_sr": 0.02320383961,
+     "admissible": false,
+     "reasons": [
+      "Verlustbudget: Ziel-σ_p 15% nur zu 41% erreichbar (Lückenstress × Wochenendfaktor 19.6% > 8%); vom Grundprofil nicht unterscheidbar",
+      "Mindestdiversifikation: 2.0 < 10 effektive Instrumente"
+     ],
+     "notes": [],
+     "band": {
+      "share_below_band": 1.0,
+      "share_in_band": 0.0,
+      "share_at_cap": 0.0,
+      "share_zero": 0.14025
+     }
+    }
+   },
+   "5000000": {
+    "H5": {
+     "n": 4,
+     "effective_n": 4.0,
+     "D": 1.737488971,
+     "sigma_h": 0.2574383859,
+     "sigma_target": 0.06,
+     "L_g_at_target": 0.4049486944,
+     "scale_gap": 0.7426736799,
+     "scale_cap": 1.0,
+     "scale": 0.7426736799,
+     "sigma_achieved": 0.0445604208,
+     "L_g_achieved": 0.3007447371,
+     "gap_loss_at_target": {
+      "HIST": 0.06909362764,
+      "K5": 0.03283545517,
+      "K10": 0.06567091033,
+      "DESIGN": 0.07181260731
+     },
+     "gap_loss_achieved": {
+      "HIST": 0.0513140187,
+      "K5": 0.02438602832,
+      "K10": 0.04877205664,
+      "DESIGN": 0.05333333333
+     },
+     "margin_to_equity": {
+      "basis": 0.02267625303,
+      "plus50": 0.03401437954,
+      "plus100": 0.04535250605
+     },
+     "es_1d_parametric": 0.007926722112,
+     "class_gross_leverage": {
+      "EDELMETALL": 0.1075322773,
+      "ENERGIE": 0.1157892201,
+      "INDUSTRIEMETALL": 0.07742323968
+     },
+     "basis": "S-BASE-TFD1-7T",
+     "mean_cost_sr": 0.0121878174,
+     "admissible": false,
+     "reasons": [
+      "Mindestdiversifikation: 4.0 < 8 effektive Instrumente"
+     ],
+     "notes": [
+      "H5 läuft mit σ_p 4.5% statt 6%; die Lückenregel skaliert automatisch"
+     ],
+     "band": {
+      "share_below_band": 1.0,
+      "share_in_band": 0.0,
+      "share_at_cap": 0.0,
+      "share_zero": 0.0195
+     }
+    },
+    "H10": {
+     "n": 4,
+     "effective_n": 4.0,
+     "D": 1.737488971,
+     "sigma_h": 0.2574383859,
+     "sigma_target": 0.09,
+     "L_g_at_target": 0.6074230416,
+     "scale_gap": 0.4951157866,
+     "scale_cap": 1.0,
+     "scale": 0.4951157866,
+     "sigma_achieved": 0.0445604208,
+     "L_g_achieved": 0.3007447371,
+     "gap_loss_at_target": {
+      "HIST": 0.1036404415,
+      "K5": 0.04925318275,
+      "K10": 0.0985063655,
+      "DESIGN": 0.107718911
+     },
+     "gap_loss_achieved": {
+      "HIST": 0.0513140187,
+      "K5": 0.02438602832,
+      "K10": 0.04877205664,
+      "DESIGN": 0.05333333333
+     },
+     "margin_to_equity": {
+      "basis": 0.02267625303,
+      "plus50": 0.03401437954,
+      "plus100": 0.04535250605
+     },
+     "es_1d_parametric": 0.007926722112,
+     "class_gross_leverage": {
+      "EDELMETALL": 0.1075322773,
+      "ENERGIE": 0.1157892201,
+      "INDUSTRIEMETALL": 0.07742323968
+     },
+     "basis": "S-BASE-TFD1-7T",
+     "mean_cost_sr": 0.0121878174,
+     "admissible": false,
+     "reasons": [
+      "Verlustbudget: Ziel-σ_p 9% nur zu 50% erreichbar (Lückenstress × Wochenendfaktor 16.2% > 8%); vom Grundprofil nicht unterscheidbar",
+      "Mindestdiversifikation: 4.0 < 8 effektive Instrumente"
+     ],
+     "notes": [],
+     "band": {
+      "share_below_band": 1.0,
+      "share_in_band": 0.0,
+      "share_at_cap": 0.0,
+      "share_zero": 0.0195
+     }
+    },
+    "H15": {
+     "n": 4,
+     "effective_n": 4.0,
+     "D": 1.737488971,
+     "sigma_h": 0.2574383859,
+     "sigma_target": 0.12,
+     "L_g_at_target": 0.8098973888,
+     "scale_gap": 0.37133684,
+     "scale_cap": 1.0,
+     "scale": 0.37133684,
+     "sigma_achieved": 0.0445604208,
+     "L_g_achieved": 0.3007447371,
+     "gap_loss_at_target": {
+      "HIST": 0.1381872553,
+      "K5": 0.06567091033,
+      "K10": 0.1313418207,
+      "DESIGN": 0.1436252146
+     },
+     "gap_loss_achieved": {
+      "HIST": 0.0513140187,
+      "K5": 0.02438602832,
+      "K10": 0.04877205664,
+      "DESIGN": 0.05333333333
+     },
+     "margin_to_equity": {
+      "basis": 0.02267625303,
+      "plus50": 0.03401437954,
+      "plus100": 0.04535250605
+     },
+     "es_1d_parametric": 0.007926722112,
+     "class_gross_leverage": {
+      "EDELMETALL": 0.1075322773,
+      "ENERGIE": 0.1157892201,
+      "INDUSTRIEMETALL": 0.07742323968
+     },
+     "basis": "S-BASE-TFD1-7T",
+     "mean_cost_sr": 0.0121878174,
+     "admissible": false,
+     "reasons": [
+      "Verlustbudget: Ziel-σ_p 12% nur zu 37% erreichbar (Lückenstress × Wochenendfaktor 21.5% > 8%); vom Grundprofil nicht unterscheidbar",
+      "Mindestdiversifikation: 4.0 < 10 effektive Instrumente"
+     ],
+     "notes": [],
+     "band": {
+      "share_below_band": 1.0,
+      "share_in_band": 0.0,
+      "share_at_cap": 0.0,
+      "share_zero": 0.02225
+     }
+    },
+    "H20": {
+     "n": 4,
+     "effective_n": 4.0,
+     "D": 1.737488971,
+     "sigma_h": 0.2574383859,
+     "sigma_target": 0.15,
+     "L_g_at_target": 1.012371736,
+     "scale_gap": 0.297069472,
+     "scale_cap": 1.0,
+     "scale": 0.297069472,
+     "sigma_achieved": 0.0445604208,
+     "L_g_achieved": 0.3007447371,
+     "gap_loss_at_target": {
+      "HIST": 0.1727340691,
+      "K5": 0.08208863791,
+      "K10": 0.1641772758,
+      "DESIGN": 0.1795315183
+     },
+     "gap_loss_achieved": {
+      "HIST": 0.0513140187,
+      "K5": 0.02438602832,
+      "K10": 0.04877205664,
+      "DESIGN": 0.05333333333
+     },
+     "margin_to_equity": {
+      "basis": 0.02267625303,
+      "plus50": 0.03401437954,
+      "plus100": 0.04535250605
+     },
+     "es_1d_parametric": 0.007926722112,
+     "class_gross_leverage": {
+      "EDELMETALL": 0.1075322773,
+      "ENERGIE": 0.1157892201,
+      "INDUSTRIEMETALL": 0.07742323968
+     },
+     "basis": "S-BASE-TFD1-7T",
+     "mean_cost_sr": 0.0121878174,
+     "admissible": false,
+     "reasons": [
+      "Verlustbudget: Ziel-σ_p 15% nur zu 30% erreichbar (Lückenstress × Wochenendfaktor 26.9% > 8%); vom Grundprofil nicht unterscheidbar",
+      "Mindestdiversifikation: 4.0 < 10 effektive Instrumente"
+     ],
+     "notes": [],
+     "band": {
+      "share_below_band": 1.0,
+      "share_in_band": 0.0,
+      "share_at_cap": 0.0,
+      "share_zero": 0.01875
+     }
+    }
+   },
+   "25000000": {
+    "H5": {
+     "n": 7,
+     "effective_n": 7.0,
+     "D": 1.870828693,
+     "sigma_h": 0.2992112628,
+     "sigma_target": 0.06,
+     "L_g_at_target": 0.3751520599,
+     "scale_gap": 0.7032156037,
+     "scale_cap": 1.0,
+     "scale": 0.7032156037,
+     "sigma_achieved": 0.04219293622,
+     "L_g_achieved": 0.2638127823,
+     "gap_loss_at_target": {
+      "HIST": 0.06599284582,
+      "K5": 0.03535533906,
+      "K10": 0.07071067812,
+      "DESIGN": 0.07584207895
+     },
+     "gap_loss_achieved": {
+      "HIST": 0.04640719892,
+      "K5": 0.0248624261,
+      "K10": 0.0497248522,
+      "DESIGN": 0.05333333333
+     },
+     "margin_to_equity": {
+      "basis": 0.02056759717,
+      "plus50": 0.03085139576,
+      "plus100": 0.04113519435
+     },
+     "es_1d_parametric": 0.007505577249,
+     "class_gross_leverage": {
+      "EDELMETALL": 0.1002358803,
+      "ENERGIE": 0.1184707559,
+      "INDUSTRIEMETALL": 0.04510614614
+     },
+     "basis": "S-BASE-TFD1-7T",
+     "mean_cost_sr": 0.01487189608,
+     "admissible": false,
+     "reasons": [
+      "Mindestdiversifikation: 7.0 < 8 effektive Instrumente"
+     ],
+     "notes": [
+      "H5 läuft mit σ_p 4.2% statt 6%; die Lückenregel skaliert automatisch"
+     ],
+     "band": {
+      "share_below_band": 1.0,
+      "share_in_band": 0.0,
+      "share_at_cap": 0.0,
+      "share_zero": 0.00075
+     }
+    },
+    "H10": {
+     "n": 7,
+     "effective_n": 7.0,
+     "D": 1.870828693,
+     "sigma_h": 0.2992112628,
+     "sigma_target": 0.09,
+     "L_g_at_target": 0.5627280899,
+     "scale_gap": 0.4688104025,
+     "scale_cap": 1.0,
+     "scale": 0.4688104025,
+     "sigma_achieved": 0.04219293622,
+     "L_g_achieved": 0.2638127823,
+     "gap_loss_at_target": {
+      "HIST": 0.09898926873,
+      "K5": 0.05303300859,
+      "K10": 0.1060660172,
+      "DESIGN": 0.1137631184
+     },
+     "gap_loss_achieved": {
+      "HIST": 0.04640719892,
+      "K5": 0.0248624261,
+      "K10": 0.0497248522,
+      "DESIGN": 0.05333333333
+     },
+     "margin_to_equity": {
+      "basis": 0.02056759717,
+      "plus50": 0.03085139576,
+      "plus100": 0.04113519435
+     },
+     "es_1d_parametric": 0.007505577249,
+     "class_gross_leverage": {
+      "EDELMETALL": 0.1002358803,
+      "ENERGIE": 0.1184707559,
+      "INDUSTRIEMETALL": 0.04510614614
+     },
+     "basis": "S-BASE-TFD1-7T",
+     "mean_cost_sr": 0.01487189608,
+     "admissible": false,
+     "reasons": [
+      "Verlustbudget: Ziel-σ_p 9% nur zu 47% erreichbar (Lückenstress × Wochenendfaktor 17.1% > 8%); vom Grundprofil nicht unterscheidbar",
+      "Mindestdiversifikation: 7.0 < 8 effektive Instrumente"
+     ],
+     "notes": [],
+     "band": {
+      "share_below_band": 1.0,
+      "share_in_band": 0.0,
+      "share_at_cap": 0.0,
+      "share_zero": 0.0015
+     }
+    },
+    "H15": {
+     "n": 7,
+     "effective_n": 7.0,
+     "D": 1.870828693,
+     "sigma_h": 0.2992112628,
+     "sigma_target": 0.12,
+     "L_g_at_target": 0.7503041199,
+     "scale_gap": 0.3516078019,
+     "scale_cap": 1.0,
+     "scale": 0.3516078019,
+     "sigma_achieved": 0.04219293622,
+     "L_g_achieved": 0.2638127823,
+     "gap_loss_at_target": {
+      "HIST": 0.1319856916,
+      "K5": 0.07071067812,
+      "K10": 0.1414213562,
+      "DESIGN": 0.1516841579
+     },
+     "gap_loss_achieved": {
+      "HIST": 0.04640719892,
+      "K5": 0.0248624261,
+      "K10": 0.0497248522,
+      "DESIGN": 0.05333333333
+     },
+     "margin_to_equity": {
+      "basis": 0.02056759717,
+      "plus50": 0.03085139576,
+      "plus100": 0.04113519435
+     },
+     "es_1d_parametric": 0.007505577249,
+     "class_gross_leverage": {
+      "EDELMETALL": 0.1002358803,
+      "ENERGIE": 0.1184707559,
+      "INDUSTRIEMETALL": 0.04510614614
+     },
+     "basis": "S-BASE-TFD1-7T",
+     "mean_cost_sr": 0.01487189608,
+     "admissible": false,
+     "reasons": [
+      "Verlustbudget: Ziel-σ_p 12% nur zu 35% erreichbar (Lückenstress × Wochenendfaktor 22.8% > 8%); vom Grundprofil nicht unterscheidbar",
+      "Mindestdiversifikation: 7.0 < 10 effektive Instrumente"
+     ],
+     "notes": [],
+     "band": {
+      "share_below_band": 1.0,
+      "share_in_band": 0.0,
+      "share_at_cap": 0.0,
+      "share_zero": 0.00125
+     }
+    },
+    "H20": {
+     "n": 7,
+     "effective_n": 7.0,
+     "D": 1.870828693,
+     "sigma_h": 0.2992112628,
+     "sigma_target": 0.15,
+     "L_g_at_target": 0.9378801498,
+     "scale_gap": 0.2812862415,
+     "scale_cap": 1.0,
+     "scale": 0.2812862415,
+     "sigma_achieved": 0.04219293622,
+     "L_g_achieved": 0.2638127823,
+     "gap_loss_at_target": {
+      "HIST": 0.1649821146,
+      "K5": 0.08838834765,
+      "K10": 0.1767766953,
+      "DESIGN": 0.1896051974
+     },
+     "gap_loss_achieved": {
+      "HIST": 0.04640719892,
+      "K5": 0.0248624261,
+      "K10": 0.0497248522,
+      "DESIGN": 0.05333333333
+     },
+     "margin_to_equity": {
+      "basis": 0.02056759717,
+      "plus50": 0.03085139576,
+      "plus100": 0.04113519435
+     },
+     "es_1d_parametric": 0.007505577249,
+     "class_gross_leverage": {
+      "EDELMETALL": 0.1002358803,
+      "ENERGIE": 0.1184707559,
+      "INDUSTRIEMETALL": 0.04510614614
+     },
+     "basis": "S-BASE-TFD1-7T",
+     "mean_cost_sr": 0.01487189608,
+     "admissible": false,
+     "reasons": [
+      "Verlustbudget: Ziel-σ_p 15% nur zu 28% erreichbar (Lückenstress × Wochenendfaktor 28.4% > 8%); vom Grundprofil nicht unterscheidbar",
+      "Mindestdiversifikation: 7.0 < 10 effektive Instrumente"
+     ],
+     "notes": [],
+     "band": {
+      "share_below_band": 1.0,
+      "share_in_band": 0.0,
+      "share_at_cap": 0.0,
+      "share_zero": 0.00125
+     }
+    }
+   },
+   "100000000": {
+    "H5": {
+     "n": 0,
+     "admissible": false,
+     "reasons": [
+      "Leeres Universum: kein Instrument erfüllt die Zulassung"
+     ]
+    },
+    "H10": {
+     "n": 0,
+     "admissible": false,
+     "reasons": [
+      "Leeres Universum: kein Instrument erfüllt die Zulassung"
+     ]
+    },
+    "H15": {
+     "n": 0,
+     "admissible": false,
+     "reasons": [
+      "Leeres Universum: kein Instrument erfüllt die Zulassung"
+     ]
+    },
+    "H20": {
+     "n": 0,
+     "admissible": false,
+     "reasons": [
+      "Leeres Universum: kein Instrument erfüllt die Zulassung"
+     ]
+    }
+   }
+  },
+  "U-KOSTEN-TFD1": {
+   "250000": {
+    "H5": {
+     "n": 2,
+     "effective_n": 2.0,
+     "D": 1.380131119,
+     "sigma_h": 0.1555555556,
+     "sigma_target": 0.06,
+     "L_g_at_target": 0.5323362886,
+     "scale_gap": 0.9107936002,
+     "scale_cap": 1.0,
+     "scale": 0.9107936002,
+     "sigma_achieved": 0.05464761601,
+     "L_g_achieved": 0.4848484848,
+     "gap_loss_at_target": {
+      "HIST": 0.05855699175,
+      "K5": 0.02608202655,
+      "K10": 0.0521640531,
+      "DESIGN": 0.05855699175
+     },
+     "gap_loss_achieved": {
+      "HIST": 0.05333333333,
+      "K5": 0.02375534286,
+      "K10": 0.04751068572,
+      "DESIGN": 0.05333333333
+     },
+     "margin_to_equity": {
+      "basis": 0.02208754209,
+      "plus50": 0.03313131313,
+      "plus100": 0.04417508418
+     },
+     "es_1d_parametric": 0.009721103582,
+     "class_gross_leverage": {
+      "ENERGIE": 0.1077441077,
+      "FX": 0.3771043771
+     },
+     "basis": "S-BASE-TFD1",
+     "mean_cost_sr": 0.02292064253,
+     "admissible": false,
+     "reasons": [
+      "Mindestdiversifikation: 2.0 < 8 effektive Instrumente"
+     ],
+     "notes": [
+      "H5 läuft mit σ_p 5.5% statt 6%; die Lückenregel skaliert automatisch"
+     ],
+     "band": {
+      "share_below_band": 1.0,
+      "share_in_band": 0.0,
+      "share_at_cap": 0.0,
+      "share_zero": 0.1405
+     }
+    },
+    "H10": {
+     "n": 2,
+     "effective_n": 2.0,
+     "D": 1.380131119,
+     "sigma_h": 0.1555555556,
+     "sigma_target": 0.09,
+     "L_g_at_target": 0.798504433,
+     "scale_gap": 0.6071957335,
+     "scale_cap": 1.0,
+     "scale": 0.6071957335,
+     "sigma_achieved": 0.05464761601,
+     "L_g_achieved": 0.4848484848,
+     "gap_loss_at_target": {
+      "HIST": 0.08783548762,
+      "K5": 0.03912303982,
+      "K10": 0.07824607964,
+      "DESIGN": 0.08783548762
+     },
+     "gap_loss_achieved": {
+      "HIST": 0.05333333333,
+      "K5": 0.02375534286,
+      "K10": 0.04751068572,
+      "DESIGN": 0.05333333333
+     },
+     "margin_to_equity": {
+      "basis": 0.02208754209,
+      "plus50": 0.03313131313,
+      "plus100": 0.04417508418
+     },
+     "es_1d_parametric": 0.009721103582,
+     "class_gross_leverage": {
+      "ENERGIE": 0.1077441077,
+      "FX": 0.3771043771
+     },
+     "basis": "S-BASE-TFD1",
+     "mean_cost_sr": 0.02292064253,
+     "admissible": false,
+     "reasons": [
+      "Verlustbudget: Ziel-σ_p 9% nur zu 61% erreichbar (Lückenstress × Wochenendfaktor 13.2% > 8%); vom Grundprofil nicht unterscheidbar",
+      "Mindestdiversifikation: 2.0 < 8 effektive Instrumente"
+     ],
+     "notes": [],
+     "band": {
+      "share_below_band": 1.0,
+      "share_in_band": 0.0,
+      "share_at_cap": 0.0,
+      "share_zero": 0.15475
+     }
+    },
+    "H15": {
+     "n": 2,
+     "effective_n": 2.0,
+     "D": 1.380131119,
+     "sigma_h": 0.1555555556,
+     "sigma_target": 0.12,
+     "L_g_at_target": 1.064672577,
+     "scale_gap": 0.4553968001,
+     "scale_cap": 1.0,
+     "scale": 0.4553968001,
+     "sigma_achieved": 0.05464761601,
+     "L_g_achieved": 0.4848484848,
+     "gap_loss_at_target": {
+      "HIST": 0.1171139835,
+      "K5": 0.0521640531,
+      "K10": 0.1043281062,
+      "DESIGN": 0.1171139835
+     },
+     "gap_loss_achieved": {
+      "HIST": 0.05333333333,
+      "K5": 0.02375534286,
+      "K10": 0.04751068572,
+      "DESIGN": 0.05333333333
+     },
+     "margin_to_equity": {
+      "basis": 0.02208754209,
+      "plus50": 0.03313131313,
+      "plus100": 0.04417508418
+     },
+     "es_1d_parametric": 0.009721103582,
+     "class_gross_leverage": {
+      "ENERGIE": 0.1077441077,
+      "FX": 0.3771043771
+     },
+     "basis": "S-BASE-TFD1",
+     "mean_cost_sr": 0.02292064253,
+     "admissible": false,
+     "reasons": [
+      "Verlustbudget: Ziel-σ_p 12% nur zu 46% erreichbar (Lückenstress × Wochenendfaktor 17.6% > 8%); vom Grundprofil nicht unterscheidbar",
+      "Mindestdiversifikation: 2.0 < 10 effektive Instrumente"
+     ],
+     "notes": [],
+     "band": {
+      "share_below_band": 1.0,
+      "share_in_band": 0.0,
+      "share_at_cap": 0.0,
+      "share_zero": 0.1475
+     }
+    },
+    "H20": {
+     "n": 2,
+     "effective_n": 2.0,
+     "D": 1.380131119,
+     "sigma_h": 0.1555555556,
+     "sigma_target": 0.15,
+     "L_g_at_target": 1.330840722,
+     "scale_gap": 0.3643174401,
+     "scale_cap": 1.0,
+     "scale": 0.3643174401,
+     "sigma_achieved": 0.05464761601,
+     "L_g_achieved": 0.4848484848,
+     "gap_loss_at_target": {
+      "HIST": 0.1463924794,
+      "K5": 0.06520506637,
+      "K10": 0.1304101327,
+      "DESIGN": 0.1463924794
+     },
+     "gap_loss_achieved": {
+      "HIST": 0.05333333333,
+      "K5": 0.02375534286,
+      "K10": 0.04751068572,
+      "DESIGN": 0.05333333333
+     },
+     "margin_to_equity": {
+      "basis": 0.02208754209,
+      "plus50": 0.03313131313,
+      "plus100": 0.04417508418
+     },
+     "es_1d_parametric": 0.009721103582,
+     "class_gross_leverage": {
+      "ENERGIE": 0.1077441077,
+      "FX": 0.3771043771
+     },
+     "basis": "S-BASE-TFD1",
+     "mean_cost_sr": 0.02292064253,
+     "admissible": false,
+     "reasons": [
+      "Verlustbudget: Ziel-σ_p 15% nur zu 36% erreichbar (Lückenstress × Wochenendfaktor 22.0% > 8%); vom Grundprofil nicht unterscheidbar",
+      "Mindestdiversifikation: 2.0 < 10 effektive Instrumente"
+     ],
+     "notes": [],
+     "band": {
+      "share_below_band": 1.0,
+      "share_in_band": 0.0,
+      "share_at_cap": 0.0,
+      "share_zero": 0.14275
+     }
+    }
+   },
+   "500000": {
+    "H5": {
+     "n": 4,
+     "effective_n": 4.0,
+     "D": 1.61955266,
+     "sigma_h": 0.09518413598,
+     "sigma_target": 0.06,
+     "L_g_at_target": 1.020896588,
+     "scale_gap": 0.6352499584,
+     "scale_cap": 1.0,
+     "scale": 0.6352499584,
+     "sigma_achieved": 0.0381149975,
+     "L_g_achieved": 0.6485245149,
+     "gap_loss_at_target": {
+      "HIST": 0.08395645309,
+      "K5": 0.03060666839,
+      "K10": 0.06121333678,
+      "DESIGN": 0.08395645309
+     },
+     "gap_loss_achieved": {
+      "HIST": 0.05333333333,
+      "K5": 0.01944288482,
+      "K10": 0.03888576964,
+      "DESIGN": 0.05333333333
+     },
+     "margin_to_equity": {
+      "basis": 0.02254219773,
+      "plus50": 0.03381329659,
+      "plus100": 0.04508439545
+     },
+     "es_1d_parametric": 0.006780164732,
+     "class_gross_leverage": {
+      "ENERGIE": 0.04409231829,
+      "FX": 0.6044321966
+     },
+     "basis": "S-BASE-TFD1",
+     "mean_cost_sr": 0.02434925686,
+     "admissible": false,
+     "reasons": [
+      "Mindestdiversifikation: 4.0 < 8 effektive Instrumente"
+     ],
+     "notes": [
+      "H5 läuft mit σ_p 3.8% statt 6%; die Lückenregel skaliert automatisch"
+     ],
+     "band": {
+      "share_below_band": 1.0,
+      "share_in_band": 0.0,
+      "share_at_cap": 0.0,
+      "share_zero": 0.023
+     }
+    },
+    "H10": {
+     "n": 4,
+     "effective_n": 4.0,
+     "D": 1.61955266,
+     "sigma_h": 0.09518413598,
+     "sigma_target": 0.09,
+     "L_g_at_target": 1.531344882,
+     "scale_gap": 0.4234999723,
+     "scale_cap": 1.0,
+     "scale": 0.4234999723,
+     "sigma_achieved": 0.0381149975,
+     "L_g_achieved": 0.6485245149,
+     "gap_loss_at_target": {
+      "HIST": 0.1259346796,
+      "K5": 0.04591000258,
+      "K10": 0.09182000517,
+      "DESIGN": 0.1259346796
+     },
+     "gap_loss_achieved": {
+      "HIST": 0.05333333333,
+      "K5": 0.01944288482,
+      "K10": 0.03888576964,
+      "DESIGN": 0.05333333333
+     },
+     "margin_to_equity": {
+      "basis": 0.02254219773,
+      "plus50": 0.03381329659,
+      "plus100": 0.04508439545
+     },
+     "es_1d_parametric": 0.006780164732,
+     "class_gross_leverage": {
+      "ENERGIE": 0.04409231829,
+      "FX": 0.6044321966
+     },
+     "basis": "S-BASE-TFD1",
+     "mean_cost_sr": 0.02434925686,
+     "admissible": false,
+     "reasons": [
+      "Verlustbudget: Ziel-σ_p 9% nur zu 42% erreichbar (Lückenstress × Wochenendfaktor 18.9% > 8%); vom Grundprofil nicht unterscheidbar",
+      "Mindestdiversifikation: 4.0 < 8 effektive Instrumente"
+     ],
+     "notes": [],
+     "band": {
+      "share_below_band": 1.0,
+      "share_in_band": 0.0,
+      "share_at_cap": 0.0,
+      "share_zero": 0.01675
+     }
+    },
+    "H15": {
+     "n": 4,
+     "effective_n": 4.0,
+     "D": 1.61955266,
+     "sigma_h": 0.09518413598,
+     "sigma_target": 0.12,
+     "L_g_at_target": 2.041793175,
+     "scale_gap": 0.3176249792,
+     "scale_cap": 1.0,
+     "scale": 0.3176249792,
+     "sigma_achieved": 0.0381149975,
+     "L_g_achieved": 0.6485245149,
+     "gap_loss_at_target": {
+      "HIST": 0.1679129062,
+      "K5": 0.06121333678,
+      "K10": 0.1224266736,
+      "DESIGN": 0.1679129062
+     },
+     "gap_loss_achieved": {
+      "HIST": 0.05333333333,
+      "K5": 0.01944288482,
+      "K10": 0.03888576964,
+      "DESIGN": 0.05333333333
+     },
+     "margin_to_equity": {
+      "basis": 0.02254219773,
+      "plus50": 0.03381329659,
+      "plus100": 0.04508439545
+     },
+     "es_1d_parametric": 0.006780164732,
+     "class_gross_leverage": {
+      "ENERGIE": 0.04409231829,
+      "FX": 0.6044321966
+     },
+     "basis": "S-BASE-TFD1",
+     "mean_cost_sr": 0.02434925686,
+     "admissible": false,
+     "reasons": [
+      "Verlustbudget: Ziel-σ_p 12% nur zu 32% erreichbar (Lückenstress × Wochenendfaktor 25.2% > 8%); vom Grundprofil nicht unterscheidbar",
+      "Mindestdiversifikation: 4.0 < 10 effektive Instrumente"
+     ],
+     "notes": [],
+     "band": {
+      "share_below_band": 1.0,
+      "share_in_band": 0.0,
+      "share_at_cap": 0.0,
+      "share_zero": 0.022
+     }
+    },
+    "H20": {
+     "n": 4,
+     "effective_n": 4.0,
+     "D": 1.61955266,
+     "sigma_h": 0.09518413598,
+     "sigma_target": 0.15,
+     "L_g_at_target": 2.552241469,
+     "scale_gap": 0.2540999834,
+     "scale_cap": 1.0,
+     "scale": 0.2540999834,
+     "sigma_achieved": 0.0381149975,
+     "L_g_achieved": 0.6485245149,
+     "gap_loss_at_target": {
+      "HIST": 0.2098911327,
+      "K5": 0.07651667097,
+      "K10": 0.1530333419,
+      "DESIGN": 0.2098911327
+     },
+     "gap_loss_achieved": {
+      "HIST": 0.05333333333,
+      "K5": 0.01944288482,
+      "K10": 0.03888576964,
+      "DESIGN": 0.05333333333
+     },
+     "margin_to_equity": {
+      "basis": 0.02254219773,
+      "plus50": 0.03381329659,
+      "plus100": 0.04508439545
+     },
+     "es_1d_parametric": 0.006780164732,
+     "class_gross_leverage": {
+      "ENERGIE": 0.04409231829,
+      "FX": 0.6044321966
+     },
+     "basis": "S-BASE-TFD1",
+     "mean_cost_sr": 0.02434925686,
+     "admissible": false,
+     "reasons": [
+      "Verlustbudget: Ziel-σ_p 15% nur zu 25% erreichbar (Lückenstress × Wochenendfaktor 31.5% > 8%); vom Grundprofil nicht unterscheidbar",
+      "Mindestdiversifikation: 4.0 < 10 effektive Instrumente"
+     ],
+     "notes": [],
+     "band": {
+      "share_below_band": 1.0,
+      "share_in_band": 0.0,
+      "share_at_cap": 0.0,
+      "share_zero": 0.019
+     }
+    }
+   },
+   "1000000": {
+    "H5": {
+     "n": 6,
+     "effective_n": 6.0,
+     "D": 2.0,
+     "sigma_h": 0.1348795718,
+     "sigma_target": 0.06,
+     "L_g_at_target": 0.8896825397,
+     "scale_gap": 0.6275739419,
+     "scale_cap": 1.0,
+     "scale": 0.6275739419,
+     "sigma_achieved": 0.03765443652,
+     "L_g_achieved": 0.5583415785,
+     "gap_loss_at_target": {
+      "HIST": 0.07732539683,
+      "K5": 0.0377964473,
+      "K10": 0.0755928946,
+      "DESIGN": 0.08498334582
+     },
+     "gap_loss_achieved": {
+      "HIST": 0.0485274041,
+      "K5": 0.02372006542,
+      "K10": 0.04744013085,
+      "DESIGN": 0.05333333333
+     },
+     "margin_to_equity": {
+      "basis": 0.02247312402,
+      "plus50": 0.03370968602,
+      "plus100": 0.04494624803
+     },
+     "es_1d_parametric": 0.006698236893,
+     "class_gross_leverage": {
+      "AGRAR": 0.04482671014,
+      "EDELMETALL": 0.06973043799,
+      "ENERGIE": 0.03586136811,
+      "FX": 0.4079230622
+     },
+     "basis": "S-BASE-TFD1",
+     "mean_cost_sr": 0.01794249548,
+     "admissible": false,
+     "reasons": [
+      "Mindestdiversifikation: 6.0 < 8 effektive Instrumente"
+     ],
+     "notes": [
+      "H5 läuft mit σ_p 3.8% statt 6%; die Lückenregel skaliert automatisch"
+     ],
+     "band": {
+      "share_below_band": 1.0,
+      "share_in_band": 0.0,
+      "share_at_cap": 0.0,
+      "share_zero": 0.0025
+     }
+    },
+    "H10": {
+     "n": 6,
+     "effective_n": 6.0,
+     "D": 2.0,
+     "sigma_h": 0.1348795718,
+     "sigma_target": 0.09,
+     "L_g_at_target": 1.33452381,
+     "scale_gap": 0.4183826279,
+     "scale_cap": 1.0,
+     "scale": 0.4183826279,
+     "sigma_achieved": 0.03765443652,
+     "L_g_achieved": 0.5583415785,
+     "gap_loss_at_target": {
+      "HIST": 0.1159880952,
+      "K5": 0.05669467095,
+      "K10": 0.1133893419,
+      "DESIGN": 0.1274750187
+     },
+     "gap_loss_achieved": {
+      "HIST": 0.0485274041,
+      "K5": 0.02372006542,
+      "K10": 0.04744013085,
+      "DESIGN": 0.05333333333
+     },
+     "margin_to_equity": {
+      "basis": 0.02247312402,
+      "plus50": 0.03370968602,
+      "plus100": 0.04494624803
+     },
+     "es_1d_parametric": 0.006698236893,
+     "class_gross_leverage": {
+      "AGRAR": 0.04482671014,
+      "EDELMETALL": 0.06973043799,
+      "ENERGIE": 0.03586136811,
+      "FX": 0.4079230622
+     },
+     "basis": "S-BASE-TFD1",
+     "mean_cost_sr": 0.01794249548,
+     "admissible": false,
+     "reasons": [
+      "Verlustbudget: Ziel-σ_p 9% nur zu 42% erreichbar (Lückenstress × Wochenendfaktor 19.1% > 8%); vom Grundprofil nicht unterscheidbar",
+      "Mindestdiversifikation: 6.0 < 8 effektive Instrumente"
+     ],
+     "notes": [],
+     "band": {
+      "share_below_band": 1.0,
+      "share_in_band": 0.0,
+      "share_at_cap": 0.0,
+      "share_zero": 0.00275
+     }
+    },
+    "H15": {
+     "n": 6,
+     "effective_n": 6.0,
+     "D": 2.0,
+     "sigma_h": 0.1348795718,
+     "sigma_target": 0.12,
+     "L_g_at_target": 1.779365079,
+     "scale_gap": 0.313786971,
+     "scale_cap": 1.0,
+     "scale": 0.313786971,
+     "sigma_achieved": 0.03765443652,
+     "L_g_achieved": 0.5583415785,
+     "gap_loss_at_target": {
+      "HIST": 0.1546507937,
+      "K5": 0.0755928946,
+      "K10": 0.1511857892,
+      "DESIGN": 0.1699666916
+     },
+     "gap_loss_achieved": {
+      "HIST": 0.0485274041,
+      "K5": 0.02372006542,
+      "K10": 0.04744013085,
+      "DESIGN": 0.05333333333
+     },
+     "margin_to_equity": {
+      "basis": 0.02247312402,
+      "plus50": 0.03370968602,
+      "plus100": 0.04494624803
+     },
+     "es_1d_parametric": 0.006698236893,
+     "class_gross_leverage": {
+      "AGRAR": 0.04482671014,
+      "EDELMETALL": 0.06973043799,
+      "ENERGIE": 0.03586136811,
+      "FX": 0.4079230622
+     },
+     "basis": "S-BASE-TFD1",
+     "mean_cost_sr": 0.01794249548,
+     "admissible": false,
+     "reasons": [
+      "Verlustbudget: Ziel-σ_p 12% nur zu 31% erreichbar (Lückenstress × Wochenendfaktor 25.5% > 8%); vom Grundprofil nicht unterscheidbar",
+      "Mindestdiversifikation: 6.0 < 10 effektive Instrumente"
+     ],
+     "notes": [],
+     "band": {
+      "share_below_band": 1.0,
+      "share_in_band": 0.0,
+      "share_at_cap": 0.0,
+      "share_zero": 0.00325
+     }
+    },
+    "H20": {
+     "n": 6,
+     "effective_n": 6.0,
+     "D": 2.0,
+     "sigma_h": 0.1348795718,
+     "sigma_target": 0.15,
+     "L_g_at_target": 2.224206349,
+     "scale_gap": 0.2510295768,
+     "scale_cap": 1.0,
+     "scale": 0.2510295768,
+     "sigma_achieved": 0.03765443652,
+     "L_g_achieved": 0.5583415785,
+     "gap_loss_at_target": {
+      "HIST": 0.1933134921,
+      "K5": 0.09449111825,
+      "K10": 0.1889822365,
+      "DESIGN": 0.2124583645
+     },
+     "gap_loss_achieved": {
+      "HIST": 0.0485274041,
+      "K5": 0.02372006542,
+      "K10": 0.04744013085,
+      "DESIGN": 0.05333333333
+     },
+     "margin_to_equity": {
+      "basis": 0.02247312402,
+      "plus50": 0.03370968602,
+      "plus100": 0.04494624803
+     },
+     "es_1d_parametric": 0.006698236893,
+     "class_gross_leverage": {
+      "AGRAR": 0.04482671014,
+      "EDELMETALL": 0.06973043799,
+      "ENERGIE": 0.03586136811,
+      "FX": 0.4079230622
+     },
+     "basis": "S-BASE-TFD1",
+     "mean_cost_sr": 0.01794249548,
+     "admissible": false,
+     "reasons": [
+      "Verlustbudget: Ziel-σ_p 15% nur zu 25% erreichbar (Lückenstress × Wochenendfaktor 31.9% > 8%); vom Grundprofil nicht unterscheidbar",
+      "Mindestdiversifikation: 6.0 < 10 effektive Instrumente"
+     ],
+     "notes": [],
+     "band": {
+      "share_below_band": 1.0,
+      "share_in_band": 0.0,
+      "share_at_cap": 0.0,
+      "share_zero": 0.00275
+     }
+    }
+   },
+   "5000000": {
+    "H5": {
+     "n": 18,
+     "effective_n": 18.0,
+     "D": 2.695287367,
+     "sigma_h": 0.1583055192,
+     "sigma_target": 0.06,
+     "L_g_at_target": 1.021551509,
+     "scale_gap": 0.4245691663,
+     "scale_cap": 1.0,
+     "scale": 0.4245691663,
+     "sigma_achieved": 0.02547414998,
+     "L_g_achieved": 0.4337192724,
+     "gap_loss_at_target": {
+      "HIST": 0.09991711596,
+      "K5": 0.05093614346,
+      "K10": 0.1018722869,
+      "DESIGN": 0.1256175379
+     },
+     "gap_loss_achieved": {
+      "HIST": 0.04242172662,
+      "K5": 0.02162591596,
+      "K10": 0.04325183193,
+      "DESIGN": 0.05333333333
+     },
+     "margin_to_equity": {
+      "basis": 0.0184858687,
+      "plus50": 0.02772880305,
+      "plus100": 0.0369717374
+     },
+     "es_1d_parametric": 0.004531521568,
+     "class_gross_leverage": {
+      "AGRAR": 0.07939896828,
+      "ANLEIHE_LANG": 0.0272460931,
+      "EDELMETALL": 0.04662109264,
+      "ENERGIE": 0.01725585896,
+      "FX": 0.2225097603,
+      "VIEH": 0.04068749903
+     },
+     "basis": "S-BASE-TFD1",
+     "mean_cost_sr": 0.0206093089,
+     "admissible": false,
+     "reasons": [
+      "Verlustbudget: nach der Lückenregel nur σ_p 2.5% < Mindest-σ 3%"
+     ],
+     "notes": [],
+     "band": {
+      "share_below_band": 1.0,
+      "share_in_band": 0.0,
+      "share_at_cap": 0.0,
+      "share_zero": 0.0
+     }
+    },
+    "H10": {
+     "n": 18,
+     "effective_n": 18.0,
+     "D": 2.695287367,
+     "sigma_h": 0.1583055192,
+     "sigma_target": 0.09,
+     "L_g_at_target": 1.532327263,
+     "scale_gap": 0.2830461108,
+     "scale_cap": 1.0,
+     "scale": 0.2830461108,
+     "sigma_achieved": 0.02547414998,
+     "L_g_achieved": 0.4337192724,
+     "gap_loss_at_target": {
+      "HIST": 0.1498756739,
+      "K5": 0.0764042152,
+      "K10": 0.1528084304,
+      "DESIGN": 0.1884263068
+     },
+     "gap_loss_achieved": {
+      "HIST": 0.04242172662,
+      "K5": 0.02162591596,
+      "K10": 0.04325183193,
+      "DESIGN": 0.05333333333
+     },
+     "margin_to_equity": {
+      "basis": 0.0184858687,
+      "plus50": 0.02772880305,
+      "plus100": 0.0369717374
+     },
+     "es_1d_parametric": 0.004531521568,
+     "class_gross_leverage": {
+      "AGRAR": 0.07939896828,
+      "ANLEIHE_LANG": 0.0272460931,
+      "EDELMETALL": 0.04662109264,
+      "ENERGIE": 0.01725585896,
+      "FX": 0.2225097603,
+      "VIEH": 0.04068749903
+     },
+     "basis": "S-BASE-TFD1",
+     "mean_cost_sr": 0.0206093089,
+     "admissible": false,
+     "reasons": [
+      "Verlustbudget: Ziel-σ_p 9% nur zu 28% erreichbar (Lückenstress × Wochenendfaktor 28.3% > 8%); vom Grundprofil nicht unterscheidbar"
+     ],
+     "notes": [],
+     "band": {
+      "share_below_band": 1.0,
+      "share_in_band": 0.0,
+      "share_at_cap": 0.0,
+      "share_zero": 0.0
+     }
+    },
+    "H15": {
+     "n": 18,
+     "effective_n": 18.0,
+     "D": 2.695287367,
+     "sigma_h": 0.1583055192,
+     "sigma_target": 0.12,
+     "L_g_at_target": 2.043103017,
+     "scale_gap": 0.2122845831,
+     "scale_cap": 1.0,
+     "scale": 0.2122845831,
+     "sigma_achieved": 0.02547414998,
+     "L_g_achieved": 0.4337192724,
+     "gap_loss_at_target": {
+      "HIST": 0.1998342319,
+      "K5": 0.1018722869,
+      "K10": 0.2037445739,
+      "DESIGN": 0.2512350758
+     },
+     "gap_loss_achieved": {
+      "HIST": 0.04242172662,
+      "K5": 0.02162591596,
+      "K10": 0.04325183193,
+      "DESIGN": 0.05333333333
+     },
+     "margin_to_equity": {
+      "basis": 0.0184858687,
+      "plus50": 0.02772880305,
+      "plus100": 0.0369717374
+     },
+     "es_1d_parametric": 0.004531521568,
+     "class_gross_leverage": {
+      "AGRAR": 0.07939896828,
+      "ANLEIHE_LANG": 0.0272460931,
+      "EDELMETALL": 0.04662109264,
+      "ENERGIE": 0.01725585896,
+      "FX": 0.2225097603,
+      "VIEH": 0.04068749903
+     },
+     "basis": "S-BASE-TFD1",
+     "mean_cost_sr": 0.0206093089,
+     "admissible": false,
+     "reasons": [
+      "Verlustbudget: Ziel-σ_p 12% nur zu 21% erreichbar (Lückenstress × Wochenendfaktor 37.7% > 8%); vom Grundprofil nicht unterscheidbar"
+     ],
+     "notes": [],
+     "band": {
+      "share_below_band": 1.0,
+      "share_in_band": 0.0,
+      "share_at_cap": 0.0,
+      "share_zero": 0.0
+     }
+    },
+    "H20": {
+     "n": 18,
+     "effective_n": 18.0,
+     "D": 2.695287367,
+     "sigma_h": 0.1583055192,
+     "sigma_target": 0.15,
+     "L_g_at_target": 2.553878772,
+     "scale_gap": 0.1698276665,
+     "scale_cap": 1.0,
+     "scale": 0.1698276665,
+     "sigma_achieved": 0.02547414998,
+     "L_g_achieved": 0.4337192724,
+     "gap_loss_at_target": {
+      "HIST": 0.2497927899,
+      "K5": 0.1273403587,
+      "K10": 0.2546807173,
+      "DESIGN": 0.3140438447
+     },
+     "gap_loss_achieved": {
+      "HIST": 0.04242172662,
+      "K5": 0.02162591596,
+      "K10": 0.04325183193,
+      "DESIGN": 0.05333333333
+     },
+     "margin_to_equity": {
+      "basis": 0.0184858687,
+      "plus50": 0.02772880305,
+      "plus100": 0.0369717374
+     },
+     "es_1d_parametric": 0.004531521568,
+     "class_gross_leverage": {
+      "AGRAR": 0.07939896828,
+      "ANLEIHE_LANG": 0.0272460931,
+      "EDELMETALL": 0.04662109264,
+      "ENERGIE": 0.01725585896,
+      "FX": 0.2225097603,
+      "VIEH": 0.04068749903
+     },
+     "basis": "S-BASE-TFD1",
+     "mean_cost_sr": 0.0206093089,
+     "admissible": false,
+     "reasons": [
+      "Verlustbudget: Ziel-σ_p 15% nur zu 17% erreichbar (Lückenstress × Wochenendfaktor 47.1% > 8%); vom Grundprofil nicht unterscheidbar"
+     ],
+     "notes": [],
+     "band": {
+      "share_below_band": 1.0,
+      "share_in_band": 0.0,
+      "share_at_cap": 0.0,
+      "share_zero": 0.0
+     }
+    }
+   },
+   "25000000": {
+    "H5": {
+     "n": 28,
+     "effective_n": 28.0,
+     "D": 2.821239242,
+     "sigma_h": 0.1015957491,
+     "sigma_target": 0.06,
+     "L_g_at_target": 1.666155878,
+     "scale_gap": 0.4190223968,
+     "scale_cap": 1.0,
+     "scale": 0.4190223968,
+     "sigma_achieved": 0.02514134381,
+     "L_g_achieved": 0.6981566293,
+     "gap_loss_at_target": {
+      "HIST": 0.1041090038,
+      "K5": 0.05331641017,
+      "K10": 0.1066328203,
+      "DESIGN": 0.1272803882
+     },
+     "gap_loss_achieved": {
+      "HIST": 0.0436240043,
+      "K5": 0.02234076998,
+      "K10": 0.04468153996,
+      "DESIGN": 0.05333333333
+     },
+     "margin_to_equity": {
+      "basis": 0.02163479564,
+      "plus50": 0.03245219347,
+      "plus100": 0.04326959129
+     },
+     "es_1d_parametric": 0.004472319657,
+     "class_gross_leverage": {
+      "AGRAR": 0.06424398483,
+      "ANLEIHE_KURZ": 0.1583253253,
+      "ANLEIHE_LANG": 0.07489953053,
+      "ANLEIHE_MITTEL": 0.1103392467,
+      "EDELMETALL": 0.0225173796,
+      "ENERGIE": 0.02661373326,
+      "FX": 0.1899903904,
+      "INDUSTRIEMETALL": 0.01013282082,
+      "VIEH": 0.04109421778
+     },
+     "basis": "S-BASE-TFD1",
+     "mean_cost_sr": 0.02464042623,
+     "admissible": false,
+     "reasons": [
+      "Verlustbudget: nach der Lückenregel nur σ_p 2.5% < Mindest-σ 3%"
+     ],
+     "notes": [],
+     "band": {
+      "share_below_band": 1.0,
+      "share_in_band": 0.0,
+      "share_at_cap": 0.0,
+      "share_zero": 0.0
+     }
+    },
+    "H10": {
+     "n": 28,
+     "effective_n": 28.0,
+     "D": 2.821239242,
+     "sigma_h": 0.1015957491,
+     "sigma_target": 0.09,
+     "L_g_at_target": 2.499233817,
+     "scale_gap": 0.2793482645,
+     "scale_cap": 1.0,
+     "scale": 0.2793482645,
+     "sigma_achieved": 0.02514134381,
+     "L_g_achieved": 0.6981566293,
+     "gap_loss_at_target": {
+      "HIST": 0.1561635057,
+      "K5": 0.07997461526,
+      "K10": 0.1599492305,
+      "DESIGN": 0.1909205823
+     },
+     "gap_loss_achieved": {
+      "HIST": 0.0436240043,
+      "K5": 0.02234076998,
+      "K10": 0.04468153996,
+      "DESIGN": 0.05333333333
+     },
+     "margin_to_equity": {
+      "basis": 0.02163479564,
+      "plus50": 0.03245219347,
+      "plus100": 0.04326959129
+     },
+     "es_1d_parametric": 0.004472319657,
+     "class_gross_leverage": {
+      "AGRAR": 0.06424398483,
+      "ANLEIHE_KURZ": 0.1583253253,
+      "ANLEIHE_LANG": 0.07489953053,
+      "ANLEIHE_MITTEL": 0.1103392467,
+      "EDELMETALL": 0.0225173796,
+      "ENERGIE": 0.02661373326,
+      "FX": 0.1899903904,
+      "INDUSTRIEMETALL": 0.01013282082,
+      "VIEH": 0.04109421778
+     },
+     "basis": "S-BASE-TFD1",
+     "mean_cost_sr": 0.02464042623,
+     "admissible": false,
+     "reasons": [
+      "Verlustbudget: Ziel-σ_p 9% nur zu 28% erreichbar (Lückenstress × Wochenendfaktor 28.6% > 8%); vom Grundprofil nicht unterscheidbar"
+     ],
+     "notes": [],
+     "band": {
+      "share_below_band": 1.0,
+      "share_in_band": 0.0,
+      "share_at_cap": 0.0,
+      "share_zero": 0.0
+     }
+    },
+    "H15": {
+     "n": 28,
+     "effective_n": 28.0,
+     "D": 2.821239242,
+     "sigma_h": 0.1015957491,
+     "sigma_target": 0.12,
+     "L_g_at_target": 3.332311755,
+     "scale_gap": 0.2095111984,
+     "scale_cap": 1.0,
+     "scale": 0.2095111984,
+     "sigma_achieved": 0.02514134381,
+     "L_g_achieved": 0.6981566293,
+     "gap_loss_at_target": {
+      "HIST": 0.2082180076,
+      "K5": 0.1066328203,
+      "K10": 0.2132656407,
+      "DESIGN": 0.2545607764
+     },
+     "gap_loss_achieved": {
+      "HIST": 0.0436240043,
+      "K5": 0.02234076998,
+      "K10": 0.04468153996,
+      "DESIGN": 0.05333333333
+     },
+     "margin_to_equity": {
+      "basis": 0.02163479564,
+      "plus50": 0.03245219347,
+      "plus100": 0.04326959129
+     },
+     "es_1d_parametric": 0.004472319657,
+     "class_gross_leverage": {
+      "AGRAR": 0.06424398483,
+      "ANLEIHE_KURZ": 0.1583253253,
+      "ANLEIHE_LANG": 0.07489953053,
+      "ANLEIHE_MITTEL": 0.1103392467,
+      "EDELMETALL": 0.0225173796,
+      "ENERGIE": 0.02661373326,
+      "FX": 0.1899903904,
+      "INDUSTRIEMETALL": 0.01013282082,
+      "VIEH": 0.04109421778
+     },
+     "basis": "S-BASE-TFD1",
+     "mean_cost_sr": 0.02464042623,
+     "admissible": false,
+     "reasons": [
+      "Verlustbudget: Ziel-σ_p 12% nur zu 21% erreichbar (Lückenstress × Wochenendfaktor 38.2% > 8%); vom Grundprofil nicht unterscheidbar"
+     ],
+     "notes": [],
+     "band": {
+      "share_below_band": 1.0,
+      "share_in_band": 0.0,
+      "share_at_cap": 0.0,
+      "share_zero": 0.0
+     }
+    },
+    "H20": {
+     "n": 28,
+     "effective_n": 28.0,
+     "D": 2.821239242,
+     "sigma_h": 0.1015957491,
+     "sigma_target": 0.15,
+     "L_g_at_target": 4.165389694,
+     "scale_gap": 0.1676089587,
+     "scale_cap": 1.0,
+     "scale": 0.1676089587,
+     "sigma_achieved": 0.02514134381,
+     "L_g_achieved": 0.6981566293,
+     "gap_loss_at_target": {
+      "HIST": 0.2602725095,
+      "K5": 0.1332910254,
+      "K10": 0.2665820509,
+      "DESIGN": 0.3182009705
+     },
+     "gap_loss_achieved": {
+      "HIST": 0.0436240043,
+      "K5": 0.02234076998,
+      "K10": 0.04468153996,
+      "DESIGN": 0.05333333333
+     },
+     "margin_to_equity": {
+      "basis": 0.02163479564,
+      "plus50": 0.03245219347,
+      "plus100": 0.04326959129
+     },
+     "es_1d_parametric": 0.004472319657,
+     "class_gross_leverage": {
+      "AGRAR": 0.06424398483,
+      "ANLEIHE_KURZ": 0.1583253253,
+      "ANLEIHE_LANG": 0.07489953053,
+      "ANLEIHE_MITTEL": 0.1103392467,
+      "EDELMETALL": 0.0225173796,
+      "ENERGIE": 0.02661373326,
+      "FX": 0.1899903904,
+      "INDUSTRIEMETALL": 0.01013282082,
+      "VIEH": 0.04109421778
+     },
+     "basis": "S-BASE-TFD1",
+     "mean_cost_sr": 0.02464042623,
+     "admissible": false,
+     "reasons": [
+      "Verlustbudget: Ziel-σ_p 15% nur zu 17% erreichbar (Lückenstress × Wochenendfaktor 47.7% > 8%); vom Grundprofil nicht unterscheidbar"
+     ],
+     "notes": [],
+     "band": {
+      "share_below_band": 1.0,
+      "share_in_band": 0.0,
+      "share_at_cap": 0.0,
+      "share_zero": 0.0
+     }
+    }
+   },
+   "100000000": {
+    "H5": {
+     "n": 22,
+     "effective_n": 22.0,
+     "D": 2.685724251,
+     "sigma_h": 0.123908161,
+     "sigma_target": 0.06,
+     "L_g_at_target": 1.300507197,
+     "scale_gap": 0.4350334663,
+     "scale_cap": 1.0,
+     "scale": 0.4350334663,
+     "sigma_achieved": 0.02610200798,
+     "L_g_achieved": 0.5657641538,
+     "gap_loss_at_target": {
+      "HIST": 0.1031380051,
+      "K5": 0.05075541756,
+      "K10": 0.1015108351,
+      "DESIGN": 0.1225959322
+     },
+     "gap_loss_achieved": {
+      "HIST": 0.04486848389,
+      "K5": 0.02208030524,
+      "K10": 0.04416061048,
+      "DESIGN": 0.05333333333
+     },
+     "margin_to_equity": {
+      "basis": 0.02147393396,
+      "plus50": 0.03221090094,
+      "plus100": 0.04294786792
+     },
+     "es_1d_parametric": 0.00464320938,
+     "class_gross_leverage": {
+      "AGRAR": 0.04046337422,
+      "ANLEIHE_LANG": 0.09421528838,
+      "ANLEIHE_MITTEL": 0.1387945141,
+      "EDELMETALL": 0.03894599769,
+      "ENERGIE": 0.03347711977,
+      "FX": 0.1858786253,
+      "INDUSTRIEMETALL": 0.01274596288,
+      "VIEH": 0.02124327147
+     },
+     "basis": "S-BASE-TFD1",
+     "mean_cost_sr": 0.02057050596,
+     "admissible": false,
+     "reasons": [
+      "Verlustbudget: nach der Lückenregel nur σ_p 2.6% < Mindest-σ 3%"
+     ],
+     "notes": [],
+     "band": {
+      "share_below_band": 1.0,
+      "share_in_band": 0.0,
+      "share_at_cap": 0.0,
+      "share_zero": 0.0
+     }
+    },
+    "H10": {
+     "n": 22,
+     "effective_n": 22.0,
+     "D": 2.685724251,
+     "sigma_h": 0.123908161,
+     "sigma_target": 0.09,
+     "L_g_at_target": 1.950760795,
+     "scale_gap": 0.2900223109,
+     "scale_cap": 1.0,
+     "scale": 0.2900223109,
+     "sigma_achieved": 0.02610200798,
+     "L_g_achieved": 0.5657641538,
+     "gap_loss_at_target": {
+      "HIST": 0.1547070077,
+      "K5": 0.07613312635,
+      "K10": 0.1522662527,
+      "DESIGN": 0.1838938983
+     },
+     "gap_loss_achieved": {
+      "HIST": 0.04486848389,
+      "K5": 0.02208030524,
+      "K10": 0.04416061048,
+      "DESIGN": 0.05333333333
+     },
+     "margin_to_equity": {
+      "basis": 0.02147393396,
+      "plus50": 0.03221090094,
+      "plus100": 0.04294786792
+     },
+     "es_1d_parametric": 0.00464320938,
+     "class_gross_leverage": {
+      "AGRAR": 0.04046337422,
+      "ANLEIHE_LANG": 0.09421528838,
+      "ANLEIHE_MITTEL": 0.1387945141,
+      "EDELMETALL": 0.03894599769,
+      "ENERGIE": 0.03347711977,
+      "FX": 0.1858786253,
+      "INDUSTRIEMETALL": 0.01274596288,
+      "VIEH": 0.02124327147
+     },
+     "basis": "S-BASE-TFD1",
+     "mean_cost_sr": 0.02057050596,
+     "admissible": false,
+     "reasons": [
+      "Verlustbudget: Ziel-σ_p 9% nur zu 29% erreichbar (Lückenstress × Wochenendfaktor 27.6% > 8%); vom Grundprofil nicht unterscheidbar"
+     ],
+     "notes": [],
+     "band": {
+      "share_below_band": 1.0,
+      "share_in_band": 0.0,
+      "share_at_cap": 0.0,
+      "share_zero": 0.0
+     }
+    },
+    "H15": {
+     "n": 22,
+     "effective_n": 22.0,
+     "D": 2.685724251,
+     "sigma_h": 0.123908161,
+     "sigma_target": 0.12,
+     "L_g_at_target": 2.601014394,
+     "scale_gap": 0.2175167332,
+     "scale_cap": 1.0,
+     "scale": 0.2175167332,
+     "sigma_achieved": 0.02610200798,
+     "L_g_achieved": 0.5657641538,
+     "gap_loss_at_target": {
+      "HIST": 0.2062760103,
+      "K5": 0.1015108351,
+      "K10": 0.2030216703,
+      "DESIGN": 0.2451918644
+     },
+     "gap_loss_achieved": {
+      "HIST": 0.04486848389,
+      "K5": 0.02208030524,
+      "K10": 0.04416061048,
+      "DESIGN": 0.05333333333
+     },
+     "margin_to_equity": {
+      "basis": 0.02147393396,
+      "plus50": 0.03221090094,
+      "plus100": 0.04294786792
+     },
+     "es_1d_parametric": 0.00464320938,
+     "class_gross_leverage": {
+      "AGRAR": 0.04046337422,
+      "ANLEIHE_LANG": 0.09421528838,
+      "ANLEIHE_MITTEL": 0.1387945141,
+      "EDELMETALL": 0.03894599769,
+      "ENERGIE": 0.03347711977,
+      "FX": 0.1858786253,
+      "INDUSTRIEMETALL": 0.01274596288,
+      "VIEH": 0.02124327147
+     },
+     "basis": "S-BASE-TFD1",
+     "mean_cost_sr": 0.02057050596,
+     "admissible": false,
+     "reasons": [
+      "Verlustbudget: Ziel-σ_p 12% nur zu 22% erreichbar (Lückenstress × Wochenendfaktor 36.8% > 8%); vom Grundprofil nicht unterscheidbar"
+     ],
+     "notes": [],
+     "band": {
+      "share_below_band": 1.0,
+      "share_in_band": 0.0,
+      "share_at_cap": 0.0,
+      "share_zero": 0.0
+     }
+    },
+    "H20": {
+     "n": 22,
+     "effective_n": 22.0,
+     "D": 2.685724251,
+     "sigma_h": 0.123908161,
+     "sigma_target": 0.15,
+     "L_g_at_target": 3.251267992,
+     "scale_gap": 0.1740133865,
+     "scale_cap": 1.0,
+     "scale": 0.1740133865,
+     "sigma_achieved": 0.02610200798,
+     "L_g_achieved": 0.5657641538,
+     "gap_loss_at_target": {
+      "HIST": 0.2578450128,
+      "K5": 0.1268885439,
+      "K10": 0.2537770878,
+      "DESIGN": 0.3064898305
+     },
+     "gap_loss_achieved": {
+      "HIST": 0.04486848389,
+      "K5": 0.02208030524,
+      "K10": 0.04416061048,
+      "DESIGN": 0.05333333333
+     },
+     "margin_to_equity": {
+      "basis": 0.02147393396,
+      "plus50": 0.03221090094,
+      "plus100": 0.04294786792
+     },
+     "es_1d_parametric": 0.00464320938,
+     "class_gross_leverage": {
+      "AGRAR": 0.04046337422,
+      "ANLEIHE_LANG": 0.09421528838,
+      "ANLEIHE_MITTEL": 0.1387945141,
+      "EDELMETALL": 0.03894599769,
+      "ENERGIE": 0.03347711977,
+      "FX": 0.1858786253,
+      "INDUSTRIEMETALL": 0.01274596288,
+      "VIEH": 0.02124327147
+     },
+     "basis": "S-BASE-TFD1",
+     "mean_cost_sr": 0.02057050596,
+     "admissible": false,
+     "reasons": [
+      "Verlustbudget: Ziel-σ_p 15% nur zu 17% erreichbar (Lückenstress × Wochenendfaktor 46.0% > 8%); vom Grundprofil nicht unterscheidbar"
+     ],
+     "notes": [],
+     "band": {
+      "share_below_band": 1.0,
+      "share_in_band": 0.0,
+      "share_at_cap": 0.0,
+      "share_zero": 0.0
+     }
+    }
+   }
+  }
+ },
+ "leverage_calibration_via_rates": {
+  "250000": {
+   "H5": {
+    "feasible": true,
+    "rate_risk_share": 0.41,
+    "instruments": [
+     "INS-COMEX-MGC",
+     "INS-CME-SR1",
+     "INS-CME-SR3",
+     "INS-EUREX-FGBS",
+     "INS-EUREX-FST3"
+    ],
+    "L_g": 5.060543269,
+    "gap_loss_design": 0.07300007776,
+    "gap_budget": 0.08,
+    "within_loss_budget": false,
+    "margin_to_equity": {
+     "basis": 0.03507121545,
+     "plus50": 0.05260682318,
+     "plus100": 0.07014243091
+    },
+    "mean_cost_sr": 0.5122389504,
+    "D": 1.437909648,
+    "instruments_without_research_history": [
+     "INS-CME-SR1",
+     "INS-CME-SR3",
+     "INS-EUREX-FGBS",
+     "INS-EUREX-FST3"
+    ],
+    "cost_increase_vs_base": 0.4585041746
+   },
+   "H10": {
+    "feasible": true,
+    "rate_risk_share": 0.53,
+    "instruments": [
+     "INS-COMEX-MGC",
+     "INS-CME-SR1",
+     "INS-CME-SR3",
+     "INS-EUREX-FGBS",
+     "INS-EUREX-FST3"
+    ],
+    "L_g": 10.16107078,
+    "gap_loss_design": 0.1245400734,
+    "gap_budget": 0.08,
+    "within_loss_budget": false,
+    "margin_to_equity": {
+     "basis": 0.05860221277,
+     "plus50": 0.08790331915,
+     "plus100": 0.1172044255
+    },
+    "mean_cost_sr": 0.6464352942,
+    "D": 1.521616664,
+    "instruments_without_research_history": [
+     "INS-CME-SR1",
+     "INS-CME-SR3",
+     "INS-EUREX-FGBS",
+     "INS-EUREX-FST3"
+    ],
+    "cost_increase_vs_base": 0.5927005183
+   },
+   "H15": {
+    "feasible": true,
+    "rate_risk_share": 0.59,
+    "instruments": [
+     "INS-COMEX-MGC",
+     "INS-CME-SR1",
+     "INS-CME-SR3",
+     "INS-EUREX-FGBS",
+     "INS-EUREX-FST3"
+    ],
+    "L_g": 15.12542222,
+    "gap_loss_design": 0.1736491778,
+    "gap_budget": 0.08,
+    "within_loss_budget": false,
+    "margin_to_equity": {
+     "basis": 0.08093930135,
+     "plus50": 0.121408952,
+     "plus100": 0.1618786027
+    },
+    "mean_cost_sr": 0.7135334661,
+    "D": 1.537722426,
+    "instruments_without_research_history": [
+     "INS-CME-SR1",
+     "INS-CME-SR3",
+     "INS-EUREX-FGBS",
+     "INS-EUREX-FST3"
+    ],
+    "cost_increase_vs_base": 0.6597986902
+   },
+   "H20": {
+    "feasible": true,
+    "rate_risk_share": 0.63,
+    "instruments": [
+     "INS-COMEX-MGC",
+     "INS-CME-SR1",
+     "INS-CME-SR3",
+     "INS-EUREX-FGBS",
+     "INS-EUREX-FST3"
+    ],
+    "L_g": 20.09577733,
+    "gap_loss_design": 0.2218610148,
+    "gap_budget": 0.08,
+    "within_loss_budget": false,
+    "margin_to_equity": {
+     "basis": 0.1027903935,
+     "plus50": 0.1541855902,
+     "plus100": 0.2055807869
+    },
+    "mean_cost_sr": 0.7582655807,
+    "D": 1.537268117,
+    "instruments_without_research_history": [
+     "INS-CME-SR1",
+     "INS-CME-SR3",
+     "INS-EUREX-FGBS",
+     "INS-EUREX-FST3"
+    ],
+    "cost_increase_vs_base": 0.7045308048
+   }
+  },
+  "500000": {
+   "H5": {
+    "feasible": true,
+    "rate_risk_share": 0.41,
+    "instruments": [
+     "INS-COMEX-MGC",
+     "INS-CME-SR1",
+     "INS-CME-SR3",
+     "INS-EUREX-FGBS",
+     "INS-EUREX-FST3"
+    ],
+    "L_g": 5.060543269,
+    "gap_loss_design": 0.07300007776,
+    "gap_budget": 0.08,
+    "within_loss_budget": false,
+    "margin_to_equity": {
+     "basis": 0.03507121545,
+     "plus50": 0.05260682318,
+     "plus100": 0.07014243091
+    },
+    "mean_cost_sr": 0.5122389504,
+    "D": 1.437909648,
+    "instruments_without_research_history": [
+     "INS-CME-SR1",
+     "INS-CME-SR3",
+     "INS-EUREX-FGBS",
+     "INS-EUREX-FST3"
+    ],
+    "cost_increase_vs_base": 0.4585041746
+   },
+   "H10": {
+    "feasible": true,
+    "rate_risk_share": 0.53,
+    "instruments": [
+     "INS-COMEX-MGC",
+     "INS-CME-SR1",
+     "INS-CME-SR3",
+     "INS-EUREX-FGBS",
+     "INS-EUREX-FST3"
+    ],
+    "L_g": 10.16107078,
+    "gap_loss_design": 0.1245400734,
+    "gap_budget": 0.08,
+    "within_loss_budget": false,
+    "margin_to_equity": {
+     "basis": 0.05860221277,
+     "plus50": 0.08790331915,
+     "plus100": 0.1172044255
+    },
+    "mean_cost_sr": 0.6464352942,
+    "D": 1.521616664,
+    "instruments_without_research_history": [
+     "INS-CME-SR1",
+     "INS-CME-SR3",
+     "INS-EUREX-FGBS",
+     "INS-EUREX-FST3"
+    ],
+    "cost_increase_vs_base": 0.5927005183
+   },
+   "H15": {
+    "feasible": true,
+    "rate_risk_share": 0.59,
+    "instruments": [
+     "INS-COMEX-MGC",
+     "INS-CME-SR1",
+     "INS-CME-SR3",
+     "INS-EUREX-FGBS",
+     "INS-EUREX-FST3"
+    ],
+    "L_g": 15.12542222,
+    "gap_loss_design": 0.1736491778,
+    "gap_budget": 0.08,
+    "within_loss_budget": false,
+    "margin_to_equity": {
+     "basis": 0.08093930135,
+     "plus50": 0.121408952,
+     "plus100": 0.1618786027
+    },
+    "mean_cost_sr": 0.7135334661,
+    "D": 1.537722426,
+    "instruments_without_research_history": [
+     "INS-CME-SR1",
+     "INS-CME-SR3",
+     "INS-EUREX-FGBS",
+     "INS-EUREX-FST3"
+    ],
+    "cost_increase_vs_base": 0.6597986902
+   },
+   "H20": {
+    "feasible": true,
+    "rate_risk_share": 0.63,
+    "instruments": [
+     "INS-COMEX-MGC",
+     "INS-CME-SR1",
+     "INS-CME-SR3",
+     "INS-EUREX-FGBS",
+     "INS-EUREX-FST3"
+    ],
+    "L_g": 20.09577733,
+    "gap_loss_design": 0.2218610148,
+    "gap_budget": 0.08,
+    "within_loss_budget": false,
+    "margin_to_equity": {
+     "basis": 0.1027903935,
+     "plus50": 0.1541855902,
+     "plus100": 0.2055807869
+    },
+    "mean_cost_sr": 0.7582655807,
+    "D": 1.537268117,
+    "instruments_without_research_history": [
+     "INS-CME-SR1",
+     "INS-CME-SR3",
+     "INS-EUREX-FGBS",
+     "INS-EUREX-FST3"
+    ],
+    "cost_increase_vs_base": 0.7045308048
+   }
+  },
+  "1000000": {
+   "H5": {
+    "feasible": true,
+    "rate_risk_share": 0.45,
+    "instruments": [
+     "INS-COMEX-MGC",
+     "INS-CBOT-ZT",
+     "INS-CME-SR1",
+     "INS-CME-SR3",
+     "INS-EUREX-FGBS",
+     "INS-EUREX-FST3"
+    ],
+    "L_g": 5.096036621,
+    "gap_loss_design": 0.07290016211,
+    "gap_budget": 0.08,
+    "within_loss_budget": false,
+    "margin_to_equity": {
+     "basis": 0.03568954779,
+     "plus50": 0.05353432169,
+     "plus100": 0.07137909559
+    },
+    "mean_cost_sr": 0.4918318052,
+    "D": 1.482124078,
+    "instruments_without_research_history": [
+     "INS-CME-SR1",
+     "INS-CME-SR3",
+     "INS-EUREX-FGBS",
+     "INS-EUREX-FST3"
+    ],
+    "cost_increase_vs_base": 0.4380970293
+   },
+   "H10": {
+    "feasible": true,
+    "rate_risk_share": 0.58,
+    "instruments": [
+     "INS-COMEX-MGC",
+     "INS-CBOT-ZT",
+     "INS-CME-SR1",
+     "INS-CME-SR3",
+     "INS-EUREX-FGBS",
+     "INS-EUREX-FST3"
+    ],
+    "L_g": 10.11456031,
+    "gap_loss_design": 0.122430825,
+    "gap_budget": 0.08,
+    "within_loss_budget": false,
+    "margin_to_equity": {
+     "basis": 0.05892979562,
+     "plus50": 0.08839469344,
+     "plus100": 0.1178595912
+    },
+    "mean_cost_sr": 0.6183931692,
+    "D": 1.555368339,
+    "instruments_without_research_history": [
+     "INS-CME-SR1",
+     "INS-CME-SR3",
+     "INS-EUREX-FGBS",
+     "INS-EUREX-FST3"
+    ],
+    "cost_increase_vs_base": 0.5646583933
+   },
+   "H15": {
+    "feasible": true,
+    "rate_risk_share": 0.65,
+    "instruments": [
+     "INS-COMEX-MGC",
+     "INS-CBOT-ZT",
+     "INS-CME-SR1",
+     "INS-CME-SR3",
+     "INS-EUREX-FGBS",
+     "INS-EUREX-FST3"
+    ],
+    "L_g": 15.00845441,
+    "gap_loss_design": 0.1689764668,
+    "gap_budget": 0.08,
+    "within_loss_budget": false,
+    "margin_to_equity": {
+     "basis": 0.0806542192,
+     "plus50": 0.1209813288,
+     "plus100": 0.1613084384
+    },
+    "mean_cost_sr": 0.686541596,
+    "D": 1.557432142,
+    "instruments_without_research_history": [
+     "INS-CME-SR1",
+     "INS-CME-SR3",
+     "INS-EUREX-FGBS",
+     "INS-EUREX-FST3"
+    ],
+    "cost_increase_vs_base": 0.6328068201
+   },
+   "H20": {
+    "feasible": true,
+    "rate_risk_share": 0.71,
+    "instruments": [
+     "INS-COMEX-MGC",
+     "INS-CBOT-ZT",
+     "INS-CME-SR1",
+     "INS-CME-SR3",
+     "INS-EUREX-FGBS",
+     "INS-EUREX-FST3"
+    ],
+    "L_g": 20.10577982,
+    "gap_loss_design": 0.2142906879,
+    "gap_budget": 0.08,
+    "within_loss_budget": false,
+    "margin_to_equity": {
+     "basis": 0.1015881767,
+     "plus50": 0.152382265,
+     "plus100": 0.2031763534
+    },
+    "mean_cost_sr": 0.7449545332,
+    "D": 1.537041205,
+    "instruments_without_research_history": [
+     "INS-CME-SR1",
+     "INS-CME-SR3",
+     "INS-EUREX-FGBS",
+     "INS-EUREX-FST3"
+    ],
+    "cost_increase_vs_base": 0.6912197574
+   }
+  },
+  "5000000": {
+   "H5": {
+    "feasible": true,
+    "rate_risk_share": 0.37,
+    "instruments": [
+     "INS-COMEX-GC",
+     "INS-NYMEX-RB",
+     "INS-CBOT-ZT",
+     "INS-CME-SR1",
+     "INS-CME-SR3",
+     "INS-EUREX-FGBS",
+     "INS-EUREX-FST3"
+    ],
+    "L_g": 5.026339091,
+    "gap_loss_design": 0.0864314089,
+    "gap_budget": 0.08,
+    "within_loss_budget": false,
+    "margin_to_equity": {
+     "basis": 0.03980652558,
+     "plus50": 0.05970978837,
+     "plus100": 0.07961305115
+    },
+    "mean_cost_sr": 0.3964754436,
+    "D": 1.772750679,
+    "instruments_without_research_history": [
+     "INS-CME-SR1",
+     "INS-CME-SR3",
+     "INS-EUREX-FGBS",
+     "INS-EUREX-FST3"
+    ],
+    "cost_increase_vs_base": 0.3704747078
+   },
+   "H10": {
+    "feasible": true,
+    "rate_risk_share": 0.5,
+    "instruments": [
+     "INS-COMEX-GC",
+     "INS-NYMEX-RB",
+     "INS-CBOT-ZT",
+     "INS-CME-SR1",
+     "INS-CME-SR3",
+     "INS-EUREX-FGBS",
+     "INS-EUREX-FST3"
+    ],
+    "L_g": 10.01513637,
+    "gap_loss_design": 0.1383842978,
+    "gap_budget": 0.08,
+    "within_loss_budget": false,
+    "margin_to_equity": {
+     "basis": 0.0637350027,
+     "plus50": 0.09560250405,
+     "plus100": 0.1274700054
+    },
+    "mean_cost_sr": 0.5266422328,
+    "D": 1.783866529,
+    "instruments_without_research_history": [
+     "INS-CME-SR1",
+     "INS-CME-SR3",
+     "INS-EUREX-FGBS",
+     "INS-EUREX-FST3"
+    ],
+    "cost_increase_vs_base": 0.5006414971
+   },
+   "H15": {
+    "feasible": true,
+    "rate_risk_share": 0.59,
+    "instruments": [
+     "INS-COMEX-GC",
+     "INS-NYMEX-RB",
+     "INS-CBOT-ZT",
+     "INS-CME-SR1",
+     "INS-CME-SR3",
+     "INS-EUREX-FGBS",
+     "INS-EUREX-FST3"
+    ],
+    "L_g": 15.16237553,
+    "gap_loss_design": 0.1865047187,
+    "gap_budget": 0.08,
+    "within_loss_budget": false,
+    "margin_to_equity": {
+     "basis": 0.08589865482,
+     "plus50": 0.1288479822,
+     "plus100": 0.1717973096
+    },
+    "mean_cost_sr": 0.6167577023,
+    "D": 1.734371997,
+    "instruments_without_research_history": [
+     "INS-CME-SR1",
+     "INS-CME-SR3",
+     "INS-EUREX-FGBS",
+     "INS-EUREX-FST3"
+    ],
+    "cost_increase_vs_base": 0.5907569665
+   },
+   "H20": {
+    "feasible": true,
+    "rate_risk_share": 0.65,
+    "instruments": [
+     "INS-COMEX-GC",
+     "INS-NYMEX-RB",
+     "INS-CBOT-ZT",
+     "INS-CME-SR1",
+     "INS-CME-SR3",
+     "INS-EUREX-FGBS",
+     "INS-EUREX-FST3"
+    ],
+    "L_g": 20.1244162,
+    "gap_loss_design": 0.2316368285,
+    "gap_budget": 0.08,
+    "within_loss_budget": false,
+    "margin_to_equity": {
+     "basis": 0.1066860144,
+     "plus50": 0.1600290215,
+     "plus100": 0.2133720287
+    },
+    "mean_cost_sr": 0.6768346819,
+    "D": 1.6805358,
+    "instruments_without_research_history": [
+     "INS-CME-SR1",
+     "INS-CME-SR3",
+     "INS-EUREX-FGBS",
+     "INS-EUREX-FST3"
+    ],
+    "cost_increase_vs_base": 0.6508339462
+   }
+  },
+  "25000000": {
+   "H5": {
+    "feasible": true,
+    "rate_risk_share": 0.45,
+    "instruments": [
+     "INS-COMEX-GC",
+     "INS-CBOT-ZT",
+     "INS-CME-SR1",
+     "INS-CME-SR3",
+     "INS-EUREX-FGBS",
+     "INS-EUREX-FST3"
+    ],
+    "L_g": 5.096036621,
+    "gap_loss_design": 0.07290016211,
+    "gap_budget": 0.08,
+    "within_loss_budget": false,
+    "margin_to_equity": {
+     "basis": 0.03568954779,
+     "plus50": 0.05353432169,
+     "plus100": 0.07137909559
+    },
+    "mean_cost_sr": 0.4757819968,
+    "D": 1.482124078,
+    "instruments_without_research_history": [
+     "INS-CME-SR1",
+     "INS-CME-SR3",
+     "INS-EUREX-FGBS",
+     "INS-EUREX-FST3"
+    ],
+    "cost_increase_vs_base": 0.4512286907
+   },
+   "H10": {
+    "feasible": true,
+    "rate_risk_share": 0.58,
+    "instruments": [
+     "INS-COMEX-GC",
+     "INS-CBOT-ZT",
+     "INS-CME-SR1",
+     "INS-CME-SR3",
+     "INS-EUREX-FGBS",
+     "INS-EUREX-FST3"
+    ],
+    "L_g": 10.11456031,
+    "gap_loss_design": 0.122430825,
+    "gap_budget": 0.08,
+    "within_loss_budget": false,
+    "margin_to_equity": {
+     "basis": 0.05892979562,
+     "plus50": 0.08839469344,
+     "plus100": 0.1178595912
+    },
+    "mean_cost_sr": 0.6061369519,
+    "D": 1.555368339,
+    "instruments_without_research_history": [
+     "INS-CME-SR1",
+     "INS-CME-SR3",
+     "INS-EUREX-FGBS",
+     "INS-EUREX-FST3"
+    ],
+    "cost_increase_vs_base": 0.5815836458
+   },
+   "H15": {
+    "feasible": true,
+    "rate_risk_share": 0.65,
+    "instruments": [
+     "INS-COMEX-GC",
+     "INS-CBOT-ZT",
+     "INS-CME-SR1",
+     "INS-CME-SR3",
+     "INS-EUREX-FGBS",
+     "INS-EUREX-FST3"
+    ],
+    "L_g": 15.00845441,
+    "gap_loss_design": 0.1689764668,
+    "gap_budget": 0.08,
+    "within_loss_budget": false,
+    "margin_to_equity": {
+     "basis": 0.0806542192,
+     "plus50": 0.1209813288,
+     "plus100": 0.1613084384
+    },
+    "mean_cost_sr": 0.6763280816,
+    "D": 1.557432142,
+    "instruments_without_research_history": [
+     "INS-CME-SR1",
+     "INS-CME-SR3",
+     "INS-EUREX-FGBS",
+     "INS-EUREX-FST3"
+    ],
+    "cost_increase_vs_base": 0.6517747755
+   },
+   "H20": {
+    "feasible": true,
+    "rate_risk_share": 0.71,
+    "instruments": [
+     "INS-COMEX-GC",
+     "INS-CBOT-ZT",
+     "INS-CME-SR1",
+     "INS-CME-SR3",
+     "INS-EUREX-FGBS",
+     "INS-EUREX-FST3"
+    ],
+    "L_g": 20.10577982,
+    "gap_loss_design": 0.2142906879,
+    "gap_budget": 0.08,
+    "within_loss_budget": false,
+    "margin_to_equity": {
+     "basis": 0.1015881767,
+     "plus50": 0.152382265,
+     "plus100": 0.2031763534
+    },
+    "mean_cost_sr": 0.736491907,
+    "D": 1.537041205,
+    "instruments_without_research_history": [
+     "INS-CME-SR1",
+     "INS-CME-SR3",
+     "INS-EUREX-FGBS",
+     "INS-EUREX-FST3"
+    ],
+    "cost_increase_vs_base": 0.7119386009
+   }
+  },
+  "100000000": {
+   "H5": {
+    "feasible": false,
+    "reason": "kein Basis- oder Zinsuniversum"
+   },
+   "H10": {
+    "feasible": false,
+    "reason": "kein Basis- oder Zinsuniversum"
+   },
+   "H15": {
+    "feasible": false,
+    "reason": "kein Basis- oder Zinsuniversum"
+   },
+   "H20": {
+    "feasible": false,
+    "reason": "kein Basis- oder Zinsuniversum"
+   }
+  }
+ },
+ "leverage_calibration_via_rates_note": "hypothetisch: handelbare Zinskontrakte ohne Kosten- und Historienfilter (U-HANDELBAR); nicht forschungsfähig",
+ "leverage_calibration_research_admissible": {
+  "250000": {
+   "H5": {
+    "feasible": false,
+    "reason": "kein Basis- oder Zinsuniversum"
+   },
+   "H10": {
+    "feasible": false,
+    "reason": "kein Basis- oder Zinsuniversum"
+   },
+   "H15": {
+    "feasible": false,
+    "reason": "kein Basis- oder Zinsuniversum"
+   },
+   "H20": {
+    "feasible": false,
+    "reason": "kein Basis- oder Zinsuniversum"
+   }
+  },
+  "500000": {
+   "H5": {
+    "feasible": false,
+    "reason": "Profilgrenze auch mit 99 % Zins-Risikoanteil nicht erreichbar"
+   },
+   "H10": {
+    "feasible": false,
+    "reason": "Profilgrenze auch mit 99 % Zins-Risikoanteil nicht erreichbar"
+   },
+   "H15": {
+    "feasible": false,
+    "reason": "Profilgrenze auch mit 99 % Zins-Risikoanteil nicht erreichbar"
+   },
+   "H20": {
+    "feasible": false,
+    "reason": "Profilgrenze auch mit 99 % Zins-Risikoanteil nicht erreichbar"
+   }
+  },
+  "1000000": {
+   "H5": {
+    "feasible": false,
+    "reason": "Profilgrenze auch mit 99 % Zins-Risikoanteil nicht erreichbar"
+   },
+   "H10": {
+    "feasible": false,
+    "reason": "Profilgrenze auch mit 99 % Zins-Risikoanteil nicht erreichbar"
+   },
+   "H15": {
+    "feasible": false,
+    "reason": "Profilgrenze auch mit 99 % Zins-Risikoanteil nicht erreichbar"
+   },
+   "H20": {
+    "feasible": false,
+    "reason": "Profilgrenze auch mit 99 % Zins-Risikoanteil nicht erreichbar"
+   }
+  },
+  "5000000": {
+   "H5": {
+    "feasible": false,
+    "reason": "Profilgrenze auch mit 99 % Zins-Risikoanteil nicht erreichbar"
+   },
+   "H10": {
+    "feasible": false,
+    "reason": "Profilgrenze auch mit 99 % Zins-Risikoanteil nicht erreichbar"
+   },
+   "H15": {
+    "feasible": false,
+    "reason": "Profilgrenze auch mit 99 % Zins-Risikoanteil nicht erreichbar"
+   },
+   "H20": {
+    "feasible": false,
+    "reason": "Profilgrenze auch mit 99 % Zins-Risikoanteil nicht erreichbar"
+   }
+  },
+  "25000000": {
+   "H5": {
+    "feasible": false,
+    "reason": "Profilgrenze auch mit 99 % Zins-Risikoanteil nicht erreichbar"
+   },
+   "H10": {
+    "feasible": false,
+    "reason": "Profilgrenze auch mit 99 % Zins-Risikoanteil nicht erreichbar"
+   },
+   "H15": {
+    "feasible": false,
+    "reason": "Profilgrenze auch mit 99 % Zins-Risikoanteil nicht erreichbar"
+   },
+   "H20": {
+    "feasible": false,
+    "reason": "Profilgrenze auch mit 99 % Zins-Risikoanteil nicht erreichbar"
+   }
+  },
+  "100000000": {
+   "H5": {
+    "feasible": false,
+    "reason": "kein Basis- oder Zinsuniversum"
+   },
+   "H10": {
+    "feasible": false,
+    "reason": "kein Basis- oder Zinsuniversum"
+   },
+   "H15": {
+    "feasible": false,
+    "reason": "kein Basis- oder Zinsuniversum"
+   },
+   "H20": {
+    "feasible": false,
+    "reason": "kein Basis- oder Zinsuniversum"
+   }
+  }
+ },
+ "class_caps": {
+  "AGRAR": {
+   "standalone_cap_strictest": 0.3023715784,
+   "binding_instrument": "ZW",
+   "design_gap_max": 0.1763834207,
+   "standalone_cap_typical": 0.3848365543,
+   "design_gap_median": 0.1385869734
+  },
+  "ANLEIHE_KURZ": {
+   "standalone_cap_strictest": 5.291502622,
+   "binding_instrument": "ZT",
+   "design_gap_max": 0.01007905261,
+   "standalone_cap_typical": 5.291502622,
+   "design_gap_median": 0.01007905261
+  },
+  "ANLEIHE_LANG": {
+   "standalone_cap_strictest": 0.5925925926,
+   "binding_instrument": "FGBX",
+   "design_gap_max": 0.09,
+   "standalone_cap_typical": 0.7696731087,
+   "design_gap_median": 0.06929348672
+  },
+  "ANLEIHE_MITTEL": {
+   "standalone_cap_strictest": 1.128853893,
+   "binding_instrument": "FBTP",
+   "design_gap_max": 0.04724555913,
+   "standalone_cap_typical": 1.302523722,
+   "design_gap_median": 0.04094615124
+  },
+  "EDELMETALL": {
+   "standalone_cap_strictest": 0.2116601049,
+   "binding_instrument": "PA",
+   "design_gap_max": 0.2519763153,
+   "standalone_cap_typical": 0.2822134732,
+   "design_gap_median": 0.1889822365
+  },
+  "ENERGIE": {
+   "standalone_cap_strictest": 0.1411067366,
+   "binding_instrument": "QG",
+   "design_gap_max": 0.377964473,
+   "standalone_cap_typical": 0.2133333333,
+   "design_gap_median": 0.25
+  },
+  "FX": {
+   "standalone_cap_strictest": 0.2666666667,
+   "binding_instrument": "MSF",
+   "design_gap_max": 0.2,
+   "standalone_cap_typical": 0.7619047619,
+   "design_gap_median": 0.07
+  },
+  "INDUSTRIEMETALL": {
+   "standalone_cap_strictest": 0.3386561678,
+   "binding_instrument": "MHG",
+   "design_gap_max": 0.1574851971,
+   "standalone_cap_typical": 0.3386561678,
+   "design_gap_median": 0.1574851971
+  },
+  "KRYPTO": {
+   "standalone_cap_strictest": 0.1209486314,
+   "binding_instrument": "MET",
+   "design_gap_max": 0.4409585518,
+   "standalone_cap_typical": 0.1209486314,
+   "design_gap_median": 0.4409585518
+  },
+  "RENDITE": {
+   "standalone_cap_strictest": 0.3386561678,
+   "binding_instrument": "2YY",
+   "design_gap_max": 0.1574851971,
+   "standalone_cap_typical": 0.3386561678,
+   "design_gap_median": 0.1574851971
+  },
+  "SOFTS": {
+   "standalone_cap_strictest": 0.1881423155,
+   "binding_instrument": "CC",
+   "design_gap_max": 0.2834733548,
+   "standalone_cap_typical": 0.2418972627,
+   "design_gap_median": 0.2204792759
+  },
+  "STIR": {
+   "standalone_cap_strictest": 6.340740741,
+   "binding_instrument": "SR1",
+   "design_gap_max": 0.008411214953,
+   "standalone_cap_typical": 6.353909465,
+   "design_gap_median": 0.008393782383
+  },
+  "VIEH": {
+   "standalone_cap_strictest": 0.3386561678,
+   "binding_instrument": "HE",
+   "design_gap_max": 0.1574851971,
+   "standalone_cap_typical": 0.4703557886,
+   "design_gap_median": 0.1133893419
+  }
+ },
+ "instrument_caps": {
+  "10Y": 0.4456002208,
+  "1OZ": 0.4703557886,
+  "2YY": 0.3386561678,
+  "6A": 0.7619047619,
+  "6B": 0.7619047619,
+  "6C": 0.7619047619,
+  "6E": 0.7619047619,
+  "6J": 0.7619047619,
+  "6M": 0.6512618612,
+  "6N": 0.7619047619,
+  "6S": 0.2666666667,
+  "ALI": 0.3555555556,
+  "B": 0.2133333333,
+  "BTC": 0.1693280839,
+  "BZ": 0.2133333333,
+  "CC": 0.1881423155,
+  "CL": 0.2133333333,
+  "CT": 0.4233202098,
+  "EBM": 0.4233202098,
+  "ECO": 0.4703557886,
+  "ETH": 0.1209486314,
+  "FBTP": 1.128853893,
+  "FGBL": 1.302523722,
+  "FGBM": 2.228001104,
+  "FGBS": 5.291502622,
+  "FGBX": 0.5925925926,
+  "FOAT": 1.245059441,
+  "FST3": 6.426337449,
+  "G": 0.2133333333,
+  "GC": 0.4703557886,
+  "GF": 0.4703557886,
+  "HE": 0.3386561678,
+  "HG": 0.3386561678,
+  "HO": 0.2133333333,
+  "I": 6.439506173,
+  "KC": 0.2418972627,
+  "KE": 0.3023715784,
+  "LE": 0.5644269464,
+  "M6A": 0.7619047619,
+  "M6B": 0.7619047619,
+  "M6E": 0.7619047619,
+  "MBT": 0.1693280839,
+  "MCD": 0.7619047619,
+  "MCL": 0.2133333333,
+  "MET": 0.1209486314,
+  "MGC": 0.4703557886,
+  "MHG": 0.3386561678,
+  "MJY": 0.7619047619,
+  "MNG": 0.1411067366,
+  "MSF": 0.2666666667,
+  "MZC": 0.3848365543,
+  "MZS": 0.4703557886,
+  "MZW": 0.3023715784,
+  "NG": 0.1411067366,
+  "PA": 0.2116601049,
+  "PL": 0.2822134732,
+  "QG": 0.1411067366,
+  "R": 1.128747795,
+  "RB": 0.2133333333,
+  "SB": 0.2822134732,
+  "SI": 0.2822134732,
+  "SIC": 0.2822134732,
+  "SIL": 0.2822134732,
+  "SO3": 6.353909465,
+  "SR1": 6.340740741,
+  "SR3": 6.347325103,
+  "TFM": 0.1539346217,
+  "TN": 1.128853893,
+  "UB": 0.6047431568,
+  "ZB": 0.7696731087,
+  "ZC": 0.3848365543,
+  "ZF": 2.228001104,
+  "ZL": 0.3023715784,
+  "ZM": 0.3848365543,
+  "ZN": 1.459724861,
+  "ZS": 0.4703557886,
+  "ZT": 5.291502622,
+  "ZW": 0.3023715784
+ },
+ "masterprompt_example_check": {
+  "inputs": {
+   "D": 2.0,
+   "sigma_h": 0.15,
+   "Lg_low": 5.0,
+   "Lg_high": 20.0,
+   "stir_share": 0.4,
+   "stir_sigma": 0.007,
+   "sigma_p": 0.1,
+   "gap": 0.05
+  },
+  "source": "Masterprompt v3.0 §7.2, Rechenbeispiel",
+  "D2_no_stir_sigma_h_15": {
+   "sigma_p_for_Lg5": 0.375,
+   "sigma_p_for_Lg20": 1.5
+  },
+  "D2_40pct_stir_rest_15_sigma_p_10": {
+   "L_g": 12.22857143
+  },
+  "gap_5pct_at_20x": 1.0
+ },
+ "contract_leverage_informative": {
+  "SR3": 285.7142857,
+  "SR1": 285.7142857,
+  "I": 285.7142857,
+  "SO3": 285.7142857,
+  "FST3": 285.7142857,
+  "ZT": 166.6666667,
+  "ZF": 55.55555556,
+  "ZN": 55.55555556,
+  "TN": 25.0,
+  "ZB": 25.0,
+  "UB": 25.0,
+  "2YY": 10.0,
+  "10Y": 10.0,
+  "FGBS": 166.6666667,
+  "FGBM": 55.55555556,
+  "FGBL": 55.55555556,
+  "FGBX": 25.0,
+  "FBTP": 55.55555556,
+  "FOAT": 55.55555556,
+  "R": 25.0,
+  "6E": 33.33333333,
+  "M6E": 33.33333333,
+  "6B": 33.33333333,
+  "M6B": 33.33333333,
+  "6J": 33.33333333,
+  "MJY": 33.33333333,
+  "6S": 33.33333333,
+  "MSF": 33.33333333,
+  "6C": 33.33333333,
+  "MCD": 33.33333333,
+  "6A": 33.33333333,
+  "M6A": 33.33333333,
+  "6N": 33.33333333,
+  "6M": 33.33333333,
+  "CL": 10.0,
+  "MCL": 10.0,
+  "B": 10.0,
+  "BZ": 10.0,
+  "NG": 10.0,
+  "QG": 10.0,
+  "MNG": 10.0,
+  "RB": 10.0,
+  "HO": 10.0,
+  "G": 10.0,
+  "TFM": 10.0,
+  "GC": 16.66666667,
+  "MGC": 16.66666667,
+  "1OZ": 16.66666667,
+  "SI": 16.66666667,
+  "SIL": 16.66666667,
+  "SIC": 16.66666667,
+  "HG": 16.66666667,
+  "MHG": 16.66666667,
+  "PL": 16.66666667,
+  "PA": 16.66666667,
+  "ALI": 16.66666667,
+  "ZC": 18.18181818,
+  "MZC": 18.18181818,
+  "ZS": 18.18181818,
+  "MZS": 18.18181818,
+  "ZW": 18.18181818,
+  "MZW": 18.18181818,
+  "KE": 18.18181818,
+  "ZM": 18.18181818,
+  "ZL": 18.18181818,
+  "LE": 22.22222222,
+  "HE": 22.22222222,
+  "GF": 22.22222222,
+  "SB": 12.5,
+  "KC": 12.5,
+  "CC": 12.5,
+  "CT": 12.5,
+  "EBM": 18.18181818,
+  "ECO": 18.18181818,
+  "BTC": 2.631578947,
+  "MBT": 2.631578947,
+  "ETH": 2.631578947,
+  "MET": 2.631578947
+ },
+ "time_in_market_S-TF": 0.6166873376
+}

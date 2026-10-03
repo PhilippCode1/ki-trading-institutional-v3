@@ -1,0 +1,20 @@
+{
+ "schema_version": "3.0",
+ "message_id": "00000000-0000-4000-8000-000000000026",
+ "correlation_id": "COR-0026",
+ "producer": "MONITOR",
+ "created_utc": "2026-09-24T09:00:00Z",
+ "observation_id": "SO-0001",
+ "reporter": "MONITOR",
+ "kind": "KOSTENDRIFT",
+ "measurement": {
+  "metric": "Kostenverhältnis gemessen/Modell",
+  "value": "1.35",
+  "unit": "Faktor",
+  "threshold_ref": "P-MON-COSTDRIFT-RATIO"
+ },
+ "severity": "WARNUNG",
+ "refs": [
+  "RB-32"
+ ]
+}

@@ -1,0 +1,33 @@
+{
+ "schema_version": "3.0",
+ "id": "TR-ORDER-011",
+ "machine": "SM-ORDER",
+ "description": "UNKNOWN länger als die Höchstdauer: Eskalation ohne Freigabe der Reservierung; Abgleich findet Ablehnung",
+ "scenarios": [
+  "OS-EX-01"
+ ],
+ "start": "UNKNOWN",
+ "initial_reasons": null,
+ "steps": [
+  {
+   "event": "UNKNOWN_ESCALATED",
+   "context": {
+    "unknown_age_h": 12
+   },
+   "expect_state": "UNKNOWN",
+   "expect_invalid": true
+  },
+  {
+   "event": "UNKNOWN_ESCALATED",
+   "context": {
+    "unknown_age_h": 24
+   },
+   "expect_state": "UNKNOWN"
+  },
+  {
+   "event": "RECON_FOUND_REJECT",
+   "context": {},
+   "expect_state": "REJECTED"
+  }
+ ]
+}

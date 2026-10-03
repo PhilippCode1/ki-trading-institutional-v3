@@ -1,0 +1,87 @@
+{
+ "schema_version": "3.0",
+ "id": "TR-SAFETY-010",
+ "machine": "SM-SAFETY",
+ "description": "Restore: Abgleich, Fencing-Nachweis und Freigabe nach Incident; Grant ungültig",
+ "scenarios": [
+  "HA-RESTORE"
+ ],
+ "start": null,
+ "initial_reasons": [],
+ "steps": [
+  {
+   "event": "RESTORE_COMPLETED",
+   "context": {},
+   "expect_state": "RECOVERY",
+   "expect_reasons": [
+    "RESTORED_FROM_BACKUP",
+    "SYNC_REQUIRED",
+    "WRITER_NOT_FENCED"
+   ],
+   "expect_allowed": [
+    "CANCEL_ORDER",
+    "EMERGENCY_PROTECT",
+    "RECONCILE",
+    "ROLL_AS_CLOSE"
+   ]
+  },
+  {
+   "event": "GRANT_INVALIDATED",
+   "context": {},
+   "expect_state": "EXIT_ONLY",
+   "expect_reasons": [
+    "GRANT_MISSING_OR_EXPIRED",
+    "RESTORED_FROM_BACKUP",
+    "SYNC_REQUIRED",
+    "WRITER_NOT_FENCED"
+   ],
+   "expect_allowed": [
+    "CANCEL_ORDER",
+    "EMERGENCY_PROTECT",
+    "RECONCILE",
+    "ROLL_AS_CLOSE"
+   ]
+  },
+  {
+   "event": "FULL_SNAPSHOT_CONSISTENT",
+   "context": {},
+   "expect_state": "EXIT_ONLY",
+   "expect_reasons": [
+    "GRANT_MISSING_OR_EXPIRED",
+    "RESTORED_FROM_BACKUP",
+    "WRITER_NOT_FENCED"
+   ],
+   "expect_allowed": [
+    "CANCEL_ORDER",
+    "CLOSE_REDUCE",
+    "EMERGENCY_PROTECT",
+    "RECONCILE",
+    "ROLL_AS_CLOSE",
+    "STOP_AMEND_RECONCILED_ONLY"
+   ]
+  },
+  {
+   "event": "FENCING_PROOF",
+   "context": {
+    "proof_recorded": true
+   },
+   "expect_state": "EXIT_ONLY",
+   "expect_reasons": [
+    "GRANT_MISSING_OR_EXPIRED",
+    "RESTORED_FROM_BACKUP"
+   ]
+  },
+  {
+   "event": "OPERATOR_CLEAR_SIGNED",
+   "context": {
+    "signed": true,
+    "reason": "RESTORED_FROM_BACKUP",
+    "incident_closed": true
+   },
+   "expect_state": "EXIT_ONLY",
+   "expect_reasons": [
+    "GRANT_MISSING_OR_EXPIRED"
+   ]
+  }
+ ]
+}

@@ -1,0 +1,288 @@
+{
+  "schema_version": "3.0",
+  "document": "Auflösungsmatrix der Befunde",
+  "as_of": "2026-09-24",
+  "status_values": {
+    "AUFGELOEST": "im Paket nachgewiesen",
+    "AUFGELOEST_IM_KONZEPT": "spezifiziert und geprüft; Wirksamkeit erst im Bau oder Betrieb messbar",
+    "TEILWEISE": "Teil offen",
+    "OFFEN_EXTERN": "hängt an einer externen Eingabe"
+  },
+  "findings": [
+    {
+      "id": "EV-01",
+      "finding": "Kostenwiderspruch: Spreadannahmen plus Kommission lagen über den Kostensätzen des Wirtschaftsmodells.",
+      "required": "§5.1, R-04",
+      "status": "AUFGELOEST",
+      "treatment": "Kosten je Instrument nur noch aus registers/costs.json und financials/cost_model.py; jede Kostenzahl im Text ist gebunden; semantische Prüfung COST; Mutation 'Spread ohne Kostenanpassung'.",
+      "evidence": [
+        "registers/costs.json",
+        "financials/cost_model.py",
+        "financials/cost_model_results.json",
+        "T-CALC-COST-001",
+        "T-SEM-COST-001",
+        "validation/mutation_tests.py"
+      ],
+      "residual": "Gebühren und Spreads bis zur Bestätigung (X-BRK-FEES) und Messung (X-DATA-VOL) Annahmen."
+    },
+    {
+      "id": "EV-02",
+      "finding": "Steuern und Aufbauaufwand fehlten; Betreiberzeit im Aufbau unbewertet.",
+      "required": "§5.3, §5.4",
+      "status": "TEILWEISE",
+      "treatment": "Aufbauaufwand je Stufe (Mensch und Agent) mit Kosten; Betreiberroutinen in Paper, Pilot und Standardbetrieb und Pflege des Agenten bewertet. Steuern nach BQ-03 nur als pauschale Sensitivität (DEC-CF-01): Szenarien privat und Gesellschaft fehlen, die Kosten der externen Rechts- und Steuerperson sind nicht eingerechnet.",
+      "evidence": [
+        "financials/tax_scenarios.py",
+        "implementation/build_stages.json",
+        "financials/stage_costs.py",
+        "financials/decision_montecarlo_results.json",
+        "T-CALC-TAX-001"
+      ],
+      "residual": "Steuerszenarien und Beratungskosten durch die externe Person (X-TAX-01)."
+    },
+    {
+      "id": "EV-03",
+      "finding": "Schlechtes Verhältnis von Ertrag zu Risiko; LLM-Budget entsprach dem Überschuss.",
+      "required": "§5.6",
+      "status": "AUFGELOEST",
+      "treatment": "Wert je Risikoeinheit, P(NPV > 0), Break-even und Sensitivitäten in allen Entscheidungstabellen; KI-Kosten und Pflegezeit enthalten.",
+      "evidence": [
+        "financials/decision_montecarlo.py",
+        "financials/decision_montecarlo_results.json",
+        "T-CALC-DMC-001"
+      ],
+      "residual": "Befund bleibt negativ: Echtgeld No-Go in allen Stufen und Profilen."
+    },
+    {
+      "id": "EV-04",
+      "finding": "Kein Kauf-statt-Bau-Vergleich.",
+      "required": "§5.5",
+      "status": "AUFGELOEST",
+      "treatment": "Varianten V0 bis V4 mit Entscheidungsregel in der Prüfreihenfolge von §5.7 (Befundklasse vor Dominanz) und Befundklasse DOMINATED_BY_ALTERNATIVE; V4 ist die registrierte Familie, das Sensitivitätsuniversum steht daneben; V2 nur als Näherung; G0 scheitert bei unzulässigem Profil (G0-R3) oder Dominanz (G0-R4).",
+      "evidence": [
+        "financials/buy_vs_build.md",
+        "financials/decision_montecarlo_results.json",
+        "research/evidence_gates.json",
+        "T-CALC-DMC-002"
+      ],
+      "residual": "Konkrete Fondsprodukte für V1 offen (X-V1-PRODUCTS)."
+    },
+    {
+      "id": "EV-05",
+      "finding": "Tore stoppen zu spät: eine Strategie ohne Edge bestand die Tore E1 und E2 zu etwa 89 %.",
+      "required": "§6.6, §16",
+      "status": "AUFGELOEST",
+      "treatment": "Deflationiertes G3, einmaliger Holdout, Futility-Regel nach G3 und G4; Betriebscharakteristik je 4.000 Strategien mit und ohne Regel simuliert. In der registrierten Konfiguration stoppt schon die DSR-Schwelle in G3 fast alle Strategien ohne Kante; die Futility-Regel stoppt dort zusätzlich nichts und wirkt erst bei gelockerter Schwelle, dann auch auf brauchbare Strategien.",
+      "evidence": [
+        "research/operating_characteristics.py",
+        "research/operating_characteristics_results.json",
+        "research/evidence_gates.json",
+        "T-CALC-OC-001",
+        "T-SEM-GATE-001"
+      ],
+      "residual": "Geringe Teststärke: brauchbare Strategien bestehen G3 selten (Tausch gegen Fehlalarme dokumentiert)."
+    },
+    {
+      "id": "EV-06",
+      "finding": "Brokermechanik unbelegt und spät getestet.",
+      "required": "§8.3, §17.4",
+      "status": "AUFGELOEST_IM_KONZEPT",
+      "treatment": "Sechzehn Killer-Tests mit Orakel und Rückfallvariante als erstes Tor G1 vor jedem Systembau; MT5-Semantik aus der Anbieterdokumentation belegt.",
+      "evidence": [
+        "implementation/test_catalog.json",
+        "execution/broker_killer_tests.md",
+        "research/evidence_gates.json",
+        "SRC-MT5-API"
+      ],
+      "residual": "Tests erst nach Kontoeröffnung durch den Betreiber ausführbar (X-BRK-ACCOUNT)."
+    },
+    {
+      "id": "EV-07",
+      "finding": "Kostendrift-Monitor wirkungslos im Pilot.",
+      "required": "§14.2",
+      "status": "AUFGELOEST",
+      "treatment": "Gepoolte, geschrumpfte Schätzung über alle Instrumente; Auslösezeit simuliert.",
+      "evidence": [
+        "operations/costdrift_monitor.py",
+        "operations/costdrift_results.json",
+        "T-CALC-DRIFT-001",
+        "research/evidence_gates.json"
+      ],
+      "residual": "Streuung je Fill (P-MON-FILL-NOISE) erst ab G1 kalibriert."
+    },
+    {
+      "id": "EV-08",
+      "finding": "Datenhistorie der Micro-Kontrakte zu kurz; keine Proxy-Regel; MTN ≠ ZN.",
+      "required": "§6.5",
+      "status": "AUFGELOEST",
+      "treatment": "Historie als Zulassungskriterium (DEC-DS-24); Proxy-Regeln PX-1 bis PX-6 nur auf denselben Basiswert; MTN ausdrücklich kein Proxy für ZN.",
+      "evidence": [
+        "data/proxy_rules.md",
+        "registers/instruments.json",
+        "research/prior_results.json",
+        "T-CALC-PRIOR-002",
+        "T-SEM-PROXY-001"
+      ],
+      "residual": "Listungsdaten und Historie beim Anbieter bestätigen (X-DATA-HIST)."
+    },
+    {
+      "id": "EV-09",
+      "finding": "Margin: Echtzeit-Liquidation des Brokers gegenüber manuellem Nachschuss.",
+      "required": "§7.7",
+      "status": "AUFGELOEST_IM_KONZEPT",
+      "treatment": "Größen immer mit Übernacht-Margin; Margin-Level auf das Guthaben beim Broker bezogen (P-ECO-CASH-AT-BROKER); De-Risking ab P-MRG-DERISK-TRIGGER vor dem Stop-out; je Allokation und Profil der nötige Anteil beim Broker gerechnet, auch nach Margin-Verdopplung und bei Handelsaussetzung (risk/stress_results.json); Runbook und Drill.",
+      "evidence": [
+        "risk/margin_liquidity.md",
+        "operations/runbook_register.json",
+        "operations/drill_register.json",
+        "T-RISK-MRG-001",
+        "architecture/state_machines.json"
+      ],
+      "residual": "Liquidationsregel des Brokers unbelegt (X-BRK-LIQ, KT-13); der Planwert beim Broker reicht für die registrierte Allokation knapp und für hohe Hebel deutlich nicht – vor jedem Grant ist der nötige Anteil umzuschichten."
+    },
+    {
+      "id": "EV-10",
+      "finding": "'KI-Trading' nur als Etikett; Nutzen von Hermes unbelegt; hohe Änderungsrate upstream.",
+      "required": "§6.1, §11.3–§11.5",
+      "status": "AUFGELOEST_IM_KONZEPT",
+      "treatment": "KI außerhalb des Geldpfads; Nutzenbilanz je Quartal (MON-AI) mit Rückbaukriterium; Update nur als Release mit Evaluationssuite; Upstream-Kennzahlen belegt.",
+      "evidence": [
+        "ai/ai_layer.md",
+        "ai/hermes_integration.md",
+        "research/evidence_gates.json",
+        "architecture/state_machines.json",
+        "SRC-HERMES-UPSTREAM"
+      ],
+      "residual": "Nutzen erst im Betrieb messbar."
+    },
+    {
+      "id": "EV-11",
+      "finding": "Selbstprüfung durch dasselbe Modell; Selbstbewertung weit über der unabhängigen Bewertung.",
+      "required": "§20.4",
+      "status": "OFFEN_EXTERN",
+      "treatment": "K höchstens 99 bis zur Gegenprüfung; Prüfauftrag mit eigenem Nachrechnen und Paketprüfung für eine andere Modellfamilie oder eine fachkundige Person.",
+      "evidence": [
+        "audit/independent_review_request.md",
+        "audit/scorecard_K.json",
+        "X-REVIEW"
+      ],
+      "residual": "Gegenprüfung durch den Betreiber zu beauftragen (X-REVIEW)."
+    },
+    {
+      "id": "EV-12",
+      "finding": "Kleinmängel: Escape-Sequenz, unbenutzte Variable, Dateiname der .sha256, kein Mehrversionslauf.",
+      "required": "§19.2, §19.4, R-10",
+      "status": "AUFGELOEST",
+      "treatment": "Linter und Läufe unter Python 3.11 bis 3.13 mit -W error; Prüfsummendatei mit identischem Namen; Prüfung nach frischem Entpacken.",
+      "evidence": [
+        "validation/execution_log.txt",
+        "validation/validate_package.py",
+        "T-PKG-MULTI-001"
+      ],
+      "residual": "–"
+    },
+    {
+      "id": "EV-13",
+      "finding": "Institutionelle Lücken: Einzelbetreiber, kein menschliches Vier-Augen-Prinzip, keine unabhängige Risikofunktion, kein Lizenzpfad, kleines Universum.",
+      "required": "§4.2, §6.2, §13, §15",
+      "status": "TEILWEISE",
+      "treatment": "Notfallvertretung und externe Risikofunktion mit Sperrwirkung (G8, G9); Vier-Augen-Prinzip für Klassen C und D; Rechtsmatrix als Übergabe; Kandidatenuniversum mit mehr als 60 Futures. Offen bleibt, was nur Personen lösen können: Ohne benannte zweite Person gibt es kein menschliches Vier-Augen-Prinzip (Klassen C und D sind bis dahin gesperrt, DEC-CF-06), und die unabhängige Risikofunktion ist erst ab G9 Pflicht; Lizenzpfad und Betriebsmodelle B2 bis B4 sind nach BQ-02 nicht bewertet.",
+      "evidence": [
+        "governance/organisation_raci.md",
+        "legal/applicability_matrix.md",
+        "registers/instruments.json",
+        "research/evidence_gates.json"
+      ],
+      "residual": "Personen nicht benannt (X-ORG-DEPUTY, X-ORG-RISK); Rechtsfragen extern (X-LEGAL-01)."
+    },
+    {
+      "id": "CR5-01",
+      "finding": "Prior nur erzählend hergeleitet (v2.0 CR-5).",
+      "required": "§6.3",
+      "status": "AUFGELOEST",
+      "treatment": "Rechnerische Herleitung aus der Literaturtabelle mit Abschlägen, Unsicherheit und Korrelationen.",
+      "evidence": [
+        "research/prior_derivation.py",
+        "research/prior_results.json",
+        "T-CALC-PRIOR-001"
+      ],
+      "residual": "Literatur überwiegend zu langsameren Horizonten."
+    },
+    {
+      "id": "CR5-02",
+      "finding": "Tore trennen schwach (v2.0 CR-5).",
+      "required": "§6.6",
+      "status": "AUFGELOEST",
+      "treatment": "wie EV-05",
+      "evidence": [
+        "research/operating_characteristics_results.json",
+        "research/evidence_gates.json"
+      ],
+      "residual": "wie EV-05"
+    },
+    {
+      "id": "CR5-03",
+      "finding": "Ausstiegsverbund beim Broker unbelegt (v2.0 CR-5).",
+      "required": "§8.3",
+      "status": "AUFGELOEST_IM_KONZEPT",
+      "treatment": "MT5 kennt keinen Ausstiegsverbund; Schutz als SL der Position beim Broker, Schließen mit position=Ticket; KT-06 und KT-07 prüfen das Verhalten.",
+      "evidence": [
+        "execution/oms_ems.md",
+        "implementation/test_catalog.json",
+        "architecture/state_machines.json"
+      ],
+      "residual": "KT-06 ausstehend."
+    },
+    {
+      "id": "CR5-04",
+      "finding": "Liquiditätszeiten je Instrument fehlen (v2.0 CR-5).",
+      "required": "§9.2",
+      "status": "TEILWEISE",
+      "treatment": "Planwerte je Instrument im Register; Messung in G2 (X-DATA-LIQ) ist Voraussetzung von G3.",
+      "evidence": [
+        "registers/instruments.json",
+        "research/evidence_gates.json"
+      ],
+      "residual": "Messung ausstehend."
+    },
+    {
+      "id": "CR5-05",
+      "finding": "Verpasste Wochenanmeldung im Lieferfenster (v2.0 CR-5).",
+      "required": "§8.6",
+      "status": "AUFGELOEST",
+      "treatment": "Keine Position im Rollfenster P-UNI-ROLL-DAYS vor FND/LTD; Schließen im Rollfenster unabhängig vom Signal; Runbook RB-18.",
+      "evidence": [
+        "architecture/state_machines.json",
+        "operations/runbook_register.json",
+        "T-EXE-010"
+      ],
+      "residual": "Kalender des Brokers mit KT-11 abgleichen."
+    },
+    {
+      "id": "CR5-06",
+      "finding": "Keine Schutzaktion ohne gültige Lease (v2.0 CR-5).",
+      "required": "§10.5",
+      "status": "AUFGELOEST",
+      "treatment": "Schutz hängt nicht an der Lease: SL liegt beim Broker (DEC-DS-20); ohne Lease sendet der Kern keine Einstiege; externer Monitor und Brokerdirektkontrolle (RB-15).",
+      "evidence": [
+        "registers/decision_register.json",
+        "architecture/state_machines.json",
+        "operations/runbook_register.json"
+      ],
+      "residual": "KT-06 ausstehend."
+    },
+    {
+      "id": "CR5-07",
+      "finding": "Prüfgrenzen des Pakets (v2.0 CR-5).",
+      "required": "§19",
+      "status": "AUFGELOEST",
+      "treatment": "Bekannte Prüfgrenzen im Prüfbericht und im README dokumentiert; Mutationstests belegen die Erkennung.",
+      "evidence": [
+        "validation/validation_report.json",
+        "validation/mutation_tests.py",
+        "README.md"
+      ],
+      "residual": "Prüfgrenzen bleiben (z. B. Wahrheit externer Quellen)."
+    }
+  ]
+}

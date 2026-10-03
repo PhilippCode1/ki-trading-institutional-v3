@@ -1,0 +1,57 @@
+{
+ "retrieved": "2026-09-24",
+ "method": "Direkte Abrufe der Projektseiten und Dokumentation mit WebFetch (Websuche-Budget erschöpft); Zitate wörtlich angefordert, Zusammenfassung durch das Abrufwerkzeug. 'Nicht erwähnt' ist ein schwacher Negativbefund.",
+ "frameworks": [
+  {
+   "id": "NAUTILUSTRADER",
+   "name": "NautilusTrader",
+   "license": "LGPL-3.0",
+   "languages": "Rust-Kern, Python als Steuerebene",
+   "integrations": ["AX Exchange", "Betfair", "Binance", "BitMEX", "Blockchain", "Bybit", "Coinbase", "Databento", "Deribit", "Derive", "dYdX", "Hyperliquid", "Interactive Brokers", "Kraken", "Lighter", "Lighter on Robinhood", "OKX", "Polymarket", "Tardis"],
+   "mt5_listed": false,
+   "status": "BELEGT",
+   "sources": [
+    {"url": "https://github.com/nautechsystems/nautilus_trader", "quote": "GNU Lesser General Public License v3.0", "kind": "primary_repository"},
+    {"url": "https://github.com/nautechsystems/nautilus_trader", "quote": "The same strategy and execution-algorithm code can run across backtest and live systems", "kind": "primary_repository"},
+    {"url": "https://nautilustrader.io/docs/latest/integrations/", "quote": "NautilusTrader uses modular adapters to connect to trading venues and data providers", "kind": "primary_documentation"}
+   ],
+   "negative_finding": "MetaTrader/MT5 weder im README noch auf der Integrationsseite genannt."
+  },
+  {
+   "id": "LEAN",
+   "name": "QuantConnect LEAN",
+   "license": "Apache-2.0",
+   "languages": "C#, Python",
+   "integrations": ["QuantConnect Paper Trading", "Interactive Brokers", "TradeStation", "Tastytrade", "Public", "Alpaca", "Charles Schwab", "Clear Street", "Webull", "Binance", "Bybit", "Tradier", "Kraken", "Coinbase", "Bitfinex", "dYdX", "Bloomberg EMSX", "Bloomberg FIX", "SSC Eze", "Trading Technologies", "Wolverine", "FIX Connections", "CFD and FOREX Brokerages (OANDA)"],
+   "mt5_listed": false,
+   "status": "BELEGT",
+   "sources": [
+    {"url": "https://github.com/QuantConnect/Lean", "quote": "Lean Algorithmic Trading Engine by QuantConnect (Python, C#)", "kind": "primary_repository"},
+    {"url": "https://www.quantconnect.com/docs/v2/cloud-platform/live-trading/brokerages", "quote": "Brokerages - QuantConnect.com", "kind": "primary_documentation"},
+    {"url": "https://www.quantconnect.com/docs/v2/cloud-platform/live-trading/brokerages/cfd-and-forex-brokerages", "quote": "OANDA", "kind": "primary_documentation"}
+   ],
+   "negative_finding": "MetaTrader/MT4/MT5 auf der Brokerageseite und der CFD-/FX-Seite nicht genannt; Lizenz Apache-2.0 laut Repository."
+  },
+  {
+   "id": "PYSYSTEMTRADE",
+   "name": "pysystemtrade",
+   "license": "GPL-3.0",
+   "languages": "Python",
+   "integrations": ["Interactive Brokers (über ib_insync)"],
+   "mt5_listed": false,
+   "features": ["Rollkalender", "Multiple Prices (aktueller, nächster, Carry-Kontrakt)", "rückwärts angepasste Preise (Panama-Methode)"],
+   "status": "BELEGT",
+   "sources": [
+    {"url": "https://github.com/robcarver17/pysystemtrade", "quote": "Absolutely no warranty is implied with this product. Use at your own risk", "kind": "primary_repository"},
+    {"url": "https://github.com/robcarver17/pysystemtrade", "quote": "I do not have the time to provide support", "kind": "primary_repository"},
+    {"url": "https://github.com/robcarver17/pysystemtrade/blob/master/docs/data.md", "quote": "A roll calendar is the series of dates on which we roll from one futures contract to the next.", "kind": "primary_documentation"},
+    {"url": "https://github.com/robcarver17/pysystemtrade/blob/master/docs/data.md", "quote": "The adjustment defaults to the panama method.", "kind": "primary_documentation"}
+   ],
+   "negative_finding": "MetaTrader nicht genannt; Lizenzangabe im README als 'GNU v3'."
+  }
+ ],
+ "not_checked": [
+  {"topic": "Kommerzielle Plattformen mit eigener Brokeranbindung (etwa NinjaTrader, MultiCharts, TradeStation, Sierra Chart)", "reason": "nach BQ-08 (nur MT5) ausgeschieden; Anbindung, Lizenz und Kosten nicht recherchiert", "status": "NICHT_GEPRUEFT"},
+  {"topic": "Community-Adapter für MT5 in NautilusTrader oder LEAN", "reason": "nicht offiziell gelistet; Reife und Pflege nicht geprüft", "status": "NICHT_GEPRUEFT"}
+ ]
+}

@@ -1,0 +1,44 @@
+{
+ "schema_version": "3.0",
+ "id": "TR-DATA-004",
+ "machine": "SM-DATAFEED",
+ "description": "Limit-Move und anschließende Handelsaussetzung: keine Einstiege, Abbau erst nach Wiederaufnahme mit frischem Kurs",
+ "scenarios": [
+  "OS-EX-12"
+ ],
+ "start": "HEALTHY",
+ "initial_reasons": null,
+ "steps": [
+  {
+   "event": "LIMIT_REACHED",
+   "context": {},
+   "expect_state": "LIMIT_LOCKED"
+  },
+  {
+   "event": "TRADING_HALTED",
+   "context": {},
+   "expect_state": "HALTED"
+  },
+  {
+   "event": "QUOTE_UPDATE",
+   "context": {
+    "quote_age_s": 1,
+    "xcheck_share": 1.0
+   },
+   "expect_state": "HALTED"
+  },
+  {
+   "event": "TRADING_RESUMED",
+   "context": {},
+   "expect_state": "DEGRADED"
+  },
+  {
+   "event": "QUOTE_UPDATE",
+   "context": {
+    "quote_age_s": 1,
+    "xcheck_share": 1.0
+   },
+   "expect_state": "HEALTHY"
+  }
+ ]
+}

@@ -1,0 +1,21 @@
+{
+ "schema_version": "3.0",
+ "id": "TR-DATA-003",
+ "machine": "SM-DATAFEED",
+ "description": "Abgleich zweier Quellen unter der Schwelle: DEGRADED trotz frischem Kurs",
+ "scenarios": [
+  "OS-DA-01"
+ ],
+ "start": "HEALTHY",
+ "initial_reasons": null,
+ "steps": [
+  {
+   "event": "QUOTE_UPDATE",
+   "context": {
+    "quote_age_s": 1,
+    "xcheck_share": 0.95
+   },
+   "expect_state": "DEGRADED"
+  }
+ ]
+}

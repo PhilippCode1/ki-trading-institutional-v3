@@ -1,0 +1,52 @@
+{
+ "schema_version": "3.0",
+ "id": "TR-SAFETY-005",
+ "machine": "SM-SAFETY",
+ "description": "Kontotyp ≠ signierter Modus: HALTED; nur der Betreiber hebt nach geschlossenem Incident auf",
+ "scenarios": [
+  "OS-GV-01"
+ ],
+ "start": null,
+ "initial_reasons": [],
+ "steps": [
+  {
+   "event": "ACCOUNT_TYPE_MISMATCH",
+   "context": {},
+   "expect_state": "HALTED",
+   "expect_reasons": [
+    "MODE_MISMATCH"
+   ],
+   "expect_allowed": [
+    "CANCEL_ORDER",
+    "EMERGENCY_PROTECT",
+    "RECONCILE",
+    "ROLL_AS_CLOSE",
+    "STOP_AMEND_RECONCILED_ONLY"
+   ]
+  },
+  {
+   "event": "OPERATOR_CLEAR_SIGNED",
+   "context": {
+    "signed": true,
+    "reason": "MODE_MISMATCH",
+    "incident_closed": true,
+    "signer_role": "VERTRETUNG"
+   },
+   "expect_state": "HALTED",
+   "expect_reasons": [
+    "MODE_MISMATCH"
+   ]
+  },
+  {
+   "event": "OPERATOR_CLEAR_SIGNED",
+   "context": {
+    "signed": true,
+    "reason": "MODE_MISMATCH",
+    "incident_closed": true,
+    "signer_role": "BETREIBER"
+   },
+   "expect_state": "READY",
+   "expect_reasons": []
+  }
+ ]
+}

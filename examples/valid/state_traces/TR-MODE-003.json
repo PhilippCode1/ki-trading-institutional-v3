@@ -1,0 +1,22 @@
+{
+ "schema_version": "3.0",
+ "id": "TR-MODE-003",
+ "machine": "SM-MODE",
+ "description": "Kein direkter Wechsel von Echtgeld zurück in das Demokonto",
+ "scenarios": [
+  "OS-GV-01"
+ ],
+ "start": "STANDARD",
+ "initial_reasons": null,
+ "steps": [
+  {
+   "event": "MODE_SWITCH_SIGNED",
+   "context": {
+    "signer_role": "BETREIBER",
+    "target": "PAPER"
+   },
+   "expect_state": "STANDARD",
+   "expect_invalid": true
+  }
+ ]
+}

@@ -1,0 +1,240 @@
+{
+  "schema_version": "3.0",
+  "document": "Limits-Hierarchie",
+  "as_of": "2026-09-24",
+  "levels": [
+    "KONTO",
+    "STRATEGIE",
+    "KLASSE",
+    "INSTRUMENT",
+    "CLUSTER"
+  ],
+  "rule": "Werte stehen nur in parameters.json bzw. in Rechnerergebnissen; hier stehen Verweise (R-04).",
+  "limits": [
+    {
+      "id": "LIM-ACC-DLC",
+      "level": "KONTO",
+      "type": "TAGESVERLUST",
+      "value_ref": "P-OP-DAILY-LOSS-CAP",
+      "action": "HARTE_GRENZE",
+      "timing": "INTRADAY",
+      "note": "Betreiber-Grenze; wird durch LIM-ACC-GAP vorab erzwungen"
+    },
+    {
+      "id": "LIM-ACC-DL1",
+      "level": "KONTO",
+      "type": "TAGESVERLUST",
+      "value_ref": "P-RISK-DL-L1",
+      "action": "RISIKOZIEL_HALBIEREN",
+      "timing": "INTRADAY",
+      "note": ""
+    },
+    {
+      "id": "LIM-ACC-DL2",
+      "level": "KONTO",
+      "type": "TAGESVERLUST",
+      "value_ref": "P-RISK-DL-L2",
+      "action": "EINSTIEGSSPERRE",
+      "timing": "INTRADAY",
+      "note": ""
+    },
+    {
+      "id": "LIM-ACC-DL3",
+      "level": "KONTO",
+      "type": "TAGESVERLUST",
+      "value_ref": "P-RISK-DL-L3",
+      "action": "GEORDNETER_ABBAU",
+      "timing": "INTRADAY",
+      "note": ""
+    },
+    {
+      "id": "LIM-ACC-GAP",
+      "level": "KONTO",
+      "type": "LUECKENSTRESS",
+      "value_ref": "P-RISK-GAP-RESERVE",
+      "action": "ORDER_ABLEHNEN",
+      "timing": "PRE_TRADE",
+      "note": "Lückenstress + Tagesverlust ≤ Grenze − Reserve"
+    },
+    {
+      "id": "LIM-ACC-WEEK",
+      "level": "KONTO",
+      "type": "WOCHENVERLUST",
+      "value_ref": "P-RISK-WEEK-LOSS",
+      "action": "EINSTIEGSSPERRE",
+      "timing": "INTRADAY",
+      "note": ""
+    },
+    {
+      "id": "LIM-ACC-DD-L1",
+      "level": "KONTO",
+      "type": "DRAWDOWN",
+      "value_ref": "P-RISK-DD-L1",
+      "action": "RISIKOZIEL_075",
+      "timing": "EOD_UND_INTRADAY",
+      "note": ""
+    },
+    {
+      "id": "LIM-ACC-DD-L2",
+      "level": "KONTO",
+      "type": "DRAWDOWN",
+      "value_ref": "P-RISK-DD-L2",
+      "action": "RISIKOZIEL_050_PROFILABSTIEG",
+      "timing": "EOD_UND_INTRADAY",
+      "note": ""
+    },
+    {
+      "id": "LIM-ACC-DD-L3",
+      "level": "KONTO",
+      "type": "DRAWDOWN",
+      "value_ref": "P-RISK-DD-L3",
+      "action": "EINSTIEGSSPERRE",
+      "timing": "EOD_UND_INTRADAY",
+      "note": ""
+    },
+    {
+      "id": "LIM-ACC-DD-KILL",
+      "level": "KONTO",
+      "type": "DRAWDOWN",
+      "value_ref": "P-RISK-DD-KILL",
+      "action": "ABBAU_STOPP",
+      "timing": "EOD_UND_INTRADAY",
+      "note": ""
+    },
+    {
+      "id": "LIM-ACC-LG",
+      "level": "KONTO",
+      "type": "BRUTTO_HEBEL",
+      "value_ref": "P-LEV-{PROFIL}-CAP",
+      "action": "ORDER_ABLEHNEN",
+      "timing": "PRE_TRADE",
+      "note": ""
+    },
+    {
+      "id": "LIM-ACC-ME",
+      "level": "KONTO",
+      "type": "MARGIN_AUSLASTUNG",
+      "value_ref": "P-LEV-{PROFIL}-ME",
+      "action": "ORDER_ABLEHNEN",
+      "timing": "PRE_TRADE",
+      "note": ""
+    },
+    {
+      "id": "LIM-ACC-ES",
+      "level": "KONTO",
+      "type": "EXPECTED_SHORTFALL",
+      "value_ref": "P-LEV-{PROFIL}-ES",
+      "action": "ORDER_ABLEHNEN",
+      "timing": "PRE_TRADE",
+      "note": ""
+    },
+    {
+      "id": "LIM-ACC-MRG",
+      "level": "KONTO",
+      "type": "MARGIN_LEVEL",
+      "value_ref": "P-MRG-DERISK-TRIGGER",
+      "action": "ABBAU_BIS_SCHWELLE",
+      "timing": "INTRADAY",
+      "note": ""
+    },
+    {
+      "id": "LIM-STR-BUDGET",
+      "level": "STRATEGIE",
+      "type": "RISIKOBUDGET",
+      "value_ref": "P-STR-RISK-SHARES",
+      "action": "SKALIEREN",
+      "timing": "PRE_TRADE",
+      "note": ""
+    },
+    {
+      "id": "LIM-CLS-LEV",
+      "level": "KLASSE",
+      "type": "HEBELDECKEL",
+      "value_ref": "risk/leverage_results.json#/class_caps",
+      "action": "ORDER_ABLEHNEN",
+      "timing": "PRE_TRADE",
+      "note": ""
+    },
+    {
+      "id": "LIM-INS-ADV",
+      "level": "INSTRUMENT",
+      "type": "LIQUIDITAET_ORDER",
+      "value_ref": "P-RISK-MAX-ADV-SHARE",
+      "action": "ORDER_TEILEN_ODER_ABLEHNEN",
+      "timing": "PRE_TRADE",
+      "note": ""
+    },
+    {
+      "id": "LIM-INS-OI",
+      "level": "INSTRUMENT",
+      "type": "KONZENTRATION",
+      "value_ref": "P-RISK-MAX-OI-SHARE",
+      "action": "ORDER_ABLEHNEN",
+      "timing": "PRE_TRADE",
+      "note": ""
+    },
+    {
+      "id": "LIM-INS-HOLD",
+      "level": "INSTRUMENT",
+      "type": "HALTEDAUER",
+      "value_ref": "P-OP-HOLD-MAX-H",
+      "action": "ZEITSTOPP_SCHLIESSEN",
+      "timing": "INTRADAY",
+      "note": ""
+    },
+    {
+      "id": "LIM-INS-ROLL",
+      "level": "INSTRUMENT",
+      "type": "VERFALL",
+      "value_ref": "P-UNI-ROLL-DAYS",
+      "action": "KEIN_EINSTIEG_SCHLIESSEN",
+      "timing": "PRE_TRADE",
+      "note": ""
+    },
+    {
+      "id": "LIM-INS-EVENT",
+      "level": "INSTRUMENT",
+      "type": "EREIGNIS",
+      "value_ref": "P-RISK-EVENT-BLACKOUT-MIN",
+      "action": "KEIN_EINSTIEG",
+      "timing": "PRE_TRADE",
+      "note": ""
+    },
+    {
+      "id": "LIM-CLU-GAP",
+      "level": "CLUSTER",
+      "type": "LUECKENSTRESS_CLUSTER",
+      "value_ref": "P-LEV-CLUSTER-MODE",
+      "action": "INFORMATIV",
+      "timing": "EOD",
+      "note": ""
+    },
+    {
+      "id": "LIM-PT-PRICE",
+      "level": "INSTRUMENT",
+      "type": "PREISKORRIDOR",
+      "value_ref": "execution/pretrade_controls.md#PTC-01",
+      "action": "ORDER_ABLEHNEN",
+      "timing": "PRE_TRADE",
+      "note": ""
+    },
+    {
+      "id": "LIM-PT-QTY",
+      "level": "INSTRUMENT",
+      "type": "HOECHSTMENGE",
+      "value_ref": "execution/pretrade_controls.md#PTC-02",
+      "action": "ORDER_ABLEHNEN",
+      "timing": "PRE_TRADE",
+      "note": ""
+    },
+    {
+      "id": "LIM-PT-RATE",
+      "level": "KONTO",
+      "type": "NACHRICHTENRATE",
+      "value_ref": "execution/pretrade_controls.md#PTC-05",
+      "action": "DROSSELN",
+      "timing": "PRE_TRADE",
+      "note": ""
+    }
+  ]
+}

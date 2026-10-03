@@ -1,0 +1,43 @@
+{
+ "schema_version": "3.0",
+ "id": "TR-SAFETY-009",
+ "machine": "SM-SAFETY",
+ "description": "Drawdown-Kill: Quittung löst nicht, nur ein neuer Grant nach Ursachenbericht",
+ "scenarios": [
+  "OS-RI-08"
+ ],
+ "start": null,
+ "initial_reasons": [],
+ "steps": [
+  {
+   "event": "DRAWDOWN_KILL_LEVEL",
+   "context": {},
+   "expect_state": "EXIT_ONLY",
+   "expect_reasons": [
+    "DRAWDOWN_EXIT"
+   ]
+  },
+  {
+   "event": "OPERATOR_ACK_SIGNED",
+   "context": {
+    "signed": true,
+    "reason": "DRAWDOWN_EXIT",
+    "cause_report": true
+   },
+   "expect_state": "EXIT_ONLY",
+   "expect_reasons": [
+    "DRAWDOWN_EXIT"
+   ]
+  },
+  {
+   "event": "NEW_GRANT_AFTER_CAUSE_REPORT",
+   "context": {
+    "signed": true,
+    "reason": "DRAWDOWN_EXIT",
+    "cause_report": true
+   },
+   "expect_state": "READY",
+   "expect_reasons": []
+  }
+ ]
+}

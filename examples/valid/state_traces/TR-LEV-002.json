@@ -1,0 +1,88 @@
+{
+ "schema_version": "3.0",
+ "id": "TR-LEV-002",
+ "machine": "SM-LEVERAGE",
+ "description": "Hypothetisch zulässig: Pilot H5, Standard H5, Aufstieg nur mit zweiter Freigabe, automatischer Abstieg, Drawdown-Kill",
+ "scenarios": [
+  "OS-RI-09",
+  "OS-RI-10"
+ ],
+ "start": null,
+ "initial_reasons": null,
+ "steps": [
+  {
+   "event": "GRANT_ACTIVATED",
+   "context": {
+    "grant_kind": "PILOT",
+    "grant_profile": "H5",
+    "profile_admissible": {
+     "H5": true
+    }
+   },
+   "expect_state": "PILOT_H5"
+  },
+  {
+   "event": "GRANT_ACTIVATED",
+   "context": {
+    "grant_kind": "STANDARD",
+    "gate_g8": "PASS",
+    "profile_admissible": {
+     "H5": true
+    }
+   },
+   "expect_state": "H5"
+  },
+  {
+   "event": "STEP_UP_SIGNED",
+   "context": {
+    "signed": true,
+    "signer_role": "BETREIBER",
+    "risk_function_cosigned": false
+   },
+   "expect_state": "H5",
+   "expect_invalid": true
+  },
+  {
+   "event": "STEP_UP_SIGNED",
+   "context": {
+    "signed": true,
+    "signer_role": "BETREIBER",
+    "risk_function_cosigned": true,
+    "days_in_step": 95,
+    "cost_ratio_abs_dev": 0.1,
+    "vol_ratio_abs_dev": 0.2,
+    "profile_admissible": {
+     "H10": true
+    },
+    "drawdown_step_active": false,
+    "grant_profile_cap_allows": true,
+    "hard_limit_breaches_in_step": 0,
+    "severe_incidents_in_step": 0
+   },
+   "expect_state": "H10"
+  },
+  {
+   "event": "STEP_DOWN",
+   "context": {},
+   "expect_state": "H5"
+  },
+  {
+   "event": "STEP_DOWN",
+   "context": {},
+   "expect_state": "H5"
+  },
+  {
+   "event": "DRAWDOWN_KILL_LEVEL",
+   "context": {},
+   "expect_state": "SUSPENDED"
+  },
+  {
+   "event": "NEW_GRANT_AFTER_CAUSE_REPORT",
+   "context": {
+    "signed": true,
+    "cause_report": true
+   },
+   "expect_state": "NO_PROFILE"
+  }
+ ]
+}

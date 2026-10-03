@@ -1,0 +1,111 @@
+{
+  "schema_version": "3.0",
+  "document": "Evidenz-Score E – Selbstbewertung nach §20.3",
+  "as_of": "2026-09-24",
+  "self_assessment": true,
+  "rule": "E-Punkte nur mit signiertem Torergebnis (Prüfmodul) und Laufbeleg im Paket; E = 100 bedeutet nachgewiesene Betriebs- und Prozessqualität, nicht Gewinn.",
+  "blocks": [
+    {
+      "id": "E-1",
+      "max": 10,
+      "requirement": "Betreibereingaben bestätigt; Wirtschaftlichkeit mit echten Gebühren (G0)",
+      "gates": [
+        "GATE-G0"
+      ],
+      "points": 0,
+      "evidence": [],
+      "status": "G0 heute BLOCKED_EXTERNAL (GC-G0-101): Gebühren, Stundensatz, Budget, Verzinsung und V1-Produkte unbestätigt"
+    },
+    {
+      "id": "E-2",
+      "max": 10,
+      "requirement": "Kontozugang, Killer-Tests bestanden (G1)",
+      "gates": [
+        "GATE-G1"
+      ],
+      "points": 0,
+      "evidence": [],
+      "status": "kein signiertes Torergebnis; das Tor ist heute gesperrt oder noch nicht erreicht"
+    },
+    {
+      "id": "E-3",
+      "max": 10,
+      "requirement": "Lizenzierte Daten, Abgleich, Leckagetests (G2)",
+      "gates": [
+        "GATE-G2"
+      ],
+      "points": 0,
+      "evidence": [],
+      "status": "kein signiertes Torergebnis; das Tor ist heute gesperrt oder noch nicht erreicht"
+    },
+    {
+      "id": "E-4",
+      "max": 10,
+      "requirement": "Forschungstore G3 und G4 bestanden, einschließlich Futility",
+      "gates": [
+        "GATE-G3",
+        "GATE-G4"
+      ],
+      "points": 0,
+      "evidence": [],
+      "status": "kein signiertes Torergebnis; das Tor ist heute gesperrt oder noch nicht erreicht"
+    },
+    {
+      "id": "E-5",
+      "max": 15,
+      "requirement": "System gebaut, Abnahmetests bestanden, Prüfmodul ohne Abweichung (G5)",
+      "gates": [
+        "GATE-G5"
+      ],
+      "points": 0,
+      "evidence": [],
+      "status": "kein signiertes Torergebnis; das Tor ist heute gesperrt oder noch nicht erreicht"
+    },
+    {
+      "id": "E-6",
+      "max": 10,
+      "requirement": "Drills bestanden (G6)",
+      "gates": [
+        "GATE-G6"
+      ],
+      "points": 0,
+      "evidence": [],
+      "status": "kein signiertes Torergebnis; das Tor ist heute gesperrt oder noch nicht erreicht"
+    },
+    {
+      "id": "E-7",
+      "max": 10,
+      "requirement": "Paper-Forward bestanden (G7)",
+      "gates": [
+        "GATE-G7"
+      ],
+      "points": 0,
+      "evidence": [],
+      "status": "kein signiertes Torergebnis; das Tor ist heute gesperrt oder noch nicht erreicht"
+    },
+    {
+      "id": "E-8",
+      "max": 10,
+      "requirement": "Pilot H5 bestanden, Kosten im Modellband (G8)",
+      "gates": [
+        "GATE-G8"
+      ],
+      "points": 0,
+      "evidence": [],
+      "status": "kein signiertes Torergebnis; das Tor ist heute gesperrt oder noch nicht erreicht"
+    },
+    {
+      "id": "E-9",
+      "max": 15,
+      "requirement": "mindestens zwölf Monate Standardbetrieb ohne schwere Incidents, Stufenleiter regelkonform, externes Audit ohne wesentliche Feststellung (G9, G10)",
+      "gates": [
+        "GATE-G9",
+        "GATE-G10"
+      ],
+      "points": 0,
+      "evidence": [],
+      "status": "kein signiertes Torergebnis; das Tor ist heute gesperrt oder noch nicht erreicht"
+    }
+  ],
+  "total": 0
+}

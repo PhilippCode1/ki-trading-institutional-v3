@@ -1,0 +1,24 @@
+{
+ "schema_version": "3.0",
+ "id": "TR-ML-003",
+ "machine": "SM-MLMODEL",
+ "description": "Ein Sprachmodell im Größenpfad wird immer abgelehnt",
+ "scenarios": [
+  "OS-GV-11"
+ ],
+ "start": "DEVELOPED",
+ "initial_reasons": null,
+ "steps": [
+  {
+   "event": "VALIDATION_RESULT",
+   "context": {
+    "dsr": 0.99,
+    "pbo": 0.05,
+    "uplift_sr": 0.3,
+    "independent_validator": true,
+    "is_language_model": true
+   },
+   "expect_state": "REJECTED"
+  }
+ ]
+}

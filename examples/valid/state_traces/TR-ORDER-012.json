@@ -1,0 +1,18 @@
+{
+ "schema_version": "3.0",
+ "id": "TR-ORDER-012",
+ "machine": "SM-ORDER",
+ "description": "Unaufgeforderte Stornierung durch die Börse; Fremdmeldung nach Risikoablehnung ändert nichts",
+ "scenarios": [
+  "OS-EX-10"
+ ],
+ "start": "ACKNOWLEDGED",
+ "initial_reasons": null,
+ "steps": [
+  {
+   "event": "CANCEL_CONFIRMED",
+   "context": {},
+   "expect_state": "CANCELLED"
+  }
+ ]
+}

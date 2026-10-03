@@ -1,0 +1,14 @@
+{
+ "schema_version": "3.0",
+ "message_id": "00000000-0000-4000-8000-000000000019",
+ "correlation_id": "COR-0019",
+ "producer": "PROJECT_OPS",
+ "created_utc": "2026-09-24T09:00:00Z",
+ "request_id": "MR-0002",
+ "status": "REJECTED",
+ "error": {
+  "code": "ERR-TOOL-NOT-ALLOWED",
+  "message": "Werkzeug nicht in der Allowlist"
+ },
+ "security_event": true
+}

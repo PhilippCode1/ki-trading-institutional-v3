@@ -1,0 +1,29 @@
+{
+ "schema_version": "3.0",
+ "id": "TR-GRANT-001",
+ "machine": "SM-GRANT",
+ "description": "Pilot-Grant über 45 Tage verletzt P-SEC-GRANT-DAYS und wird abgelehnt",
+ "scenarios": [
+  "OS-GV-02"
+ ],
+ "start": null,
+ "initial_reasons": null,
+ "steps": [
+  {
+   "event": "SIGNATURE_VERIFIED",
+   "context": {
+    "signature_valid": true,
+    "signer_role": "BETREIBER",
+    "kind": "PILOT",
+    "duration_days": 45
+   },
+   "expect_state": "DRAFT",
+   "expect_invalid": true
+  },
+  {
+   "event": "VALIDATION_FAILED",
+   "context": {},
+   "expect_state": "REJECTED"
+  }
+ ]
+}

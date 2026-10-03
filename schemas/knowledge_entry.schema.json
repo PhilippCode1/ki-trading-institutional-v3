@@ -1,0 +1,133 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:ki-trading-v3:knowledge_entry",
+  "title": "Wissensregister-Eintrag (IF-10)",
+  "description": "Der Agent darf vorschlagen, aber nichts als Tatsache markieren.",
+  "x-version": "3.0.0",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "$ref": "urn:ki-trading-v3:common#/$defs/schema_version"
+    },
+    "message_id": {
+      "$ref": "urn:ki-trading-v3:common#/$defs/uuid"
+    },
+    "correlation_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "producer": {
+      "$ref": "urn:ki-trading-v3:common#/$defs/producer"
+    },
+    "created_utc": {
+      "$ref": "urn:ki-trading-v3:common#/$defs/utc"
+    },
+    "entry_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "status": {
+      "enum": [
+        "HYPOTHESE",
+        "BESTAETIGT",
+        "WIDERLEGT"
+      ]
+    },
+    "claim": {
+      "type": "string",
+      "minLength": 1
+    },
+    "evidence_refs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 0
+    },
+    "data_window": {
+      "type": "object",
+      "properties": {
+        "start": {
+          "$ref": "urn:ki-trading-v3:common#/$defs/date"
+        },
+        "end": {
+          "$ref": "urn:ki-trading-v3:common#/$defs/date"
+        }
+      },
+      "required": [
+        "start",
+        "end"
+      ],
+      "additionalProperties": false
+    },
+    "valid_until": {
+      "$ref": "urn:ki-trading-v3:common#/$defs/date"
+    },
+    "author_role": {
+      "enum": [
+        "HERMES",
+        "BETREIBER"
+      ]
+    }
+  },
+  "required": [
+    "schema_version",
+    "message_id",
+    "correlation_id",
+    "producer",
+    "created_utc",
+    "entry_id",
+    "status",
+    "claim",
+    "evidence_refs",
+    "data_window",
+    "valid_until",
+    "author_role"
+  ],
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "author_role": {
+            "const": "HERMES"
+          }
+        },
+        "required": [
+          "author_role"
+        ]
+      },
+      "then": {
+        "properties": {
+          "status": {
+            "const": "HYPOTHESE"
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "enum": [
+              "BESTAETIGT",
+              "WIDERLEGT"
+            ]
+          }
+        },
+        "required": [
+          "status"
+        ]
+      },
+      "then": {
+        "required": [],
+        "properties": {
+          "evidence_refs": {
+            "minItems": 1
+          }
+        }
+      }
+    }
+  ]
+}

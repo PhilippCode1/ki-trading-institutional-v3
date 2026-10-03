@@ -1,0 +1,32 @@
+{
+ "schema_version": "3.0",
+ "message_id": "00000000-0000-4000-8000-000000000008",
+ "correlation_id": "COR-0008",
+ "producer": "RECONCILER",
+ "created_utc": "2026-09-24T09:00:00Z",
+ "snapshot_id": "SN-0001",
+ "taken_at_utc": "2026-09-24T09:00:30Z",
+ "account_ref": "ACC-DEMO0001",
+ "account_type": "DEMO",
+ "margin_mode": "HEDGING",
+ "currency": "EUR",
+ "balance": "100000.00",
+ "equity": "100250.00",
+ "margin": "2000.00",
+ "margin_free": "98250.00",
+ "margin_level": "5.0",
+ "stop_out_level": "0.50",
+ "deal_cursor": 8880001,
+ "positions": [
+  {
+   "position_ticket": 5550001,
+   "broker_symbol": "MGCZ26",
+   "side": "BUY",
+   "qty": 1,
+   "sl_price": "4190.3"
+  }
+ ],
+ "open_orders": [],
+ "complete": true,
+ "gap_since_last": false
+}

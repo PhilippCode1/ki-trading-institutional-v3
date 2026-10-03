@@ -1,0 +1,808 @@
+{
+ "document": "Bericht der Mutationstests",
+ "catalog": "validation/mutation_catalog.json",
+ "as_of": "2026-09-24",
+ "package_state": "b19110757120fa49cb335bce98dc93ee648014cd0576db547221d8a8fec73a26",
+ "python": "3.12.3",
+ "total": 60,
+ "detected": 60,
+ "minimum": 40,
+ "required_by_19_3": [
+  "MUT-01",
+  "MUT-02",
+  "MUT-03",
+  "MUT-04",
+  "MUT-05",
+  "MUT-06"
+ ],
+ "result": "PASS",
+ "mutations": [
+  {
+   "id": "MUT-01",
+   "title": "Spread ändern ohne Kostenanpassung",
+   "category": "SEMANTIK",
+   "phases": [
+    "P09"
+   ],
+   "detected": true,
+   "status": "ERKANNT",
+   "detail": [
+    "P09: check_costs: GC: halber Spread je Seite nachgerechnet 13.1452 ≠ gespeichert 4.3800 (Spread, Gebühr oder Kurs ohne Neuberechnung geändert)"
+   ]
+  },
+  {
+   "id": "MUT-02",
+   "title": "Hebelprofil über ein Limit setzen (H20-Obergrenze über der Betreibergrenze)",
+   "category": "SEMANTIK",
+   "phases": [
+    "P09"
+   ],
+   "detected": true,
+   "status": "ERKANNT",
+   "detail": [
+    "P09: check_leverage: P-LEV-H20-CAP 25.0 liegt über der Betreibergrenze P-OP-LEV-MAX 20.0"
+   ]
+  },
+  {
+   "id": "MUT-03",
+   "title": "Stresswert entfernen",
+   "category": "SEMANTIK",
+   "phases": [
+    "P09"
+   ],
+   "detected": true,
+   "status": "ERKANNT",
+   "detail": [
+    "P09: check_stress: SYSTEM/H5: Szenarien ohne Ergebnis ['SC-H-1987']"
+   ]
+  },
+  {
+   "id": "MUT-04",
+   "title": "Betreiberangabe erfinden (Kapital als bestätigt ausgeben)",
+   "category": "SEMANTIK",
+   "phases": [
+    "P09"
+   ],
+   "detected": true,
+   "status": "ERKANNT",
+   "detail": [
+    "P09: check_operator: X-OP-CAPITAL: Status BESTAETIGT ohne Nachweis (Datum, Unterschrift, Beleg im Paket)"
+   ]
+  },
+  {
+   "id": "MUT-05",
+   "title": "Futility-Schwelle umgehen (Regel G3-R7 entfernen)",
+   "category": "SEMANTIK",
+   "phases": [
+    "P09"
+   ],
+   "detected": true,
+   "status": "ERKANNT",
+   "detail": [
+    "P09: check_gates: GATE-G3: Futility-Regel fehlt oder steht hinter PASS (Futility umgangen)"
+   ]
+  },
+  {
+   "id": "MUT-06",
+   "title": "E-Punkt ohne Laufbeleg vergeben",
+   "category": "SEMANTIK",
+   "phases": [
+    "P12"
+   ],
+   "detected": true,
+   "status": "ERKANNT",
+   "detail": [
+    "P12: E E-1: 10 Punkte ohne signiertes Torergebnis mit Laufbeleg"
+   ]
+  },
+  {
+   "id": "MUT-07",
+   "title": "Brokergebühr ändern ohne Neuberechnung",
+   "category": "SEMANTIK",
+   "phases": [
+    "P09"
+   ],
+   "detected": true,
+   "status": "ERKANNT",
+   "detail": [
+    "P09: check_costs: SR3: Kommission je Seite nachgerechnet 0.5000 ≠ gespeichert 1.0000 (Spread, Gebühr oder Kurs ohne Neuberechnung geändert)",
+    "P09: check_costs: SR1: Kommission je Seite nachgerechnet 0.5000 ≠ gespeichert 1.0000 (Spread, Gebühr oder Kurs ohne Neuberechnung geändert)"
+   ]
+  },
+  {
+   "id": "MUT-08",
+   "title": "Planpreis eines Kontrakts ändern ohne Neuberechnung",
+   "category": "SEMANTIK",
+   "phases": [
+    "P09"
+   ],
+   "detected": true,
+   "status": "ERKANNT",
+   "detail": [
+    "P09: check_costs: ZN: Nominal EUR nachgerechnet 83253.0015 ≠ gespeichert 98150.9100 (Spread, Gebühr oder Kurs ohne Neuberechnung geändert)"
+   ]
+  },
+  {
+   "id": "MUT-09",
+   "title": "Kostentabelle CSV abweichend vom Kostenmodell",
+   "category": "SEMANTIK",
+   "phases": [
+    "P09"
+   ],
+   "detected": true,
+   "status": "ERKANNT",
+   "detail": [
+    "P09: check_costs: SR3: financials/cost_table.csv weicht vom Kostenmodell ab"
+   ]
+  },
+  {
+   "id": "MUT-10",
+   "title": "Hebelzelle als zulässig ausweisen trotz verletzter Grenzen",
+   "category": "SEMANTIK",
+   "phases": [
+    "P09"
+   ],
+   "detected": true,
+   "status": "ERKANNT",
+   "detail": [
+    "P09: check_leverage: U-KOSTEN/5000000/H5: Zulässigkeit True widerspricht den Grenzen (verletzt: ['Diversifikation'])"
+   ]
+  },
+  {
+   "id": "MUT-11",
+   "title": "Go/No-Go auf Echtgeld-Go setzen bei unzulässigem Profil",
+   "category": "SEMANTIK",
+   "phases": [
+    "P09",
+    "P13"
+   ],
+   "detected": true,
+   "status": "ERKANNT",
+   "detail": [
+    "P09: check_leverage: Go/No-Go 5000000/H5: Echtgeld nicht No-Go, obwohl das Profil unzulässig ist",
+    "P13: Go/No-Go 5000000/H5 widerspricht der Profilzulässigkeit"
+   ]
+  },
+  {
+   "id": "MUT-12",
+   "title": "Wochenendfaktor der Größenregel weglassen",
+   "category": "SEMANTIK",
+   "phases": [
+    "P09"
+   ],
+   "detected": true,
+   "status": "ERKANNT",
+   "detail": [
+    "P09: check_leverage: Hebelrechner rechnet ohne den Wochenendfaktor P-RISK-WEEKEND-FACTOR 1.5 (DEC-DS-10)"
+   ]
+  },
+  {
+   "id": "MUT-13",
+   "title": "Steuerbeispiel falsch",
+   "category": "SEMANTIK",
+   "phases": [
+    "P09"
+   ],
+   "detected": true,
+   "status": "ERKANNT",
+   "detail": [
+    "P09: check_tax: Steuerbeispiel 1000.0: 1000.0 ≠ 700.00"
+   ]
+  },
+  {
+   "id": "MUT-14",
+   "title": "Kapazitätsgrenze drastisch senken ohne Neuberechnung",
+   "category": "SEMANTIK",
+   "phases": [
+    "P09",
+    "P07"
+   ],
+   "detected": true,
+   "status": "ERKANNT",
+   "detail": [
+    "P07: research/turnover_results.json: Eingabe parameters.json seit der Rechnung geändert (Eingangs-Hash; Rechner neu laufen lassen)",
+    "P07: financials/cost_model_results.json: Eingabe parameters.json seit der Rechnung geändert (Eingangs-Hash; Rechner neu laufen lassen)"
+   ]
+  },
+  {
+   "id": "MUT-15",
+   "title": "Proxy auf anderen Basiswert (Micro Gold auf 10-Year Note)",
+   "category": "SEMANTIK",
+   "phases": [
+    "P09"
+   ],
+   "detected": true,
+   "status": "ERKANNT",
+   "detail": [
+    "P09: check_proxy: MGC: Proxy ZN mit anderer Risikoklasse oder Währung (anderer Basiswert, vgl. MTN ≠ ZN)"
+   ]
+  },
+  {
+   "id": "MUT-16",
+   "title": "Tagesverlust-Leiter nicht mehr steigend",
+   "category": "SEMANTIK",
+   "phases": [
+    "P09"
+   ],
+   "detected": true,
+   "status": "ERKANNT",
+   "detail": [
+    "P09: check_limits: Tagesverlust-Leiter nicht streng steigend bis zur Betreibergrenze"
+   ]
+  },
+  {
+   "id": "MUT-17",
+   "title": "Stressszenario ohne Runbook",
+   "category": "SEMANTIK",
+   "phases": [
+    "P09"
+   ],
+   "detected": true,
+   "status": "ERKANNT",
+   "detail": [
+    "P09: check_runbooks: Stressszenario SC-H-1987 ohne Runbook"
+   ]
+  },
+  {
+   "id": "MUT-18",
+   "title": "Externe Eingabe sperrt ihr Tor nicht mehr",
+   "category": "SEMANTIK",
+   "phases": [
+    "P09"
+   ],
+   "detected": true,
+   "status": "ERKANNT",
+   "detail": [
+    "P09: check_gates: GATE-G0: sperrende Eingaben im Tor ['X-BRK-FEES'] bzw. im Register [] nicht abgeglichen",
+    "P09: check_gates: BS-00: externe Eingaben weichen vom Register ab"
+   ]
+  },
+  {
+   "id": "MUT-19",
+   "title": "Torschwelle als Zahl statt Parameter (G3 ohne P-RES-DSR-MIN)",
+   "category": "SEMANTIK",
+   "phases": [
+    "P09"
+   ],
+   "detected": true,
+   "status": "ERKANNT",
+   "detail": [
+    "P09: check_gates: GATE-G3: Schwellen der Betriebscharakteristik fehlen in den Regeln: ['P-RES-DSR-MIN']"
+   ]
+  },
+  {
+   "id": "MUT-20",
+   "title": "Futility-Schwelle auf null (Regel wirkungslos)",
+   "category": "SEMANTIK",
+   "phases": [
+    "P09"
+   ],
+   "detected": true,
+   "status": "ERKANNT",
+   "detail": [
+    "P09: check_gates: P-RES-FUTILITY 0.0 unwirksam (muss in (0, 1) liegen)"
+   ]
+  },
+  {
+   "id": "MUT-21",
+   "title": "Betriebscharakteristik mit anderer DSR-Schwelle",
+   "category": "SEMANTIK",
+   "phases": [
+    "P09"
+   ],
+   "detected": true,
+   "status": "ERKANNT",
+   "detail": [
+    "P09: check_gates: Betriebscharakteristik rechnet mit einer anderen DSR-Schwelle als G3"
+   ]
+  },
+  {
+   "id": "MUT-22",
+   "title": "Wortlaut einer Betreiberantwort ändern",
+   "category": "SEMANTIK",
+   "phases": [
+    "P09"
+   ],
+   "detected": true,
+   "status": "ERKANNT",
+   "detail": [
+    "P09: check_operator: DEC-OP-04: Wortlaut der Betreiberantwort weicht vom Siegel ab"
+   ]
+  },
+  {
+   "id": "MUT-23",
+   "title": "Betreiberwert ändern (Tagesgrenze)",
+   "category": "SEMANTIK",
+   "phases": [
+    "P09"
+   ],
+   "detected": true,
+   "status": "ERKANNT",
+   "detail": [
+    "P09: check_operator: P-OP-DAILY-LOSS-CAP: Betreiberwert weicht vom Siegel ab (neue Betreiberentscheidung nötig)"
+   ]
+  },
+  {
+   "id": "MUT-24",
+   "title": "Heutiger Torfall veraltet (P(NPV > 0) im Fall verändert)",
+   "category": "SEMANTIK",
+   "phases": [
+    "P09"
+   ],
+   "detected": true,
+   "status": "ERKANNT",
+   "detail": [
+    "P09: check_gates: GC-G0-103: Fakt p_npv_positive = 0.9 ≠ heutiger Rechenwert 0.41655 (financials/decision_montecarlo_results.json#/table/U-KOSTEN-TFD1/5000000/H5)"
+   ]
+  },
+  {
+   "id": "MUT-25",
+   "title": "K über 99 ohne unabhängige Gegenprüfung",
+   "category": "SEMANTIK",
+   "phases": [
+    "P12"
+   ],
+   "detected": true,
+   "status": "ERKANNT",
+   "detail": [
+    "P12: K J3: Punkte ohne bestandene unabhängige Gegenprüfung"
+   ]
+  },
+  {
+   "id": "MUT-26",
+   "title": "Pflichtdatei entfernen",
+   "category": "STRUKTUR",
+   "phases": [
+    "P01"
+   ],
+   "detected": true,
+   "status": "ERKANNT",
+   "detail": [
+    "P01: Pflichtdatei fehlt: execution/broker_killer_tests.md"
+   ]
+  },
+  {
+   "id": "MUT-27",
+   "title": "JSON-Syntaxfehler",
+   "category": "STRUKTUR",
+   "phases": [
+    "P02"
+   ],
+   "detected": true,
+   "status": "ERKANNT",
+   "detail": [
+    "P02: registers/limits.json: Extra data: line 241 column 1 (char 5936)"
+   ]
+  },
+  {
+   "id": "MUT-28",
+   "title": "Doppelter JSON-Schlüssel",
+   "category": "STRUKTUR",
+   "phases": [
+    "P02"
+   ],
+   "detected": true,
+   "status": "ERKANNT",
+   "detail": [
+    "P02: registers/model_inventory.json: doppelter Schlüssel 'schema_version'"
+   ]
+  },
+  {
+   "id": "MUT-29",
+   "title": "Schemaverstoß (Parameter ohne Einheit)",
+   "category": "STRUKTUR",
+   "phases": [
+    "P03"
+   ],
+   "detected": true,
+   "status": "ERKANNT",
+   "detail": [
+    "P03: parameters.json parameters/174: 'unit' is a required property"
+   ]
+  },
+  {
+   "id": "MUT-30",
+   "title": "Tickwert ≠ Multiplikator × Tick",
+   "category": "REGISTER",
+   "phases": [
+    "P04"
+   ],
+   "detected": true,
+   "status": "ERKANNT",
+   "detail": [
+    "P04: INS-COMEX-GC: Tickwert 12.00 ≠ Multiplikator × Tick"
+   ]
+  },
+  {
+   "id": "MUT-31",
+   "title": "Parameter BELEGT ohne Quelle",
+   "category": "REGISTER",
+   "phases": [
+    "P04"
+   ],
+   "detected": true,
+   "status": "ERKANNT",
+   "detail": [
+    "P04: P-RES-STANDARD-MONTHS: Status BELEGT ohne Quelle"
+   ]
+  },
+  {
+   "id": "MUT-32",
+   "title": "Risikoscore ≠ Wahrscheinlichkeit × Wirkung",
+   "category": "REGISTER",
+   "phases": [
+    "P04"
+   ],
+   "detected": true,
+   "status": "ERKANNT",
+   "detail": [
+    "P04: RK-01: Score ≠ Wahrscheinlichkeit × Wirkung"
+   ]
+  },
+  {
+   "id": "MUT-33",
+   "title": "Ungebundene Ergebniszahl im Fließtext",
+   "category": "BINDUNG",
+   "phases": [
+    "P06"
+   ],
+   "detected": true,
+   "status": "ERKANNT",
+   "detail": [
+    "P06: financials/economic_model.md: ungebundene Zahl '99.999' in „Der Aufbau kostet zusätzlich 99.999 EUR.“ (R-03)"
+   ]
+  },
+  {
+   "id": "MUT-34",
+   "title": "Gebundenen Wert im Text verfälschen",
+   "category": "BINDUNG",
+   "phases": [
+    "P06"
+   ],
+   "detected": true,
+   "status": "ERKANNT",
+   "detail": [
+    "P06: render_blocks --check: render_blocks: PRÜFUNG 1 Dateien abweichend 0 Fehler"
+   ]
+  },
+  {
+   "id": "MUT-35",
+   "title": "Betreiberfassung länger als sechs Sätze",
+   "category": "BINDUNG",
+   "phases": [
+    "P06"
+   ],
+   "detected": true,
+   "status": "ERKANNT",
+   "detail": [
+    "P06: risk/margin_liquidity.md: Betreiberfassung mit 12 Sätzen (höchstens sechs) (R-12)"
+   ]
+  },
+  {
+   "id": "MUT-36",
+   "title": "Verweis auf fehlende Datei",
+   "category": "VERWEIS",
+   "phases": [
+    "P05"
+   ],
+   "detected": true,
+   "status": "ERKANNT",
+   "detail": [
+    "P05: data/data_plan.md: Datei financials/nicht_vorhanden.json fehlt"
+   ]
+  },
+  {
+   "id": "MUT-37",
+   "title": "Verweis auf unbekanntes Risiko",
+   "category": "VERWEIS",
+   "phases": [
+    "P05"
+   ],
+   "detected": true,
+   "status": "ERKANNT",
+   "detail": [
+    "P05: operations/runbooks.md: Verweis RK-⟨⟩99 unbekannt"
+   ]
+  },
+  {
+   "id": "MUT-38",
+   "title": "Verweis auf unbekannten Parameter",
+   "category": "VERWEIS",
+   "phases": [
+    "P05"
+   ],
+   "detected": true,
+   "status": "ERKANNT",
+   "detail": [
+    "P05: risk/limits.md: Parameter P-RISK-⟨⟩NICHT-DA unbekannt"
+   ]
+  },
+  {
+   "id": "MUT-39",
+   "title": "Erwartung eines Torfalls verfälscht",
+   "category": "BEISPIEL",
+   "phases": [
+    "P08"
+   ],
+   "detected": true,
+   "status": "ERKANNT",
+   "detail": [
+    "P08: gate_engine: 0 statische Fehler, 1 Fälle abweichend, ungedeckt []"
+   ]
+  },
+  {
+   "id": "MUT-40",
+   "title": "Zustandstrace verfälscht",
+   "category": "BEISPIEL",
+   "phases": [
+    "P08"
+   ],
+   "detected": true,
+   "status": "ERKANNT",
+   "detail": [
+    "P08: state_engine: 0 statische Fehler, 1 Traces abweichend"
+   ]
+  },
+  {
+   "id": "MUT-41",
+   "title": "Gültiges Beispiel verletzt eine semantische Regel (Aufrunden)",
+   "category": "BEISPIEL",
+   "phases": [
+    "P08"
+   ],
+   "detected": true,
+   "status": "ERKANNT",
+   "detail": [
+    "P08: examples/valid/contracts/risk_decision_reduce.json: Erwartung verfehlt (Schemafehler 0, Regeln ['R-EX-01'], erwartet gültig)"
+   ]
+  },
+  {
+   "id": "MUT-42",
+   "title": "Ungültiges Beispiel repariert (Erwartung nicht mehr erfüllt)",
+   "category": "BEISPIEL",
+   "phases": [
+    "P08"
+   ],
+   "detected": true,
+   "status": "ERKANNT",
+   "detail": [
+    "P08: examples/invalid/risk_decision_rounded_up.json: Erwartung verfehlt (Schemafehler 0, Regeln [], erwartet {'type': 'SEMANTIC', 'rule': 'R-EX-01'})"
+   ]
+  },
+  {
+   "id": "MUT-43",
+   "title": "Platzhalter im Text",
+   "category": "HYGIENE",
+   "phases": [
+    "P11"
+   ],
+   "detected": true,
+   "status": "ERKANNT",
+   "detail": [
+    "P11: ai/ai_layer.md: Platzhalter 'TO⟨⟩DO'"
+   ]
+  },
+  {
+   "id": "MUT-44",
+   "title": "Personenbezogene E-Mail-Adresse",
+   "category": "HYGIENE",
+   "phases": [
+    "P11"
+   ],
+   "detected": true,
+   "status": "ERKANNT",
+   "detail": [
+    "P11: governance/organisation_raci.md: E-Mail-Adresse 'vorname.nachname⟨⟩@beispielfirma.de' (R-13)"
+   ]
+  },
+  {
+   "id": "MUT-45",
+   "title": "Privater Schlüssel im Paket",
+   "category": "HYGIENE",
+   "phases": [
+    "P11"
+   ],
+   "detected": true,
+   "status": "ERKANNT",
+   "detail": [
+    "P11: security/key_management.md: mögliches Geheimnis '-----BEGIN RSA ⟨⟩PRIVATE K'"
+   ]
+  },
+  {
+   "id": "MUT-46",
+   "title": "Absoluter lokaler Pfad",
+   "category": "HYGIENE",
+   "phases": [
+    "P11"
+   ],
+   "detected": true,
+   "status": "ERKANNT",
+   "detail": [
+    "P11: implementation/build_program.md: absoluter lokaler Pfad"
+   ]
+  },
+  {
+   "id": "MUT-47",
+   "title": "Anforderung als im Paket nachgewiesen ausgegeben",
+   "category": "STATUS",
+   "phases": [
+    "P13"
+   ],
+   "detected": true,
+   "status": "ERKANNT",
+   "detail": [
+    "P13: REQ-EXE-011: Status IM_PAKET_NACHGEWIESEN, aus den Tests folgt TEILWEISE_NACHGEWIESEN"
+   ]
+  },
+  {
+   "id": "MUT-48",
+   "title": "Bautest als im Paket ausgeführt ausgegeben",
+   "category": "STATUS",
+   "phases": [
+    "P13"
+   ],
+   "detected": true,
+   "status": "ERKANNT",
+   "detail": [
+    "P13: T-SEC-014: Status IM_PAKET_AUSGEFUEHRT ohne Ausführung im Paket"
+   ]
+  },
+  {
+   "id": "MUT-49",
+   "title": "Befund mit fehlendem Nachweis",
+   "category": "STATUS",
+   "phases": [
+    "P13"
+   ],
+   "detected": true,
+   "status": "ERKANNT",
+   "detail": [
+    "P13: EV-01: Nachweis financials/nicht_vorhanden.json fehlt"
+   ]
+  },
+  {
+   "id": "MUT-50",
+   "title": "Parameter ändern ohne Rechner neu laufen zu lassen",
+   "category": "RECHNER",
+   "phases": [
+    "P07"
+   ],
+   "detected": true,
+   "status": "ERKANNT",
+   "detail": [
+    "P07: research/turnover_results.json: Eingabe parameters.json seit der Rechnung geändert (Eingangs-Hash; Rechner neu laufen lassen)",
+    "P07: financials/cost_model_results.json: Eingabe parameters.json seit der Rechnung geändert (Eingangs-Hash; Rechner neu laufen lassen)"
+   ]
+  },
+  {
+   "id": "MUT-51",
+   "title": "Steuerfunktion kürzt auch Verluste",
+   "category": "RECHNER",
+   "phases": [
+    "P10"
+   ],
+   "detected": true,
+   "status": "ERKANNT",
+   "detail": [
+    "P10: Referenztests: 1 fehlgeschlagen ['test_tax_sensitivity']; REFERENZTESTS FAIL 21/22"
+   ]
+  },
+  {
+   "id": "MUT-52",
+   "title": "Leiterfaktor im Stressmotor verfälscht",
+   "category": "RECHNER",
+   "phases": [
+    "P10"
+   ],
+   "detected": true,
+   "status": "ERKANNT",
+   "detail": [
+    "P10: Referenztests: 1 fehlgeschlagen ['test_stress_single']; REFERENZTESTS FAIL 21/22"
+   ]
+  },
+  {
+   "id": "MUT-53",
+   "title": "Inhalt ändern ohne neuen Mehrversionslauf (Beleg eines alten Paketstands)",
+   "category": "STATUS",
+   "phases": [
+    "P13"
+   ],
+   "detected": true,
+   "status": "ERKANNT",
+   "detail": [
+    "P13: T-PKG-MULTI-001: validation/execution_log.txt gehört zu einem anderen Paketstand (Mehrversionslauf wiederholen)"
+   ]
+  },
+  {
+   "id": "MUT-54",
+   "title": "Gepinnte Abhängigkeiten entfernen",
+   "category": "STRUKTUR",
+   "phases": [
+    "P01"
+   ],
+   "detected": true,
+   "status": "ERKANNT",
+   "detail": [
+    "P01: Pflichtdatei fehlt: validation/requirements-validation.txt"
+   ]
+  },
+  {
+   "id": "MUT-55",
+   "title": "Sprachmodell als Erzeuger einer Handelsabsicht zulassen",
+   "category": "SEMANTIK",
+   "phases": [
+    "P08"
+   ],
+   "detected": true,
+   "status": "ERKANNT",
+   "detail": [
+    "P08: examples/invalid/order_intent_from_hermes.json: Erwartung verfehlt (Schemafehler 0, Regeln [], erwartet {'type': 'SCHEMA', 'rule': None})"
+   ]
+  },
+  {
+   "id": "MUT-56",
+   "title": "Proxy auf anderen Basiswert gleicher Klasse (Micro Gold auf Silber)",
+   "category": "SEMANTIK",
+   "phases": [
+    "P09"
+   ],
+   "detected": true,
+   "status": "ERKANNT",
+   "detail": [
+    "P09: check_proxy: MGC: Proxy SI mit anderer Notierung (4228.0 gegenüber 66.7; anderer Basiswert gleicher Klasse, PX-1)"
+   ]
+  },
+  {
+   "id": "MUT-57",
+   "title": "Killer-Test-Tor nimmt unzulässige Ergebniswerte an (Regel G1-R2A entfernt)",
+   "category": "SEMANTIK",
+   "phases": [
+    "P08"
+   ],
+   "detected": true,
+   "status": "ERKANNT",
+   "detail": [
+    "P08: gate_engine: 0 statische Fehler, 1 Fälle abweichend, ungedeckt []"
+   ]
+  },
+  {
+   "id": "MUT-58",
+   "title": "Margin-Level auf den gesamten NAV statt auf das Guthaben beim Broker bezogen",
+   "category": "SEMANTIK",
+   "phases": [
+    "P09"
+   ],
+   "detected": true,
+   "status": "ERKANNT",
+   "detail": [
+    "P09: check_stress: SYSTEM/H5/SC-H-1987: Margin-Level nicht auf das Guthaben beim Broker bezogen"
+   ]
+  },
+  {
+   "id": "MUT-59",
+   "title": "Rückkehr einer ML-Komponente ohne volle Neuvalidierung (Wächter ML-10 ausgehebelt)",
+   "category": "SEMANTIK",
+   "phases": [
+    "P08"
+   ],
+   "detected": true,
+   "status": "ERKANNT",
+   "detail": [
+    "P08: state_engine: 0 statische Fehler, 1 Traces abweichend"
+   ]
+  },
+  {
+   "id": "MUT-60",
+   "title": "Rechner liest das Kostenregister am Kostenmodell vorbei",
+   "category": "SEMANTIK",
+   "phases": [
+    "P09"
+   ],
+   "detected": true,
+   "status": "ERKANNT",
+   "detail": [
+    "P09: check_costs: research/statistical_calculator.py: liest das Kostenregister direkt statt financials/cost_model_results.json (R-04)"
+   ]
+  }
+ ]
+}

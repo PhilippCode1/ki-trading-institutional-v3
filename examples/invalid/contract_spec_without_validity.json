@@ -1,0 +1,32 @@
+{
+ "schema_version": "3.0",
+ "message_id": "00000000-0000-4000-8000-000000000020",
+ "correlation_id": "COR-0020",
+ "producer": "DATA_SERVICE",
+ "created_utc": "2026-09-24T09:00:00Z",
+ "instrument_id": "INS-COMEX-MGC",
+ "exchange": "COMEX",
+ "broker_symbol": "MGCZ26",
+ "contract_month": "202612",
+ "multiplier": "10",
+ "tick_size": "0.1",
+ "tick_value": "1.00",
+ "currency": "USD",
+ "first_notice_date": "2026-11-30",
+ "last_trade_date": "2026-12-29",
+ "roll_window_start": "2026-11-23",
+ "sessions": [
+  {
+   "open": "17:00",
+   "close": "16:00",
+   "tz": "America/Chicago"
+  }
+ ],
+ "overnight_initial_margin": {
+  "amount": "2500.00",
+  "currency": "USD"
+ },
+ "valid_from": "2026-09-24",
+ "source": "X-BRK-CONTRACTS",
+ "status": "ANNAHME"
+}

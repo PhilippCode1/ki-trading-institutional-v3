@@ -1,0 +1,32 @@
+{
+ "schema_version": "3.0",
+ "message_id": "00000000-0000-4000-8000-000000000010",
+ "correlation_id": "COR-0010",
+ "producer": "HERMES",
+ "created_utc": "2026-09-24T09:00:00Z",
+ "decision_id": "RD-0001",
+ "command_id": "CMD-00000000000A",
+ "result": "PASS",
+ "controls": [
+  {
+   "control_id": "PTC-13",
+   "passed": true,
+   "value": "0.061",
+   "limit": "0.08"
+  },
+  {
+   "control_id": "PTC-08",
+   "passed": true,
+   "value": "0.12",
+   "limit": "0.25"
+  }
+ ],
+ "qty_requested": 1,
+ "qty_approved": 1,
+ "profile": "H5",
+ "gap_stress_share": "0.041",
+ "day_loss_share": "0.020",
+ "me_after": "0.12",
+ "lg_after": "3.9",
+ "parameters_sha256": "0000000000000000000000000000000000000000000000000000000000000004"
+}

@@ -1,0 +1,103 @@
+{
+ "schema_version": "3.0",
+ "id": "TR-RELEASE-001",
+ "machine": "SM-RELEASE",
+ "description": "Klasse C: zweite menschliche Freigabe und Karenzzeit; Aktivierung nur flach; Rücknahme nach Befund",
+ "scenarios": [
+  "OS-GV-05"
+ ],
+ "start": null,
+ "initial_reasons": null,
+ "steps": [
+  {
+   "event": "IMPORT_OK",
+   "context": {
+    "digest_matches_review": true
+   },
+   "expect_state": "QUARANTINED"
+  },
+  {
+   "event": "CLASSIFY",
+   "context": {
+    "change_class": "C"
+   },
+   "expect_state": "CLASSIFIED"
+  },
+  {
+   "event": "TESTS_PASS",
+   "context": {
+    "is_agent_update": false
+   },
+   "expect_state": "TESTED"
+  },
+  {
+   "event": "EQUIV_FAIL",
+   "context": {
+    "change_class": "C"
+   },
+   "expect_state": "EQUIVALENCE_CHECKED"
+  },
+  {
+   "event": "APPROVE_SIGNED",
+   "context": {
+    "signed": true,
+    "author_is_not_reviewer": true,
+    "change_class": "C",
+    "second_human_approval": false
+   },
+   "expect_state": "EQUIVALENCE_CHECKED",
+   "expect_invalid": true
+  },
+  {
+   "event": "APPROVE_SIGNED",
+   "context": {
+    "signed": true,
+    "author_is_not_reviewer": true,
+    "change_class": "C",
+    "second_human_approval": true,
+    "hours_since_review_report": 12
+   },
+   "expect_state": "EQUIVALENCE_CHECKED",
+   "expect_invalid": true
+  },
+  {
+   "event": "APPROVE_SIGNED",
+   "context": {
+    "signed": true,
+    "author_is_not_reviewer": true,
+    "change_class": "C",
+    "second_human_approval": true,
+    "hours_since_review_report": 30
+   },
+   "expect_state": "APPROVED"
+  },
+  {
+   "event": "ACTIVATE",
+   "context": {
+    "unknown_orders": 0,
+    "positions_flat": false,
+    "change_class": "C"
+   },
+   "expect_state": "APPROVED",
+   "expect_invalid": true
+  },
+  {
+   "event": "ACTIVATE",
+   "context": {
+    "unknown_orders": 0,
+    "positions_flat": true
+   },
+   "expect_state": "ACTIVATING"
+  },
+  {
+   "event": "ACTIVATED",
+   "context": {},
+   "expect_state": "OBSERVING"
+  },
+  {
+   "event": "OBSERVE_FAIL",
+   "context": {},
+   "expect_state": "ROLLED_BACK"
+  }
+ ]
+}

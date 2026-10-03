@@ -1,0 +1,26 @@
+{
+ "schema_version": "3.0",
+ "id": "TR-RELEASE-004",
+ "machine": "SM-RELEASE",
+ "description": "Artefakt mit Symlink oder ausgetauschtem Digest wird beim Import abgewiesen",
+ "scenarios": [
+  "OS-GV-10"
+ ],
+ "start": null,
+ "initial_reasons": null,
+ "steps": [
+  {
+   "event": "IMPORT_OK",
+   "context": {
+    "digest_matches_review": false
+   },
+   "expect_state": "SUBMITTED",
+   "expect_invalid": true
+  },
+  {
+   "event": "IMPORT_BAD",
+   "context": {},
+   "expect_state": "REJECTED"
+  }
+ ]
+}

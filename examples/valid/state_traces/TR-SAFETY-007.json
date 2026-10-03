@@ -1,0 +1,38 @@
+{
+ "schema_version": "3.0",
+ "id": "TR-SAFETY-007",
+ "machine": "SM-SAFETY",
+ "description": "Wochenverlust: Sperre bis zur neuen Handelswoche, keine Quittung nötig",
+ "scenarios": [
+  "OS-RI-04"
+ ],
+ "start": null,
+ "initial_reasons": [],
+ "steps": [
+  {
+   "event": "WEEKLY_LOSS_LIMIT",
+   "context": {},
+   "expect_state": "ENTRY_PAUSED",
+   "expect_reasons": [
+    "WEEKLY_LOSS_PAUSE"
+   ]
+  },
+  {
+   "event": "OPERATOR_ACK_SIGNED",
+   "context": {
+    "signed": true,
+    "reason": "WEEKLY_LOSS_PAUSE"
+   },
+   "expect_state": "ENTRY_PAUSED",
+   "expect_reasons": [
+    "WEEKLY_LOSS_PAUSE"
+   ]
+  },
+  {
+   "event": "NEW_TRADING_WEEK",
+   "context": {},
+   "expect_state": "READY",
+   "expect_reasons": []
+  }
+ ]
+}

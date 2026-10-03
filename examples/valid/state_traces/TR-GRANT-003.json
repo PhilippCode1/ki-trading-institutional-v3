@@ -1,0 +1,26 @@
+{
+ "schema_version": "3.0",
+ "id": "TR-GRANT-003",
+ "machine": "SM-GRANT",
+ "description": "Paper-Grant auf einem Echtgeldkonto ist ungültig",
+ "scenarios": [
+  "OS-GV-01"
+ ],
+ "start": null,
+ "initial_reasons": null,
+ "steps": [
+  {
+   "event": "SIGNATURE_VERIFIED",
+   "context": {
+    "signature_valid": true,
+    "signer_role": "BETREIBER",
+    "kind": "PAPER",
+    "duration_days": 60,
+    "gate_g6": "PASS",
+    "account_type": "REAL"
+   },
+   "expect_state": "DRAFT",
+   "expect_invalid": true
+  }
+ ]
+}

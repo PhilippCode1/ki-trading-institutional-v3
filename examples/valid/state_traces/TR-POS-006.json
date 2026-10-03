@@ -1,0 +1,26 @@
+{
+ "schema_version": "3.0",
+ "id": "TR-POS-006",
+ "machine": "SM-POSITION",
+ "description": "Abgleich findet Abweichung: Brokerfakt gewinnt, Schutz fehlt danach",
+ "scenarios": [
+  "OS-EX-06"
+ ],
+ "start": "OPEN_PROTECTED",
+ "initial_reasons": null,
+ "steps": [
+  {
+   "event": "RECON_MISMATCH",
+   "context": {},
+   "expect_state": "UNRECONCILED"
+  },
+  {
+   "event": "RECON_MATCH",
+   "context": {
+    "broker_qty": 2,
+    "sl_covers_full_qty": false
+   },
+   "expect_state": "OPEN_UNPROTECTED"
+  }
+ ]
+}
